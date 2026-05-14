@@ -38,7 +38,7 @@ const medicalSchema = schema ?? {
   </div>
 
   <!-- Main calculator slot -->
-  <main style="min-height: calc(100vh - 200px);">
+  <main class="calc-main" style="min-height: calc(100vh - 200px);">
     <slot />
   </main>
 
@@ -56,5 +56,9 @@ const medicalSchema = schema ?? {
   @media (max-width: 640px) {
     .breadcrumb  { padding: 10px 16px; }
     .seo-section { padding: 32px 16px; }
+    :global(.calc-main > div:first-child) {
+      padding-left: 16px !important;
+      padding-right: 16px !important;
+    }
   }
 </style>

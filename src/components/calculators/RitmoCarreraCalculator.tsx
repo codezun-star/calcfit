@@ -40,7 +40,7 @@ export default function RitmoCarreraCalculator() {
 
       {result && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-          <div style={{ background: 'var(--ink)', padding: '28px 24px', display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1px' }}>
+          <div style={{ background: 'var(--ink)', padding: '28px 24px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))', gap: '1px' }}>
             <div style={{ paddingRight: '16px' }}>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: '#555', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '4px' }}>Ritmo /km</div>
               <div style={{ fontFamily: 'var(--font-display)', fontSize: '42px', color: 'var(--acid)', lineHeight: 1 }}>{result.ritmoMinPorKm}</div>
