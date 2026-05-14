@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { calcularSueno } from '../../lib/calculators';
 import Button from '../ui/Button';
 import ShareButtons from '../ui/ShareButtons';
@@ -25,7 +25,7 @@ export default function SuenoCalculator() {
   const selectedCiclo = result && selectedRow !== null ? result[selectedRow] : null;
 
   return (
-    <div style={{ padding: '32px', maxWidth: '680px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '680px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
         <label style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--muted)', letterSpacing: '0.3px' }}>
           Hora a la que quiero despertar
@@ -41,7 +41,8 @@ export default function SuenoCalculator() {
       <Button onClick={calcular}>Ver horarios ideales</Button>
 
       {result && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1px', background: 'var(--border)' }}>
+        <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1px', background: 'var(--border)', minWidth: '360px' }}>
           {/* Header */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 80px 80px 100px', gap: '1px', background: 'var(--border)' }}>
             {['Hora de dormir', 'Ciclos', 'Horas', 'Calidad'].map((h) => (
@@ -86,6 +87,7 @@ export default function SuenoCalculator() {
               </div>
             );
           })}
+        </div>
         </div>
       )}
 

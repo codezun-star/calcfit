@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { calcularCicloMenstrual } from '../../lib/calculators';
 import Input from '../ui/Input';
 import Button from '../ui/Button';
@@ -26,7 +26,7 @@ export default function CicloMenstrualCalculator() {
   const fmtFecha = (d: Date) => d.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
 
   return (
-    <div style={{ padding: '32px', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
       <div>
         <p style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--muted)', marginBottom: '6px' }}>Fecha de inicio de la última menstruación</p>
         <input
@@ -38,7 +38,7 @@ export default function CicloMenstrualCalculator() {
         {errors.ultimaMens && <p style={{ fontSize: '11px', color: '#F87171', marginTop: '4px' }}>{errors.ultimaMens}</p>}
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '20px' }}>
         <Input label="Duración del ciclo" value={durCiclo}   onChange={setDurCiclo}   suffix="días" error={errors.durCiclo} />
         <Input label="Duración del período" value={durPeriodo} onChange={setDurPeriodo} suffix="días" />
       </div>

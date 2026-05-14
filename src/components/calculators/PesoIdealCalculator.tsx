@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { calcularPesoIdeal } from '../../lib/calculators';
 import { toCm, toLb } from '../../lib/units';
 import Toggle from '../ui/Toggle';
@@ -26,13 +26,13 @@ export default function PesoIdealCalculator() {
   const btnActive: React.CSSProperties = { ...btnBase, background: 'var(--ink)', color: 'var(--acid)', border: '1px solid var(--ink)' };
 
   return (
-    <div style={{ padding: '32px', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
       <Toggle value={units} onChange={setUnits} />
 
       {units === 'metric' ? (
         <Input label="Altura" value={altura} onChange={setAltura} suffix="cm" />
       ) : (
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '20px' }}>
           <Input label="Pies" value={ft} onChange={setFt} suffix="pies" />
           <Input label="Pulgadas" value={inches} onChange={setInches} suffix="pulg" />
         </div>
@@ -56,7 +56,7 @@ export default function PesoIdealCalculator() {
             <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: '#666' }}>kg{units === 'imperial' && ` · ${toLb(result.promedio)} lb`}</div>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '1px', background: 'var(--border)' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(80px, 1fr))', gap: '1px', background: 'var(--border)' }}>
             {(['devine', 'robinson', 'miller', 'hamwi', 'broca'] as const).map((f) => (
               <div key={f} style={{ background: 'var(--cream)', padding: '12px 10px', textAlign: 'center' }}>
                 <div style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', color: 'var(--muted)', textTransform: 'capitalize', marginBottom: '4px' }}>{f}</div>

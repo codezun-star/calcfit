@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { calcularEdad } from '../../lib/calculators';
 import Input from '../ui/Input';
 import Button from '../ui/Button';
@@ -16,7 +16,7 @@ export default function EdadCalculator() {
   const fmt = (d: Date) => d.toLocaleDateString('es', { day: 'numeric', month: 'long' });
 
   return (
-    <div style={{ padding: '32px', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
       <Input label="Fecha de nacimiento" value={fecha} onChange={setFecha} type="date" />
       <Button onClick={calcular}>Calcular edad</Button>
 
@@ -37,7 +37,7 @@ export default function EdadCalculator() {
               ))}
             </div>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1px', background: 'var(--border)' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '1px', background: 'var(--border)' }}>
             <div style={{ background: 'var(--cream)', padding: '14px 16px' }}>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--muted)', textTransform: 'uppercase', marginBottom: '4px' }}>Total de días vividos</div>
               <div style={{ fontFamily: 'var(--font-display)', fontSize: '24px', color: 'var(--ink)' }}>{result.totalDias.toLocaleString('es')}</div>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { calcularFFMI } from '../../lib/calculators';
 import { toKg, toCm } from '../../lib/units';
 import Toggle from '../ui/Toggle';
@@ -36,16 +36,16 @@ export default function FFMICalculator() {
   };
 
   return (
-    <div style={{ padding: '32px', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
       <Toggle value={units} onChange={setUnits} />
 
       {units === 'metric' ? (
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '20px' }}>
           <Input label="Peso"   value={peso}   onChange={setPeso}   suffix="kg" error={errors.peso} />
           <Input label="Altura" value={altura} onChange={setAltura} suffix="cm" error={errors.altura} />
         </div>
       ) : (
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '20px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))', gap: '20px' }}>
           <Input label="Peso"     value={lb}     onChange={setLb}     suffix="lb" error={errors.peso} />
           <Input label="Pies"     value={ft}     onChange={setFt}     suffix="pies" error={errors.altura} />
           <Input label="Pulgadas" value={inches} onChange={setInches} suffix="pulg" />
@@ -59,7 +59,7 @@ export default function FFMICalculator() {
       {result && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <ResultCard label="FFMI normalizado" value={result.ffmiNormalizado} unit="" interpretation={result.categoria} />
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1px', background: 'var(--border)' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '1px', background: 'var(--border)' }}>
             <div style={{ background: 'var(--cream)', padding: '16px' }}>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '4px' }}>FFMI sin normalizar</div>
               <div style={{ fontFamily: 'var(--font-display)', fontSize: '32px', color: 'var(--ink)' }}>{result.ffmi}</div>

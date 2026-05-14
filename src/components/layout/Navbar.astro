@@ -9,8 +9,15 @@
     <span style="font-family: var(--font-display); font-size: 26px; color: var(--acid); letter-spacing: 0.5px;">CalcFit</span>
   </a>
   <div style="display: flex; align-items: center; gap: 28px;">
-    <a href="/#calculadoras" style="font-size: 12px; color: #888; letter-spacing: 0.5px; text-decoration: none;">Calculadoras</a>
-    <a href="/sobre-nosotros" style="font-size: 12px; color: #888; letter-spacing: 0.5px; text-decoration: none;">Nosotros</a>
+    <a href="/#calculadoras" class="nav-hide" style="font-size: 12px; color: #888; letter-spacing: 0.5px; text-decoration: none;">Calculadoras</a>
+    <a href="/sobre-nosotros" class="nav-hide" style="font-size: 12px; color: #888; letter-spacing: 0.5px; text-decoration: none;">Nosotros</a>
     <a href="/#calculadoras" style="font-family: var(--font-body); font-size: 12px; font-weight: 600; background: var(--acid); color: var(--ink); padding: 7px 16px; text-decoration: none;">Empezar</a>
   </div>
 </nav>
+
+<style>
+  .nav-hide { display: inline; }
+  @media (max-width: 640px) {
+    .nav-hide { display: none; }
+  }
+</style>

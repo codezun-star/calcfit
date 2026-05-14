@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { calcularAlcoholemia } from '../../lib/calculators';
 import Input from '../ui/Input';
 import Button from '../ui/Button';
@@ -46,7 +46,7 @@ export default function AlcoholemiaCalculator() {
   };
 
   return (
-    <div style={{ padding: '32px', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
       <div style={{ padding: '12px 16px', background: '#F8711122', borderLeft: '3px solid #F87171', fontSize: '12px', color: 'var(--ink)', lineHeight: 1.6 }}>
         <strong>Aviso:</strong> Esta calculadora es orientativa. No conduzca si ha consumido alcohol. El alcohol afecta a cada persona de forma diferente.
       </div>
@@ -63,7 +63,7 @@ export default function AlcoholemiaCalculator() {
 
       <p style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--muted)', marginBottom: '-12px' }}>Bebidas consumidas</p>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '20px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))', gap: '20px' }}>
         <Input label="Cervezas (330ml)"  value={cerveza} onChange={setCerveza} suffix="cant." />
         <Input label="Copas vino (150ml)" value={vino}   onChange={setVino}   suffix="cant." />
         <Input label="Shots/tragos (50ml)"   value={copa}    onChange={setCopa}    suffix="cant." />
@@ -76,7 +76,7 @@ export default function AlcoholemiaCalculator() {
       {result && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <ResultCard label="Tasa de alcoholemia" value={result.bac} unit="g/L" interpretation={result.estado} />
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1px', background: 'var(--border)' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '1px', background: 'var(--border)' }}>
             <div style={{ background: 'var(--cream)', padding: '16px' }}>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '4px' }}>¿Puede conducir?</div>
               <div style={{ fontSize: '14px', fontWeight: 600, color: result.aptoConducir ? '#34D399' : '#F87171' }}>

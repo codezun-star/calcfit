@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { calcularDiasFechas } from '../../lib/calculators';
 import Input from '../ui/Input';
 import Button from '../ui/Button';
@@ -15,8 +15,8 @@ export default function DiasFechasCalculator() {
   };
 
   return (
-    <div style={{ padding: '32px', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '20px' }}>
         <Input label="Fecha de inicio" value={fechaInicio} onChange={setFechaInicio} type="date" />
         <Input label="Fecha de fin" value={fechaFin} onChange={setFechaFin} type="date" />
       </div>
@@ -33,7 +33,7 @@ export default function DiasFechasCalculator() {
               </div>
             </div>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1px', background: 'var(--border)' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))', gap: '1px', background: 'var(--border)' }}>
             {[
               { val: result.semanas, label: 'semanas' },
               { val: result.meses,   label: 'meses' },

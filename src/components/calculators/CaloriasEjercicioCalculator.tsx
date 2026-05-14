@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { calcularCaloriasEjercicio, METS, type ActividadFisica } from '../../lib/calculators';
 import { toKg } from '../../lib/units';
 import Toggle from '../ui/Toggle';
@@ -33,7 +33,7 @@ export default function CaloriasEjercicioCalculator() {
   };
 
   return (
-    <div style={{ padding: '32px', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
       <Toggle value={units} onChange={setUnits} />
 
       {units === 'metric'

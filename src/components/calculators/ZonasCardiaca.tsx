@@ -1,4 +1,4 @@
-interface Zona {
+﻿interface Zona {
   nombre: string;
   min:    number;
   max:    number;

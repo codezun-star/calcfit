@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { calcularRitmoCarrera } from '../../lib/calculators';
 import Input from '../ui/Input';
 import Button from '../ui/Button';
@@ -25,12 +25,12 @@ export default function RitmoCarreraCalculator() {
   };
 
   return (
-    <div style={{ padding: '32px', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
       <Input label="Distancia recorrida" value={distancia} onChange={setDistancia} suffix="km" error={errors.distancia} />
 
       <div>
         <p style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--muted)', marginBottom: '6px' }}>Tiempo empleado</p>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '20px' }}>
           <Input label="Minutos" value={minutos}  onChange={setMinutos}  suffix="min" error={errors.tiempo} />
           <Input label="Segundos" value={segundos} onChange={setSegundos} suffix="seg" />
         </div>

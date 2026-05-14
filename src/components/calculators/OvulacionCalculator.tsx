@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { calcularOvulacion } from '../../lib/calculators';
 import Input from '../ui/Input';
 import Button from '../ui/Button';
@@ -19,7 +19,7 @@ export default function OvulacionCalculator() {
   const fmt = (d: Date) => d.toLocaleDateString('es', { day: 'numeric', month: 'long', year: 'numeric' });
 
   return (
-    <div style={{ padding: '32px', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
       <Input label="Fecha de última menstruación" value={fechaFUM} onChange={setFechaFUM} type="date" />
       <Input label="Duración del ciclo" value={ciclo} onChange={setCiclo} suffix="días" />
       <Button onClick={calcular}>Calcular ovulación</Button>
@@ -30,7 +30,7 @@ export default function OvulacionCalculator() {
             <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: '#888', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '8px' }}>Día de ovulación</div>
             <div style={{ fontFamily: 'var(--font-display)', fontSize: '28px', color: 'var(--acid)', lineHeight: 1.1 }}>{fmt(result.ovulacion)}</div>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1px', background: 'var(--border)' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '1px', background: 'var(--border)' }}>
             <div style={{ background: 'var(--cream)', padding: '14px 16px' }}>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--muted)', textTransform: 'uppercase', marginBottom: '4px' }}>Inicio período fértil</div>
               <div style={{ fontFamily: 'var(--font-body)', fontSize: '14px', fontWeight: 600, color: 'var(--ink)' }}>{fmt(result.inicioFertil)}</div>

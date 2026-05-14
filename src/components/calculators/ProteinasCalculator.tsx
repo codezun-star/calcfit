@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { calcularProteinasDiarias } from '../../lib/calculators';
 import { toKg } from '../../lib/units';
 import Toggle from '../ui/Toggle';
@@ -33,7 +33,7 @@ export default function ProteinasCalculator() {
   ] : [];
 
   return (
-    <div style={{ padding: '32px', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
       <Toggle value={units} onChange={setUnits} />
       {units === 'metric'
         ? <Input label="Peso" value={peso} onChange={setPeso} suffix="kg" />
@@ -57,7 +57,7 @@ export default function ProteinasCalculator() {
 
       {result && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1px', background: 'var(--border)' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '1px', background: 'var(--border)' }}>
             <div style={{ background: 'var(--ink)', padding: '24px 28px' }}>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: '#888', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '4px' }}>Mínimo</div>
               <div>

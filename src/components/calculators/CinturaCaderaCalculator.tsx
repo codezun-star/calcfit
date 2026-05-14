@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { calcularCinturaCadera } from '../../lib/calculators';
 import Input from '../ui/Input';
 import Button from '../ui/Button';
@@ -33,7 +33,7 @@ export default function CinturaCaderaCalculator() {
   };
 
   return (
-    <div style={{ padding: '32px', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
       <div>
         <p style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--muted)', marginBottom: '6px' }}>Sexo biológico</p>
         <select value={sexo} onChange={e => setSexo(e.target.value as Sexo)} style={selStyle}>
@@ -42,7 +42,7 @@ export default function CinturaCaderaCalculator() {
         </select>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '20px' }}>
         <Input label="Cintura" value={cintura} onChange={setCintura} suffix="cm" error={errors.cintura} />
         <Input label="Cadera"  value={cadera}  onChange={setCadera}  suffix="cm" error={errors.cadera} />
       </div>

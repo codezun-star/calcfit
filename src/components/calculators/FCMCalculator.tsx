@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { calcularFCM } from '../../lib/calculators';
 import Input from '../ui/Input';
 import Button from '../ui/Button';
@@ -17,7 +17,7 @@ export default function FCMCalculator() {
   };
 
   return (
-    <div style={{ padding: '32px', maxWidth: '680px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '680px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
       <Input label="Edad" value={edad} onChange={setEdad} suffix="años" />
       <Button onClick={calcular}>Calcular frecuencia cardíaca</Button>
 

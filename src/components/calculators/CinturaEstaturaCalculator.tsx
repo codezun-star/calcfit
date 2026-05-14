@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { calcularCinturaEstatura } from '../../lib/calculators';
 import { toCm } from '../../lib/units';
 import Toggle from '../ui/Toggle';
@@ -33,16 +33,16 @@ export default function CinturaEstaturaCalculator() {
   };
 
   return (
-    <div style={{ padding: '32px', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
       <Toggle value={units} onChange={setUnits} />
 
       {units === 'metric' ? (
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '20px' }}>
           <Input label="Cintura" value={cintura} onChange={setCintura} suffix="cm" error={errors.cintura} />
           <Input label="Altura"  value={altura}  onChange={setAltura}  suffix="cm" error={errors.altura} />
         </div>
       ) : (
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '20px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))', gap: '20px' }}>
           <Input label="Cintura"   value={cinturaIn} onChange={setCinturaIn} suffix="pulg"  error={errors.cintura} />
           <Input label="Pies"      value={ft}        onChange={setFt}        suffix="pies"  error={errors.altura} />
           <Input label="Pulgadas"  value={inchesH}   onChange={setInchesH}  suffix="pulg" />

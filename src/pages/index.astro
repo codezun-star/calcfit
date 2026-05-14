@@ -102,18 +102,18 @@ const schema = {
     <span style="font-family: var(--font-display); font-size: 26px; color: var(--acid);">CalcFit</span>
   </a>
   <div style="display: flex; align-items: center; gap: 28px;">
-    <a href="#calculadoras" style="font-size: 12px; color: #888; letter-spacing: 0.5px; text-decoration: none;">Calculadoras</a>
+    <a href="#calculadoras" class="nav-text" style="font-size: 12px; color: #888; letter-spacing: 0.5px; text-decoration: none;">Calculadoras</a>
     <a href="#calculadoras" style="font-size: 12px; font-weight: 600; background: var(--acid); color: var(--ink); padding: 7px 16px; text-decoration: none;">Empezar</a>
   </div>
 </nav>
 
 <!-- HERO -->
-<section style="background: var(--ink); display: grid; grid-template-columns: 60% 40%; min-height: 480px;">
+<section class="hero-grid" style="background: var(--ink);">
   <div style="padding: 56px 32px; display: flex; flex-direction: column; justify-content: center; gap: 20px;">
     <p class="anim anim-1" style="font-family: var(--font-mono); font-size: 10px; color: #888; text-transform: uppercase; letter-spacing: 3px;">
       Calculadoras de salud · Validadas científicamente
     </p>
-    <h1 class="anim anim-2" style="font-family: var(--font-display); font-size: 96px; line-height: 0.92; color: white;">
+    <h1 class="anim anim-2 hero-h1" style="font-family: var(--font-display); line-height: 0.92; color: white;">
       Tu cuerpo /<br><span style="color: var(--acid);">tiene</span> /<br>respuestas.
     </h1>
     <p class="anim anim-3" style="font-size: 12px; color: #666; font-weight: 300; max-width: 320px; line-height: 1.7;">
@@ -124,7 +124,7 @@ const schema = {
       <a href="#manifesto" style="background: transparent; border: 1px solid #333; color: #888; padding: 12px 24px; font-size: 13px; text-decoration: none;">Cómo funciona</a>
     </div>
   </div>
-  <div style="background: var(--ink-2); padding: 28px; border-left: 1px solid var(--ink-3); display: flex; flex-direction: column; justify-content: center;">
+  <div class="hero-nums" style="background: var(--ink-2); padding: 28px; border-left: 1px solid var(--ink-3); display: flex; flex-direction: column; justify-content: center;">
     <p style="font-family: var(--font-mono); font-size: 9px; text-transform: uppercase; letter-spacing: 2px; color: #555; margin-bottom: 20px;">Resultados en tiempo real</p>
     {[
       { nombre: 'IMC', formula: 'kg / m²', valor: '22.4', unidad: '' },
@@ -177,7 +177,7 @@ const schema = {
         </span>
         <div style="flex: 1; height: 1px; background: var(--border);"></div>
       </div>
-      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border);">
+      <div class="calc-grid-3col" style="gap: 1px; background: var(--border);">
         {cat.slugs.map((slug) => {
           const calc = calcsBySlug[slug];
           if (!calc) return null;
@@ -205,14 +205,14 @@ const schema = {
 </section>
 
 <!-- MANIFESTO -->
-<section id="manifesto" style="background: var(--ink); padding: 56px 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 0;">
-  <div style="border-right: 1px solid #222; padding-right: 48px; display: flex; flex-direction: column; justify-content: center; gap: 16px;">
+<section id="manifesto" class="manifesto-grid" style="background: var(--ink); padding: 56px 32px;">
+  <div class="manifesto-left" style="display: flex; flex-direction: column; justify-content: center; gap: 16px;">
     <p style="font-family: var(--font-mono); font-size: 10px; color: #555; text-transform: uppercase; letter-spacing: 3px;">Nuestro compromiso</p>
     <h2 style="font-family: var(--font-display); font-size: 62px; color: white; line-height: 0.95;">
       Ciencia, /<br>no /<br><span style="color: var(--acid);">opinión.</span>
     </h2>
   </div>
-  <div style="padding-left: 48px; display: flex; flex-direction: column; justify-content: center;">
+  <div class="manifesto-right" style="display: flex; flex-direction: column; justify-content: center;">
     {[
       { n: '01', title: 'Validadas científicamente', desc: 'Fórmulas basadas en evidencia: OMS, ACSM y literatura médica peer-reviewed.' },
       { n: '02', title: 'Privacidad total', desc: 'Todo el cálculo ocurre en tu navegador. Cero cookies de rastreo.' },
@@ -244,3 +244,36 @@ const schema = {
 <Footer />
 
 </Base>
+
+<style>
+  /* Hero */
+  .hero-grid { display: grid; grid-template-columns: 60% 40%; min-height: 480px; }
+  .hero-h1   { font-size: 96px; }
+
+  /* Calculator grid */
+  .calc-grid-3col { display: grid; grid-template-columns: repeat(3, 1fr); }
+
+  /* Manifesto */
+  .manifesto-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+  .manifesto-left { border-right: 1px solid #222; padding-right: 48px; }
+  .manifesto-right { padding-left: 48px; }
+
+  /* Nav text links (homepage) */
+  .nav-text { display: inline; }
+
+  @media (max-width: 768px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-nums { display: none; }
+    .hero-h1   { font-size: 62px; }
+    .calc-grid-3col { grid-template-columns: repeat(2, 1fr); }
+    .manifesto-grid { grid-template-columns: 1fr; }
+    .manifesto-left  { border-right: none; padding-right: 0; border-bottom: 1px solid #222; padding-bottom: 32px; }
+    .manifesto-right { padding-left: 0; padding-top: 24px; }
+    .nav-text { display: none; }
+  }
+
+  @media (max-width: 480px) {
+    .hero-h1 { font-size: 48px; }
+    .calc-grid-3col { grid-template-columns: 1fr 1fr; }
+  }
+</style>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { calcularTDEE } from '../../lib/calculators';
 import { toKg, toCm } from '../../lib/units';
 import { useHistory } from '../../lib/useHistory';
@@ -57,16 +57,16 @@ export default function CaloriasCalculator() {
   const btnActive: React.CSSProperties = { ...btnBase, background: 'var(--ink)', color: 'var(--acid)', border: '1px solid var(--ink)' };
 
   return (
-    <div style={{ padding: '32px', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
       <Toggle value={units} onChange={setUnits} />
 
       {units === 'metric' ? (
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '20px' }}>
           <Input label="Peso" value={peso} onChange={setPeso} suffix="kg" />
           <Input label="Altura" value={altura} onChange={setAltura} suffix="cm" />
         </div>
       ) : (
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '20px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))', gap: '20px' }}>
           <Input label="Peso" value={lb} onChange={setLb} suffix="lb" />
           <Input label="Pies" value={ft} onChange={setFt} suffix="pies" />
           <Input label="Pulgadas" value={inches} onChange={setInches} suffix="pulg" />
@@ -102,7 +102,7 @@ export default function CaloriasCalculator() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <ResultCard label="Calorías de mantenimiento" value={result.tdee} unit="kcal/día" interpretation={`TMB: ${result.tmb} kcal · Con tu nivel de actividad`} />
           <BarrasCaloria tdee={result.tdee} />
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1px', background: 'var(--border)' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '1px', background: 'var(--border)' }}>
             <div style={{ background: 'var(--cream)', padding: '14px 16px' }}>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--muted)', textTransform: 'uppercase', marginBottom: '4px' }}>Perder peso</div>
               <div style={{ fontFamily: 'var(--font-display)', fontSize: '28px', color: 'var(--ink)' }}>{result.deficit} <span style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', color: 'var(--muted)' }}>kcal</span></div>

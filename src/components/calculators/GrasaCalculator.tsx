@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { calcularGrasaCorporal } from '../../lib/calculators';
 import { useHistory } from '../../lib/useHistory';
 import Input from '../ui/Input';
@@ -36,7 +36,7 @@ export default function GrasaCalculator() {
   const btnActive: React.CSSProperties = { ...btnBase, background: 'var(--ink)', color: 'var(--acid)', border: '1px solid var(--ink)' };
 
   return (
-    <div style={{ padding: '32px', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
       <div>
         <p style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--muted)', marginBottom: '8px' }}>Sexo</p>
         <div style={{ display: 'flex', gap: '1px' }}>
@@ -45,7 +45,7 @@ export default function GrasaCalculator() {
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: sexo === 'mujer' ? '1fr 1fr' : '1fr 1fr 1fr', gap: '20px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: sexo === 'mujer' ? 'repeat(auto-fit, minmax(130px, 1fr))' : 'repeat(auto-fit, minmax(100px, 1fr))', gap: '20px' }}>
         <Input label="Altura" value={altura} onChange={setAltura} suffix="cm" />
         <Input label="Cuello" value={cuello} onChange={setCuello} suffix="cm" />
         <Input label="Cintura" value={cintura} onChange={setCintura} suffix="cm" />

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { calcularPresionArterial } from '../../lib/calculators';
 import Input from '../ui/Input';
 import Button from '../ui/Button';
@@ -22,12 +22,12 @@ export default function PresionArterialCalculator() {
   };
 
   return (
-    <div style={{ padding: '32px', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
       <div style={{ padding: '12px 16px', background: 'var(--ink)', borderLeft: '3px solid var(--acid)', fontSize: '12px', color: '#888', lineHeight: 1.6 }}>
         Mida su presión arterial en reposo, sentado, con el brazo a la altura del corazón. Tome dos mediciones con 1-2 minutos de diferencia.
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '20px' }}>
         <Input label="Presión sistólica (alta)"  value={sistolica}  onChange={setSistolica}  suffix="mmHg" error={errors.sistolica} />
         <Input label="Presión diastólica (baja)" value={diastolica} onChange={setDiastolica} suffix="mmHg" error={errors.diastolica} />
       </div>

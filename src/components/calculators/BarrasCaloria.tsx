@@ -1,4 +1,4 @@
-interface BarrasCaloriaProps {
+﻿interface BarrasCaloriaProps {
   tdee: number;
 }
 

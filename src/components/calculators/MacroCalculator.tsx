@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { calcularMacronutrientes } from '../../lib/calculators';
 import { toKg } from '../../lib/units';
 import Toggle from '../ui/Toggle';
@@ -28,7 +28,7 @@ export default function MacroCalculator() {
   const selStyle: React.CSSProperties = { width: '100%', padding: '10px 0', border: 'none', borderBottom: '1px solid var(--border)', background: 'transparent', fontSize: '14px', fontFamily: 'var(--font-body)', color: 'var(--ink)', outline: 'none', cursor: 'pointer' };
 
   return (
-    <div style={{ padding: '32px', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
       <Toggle value={units} onChange={setUnits} />
       {units === 'metric'
         ? <Input label="Peso" value={peso} onChange={setPeso} suffix="kg" />
@@ -65,7 +65,7 @@ export default function MacroCalculator() {
             </div>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1px', background: 'var(--border)' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))', gap: '1px', background: 'var(--border)' }}>
             {[
               { macro: 'Proteínas',    val: result.proteinas,     color: 'var(--acid)',   pct: Math.round(result.proteinas * 4 / result.calorias * 100) },
               { macro: 'Carbohidratos',val: result.carbohidratos, color: 'var(--cream)',  pct: Math.round(result.carbohidratos * 4 / result.calorias * 100) },

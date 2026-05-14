@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { calcularAyunoIntermitente, type ProtocoloAyuno } from '../../lib/calculators';
 import Button from '../ui/Button';
 import ShareButtons from '../ui/ShareButtons';
@@ -20,7 +20,7 @@ export default function AyunoCalculator() {
   ];
 
   return (
-    <div style={{ padding: '32px', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
       <div>
         <p style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--muted)', marginBottom: '10px' }}>Protocolo de ayuno</p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1px', background: 'var(--border)' }}>

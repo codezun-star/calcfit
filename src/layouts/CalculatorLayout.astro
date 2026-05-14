@@ -29,7 +29,7 @@ const medicalSchema = schema ?? {
   <Navbar />
 
   <!-- Breadcrumb -->
-  <div style="background: var(--cream); border-bottom: 1px solid var(--border); padding: 10px 32px;">
+  <div class="breadcrumb" style="background: var(--cream); border-bottom: 1px solid var(--border);">
     <span style="font-family: var(--font-mono); font-size: 10px; color: var(--muted);">
       <a href="/" style="color: var(--muted); text-decoration: none;">Inicio</a>
       <span style="margin: 0 6px;">→</span>
@@ -43,9 +43,18 @@ const medicalSchema = schema ?? {
   </main>
 
   <!-- SEO content slot (server rendered) -->
-  <div style="background: var(--cream); border-top: 1px solid var(--border); padding: 48px 32px; max-width: 860px; margin: 0 auto;">
+  <div class="seo-section" style="background: var(--cream); border-top: 1px solid var(--border); max-width: 860px; margin: 0 auto;">
     <slot name="seo" />
   </div>
 
   <Footer />
 </Base>
+
+<style>
+  .breadcrumb  { padding: 10px 32px; }
+  .seo-section { padding: 48px 32px; }
+  @media (max-width: 640px) {
+    .breadcrumb  { padding: 10px 16px; }
+    .seo-section { padding: 32px 16px; }
+  }
+</style>

@@ -8,6 +8,14 @@ Este es el proyecto **Astro** (migración desde Next.js). El proyecto Next.js or
 
 ---
 
+## Repositorio Git
+
+- **URL:** `https://github.com/codezun-star/calcfit`
+- **Rama principal:** `main`
+- **Email de contacto del proyecto:** `codezun@gmail.com`
+
+---
+
 ## Stack tecnológico
 
 | Elemento | Tecnología |
@@ -21,7 +29,7 @@ Este es el proyecto **Astro** (migración desde Next.js). El proyecto Next.js or
 | Deploy | Output estático — compatible con Vercel, Netlify, Cloudflare Pages |
 
 **Sin librerías de animación** — solo CSS `@keyframes`.
-**Sin librerías de íconos** — solo SVG inline simples.
+**Sin librerías de íconos** — solo SVG inline simples con `currentColor`.
 **Sin librerías de gráficos** — solo SVG/CSS puro.
 
 ---
@@ -31,30 +39,30 @@ Este es el proyecto **Astro** (migración desde Next.js). El proyecto Next.js or
 ```
 calcfit-astro/
 ├── public/
-│   ├── favicon.svg
+│   ├── favicon.svg                    ← cruz "+" acid sobre fondo ink
 │   ├── favicon.ico
 │   ├── robots.txt
-│   └── og/                        ← imágenes OG estáticas (por generar)
+│   └── og/                            ← imágenes OG estáticas (por generar)
 ├── src/
 │   ├── styles/
-│   │   ├── tokens.css             ← variables CSS (colores, tipografías)
-│   │   └── global.css             ← reset + animaciones base
+│   │   ├── tokens.css                 ← variables CSS (colores, tipografías)
+│   │   └── global.css                 ← reset + animaciones base
 │   ├── layouts/
-│   │   ├── Base.astro             ← HTML base con meta tags y JSON-LD
-│   │   └── CalculatorLayout.astro ← layout de cada calculadora (navbar + breadcrumb + slots)
+│   │   ├── Base.astro                 ← HTML base con meta tags y JSON-LD
+│   │   └── CalculatorLayout.astro     ← layout de cada calculadora (navbar + breadcrumb + slots)
 │   ├── components/
 │   │   ├── layout/
 │   │   │   ├── Navbar.astro
-│   │   │   └── Footer.astro
-│   │   ├── ui/                    ← componentes React reutilizables
-│   │   │   ├── Toggle.tsx         ← métrico / imperial
-│   │   │   ├── Input.tsx          ← input con label, sufijo y error inline
-│   │   │   ├── Button.tsx         ← variantes: primary | ghost | dark
-│   │   │   ├── ResultCard.tsx     ← card de resultado (valor grande en acid)
-│   │   │   ├── HistoryTable.tsx   ← historial desde localStorage
-│   │   │   ├── ShareButtons.tsx   ← WhatsApp, X/Twitter, Copiar enlace
-│   │   │   └── Badge.tsx          ← popular | new | essential
-│   │   └── calculators/           ← componentes React por calculadora
+│   │   │   └── Footer.astro           ← 3 columnas: Herramientas, CalcFit, Legal
+│   │   ├── ui/                        ← componentes React reutilizables
+│   │   │   ├── Toggle.tsx             ← "kg · cm" / "lb · pies"
+│   │   │   ├── Input.tsx
+│   │   │   ├── Button.tsx             ← variantes: primary | ghost | dark
+│   │   │   ├── ResultCard.tsx
+│   │   │   ├── HistoryTable.tsx
+│   │   │   ├── ShareButtons.tsx
+│   │   │   └── Badge.tsx              ← popular | new | essential
+│   │   └── calculators/               ← 24 componentes React
 │   │       ├── IMCCalculator.tsx
 │   │       ├── CaloriasCalculator.tsx
 │   │       ├── PesoIdealCalculator.tsx
@@ -69,16 +77,26 @@ calcfit-astro/
 │   │       ├── MacroCalculator.tsx
 │   │       ├── ProteinasCalculator.tsx
 │   │       ├── SuenoCalculator.tsx
-│   │       ├── GaugeIMC.tsx       ← gauge SVG semicircular animado
-│   │       ├── ZonasCardiaca.tsx  ← barras horizontales de zonas cardíacas
-│   │       └── BarrasCaloria.tsx  ← barras verticales déficit/mant/superávit
+│   │       ├── CinturaCaderaCalculator.tsx
+│   │       ├── CaloriasEjercicioCalculator.tsx
+│   │       ├── AlcoholemiaCalculator.tsx
+│   │       ├── PresionArterialCalculator.tsx
+│   │       ├── VO2MaxCalculator.tsx
+│   │       ├── FFMICalculator.tsx
+│   │       ├── CicloMenstrualCalculator.tsx
+│   │       ├── RitmoCarreraCalculator.tsx
+│   │       ├── CinturaEstaturaCalculator.tsx
+│   │       ├── AyunoCalculator.tsx
+│   │       ├── GaugeIMC.tsx           ← gauge SVG semicircular animado
+│   │       ├── ZonasCardiaca.tsx      ← barras horizontales de zonas cardíacas
+│   │       └── BarrasCaloria.tsx      ← barras verticales déficit/mant/superávit
 │   ├── lib/
-│   │   ├── calculators.ts         ← TODA la lógica de cálculo (funciones puras)
-│   │   ├── units.ts               ← conversiones métrico ↔ imperial
-│   │   ├── useValidation.ts       ← hook de validación de campos
-│   │   └── useHistory.ts          ← hook de historial en localStorage
+│   │   ├── calculators.ts             ← TODA la lógica de cálculo (funciones puras)
+│   │   ├── units.ts                   ← conversiones métrico ↔ imperial
+│   │   ├── useValidation.ts           ← hook de validación de campos
+│   │   └── useHistory.ts              ← hook de historial en localStorage
 │   └── pages/
-│       ├── index.astro            ← homepage
+│       ├── index.astro                ← homepage con las 24 calculadoras
 │       ├── imc.astro
 │       ├── calorias-diarias.astro
 │       ├── peso-ideal.astro
@@ -92,7 +110,22 @@ calcfit-astro/
 │       ├── dias-fechas.astro
 │       ├── macronutrientes.astro
 │       ├── proteinas.astro
-│       └── sueno.astro
+│       ├── sueno.astro
+│       ├── cintura-cadera.astro
+│       ├── calorias-ejercicio.astro
+│       ├── alcoholemia.astro
+│       ├── presion-arterial.astro
+│       ├── vo2-maximo.astro
+│       ├── ffmi.astro
+│       ├── ciclo-menstrual.astro
+│       ├── ritmo-carrera.astro
+│       ├── cintura-estatura.astro
+│       ├── ayuno-intermitente.astro
+│       ├── sobre-nosotros.astro       ← página estática
+│       ├── contacto.astro             ← solo email, sin formulario
+│       ├── aviso-legal.astro          ← LSSI-CE
+│       ├── politica-privacidad.astro  ← RGPD/LOPDGDD
+│       └── politica-cookies.astro     ← explica uso de localStorage
 ├── astro.config.mjs
 ├── tsconfig.json
 └── package.json
@@ -130,6 +163,34 @@ calcfit-astro/
 - Todos los valores numéricos de resultado van en **Bebas Neue**
 - El color acid (`#CAFF00`) es el único color de acento — no agregar otros sin consultar
 
+### Logo y favicon
+
+El logo es una **cruz "+"** SVG con los rectángulos en `fill="#CAFF00"`. Se usa en:
+- `public/favicon.svg` — fondo `#0F0E0D`, cruz acid 32×32
+- `Navbar.astro` — cruz SVG 18×18 inline junto al texto "CalcFit"
+- `Footer.astro` — cruz SVG 15×15 inline junto al texto "CalcFit"
+
+### Iconos en la homepage
+
+Todos los íconos de las calculadoras son **SVG strings inline** renderizados con `<Fragment set:html={calc.icon} />`. Usan `currentColor` — el contenedor lleva `color: var(--acid)` sobre fondo ink o `color: var(--ink)` sobre fondo acid para theming automático. No hay emojis en ninguna parte del proyecto.
+
+---
+
+## Terminología LATAM
+
+El proyecto usa terminología comprensible para Latinoamérica. Reglas fijas:
+
+| Término incorrecto | Término correcto | Contexto |
+|---|---|---|
+| `suffix="ft"` | `suffix="pies"` | Inputs de altura imperial |
+| `suffix="in"` | `suffix="pulg"` | Inputs de pulgadas imperial |
+| `"bpm"` | `"ppm"` | Pulsaciones por minuto (frecuencia cardíaca) |
+| `"FC máxima"` | `"Frec. cardíaca máxima"` | Labels de inputs |
+| `"Chupitos"` | `"Shots/tragos"` | Spain-only, no se usa en LATAM |
+| `suffix="ud"` | `suffix="cant."` | Conteo de bebidas |
+
+El Toggle siempre muestra **"kg · cm"** y **"lb · pies"** — nunca "Métrico"/"Imperial" ni abreviaturas en inglés.
+
 ---
 
 ## Arquitectura de páginas
@@ -166,25 +227,58 @@ Cada página de calculadora sigue este patrón exacto:
 ### Funciones disponibles
 
 ```typescript
-calcularIMC(pesoKg, alturaCm)              → { imc, categoria, rango }
+// Calculadoras originales (14)
+calcularIMC(pesoKg, alturaCm)
+  → { imc, categoria, rango }
 calcularTDEE({ pesoKg, alturaCm, edadAnios, sexo, actividad })
-                                            → { tmb, tdee, deficit, superavit }
-calcularPesoIdeal(alturaCm, sexo)          → { devine, robinson, miller, hamwi, broca, promedio }
+  → { tmb, tdee, deficit, superavit }
+calcularPesoIdeal(alturaCm, sexo)
+  → { devine, robinson, miller, hamwi, broca, promedio }
 calcularGrasaCorporal({ sexo, alturaCm, cuelloCm, cinturaCm, caderaCm? })
-                                            → { porcentaje, categoria }
-calcularFCM(edad)                          → { fcm, zonas[] }
+  → { porcentaje, categoria }
+calcularFCM(edad)
+  → { fcm, zonas[] }
 calcularAguaDiaria({ pesoKg, actividad, clima })
-                                            → { litros, vasos }
+  → { litros, vasos }
 calcularOvulacion({ ultimaMenstruacion, duracionCiclo })
-                                            → { ovulacion, inicioFertil, finFertil, diasFertiles[] }
-calcularSemanaEmbarazo(ultimaMenstruacion) → { semanas, dias, trimestre, fechaParto }
-calcularFechaParto(ultimaMenstruacion)     → { fechaParto, semanasRestantes }
-calcularEdad(fechaNacimiento)              → { anios, meses, dias, totalDias, proximoCumple }
-calcularDiasFechas(fechaInicio, fechaFin)  → { dias, semanas, meses, anios }
+  → { ovulacion, inicioFertil, finFertil, diasFertiles[] }
+calcularSemanaEmbarazo(ultimaMenstruacion)
+  → { semanas, dias, trimestre, fechaParto }
+calcularFechaParto(ultimaMenstruacion)
+  → { fechaParto, semanasRestantes }
+calcularEdad(fechaNacimiento)
+  → { anios, meses, dias, totalDias, proximoCumple }
+calcularDiasFechas(fechaInicio, fechaFin)
+  → { dias, semanas, meses, anios }
 calcularMacronutrientes({ pesoKg, objetivo, actividad })
-                                            → { proteinas, carbohidratos, grasas, calorias }
-calcularProteinasDiarias({ pesoKg, nivel }) → { minimo, optimo }
-calcularSueno(horaDespertar)              → CicloSueno[]  (6 opciones de horario)
+  → { proteinas, carbohidratos, grasas, calorias }
+calcularProteinasDiarias({ pesoKg, nivel })
+  → { minimo, optimo }
+calcularSueno(horaDespertar)
+  → CicloSueno[]  (6 opciones de horario)
+
+// Calculadoras nuevas (10)
+calcularCinturaCadera({ sexo, cinturaCm, caderaCm })
+  → { ratio, categoria, riesgo }
+calcularCaloriasEjercicio({ pesoKg, duracionMin, actividad })
+  → { calorias, met, actividadNombre }
+  // también exporta: METS (constante con todos los tipos de actividad y sus MET)
+calcularAlcoholemia({ pesoKg, sexo, bebidasCerveza, bebidasVino, bebidasCopa, horasTranscurridas })
+  → { bac, estado, aptoConducir, horasHastaCero }
+calcularPresionArterial(sistolica, diastolica)
+  → { categoria, riesgo, recomendacion, color }
+calcularVO2Max(edad, sexo, fcReposo, fcMaxima?)
+  → { vo2max, categoria, nivel }
+calcularFFMI(pesoKg, alturaCm, grasaPorcentaje)
+  → { ffmi, ffmiNormalizado, masaMagraKg, categoria, nivel }
+calcularCicloMenstrual(ultimaMenstruacion, duracionCiclo, duracionPeriodo)
+  → { proximaMenstruacion, fases, diaActual, faseActual }
+calcularRitmoCarrera(distanciaKm, minutosTotal)
+  → { ritmoMinPorKm, ritmoMinPorMilla, velocidadKmh, tiempos[] }
+calcularCinturaEstatura(cinturaCm, alturaCm)
+  → { ratio, categoria, riesgo, recomendacion }
+calcularAyunoIntermitente({ protocolo, horaInicioComida })
+  → { horaFinComida, horaInicioAyuno, horaFinAyuno, horasAyuno, horasComida, beneficios }
 ```
 
 ### Conversión de unidades (src/lib/units.ts)
@@ -201,7 +295,7 @@ toFtIn(cm)       → { ft, inches }
 ## Componentes UI — guía de uso
 
 ### Toggle
-Cambia entre sistema métrico e imperial. Siempre el primer elemento de los formularios con peso o altura.
+Cambia entre sistema métrico e imperial. Siempre el primer elemento de los formularios con peso o altura. Las etiquetas son **"kg · cm"** y **"lb · pies"** — no cambiar a inglés.
 ```tsx
 <Toggle value={units} onChange={setUnits} />
 ```
@@ -242,15 +336,43 @@ Incluye WhatsApp, X/Twitter y Copiar enlace. SVG inline, sin dependencias.
 Tres visualizaciones específicas en `src/components/calculators/`:
 
 - **GaugeIMC** — gauge SVG semicircular de 5 colores. Marcador animado con CSS `transform: rotate()`. Props: `imc: number`
-- **ZonasCardiaca** — barras horizontales CSS con 5 zonas coloreadas. Props: `fcm, zonas[]`
+- **ZonasCardiaca** — barras horizontales CSS con 5 zonas coloreadas. Muestra rangos en **ppm**. Props: `fcm, zonas[]`
 - **BarrasCaloria** — 3 barras verticales (déficit / mantenimiento / superávit). La de mantenimiento en acid. Props: `tdee: number`
+
+---
+
+## Homepage (src/pages/index.astro)
+
+La homepage muestra las **24 calculadoras** en 4 categorías. Los íconos SVG están definidos como strings en el objeto `I` al inicio del frontmatter y se renderizan con `<Fragment set:html={calc.icon} />`.
+
+Categorías:
+1. **Fitness & salud** (12 calculadoras)
+2. **Embarazo & fertilidad** (4 calculadoras)
+3. **Fechas & tiempo** (3 calculadoras)
+4. **Nutrición & bienestar** (5 calculadoras)
+
+Al agregar una calculadora nueva, añadirla al array `calculadoras` con: `{ slug, nombre, desc, badge, icon }` y al map `calcsBySlug` para asignarla a su categoría.
+
+---
+
+## Páginas estáticas
+
+Cinco páginas informativas/legales sin componentes React:
+
+| Página | Ruta | Contenido |
+|---|---|---|
+| Sobre nosotros | `/sobre-nosotros` | Misión, tecnología, rigor científico |
+| Contacto | `/contacto` | Solo email codezun@gmail.com, sin formulario |
+| Aviso legal | `/aviso-legal` | LSSI-CE, 6 secciones |
+| Política de privacidad | `/politica-privacidad` | RGPD/LOPDGDD, 8 secciones |
+| Política de cookies | `/politica-cookies` | Explica uso de localStorage (sin cookies de rastreo) |
 
 ---
 
 ## SEO
 
 ### Por página
-- `Base.astro` genera automáticamente: meta charset/viewport, canonical, OG completo, Twitter Card, JSON-LD
+- `Base.astro` genera automáticamente: meta charset/viewport, canonical, OG completo, Twitter Card, JSON-LD (`is:inline` obligatorio en el script)
 - `CalculatorLayout.astro` inyecta `MedicalWebContent` schema por defecto en páginas de calculadoras
 - Breadcrumb visible en todas las páginas interiores
 
@@ -281,8 +403,9 @@ npm run preview  # preview del build
    - Usar `Toggle` si tiene peso/altura
    - Usar `useValidation` o validación inline para los inputs
    - Usar `Input`, `Button`, `ResultCard`, `ShareButtons`
+   - Respetar terminología LATAM (pies/pulg/ppm — ver tabla arriba)
 3. Crear la página en `src/pages/nombre.astro` usando `CalculatorLayout`
-4. Agregar la calculadora al array en `src/pages/index.astro` (con slug, nombre, desc, badge, icon)
+4. Agregar al array `calculadoras` en `src/pages/index.astro` con su SVG icon y categoría
 5. Ejecutar `npm run build` y verificar que pasa sin errores
 
 ---
@@ -313,6 +436,5 @@ Siempre verificar `typeof window !== 'undefined'` antes de acceder a localStorag
 ## Pendientes conocidos
 
 - Generar imágenes OG estáticas en `public/og/` (1200×630px por calculadora)
-- Páginas estáticas: `/sobre-nosotros`, `/contacto`, `/aviso-legal`, `/politica-privacidad`
-- Favicon personalizado (actualmente usa el SVG de Astro por defecto)
 - Google Analytics o sistema de métricas (actualmente ninguno)
+- Deploy en producción (Vercel / Netlify / Cloudflare Pages)
