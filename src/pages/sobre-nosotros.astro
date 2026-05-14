@@ -1,0 +1,109 @@
+---
+import Base from '../layouts/Base.astro';
+import Navbar from '../components/layout/Navbar.astro';
+import Footer from '../components/layout/Footer.astro';
+---
+
+<Base
+  title="Sobre Nosotros — CalcFit"
+  description="Conoce la misión de CalcFit: calculadoras de salud gratuitas, validadas científicamente, sin registros, sin publicidad y sin almacenamiento de datos."
+>
+  <Navbar />
+
+  <!-- HERO -->
+  <div style="background: var(--ink); padding: 64px 32px 48px;">
+    <p style="font-family: var(--font-mono); font-size: 10px; color: #555; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 16px;">Sobre nosotros</p>
+    <h1 style="font-family: var(--font-display); font-size: 88px; color: white; line-height: 0.92; margin-bottom: 20px;">
+      Ciencia /<br><span style="color: var(--acid);">accesible.</span>
+    </h1>
+    <p style="font-size: 14px; color: #666; max-width: 520px; line-height: 1.8;">
+      CalcFit nació de una pregunta simple: ¿por qué las mejores herramientas de salud están detrás de muros de registro, publicidad o de pago? La respuesta fue construirlas de otro modo.
+    </p>
+  </div>
+
+  <!-- CONTENIDO -->
+  <div style="background: var(--cream); padding: 56px 32px; max-width: 860px;">
+
+    <!-- Manifiesto -->
+    <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid var(--border); margin-bottom: 48px;">
+      <div>
+        <p style="font-family: var(--font-mono); font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 2px;">01 — Misión</p>
+      </div>
+      <div>
+        <h2 style="font-family: var(--font-display); font-size: 36px; color: var(--ink); margin-bottom: 16px; line-height: 1;">Democratizar el acceso a la información de salud</h2>
+        <p style="font-size: 14px; color: var(--muted); line-height: 1.8; margin-bottom: 14px;">
+          CalcFit ofrece calculadoras de salud y bienestar basadas en las mismas fórmulas que usan médicos, dietistas y entrenadores. Gratis. Sin registro. Sin publicidad. Sin que nadie tenga que confiar en nosotros sus datos personales.
+        </p>
+        <p style="font-size: 14px; color: var(--muted); line-height: 1.8;">
+          Creemos que conocer tu IMC, tus calorías de mantenimiento o tu ciclo menstrual es un derecho, no un producto.
+        </p>
+      </div>
+    </div>
+
+    <!-- Cómo funciona -->
+    <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid var(--border); margin-bottom: 48px;">
+      <div>
+        <p style="font-family: var(--font-mono); font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 2px;">02 — Tecnología</p>
+      </div>
+      <div>
+        <h2 style="font-family: var(--font-display); font-size: 36px; color: var(--ink); margin-bottom: 16px; line-height: 1;">Todo ocurre en tu navegador</h2>
+        <p style="font-size: 14px; color: var(--muted); line-height: 1.8; margin-bottom: 14px;">
+          Ningún dato que introduces en CalcFit abandona tu dispositivo. Los cálculos se ejecutan íntegramente en tu navegador mediante JavaScript. No existe ningún servidor que procese tus medidas, tu peso o tu fecha de nacimiento.
+        </p>
+        <p style="font-size: 14px; color: var(--muted); line-height: 1.8;">
+          El historial opcional de algunas calculadoras se guarda exclusivamente en el almacenamiento local de tu navegador (<code style="font-family: var(--font-mono); font-size: 12px; background: #E8E4DB; padding: 1px 5px;">localStorage</code>). CalcFit no tiene acceso a él.
+        </p>
+      </div>
+    </div>
+
+    <!-- Rigor científico -->
+    <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid var(--border); margin-bottom: 48px;">
+      <div>
+        <p style="font-family: var(--font-mono); font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 2px;">03 — Rigor</p>
+      </div>
+      <div>
+        <h2 style="font-family: var(--font-display); font-size: 36px; color: var(--ink); margin-bottom: 16px; line-height: 1;">Fórmulas validadas, no opinión</h2>
+        <p style="font-size: 14px; color: var(--muted); line-height: 1.8; margin-bottom: 14px;">
+          Cada calculadora está construida sobre evidencia científica revisada por pares: fórmulas de la OMS, el ACSM, la AHA o publicaciones indexadas en PubMed. Citamos la fuente en cada herramienta para que puedas verificarlo.
+        </p>
+        <div style="display: flex; flex-direction: column; gap: 1px; background: var(--border); margin-top: 16px;">
+          {[
+            { org: 'OMS', desc: 'Clasificación IMC, relación cintura-cadera, agua diaria' },
+            { org: 'ACSM', desc: 'Valores MET, VO2 máximo, zonas cardíacas' },
+            { org: 'AHA / ACC', desc: 'Clasificación presión arterial 2017' },
+            { org: 'Mifflin-St Jeor', desc: 'Tasa metabólica basal (TMB) y TDEE' },
+            { org: 'US Navy', desc: 'Porcentaje de grasa corporal' },
+          ].map(f => (
+            <div style="background: var(--cream); padding: 12px 16px; display: flex; gap: 16px; align-items: baseline;">
+              <span style="font-family: var(--font-mono); font-size: 10px; color: var(--acid); background: var(--ink); padding: 2px 8px; flex-shrink: 0;">{f.org}</span>
+              <span style="font-size: 13px; color: var(--muted);">{f.desc}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- Contacto -->
+    <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 48px;">
+      <div>
+        <p style="font-family: var(--font-mono); font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 2px;">04 — Contacto</p>
+      </div>
+      <div>
+        <h2 style="font-family: var(--font-display); font-size: 36px; color: var(--ink); margin-bottom: 16px; line-height: 1;">¿Alguna pregunta?</h2>
+        <p style="font-size: 14px; color: var(--muted); line-height: 1.8; margin-bottom: 20px;">
+          Para sugerencias, correcciones científicas, colaboraciones o cualquier otra consulta, escríbenos directamente.
+        </p>
+        <a href="mailto:codezun@gmail.com" style="display: inline-flex; align-items: center; gap: 12px; background: var(--ink); color: var(--acid); padding: 14px 24px; text-decoration: none; font-family: var(--font-mono); font-size: 13px;">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="1" y="3" width="14" height="10"/>
+            <polyline points="1,3 8,9 15,3"/>
+          </svg>
+          codezun@gmail.com
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <Footer />
+</Base>

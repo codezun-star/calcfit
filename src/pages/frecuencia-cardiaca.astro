@@ -1,0 +1,51 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import FCMCalculator from '../components/calculators/FCMCalculator';
+---
+
+<CalculatorLayout
+  title="Calculadora de Frecuencia Cardíaca Máxima y Zonas | CalcFit"
+  description="Calcula tu frecuencia cardíaca máxima y las 5 zonas de entrenamiento. Optimiza tu rendimiento deportivo."
+  calculatorName="Frecuencia Cardíaca"
+  breadcrumbSlug="frecuencia-cardiaca"
+  ogImage="/og/frecuencia-cardiaca.jpg"
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: 64px; color: white; line-height: 0.92; margin-bottom: 12px;">
+      Frecuencia<br><span style="color: var(--acid);">Cardíaca</span>
+    </h1>
+    <p style="font-size: 13px; color: #666; max-width: 480px; line-height: 1.7;">
+      Conoce tu frecuencia cardíaca máxima (FCM) y las 5 zonas de entrenamiento para optimizar cada sesión de ejercicio.
+    </p>
+  </div>
+
+  <FCMCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">Las 5 zonas de entrenamiento</h2>
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px;">
+      <thead>
+        <tr style="border-bottom: 2px solid var(--border);">
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase;">Zona</th>
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase;">% FCM</th>
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase;">Beneficio</th>
+        </tr>
+      </thead>
+      <tbody>
+        {[
+          { z: '1 — Recuperación',   p: '50–60%', b: 'Recuperación activa, calentamiento' },
+          { z: '2 — Quema de grasa', p: '60–70%', b: 'Máxima oxidación de grasas' },
+          { z: '3 — Aeróbica',       p: '70–80%', b: 'Mejora resistencia cardiovascular' },
+          { z: '4 — Anaeróbica',     p: '80–90%', b: 'Aumenta velocidad y potencia' },
+          { z: '5 — Máxima',         p: '90–100%', b: 'Intervalos de alta intensidad (HIIT)' },
+        ].map((row) => (
+          <tr style="border-bottom: 1px solid var(--border);">
+            <td style="padding: 10px 0; font-size: 13px; font-weight: 600; color: var(--ink);">{row.z}</td>
+            <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.p}</td>
+            <td style="padding: 10px 0; font-size: 13px; color: var(--muted);">{row.b}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</CalculatorLayout>

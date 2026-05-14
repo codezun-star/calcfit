@@ -1,0 +1,70 @@
+---
+import Base from '../layouts/Base.astro';
+import Navbar from '../components/layout/Navbar.astro';
+import Footer from '../components/layout/Footer.astro';
+---
+
+<Base
+  title="Contacto — CalcFit"
+  description="Contacta con CalcFit para sugerencias, correcciones científicas o colaboraciones. Respondemos a todos los mensajes."
+>
+  <Navbar />
+
+  <!-- HERO -->
+  <div style="background: var(--ink); padding: 64px 32px 48px;">
+    <p style="font-family: var(--font-mono); font-size: 10px; color: #555; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 16px;">Contacto</p>
+    <h1 style="font-family: var(--font-display); font-size: 88px; color: white; line-height: 0.92; margin-bottom: 20px;">
+      Escríbenos /<br><span style="color: var(--acid);">directamente.</span>
+    </h1>
+    <p style="font-size: 14px; color: #666; max-width: 480px; line-height: 1.8;">
+      Sin formularios, sin bots. Un correo electrónico real que lee una persona real.
+    </p>
+  </div>
+
+  <!-- CONTENIDO -->
+  <div style="background: var(--cream); padding: 56px 32px; max-width: 860px;">
+
+    <!-- Email principal -->
+    <div style="margin-bottom: 48px;">
+      <p style="font-family: var(--font-mono); font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px;">Dirección de contacto</p>
+      <a href="mailto:codezun@gmail.com" style="display: inline-flex; align-items: center; gap: 16px; background: var(--ink); color: var(--acid); padding: 20px 28px; text-decoration: none;">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="1" y="4" width="18" height="13"/>
+          <polyline points="1,4 10,11 19,4"/>
+        </svg>
+        <div>
+          <div style="font-family: var(--font-display); font-size: 32px; line-height: 1;">codezun@gmail.com</div>
+          <div style="font-size: 11px; color: #888; margin-top: 2px;">Haz clic para abrir tu cliente de correo</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Motivos de contacto -->
+    <div style="margin-bottom: 48px;">
+      <p style="font-family: var(--font-mono); font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px;">¿Por qué escribirnos?</p>
+      <div style="display: flex; flex-direction: column; gap: 1px; background: var(--border);">
+        {[
+          { titulo: 'Error o inexactitud científica', desc: 'Si detectas que una fórmula está mal implementada o los resultados no coinciden con la evidencia actualizada, cuéntanos con la fuente.' },
+          { titulo: 'Sugerir una nueva calculadora', desc: 'Hay decenas de herramientas de salud que podríamos añadir. Si tienes una idea y la referencia científica, la valoramos.' },
+          { titulo: 'Colaboración o prensa', desc: 'Somos un proyecto independiente. Si quieres citarnos, entrevistarnos o proponer algún tipo de colaboración, adelante.' },
+          { titulo: 'Consulta legal o privacidad', desc: 'Para ejercer tus derechos RGPD (acceso, rectificación, supresión) o cualquier duda legal sobre el sitio.' },
+        ].map(item => (
+          <div style="background: var(--cream); padding: 18px 20px;">
+            <div style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 4px;">{item.titulo}</div>
+            <div style="font-size: 13px; color: var(--muted); line-height: 1.6;">{item.desc}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Aviso -->
+    <div style="padding: 16px 20px; background: var(--ink); border-left: 3px solid var(--acid);">
+      <p style="font-size: 13px; color: #888; line-height: 1.7;">
+        <strong style="color: white;">Aviso:</strong> CalcFit es una herramienta informativa. No ofrecemos asesoramiento médico personalizado ni podemos responder preguntas clínicas sobre tu salud concreta. Para eso, consulta con un profesional sanitario.
+      </p>
+    </div>
+
+  </div>
+
+  <Footer />
+</Base>

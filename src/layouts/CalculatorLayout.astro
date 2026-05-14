@@ -1,0 +1,51 @@
+---
+import Base from './Base.astro';
+import Navbar from '../components/layout/Navbar.astro';
+import Footer from '../components/layout/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  schema?: object;
+  calculatorName: string;
+  breadcrumbSlug: string;
+}
+
+const { title, description, ogImage, schema, calculatorName, breadcrumbSlug } = Astro.props;
+
+const medicalSchema = schema ?? {
+  '@context': 'https://schema.org',
+  '@type': 'MedicalWebContent',
+  name: calculatorName,
+  description,
+  url: `https://www.calcfit.com/${breadcrumbSlug}`,
+  audience: { '@type': 'Patient' },
+  lastReviewed: '2026-01-01',
+};
+---
+
+<Base title={title} description={description} ogImage={ogImage} schema={medicalSchema}>
+  <Navbar />
+
+  <!-- Breadcrumb -->
+  <div style="background: var(--cream); border-bottom: 1px solid var(--border); padding: 10px 32px;">
+    <span style="font-family: var(--font-mono); font-size: 10px; color: var(--muted);">
+      <a href="/" style="color: var(--muted); text-decoration: none;">Inicio</a>
+      <span style="margin: 0 6px;">→</span>
+      <span style="color: var(--ink);">{calculatorName}</span>
+    </span>
+  </div>
+
+  <!-- Main calculator slot -->
+  <main style="min-height: calc(100vh - 200px);">
+    <slot />
+  </main>
+
+  <!-- SEO content slot (server rendered) -->
+  <div style="background: var(--cream); border-top: 1px solid var(--border); padding: 48px 32px; max-width: 860px; margin: 0 auto;">
+    <slot name="seo" />
+  </div>
+
+  <Footer />
+</Base>

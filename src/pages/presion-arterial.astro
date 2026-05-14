@@ -1,0 +1,71 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import PresionArterialCalculator from '../components/calculators/PresionArterialCalculator';
+---
+
+<CalculatorLayout
+  title="Clasificador de Presión Arterial | CalcFit"
+  description="Clasifica tu presión arterial según los criterios AHA/ACC 2017. Sabe si tienes hipertensión, presión normal o elevada con una sola medición."
+  calculatorName="Clasificador de Presión Arterial"
+  breadcrumbSlug="presion-arterial"
+  ogImage="/og/presion-arterial.jpg"
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: 64px; color: white; line-height: 0.92; margin-bottom: 12px;">
+      Presión<br><span style="color: var(--acid);">Arterial</span>
+    </h1>
+    <p style="font-size: 13px; color: #666; max-width: 480px; line-height: 1.7;">
+      Introduce tus valores de presión sistólica y diastólica para clasificarlos según las guías de la American Heart Association (AHA) y el American College of Cardiology (ACC) de 2017.
+    </p>
+  </div>
+
+  <PresionArterialCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Qué es la presión arterial sistólica y diastólica?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      La presión <strong>sistólica</strong> (número superior) mide la presión cuando el corazón late. La presión <strong>diastólica</strong> (número inferior) mide la presión entre latidos, cuando el corazón está en reposo. Se expresan en milímetros de mercurio (mmHg).
+    </p>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Clasificación AHA/ACC 2017</h2>
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px;">
+      <thead>
+        <tr style="border-bottom: 2px solid var(--border);">
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Categoría</th>
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Sistólica</th>
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Diastólica</th>
+        </tr>
+      </thead>
+      <tbody>
+        {[
+          { cat: 'Hipotensión',          sis: '< 90',       dia: '< 60' },
+          { cat: 'Normal',               sis: '< 120',      dia: '< 80' },
+          { cat: 'Presión elevada',      sis: '120 – 129',  dia: '< 80' },
+          { cat: 'Hipertensión grado 1', sis: '130 – 139',  dia: '80 – 89' },
+          { cat: 'Hipertensión grado 2', sis: '140 – 179',  dia: '90 – 119' },
+          { cat: 'Crisis hipertensiva',  sis: '≥ 180',      dia: '≥ 120' },
+        ].map(row => (
+          <tr style="border-bottom: 1px solid var(--border);">
+            <td style="padding: 10px 0; font-size: 13px; color: var(--ink);">{row.cat}</td>
+            <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.sis}</td>
+            <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.dia}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {[
+        { q: '¿Cuándo debo consultar a mi médico?', a: 'Si su presión supera 140/90 mmHg en dos mediciones separadas, si obtiene una lectura superior a 180/120 mmHg (crisis), o si tiene síntomas como dolor de cabeza severo, visión borrosa o dificultad para respirar. La hipertensión sostenida sin tratar aumenta el riesgo de infarto, ictus e insuficiencia renal.' },
+        { q: '¿Por qué varía la presión arterial durante el día?', a: 'Es normal que fluctúe. Factores como el ejercicio, el estrés, la cafeína, el tabaco o la posición corporal la elevan temporalmente. Por eso se recomienda medirla en reposo, sentado, por las mañanas antes de tomar medicación, y tomar varias mediciones.' },
+        { q: '¿Qué son los factores de riesgo para la hipertensión?', a: 'Edad avanzada, obesidad, sedentarismo, dieta alta en sodio, consumo excesivo de alcohol, tabaquismo, estrés crónico, antecedentes familiares y apnea del sueño. La hipertensión afecta al 30-45% de la población adulta y muchos desconocen que la padecen.' },
+      ].map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

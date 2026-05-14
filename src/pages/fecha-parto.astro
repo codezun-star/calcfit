@@ -1,0 +1,30 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import PartoCalculator from '../components/calculators/PartoCalculator';
+---
+
+<CalculatorLayout
+  title="Calculadora de Fecha de Parto — Regla de Naegele | CalcFit"
+  description="Calcula tu fecha probable de parto usando la Regla de Naegele. Resultado inmediato desde la fecha de tu última menstruación."
+  calculatorName="Fecha de Parto"
+  breadcrumbSlug="fecha-parto"
+  ogImage="/og/parto.jpg"
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: 64px; color: white; line-height: 0.92; margin-bottom: 12px;">
+      Fecha de<br><span style="color: var(--acid);">Parto</span>
+    </h1>
+    <p style="font-size: 13px; color: #666; max-width: 480px; line-height: 1.7;">
+      Calcula tu fecha probable de parto (FPP) usando la Regla de Naegele, el método estándar en obstetricia mundial.
+    </p>
+  </div>
+
+  <PartoCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cómo funciona la Regla de Naegele?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted);">
+      La <strong>Regla de Naegele</strong> estima la fecha de parto sumando 280 días (40 semanas) al primer día de la última menstruación. La fórmula original toma el primer día de la FUM, le resta 3 meses, suma 7 días y un año. Aproximadamente el 80% de los partos ocurren dentro de las 2 semanas de la fecha estimada.
+    </p>
+  </div>
+</CalculatorLayout>

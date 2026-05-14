@@ -1,0 +1,246 @@
+---
+import Base from '../layouts/Base.astro';
+import Footer from '../components/layout/Footer.astro';
+
+const I = {
+  imc:               `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="9" y1="3" x2="9" y2="15"/><line x1="3" y1="9" x2="15" y2="9"/><path d="M3 9 5.5 14 .5 14Z" fill="currentColor" stroke="none"/><path d="M15 9 12.5 14 17.5 14Z" fill="currentColor" stroke="none"/></svg>`,
+  calorias:          `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 2c0 0 4 4 4 7.5a4 4 0 01-8 0C5 7 6.5 5 7.5 4c0 0-.5 2.5 1.5 3C9 5.5 9 2 9 2z"/></svg>`,
+  pesoIdeal:         `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="7" width="16" height="4"/><line x1="4" y1="7" x2="4" y2="9.5"/><line x1="7" y1="7" x2="7" y2="11"/><line x1="10" y1="7" x2="10" y2="9.5"/><line x1="13" y1="7" x2="13" y2="11"/></svg>`,
+  grasa:             `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="9" cy="9" r="7"/><path d="M9 9V2M9 9l5.5 4"/></svg>`,
+  fcm:               `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,9 4,9 6,4 8,14 10,9 12,9 14,12 17,9"/></svg>`,
+  agua:              `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 2L4 10a5 5 0 0010 0L9 2z"/></svg>`,
+  ovulacion:         `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M14.5 9.5a7 7 0 01-9.9-9.9 7 7 0 110 9.9z"/></svg>`,
+  embarazo:          `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="9" cy="4" r="2"/><path d="M6 7.5c-1 1-1.5 2.5-1 4.5L6 16h6l1-4c.5-2-.5-3.5-1.5-4.5H6z"/><path d="M8.5 11a2 2 0 002 1.5"/></svg>`,
+  parto:             `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="14" height="13"/><line x1="2" y1="7" x2="16" y2="7"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="12" y1="1" x2="12" y2="4"/><circle cx="9" cy="11.5" r="1" fill="currentColor" stroke="none"/></svg>`,
+  edad:              `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="9" cy="9" r="7"/><polyline points="9,5 9,9 12,11"/></svg>`,
+  diasFechas:        `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="7" height="6"/><rect x="10" y="9" width="7" height="6"/><line x1="8" y1="6" x2="10" y2="6"/><path d="M9.5 4.5L11 6 9.5 7.5"/></svg>`,
+  macro:             `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="6" y1="2" x2="6" y2="16"/><path d="M3 2v5a3 3 0 006 0V2"/><path d="M12 2c2 2 3 4 2 7l-1 1v6"/></svg>`,
+  proteinas:         `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="9" x2="13" y2="9"/><rect x="1" y="7.5" width="3" height="3"/><rect x="4.5" y="6.5" width="2" height="5"/><rect x="11.5" y="6.5" width="2" height="5"/><rect x="14" y="7.5" width="3" height="3"/></svg>`,
+  sueno:             `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 10a6 6 0 01-8.5-8.5 6 6 0 110 8.5z"/><path d="M13 2h4l-4 4h4"/></svg>`,
+  cinturaCadera:     `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="9" cy="3" r="2"/><path d="M6 6.5c-1 .5-2 2-1.5 4L6 16h6l1.5-5.5c.5-2-.5-3.5-1.5-4H6z"/><line x1="3.5" y1="10" x2="14.5" y2="10" stroke-dasharray="2 1.5"/></svg>`,
+  calEjercicio:      `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="3" r="1.5"/><path d="M11.5 5.5L8 9l3 1.5-2 6M11.5 5.5L14 10l-3 2"/><line x1="4" y1="8" x2="9.5" y2="7"/></svg>`,
+  alcoholemia:       `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 2h8L11 9.5a2.5 2.5 0 01-5 0L5 2z"/><line x1="9" y1="12" x2="9" y2="16"/><line x1="6" y1="16" x2="12" y2="16"/></svg>`,
+  presion:           `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 15.5S2 11 2 6.5a4 4 0 018 0 4 4 0 018 0C18 11 9 15.5 9 15.5z"/><line x1="9" y1="7" x2="9" y2="10.5"/><polyline points="7.5,9 9,10.5 10.5,9"/></svg>`,
+  vo2:               `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 2v14"/><path d="M9 6C7.5 6 5 7 4 9s-1 4 0 5.5c1 1 2.5 1 4 .5L9 6z"/><path d="M9 6c1.5 0 4 1 5 3s1 4 0 5.5c-1 1-2.5 1-4 .5L9 6z"/></svg>`,
+  ffmi:              `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14c0-3 1.5-5.5 4-6l3.5-1.5c1.5-1 2.5-3 2-4S11 1.5 10 2.5L7.5 5c-1.5 1-3 3-3 5"/><circle cx="4.5" cy="11.5" r="2.5"/><line x1="1" y1="14" x2="17" y2="14"/></svg>`,
+  cicloMenstrual:    `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="9" cy="9" r="7"/><line x1="9" y1="2" x2="9" y2="4.5"/><line x1="16" y1="9" x2="13.5" y2="9"/><line x1="9" y1="16" x2="9" y2="13.5"/><line x1="2" y1="9" x2="4.5" y2="9"/><circle cx="9" cy="9" r="2.5" fill="currentColor" stroke="none"/></svg>`,
+  ritmo:             `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="9" cy="11" r="6.5"/><line x1="9" y1="11" x2="9" y2="7"/><line x1="7" y1="1.5" x2="11" y2="1.5"/><line x1="9" y1="1.5" x2="9" y2="4.5"/><line x1="14.5" y1="5.5" x2="16" y2="4"/></svg>`,
+  cinturaEstatura:   `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="9" cy="3.5" r="2"/><path d="M6 7h6l1.5 9h-9L6 7z"/><line x1="2" y1="10.5" x2="16" y2="10.5" stroke-dasharray="2 1.5"/></svg>`,
+  ayuno:             `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="9" cy="9" r="7"/><line x1="9" y1="4.5" x2="9" y2="9"/><line x1="9" y1="9" x2="12.5" y2="11"/><line x1="3.5" y1="3.5" x2="14.5" y2="14.5" stroke-dasharray="2 1.5"/></svg>`,
+};
+
+const calculadoras = [
+  { slug: '/imc',                 nombre: 'Calculadora IMC',              desc: 'Índice de Masa Corporal según la OMS',    badge: 'popular',   destacada: true,  num: '01', icon: I.imc },
+  { slug: '/calorias-diarias',    nombre: 'Calorías Diarias',             desc: 'TDEE con fórmula Mifflin-St Jeor',        badge: null,        destacada: false, num: '02', icon: I.calorias },
+  { slug: '/peso-ideal',          nombre: 'Peso Ideal',                   desc: '5 fórmulas: Devine, Robinson, Miller',    badge: null,        destacada: false, num: '03', icon: I.pesoIdeal },
+  { slug: '/grasa-corporal',      nombre: 'Grasa Corporal',               desc: 'Método Marina US Navy',                   badge: null,        destacada: false, num: '04', icon: I.grasa },
+  { slug: '/frecuencia-cardiaca', nombre: 'Frecuencia Cardíaca',          desc: 'FCM y 5 zonas de entrenamiento',          badge: null,        destacada: false, num: '05', icon: I.fcm },
+  { slug: '/agua-diaria',         nombre: 'Agua Diaria',                  desc: 'Hidratación según peso y actividad',      badge: null,        destacada: false, num: '06', icon: I.agua },
+  { slug: '/cintura-cadera',      nombre: 'Cintura-Cadera',               desc: 'Riesgo cardiovascular según OMS',         badge: 'new',       destacada: false, num: '07', icon: I.cinturaCadera },
+  { slug: '/calorias-ejercicio',  nombre: 'Calorías en Ejercicio',        desc: 'Gasto energético por actividad (METs)',   badge: 'new',       destacada: false, num: '08', icon: I.calEjercicio },
+  { slug: '/ffmi',                nombre: 'FFMI',                         desc: 'Índice de Masa Libre de Grasa',           badge: 'new',       destacada: false, num: '09', icon: I.ffmi },
+  { slug: '/vo2-maximo',          nombre: 'VO2 Máximo',                   desc: 'Condición cardiovascular estimada',       badge: 'new',       destacada: false, num: '10', icon: I.vo2 },
+  { slug: '/presion-arterial',    nombre: 'Presión Arterial',             desc: 'Clasificación AHA/ACC 2017',              badge: 'new',       destacada: false, num: '11', icon: I.presion },
+  { slug: '/cintura-estatura',    nombre: 'Cintura-Estatura',             desc: 'Índice de adiposidad central (ICE)',      badge: 'new',       destacada: false, num: '12', icon: I.cinturaEstatura },
+  { slug: '/ovulacion',           nombre: 'Ovulación',                    desc: 'Ventana fértil y días de ovulación',      badge: 'essential', destacada: true,  num: '13', icon: I.ovulacion },
+  { slug: '/semana-embarazo',     nombre: 'Semana de Embarazo',           desc: 'Semana gestacional y trimestre',          badge: null,        destacada: false, num: '14', icon: I.embarazo },
+  { slug: '/fecha-parto',         nombre: 'Fecha de Parto',               desc: 'Regla de Naegele para la FPP',            badge: null,        destacada: false, num: '15', icon: I.parto },
+  { slug: '/ciclo-menstrual',     nombre: 'Ciclo Menstrual',              desc: 'Fases del ciclo y próxima menstruación',  badge: 'new',       destacada: false, num: '16', icon: I.cicloMenstrual },
+  { slug: '/edad',                nombre: 'Calculadora de Edad',          desc: 'Edad exacta en años, meses y días',       badge: null,        destacada: false, num: '17', icon: I.edad },
+  { slug: '/dias-fechas',         nombre: 'Días entre Fechas',            desc: 'Diferencia exacta entre dos fechas',      badge: null,        destacada: false, num: '18', icon: I.diasFechas },
+  { slug: '/ritmo-carrera',       nombre: 'Ritmo de Carrera',             desc: 'Pace, velocidad y tiempos proyectados',   badge: 'new',       destacada: false, num: '19', icon: I.ritmo },
+  { slug: '/macronutrientes',     nombre: 'Macronutrientes',              desc: 'Proteínas, carbos y grasas ideales',      badge: null,        destacada: false, num: '20', icon: I.macro },
+  { slug: '/proteinas',           nombre: 'Proteínas Diarias',            desc: 'Ingesta mínima y óptima de proteína',     badge: null,        destacada: false, num: '21', icon: I.proteinas },
+  { slug: '/sueno',               nombre: 'Tiempo de Sueño',              desc: 'Ciclos de 90 min para despertar bien',    badge: null,        destacada: false, num: '22', icon: I.sueno },
+  { slug: '/ayuno-intermitente',  nombre: 'Ayuno Intermitente',           desc: 'Ventanas 14:10, 16:8, 18:6, 20:4',       badge: 'new',       destacada: false, num: '23', icon: I.ayuno },
+  { slug: '/alcoholemia',         nombre: 'Alcoholemia',                  desc: 'Tasa de alcohol en sangre (Widmark)',     badge: 'new',       destacada: false, num: '24', icon: I.alcoholemia },
+];
+
+const calcsBySlug = Object.fromEntries(calculadoras.map(c => [c.slug, c]));
+
+const categorias = [
+  {
+    label: 'Fitness & salud',
+    slugs: ['/imc', '/calorias-diarias', '/peso-ideal', '/grasa-corporal', '/frecuencia-cardiaca', '/agua-diaria', '/cintura-cadera', '/calorias-ejercicio', '/ffmi', '/vo2-maximo', '/presion-arterial', '/cintura-estatura'],
+  },
+  {
+    label: 'Embarazo & fertilidad',
+    slugs: ['/ovulacion', '/semana-embarazo', '/fecha-parto', '/ciclo-menstrual'],
+  },
+  {
+    label: 'Fechas & tiempo',
+    slugs: ['/edad', '/dias-fechas', '/ritmo-carrera'],
+  },
+  {
+    label: 'Nutrición & bienestar',
+    slugs: ['/macronutrientes', '/proteinas', '/sueno', '/ayuno-intermitente', '/alcoholemia'],
+  },
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'CalcFit',
+  url: 'https://www.calcfit.com',
+  description: 'Calculadoras de salud gratuitas validadas científicamente.',
+};
+---
+
+<Base
+  title="CalcFit — Calculadoras de Salud Gratuitas y Científicas"
+  description="24 calculadoras de salud gratuitas: IMC, calorías, peso ideal, grasa corporal, ovulación y más. Validadas por la OMS."
+  schema={schema}
+>
+
+<!-- NAVBAR -->
+<nav style="background: var(--ink); padding: 0 32px; display: flex; align-items: center; justify-content: space-between; height: 56px; position: sticky; top: 0; z-index: 100;">
+  <a href="/" style="display: flex; align-items: center; gap: 6px; text-decoration: none;">
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="#CAFF00" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect x="7.5" y="1" width="3" height="16"/>
+      <rect x="1" y="7.5" width="16" height="3"/>
+    </svg>
+    <span style="font-family: var(--font-display); font-size: 26px; color: var(--acid);">CalcFit</span>
+  </a>
+  <div style="display: flex; align-items: center; gap: 28px;">
+    <a href="#calculadoras" style="font-size: 12px; color: #888; letter-spacing: 0.5px; text-decoration: none;">Calculadoras</a>
+    <a href="#calculadoras" style="font-size: 12px; font-weight: 600; background: var(--acid); color: var(--ink); padding: 7px 16px; text-decoration: none;">Empezar</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section style="background: var(--ink); display: grid; grid-template-columns: 60% 40%; min-height: 480px;">
+  <div style="padding: 56px 32px; display: flex; flex-direction: column; justify-content: center; gap: 20px;">
+    <p class="anim anim-1" style="font-family: var(--font-mono); font-size: 10px; color: #888; text-transform: uppercase; letter-spacing: 3px;">
+      Calculadoras de salud · Validadas científicamente
+    </p>
+    <h1 class="anim anim-2" style="font-family: var(--font-display); font-size: 96px; line-height: 0.92; color: white;">
+      Tu cuerpo /<br><span style="color: var(--acid);">tiene</span> /<br>respuestas.
+    </h1>
+    <p class="anim anim-3" style="font-size: 12px; color: #666; font-weight: 300; max-width: 320px; line-height: 1.7;">
+      Herramientas de salud precisas y gratuitas. Sin registros, sin publicidad, sin datos almacenados.
+    </p>
+    <div class="anim anim-4" style="display: flex; gap: 10px; flex-wrap: wrap;">
+      <a href="#calculadoras" style="background: var(--acid); color: var(--ink); padding: 12px 24px; font-weight: 600; font-size: 13px; text-decoration: none;">Ver calculadoras</a>
+      <a href="#manifesto" style="background: transparent; border: 1px solid #333; color: #888; padding: 12px 24px; font-size: 13px; text-decoration: none;">Cómo funciona</a>
+    </div>
+  </div>
+  <div style="background: var(--ink-2); padding: 28px; border-left: 1px solid var(--ink-3); display: flex; flex-direction: column; justify-content: center;">
+    <p style="font-family: var(--font-mono); font-size: 9px; text-transform: uppercase; letter-spacing: 2px; color: #555; margin-bottom: 20px;">Resultados en tiempo real</p>
+    {[
+      { nombre: 'IMC', formula: 'kg / m²', valor: '22.4', unidad: '' },
+      { nombre: 'Calorías', formula: 'Mifflin-St Jeor', valor: '1850', unidad: 'kcal' },
+      { nombre: 'Agua', formula: '35 ml × kg', valor: '2.3', unidad: 'L' },
+    ].map((r) => (
+      <div style="padding: 18px 0; border-bottom: 1px solid var(--ink-3);">
+        <div style="font-size: 11px; color: #888;">{r.nombre}</div>
+        <div style="font-size: 9px; color: #555; font-family: var(--font-mono); margin: 2px 0;">{r.formula}</div>
+        <div>
+          <span style="font-family: var(--font-display); font-size: 44px; color: var(--acid);">{r.valor}</span>
+          {r.unidad && <span style="font-size: 11px; color: #666; margin-left: 4px;">{r.unidad}</span>}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<!-- TICKER -->
+<div style="background: var(--acid); padding: 10px 32px; display: flex; align-items: center; gap: 24px; flex-wrap: wrap;">
+  {[
+    { num: '100K+', txt: 'Usuarios activos' },
+    { num: '24',    txt: 'Calculadoras gratuitas' },
+    { num: '99.9%', txt: 'Precisión científica' },
+    { num: '0',     txt: 'Datos almacenados' },
+    { num: 'OMS',   txt: 'Validación internacional' },
+  ].map((item, i) => (
+    <>
+      {i > 0 && <span style="color: #9aaa00;">·</span>}
+      <div style="display: flex; align-items: baseline; gap: 6px;">
+        <span style="font-family: var(--font-display); font-size: 22px; color: var(--ink);">{item.num}</span>
+        <span style="font-size: 10px; font-weight: 500; color: #3a3a00;">{item.txt}</span>
+      </div>
+    </>
+  ))}
+</div>
+
+<!-- CALCULADORAS -->
+<section id="calculadoras" style="background: var(--cream); padding: 48px 32px;">
+  <div style="display: flex; align-items: baseline; justify-content: space-between; padding-bottom: 16px; border-bottom: 1px solid var(--border); margin-bottom: 32px;">
+    <h2 style="font-family: var(--font-display); font-size: 48px; color: var(--ink);">Calculadoras</h2>
+    <span style="font-family: var(--font-mono); font-size: 11px; color: var(--muted);">24 herramientas disponibles</span>
+  </div>
+
+  {categorias.map((cat) => (
+    <div style="margin-bottom: 32px;">
+      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 1px;">
+        <span style="border: 1px solid var(--ink); padding: 4px 12px; font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--ink); flex-shrink: 0;">
+          {cat.label}
+        </span>
+        <div style="flex: 1; height: 1px; background: var(--border);"></div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border);">
+        {cat.slugs.map((slug) => {
+          const calc = calcsBySlug[slug];
+          if (!calc) return null;
+          return (
+            <a href={calc.slug} style="background: var(--cream); padding: 20px; text-decoration: none; display: block; position: relative; transition: background 0.12s;"
+              onmouseover="this.style.background='#EDE9E0'"
+              onmouseout="this.style.background='var(--cream)'">
+              <span style="position: absolute; top: 12px; right: 14px; font-family: var(--font-mono); font-size: 10px; color: #bbb;">{calc.num}</span>
+              <div style={`width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; background: ${calc.destacada ? 'var(--acid)' : 'var(--ink)'}; color: ${calc.destacada ? 'var(--ink)' : 'var(--acid)'};`}>
+                <Fragment set:html={calc.icon} />
+              </div>
+              <div style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 4px;">{calc.nombre}</div>
+              <div style="font-size: 11px; color: var(--muted); line-height: 1.5; margin-bottom: 8px;">{calc.desc}</div>
+              {calc.badge && (
+                <span style={`font-family: var(--font-mono); font-size: 9px; padding: 2px 7px; letter-spacing: 0.8px; text-transform: uppercase; display: inline-block; ${calc.badge === 'popular' ? 'background: var(--acid); color: #1a1a00;' : calc.badge === 'essential' ? 'border: 1px solid var(--ink); color: var(--ink);' : 'background: var(--ink); color: var(--acid);'}`}>
+                  {calc.badge === 'popular' ? 'Popular' : calc.badge === 'essential' ? 'Esencial' : 'Nuevo'}
+                </span>
+              )}
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  ))}
+</section>
+
+<!-- MANIFESTO -->
+<section id="manifesto" style="background: var(--ink); padding: 56px 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 0;">
+  <div style="border-right: 1px solid #222; padding-right: 48px; display: flex; flex-direction: column; justify-content: center; gap: 16px;">
+    <p style="font-family: var(--font-mono); font-size: 10px; color: #555; text-transform: uppercase; letter-spacing: 3px;">Nuestro compromiso</p>
+    <h2 style="font-family: var(--font-display); font-size: 62px; color: white; line-height: 0.95;">
+      Ciencia, /<br>no /<br><span style="color: var(--acid);">opinión.</span>
+    </h2>
+  </div>
+  <div style="padding-left: 48px; display: flex; flex-direction: column; justify-content: center;">
+    {[
+      { n: '01', title: 'Validadas científicamente', desc: 'Fórmulas basadas en evidencia: OMS, ACSM y literatura médica peer-reviewed.' },
+      { n: '02', title: 'Privacidad total', desc: 'Todo el cálculo ocurre en tu navegador. Cero cookies de rastreo.' },
+      { n: '03', title: 'Siempre gratis', desc: 'Sin planes premium, sin registro obligatorio, sin letra pequeña.' },
+    ].map((f, i) => (
+      <div style={`padding: 20px 0; ${i < 2 ? 'border-bottom: 1px solid #1e1e1e;' : ''}`}>
+        <div style="display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px;">
+          <span style="font-family: var(--font-mono); font-size: 12px; color: var(--acid);">{f.n} —</span>
+          <span style="font-size: 13px; font-weight: 500; color: white;">{f.title}</span>
+        </div>
+        <p style="font-size: 12px; color: #666; line-height: 1.6;">{f.desc}</p>
+      </div>
+    ))}
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="background: var(--acid); padding: 52px 32px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px;">
+  <div>
+    <h2 style="font-family: var(--font-display); font-size: 58px; color: var(--ink); line-height: 0.95;">Empieza /<br>ahora.</h2>
+    <p style="font-size: 13px; color: #3a3900; margin-top: 8px;">24 calculadoras gratuitas te esperan.</p>
+  </div>
+  <div style="display: flex; gap: 12px;">
+    <a href="#calculadoras" style="background: var(--ink); color: var(--acid); padding: 14px 28px; font-weight: 600; font-size: 13px; text-decoration: none;">Ver calculadoras</a>
+    <a href="/imc" style="background: transparent; border: 1px solid var(--ink); color: var(--ink); padding: 14px 28px; font-size: 13px; text-decoration: none;">Calcular mi IMC</a>
+  </div>
+</section>
+
+<Footer />
+
+</Base>

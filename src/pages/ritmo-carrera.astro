@@ -1,0 +1,72 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import RitmoCarreraCalculator from '../components/calculators/RitmoCarreraCalculator';
+---
+
+<CalculatorLayout
+  title="Calculadora Ritmo de Carrera (Pace) | CalcFit"
+  description="Calcula tu ritmo de carrera por kilómetro y por milla. Obtén proyecciones de tiempo para 5K, 10K, media maratón y maratón."
+  calculatorName="Calculadora Ritmo de Carrera"
+  breadcrumbSlug="ritmo-carrera"
+  ogImage="/og/ritmo-carrera.jpg"
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: 64px; color: white; line-height: 0.92; margin-bottom: 12px;">
+      Ritmo de<br><span style="color: var(--acid);">Carrera</span>
+    </h1>
+    <p style="font-size: 13px; color: #666; max-width: 480px; line-height: 1.7;">
+      Introduce la distancia recorrida y el tiempo empleado para calcular tu pace (ritmo por kilómetro y por milla), velocidad y tiempos proyectados para las distancias de referencia.
+    </p>
+  </div>
+
+  <RitmoCarreraCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Qué es el pace de carrera?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      El <strong>pace</strong> o ritmo de carrera es el tiempo que tardas en recorrer un kilómetro (o una milla), expresado en minutos y segundos. Es la métrica principal que usan los corredores para planificar entrenamientos y competiciones.
+    </p>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Tiempos de referencia por nivel</h2>
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px;">
+      <thead>
+        <tr style="border-bottom: 2px solid var(--border);">
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Nivel</th>
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Pace /km</th>
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">5K</th>
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">10K</th>
+        </tr>
+      </thead>
+      <tbody>
+        {[
+          { nivel: 'Principiante',  pace: '7:00 – 8:30', k5: '35–42 min', k10: '1h10–1h25' },
+          { nivel: 'Intermedio',    pace: '5:30 – 7:00', k5: '27–35 min', k10: '55–1h10' },
+          { nivel: 'Avanzado',      pace: '4:30 – 5:30', k5: '22–27 min', k10: '45–55 min' },
+          { nivel: 'Competitivo',   pace: '3:30 – 4:30', k5: '17–22 min', k10: '35–45 min' },
+          { nivel: 'Élite (hombre)',pace: '< 2:50',      k5: '< 14 min',  k10: '< 28 min' },
+        ].map(row => (
+          <tr style="border-bottom: 1px solid var(--border);">
+            <td style="padding: 10px 0; font-size: 13px; color: var(--ink);">{row.nivel}</td>
+            <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.pace}</td>
+            <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.k5}</td>
+            <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.k10}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {[
+        { q: '¿Cómo mejorar el pace de carrera?', a: 'La combinación de entrenamiento de intervalos (series cortas a alta intensidad), rodajes largos a ritmo cómodo y trabajo de fuerza es la estrategia más efectiva. También importa la periodización: alterna semanas de carga con semanas de recuperación.' },
+        { q: '¿Qué es el umbral de lactato y por qué importa?', a: 'Es la intensidad a la que el lactato empieza a acumularse en sangre más rápido de lo que se elimina. Entrenar justo por debajo de este umbral (tempo runs) es una de las formas más eficaces de mejorar la resistencia y reducir el pace en carreras largas.' },
+        { q: '¿Es mejor entrenar por pace o por frecuencia cardíaca?', a: 'Depende del objetivo. Para principiantes y rodajes base, la FC es más útil porque neutraliza el efecto del calor, la fatiga acumulada o el terreno. Para entrenamientos específicos de competición, el pace ofrece objetivos más precisos.' },
+      ].map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

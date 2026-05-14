@@ -1,0 +1,51 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import ProteinasCalculator from '../components/calculators/ProteinasCalculator';
+---
+
+<CalculatorLayout
+  title="Calculadora de Proteínas Diarias — ¿Cuánta Proteína Necesito? | CalcFit"
+  description="Calcula cuánta proteína necesitas al día según tu peso y nivel de actividad. Con equivalencias en alimentos reales."
+  calculatorName="Proteínas Diarias"
+  breadcrumbSlug="proteinas"
+  ogImage="/og/proteinas.jpg"
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: 64px; color: white; line-height: 0.92; margin-bottom: 12px;">
+      Proteínas<br><span style="color: var(--acid);">Diarias</span>
+    </h1>
+    <p style="font-size: 13px; color: #666; max-width: 480px; line-height: 1.7;">
+      Descubre cuánta proteína necesitas consumir cada día para mantener tu masa muscular, mejorar tu rendimiento o perder grasa.
+    </p>
+  </div>
+
+  <ProteinasCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cuánta proteína necesito al día?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 16px;">
+      La OMS establece un mínimo de <strong>0.8 g/kg de peso</strong> para adultos sedentarios. Sin embargo, para personas activas, la evidencia actual sugiere rangos más altos para optimizar la composición corporal y el rendimiento deportivo.
+    </p>
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px;">
+      <thead>
+        <tr style="border-bottom: 2px solid var(--border);">
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase;">Perfil</th>
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase;">Rango recomendado</th>
+        </tr>
+      </thead>
+      <tbody>
+        {[
+          { p: 'Sedentario / sin ejercicio', r: '0.8 – 1.2 g/kg' },
+          { p: 'Deportista recreacional',    r: '1.4 – 1.8 g/kg' },
+          { p: 'Atleta / alta intensidad',   r: '1.8 – 2.5 g/kg' },
+          { p: 'En déficit calórico',        r: '2.0 – 2.5 g/kg (mayor necesidad)' },
+        ].map((row) => (
+          <tr style="border-bottom: 1px solid var(--border);">
+            <td style="padding: 10px 0; font-size: 13px; font-weight: 600; color: var(--ink);">{row.p}</td>
+            <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.r}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</CalculatorLayout>

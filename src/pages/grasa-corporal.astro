@@ -1,0 +1,51 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import GrasaCalculator from '../components/calculators/GrasaCalculator';
+---
+
+<CalculatorLayout
+  title="Calculadora de Grasa Corporal — Método US Navy | CalcFit"
+  description="Calcula tu porcentaje de grasa corporal con el método Marina US Navy. Resultados precisos con solo tu altura, cuello y cintura."
+  calculatorName="Grasa Corporal"
+  breadcrumbSlug="grasa-corporal"
+  ogImage="/og/grasa.jpg"
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: 64px; color: white; line-height: 0.92; margin-bottom: 12px;">
+      Grasa<br><span style="color: var(--acid);">Corporal</span>
+    </h1>
+    <p style="font-size: 13px; color: #666; max-width: 480px; line-height: 1.7;">
+      Usa el método circunferencial de la Marina de EE.UU. para estimar tu porcentaje de grasa corporal sin básculas especiales.
+    </p>
+  </div>
+
+  <GrasaCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">Rangos de grasa corporal saludable</h2>
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px;">
+      <thead>
+        <tr style="border-bottom: 2px solid var(--border);">
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase;">Categoría</th>
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase;">Hombres</th>
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase;">Mujeres</th>
+        </tr>
+      </thead>
+      <tbody>
+        {[
+          { cat: 'Esencial',   h: '2–5%',    m: '10–13%' },
+          { cat: 'Atlético',   h: '6–13%',   m: '14–20%' },
+          { cat: 'Fitness',    h: '14–17%',  m: '21–24%' },
+          { cat: 'Aceptable',  h: '18–24%',  m: '25–31%' },
+          { cat: 'Obesidad',   h: '25%+',    m: '32%+' },
+        ].map((row) => (
+          <tr style="border-bottom: 1px solid var(--border);">
+            <td style="padding: 10px 0; font-size: 13px; font-weight: 600; color: var(--ink);">{row.cat}</td>
+            <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.h}</td>
+            <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.m}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</CalculatorLayout>

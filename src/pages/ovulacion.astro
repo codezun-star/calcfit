@@ -1,0 +1,33 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import OvulacionCalculator from '../components/calculators/OvulacionCalculator';
+---
+
+<CalculatorLayout
+  title="Calculadora de Ovulación y Días Fértiles | CalcFit"
+  description="Calcula tu fecha de ovulación y ventana fértil. Conoce tus días más fértiles para planificar o evitar un embarazo."
+  calculatorName="Ovulación"
+  breadcrumbSlug="ovulacion"
+  ogImage="/og/ovulacion.jpg"
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: 64px; color: white; line-height: 0.92; margin-bottom: 12px;">
+      Calculadora<br><span style="color: var(--acid);">Ovulación</span>
+    </h1>
+    <p style="font-size: 13px; color: #666; max-width: 480px; line-height: 1.7;">
+      Predice tu fecha de ovulación y el período fértil de hasta 6 días basándote en tu último ciclo menstrual.
+    </p>
+  </div>
+
+  <OvulacionCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cuándo ocurre la ovulación?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 16px;">
+      La ovulación ocurre aproximadamente <strong>14 días antes del inicio del siguiente período menstrual</strong>, independientemente de la duración del ciclo. En un ciclo de 28 días, esto sucede alrededor del día 14. En un ciclo de 32 días, ocurre alrededor del día 18.
+    </p>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted);">
+      La ventana fértil incluye los 5 días previos a la ovulación más el día de la ovulación, ya que los espermatozoides pueden sobrevivir hasta 5 días en el tracto reproductor femenino.
+    </p>
+  </div>
+</CalculatorLayout>

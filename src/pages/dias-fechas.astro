@@ -1,0 +1,29 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import DiasFechasCalculator from '../components/calculators/DiasFechasCalculator';
+---
+
+<CalculatorLayout
+  title="Calculadora de Días entre Fechas | CalcFit"
+  description="Calcula los días, semanas, meses y años entre dos fechas cualquiera. Útil para plazos, aniversarios y eventos."
+  calculatorName="Días entre Fechas"
+  breadcrumbSlug="dias-fechas"
+  ogImage="/og/dias-fechas.jpg"
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: 64px; color: white; line-height: 0.92; margin-bottom: 12px;">
+      Días entre<br><span style="color: var(--acid);">Fechas</span>
+    </h1>
+    <p style="font-size: 13px; color: #666; max-width: 480px; line-height: 1.7;">
+      Calcula la diferencia exacta entre dos fechas en días, semanas, meses y años.
+    </p>
+  </div>
+
+  <DiasFechasCalculator client:load />
+
+  <div slot="seo">
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted);">
+      Esta calculadora determina la diferencia absoluta entre dos fechas. Útil para calcular plazos legales, aniversarios, tiempo hasta un evento, o verificar vencimientos.
+    </p>
+  </div>
+</CalculatorLayout>

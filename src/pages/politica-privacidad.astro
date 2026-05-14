@@ -1,0 +1,121 @@
+---
+import Base from '../layouts/Base.astro';
+import Navbar from '../components/layout/Navbar.astro';
+import Footer from '../components/layout/Footer.astro';
+---
+
+<Base
+  title="Política de Privacidad — CalcFit"
+  description="Política de privacidad de CalcFit. Sin registro, sin cookies de rastreo, sin datos enviados al servidor. Todo el cálculo ocurre en tu navegador."
+>
+  <Navbar />
+
+  <!-- HERO -->
+  <div style="background: var(--ink); padding: 64px 32px 48px;">
+    <p style="font-family: var(--font-mono); font-size: 10px; color: #555; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 16px;">Privacidad</p>
+    <h1 style="font-family: var(--font-display); font-size: 88px; color: white; line-height: 0.92; margin-bottom: 20px;">
+      Política de<br><span style="color: var(--acid);">Privacidad.</span>
+    </h1>
+    <p style="font-family: var(--font-mono); font-size: 11px; color: #555;">Última actualización: enero de 2026</p>
+  </div>
+
+  <!-- RESUMEN VISUAL -->
+  <div style="background: var(--acid); padding: 28px 32px;">
+    <p style="font-family: var(--font-mono); font-size: 10px; color: #3a3a00; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px;">Resumen en tres puntos</p>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: #9aaa00;">
+      {[
+        { n: '01', t: 'Cero datos al servidor', d: 'Ningún dato que introduces se envía a nuestros servidores. Los cálculos ocurren en tu navegador.' },
+        { n: '02', t: 'Sin cookies de rastreo', d: 'No usamos cookies de analítica, publicidad ni seguimiento de ningún tipo.' },
+        { n: '03', t: 'Historial 100% local', d: 'El historial opcional se guarda solo en tu dispositivo (localStorage). Puedes borrarlo cuando quieras.' },
+      ].map(item => (
+        <div style="background: var(--acid); padding: 20px;">
+          <div style="font-family: var(--font-mono); font-size: 10px; color: #3a3a00; margin-bottom: 6px;">{item.n}</div>
+          <div style="font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 6px;">{item.t}</div>
+          <div style="font-size: 12px; color: #3a3900; line-height: 1.6;">{item.d}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- CONTENIDO -->
+  <div style="background: var(--cream); padding: 56px 32px; max-width: 860px;">
+
+    {[
+      {
+        num: '01',
+        titulo: 'Responsable del tratamiento',
+        contenido: [
+          'De conformidad con el Reglamento (UE) 2016/679 General de Protección de Datos (RGPD) y la Ley Orgánica 3/2018 de Protección de Datos Personales y garantía de los derechos digitales (LOPDGDD), el responsable del tratamiento es:',
+          '<strong>Denominación:</strong> CalcFit<br><strong>Contacto:</strong> <a href="mailto:codezun@gmail.com" style="color: var(--ink); text-decoration: underline;">codezun@gmail.com</a>',
+        ],
+      },
+      {
+        num: '02',
+        titulo: 'Datos que NO recopilamos',
+        contenido: [
+          'CalcFit no recoge, almacena, procesa ni transmite a ningún servidor los datos que el usuario introduce en las calculadoras (peso, altura, edad, medidas corporales, fechas, etc.).',
+          'No existe ningún formulario de registro, cuenta de usuario ni sistema de autenticación. No se realizan perfiles de usuario ni se cruzan datos con terceros.',
+        ],
+      },
+      {
+        num: '03',
+        titulo: 'Almacenamiento local (localStorage)',
+        contenido: [
+          'Algunas calculadoras (IMC, Calorías Diarias, Grasa Corporal) ofrecen la opción de guardar un historial de cálculos. Este historial se almacena exclusivamente en el <code style="font-family: var(--font-mono); font-size: 12px; background: #E8E4DB; padding: 1px 5px;">localStorage</code> del navegador del propio usuario.',
+          'CalcFit no tiene acceso a este almacenamiento. Los datos no se transmiten por red en ningún momento. El usuario puede eliminar este historial borrando los datos de sitio en la configuración de su navegador o mediante la propia interfaz de la calculadora.',
+        ],
+      },
+      {
+        num: '04',
+        titulo: 'Cookies',
+        contenido: [
+          'CalcFit no utiliza cookies de rastreo, analítica, publicidad ni perfiles. Para más información, consulte nuestra <a href="/politica-cookies" style="color: var(--ink); text-decoration: underline;">Política de Cookies</a>.',
+        ],
+      },
+      {
+        num: '05',
+        titulo: 'Servicios de terceros',
+        contenido: [
+          'El Sitio está alojado en infraestructura de terceros (Cloudflare Pages / Vercel). Dichos proveedores pueden registrar datos técnicos de acceso (dirección IP, navegador, sistema operativo) en los logs estándar del servidor con fines de seguridad y rendimiento, de acuerdo con sus propias políticas de privacidad. CalcFit no tiene acceso a estos logs ni los utiliza para fines de marketing.',
+          'Las fuentes tipográficas se cargan desde Google Fonts. Si deseas evitar esta conexión, puedes autoalojar las fuentes desactivando JavaScript o usando una extensión de bloqueo de contenido.',
+        ],
+      },
+      {
+        num: '06',
+        titulo: 'Correo electrónico de contacto',
+        contenido: [
+          'Si nos envías un correo a codezun@gmail.com, los datos que incluyas (nombre, dirección de email, contenido del mensaje) se utilizarán únicamente para responder a tu consulta. No se ceden a terceros ni se utilizan para envíos comerciales.',
+          'Puedes solicitar la supresión de tu correo y datos asociados en cualquier momento escribiéndonos a la misma dirección.',
+        ],
+      },
+      {
+        num: '07',
+        titulo: 'Derechos de los usuarios',
+        contenido: [
+          'Dado que CalcFit no trata datos personales de los usuarios (salvo los recibidos por correo electrónico), el ejercicio de los derechos RGPD (acceso, rectificación, supresión, oposición, portabilidad, limitación) aplica únicamente a la comunicación por email.',
+          'Para ejercer cualquiera de estos derechos, escríbenos a: <a href="mailto:codezun@gmail.com" style="color: var(--ink); text-decoration: underline;">codezun@gmail.com</a>. También tienes derecho a presentar una reclamación ante la Agencia Española de Protección de Datos (www.aepd.es).',
+        ],
+      },
+      {
+        num: '08',
+        titulo: 'Cambios en esta política',
+        contenido: [
+          'CalcFit puede actualizar esta política para reflejar cambios técnicos o legales. La fecha de última actualización aparece al inicio del documento. El uso continuado del Sitio tras la publicación de cambios implica la aceptación de la nueva versión.',
+        ],
+      },
+    ].map(sec => (
+      <div style="padding-bottom: 36px; border-bottom: 1px solid var(--border); margin-bottom: 36px;">
+        <div style="display: flex; align-items: baseline; gap: 14px; margin-bottom: 14px;">
+          <span style="font-family: var(--font-mono); font-size: 10px; color: var(--muted);">{sec.num}</span>
+          <h2 style="font-family: var(--font-display); font-size: 28px; color: var(--ink); line-height: 1;">{sec.titulo}</h2>
+        </div>
+        {sec.contenido.map(p => (
+          <p style="font-size: 14px; color: var(--muted); line-height: 1.8; margin-bottom: 12px;" set:html={p} />
+        ))}
+      </div>
+    ))}
+
+  </div>
+
+  <Footer />
+</Base>

@@ -1,0 +1,33 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import AguaCalculator from '../components/calculators/AguaCalculator';
+---
+
+<CalculatorLayout
+  title="Calculadora de Agua Diaria — ¿Cuánta Agua Debo Tomar? | CalcFit"
+  description="Calcula cuánta agua necesitas beber al día según tu peso, actividad y clima. Resultado en litros y vasos."
+  calculatorName="Agua Diaria"
+  breadcrumbSlug="agua-diaria"
+  ogImage="/og/agua.jpg"
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: 64px; color: white; line-height: 0.92; margin-bottom: 12px;">
+      Agua<br><span style="color: var(--acid);">Diaria</span>
+    </h1>
+    <p style="font-size: 13px; color: #666; max-width: 480px; line-height: 1.7;">
+      La hidratación es clave para la salud. Calcula tu necesidad diaria de agua personalizada según tu peso, actividad física y el clima donde vives.
+    </p>
+  </div>
+
+  <AguaCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cómo se calcula el agua diaria?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 16px;">
+      La base es <strong>35 ml por kg de peso</strong>. A esto se suman ajustes por actividad física y clima. Por ejemplo, una persona de 70 kg con actividad moderada en clima cálido necesita aproximadamente 2.9 litros diarios.
+    </p>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted);">
+      Recuerda que estas cifras incluyen el agua de los alimentos (aproximadamente 20% de la ingesta diaria) y bebidas como infusiones. El ejercicio intenso puede aumentar la necesidad hasta en 1 litro adicional por hora.
+    </p>
+  </div>
+</CalculatorLayout>

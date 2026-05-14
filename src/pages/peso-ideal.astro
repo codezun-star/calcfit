@@ -1,0 +1,51 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import PesoIdealCalculator from '../components/calculators/PesoIdealCalculator';
+---
+
+<CalculatorLayout
+  title="Calculadora de Peso Ideal — 5 Fórmulas Médicas | CalcFit"
+  description="Calcula tu peso ideal con 5 fórmulas médicas: Devine, Robinson, Miller, Hamwi y Broca. Rango personalizado por altura y sexo."
+  calculatorName="Peso Ideal"
+  breadcrumbSlug="peso-ideal"
+  ogImage="/og/peso-ideal.jpg"
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: 64px; color: white; line-height: 0.92; margin-bottom: 12px;">
+      Peso<br><span style="color: var(--acid);">Ideal</span>
+    </h1>
+    <p style="font-size: 13px; color: #666; max-width: 480px; line-height: 1.7;">
+      Calcula tu peso ideal usando 5 fórmulas científicas ampliamente utilizadas en medicina clínica.
+    </p>
+  </div>
+
+  <PesoIdealCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">Las 5 fórmulas del peso ideal</h2>
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px;">
+      <thead>
+        <tr style="border-bottom: 2px solid var(--border);">
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase;">Fórmula</th>
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase;">Hombres</th>
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase;">Mujeres</th>
+        </tr>
+      </thead>
+      <tbody>
+        {[
+          { f: 'Devine (1974)',   h: '50 + 2.3 × (pulgadas > 60)',  m: '45.5 + 2.3 × (pulgadas > 60)' },
+          { f: 'Robinson (1983)', h: '52 + 1.9 × (pulgadas > 60)',  m: '49 + 1.7 × (pulgadas > 60)' },
+          { f: 'Miller (1983)',   h: '56.2 + 1.41 × (pulgadas > 60)', m: '53.1 + 1.36 × (pulgadas > 60)' },
+          { f: 'Hamwi (1964)',    h: '48 + 2.7 × (pulgadas > 60)',  m: '45.5 + 2.2 × (pulgadas > 60)' },
+          { f: 'Broca',          h: '(Altura cm − 100) × 0.9',     m: '(Altura cm − 100) × 0.85' },
+        ].map((row) => (
+          <tr style="border-bottom: 1px solid var(--border);">
+            <td style="padding: 10px 0; font-size: 13px; font-weight: 600; color: var(--ink);">{row.f}</td>
+            <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted);">{row.h}</td>
+            <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted);">{row.m}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</CalculatorLayout>

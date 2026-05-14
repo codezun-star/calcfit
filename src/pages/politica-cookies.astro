@@ -1,0 +1,146 @@
+---
+import Base from '../layouts/Base.astro';
+import Navbar from '../components/layout/Navbar.astro';
+import Footer from '../components/layout/Footer.astro';
+---
+
+<Base
+  title="Política de Cookies — CalcFit"
+  description="CalcFit no usa cookies de rastreo ni publicidad. Conoce qué almacenamiento técnico utiliza el sitio y cómo controlarlo."
+>
+  <Navbar />
+
+  <!-- HERO -->
+  <div style="background: var(--ink); padding: 64px 32px 48px;">
+    <p style="font-family: var(--font-mono); font-size: 10px; color: #555; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 16px;">Cookies</p>
+    <h1 style="font-family: var(--font-display); font-size: 88px; color: white; line-height: 0.92; margin-bottom: 20px;">
+      Política de<br><span style="color: var(--acid);">Cookies.</span>
+    </h1>
+    <p style="font-family: var(--font-mono); font-size: 11px; color: #555;">Última actualización: enero de 2026</p>
+  </div>
+
+  <!-- BANNER DESTACADO -->
+  <div style="background: var(--acid); padding: 24px 32px; display: flex; align-items: center; gap: 20px;">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/>
+      <line x1="12" y1="8" x2="12" y2="12"/>
+      <line x1="12" y1="16" x2="12.01" y2="16"/>
+    </svg>
+    <p style="font-size: 14px; font-weight: 600; color: var(--ink);">
+      CalcFit no utiliza cookies de rastreo, analítica ni publicidad. No aparece ningún banner de cookies porque no hay nada que consentir.
+    </p>
+  </div>
+
+  <!-- CONTENIDO -->
+  <div style="background: var(--cream); padding: 56px 32px; max-width: 860px;">
+
+    {[
+      {
+        num: '01',
+        titulo: '¿Qué es una cookie?',
+        contenido: [
+          'Una cookie es un pequeño archivo de texto que un sitio web almacena en el navegador del usuario cuando este lo visita. Las cookies pueden ser de sesión (se eliminan al cerrar el navegador) o persistentes (permanecen durante un período determinado).',
+          'La normativa europea (Directiva ePrivacy y RGPD) exige informar al usuario sobre el uso de cookies y obtener su consentimiento para las no esenciales.',
+        ],
+      },
+      {
+        num: '02',
+        titulo: 'Cookies que CalcFit NO usa',
+        contenido: [
+          'CalcFit no instala ninguna de las siguientes categorías de cookies:',
+        ],
+        lista: [
+          'Cookies de analítica (Google Analytics, Mixpanel, Hotjar, etc.)',
+          'Cookies de publicidad o retargeting (Google Ads, Meta Pixel, etc.)',
+          'Cookies de redes sociales (botones de compartir con rastreo incorporado)',
+          'Cookies de A/B testing o personalización',
+          'Cookies de terceros de ningún tipo',
+        ],
+      },
+      {
+        num: '03',
+        titulo: 'Almacenamiento local (localStorage) — no es una cookie',
+        contenido: [
+          'Algunas calculadoras (IMC, Calorías Diarias y Grasa Corporal) guardan de forma opcional un historial de tus cálculos anteriores. Este dato se almacena en el <strong>localStorage</strong> de tu navegador, no en una cookie.',
+          'La diferencia técnica es importante: el localStorage nunca se envía al servidor de forma automática como hacen las cookies. Los datos permanecen íntegramente en tu dispositivo y CalcFit no tiene acceso a ellos.',
+          'Puedes eliminar estos datos en cualquier momento desde la propia calculadora (botón "Borrar historial") o desde los ajustes de tu navegador en la sección "Datos del sitio".',
+        ],
+        tabla: {
+          cabeceras: ['Característica', 'Cookie', 'localStorage de CalcFit'],
+          filas: [
+            ['¿Se envía al servidor?', 'Sí, automáticamente', 'No, nunca'],
+            ['¿Puede leerlo CalcFit?', 'Sí', 'No'],
+            ['¿Expira?', 'Sí (configurable)', 'No expira automáticamente'],
+            ['¿Lo controla el usuario?', 'Sí (configuración del navegador)', 'Sí (navegador o botón en la calculadora)'],
+          ],
+        },
+      },
+      {
+        num: '04',
+        titulo: 'Fuentes y servicios de terceros',
+        contenido: [
+          'Las fuentes tipográficas del sitio (Bebas Neue, DM Mono, Plus Jakarta Sans) se cargan desde Google Fonts. Esta petición puede incluir tu dirección IP, el navegador y el sistema operativo en los logs de Google. Google tiene su propia política de privacidad disponible en policies.google.com.',
+          'Si deseas evitar cualquier conexión con servicios de terceros, puedes bloquearla con una extensión de tipo uBlock Origin o equivalente.',
+        ],
+      },
+      {
+        num: '05',
+        titulo: 'Por qué no hay banner de cookies',
+        contenido: [
+          'La normativa europea solo exige mostrar un banner de consentimiento cuando el sitio instala cookies no esenciales (analítica, publicidad, rastreo). Como CalcFit no las usa, no existe obligación legal de mostrarlo ni nada que consentir.',
+          'Consideramos que el banner de cookies es mayoritariamente un mecanismo de recogida de más datos disfrazado de transparencia. Nuestra opción es simplemente no instalar nada que requiera ese consentimiento.',
+        ],
+      },
+      {
+        num: '06',
+        titulo: 'Contacto',
+        contenido: [
+          'Para cualquier duda sobre esta política, escríbenos a: <a href="mailto:codezun@gmail.com" style="color: var(--ink); text-decoration: underline;">codezun@gmail.com</a>',
+        ],
+      },
+    ].map(sec => (
+      <div style="padding-bottom: 36px; border-bottom: 1px solid var(--border); margin-bottom: 36px;">
+        <div style="display: flex; align-items: baseline; gap: 14px; margin-bottom: 14px;">
+          <span style="font-family: var(--font-mono); font-size: 10px; color: var(--muted);">{sec.num}</span>
+          <h2 style="font-family: var(--font-display); font-size: 28px; color: var(--ink); line-height: 1;">{sec.titulo}</h2>
+        </div>
+        {sec.contenido.map(p => (
+          <p style="font-size: 14px; color: var(--muted); line-height: 1.8; margin-bottom: 12px;" set:html={p} />
+        ))}
+        {sec.lista && (
+          <ul style="margin: 0; padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 6px;">
+            {sec.lista.map(item => (
+              <li style="display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: var(--muted);">
+                <span style="width: 6px; height: 6px; background: var(--ink); flex-shrink: 0; margin-top: 6px; display: inline-block;"></span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        )}
+        {sec.tabla && (
+          <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 16px;">
+            <thead>
+              <tr style="border-bottom: 2px solid var(--border);">
+                {sec.tabla.cabeceras.map(h => (
+                  <th style="text-align: left; padding: 8px 0; font-family: var(--font-mono); font-size: 10px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {sec.tabla.filas.map(fila => (
+                <tr style="border-bottom: 1px solid var(--border);">
+                  {fila.map((celda, i) => (
+                    <td style={`padding: 10px 0; font-size: 13px; color: ${i === 0 ? 'var(--ink)' : 'var(--muted)'}; ${i === 0 ? 'font-weight: 500;' : ''}`}>{celda}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
+    ))}
+
+  </div>
+
+  <Footer />
+</Base>
