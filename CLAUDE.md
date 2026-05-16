@@ -163,12 +163,28 @@ calcfit-astro/
 - Todos los valores numéricos de resultado van en **Bebas Neue**
 - El color acid (`#CAFF00`) es el único color de acento — no agregar otros sin consultar
 
+### Contraste de texto en fondos oscuros
+
+En fondos `var(--ink)` (#0F0E0D) y similares, usar mínimo `#888` para texto secundario. Escala aprobada:
+
+| Uso | Color mínimo |
+|---|---|
+| Labels / encabezados de columna | `#999` |
+| Unidades (min/km, kcal/día…) | `#aaa` |
+| Texto descriptivo secundario | `#999` |
+| Encabezados de sección (footer, hero) | `#888` |
+| Decorativo / muy secundario | `#666` |
+
+**No usar** `#555`, `#444`, `#333` sobre fondos oscuros — ratio de contraste insuficiente (< 4.5:1 WCAG AA).
+
 ### Logo y favicon
 
 El logo es una **cruz "+"** SVG con los rectángulos en `fill="#CAFF00"`. Se usa en:
-- `public/favicon.svg` — fondo `#0F0E0D`, cruz acid 32×32
+- `public/favicon.svg` — fondo `#0F0E0D`, cruz acid 32×32. Proporciones alineadas al navbar: brazos en y=2/x=2, grosor 6px, largo 28px.
 - `Navbar.astro` — cruz SVG 18×18 inline junto al texto "CalcFit"
 - `Footer.astro` — cruz SVG 15×15 inline junto al texto "CalcFit"
+
+**Soporte favicon SVG:** Chrome 80+, Firefox 82+, Edge 80+, Safari 12+ ✓ — Safari iOS ✗ (usa el `.ico` de fallback). Si el favicon no aparece en el browser durante desarrollo, es caché — hacer Ctrl+Shift+R o abrir `/favicon.svg` directamente.
 
 ### Iconos en la homepage
 
@@ -369,6 +385,12 @@ Cinco páginas informativas/legales sin componentes React:
 
 ---
 
+## Analytics
+
+Google Analytics está activo en todas las páginas (ID: `G-NRM0FZ5W8S`). Se inyecta en `Base.astro` con `is:inline async` — equivalente al `strategy="afterInteractive"` de Next.js. No bloquea el render.
+
+---
+
 ## SEO
 
 ### Por página
@@ -379,6 +401,16 @@ Cinco páginas informativas/legales sin componentes React:
 ### JSON-LD schemas usados
 - `WebSite` en la homepage
 - `MedicalWebContent` en cada calculadora (con `audience: Patient` y `lastReviewed`)
+
+### Sitemap
+Generado automáticamente por `@astrojs/sitemap`. Dos archivos en `/dist/`:
+- `sitemap-index.xml` — índice principal
+- `sitemap-0.xml` — 30 URLs, todas bajo `https://www.calcfit.com`
+
+URL a enviar en Google Search Console: `https://www.calcfit.com/sitemap-index.xml` (con www).
+
+### Dominio canónico
+Todo el sitio usa `https://www.calcfit.com` (con www). Configurado en `astro.config.mjs` → `site: 'https://www.calcfit.com'`. Al desplegar, configurar redirect 301 de `calcfit.com` → `www.calcfit.com` en el hosting.
 
 ### Imágenes OG
 Carpeta `public/og/` — pendiente generar las imágenes por calculadora. Formato: 1200×630px. La ruta en cada página es `/og/[nombre].jpg`.
@@ -419,6 +451,15 @@ npm run preview  # preview del build
 - Nunca agregar `box-shadow`
 - Nunca agregar gradientes
 
+### Responsive — patrones establecidos
+
+- `padding: clamp(16px, 4vw, 32px)` en todos los wrappers de calculadoras (evita media queries en TSX)
+- `gridTemplateColumns: 'repeat(auto-fit, minmax(Xpx, 1fr))'` para todos los grids de resultados — valores usados: 80px, 100px, 120px, 130px, 150px según densidad de contenido
+- `overflow-x: hidden` aplicado en `html, body` en `global.css` como red de seguridad
+- Las secciones de `index.astro` con padding inline usan clases + `!important` en el `<style>` para overrides móvil
+- El header oscuro de cada página calculadora se hace responsive vía `:global(.calc-main > div:first-child)` en `CalculatorLayout.astro`
+- Tablas con scroll interno: envolver en `<div style="overflow-x: auto; -webkit-overflow-scrolling: touch">` con `minWidth` en el hijo
+
 ---
 
 ## localStorage keys en uso
@@ -436,5 +477,6 @@ Siempre verificar `typeof window !== 'undefined'` antes de acceder a localStorag
 ## Pendientes conocidos
 
 - Generar imágenes OG estáticas en `public/og/` (1200×630px por calculadora)
-- Google Analytics o sistema de métricas (actualmente ninguno)
-- Deploy en producción (Vercel / Netlify / Cloudflare Pages)
+- Deploy en producción (Vercel / Netlify / Cloudflare Pages) — configurar redirect 301 de non-www a www
+- Verificar propiedad en Google Search Console y enviar sitemap con URL www
+- Agregar `apple-touch-icon` PNG 180×180 para homescreen iOS (actualmente no hay)
