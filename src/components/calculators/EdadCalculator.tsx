@@ -32,7 +32,7 @@ export default function EdadCalculator() {
               ].map((item) => (
                 <div key={item.label}>
                   <span style={{ fontFamily: 'var(--font-display)', fontSize: '56px', color: 'var(--acid)', lineHeight: 1 }}>{item.val}</span>
-                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: '#666', marginLeft: '4px' }}>{item.label}</span>
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: '#aaa', marginLeft: '4px' }}>{item.label}</span>
                 </div>
               ))}
             </div>

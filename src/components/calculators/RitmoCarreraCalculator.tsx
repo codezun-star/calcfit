@@ -42,19 +42,19 @@ export default function RitmoCarreraCalculator() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <div style={{ background: 'var(--ink)', padding: '28px 24px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))', gap: '1px' }}>
             <div style={{ paddingRight: '16px' }}>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: '#555', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '4px' }}>Ritmo /km</div>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: '#999', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '4px' }}>Ritmo /km</div>
               <div style={{ fontFamily: 'var(--font-display)', fontSize: '42px', color: 'var(--acid)', lineHeight: 1 }}>{result.ritmoMinPorKm}</div>
-              <div style={{ fontSize: '11px', color: '#666', marginTop: '2px' }}>min/km</div>
+              <div style={{ fontSize: '11px', color: '#aaa', marginTop: '2px' }}>min/km</div>
             </div>
             <div style={{ paddingRight: '16px', borderLeft: '1px solid #222', paddingLeft: '16px' }}>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: '#555', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '4px' }}>Ritmo /milla</div>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: '#999', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '4px' }}>Ritmo /milla</div>
               <div style={{ fontFamily: 'var(--font-display)', fontSize: '42px', color: 'white', lineHeight: 1 }}>{result.ritmoMinPorMilla}</div>
-              <div style={{ fontSize: '11px', color: '#666', marginTop: '2px' }}>min/mi</div>
+              <div style={{ fontSize: '11px', color: '#aaa', marginTop: '2px' }}>min/mi</div>
             </div>
             <div style={{ borderLeft: '1px solid #222', paddingLeft: '16px' }}>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: '#555', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '4px' }}>Velocidad</div>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: '#999', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '4px' }}>Velocidad</div>
               <div style={{ fontFamily: 'var(--font-display)', fontSize: '42px', color: 'white', lineHeight: 1 }}>{result.velocidadKmh}</div>
-              <div style={{ fontSize: '11px', color: '#666', marginTop: '2px' }}>km/h</div>
+              <div style={{ fontSize: '11px', color: '#aaa', marginTop: '2px' }}>km/h</div>
             </div>
           </div>
 

@@ -29,7 +29,7 @@ export default function DiasFechasCalculator() {
             <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
               <div>
                 <span style={{ fontFamily: 'var(--font-display)', fontSize: '64px', color: 'var(--acid)', lineHeight: 1 }}>{result.dias}</span>
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: '#666', marginLeft: '4px' }}>días</span>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: '#aaa', marginLeft: '4px' }}>días</span>
               </div>
             </div>
           </div>

@@ -49,12 +49,12 @@ export default function CicloMenstrualCalculator() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <div style={{ background: 'var(--ink)', padding: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
             <div>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: '#555', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '4px' }}>Día actual del ciclo</div>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: '#999', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '4px' }}>Día actual del ciclo</div>
               <div style={{ fontFamily: 'var(--font-display)', fontSize: '72px', color: 'var(--acid)', lineHeight: 1 }}>{result.diaActual}</div>
               <div style={{ fontSize: '12px', color: '#888', marginTop: '4px' }}>Fase: <strong style={{ color: 'white' }}>{result.faseActual}</strong></div>
             </div>
             <div style={{ textAlign: 'right' }}>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: '#555', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '4px' }}>Próxima menstruación</div>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: '#999', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '4px' }}>Próxima menstruación</div>
               <div style={{ fontSize: '16px', fontWeight: 600, color: 'white' }}>{fmtFecha(result.proximaMenstruacion)}</div>
             </div>
           </div>

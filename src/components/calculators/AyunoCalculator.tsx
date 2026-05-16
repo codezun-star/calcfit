@@ -62,16 +62,16 @@ export default function AyunoCalculator() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <div style={{ background: 'var(--ink)', padding: '28px 24px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '16px' }}>
             <div>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: '#555', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '4px' }}>Ventana de comida</div>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: '#999', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '4px' }}>Ventana de comida</div>
               <div style={{ fontFamily: 'var(--font-display)', fontSize: '56px', color: 'var(--acid)', lineHeight: 1 }}>{horaInicio}</div>
               <div style={{ fontSize: '12px', color: '#888' }}>hasta las <strong style={{ color: 'white' }}>{result.horaFinComida}</strong></div>
-              <div style={{ fontSize: '11px', color: '#555', marginTop: '4px' }}>{result.horasComida} horas para comer</div>
+              <div style={{ fontSize: '11px', color: '#999', marginTop: '4px' }}>{result.horasComida} horas para comer</div>
             </div>
             <div>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: '#555', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '4px' }}>Ventana de ayuno</div>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: '#999', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '4px' }}>Ventana de ayuno</div>
               <div style={{ fontFamily: 'var(--font-display)', fontSize: '56px', color: 'white', lineHeight: 1 }}>{result.horaInicioAyuno}</div>
               <div style={{ fontSize: '12px', color: '#888' }}>hasta las <strong style={{ color: 'white' }}>{result.horaFinAyuno}</strong></div>
-              <div style={{ fontSize: '11px', color: '#555', marginTop: '4px' }}>{result.horasAyuno} horas de ayuno</div>
+              <div style={{ fontSize: '11px', color: '#999', marginTop: '4px' }}>{result.horasAyuno} horas de ayuno</div>
             </div>
           </div>
 

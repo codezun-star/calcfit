@@ -62,14 +62,14 @@ export default function ProteinasCalculator() {
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: '#888', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '4px' }}>Mínimo</div>
               <div>
                 <span style={{ fontFamily: 'var(--font-display)', fontSize: '56px', color: '#888', lineHeight: 1 }}>{result.minimo}</span>
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: '#555', marginLeft: '4px' }}>g/día</span>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: '#999', marginLeft: '4px' }}>g/día</span>
               </div>
             </div>
             <div style={{ background: 'var(--ink)', padding: '24px 28px' }}>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: '#888', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '4px' }}>Óptimo</div>
               <div>
                 <span style={{ fontFamily: 'var(--font-display)', fontSize: '56px', color: 'var(--acid)', lineHeight: 1 }}>{result.optimo}</span>
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: '#666', marginLeft: '4px' }}>g/día</span>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: '#aaa', marginLeft: '4px' }}>g/día</span>
               </div>
             </div>
           </div>

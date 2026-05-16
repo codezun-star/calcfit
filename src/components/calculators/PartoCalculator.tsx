@@ -26,7 +26,7 @@ export default function PartoCalculator() {
             <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: '#888', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '8px' }}>Fecha probable de parto</div>
             <div style={{ fontFamily: 'var(--font-display)', fontSize: '32px', color: 'var(--acid)', lineHeight: 1.2, textTransform: 'capitalize' }}>{fmt(result.fechaParto)}</div>
             {result.semanasRestantes > 0 && (
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: '#666', marginTop: '8px' }}>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: '#aaa', marginTop: '8px' }}>
                 Aproximadamente {result.semanasRestantes} semanas restantes
               </div>
             )}

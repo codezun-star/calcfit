@@ -61,7 +61,7 @@ export default function MacroCalculator() {
             <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: '#888', textTransform: 'uppercase', marginBottom: '8px' }}>Calorías objetivo</div>
             <div>
               <span style={{ fontFamily: 'var(--font-display)', fontSize: '64px', color: 'var(--acid)', lineHeight: 1 }}>{result.calorias}</span>
-              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: '#666', marginLeft: '6px' }}>kcal/día</span>
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: '#aaa', marginLeft: '6px' }}>kcal/día</span>
             </div>
           </div>
 

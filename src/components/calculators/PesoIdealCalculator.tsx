@@ -53,7 +53,7 @@ export default function PesoIdealCalculator() {
           <div style={{ background: 'var(--ink)', padding: '24px 28px' }}>
             <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: '#888', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '8px' }}>Promedio de 5 fórmulas</div>
             <div style={{ fontFamily: 'var(--font-display)', fontSize: '72px', color: 'var(--acid)', lineHeight: 1 }}>{result.promedio}</div>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: '#666' }}>kg{units === 'imperial' && ` · ${toLb(result.promedio)} lb`}</div>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: '#aaa' }}>kg{units === 'imperial' && ` · ${toLb(result.promedio)} lb`}</div>
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(80px, 1fr))', gap: '1px', background: 'var(--border)' }}>

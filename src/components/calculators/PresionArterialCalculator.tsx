@@ -37,7 +37,7 @@ export default function PresionArterialCalculator() {
       {result && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <div style={{ background: 'var(--ink)', padding: '28px 24px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: '#555', textTransform: 'uppercase', letterSpacing: '2px' }}>Clasificación AHA</div>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: '#999', textTransform: 'uppercase', letterSpacing: '2px' }}>Clasificación AHA</div>
             <div style={{ fontFamily: 'var(--font-display)', fontSize: '56px', color: result.color, lineHeight: 1 }}>{sistolica}/{diastolica}</div>
             <div style={{ fontSize: '11px', color: '#888' }}>mmHg</div>
             <div style={{ fontSize: '18px', fontWeight: 600, color: 'white', marginTop: '4px' }}>{result.categoria}</div>

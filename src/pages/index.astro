@@ -116,7 +116,7 @@ const schema = {
     <h1 class="anim anim-2 hero-h1" style="font-family: var(--font-display); line-height: 0.92; color: white;">
       Tu cuerpo /<br><span style="color: var(--acid);">tiene</span> /<br>respuestas.
     </h1>
-    <p class="anim anim-3" style="font-size: 12px; color: #666; font-weight: 300; max-width: 320px; line-height: 1.7;">
+    <p class="anim anim-3" style="font-size: 12px; color: #999; font-weight: 300; max-width: 320px; line-height: 1.7;">
       Herramientas de salud precisas y gratuitas. Sin registros, sin publicidad, sin datos almacenados.
     </p>
     <div class="anim anim-4" style="display: flex; gap: 10px; flex-wrap: wrap;">
@@ -125,7 +125,7 @@ const schema = {
     </div>
   </div>
   <div class="hero-nums" style="background: var(--ink-2); padding: 28px; border-left: 1px solid var(--ink-3); display: flex; flex-direction: column; justify-content: center;">
-    <p style="font-family: var(--font-mono); font-size: 9px; text-transform: uppercase; letter-spacing: 2px; color: #555; margin-bottom: 20px;">Resultados en tiempo real</p>
+    <p style="font-family: var(--font-mono); font-size: 9px; text-transform: uppercase; letter-spacing: 2px; color: #888; margin-bottom: 20px;">Resultados en tiempo real</p>
     {[
       { nombre: 'IMC', formula: 'kg / m²', valor: '22.4', unidad: '' },
       { nombre: 'Calorías', formula: 'Mifflin-St Jeor', valor: '1850', unidad: 'kcal' },
@@ -133,10 +133,10 @@ const schema = {
     ].map((r) => (
       <div style="padding: 18px 0; border-bottom: 1px solid var(--ink-3);">
         <div style="font-size: 11px; color: #888;">{r.nombre}</div>
-        <div style="font-size: 9px; color: #555; font-family: var(--font-mono); margin: 2px 0;">{r.formula}</div>
+        <div style="font-size: 9px; color: #888; font-family: var(--font-mono); margin: 2px 0;">{r.formula}</div>
         <div>
           <span style="font-family: var(--font-display); font-size: 44px; color: var(--acid);">{r.valor}</span>
-          {r.unidad && <span style="font-size: 11px; color: #666; margin-left: 4px;">{r.unidad}</span>}
+          {r.unidad && <span style="font-size: 11px; color: #999; margin-left: 4px;">{r.unidad}</span>}
         </div>
       </div>
     ))}
@@ -207,7 +207,7 @@ const schema = {
 <!-- MANIFESTO -->
 <section id="manifesto" class="manifesto-grid" style="background: var(--ink); padding: 56px 32px;">
   <div class="manifesto-left" style="display: flex; flex-direction: column; justify-content: center; gap: 16px;">
-    <p style="font-family: var(--font-mono); font-size: 10px; color: #555; text-transform: uppercase; letter-spacing: 3px;">Nuestro compromiso</p>
+    <p style="font-family: var(--font-mono); font-size: 10px; color: #888; text-transform: uppercase; letter-spacing: 3px;">Nuestro compromiso</p>
     <h2 style="font-family: var(--font-display); font-size: 62px; color: white; line-height: 0.95;">
       Ciencia, /<br>no /<br><span style="color: var(--acid);">opinión.</span>
     </h2>
@@ -223,7 +223,7 @@ const schema = {
           <span style="font-family: var(--font-mono); font-size: 12px; color: var(--acid);">{f.n} —</span>
           <span style="font-size: 13px; font-weight: 500; color: white;">{f.title}</span>
         </div>
-        <p style="font-size: 12px; color: #666; line-height: 1.6;">{f.desc}</p>
+        <p style="font-size: 12px; color: #999; line-height: 1.6;">{f.desc}</p>
       </div>
     ))}
   </div>
