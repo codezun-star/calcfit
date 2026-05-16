@@ -62,7 +62,7 @@ calcfit-astro/
 │   │   │   ├── HistoryTable.tsx
 │   │   │   ├── ShareButtons.tsx
 │   │   │   └── Badge.tsx              ← popular | new | essential
-│   │   └── calculators/               ← 24 componentes React
+│   │   └── calculators/               ← 34 componentes React
 │   │       ├── IMCCalculator.tsx
 │   │       ├── CaloriasCalculator.tsx
 │   │       ├── PesoIdealCalculator.tsx
@@ -87,6 +87,16 @@ calcfit-astro/
 │   │       ├── RitmoCarreraCalculator.tsx
 │   │       ├── CinturaEstaturaCalculator.tsx
 │   │       ├── AyunoCalculator.tsx
+│   │       ├── MetabolismoBasalCalculator.tsx
+│   │       ├── UnRepeticionMaximaCalculator.tsx
+│   │       ├── CaloriasCaminandoCalculator.tsx
+│   │       ├── DeficitCaloricoCalculator.tsx
+│   │       ├── ComplexionCorporalCalculator.tsx
+│   │       ├── ResistenciaInsulinaCalculator.tsx
+│   │       ├── SomatotipoCalculator.tsx
+│   │       ├── RiesgoCardiovascularCalculator.tsx
+│   │       ├── IndiceAdipositadCalculator.tsx
+│   │       ├── VolumenEntrenamientoCalculator.tsx
 │   │       ├── GaugeIMC.tsx           ← gauge SVG semicircular animado
 │   │       ├── ZonasCardiaca.tsx      ← barras horizontales de zonas cardíacas
 │   │       └── BarrasCaloria.tsx      ← barras verticales déficit/mant/superávit
@@ -96,7 +106,7 @@ calcfit-astro/
 │   │   ├── useValidation.ts           ← hook de validación de campos
 │   │   └── useHistory.ts              ← hook de historial en localStorage
 │   └── pages/
-│       ├── index.astro                ← homepage con las 24 calculadoras
+│       ├── index.astro                ← homepage con las 34 calculadoras
 │       ├── imc.astro
 │       ├── calorias-diarias.astro
 │       ├── peso-ideal.astro
@@ -121,6 +131,16 @@ calcfit-astro/
 │       ├── ritmo-carrera.astro
 │       ├── cintura-estatura.astro
 │       ├── ayuno-intermitente.astro
+│       ├── metabolismo-basal.astro
+│       ├── 1rm.astro
+│       ├── calorias-caminando.astro
+│       ├── deficit-calorico.astro
+│       ├── complexion-corporal.astro
+│       ├── resistencia-insulina.astro
+│       ├── somatotipo.astro
+│       ├── riesgo-cardiovascular.astro
+│       ├── indice-adiposidad.astro
+│       ├── volumen-entrenamiento.astro
 │       ├── sobre-nosotros.astro       ← página estática
 │       ├── contacto.astro             ← solo email, sin formulario
 │       ├── aviso-legal.astro          ← LSSI-CE
@@ -273,7 +293,7 @@ calcularProteinasDiarias({ pesoKg, nivel })
 calcularSueno(horaDespertar)
   → CicloSueno[]  (6 opciones de horario)
 
-// Calculadoras nuevas (10)
+// Calculadoras batch 2 (10)
 calcularCinturaCadera({ sexo, cinturaCm, caderaCm })
   → { ratio, categoria, riesgo }
 calcularCaloriasEjercicio({ pesoKg, duracionMin, actividad })
@@ -295,6 +315,38 @@ calcularCinturaEstatura(cinturaCm, alturaCm)
   → { ratio, categoria, riesgo, recomendacion }
 calcularAyunoIntermitente({ protocolo, horaInicioComida })
   → { horaFinComida, horaInicioAyuno, horaFinAyuno, horasAyuno, horasComida, beneficios }
+
+// Calculadoras batch 3 (10 nuevas — 2026-05-16)
+calcularMetabolismoBasal(pesoKg, alturaCm, edadAnios, sexo)
+  → { mifflin, harris, schofield, promedio, categoria }
+calcularUnaRepeticionMaxima(pesoKg, reps)
+  → { brzycki, epley, lander, promedio, tabla[] }
+  // tabla: [{ porcentaje, peso, reps }] — del 100% al 50%
+calcularCaloriasCaminando(pesoKg, duracionMin, velocidad)
+  → { calorias, km, pasos, velocidadNombre }
+  // también exporta: VELOCIDADES_CAMINATA (constante con 5 velocidades y sus METs)
+calcularDeficitCalorico(tdee, pesoActualKg, pesoObjetivoKg, objetivo)
+  → { caloriasDiarias, deficitDiario, perdidaSemanal, tiempoSemanas, tiempoMeses, esSeguaro }
+  // objetivo: '0.25' | '0.5' | '0.75' | '1.0' (kg por semana)
+calcularComplexionCorporal(alturaCm, munecaCm, sexo)
+  → { tipo, tipoNombre, indice, descripcion }
+  // tipo: 'pequena' | 'mediana' | 'grande'
+calcularHOMAIR(glucosaAyunas, insulinaAyunas)
+  → { homaIR, categoria, riesgo, descripcion, color }
+  // riesgo: 'sensible' | 'normal' | 'limite' | 'resistente'
+calcularSomatotipo(pesoKg, alturaCm, munecaCm, sexo)
+  → { tipo, tipoNombre, descripcion, puntaje, recomendaciones }
+  // tipo: 'ectomorfo' | 'mesomorfo' | 'endomorfo' | 'ecto_meso' | 'endo_meso'
+calcularRiesgoCardiovascular({ edad, sexo, sistolica, imc, fumador, diabetes, antecedentes })
+  → { riesgo10Anios, categoria, categoriaNombre, color, recomendacion }
+  // basado en modelo Framingham sin laboratorio
+calcularBAI(alturaCm, caderaCm, sexo)
+  → { bai, categoria, riesgo, color }
+  // BAI = (cadera / altura^1.5) - 18
+calcularVolumenEntrenamiento(nivel, diasPorSemana)
+  → { grupos[], totalSetsSemana, recomendacion }
+  // nivel: 'principiante' | 'intermedio' | 'avanzado'
+  // grupos[]: { nombre, mev, mrv, recomendado } por grupo muscular (10 grupos)
 ```
 
 ### Conversión de unidades (src/lib/units.ts)
@@ -359,13 +411,13 @@ Tres visualizaciones específicas en `src/components/calculators/`:
 
 ## Homepage (src/pages/index.astro)
 
-La homepage muestra las **24 calculadoras** en 4 categorías. Los íconos SVG están definidos como strings en el objeto `I` al inicio del frontmatter y se renderizan con `<Fragment set:html={calc.icon} />`.
+La homepage muestra las **34 calculadoras** en 4 categorías. Los íconos SVG están definidos como strings en el objeto `I` al inicio del frontmatter y se renderizan con `<Fragment set:html={calc.icon} />`.
 
 Categorías:
-1. **Fitness & salud** (12 calculadoras)
+1. **Fitness & salud** (19 calculadoras)
 2. **Embarazo & fertilidad** (4 calculadoras)
 3. **Fechas & tiempo** (3 calculadoras)
-4. **Nutrición & bienestar** (5 calculadoras)
+4. **Nutrición & bienestar** (8 calculadoras)
 
 Al agregar una calculadora nueva, añadirla al array `calculadoras` con: `{ slug, nombre, desc, badge, icon }` y al map `calcsBySlug` para asignarla a su categoría.
 
@@ -476,7 +528,13 @@ Siempre verificar `typeof window !== 'undefined'` antes de acceder a localStorag
 
 ## Pendientes conocidos
 
-- Generar imágenes OG estáticas en `public/og/` (1200×630px por calculadora)
+- Generar imágenes OG estáticas en `public/og/` (1200×630px por calculadora) — pendientes 10 nuevas de batch 3
 - Deploy en producción (Vercel / Netlify / Cloudflare Pages) — configurar redirect 301 de non-www a www
 - Verificar propiedad en Google Search Console y enviar sitemap con URL www
 - Agregar `apple-touch-icon` PNG 180×180 para homescreen iOS (actualmente no hay)
+
+## Registro de cambios
+
+| Fecha | Acción |
+|---|---|
+| 2026-05-16 | Batch 3: +10 calculadoras (metabolismo-basal, 1rm, calorias-caminando, deficit-calorico, complexion-corporal, resistencia-insulina, somatotipo, riesgo-cardiovascular, indice-adiposidad, volumen-entrenamiento). Total: 34. |

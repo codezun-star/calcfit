@@ -1,0 +1,70 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import ComplexionCorporalCalculator from '../components/calculators/ComplexionCorporalCalculator';
+---
+
+<CalculatorLayout
+  title="Calculadora de Complexión Corporal — Soy de Hueso Fino, Mediano o Grueso | CalcFit"
+  description="Descubre si tienes complexión pequeña, mediana o grande con la fórmula de la circunferencia de muñeca. Ajusta tu peso ideal según tu estructura ósea real."
+  calculatorName="Complexión Corporal"
+  breadcrumbSlug="complexion-corporal"
+  ogImage="/og/complexion-corporal.jpg"
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Complexión<br><span style="color: var(--acid);">Corporal</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      La complexión corporal (o tipo de estructura ósea) determina cuánto "pesa" tu esqueleto. Dos personas con la misma altura pueden tener pesos ideales distintos dependiendo de si tienen huesos finos, medianos o gruesos.
+    </p>
+  </div>
+
+  <ComplexionCorporalCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cómo se determina la complexión corporal?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      El método más simple y validado usa la relación entre la altura y la circunferencia de la muñeca: <strong>Índice = Altura (cm) / Circunferencia muñeca (cm)</strong>. Este valor clasifica la estructura ósea en tres tipos que luego ajustan el peso ideal.
+    </p>
+
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+      <table style="width: 100%; min-width: 360px; border-collapse: collapse; font-size: 13px; margin-bottom: 24px;">
+        <thead>
+          <tr style="border-bottom: 2px solid var(--border);">
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Complexión</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Índice (Hombres)</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Índice (Mujeres)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {[
+            { tipo: 'Pequeña (hueso fino)',  h: '> 10.4', m: '> 11.0' },
+            { tipo: 'Mediana (estructura promedio)', h: '9.6 – 10.4', m: '10.1 – 11.0' },
+            { tipo: 'Grande (hueso grueso)', h: '< 9.6', m: '< 10.1' },
+          ].map(row => (
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 10px 0; font-weight: 600; color: var(--ink);">{row.tipo}</td>
+              <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--muted);">{row.h}</td>
+              <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--muted);">{row.m}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {[
+        { q: '¿Por qué la complexión corporal afecta al peso ideal?', a: 'Las personas de complexión grande tienen una densidad ósea mayor, por lo que su peso "saludable" puede ser hasta un 10% superior al estándar. Lo contrario ocurre con la complexión pequeña. Ignorar la complexión puede llevar a objetivos de peso irreales o poco saludables.' },
+        { q: '¿Cómo mido la circunferencia de la muñeca correctamente?', a: 'Usa una cinta métrica flexible alrededor de la muñeca en su punto más estrecho, justo por encima del hueso del carpo (la protuberancia del extremo del antebrazo). Mantén la muñeca relajada y la cinta paralela al suelo. Mide en el lado de la palma.' },
+        { q: '¿La complexión corporal cambia con el tiempo?', a: 'No. La complexión está determinada genéticamente por la densidad y grosor de los huesos, que se desarrollan durante el crecimiento y permanecen estables en la edad adulta. El ejercicio puede aumentar la densidad mineral ósea pero no cambia el tipo de complexión.' },
+        { q: '¿Puedo determinar mi complexión sin medir la muñeca?', a: 'Existen métodos alternativos: el codo (ancho del codo medido con dedos pulgar e índice) o simplemente encerrar la muñeca con el pulgar y el dedo medio de la mano opuesta. Si el pulgar supera el dedo medio, complexión grande; si se tocan, mediana; si no llegan, pequeña.' },
+      ].map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

@@ -1,0 +1,72 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import CaloriasCaminandoCalculator from '../components/calculators/CaloriasCaminandoCalculator';
+---
+
+<CalculatorLayout
+  title="Calculadora de Calorías Caminando — Cuántas Calorías Quemas al Caminar | CalcFit"
+  description="Calcula cuántas calorías quemas caminando según tu peso, duración y velocidad. Incluye estimación de kilómetros recorridos y pasos totales. Fórmula MET validada por el ACSM."
+  calculatorName="Calorías Caminando"
+  breadcrumbSlug="calorias-caminando"
+  ogImage="/og/calorias-caminando.jpg"
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Calorías<br><span style="color: var(--acid);">Caminando</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Caminar es el ejercicio más accesible y consistente para la salud cardiovascular. Calcula el gasto exacto según tu peso y ritmo de caminata.
+    </p>
+  </div>
+
+  <CaloriasCaminandoCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cuántas calorías se queman caminando?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      El gasto calórico al caminar depende de tres factores: <strong>peso corporal</strong>, <strong>velocidad</strong> y <strong>duración</strong>. La fórmula usa el valor MET (Equivalente Metabólico) de cada velocidad: <em>Calorías = MET × Peso (kg) × Horas</em>.
+    </p>
+
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+      <table style="width: 100%; min-width: 380px; border-collapse: collapse; font-size: 13px; margin-bottom: 24px;">
+        <thead>
+          <tr style="border-bottom: 2px solid var(--border);">
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Velocidad</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">MET</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">kcal/h (70 kg)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {[
+            { v: 'Muy lento (< 3 km/h)',    met: 2.0, kcal: 140 },
+            { v: 'Lento (3–4 km/h)',         met: 2.8, kcal: 196 },
+            { v: 'Moderado (4–5 km/h)',       met: 3.5, kcal: 245 },
+            { v: 'Rápido (5–6 km/h)',         met: 4.3, kcal: 301 },
+            { v: 'Muy rápido (> 6 km/h)',     met: 5.0, kcal: 350 },
+          ].map(row => (
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 10px 0; color: var(--ink);">{row.v}</td>
+              <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--muted);">{row.met}</td>
+              <td style="padding: 10px 0; font-family: var(--font-display); font-size: 18px; color: var(--ink);">{row.kcal}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {[
+        { q: '¿Cuántas calorías quemo caminando 10 000 pasos?', a: '10 000 pasos equivalen aproximadamente a 7–8 km según la longitud de zancada. A ritmo moderado (4.5 km/h) una persona de 70 kg quema entre 280 y 350 kcal. El valor exacto varía con el peso: más peso significa mayor gasto calórico por cada paso.' },
+        { q: '¿Cuántas calorías quemo caminando 1 hora?', a: 'A ritmo moderado (4.5 km/h), una persona de 70 kg quema aproximadamente 245 kcal en 1 hora. A 80 kg serían 280 kcal y a 60 kg unos 210 kcal. Caminar rápido (5.5 km/h) incrementa el gasto a unas 300–420 kcal por hora según el peso.' },
+        { q: '¿Caminar en cuesta quema más calorías?', a: 'Sí. Caminar con una inclinación del 5% aumenta el gasto calórico aproximadamente un 50% respecto a superficie plana. Con un 10% de inclinación el aumento puede llegar al 100%. Esta calculadora asume superficie plana; para caminatas con desnivel, el gasto real será mayor.' },
+        { q: '¿Es mejor caminar o correr para adelgazar?', a: 'Correr quema más calorías por minuto, pero caminar permite sesiones más largas y con menor riesgo de lesión. Para perder peso, lo más importante es el déficit calórico total. 1 hora caminando a buen ritmo puede quemar calorías similares a 30 minutos de carrera suave.' },
+      ].map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

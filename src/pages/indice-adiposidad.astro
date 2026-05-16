@@ -1,0 +1,71 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import IndiceAdipositadCalculator from '../components/calculators/IndiceAdipositadCalculator';
+---
+
+<CalculatorLayout
+  title="Calculadora Índice de Adiposidad Corporal (BAI) — Grasa Corporal con Cadera y Altura | CalcFit"
+  description="Calcula tu índice de adiposidad corporal (BAI) usando solo la cadera y la altura, sin necesitar el peso. Alternativa al IMC publicada en la revista Obesity en 2011."
+  calculatorName="Índice de Adiposidad Corporal — BAI"
+  breadcrumbSlug="indice-adiposidad"
+  ogImage="/og/indice-adiposidad.jpg"
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Índice de<br><span style="color: var(--acid);">Adiposidad Corporal</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      El BAI (Body Adiposity Index) estima el porcentaje de grasa corporal a partir de la circunferencia de la cadera y la altura, sin necesitar el peso en una báscula.
+    </p>
+  </div>
+
+  <IndiceAdipositadCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cómo se calcula el BAI?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 16px;">
+      La fórmula fue publicada por Bergman et al. en la revista <em>Obesity</em> (2011): <strong>BAI = (Cadera en cm / Altura en m<sup>1.5</sup>) − 18</strong>
+    </p>
+
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+      <table style="width: 100%; min-width: 380px; border-collapse: collapse; font-size: 13px; margin-bottom: 24px;">
+        <thead>
+          <tr style="border-bottom: 2px solid var(--border);">
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Categoría</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">BAI Hombres</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">BAI Mujeres</th>
+          </tr>
+        </thead>
+        <tbody>
+          {[
+            { cat: 'Bajo peso',  h: '< 8',    m: '< 21' },
+            { cat: 'Normal',      h: '8 – 21', m: '21 – 33' },
+            { cat: 'Sobrepeso',   h: '21 – 26', m: '33 – 39' },
+            { cat: 'Obesidad',    h: '> 26',   m: '> 39' },
+          ].map(row => (
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 10px 0; font-weight: 600; color: var(--ink);">{row.cat}</td>
+              <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--muted);">{row.h}</td>
+              <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--muted);">{row.m}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {[
+        { q: '¿Es el BAI más preciso que el IMC?', a: 'El BAI fue diseñado para estimar directamente el porcentaje de grasa corporal sin necesitar báscula. Los estudios muestran que tiene una correlación similar al IMC con la grasa medida por DEXA (la técnica de referencia). Su principal ventaja es que no requiere el peso, útil cuando este dato no está disponible.' },
+        { q: '¿Por qué el BAI usa la cadera y no la cintura?', a: 'La cadera es una medida más estable que la cintura porque varía menos con la digestión, la retención de líquidos o la postura. Además, la circunferencia de cadera en su punto más ancho incluye tanto la grasa glúteo-femoral como la pelvis ósea, siendo un buen proxy de la masa grasa total.' },
+        { q: '¿Puedo usar el BAI en lugar del IMC?', a: 'Son métricas complementarias. El IMC es más universal y tiene mayor evidencia epidemiológica acumulada. El BAI añade valor cuando se sospecha que el IMC puede estar distorsionado (atletas con mucha musculatura, personas muy altas o muy bajas). Lo ideal es usar varias métricas conjuntamente.' },
+        { q: '¿Cómo mido correctamente la circunferencia de la cadera?', a: 'De pie, con los pies juntos y sin ropa que comprima. Pasa la cinta métrica alrededor de la cadera en su punto más ancho (generalmente a la altura de los glúteos). La cinta debe estar horizontal, paralela al suelo, sin comprimir la piel. Toma la medida al final de una espiración normal.' },
+      ].map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

@@ -1,0 +1,72 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import MetabolismoBasalCalculator from '../components/calculators/MetabolismoBasalCalculator';
+---
+
+<CalculatorLayout
+  title="Calculadora de Metabolismo Basal (TMB) — Tasa Metabólica en Reposo | CalcFit"
+  description="Calcula tu tasa metabólica basal (TMB) con 3 fórmulas científicas: Mifflin-St Jeor, Harris-Benedict y Schofield. Descubre cuántas calorías quema tu cuerpo en reposo total."
+  calculatorName="Metabolismo Basal — TMB"
+  breadcrumbSlug="metabolismo-basal"
+  ogImage="/og/metabolismo-basal.jpg"
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Calculadora<br><span style="color: var(--acid);">Metabolismo Basal</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      La Tasa Metabólica Basal (TMB) es la energía mínima que tu cuerpo necesita para mantener sus funciones vitales en reposo completo: respirar, bombear sangre y regular la temperatura.
+    </p>
+  </div>
+
+  <MetabolismoBasalCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cómo se calcula la tasa metabólica basal?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      Existen tres fórmulas científicamente validadas para estimar la TMB. La <strong>Mifflin-St Jeor</strong> (1990) es la más precisa para la mayoría de personas. La <strong>Harris-Benedict revisada</strong> (Roza & Shizgal, 1984) fue estándar durante décadas. La <strong>Schofield</strong> (1985) es la recomendada por la OMS y ajusta por tramos de edad.
+    </p>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Fórmulas utilizadas</h2>
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+      <table style="width: 100%; min-width: 400px; border-collapse: collapse; font-size: 13px; margin-bottom: 24px;">
+        <thead>
+          <tr style="border-bottom: 2px solid var(--border);">
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Fórmula</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Hombre</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Precisión</th>
+          </tr>
+        </thead>
+        <tbody>
+          {[
+            { formula: 'Mifflin-St Jeor', ec: '10×P + 6.25×A − 5×E + 5', precision: '±5% en adultos sanos' },
+            { formula: 'Harris-Benedict', ec: '88.4 + 13.4×P + 4.8×A − 5.7×E', precision: '±10% en adultos' },
+            { formula: 'Schofield (OMS)', ec: 'Variable según tramo de edad', precision: 'Recomendada por OMS' },
+          ].map(row => (
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 10px 0; font-weight: 600; color: var(--ink);">{row.formula}</td>
+              <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted);">{row.ec}</td>
+              <td style="padding: 10px 0; font-size: 13px; color: var(--ink);">{row.precision}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size: 12px; color: var(--muted); margin-bottom: 32px;">P = peso en kg · A = altura en cm · E = edad en años</p>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {[
+        { q: '¿Cuántas calorías quema mi cuerpo en reposo absoluto?', a: 'La TMB representa entre el 60 y el 75% del gasto energético total diario. Es la energía que tu cuerpo consume sin hacer ninguna actividad: manteniendo la temperatura corporal, la respiración, el latido cardíaco y los procesos celulares.' },
+        { q: '¿En qué se diferencia la TMB del TDEE?', a: 'La TMB (Tasa Metabólica Basal) es el gasto en reposo absoluto. El TDEE (Total Daily Energy Expenditure) es la TMB multiplicada por un factor de actividad física que va de 1.2 (sedentario) a 1.9 (muy activo). El TDEE representa las calorías totales que necesitas al día.' },
+        { q: '¿Puedo bajar de peso sin saber mi TMB?', a: 'Sí, pero conocer tu TMB te permite calcular un déficit calórico seguro. Nunca debes comer por debajo de tu TMB durante períodos prolongados, ya que esto puede ralentizar el metabolismo y causar pérdida de masa muscular.' },
+        { q: '¿Por qué cada fórmula da un resultado diferente?', a: 'Porque fueron desarrolladas con diferentes grupos de población y metodologías. La fórmula de Mifflin-St Jeor fue validada en 1990 con métodos más modernos y tiende a ser la más precisa. El promedio de las tres reduce el error individual de cada fórmula.' },
+      ].map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

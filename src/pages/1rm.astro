@@ -1,0 +1,71 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import UnRepeticionMaximaCalculator from '../components/calculators/UnRepeticionMaximaCalculator';
+---
+
+<CalculatorLayout
+  title="Calculadora 1RM — Una Repetición Máxima para Press, Sentadilla y Peso Muerto | CalcFit"
+  description="Calcula tu 1RM (una repetición máxima) con las fórmulas de Brzycki, Epley y Lander. Obtén la tabla completa de porcentajes para programar tu entrenamiento de fuerza."
+  calculatorName="1RM — Una Repetición Máxima"
+  breadcrumbSlug="1rm"
+  ogImage="/og/1rm.jpg"
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Calculadora<br><span style="color: var(--acid);">1RM</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      El 1RM (una repetición máxima) es el peso máximo que puedes levantar una sola vez. Conocerlo te permite programar tu entrenamiento de fuerza con porcentajes exactos sin necesidad de llegar al fallo muscular.
+    </p>
+  </div>
+
+  <UnRepeticionMaximaCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cómo se calcula el 1RM?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      Las fórmulas predicen el 1RM a partir del peso levantado y las repeticiones completadas antes del fallo. Las tres más utilizadas son:
+    </p>
+
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+      <table style="width: 100%; min-width: 400px; border-collapse: collapse; font-size: 13px; margin-bottom: 24px;">
+        <thead>
+          <tr style="border-bottom: 2px solid var(--border);">
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Fórmula</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Ecuación</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Mejor uso</th>
+          </tr>
+        </thead>
+        <tbody>
+          {[
+            { f: 'Brzycki (1993)', ec: 'P / (1.0278 − 0.0278 × R)', uso: 'Menos de 10 reps' },
+            { f: 'Epley (1985)', ec: 'P × (1 + R/30)', uso: 'Rango amplio' },
+            { f: 'Lander (1985)', ec: '100P / (101.3 − 2.67 × R)', uso: 'Alta fiabilidad' },
+          ].map(row => (
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 10px 0; font-weight: 600; color: var(--ink);">{row.f}</td>
+              <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted);">{row.ec}</td>
+              <td style="padding: 10px 0; font-size: 13px; color: var(--ink);">{row.uso}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size: 12px; color: var(--muted); margin-bottom: 32px;">P = peso levantado (kg) · R = repeticiones completadas</p>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {[
+        { q: '¿Para qué ejercicios sirve el 1RM?', a: 'El 1RM es especialmente útil para los movimientos compuestos: sentadilla (squat), press de banca (bench press), peso muerto (deadlift), press militar, dominadas y remo con barra. También se aplica a ejercicios de aislamiento aunque es menos común.' },
+        { q: '¿Cuántas repeticiones debo hacer para obtener un buen estimado?', a: 'Las fórmulas son más precisas con 1 a 10 repeticiones. A partir de 15 repeticiones el margen de error aumenta significativamente, especialmente la de Brzycki. Para estimaciones de alta precisión, trabaja con un peso que te permita entre 3 y 8 repeticiones.' },
+        { q: '¿Cómo uso el 1RM para programar mi entrenamiento?', a: 'Los programas de fuerza e hipertrofia se basan en porcentajes del 1RM: 85–95% para trabajo de fuerza máxima (1–5 reps), 70–84% para hipertrofia (6–12 reps), 60–70% para resistencia muscular (12–20 reps). La tabla de la calculadora muestra el peso exacto para cada porcentaje.' },
+        { q: '¿Con qué frecuencia debo recalcular mi 1RM?', a: 'Se recomienda recalcular cada 4–8 semanas (al final de cada mesociclo) para ajustar los pesos de entrenamiento a tu progresión real. En principiantes los progresos son más rápidos, por lo que el recálculo puede ser mensual.' },
+      ].map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

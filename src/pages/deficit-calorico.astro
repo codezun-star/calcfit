@@ -1,0 +1,71 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import DeficitCaloricoCalculator from '../components/calculators/DeficitCaloricoCalculator';
+---
+
+<CalculatorLayout
+  title="Calculadora de Déficit Calórico — Cuántas Calorías Comer para Perder Peso | CalcFit"
+  description="Calcula tu déficit calórico diario para perder peso de forma segura. Descubre cuántas calorías debes comer al día para adelgazar 0.5 kg a la semana sin perder músculo."
+  calculatorName="Déficit Calórico"
+  breadcrumbSlug="deficit-calorico"
+  ogImage="/og/deficit-calorico.jpg"
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Déficit<br><span style="color: var(--acid);">Calórico</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Un déficit calórico significa consumir menos energía de la que gastas. Es el único mecanismo fisiológico comprobado para perder grasa corporal de forma sostenida.
+    </p>
+  </div>
+
+  <DeficitCaloricoCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cuántas calorías debo comer para adelgazar?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      Para perder peso, necesitas consumir menos calorías de las que gastas (TDEE). Cada kilo de grasa equivale a aproximadamente <strong>7 700 kcal</strong>. Un déficit diario de 500 kcal produce una pérdida de ~0.5 kg por semana, que es el ritmo más recomendado por los profesionales de la salud.
+    </p>
+
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+      <table style="width: 100%; min-width: 360px; border-collapse: collapse; font-size: 13px; margin-bottom: 24px;">
+        <thead>
+          <tr style="border-bottom: 2px solid var(--border);">
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Déficit diario</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Pérdida/semana</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Valoración</th>
+          </tr>
+        </thead>
+        <tbody>
+          {[
+            { deficit: '250 kcal', perdida: '~0.25 kg', val: 'Suave — ideal para deportistas' },
+            { deficit: '500 kcal', perdida: '~0.5 kg',  val: 'Recomendado — sostenible' },
+            { deficit: '750 kcal', perdida: '~0.75 kg', val: 'Moderado — requiere seguimiento' },
+            { deficit: '1 000 kcal', perdida: '~1 kg',  val: 'Agresivo — riesgo de pérdida muscular' },
+          ].map(row => (
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 10px 0; font-family: var(--font-display); font-size: 18px; color: var(--ink);">{row.deficit}</td>
+              <td style="padding: 10px 0; color: var(--ink);">{row.perdida}</td>
+              <td style="padding: 10px 0; font-size: 12px; color: var(--muted);">{row.val}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {[
+        { q: '¿Cuántas calorías debo comer para perder 1 kg por semana?', a: 'Para perder 1 kg de grasa por semana necesitas un déficit de 7 700 kcal semanales, lo que equivale a 1 100 kcal diarias. Sin embargo, este ritmo es agresivo y puede causar pérdida de músculo. La calculadora aplica automáticamente un mínimo de 1 200 kcal/día para preservar la salud metabólica.' },
+        { q: '¿Cuál es el déficit calórico mínimo para perder peso?', a: 'Un déficit de 200–300 kcal diarias ya produce pérdida de grasa, aunque lentamente (0.2–0.3 kg/semana). Este ritmo es ideal para deportistas que quieren perder grasa sin comprometer el rendimiento o la masa muscular.' },
+        { q: '¿Puedo comer cualquier cosa mientras esté en déficit calórico?', a: 'Técnicamente sí, pero la calidad nutricional importa mucho. Un déficit calórico con alta proteína (1.8–2.5 g/kg de peso) preserva mejor la masa muscular. También es importante consumir micronutrientes suficientes a través de frutas, verduras, proteínas magras y carbohidratos complejos.' },
+        { q: '¿Por qué dejo de perder peso aunque estoy en déficit?', a: 'El cuerpo se adapta al déficit: el metabolismo se ralentiza (adaptación metabólica), la actividad espontánea disminuye y aumenta el apetito. Para romper estancamientos: recalcula tu TDEE con tu nuevo peso, varía los macros, incluye una semana de mantenimiento (diet break) o ajusta el déficit.' },
+      ].map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

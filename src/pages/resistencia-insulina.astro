@@ -1,0 +1,72 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import ResistenciaInsulinaCalculator from '../components/calculators/ResistenciaInsulinaCalculator';
+---
+
+<CalculatorLayout
+  title="Calculadora HOMA-IR — Resistencia a la Insulina con Glucosa e Insulina en Ayunas | CalcFit"
+  description="Calcula tu índice HOMA-IR para detectar resistencia a la insulina. Introduce glucosa e insulina en ayunas y obtén tu resultado clasificado según los valores de referencia clínicos."
+  calculatorName="Resistencia a la Insulina — HOMA-IR"
+  breadcrumbSlug="resistencia-insulina"
+  ogImage="/og/resistencia-insulina.jpg"
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Resistencia a la<br><span style="color: var(--acid);">Insulina HOMA-IR</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      El índice HOMA-IR (Homeostatic Model Assessment for Insulin Resistance) es la herramienta clínica estándar para detectar resistencia a la insulina a partir de una simple analítica en ayunas.
+    </p>
+  </div>
+
+  <ResistenciaInsulinaCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cómo se calcula el HOMA-IR?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 16px;">
+      La fórmula es: <strong>HOMA-IR = (Glucosa en ayunas [mg/dL] × Insulina en ayunas [μU/mL]) / 405</strong>
+    </p>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      El denominador 405 es una constante de conversión. Si utilizas glucosa en mmol/L, la fórmula cambia a: HOMA-IR = (Glucosa [mmol/L] × Insulina [μU/mL]) / 22.5.
+    </p>
+
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+      <table style="width: 100%; min-width: 360px; border-collapse: collapse; font-size: 13px; margin-bottom: 24px;">
+        <thead>
+          <tr style="border-bottom: 2px solid var(--border);">
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">HOMA-IR</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Interpretación</th>
+          </tr>
+        </thead>
+        <tbody>
+          {[
+            { rango: '< 1.0',  int: 'Alta sensibilidad a la insulina — óptimo' },
+            { rango: '1.0 – 2.0', int: 'Normal — dentro del rango saludable' },
+            { rango: '2.0 – 3.0', int: 'En límite — posible resistencia incipiente' },
+            { rango: '≥ 3.0',  int: 'Resistencia a la insulina — consultar médico' },
+          ].map(row => (
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 13px; color: var(--ink);">{row.rango}</td>
+              <td style="padding: 10px 0; font-size: 13px; color: var(--ink);">{row.int}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {[
+        { q: '¿Qué es la resistencia a la insulina y por qué importa?', a: 'La resistencia a la insulina ocurre cuando las células no responden bien a la insulina y la glucosa no entra eficientemente a los tejidos. El páncreas compensa produciendo más insulina. Con el tiempo, esto puede derivar en prediabetes, diabetes tipo 2, síndrome metabólico y mayor riesgo cardiovascular.' },
+        { q: '¿Cuándo debo hacerme el análisis de HOMA-IR?', a: 'El análisis requiere sangre extraída en ayunas de al menos 8 horas. Se solicita en el mismo momento que la glucosa basal habitual. Si tienes sobrepeso, antecedentes familiares de diabetes, síndrome de ovario poliquístico o acantosis nigricans (zonas de piel oscurecida), consulta a tu médico para incluirlo en tu analítica anual.' },
+        { q: '¿Cómo se puede mejorar el HOMA-IR?', a: 'Las intervenciones más efectivas son: actividad física regular (especialmente ejercicio de fuerza y HIIT), reducción de azúcares simples y carbohidratos refinados, pérdida de grasa corporal (especialmente visceral), mejora del sueño y reducción del estrés crónico. Algunos fármacos como la metformina también mejoran la sensibilidad insulínica.' },
+        { q: '¿HOMA-IR > 2.5 significa que tengo diabetes?', a: 'No necesariamente. Un HOMA-IR elevado indica resistencia a la insulina, que es un precursor de la diabetes tipo 2, pero no equivale a un diagnóstico de diabetes. Para diagnosticar diabetes se necesita glucosa en ayunas ≥ 126 mg/dL, hemoglobina glucosilada (HbA1c) ≥ 6.5% o prueba de tolerancia a la glucosa alterada.' },
+      ].map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

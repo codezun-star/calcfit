@@ -755,6 +755,366 @@ export function calcularAyunoIntermitente(params: AyunoParams): AyunoResult {
   };
 }
 
+// ─── METABOLISMO BASAL (TMB) ───────────────────────────────────────────────
+export interface MetabolismoBasalResult {
+  mifflin:   number;
+  harris:    number;
+  schofield: number;
+  promedio:  number;
+  categoria: string;
+}
+
+export function calcularMetabolismoBasal(
+  pesoKg:    number,
+  alturaCm:  number,
+  edadAnios: number,
+  sexo:      'hombre' | 'mujer',
+): MetabolismoBasalResult {
+  const mifflin = sexo === 'hombre'
+    ? 10 * pesoKg + 6.25 * alturaCm - 5 * edadAnios + 5
+    : 10 * pesoKg + 6.25 * alturaCm - 5 * edadAnios - 161;
+
+  const harris = sexo === 'hombre'
+    ? 88.362 + 13.397 * pesoKg + 4.799 * alturaCm - 5.677 * edadAnios
+    : 447.593 + 9.247 * pesoKg + 3.098 * alturaCm - 4.330 * edadAnios;
+
+  let schofield: number;
+  if (sexo === 'hombre') {
+    if (edadAnios < 18)       schofield = 17.686 * pesoKg + 658.2;
+    else if (edadAnios < 30)  schofield = 15.057 * pesoKg + 692.2;
+    else if (edadAnios < 60)  schofield = 11.472 * pesoKg + 873.1;
+    else                      schofield = 11.711 * pesoKg + 587.7;
+  } else {
+    if (edadAnios < 18)       schofield = 13.384 * pesoKg + 692.6;
+    else if (edadAnios < 30)  schofield = 14.818 * pesoKg + 486.6;
+    else if (edadAnios < 60)  schofield =  8.126 * pesoKg + 845.6;
+    else                      schofield =  9.082 * pesoKg + 658.5;
+  }
+
+  const promedio   = Math.round((mifflin + harris + schofield) / 3);
+  const umbralBajo = sexo === 'hombre' ? 1400 : 1100;
+  const umbralAlto = sexo === 'hombre' ? 1800 : 1500;
+  const categoria  = promedio < umbralBajo ? 'TMB baja' : promedio < umbralAlto ? 'TMB normal' : 'TMB alta';
+
+  return { mifflin: Math.round(mifflin), harris: Math.round(harris), schofield: Math.round(schofield), promedio, categoria };
+}
+
+// ─── UNA REPETICIÓN MÁXIMA (1RM) ──────────────────────────────────────────
+function _repsFor1RM(pct: number): number {
+  if (pct >= 100) return 1;
+  if (pct >= 95)  return 2;
+  if (pct >= 90)  return 4;
+  if (pct >= 85)  return 6;
+  if (pct >= 80)  return 8;
+  if (pct >= 75)  return 10;
+  if (pct >= 70)  return 12;
+  if (pct >= 65)  return 15;
+  if (pct >= 60)  return 17;
+  if (pct >= 55)  return 20;
+  return 25;
+}
+
+export interface UnaRepeticionMaximaResult {
+  brzycki: number;
+  epley:   number;
+  lander:  number;
+  promedio: number;
+  tabla: { porcentaje: number; peso: number; reps: number }[];
+}
+
+export function calcularUnaRepeticionMaxima(pesoKg: number, reps: number): UnaRepeticionMaximaResult {
+  const brzycki = pesoKg / (1.0278 - 0.0278 * reps);
+  const epley   = pesoKg * (1 + reps / 30);
+  const lander  = (100 * pesoKg) / (101.3 - 2.67123 * reps);
+  const promedio = (brzycki + epley + lander) / 3;
+  const r = (v: number) => Math.round(v * 10) / 10;
+
+  return {
+    brzycki: r(brzycki),
+    epley:   r(epley),
+    lander:  r(lander),
+    promedio: r(promedio),
+    tabla: [100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50].map(pct => ({
+      porcentaje: pct,
+      peso: r(promedio * pct / 100),
+      reps: _repsFor1RM(pct),
+    })),
+  };
+}
+
+// ─── CALORÍAS CAMINANDO ────────────────────────────────────────────────────
+export type VelocidadCaminata = 'muy_lento' | 'lento' | 'moderado' | 'rapido' | 'muy_rapido';
+
+export const VELOCIDADES_CAMINATA: Record<VelocidadCaminata, { kmh: number; met: number; nombre: string }> = {
+  muy_lento:  { kmh: 2.5, met: 2.0, nombre: 'Muy lento (< 3 km/h)' },
+  lento:      { kmh: 3.5, met: 2.8, nombre: 'Lento (3–4 km/h)' },
+  moderado:   { kmh: 4.5, met: 3.5, nombre: 'Moderado (4–5 km/h)' },
+  rapido:     { kmh: 5.5, met: 4.3, nombre: 'Rápido (5–6 km/h)' },
+  muy_rapido: { kmh: 7.0, met: 5.0, nombre: 'Muy rápido (> 6 km/h)' },
+};
+
+export interface CaloriasCaminandoResult {
+  calorias: number;
+  km:       number;
+  pasos:    number;
+  velocidadNombre: string;
+}
+
+export function calcularCaloriasCaminando(
+  pesoKg:      number,
+  duracionMin: number,
+  velocidad:   VelocidadCaminata,
+): CaloriasCaminandoResult {
+  const { kmh, met, nombre } = VELOCIDADES_CAMINATA[velocidad];
+  const horas = duracionMin / 60;
+  return {
+    calorias: Math.round(met * pesoKg * horas),
+    km:       Math.round(kmh * horas * 10) / 10,
+    pasos:    Math.round(kmh * horas * 1350),
+    velocidadNombre: nombre,
+  };
+}
+
+// ─── DÉFICIT CALÓRICO ──────────────────────────────────────────────────────
+export type ObjetivoDeficit = '0.25' | '0.5' | '0.75' | '1.0';
+
+export interface DeficitCaloricoResult {
+  caloriasDiarias: number;
+  deficitDiario:   number;
+  perdidaSemanal:  number;
+  tiempoSemanas:   number;
+  tiempoMeses:     number;
+  esSeguaro:       boolean;
+}
+
+export function calcularDeficitCalorico(
+  tdee:           number,
+  pesoActualKg:   number,
+  pesoObjetivoKg: number,
+  objetivo:       ObjetivoDeficit,
+): DeficitCaloricoResult {
+  const kgSemana    = parseFloat(objetivo);
+  const caloriasDiarias = Math.max(1200, tdee - Math.round(kgSemana * 7700 / 7));
+  const deficitDiario   = tdee - caloriasDiarias;
+  const kgDiff      = Math.abs(pesoActualKg - pesoObjetivoKg);
+  const semanas     = kgDiff > 0 ? Math.ceil(kgDiff * 7700 / (deficitDiario * 7)) : 0;
+  return {
+    caloriasDiarias,
+    deficitDiario,
+    perdidaSemanal: Math.round(deficitDiario * 7 / 7700 * 100) / 100,
+    tiempoSemanas:  semanas,
+    tiempoMeses:    Math.round(semanas / 4.33 * 10) / 10,
+    esSeguaro:      deficitDiario <= 1000,
+  };
+}
+
+// ─── COMPLEXIÓN CORPORAL ───────────────────────────────────────────────────
+export interface ComplexionCorporalResult {
+  tipo:      'pequena' | 'mediana' | 'grande';
+  tipoNombre: string;
+  indice:    number;
+  descripcion: string;
+}
+
+export function calcularComplexionCorporal(
+  alturaCm: number,
+  munecaCm: number,
+  sexo:     'hombre' | 'mujer',
+): ComplexionCorporalResult {
+  const indice   = Math.round((alturaCm / munecaCm) * 100) / 100;
+  const [hi, lo] = sexo === 'hombre' ? [10.4, 9.6] : [11.0, 10.1];
+
+  if (indice > hi)  return { tipo: 'pequena', tipoNombre: 'Complexión pequeña', indice, descripcion: 'Estructura ósea fina. El peso ideal puede ser hasta un 10 % menor al estándar.' };
+  if (indice >= lo) return { tipo: 'mediana', tipoNombre: 'Complexión mediana', indice, descripcion: 'Estructura ósea promedio. Las tablas de peso ideal estándar aplican directamente.' };
+  return             { tipo: 'grande',  tipoNombre: 'Complexión grande',  indice, descripcion: 'Estructura ósea robusta. El peso ideal puede ser hasta un 10 % mayor al estándar.' };
+}
+
+// ─── RESISTENCIA A LA INSULINA (HOMA-IR) ──────────────────────────────────
+export interface HOMAIRResult {
+  homaIR:     number;
+  categoria:  string;
+  riesgo:     'sensible' | 'normal' | 'limite' | 'resistente';
+  descripcion: string;
+  color:      string;
+}
+
+export function calcularHOMAIR(glucosaAyunas: number, insulinaAyunas: number): HOMAIRResult {
+  const homaIR = Math.round((glucosaAyunas * insulinaAyunas) / 405 * 100) / 100;
+  if (homaIR < 1.0) return { homaIR, categoria: 'Alta sensibilidad', riesgo: 'sensible',   color: '#34D399', descripcion: 'Excelente sensibilidad a la insulina. Sin resistencia detectable.' };
+  if (homaIR < 2.0) return { homaIR, categoria: 'Normal',            riesgo: 'normal',     color: '#CAFF00', descripcion: 'Sensibilidad insulínica dentro del rango normal.' };
+  if (homaIR < 3.0) return { homaIR, categoria: 'En límite',         riesgo: 'limite',     color: '#FB923C', descripcion: 'Posible resistencia incipiente. Revise hábitos y consulte a su médico.' };
+  return             { homaIR, categoria: 'Resistencia',         riesgo: 'resistente', color: '#F87171', descripcion: 'Resistencia a la insulina significativa. Consulte a su médico.' };
+}
+
+// ─── SOMATOTIPO ────────────────────────────────────────────────────────────
+export type TipoSomatotipo = 'ectomorfo' | 'mesomorfo' | 'endomorfo' | 'ecto_meso' | 'endo_meso';
+
+export interface SomatotipoResult {
+  tipo:        TipoSomatotipo;
+  tipoNombre:  string;
+  descripcion: string;
+  puntaje:     { ecto: number; meso: number; endo: number };
+  recomendaciones: { dieta: string; entreno: string };
+}
+
+export function calcularSomatotipo(
+  pesoKg:   number,
+  alturaCm: number,
+  munecaCm: number,
+  sexo:     'hombre' | 'mujer',
+): SomatotipoResult {
+  const imc          = pesoKg / ((alturaCm / 100) ** 2);
+  const indiceMuneca = alturaCm / munecaCm;
+  const [frameHi, frameLo] = sexo === 'hombre' ? [10.4, 9.6] : [11.0, 10.1];
+
+  let ecto = 0, meso = 0, endo = 0;
+  if (imc < 18.5)     { ecto += 3; }
+  else if (imc < 20)  { ecto += 2; meso += 1; }
+  else if (imc < 23)  { meso += 3; }
+  else if (imc < 26)  { meso += 1; endo += 2; }
+  else                { endo += 3; }
+
+  if (indiceMuneca > frameHi)       ecto += 2;
+  else if (indiceMuneca >= frameLo) meso += 1;
+  else                              endo += 2;
+
+  const total = (ecto + meso + endo) || 1;
+  const puntaje = {
+    ecto: Math.round(ecto / total * 10) / 10,
+    meso: Math.round(meso / total * 10) / 10,
+    endo: Math.round(endo / total * 10) / 10,
+  };
+
+  if (ecto > meso && ecto > endo)
+    return { tipo: 'ectomorfo',  tipoNombre: 'Ectomorfo',      descripcion: 'Complexión delgada, metabolismo rápido, dificultad para ganar masa muscular.', puntaje, recomendaciones: { dieta: 'Superávit calórico (+300–500 kcal). Alta proteína (2–2.5 g/kg). Carbohidratos abundantes.', entreno: 'Prioriza la fuerza con progresión lineal. Limita el cardio. Descansa suficiente.' } };
+  if (meso > ecto && meso > endo)
+    return { tipo: 'mesomorfo',  tipoNombre: 'Mesomorfo',      descripcion: 'Complexión atlética, responde bien al entrenamiento, mantiene el peso con facilidad.', puntaje, recomendaciones: { dieta: 'Calorías según objetivo. Proteína 1.8–2.2 g/kg. Balance de macros flexible.', entreno: 'Alta versatilidad: combina fuerza, hipertrofia y cardio según tu objetivo.' } };
+  if (endo > ecto && endo > meso)
+    return { tipo: 'endomorfo',  tipoNombre: 'Endomorfo',      descripcion: 'Complexión robusta, tendencia a acumular grasa fácilmente, metabolismo más lento.', puntaje, recomendaciones: { dieta: 'Déficit moderado (–300–500 kcal). Alta proteína. Controla los carbohidratos refinados.', entreno: 'Combina fuerza con HIIT. Alta frecuencia semanal.' } };
+  if (ecto >= meso)
+    return { tipo: 'ecto_meso',  tipoNombre: 'Ecto-Mesomorfo', descripcion: 'Delgado con buena base muscular. Responde bien a la fuerza sin acumular grasa.', puntaje, recomendaciones: { dieta: 'Superávit leve (+200–300 kcal). Proteína 2–2.5 g/kg.', entreno: 'Fuerza con volumen moderado. Mínimo cardio.' } };
+  return   { tipo: 'endo_meso',  tipoNombre: 'Endo-Mesomorfo', descripcion: 'Complexión grande con buena musculatura. Gana fácilmente músculo y grasa.', puntaje, recomendaciones: { dieta: 'Calorías controladas. Alta proteína. Déficit moderado para definir.', entreno: 'Combina fuerza e intervalos. Monitorea la ingesta total.' } };
+}
+
+// ─── RIESGO CARDIOVASCULAR (Framingham simplificado) ──────────────────────
+interface RiesgoCardiovascularParams {
+  edad:         number;
+  sexo:         'hombre' | 'mujer';
+  sistolica:    number;
+  imc:          number;
+  fumador:      boolean;
+  diabetes:     boolean;
+  antecedentes: boolean;
+}
+
+export interface RiesgoCardiovascularResult {
+  riesgo10Anios:  number;
+  categoria:      'bajo' | 'moderado' | 'alto' | 'muy_alto';
+  categoriaNombre: string;
+  color:          string;
+  recomendacion:  string;
+}
+
+export function calcularRiesgoCardiovascular(params: RiesgoCardiovascularParams): RiesgoCardiovascularResult {
+  const { edad, sexo, sistolica, imc, fumador, diabetes, antecedentes } = params;
+
+  let pts = 0;
+  const tablaEdadH: [number, number][] = [[30,0],[35,2],[40,5],[45,7],[50,8],[55,10],[60,11],[65,12],[70,14],[75,15]];
+  const tablaEdadM: [number, number][] = [[30,0],[35,2],[40,4],[45,5],[50,7],[55,8],[60,9],[65,10],[70,11],[75,12]];
+  for (const [e, p] of (sexo === 'hombre' ? tablaEdadH : tablaEdadM)) { if (edad >= e) pts = p; }
+
+  if (imc >= 30) pts += 2; else if (imc >= 25) pts += 1;
+  if (sistolica >= 160) pts += 3; else if (sistolica >= 140) pts += 2; else if (sistolica >= 130) pts += 1; else if (sistolica < 120) pts -= 2;
+  if (fumador)      pts += sexo === 'hombre' ? 4 : 3;
+  if (diabetes)     pts += sexo === 'hombre' ? 3 : 4;
+  if (antecedentes) pts += 2;
+
+  const tablaRH: [number, number][] = [[3,1],[5,2],[7,3],[9,5],[11,8],[13,12],[15,20],[17,31]];
+  const tablaRM: [number, number][] = [[-1,1],[1,2],[3,3],[5,5],[7,7],[9,11],[11,18],[13,27]];
+  let r10 = 1;
+  for (const [p, r] of (sexo === 'hombre' ? tablaRH : tablaRM)) { if (pts >= p) r10 = r; }
+  const riesgo10Anios = Math.min(r10, 40);
+
+  if (riesgo10Anios < 5)  return { riesgo10Anios, categoria: 'bajo',     categoriaNombre: 'Riesgo bajo',     color: '#34D399', recomendacion: 'Mantenga sus hábitos saludables. Control cada 5 años.' };
+  if (riesgo10Anios < 10) return { riesgo10Anios, categoria: 'moderado', categoriaNombre: 'Riesgo moderado', color: '#CAFF00', recomendacion: 'Mejore dieta y actividad física. Control anual recomendado.' };
+  if (riesgo10Anios < 20) return { riesgo10Anios, categoria: 'alto',     categoriaNombre: 'Riesgo alto',     color: '#FB923C', recomendacion: 'Consulte a su médico. Posible necesidad de tratamiento.' };
+  return                    { riesgo10Anios, categoria: 'muy_alto', categoriaNombre: 'Riesgo muy alto', color: '#F87171', recomendacion: 'Atención médica urgente. Tratamiento intensivo recomendado.' };
+}
+
+// ─── ÍNDICE DE ADIPOSIDAD CORPORAL (BAI) ──────────────────────────────────
+export interface BAIResult {
+  bai:       number;
+  categoria: string;
+  riesgo:    'bajo' | 'normal' | 'sobrepeso' | 'obeso';
+  color:     string;
+}
+
+export function calcularBAI(alturaCm: number, caderaCm: number, sexo: 'hombre' | 'mujer'): BAIResult {
+  const bai = Math.round((caderaCm / ((alturaCm / 100) ** 1.5) - 18) * 10) / 10;
+  if (sexo === 'hombre') {
+    if (bai < 8)  return { bai, categoria: 'Bajo peso', riesgo: 'bajo',      color: '#60A5FA' };
+    if (bai < 21) return { bai, categoria: 'Normal',    riesgo: 'normal',    color: '#34D399' };
+    if (bai < 26) return { bai, categoria: 'Sobrepeso', riesgo: 'sobrepeso', color: '#CAFF00' };
+    return               { bai, categoria: 'Obesidad',  riesgo: 'obeso',     color: '#F87171' };
+  } else {
+    if (bai < 21) return { bai, categoria: 'Bajo peso', riesgo: 'bajo',      color: '#60A5FA' };
+    if (bai < 33) return { bai, categoria: 'Normal',    riesgo: 'normal',    color: '#34D399' };
+    if (bai < 39) return { bai, categoria: 'Sobrepeso', riesgo: 'sobrepeso', color: '#CAFF00' };
+    return               { bai, categoria: 'Obesidad',  riesgo: 'obeso',     color: '#F87171' };
+  }
+}
+
+// ─── VOLUMEN DE ENTRENAMIENTO SEMANAL ─────────────────────────────────────
+export type NivelExperiencia = 'principiante' | 'intermedio' | 'avanzado';
+
+export interface GrupoMuscularVolumen {
+  nombre:      string;
+  mev:         number;
+  mrv:         number;
+  recomendado: number;
+}
+
+export interface VolumenEntrenamientoResult {
+  grupos:          GrupoMuscularVolumen[];
+  totalSetsSemana: number;
+  recomendacion:   string;
+}
+
+export function calcularVolumenEntrenamiento(
+  nivel:          NivelExperiencia,
+  diasPorSemana:  number,
+): VolumenEntrenamientoResult {
+  const nivelF: Record<NivelExperiencia, number> = { principiante: 0.7, intermedio: 1.0, avanzado: 1.3 };
+  const factor = nivelF[nivel] * Math.min(1, diasPorSemana / 4);
+
+  const base = [
+    { nombre: 'Pecho',          mevB: 10, mrvB: 20 },
+    { nombre: 'Espalda',        mevB: 10, mrvB: 25 },
+    { nombre: 'Hombros',        mevB:  8, mrvB: 20 },
+    { nombre: 'Bíceps',         mevB:  8, mrvB: 20 },
+    { nombre: 'Tríceps',        mevB:  6, mrvB: 18 },
+    { nombre: 'Cuádriceps',     mevB:  8, mrvB: 20 },
+    { nombre: 'Isquiotibiales', mevB:  6, mrvB: 20 },
+    { nombre: 'Glúteos',        mevB:  4, mrvB: 16 },
+    { nombre: 'Abdominales',    mevB:  6, mrvB: 16 },
+    { nombre: 'Pantorrillas',   mevB:  8, mrvB: 16 },
+  ];
+
+  const grupos = base.map(({ nombre, mevB, mrvB }) => {
+    const mev = Math.max(4, Math.round(mevB * factor));
+    const mrv = Math.max(6, Math.round(mrvB * factor));
+    return { nombre, mev, mrv, recomendado: Math.round((mev + mrv) / 2) };
+  });
+
+  const recMap: Record<NivelExperiencia, string> = {
+    principiante: 'Comienza con el volumen mínimo efectivo (MEV) y auméntalo gradualmente. La consistencia supera al volumen.',
+    intermedio:   'Trabaja entre el MEV y el MRV. Sube el volumen progresivamente cada mesociclo de 4–6 semanas.',
+    avanzado:     'Acércate al MRV en fases de acumulación y alterna con semanas de descarga para optimizar la recuperación.',
+  };
+
+  return { grupos, totalSetsSemana: grupos.reduce((s, g) => s + g.recomendado, 0), recomendacion: recMap[nivel] };
+}
+
 // ─── TIEMPO DE SUEÑO ───────────────────────────────────────────────────────
 export interface CicloSueno {
   horaDormir: string;
