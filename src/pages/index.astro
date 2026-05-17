@@ -193,20 +193,20 @@ const schema = {
 </nav>
 
 <!-- HERO -->
-<section class="hero-grid" style="background: var(--ink);">
-  <div style="padding: 56px 32px; display: flex; flex-direction: column; justify-content: center; gap: 20px;">
-    <p class="anim anim-1" style="font-family: var(--font-mono); font-size: 10px; color: #888; text-transform: uppercase; letter-spacing: 3px;">
+<section class="hero-grid">
+  <div class="hero-left">
+    <p class="anim anim-1" style="font-family: var(--font-mono); font-size: 10px; color: #aaa; text-transform: uppercase; letter-spacing: 3px;">
       Calculadoras de salud · Validadas científicamente
     </p>
     <h1 class="anim anim-2 hero-h1" style="font-family: var(--font-display); line-height: 0.92; color: white;">
       Tu cuerpo /<br><span style="color: var(--acid);">tiene</span> /<br>respuestas.
     </h1>
-    <p class="anim anim-3" style="font-size: 12px; color: #999; font-weight: 300; max-width: 320px; line-height: 1.7;">
+    <p class="anim anim-3" style="font-size: 12px; color: #ccc; font-weight: 300; max-width: 320px; line-height: 1.7;">
       Herramientas de salud precisas y gratuitas. Sin registros, sin publicidad, sin datos almacenados.
     </p>
     <div class="anim anim-4" style="display: flex; gap: 10px; flex-wrap: wrap;">
       <a href="#calculadoras" style="background: var(--acid); color: var(--ink); padding: 12px 24px; font-weight: 600; font-size: 13px; text-decoration: none;">Ver calculadoras</a>
-      <a href="#manifesto" style="background: transparent; border: 1px solid #333; color: #888; padding: 12px 24px; font-size: 13px; text-decoration: none;">Cómo funciona</a>
+      <a href="#manifesto" style="background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #ccc; padding: 12px 24px; font-size: 13px; text-decoration: none;">Cómo funciona</a>
     </div>
   </div>
   <div class="hero-nums" style="background: var(--ink-2); padding: 28px; border-left: 1px solid var(--ink-3); display: flex; flex-direction: column; justify-content: center;">
@@ -232,7 +232,7 @@ const schema = {
 <div style="background: var(--acid); padding: 10px 32px; display: flex; align-items: center; gap: 24px; flex-wrap: wrap;">
   {[
     { num: '100K+', txt: 'Usuarios activos' },
-    { num: '34',    txt: 'Calculadoras gratuitas' },
+    { num: '39',    txt: 'Calculadoras gratuitas' },
     { num: '99.9%', txt: 'Precisión científica' },
     { num: '0',     txt: 'Datos almacenados' },
     { num: 'OMS',   txt: 'Validación internacional' },
@@ -284,7 +284,7 @@ const schema = {
 <section class="cta-section" style="background: var(--acid); padding: 52px 32px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px;">
   <div>
     <h2 style="font-family: var(--font-display); font-size: 58px; color: var(--ink); line-height: 0.95;">Empieza /<br>ahora.</h2>
-    <p style="font-size: 13px; color: #3a3900; margin-top: 8px;">34 calculadoras gratuitas te esperan.</p>
+    <p style="font-size: 13px; color: #3a3900; margin-top: 8px;">39 calculadoras gratuitas te esperan.</p>
   </div>
   <div style="display: flex; gap: 12px; flex-wrap: wrap;">
     <a href="#calculadoras" style="background: var(--ink); color: var(--acid); padding: 14px 28px; font-weight: 600; font-size: 13px; text-decoration: none;">Ver calculadoras</a>
@@ -300,6 +300,19 @@ const schema = {
   /* Hero */
   .hero-grid { display: grid; grid-template-columns: 60% 40%; min-height: 480px; }
   .hero-h1   { font-size: 96px; }
+  .hero-left {
+    padding: 56px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    position: relative;
+    background-image:
+      linear-gradient(rgba(10, 10, 9, 0.72), rgba(10, 10, 9, 0.72)),
+      url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1400&q=80&fit=crop&crop=focalpoint&fp-y=0.3');
+    background-size: cover;
+    background-position: center top;
+  }
 
   /* Calculator grid */
   .calc-grid-3col { display: grid; grid-template-columns: repeat(3, 1fr); }
@@ -316,6 +329,7 @@ const schema = {
     .hero-grid { grid-template-columns: 1fr; }
     .hero-nums { display: none; }
     .hero-h1   { font-size: 62px; }
+    .hero-left { min-height: 420px; background-position: center center; }
     .calc-grid-3col { grid-template-columns: repeat(2, 1fr); }
     .manifesto-grid { grid-template-columns: 1fr; }
     .manifesto-left  { border-right: none; padding-right: 0; border-bottom: 1px solid #222; padding-bottom: 32px; }
