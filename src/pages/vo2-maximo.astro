@@ -4,17 +4,25 @@ import VO2MaxCalculator from '../components/calculators/VO2MaxCalculator';
 ---
 
 <CalculatorLayout
-  title="Calculadora VO2 Máximo Estimado | CalcFit"
-  description="Estima tu VO2 máximo con la fórmula de Uth-Sørensen basada en tu frecuencia cardíaca. Conoce tu nivel de condición cardiovascular."
+  title="Calculadora VO2 Máximo Estimado — Salud Cardiovascular y Longevidad | CalcFit"
+  description="Estima tu VO2 máximo con la fórmula Uth-Sørensen (FC en reposo). El mejor indicador de salud cardiovascular y longevidad. Resultado clasificado por edad y sexo."
   calculatorName="VO2 Máximo Estimado"
   breadcrumbSlug="vo2-maximo"
   ogImage="/og/vo2-maximo.jpg"
+  keywords="calculadora VO2 máximo, consumo máximo oxígeno, condición cardiovascular, VO2max estimado por frecuencia cardíaca, salud cardiovascular fitness"
+  faqs={[
+    { q: '¿Cómo puedo mejorar mi VO2 máximo?', a: 'El entrenamiento de intervalos de alta intensidad (HIIT) es el método más eficaz para aumentar el VO2max. También son efectivos el entrenamiento aeróbico de moderada intensidad realizado de forma consistente, y el entrenamiento en altitud. En principiantes, el VO2max puede mejorar un 15-20% en pocos meses.' },
+    { q: '¿Cómo medir la frecuencia cardíaca en reposo?', a: 'Mídala por la mañana antes de levantarse, tumbado y tras despertar de forma natural. Cuente los latidos durante 60 segundos o 30 segundos y multiplique por 2. Un atleta de élite puede tener FC en reposo de 35-45 lpm; una persona sedentaria, 70-90 lpm.' },
+    { q: '¿Es mejor el VO2max que el IMC como indicador de salud?', a: 'El VO2max es un predictor de mortalidad cardiovascular más potente que el IMC. Investigaciones muestran que una mala condición cardiorrespiratoria es un factor de riesgo de muerte más importante que la obesidad, la hipertensión o el tabaquismo.' },
+    { q: '¿Qué VO2 máximo se considera bueno para mi edad?', a: 'Para hombres de 30–39 años, un VO2max de 45–51 ml/kg/min se considera \'bueno\'; 52–60 es \'excelente\'. Para mujeres del mismo tramo, 38–45 es \'bueno\' y 46–53 es \'excelente\'. El VO2max disminuye aproximadamente un 10% por década a partir de los 30 años en personas sedentarias, pero el ejercicio aeróbico regular puede reducir esta pérdida a la mitad.' },
+    { q: '¿Por qué el VO2 máximo es el mejor predictor de salud?', a: 'Un estudio publicado en JAMA (2018) con 122 000 pacientes demostró que la mala condición cardiorrespiratoria (VO2max bajo) es el mayor predictor de mortalidad, superando al tabaquismo, la hipertensión o la diabetes. Cada incremento de 1 MET (equivalente a 3.5 ml/kg/min de VO2max) se asocia con una reducción del 13% en mortalidad cardiovascular.' },
+  ]}
 >
   <div style="background: var(--ink); padding: 40px 32px 32px;">
     <h1 style="font-family: var(--font-display); font-size: 64px; color: white; line-height: 0.92; margin-bottom: 12px;">
       VO2<br><span style="color: var(--acid);">Máximo</span>
     </h1>
-    <p style="font-size: 13px; color: #666; max-width: 480px; line-height: 1.7;">
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
       El VO2 máximo es el mejor indicador de la salud cardiovascular y la resistencia física. Estima el tuyo a partir de tu frecuencia cardíaca en reposo usando la fórmula de Uth-Sørensen-Overgaard-Pedersen.
     </p>
   </div>
@@ -63,6 +71,8 @@ import VO2MaxCalculator from '../components/calculators/VO2MaxCalculator';
         { q: '¿Cómo puedo mejorar mi VO2 máximo?', a: 'El entrenamiento de intervalos de alta intensidad (HIIT) es el método más eficaz para aumentar el VO2max. También son efectivos el entrenamiento aeróbico de moderada intensidad realizado de forma consistente, y el entrenamiento en altitud. En principiantes, el VO2max puede mejorar un 15-20% en pocos meses.' },
         { q: '¿Cómo medir la frecuencia cardíaca en reposo?', a: 'Mídala por la mañana antes de levantarse, tumbado y tras despertar de forma natural. Cuente los latidos durante 60 segundos o 30 segundos y multiplique por 2. Un atleta de élite puede tener FC en reposo de 35-45 lpm; una persona sedentaria, 70-90 lpm.' },
         { q: '¿Es mejor el VO2max que el IMC como indicador de salud?', a: 'El VO2max es un predictor de mortalidad cardiovascular más potente que el IMC. Investigaciones muestran que una mala condición cardiorrespiratoria es un factor de riesgo de muerte más importante que la obesidad, la hipertensión o el tabaquismo.' },
+        { q: '¿Qué VO2 máximo se considera bueno para mi edad?', a: 'Para hombres de 30–39 años, un VO2max de 45–51 ml/kg/min se considera \'bueno\'; 52–60 es \'excelente\'. Para mujeres del mismo tramo, 38–45 es \'bueno\' y 46–53 es \'excelente\'. El VO2max disminuye aproximadamente un 10% por década a partir de los 30 años en personas sedentarias, pero el ejercicio aeróbico regular puede reducir esta pérdida a la mitad.' },
+        { q: '¿Por qué el VO2 máximo es el mejor predictor de salud?', a: 'Un estudio publicado en JAMA (2018) con 122 000 pacientes demostró que la mala condición cardiorrespiratoria (VO2max bajo) es el mayor predictor de mortalidad, superando al tabaquismo, la hipertensión o la diabetes. Cada incremento de 1 MET (equivalente a 3.5 ml/kg/min de VO2max) se asocia con una reducción del 13% en mortalidad cardiovascular.' },
       ].map(faq => (
         <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
           <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>

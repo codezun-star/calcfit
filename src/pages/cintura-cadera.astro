@@ -4,17 +4,25 @@ import CinturaCaderaCalculator from '../components/calculators/CinturaCaderaCalc
 ---
 
 <CalculatorLayout
-  title="Calculadora Relación Cintura-Cadera | CalcFit"
-  description="Calcula tu relación cintura-cadera gratis. Evalúa tu riesgo cardiovascular según los criterios de la OMS. Resultado inmediato con interpretación."
+  title="Calculadora Cintura-Cadera (RCC) — Riesgo Cardiovascular según OMS | CalcFit"
+  description="Calcula tu relación cintura-cadera (RCC) y evalúa tu riesgo cardiovascular según los criterios de la OMS. Más preciso que el IMC para detectar grasa abdominal peligrosa."
   calculatorName="Relación Cintura-Cadera"
   breadcrumbSlug="cintura-cadera"
   ogImage="/og/cintura-cadera.jpg"
+  keywords="calculadora cintura cadera, relación cintura cadera, RCC OMS, riesgo cardiovascular cintura, grasa abdominal, índice cintura cadera saludable"
+  faqs={[
+    { q: '¿Es mejor la RCC que el IMC?', a: 'Sí, en muchos aspectos. La RCC distingue entre grasa visceral (abdominal, más peligrosa) y grasa subcutánea (glúteo-femoral, menos peligrosa). Una persona puede tener IMC normal pero RCC elevada, lo que indica mayor riesgo cardiovascular.' },
+    { q: '¿Cómo medir correctamente la cintura?', a: 'Mida a la altura del ombligo o en el punto medio entre la última costilla y la cresta ilíaca, al final de una exhalación normal. No aguante la respiración ni meta el abdomen.' },
+    { q: '¿Puedo mejorar mi RCC?', a: 'Sí. El ejercicio aeróbico, especialmente el entrenamiento de intervalos de alta intensidad (HIIT), es especialmente eficaz para reducir la grasa abdominal visceral. Combinado con una dieta equilibrada, puede mejorar significativamente este indicador.' },
+    { q: '¿Cuál es la relación cintura-cadera saludable?', a: 'Según la OMS, el riesgo cardiovascular bajo se asocia con RCC < 0.90 en hombres y < 0.80 en mujeres. Sin embargo, algunos expertos consideran que para mujeres el punto de corte óptimo es < 0.75 para riesgo mínimo. Una RCC ≥ 1.0 en hombres y ≥ 0.85 en mujeres indica riesgo cardiovascular alto.' },
+    { q: '¿Por qué la grasa abdominal es más peligrosa que la de glúteos?', a: 'La grasa abdominal visceral (que rodea los órganos internos) libera ácidos grasos directamente al hígado y produce sustancias inflamatorias (adipokinas) que alteran la sensibilidad a la insulina, elevan el colesterol LDL y aumentan la presión arterial. La grasa glúteo-femoral (cadera y muslos) es metabólicamente más inerte e incluso puede tener efectos protectores.' },
+  ]}
 >
   <div style="background: var(--ink); padding: 40px 32px 32px;">
     <h1 style="font-family: var(--font-display); font-size: 64px; color: white; line-height: 0.92; margin-bottom: 12px;">
       Relación<br><span style="color: var(--acid);">Cintura-Cadera</span>
     </h1>
-    <p style="font-size: 13px; color: #666; max-width: 480px; line-height: 1.7;">
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
       La relación cintura-cadera (RCC) es un indicador validado por la OMS para evaluar la distribución de grasa corporal y el riesgo cardiovascular y metabólico asociado.
     </p>
   </div>
@@ -58,6 +66,8 @@ import CinturaCaderaCalculator from '../components/calculators/CinturaCaderaCalc
         { q: '¿Es mejor la RCC que el IMC?', a: 'Sí, en muchos aspectos. La RCC distingue entre grasa visceral (abdominal, más peligrosa) y grasa subcutánea (glúteo-femoral, menos peligrosa). Una persona puede tener IMC normal pero RCC elevada, lo que indica mayor riesgo cardiovascular.' },
         { q: '¿Cómo medir correctamente la cintura?', a: 'Mida a la altura del ombligo o en el punto medio entre la última costilla y la cresta ilíaca, al final de una exhalación normal. No aguante la respiración ni meta el abdomen.' },
         { q: '¿Puedo mejorar mi RCC?', a: 'Sí. El ejercicio aeróbico, especialmente el entrenamiento de intervalos de alta intensidad (HIIT), es especialmente eficaz para reducir la grasa abdominal visceral. Combinado con una dieta equilibrada, puede mejorar significativamente este indicador.' },
+        { q: '¿Cuál es la relación cintura-cadera saludable?', a: 'Según la OMS, el riesgo cardiovascular bajo se asocia con RCC < 0.90 en hombres y < 0.80 en mujeres. Sin embargo, algunos expertos consideran que para mujeres el punto de corte óptimo es < 0.75 para riesgo mínimo. Una RCC ≥ 1.0 en hombres y ≥ 0.85 en mujeres indica riesgo cardiovascular alto.' },
+        { q: '¿Por qué la grasa abdominal es más peligrosa que la de glúteos?', a: 'La grasa abdominal visceral (que rodea los órganos internos) libera ácidos grasos directamente al hígado y produce sustancias inflamatorias (adipokinas) que alteran la sensibilidad a la insulina, elevan el colesterol LDL y aumentan la presión arterial. La grasa glúteo-femoral (cadera y muslos) es metabólicamente más inerte e incluso puede tener efectos protectores.' },
       ].map(faq => (
         <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
           <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>

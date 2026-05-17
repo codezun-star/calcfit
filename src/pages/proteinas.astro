@@ -4,17 +4,24 @@ import ProteinasCalculator from '../components/calculators/ProteinasCalculator';
 ---
 
 <CalculatorLayout
-  title="Calculadora de Proteínas Diarias — ¿Cuánta Proteína Necesito? | CalcFit"
-  description="Calcula cuánta proteína necesitas al día según tu peso y nivel de actividad. Con equivalencias en alimentos reales."
+  title="Calculadora de Proteínas Diarias — Cuánta Proteína Necesito al Día | CalcFit"
+  description="Calcula tu ingesta diaria de proteínas según tu peso y nivel de actividad. Con rangos de la OMS, ISSN y evidencia científica actualizada. Equivalencias en alimentos reales."
   calculatorName="Proteínas Diarias"
   breadcrumbSlug="proteinas"
   ogImage="/og/proteinas.jpg"
+  keywords="calculadora proteínas diarias, cuánta proteína necesito al día, proteína diaria por kg peso, ingesta proteína OMS, proteína para ganar músculo"
+  faqs={[
+    { q: '¿Cuánta proteína debo comer al día para ganar músculo?', a: 'La International Society of Sports Nutrition (ISSN) recomienda 1.4–2.0 g/kg/día para personas que entrenan con objetivo de ganar músculo. Algunos estudios sugieren que hasta 2.4 g/kg puede ser beneficioso en periodos de restricción calórica para preservar la masa muscular. Más de 3.5 g/kg/día no aporta beneficios adicionales en la mayoría de personas.' },
+    { q: '¿Puedo comer demasiada proteína? ¿Es dañino?', a: 'En personas sanas sin enfermedad renal preexistente, ingestas de hasta 3.5 g/kg/día son seguras según los estudios disponibles. El mito de que la proteína alta daña los riñones sanos no tiene respaldo científico sólido. Sin embargo, un exceso de proteína desplaza otros nutrientes importantes y puede aumentar el gasto energético de la digestión.' },
+    { q: '¿Qué pasa si no consumo suficiente proteína?', a: 'La ingesta insuficiente de proteína causa pérdida de masa muscular (catabolismo), peor recuperación tras el ejercicio, sistema inmune debilitado, cabello y uñas frágiles, y peor cicatrización de heridas. En adultos mayores, la sarcopenia (pérdida de músculo con la edad) se acelera con ingestas bajas de proteína.' },
+    { q: '¿Las proteínas vegetales son tan completas como las animales?', a: 'Las proteínas animales son \'completas\' (contienen todos los aminoácidos esenciales en proporciones adecuadas). Las vegetales suelen ser \'incompletas\' (bajas en uno o más aminoácidos esenciales). Sin embargo, combinando diferentes fuentes vegetales a lo largo del día (legumbres + cereales, por ejemplo) se obtiene un perfil aminoacídico completo. La soja y el garbanzo son las fuentes vegetales más completas.' },
+  ]}
 >
   <div style="background: var(--ink); padding: 40px 32px 32px;">
     <h1 style="font-family: var(--font-display); font-size: 64px; color: white; line-height: 0.92; margin-bottom: 12px;">
       Proteínas<br><span style="color: var(--acid);">Diarias</span>
     </h1>
-    <p style="font-size: 13px; color: #666; max-width: 480px; line-height: 1.7;">
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
       Descubre cuánta proteína necesitas consumir cada día para mantener tu masa muscular, mejorar tu rendimiento o perder grasa.
     </p>
   </div>
@@ -47,5 +54,20 @@ import ProteinasCalculator from '../components/calculators/ProteinasCalculator';
         ))}
       </tbody>
     </table>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {[
+        { q: '¿Cuánta proteína debo comer al día para ganar músculo?', a: 'La International Society of Sports Nutrition (ISSN) recomienda 1.4–2.0 g/kg/día para personas que entrenan con objetivo de ganar músculo. Algunos estudios sugieren que hasta 2.4 g/kg puede ser beneficioso en periodos de restricción calórica para preservar la masa muscular. Más de 3.5 g/kg/día no aporta beneficios adicionales en la mayoría de personas.' },
+        { q: '¿Puedo comer demasiada proteína? ¿Es dañino?', a: 'En personas sanas sin enfermedad renal preexistente, ingestas de hasta 3.5 g/kg/día son seguras según los estudios disponibles. El mito de que la proteína alta daña los riñones sanos no tiene respaldo científico sólido. Sin embargo, un exceso de proteína desplaza otros nutrientes importantes y puede aumentar el gasto energético de la digestión.' },
+        { q: '¿Qué pasa si no consumo suficiente proteína?', a: 'La ingesta insuficiente de proteína causa pérdida de masa muscular (catabolismo), peor recuperación tras el ejercicio, sistema inmune debilitado, cabello y uñas frágiles, y peor cicatrización de heridas. En adultos mayores, la sarcopenia (pérdida de músculo con la edad) se acelera con ingestas bajas de proteína.' },
+        { q: '¿Las proteínas vegetales son tan completas como las animales?', a: 'Las proteínas animales son \'completas\' (contienen todos los aminoácidos esenciales en proporciones adecuadas). Las vegetales suelen ser \'incompletas\' (bajas en uno o más aminoácidos esenciales). Sin embargo, combinando diferentes fuentes vegetales a lo largo del día (legumbres + cereales, por ejemplo) se obtiene un perfil aminoacídico completo. La soja y el garbanzo son las fuentes vegetales más completas.' },
+      ].map((faq) => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
   </div>
 </CalculatorLayout>

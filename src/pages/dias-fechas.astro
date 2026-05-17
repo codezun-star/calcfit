@@ -4,17 +4,24 @@ import DiasFechasCalculator from '../components/calculators/DiasFechasCalculator
 ---
 
 <CalculatorLayout
-  title="Calculadora de Días entre Fechas | CalcFit"
-  description="Calcula los días, semanas, meses y años entre dos fechas cualquiera. Útil para plazos, aniversarios y eventos."
+  title="Calculadora Días entre Fechas — Diferencia Exacta en Días, Semanas y Meses | CalcFit"
+  description="Calcula cuántos días, semanas, meses y años hay entre dos fechas cualquiera. Ideal para plazos legales, aniversarios y eventos. Resultado instantáneo y preciso."
   calculatorName="Días entre Fechas"
   breadcrumbSlug="dias-fechas"
   ogImage="/og/dias-fechas.jpg"
+  keywords="calculadora días entre fechas, diferencia entre dos fechas, cuántos días faltan, días hábiles entre fechas, calcular tiempo entre fechas"
+  faqs={[
+    { q: '¿Cómo se calculan los días entre dos fechas?', a: 'El cálculo convierte ambas fechas a un número de días absoluto desde una fecha de referencia y calcula la diferencia. Los años bisiestos (1 día extra en febrero cada 4 años) se tienen en cuenta automáticamente, por lo que el resultado es exacto independientemente del período.' },
+    { q: '¿Se incluyen los fines de semana en el resultado?', a: 'Esta calculadora cuenta todos los días del calendario, incluyendo sábados, domingos y festivos. Si necesitas calcular solo los días laborables (lunes a viernes), tendrás que restar aproximadamente el 28.6% del total (2 de cada 7 días) como estimación, o usar una herramienta específica de días hábiles.' },
+    { q: '¿Para qué usos sirve calcular los días entre dos fechas?', a: 'Tiene múltiples aplicaciones: calcular plazos legales y procesales, fechas de vencimiento de contratos, tiempo de prescripción de deudas, aniversarios, días de embarazo, tiempo transcurrido desde un evento, vencimiento de garantías, cálculo de intereses financieros y planificación de proyectos.' },
+    { q: '¿La calculadora funciona con fechas muy antiguas o futuras?', a: 'Sí, funciona con cualquier fecha del calendario gregoriano, desde fechas históricas antiguas hasta fechas futuras lejanas. Hay que tener en cuenta que el calendario gregoriano se adoptó en fechas diferentes según el país (España en 1582; algunos países tardaron hasta el siglo XX), por lo que para fechas muy antiguas puede haber discrepancias con registros históricos.' },
+  ]}
 >
   <div style="background: var(--ink); padding: 40px 32px 32px;">
     <h1 style="font-family: var(--font-display); font-size: 64px; color: white; line-height: 0.92; margin-bottom: 12px;">
       Días entre<br><span style="color: var(--acid);">Fechas</span>
     </h1>
-    <p style="font-size: 13px; color: #666; max-width: 480px; line-height: 1.7;">
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
       Calcula la diferencia exacta entre dos fechas en días, semanas, meses y años.
     </p>
   </div>
@@ -22,8 +29,24 @@ import DiasFechasCalculator from '../components/calculators/DiasFechasCalculator
   <DiasFechasCalculator client:load />
 
   <div slot="seo">
-    <p style="font-size: 14px; line-height: 1.7; color: var(--muted);">
-      Esta calculadora determina la diferencia absoluta entre dos fechas. Útil para calcular plazos legales, aniversarios, tiempo hasta un evento, o verificar vencimientos.
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cómo funciona el cálculo de días entre fechas?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 16px;">
+      La calculadora determina la diferencia absoluta entre dos fechas considerando todos los días del calendario, incluyendo años bisiestos. El resultado se expresa en días totales, y también se convierte automáticamente en semanas completas, meses aproximados y años completos.
     </p>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {[
+        { q: '¿Cómo se calculan los días entre dos fechas?', a: 'El cálculo convierte ambas fechas a un número de días absoluto desde una fecha de referencia y calcula la diferencia. Los años bisiestos (1 día extra en febrero cada 4 años) se tienen en cuenta automáticamente, por lo que el resultado es exacto independientemente del período.' },
+        { q: '¿Se incluyen los fines de semana en el resultado?', a: 'Esta calculadora cuenta todos los días del calendario, incluyendo sábados, domingos y festivos. Si necesitas calcular solo los días laborables (lunes a viernes), tendrás que restar aproximadamente el 28.6% del total (2 de cada 7 días) como estimación, o usar una herramienta específica de días hábiles.' },
+        { q: '¿Para qué usos sirve calcular los días entre dos fechas?', a: 'Tiene múltiples aplicaciones: calcular plazos legales y procesales, fechas de vencimiento de contratos, tiempo de prescripción de deudas, aniversarios, días de embarazo, tiempo transcurrido desde un evento, vencimiento de garantías, cálculo de intereses financieros y planificación de proyectos.' },
+        { q: '¿La calculadora funciona con fechas muy antiguas o futuras?', a: 'Sí, funciona con cualquier fecha del calendario gregoriano, desde fechas históricas antiguas hasta fechas futuras lejanas. Hay que tener en cuenta que el calendario gregoriano se adoptó en fechas diferentes según el país (España en 1582; algunos países tardaron hasta el siglo XX), por lo que para fechas muy antiguas puede haber discrepancias con registros históricos.' },
+      ].map((faq) => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
   </div>
 </CalculatorLayout>

@@ -4,11 +4,18 @@ import MetabolismoBasalCalculator from '../components/calculators/MetabolismoBas
 ---
 
 <CalculatorLayout
-  title="Calculadora de Metabolismo Basal (TMB) — Tasa Metabólica en Reposo | CalcFit"
-  description="Calcula tu tasa metabólica basal (TMB) con 3 fórmulas científicas: Mifflin-St Jeor, Harris-Benedict y Schofield. Descubre cuántas calorías quema tu cuerpo en reposo total."
+  title="Calculadora Metabolismo Basal (TMB) — Mifflin, Harris-Benedict y Schofield | CalcFit"
+  description="Calcula tu tasa metabólica basal (TMB) con 3 fórmulas científicas: Mifflin-St Jeor, Harris-Benedict y Schofield OMS. Descubre cuántas calorías quema tu cuerpo en reposo total."
   calculatorName="Metabolismo Basal — TMB"
   breadcrumbSlug="metabolismo-basal"
   ogImage="/og/metabolismo-basal.jpg"
+  keywords="calculadora metabolismo basal, TMB tasa metabólica basal, calorías en reposo, fórmula Mifflin-St Jeor, Harris-Benedict metabolismo"
+  faqs={[
+    { q: '¿Cuántas calorías quema mi cuerpo en reposo absoluto?', a: 'La TMB representa entre el 60 y el 75% del gasto energético total diario. Es la energía que tu cuerpo consume sin hacer ninguna actividad: manteniendo la temperatura corporal, la respiración, el latido cardíaco y los procesos celulares.' },
+    { q: '¿En qué se diferencia la TMB del TDEE?', a: 'La TMB (Tasa Metabólica Basal) es el gasto en reposo absoluto. El TDEE (Total Daily Energy Expenditure) es la TMB multiplicada por un factor de actividad física que va de 1.2 (sedentario) a 1.9 (muy activo). El TDEE representa las calorías totales que necesitas al día.' },
+    { q: '¿Puedo bajar de peso sin saber mi TMB?', a: 'Sí, pero conocer tu TMB te permite calcular un déficit calórico seguro. Nunca debes comer por debajo de tu TMB durante períodos prolongados, ya que esto puede ralentizar el metabolismo y causar pérdida de masa muscular.' },
+    { q: '¿Por qué cada fórmula da un resultado diferente?', a: 'Porque fueron desarrolladas con diferentes grupos de población y metodologías. La fórmula de Mifflin-St Jeor fue validada en 1990 con métodos más modernos y tiende a ser la más precisa. El promedio de las tres reduce el error individual de cada fórmula.' },
+  ]}
 >
   <div style="background: var(--ink); padding: 40px 32px 32px;">
     <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">

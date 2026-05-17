@@ -4,11 +4,18 @@ import IndiceAdipositadCalculator from '../components/calculators/IndiceAdiposit
 ---
 
 <CalculatorLayout
-  title="Calculadora Índice de Adiposidad Corporal (BAI) — Grasa Corporal con Cadera y Altura | CalcFit"
-  description="Calcula tu índice de adiposidad corporal (BAI) usando solo la cadera y la altura, sin necesitar el peso. Alternativa al IMC publicada en la revista Obesity en 2011."
+  title="Calculadora BAI — Índice de Adiposidad Corporal sin Báscula | CalcFit"
+  description="Calcula tu porcentaje de grasa corporal (BAI) con cadera y altura, sin báscula. Fórmula de Bergman (Obesity, 2011). Alternativa al IMC para estimar adiposidad. Gratis."
   calculatorName="Índice de Adiposidad Corporal — BAI"
   breadcrumbSlug="indice-adiposidad"
   ogImage="/og/indice-adiposidad.jpg"
+  keywords="calculadora BAI, índice adiposidad corporal, grasa corporal sin báscula, BAI cadera altura, body adiposity index Bergman"
+  faqs={[
+    { q: '¿Es el BAI más preciso que el IMC?', a: 'El BAI fue diseñado para estimar directamente el porcentaje de grasa corporal sin necesitar báscula. Los estudios muestran que tiene una correlación similar al IMC con la grasa medida por DEXA (la técnica de referencia). Su principal ventaja es que no requiere el peso, útil cuando este dato no está disponible.' },
+    { q: '¿Por qué el BAI usa la cadera y no la cintura?', a: 'La cadera es una medida más estable que la cintura porque varía menos con la digestión, la retención de líquidos o la postura. Además, la circunferencia de cadera en su punto más ancho incluye tanto la grasa glúteo-femoral como la pelvis ósea, siendo un buen proxy de la masa grasa total.' },
+    { q: '¿Puedo usar el BAI en lugar del IMC?', a: 'Son métricas complementarias. El IMC es más universal y tiene mayor evidencia epidemiológica acumulada. El BAI añade valor cuando se sospecha que el IMC puede estar distorsionado (atletas con mucha musculatura, personas muy altas o muy bajas). Lo ideal es usar varias métricas conjuntamente.' },
+    { q: '¿Cómo mido correctamente la circunferencia de la cadera?', a: 'De pie, con los pies juntos y sin ropa que comprima. Pasa la cinta métrica alrededor de la cadera en su punto más ancho (generalmente a la altura de los glúteos). La cinta debe estar horizontal, paralela al suelo, sin comprimir la piel. Toma la medida al final de una espiración normal.' },
+  ]}
 >
   <div style="background: var(--ink); padding: 40px 32px 32px;">
     <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">

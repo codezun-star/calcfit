@@ -4,11 +4,18 @@ import SomatotipoCalculator from '../components/calculators/SomatotipoCalculator
 ---
 
 <CalculatorLayout
-  title="Calculadora de Somatotipo — Soy Ectomorfo, Mesomorfo o Endomorfo | CalcFit"
-  description="Descubre tu somatotipo corporal (ectomorfo, mesomorfo o endomorfo) con la calculadora basada en IMC y complexión. Incluye recomendaciones de dieta y entrenamiento para cada tipo."
+  title="Calculadora Somatotipo — Soy Ectomorfo, Mesomorfo o Endomorfo | CalcFit"
+  description="Descubre tu tipo corporal (ectomorfo, mesomorfo o endomorfo) con la calculadora. Incluye recomendaciones personalizadas de dieta y entrenamiento para cada somatotipo."
   calculatorName="Somatotipo Corporal"
   breadcrumbSlug="somatotipo"
   ogImage="/og/somatotipo.jpg"
+  keywords="calculadora somatotipo, ectomorfo mesomorfo endomorfo, tipo de cuerpo, qué somatotipo soy, somatotipo dieta entrenamiento"
+  faqs={[
+    { q: '¿El somatotipo es fijo o puede cambiar?', a: 'El somatotipo tiene una base genética (estructura ósea, distribución de fibras musculares, tendencia metabólica) que es relativamente estable. Sin embargo, el entrenamiento y la alimentación pueden modificar significativamente la composición corporal. Un endomorfo puede alcanzar un aspecto mesomorfo con entrenamiento consistente y dieta adecuada.' },
+    { q: '¿Para qué me sirve conocer mi somatotipo?', a: 'Te ayuda a entender por qué tu cuerpo responde de una forma determinada al ejercicio y la dieta. Los ectomorfos necesitan más calorías y menos cardio para ganar músculo; los endomorfos se benefician más del cardio y el control calórico; los mesomorfos tienen mayor flexibilidad para adaptarse a diferentes objetivos.' },
+    { q: '¿Puedo ser una combinación de dos somatotipos?', a: 'Sí, la mayoría de personas son combinaciones: ecto-mesomorfo (delgado y muscular), endo-mesomorfo (grande y fuerte), etc. Los somatotipos puros son raros. La calculadora muestra el porcentaje de cada componente para darte una imagen más realista de tu tendencia corporal.' },
+    { q: '¿El somatotipo es lo mismo que el tipo metabólico?', a: 'Son conceptos relacionados pero distintos. El somatotipo describe la forma y composición corporal observable. El tipo metabólico (basal rate, oxidizer type) hace referencia a la velocidad y forma en que el cuerpo metaboliza los macronutrientes. Un ectomorfo típicamente tiene un metabolismo más rápido, pero no siempre.' },
+  ]}
 >
   <div style="background: var(--ink); padding: 40px 32px 32px;">
     <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">

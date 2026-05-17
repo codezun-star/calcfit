@@ -4,11 +4,18 @@ import ResistenciaInsulinaCalculator from '../components/calculators/Resistencia
 ---
 
 <CalculatorLayout
-  title="Calculadora HOMA-IR — Resistencia a la Insulina con Glucosa e Insulina en Ayunas | CalcFit"
-  description="Calcula tu índice HOMA-IR para detectar resistencia a la insulina. Introduce glucosa e insulina en ayunas y obtén tu resultado clasificado según los valores de referencia clínicos."
+  title="Calculadora HOMA-IR — Índice de Resistencia a la Insulina | CalcFit"
+  description="Calcula tu índice HOMA-IR para detectar resistencia a la insulina. Solo necesitas glucosa e insulina en ayunas de tu analítica. Clasificación con valores clínicos de referencia."
   calculatorName="Resistencia a la Insulina — HOMA-IR"
   breadcrumbSlug="resistencia-insulina"
   ogImage="/og/resistencia-insulina.jpg"
+  keywords="calculadora HOMA-IR, resistencia insulina, índice HOMA, glucosa insulina ayunas, prediabetes resistencia a la insulina HOMA"
+  faqs={[
+    { q: '¿Qué es la resistencia a la insulina y por qué importa?', a: 'La resistencia a la insulina ocurre cuando las células no responden bien a la insulina y la glucosa no entra eficientemente a los tejidos. El páncreas compensa produciendo más insulina. Con el tiempo, esto puede derivar en prediabetes, diabetes tipo 2, síndrome metabólico y mayor riesgo cardiovascular.' },
+    { q: '¿Cuándo debo hacerme el análisis de HOMA-IR?', a: 'El análisis requiere sangre extraída en ayunas de al menos 8 horas. Se solicita en el mismo momento que la glucosa basal habitual. Si tienes sobrepeso, antecedentes familiares de diabetes, síndrome de ovario poliquístico o acantosis nigricans (zonas de piel oscurecida), consulta a tu médico para incluirlo en tu analítica anual.' },
+    { q: '¿Cómo se puede mejorar el HOMA-IR?', a: 'Las intervenciones más efectivas son: actividad física regular (especialmente ejercicio de fuerza y HIIT), reducción de azúcares simples y carbohidratos refinados, pérdida de grasa corporal (especialmente visceral), mejora del sueño y reducción del estrés crónico. Algunos fármacos como la metformina también mejoran la sensibilidad insulínica.' },
+    { q: '¿HOMA-IR > 2.5 significa que tengo diabetes?', a: 'No necesariamente. Un HOMA-IR elevado indica resistencia a la insulina, que es un precursor de la diabetes tipo 2, pero no equivale a un diagnóstico de diabetes. Para diagnosticar diabetes se necesita glucosa en ayunas ≥ 126 mg/dL, hemoglobina glucosilada (HbA1c) ≥ 6.5% o prueba de tolerancia a la glucosa alterada.' },
+  ]}
 >
   <div style="background: var(--ink); padding: 40px 32px 32px;">
     <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">

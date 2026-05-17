@@ -10,22 +10,65 @@ interface Props {
   schema?: object;
   calculatorName: string;
   breadcrumbSlug: string;
+  keywords?: string;
+  faqs?: Array<{ q: string; a: string }>;
+  dateModified?: string;
 }
 
-const { title, description, ogImage, schema, calculatorName, breadcrumbSlug } = Astro.props;
+const {
+  title,
+  description,
+  ogImage,
+  schema,
+  calculatorName,
+  breadcrumbSlug,
+  keywords,
+  faqs,
+  dateModified = '2026-05-16',
+} = Astro.props;
 
-const medicalSchema = schema ?? {
-  '@context': 'https://schema.org',
+const pageUrl = `https://www.calcfit.com/${breadcrumbSlug}`;
+
+const medicalContent = schema ?? {
   '@type': 'MedicalWebContent',
   name: calculatorName,
   description,
-  url: `https://www.calcfit.com/${breadcrumbSlug}`,
+  url: pageUrl,
+  inLanguage: 'es',
   audience: { '@type': 'Patient' },
-  lastReviewed: '2026-01-01',
+  lastReviewed: dateModified,
+  dateModified,
+  publisher: {
+    '@type': 'Organization',
+    name: 'CalcFit',
+    url: 'https://www.calcfit.com',
+  },
 };
+
+const breadcrumbSchema = {
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://www.calcfit.com' },
+    { '@type': 'ListItem', position: 2, name: calculatorName, item: pageUrl },
+  ],
+};
+
+const faqSchema = faqs && faqs.length > 0
+  ? {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map((faq) => ({
+        '@type': 'Question',
+        name: faq.q,
+        acceptedAnswer: { '@type': 'Answer', text: faq.a },
+      })),
+    }
+  : null;
+
+const graphItems = [medicalContent, breadcrumbSchema, ...(faqSchema ? [faqSchema] : [])];
+const combinedSchema = { '@context': 'https://schema.org', '@graph': graphItems };
 ---
 
-<Base title={title} description={description} ogImage={ogImage} schema={medicalSchema}>
+<Base title={title} description={description} keywords={keywords} ogImage={ogImage} schema={combinedSchema}>
   <Navbar />
 
   <!-- Breadcrumb -->

@@ -4,17 +4,25 @@ import RitmoCarreraCalculator from '../components/calculators/RitmoCarreraCalcul
 ---
 
 <CalculatorLayout
-  title="Calculadora Ritmo de Carrera (Pace) | CalcFit"
-  description="Calcula tu ritmo de carrera por kilómetro y por milla. Obtén proyecciones de tiempo para 5K, 10K, media maratón y maratón."
+  title="Calculadora Ritmo de Carrera (Pace) — Proyecciones 5K, 10K, Maratón | CalcFit"
+  description="Calcula tu ritmo de carrera (pace) por km y milla. Obtén proyecciones para 5K, 10K, media maratón y maratón completa. Ideal para planificar tus entrenamientos. Gratis."
   calculatorName="Calculadora Ritmo de Carrera"
   breadcrumbSlug="ritmo-carrera"
   ogImage="/og/ritmo-carrera.jpg"
+  keywords="calculadora pace carrera, ritmo carrera kilómetro, pace corriendo, proyección tiempo maratón, calculadora running tiempo distancia"
+  faqs={[
+    { q: '¿Cómo mejorar el pace de carrera?', a: 'La combinación de entrenamiento de intervalos (series cortas a alta intensidad), rodajes largos a ritmo cómodo y trabajo de fuerza es la estrategia más efectiva. También importa la periodización: alterna semanas de carga con semanas de recuperación.' },
+    { q: '¿Qué es el umbral de lactato y por qué importa?', a: 'Es la intensidad a la que el lactato empieza a acumularse en sangre más rápido de lo que se elimina. Entrenar justo por debajo de este umbral (tempo runs) es una de las formas más eficaces de mejorar la resistencia y reducir el pace en carreras largas.' },
+    { q: '¿Es mejor entrenar por pace o por frecuencia cardíaca?', a: 'Depende del objetivo. Para principiantes y rodajes base, la FC es más útil porque neutraliza el efecto del calor, la fatiga acumulada o el terreno. Para entrenamientos específicos de competición, el pace ofrece objetivos más precisos.' },
+    { q: '¿Cuál es un buen pace para principiantes?', a: 'Para alguien que empieza a correr, un pace de 7:00–8:30 min/km es razonable: permite mantener una conversación (zona 2 de FC) y desarrollar la base aeróbica sin lesionarse. Lo más importante es poder correr durante 20–30 minutos sin parar, independientemente del pace. Con 3–4 meses de entrenamiento consistente, muchos principiantes llegan a pace de 6:00–7:00 min/km.' },
+    { q: '¿Cómo se convierte el pace de km a millas?', a: '1 kilómetro = 0.6214 millas. Para convertir pace de min/km a min/milla, divide el pace (en segundos) entre 0.6214. Por ejemplo, un pace de 5:00 min/km = 300 segundos ÷ 0.6214 = 483 segundos = 8:03 min/milla. Esta calculadora muestra automáticamente ambos valores.' },
+  ]}
 >
   <div style="background: var(--ink); padding: 40px 32px 32px;">
     <h1 style="font-family: var(--font-display); font-size: 64px; color: white; line-height: 0.92; margin-bottom: 12px;">
       Ritmo de<br><span style="color: var(--acid);">Carrera</span>
     </h1>
-    <p style="font-size: 13px; color: #666; max-width: 480px; line-height: 1.7;">
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
       Introduce la distancia recorrida y el tiempo empleado para calcular tu pace (ritmo por kilómetro y por milla), velocidad y tiempos proyectados para las distancias de referencia.
     </p>
   </div>
@@ -61,6 +69,8 @@ import RitmoCarreraCalculator from '../components/calculators/RitmoCarreraCalcul
         { q: '¿Cómo mejorar el pace de carrera?', a: 'La combinación de entrenamiento de intervalos (series cortas a alta intensidad), rodajes largos a ritmo cómodo y trabajo de fuerza es la estrategia más efectiva. También importa la periodización: alterna semanas de carga con semanas de recuperación.' },
         { q: '¿Qué es el umbral de lactato y por qué importa?', a: 'Es la intensidad a la que el lactato empieza a acumularse en sangre más rápido de lo que se elimina. Entrenar justo por debajo de este umbral (tempo runs) es una de las formas más eficaces de mejorar la resistencia y reducir el pace en carreras largas.' },
         { q: '¿Es mejor entrenar por pace o por frecuencia cardíaca?', a: 'Depende del objetivo. Para principiantes y rodajes base, la FC es más útil porque neutraliza el efecto del calor, la fatiga acumulada o el terreno. Para entrenamientos específicos de competición, el pace ofrece objetivos más precisos.' },
+        { q: '¿Cuál es un buen pace para principiantes?', a: 'Para alguien que empieza a correr, un pace de 7:00–8:30 min/km es razonable: permite mantener una conversación (zona 2 de FC) y desarrollar la base aeróbica sin lesionarse. Lo más importante es poder correr durante 20–30 minutos sin parar, independientemente del pace. Con 3–4 meses de entrenamiento consistente, muchos principiantes llegan a pace de 6:00–7:00 min/km.' },
+        { q: '¿Cómo se convierte el pace de km a millas?', a: '1 kilómetro = 0.6214 millas. Para convertir pace de min/km a min/milla, divide el pace (en segundos) entre 0.6214. Por ejemplo, un pace de 5:00 min/km = 300 segundos ÷ 0.6214 = 483 segundos = 8:03 min/milla. Esta calculadora muestra automáticamente ambos valores.' },
       ].map(faq => (
         <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
           <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>

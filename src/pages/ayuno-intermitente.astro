@@ -4,17 +4,25 @@ import AyunoCalculator from '../components/calculators/AyunoCalculator';
 ---
 
 <CalculatorLayout
-  title="Calculadora Ayuno Intermitente — Ventana de Comida | CalcFit"
-  description="Calcula tu ventana de ayuno intermitente para los protocolos 14:10, 16:8, 18:6 y 20:4. Conoce tus horas de comida y ayuno exactas."
+  title="Calculadora Ayuno Intermitente — Ventana Horaria 16:8, 18:6 y más | CalcFit"
+  description="Calcula tu ventana de alimentación y ayuno para los protocolos 14:10, 16:8, 18:6 y 20:4. Sabe exactamente a qué hora comer y comenzar tu ayuno cada día. Gratis."
   calculatorName="Calculadora Ayuno Intermitente"
   breadcrumbSlug="ayuno-intermitente"
   ogImage="/og/ayuno-intermitente.jpg"
+  keywords="calculadora ayuno intermitente, horario ayuno 16 8, ventana alimentación, protocolo ayuno intermitente, cuándo comer ayuno, 16 horas ayuno"
+  faqs={[
+    { q: '¿Qué puedo consumir durante el ayuno?', a: 'Agua, té, café sin azúcar ni leche y caldos sin calorías no rompen el ayuno. Cualquier alimento o bebida con calorías (incluidos los edulcorantes artificiales en algunos protocolos) finaliza el período de ayuno. El objetivo es mantener los niveles de insulina bajos.' },
+    { q: '¿Qué es la autofagia y cuándo ocurre?', a: 'La autofagia es el proceso celular por el que el organismo "recicla" células dañadas y desechos celulares. Comienza a activarse después de 12-16 horas de ayuno y se maximiza en torno a las 24-72 horas. Es uno de los principales mecanismos de los beneficios del ayuno a largo plazo.' },
+    { q: '¿El ayuno intermitente es seguro para todos?', a: 'No es adecuado para embarazadas, personas con historial de trastornos alimentarios, diabetes tipo 1 insulino-dependiente o en tratamiento con fármacos que requieren ingesta de alimentos. Las personas con enfermedades crónicas deben consultar a su médico antes de comenzar.' },
+    { q: '¿Cuál es el mejor protocolo de ayuno intermitente para principiantes?', a: 'El 14:10 o el 16:8 son los más recomendados para empezar. El 16:8 es el más estudiado: asociado a mejoras en la sensibilidad a la insulina, reducción de peso y marcadores inflamatorios con bajo nivel de dificultad. La clave es que la ventana de ayuno incluya las horas de sueño, lo que lo hace más fácil de mantener.' },
+    { q: '¿El ayuno intermitente es efectivo para perder peso?', a: 'Los estudios muestran que el ayuno intermitente produce pérdidas de peso similares a la restricción calórica continua cuando las calorías totales son equivalentes. Su principal ventaja es que reduce el hambre al limitar las horas de ingesta, lo que facilita el déficit calórico sin contar calorías activamente. No es superior a otras estrategias si el total calórico es el mismo.' },
+  ]}
 >
   <div style="background: var(--ink); padding: 40px 32px 32px;">
     <h1 style="font-family: var(--font-display); font-size: 64px; color: white; line-height: 0.92; margin-bottom: 12px;">
       Ayuno<br><span style="color: var(--acid);">Intermitente</span>
     </h1>
-    <p style="font-size: 13px; color: #666; max-width: 480px; line-height: 1.7;">
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
       Calcula tu ventana de alimentación y ayuno según el protocolo que elijas. Desde el accesible 14:10 para principiantes hasta el exigente 20:4 para usuarios avanzados.
     </p>
   </div>
@@ -50,6 +58,8 @@ import AyunoCalculator from '../components/calculators/AyunoCalculator';
         { q: '¿Qué puedo consumir durante el ayuno?', a: 'Agua, té, café sin azúcar ni leche y caldos sin calorías no rompen el ayuno. Cualquier alimento o bebida con calorías (incluidos los edulcorantes artificiales en algunos protocolos) finaliza el período de ayuno. El objetivo es mantener los niveles de insulina bajos.' },
         { q: '¿Qué es la autofagia y cuándo ocurre?', a: 'La autofagia es el proceso celular por el que el organismo "recicla" células dañadas y desechos celulares. Comienza a activarse después de 12-16 horas de ayuno y se maximiza en torno a las 24-72 horas. Es uno de los principales mecanismos de los beneficios del ayuno a largo plazo.' },
         { q: '¿El ayuno intermitente es seguro para todos?', a: 'No es adecuado para embarazadas, personas con historial de trastornos alimentarios, diabetes tipo 1 insulino-dependiente o en tratamiento con fármacos que requieren ingesta de alimentos. Las personas con enfermedades crónicas deben consultar a su médico antes de comenzar.' },
+        { q: '¿Cuál es el mejor protocolo de ayuno intermitente para principiantes?', a: 'El 14:10 o el 16:8 son los más recomendados para empezar. El 16:8 es el más estudiado: asociado a mejoras en la sensibilidad a la insulina, reducción de peso y marcadores inflamatorios con bajo nivel de dificultad. La clave es que la ventana de ayuno incluya las horas de sueño, lo que lo hace más fácil de mantener.' },
+        { q: '¿El ayuno intermitente es efectivo para perder peso?', a: 'Los estudios muestran que el ayuno intermitente produce pérdidas de peso similares a la restricción calórica continua cuando las calorías totales son equivalentes. Su principal ventaja es que reduce el hambre al limitar las horas de ingesta, lo que facilita el déficit calórico sin contar calorías activamente. No es superior a otras estrategias si el total calórico es el mismo.' },
       ].map(faq => (
         <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
           <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>

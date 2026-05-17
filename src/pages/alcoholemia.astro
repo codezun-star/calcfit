@@ -4,17 +4,25 @@ import AlcoholemiaCalculator from '../components/calculators/AlcoholemiaCalculat
 ---
 
 <CalculatorLayout
-  title="Calculadora de Alcoholemia | CalcFit"
-  description="Calcula tu tasa de alcoholemia orientativa con la fórmula de Widmark. Herramienta de concienciación. No conduzca bajo los efectos del alcohol."
+  title="Calculadora de Alcoholemia — Tasa de Alcohol en Sangre con Fórmula Widmark | CalcFit"
+  description="Estima tu nivel de alcohol en sangre con la fórmula de Widmark. Incluye efectos por nivel, tiempo hasta sobriedad y límite legal. Herramienta de concienciación. No para conducir."
   calculatorName="Calculadora de Alcoholemia"
   breadcrumbSlug="alcoholemia"
   ogImage="/og/alcoholemia.jpg"
+  keywords="calculadora alcoholemia, tasa alcohol en sangre, fórmula Widmark, cuándo puedo conducir, límite alcohol conducción, gramos litro alcohol sangre"
+  faqs={[
+    { q: '¿Por qué las mujeres tienen mayor alcoholemia que los hombres con la misma cantidad?', a: 'Las mujeres tienen menor proporción de agua corporal (constante r = 0.55 vs 0.68 en hombres), por lo que el alcohol se diluye menos. También tienen menor actividad de la enzima alcohol-deshidrogenasa en el estómago, absorbiendo más alcohol antes de que llegue al torrente sanguíneo.' },
+    { q: '¿Cuánto tiempo tarda el cuerpo en eliminar el alcohol?', a: 'El hígado elimina aproximadamente 0.10–0.15 g/L por hora. No hay forma de acelerar este proceso: el café, el ejercicio o el agua fría no reducen la alcoholemia. Solo el tiempo lo hace.' },
+    { q: '¿Es fiable esta calculadora para decidir si conducir?', a: 'No. Esta calculadora es orientativa y no debe usarse para decidir conducir. Hay gran variabilidad individual: factores como el estado de ánimo, el cansancio, la medicación, el nivel de tolerancia y si se ha comido afectan enormemente la respuesta al alcohol.' },
+    { q: '¿Cuál es el límite legal de alcoholemia en Latinoamérica?', a: 'Varía por país. En México el límite general es 0.8 g/L (0.4 g/L para conductores de transporte público). En Argentina: 0.5 g/L (tolerancia cero para conductores profesionales). En Colombia: 0.4 g/L. En Chile: 0.3 g/L (tolerancia cero para conductores profesionales y menores de 18). En España: 0.5 g/L (0.3 g/L para conductores noveles). Siempre verifica la legislación local vigente.' },
+    { q: '¿Hay forma de eliminar el alcohol del cuerpo más rápido?', a: 'No. El mito del café, la ducha fría o el ejercicio para \'bajar\' la alcoholemia es falso. El hígado elimina el alcohol a una tasa fija de aproximadamente 0.10–0.15 g/L por hora y ninguna sustancia acelera este proceso de forma significativa. El tiempo es la única forma de reducir la alcoholemia.' },
+  ]}
 >
   <div style="background: var(--ink); padding: 40px 32px 32px;">
     <h1 style="font-family: var(--font-display); font-size: 64px; color: white; line-height: 0.92; margin-bottom: 12px;">
       Calculadora de<br><span style="color: var(--acid);">Alcoholemia</span>
     </h1>
-    <p style="font-size: 13px; color: #666; max-width: 480px; line-height: 1.7;">
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
       Herramienta orientativa basada en la fórmula de Widmark para estimar la tasa de alcohol en sangre. Diseñada para concienciación, no para tomar decisiones de conducción.
     </p>
   </div>
@@ -60,6 +68,8 @@ import AlcoholemiaCalculator from '../components/calculators/AlcoholemiaCalculat
         { q: '¿Por qué las mujeres tienen mayor alcoholemia que los hombres con la misma cantidad?', a: 'Las mujeres tienen menor proporción de agua corporal (constante r = 0.55 vs 0.68 en hombres), por lo que el alcohol se diluye menos. También tienen menor actividad de la enzima alcohol-deshidrogenasa en el estómago, absorbiendo más alcohol antes de que llegue al torrente sanguíneo.' },
         { q: '¿Cuánto tiempo tarda el cuerpo en eliminar el alcohol?', a: 'El hígado elimina aproximadamente 0.10–0.15 g/L por hora. No hay forma de acelerar este proceso: el café, el ejercicio o el agua fría no reducen la alcoholemia. Solo el tiempo lo hace.' },
         { q: '¿Es fiable esta calculadora para decidir si conducir?', a: 'No. Esta calculadora es orientativa y no debe usarse para decidir conducir. Hay gran variabilidad individual: factores como el estado de ánimo, el cansancio, la medicación, el nivel de tolerancia y si se ha comido afectan enormemente la respuesta al alcohol.' },
+        { q: '¿Cuál es el límite legal de alcoholemia en Latinoamérica?', a: 'Varía por país. En México el límite general es 0.8 g/L (0.4 g/L para conductores de transporte público). En Argentina: 0.5 g/L (tolerancia cero para conductores profesionales). En Colombia: 0.4 g/L. En Chile: 0.3 g/L (tolerancia cero para conductores profesionales y menores de 18). En España: 0.5 g/L (0.3 g/L para conductores noveles). Siempre verifica la legislación local vigente.' },
+        { q: '¿Hay forma de eliminar el alcohol del cuerpo más rápido?', a: 'No. El mito del café, la ducha fría o el ejercicio para \'bajar\' la alcoholemia es falso. El hígado elimina el alcohol a una tasa fija de aproximadamente 0.10–0.15 g/L por hora y ninguna sustancia acelera este proceso de forma significativa. El tiempo es la única forma de reducir la alcoholemia.' },
       ].map(faq => (
         <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
           <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>

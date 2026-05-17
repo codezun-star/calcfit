@@ -4,17 +4,25 @@ import PresionArterialCalculator from '../components/calculators/PresionArterial
 ---
 
 <CalculatorLayout
-  title="Clasificador de Presión Arterial | CalcFit"
-  description="Clasifica tu presión arterial según los criterios AHA/ACC 2017. Sabe si tienes hipertensión, presión normal o elevada con una sola medición."
+  title="Calculadora Presión Arterial — Clasificación Hipertensión según AHA 2017 | CalcFit"
+  description="Clasifica tu presión arterial (tensión) con las guías AHA/ACC 2017. Ingresa sistólica y diastólica y sabe si tienes hipertensión, presión elevada o normal. Gratis."
   calculatorName="Clasificador de Presión Arterial"
   breadcrumbSlug="presion-arterial"
   ogImage="/og/presion-arterial.jpg"
+  keywords="calculadora presión arterial, tensión arterial normal, hipertensión valores, presión arterial alta mmHg, sistólica diastólica clasificación AHA"
+  faqs={[
+    { q: '¿Cuándo debo consultar a mi médico?', a: 'Si su presión supera 140/90 mmHg en dos mediciones separadas, si obtiene una lectura superior a 180/120 mmHg (crisis), o si tiene síntomas como dolor de cabeza severo, visión borrosa o dificultad para respirar. La hipertensión sostenida sin tratar aumenta el riesgo de infarto, ictus e insuficiencia renal.' },
+    { q: '¿Por qué varía la presión arterial durante el día?', a: 'Es normal que fluctúe. Factores como el ejercicio, el estrés, la cafeína, el tabaco o la posición corporal la elevan temporalmente. Por eso se recomienda medirla en reposo, sentado, por las mañanas antes de tomar medicación, y tomar varias mediciones.' },
+    { q: '¿Qué son los factores de riesgo para la hipertensión?', a: 'Edad avanzada, obesidad, sedentarismo, dieta alta en sodio, consumo excesivo de alcohol, tabaquismo, estrés crónico, antecedentes familiares y apnea del sueño. La hipertensión afecta al 30-45% de la población adulta y muchos desconocen que la padecen.' },
+    { q: '¿Cuál es la presión arterial normal en adultos?', a: 'Según las guías AHA/ACC 2017, la presión normal es sistólica < 120 mmHg y diastólica < 80 mmHg. La presión \'elevada\' (no aún hipertensión) es 120–129/< 80. La hipertensión comienza a partir de 130/80. Los valores previos (antes de 2017) definían el inicio de la hipertensión en 140/90.' },
+    { q: '¿Qué diferencia hay entre hipertensión grado 1 y grado 2?', a: 'Hipertensión grado 1: sistólica 130–139 o diastólica 80–89 mmHg. Requiere cambios en el estilo de vida (dieta DASH, reducción de sodio, ejercicio regular, pérdida de peso si sobrepeso). La medicación se considera si hay factores de riesgo cardiovascular elevados. Hipertensión grado 2: ≥ 140/90 mmHg. Requiere tratamiento farmacológico junto con cambios en el estilo de vida.' },
+  ]}
 >
   <div style="background: var(--ink); padding: 40px 32px 32px;">
     <h1 style="font-family: var(--font-display); font-size: 64px; color: white; line-height: 0.92; margin-bottom: 12px;">
       Presión<br><span style="color: var(--acid);">Arterial</span>
     </h1>
-    <p style="font-size: 13px; color: #666; max-width: 480px; line-height: 1.7;">
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
       Introduce tus valores de presión sistólica y diastólica para clasificarlos según las guías de la American Heart Association (AHA) y el American College of Cardiology (ACC) de 2017.
     </p>
   </div>
@@ -60,6 +68,8 @@ import PresionArterialCalculator from '../components/calculators/PresionArterial
         { q: '¿Cuándo debo consultar a mi médico?', a: 'Si su presión supera 140/90 mmHg en dos mediciones separadas, si obtiene una lectura superior a 180/120 mmHg (crisis), o si tiene síntomas como dolor de cabeza severo, visión borrosa o dificultad para respirar. La hipertensión sostenida sin tratar aumenta el riesgo de infarto, ictus e insuficiencia renal.' },
         { q: '¿Por qué varía la presión arterial durante el día?', a: 'Es normal que fluctúe. Factores como el ejercicio, el estrés, la cafeína, el tabaco o la posición corporal la elevan temporalmente. Por eso se recomienda medirla en reposo, sentado, por las mañanas antes de tomar medicación, y tomar varias mediciones.' },
         { q: '¿Qué son los factores de riesgo para la hipertensión?', a: 'Edad avanzada, obesidad, sedentarismo, dieta alta en sodio, consumo excesivo de alcohol, tabaquismo, estrés crónico, antecedentes familiares y apnea del sueño. La hipertensión afecta al 30-45% de la población adulta y muchos desconocen que la padecen.' },
+        { q: '¿Cuál es la presión arterial normal en adultos?', a: 'Según las guías AHA/ACC 2017, la presión normal es sistólica < 120 mmHg y diastólica < 80 mmHg. La presión \'elevada\' (no aún hipertensión) es 120–129/< 80. La hipertensión comienza a partir de 130/80. Los valores previos (antes de 2017) definían el inicio de la hipertensión en 140/90.' },
+        { q: '¿Qué diferencia hay entre hipertensión grado 1 y grado 2?', a: 'Hipertensión grado 1: sistólica 130–139 o diastólica 80–89 mmHg. Requiere cambios en el estilo de vida (dieta DASH, reducción de sodio, ejercicio regular, pérdida de peso si sobrepeso). La medicación se considera si hay factores de riesgo cardiovascular elevados. Hipertensión grado 2: ≥ 140/90 mmHg. Requiere tratamiento farmacológico junto con cambios en el estilo de vida.' },
       ].map(faq => (
         <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
           <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>

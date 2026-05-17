@@ -4,17 +4,24 @@ import EmbarazoCalculator from '../components/calculators/EmbarazoCalculator';
 ---
 
 <CalculatorLayout
-  title="Calculadora de Semana de Embarazo | CalcFit"
-  description="Calcula en qué semana de embarazo estás y tu trimestre. Solo necesitas la fecha de tu última menstruación."
+  title="Calculadora Semana de Embarazo — En Qué Semana Gestacional Estoy | CalcFit"
+  description="Calcula en qué semana de embarazo estás y en qué trimestre. Solo necesitas la fecha de tu última menstruación. Incluye fecha probable de parto. Gratis y al instante."
   calculatorName="Semana de Embarazo"
   breadcrumbSlug="semana-embarazo"
   ogImage="/og/embarazo.jpg"
+  keywords="calculadora semana embarazo, semana gestacional, en qué semana de embarazo estoy, semanas de gestación, trimestre del embarazo"
+  faqs={[
+    { q: '¿Cómo se cuentan las semanas de embarazo?', a: 'Las semanas de embarazo se cuentan desde el primer día de la última menstruación (FUM), no desde la concepción. Esto significa que al momento de la concepción (aproximadamente 2 semanas después de la FUM) ya se están \'en la semana 2\'. Por eso un embarazo de 40 semanas equivale a aproximadamente 38 semanas desde la fecundación.' },
+    { q: '¿Cuándo puedo detectar el embarazo con un test?', a: 'Los tests de embarazo caseros detectan la hormona hCG en orina. El nivel de hCG es detectable aproximadamente en la semana 4 gestacional (2 semanas después de la concepción). Los tests más sensibles pueden dar positivo desde el primer día del retraso menstrual. Las pruebas de sangre (beta-hCG) pueden detectarlo incluso antes (semana 3-4).' },
+    { q: '¿Cuándo comienza exactamente cada trimestre del embarazo?', a: 'Primer trimestre: semanas 1–12 (órganos principales). Segundo trimestre: semanas 13–26 (movimientos fetales, desarrollo sensorial). Tercer trimestre: semanas 27–40 (crecimiento rápido, maduración pulmonar). El parto prematuro se define antes de la semana 37; prematuro extremo antes de la semana 28.' },
+    { q: '¿Qué ocurre si mi ciclo menstrual es muy irregular?', a: 'Si tu ciclo es muy irregular, la fecha calculada puede tener un margen de error mayor. En ese caso, la ecografía de primer trimestre (entre las semanas 11 y 13) es el método más preciso para datar el embarazo y estimar la fecha de parto, ya que el tamaño del embrión en esas semanas varía muy poco entre individuos.' },
+  ]}
 >
   <div style="background: var(--ink); padding: 40px 32px 32px;">
     <h1 style="font-family: var(--font-display); font-size: 64px; color: white; line-height: 0.92; margin-bottom: 12px;">
       Semana de<br><span style="color: var(--acid);">Embarazo</span>
     </h1>
-    <p style="font-size: 13px; color: #666; max-width: 480px; line-height: 1.7;">
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
       Calcula tu semana gestacional exacta y en qué trimestre te encuentras. También te indicamos la fecha probable de parto.
     </p>
   </div>
@@ -45,5 +52,20 @@ import EmbarazoCalculator from '../components/calculators/EmbarazoCalculator';
         ))}
       </tbody>
     </table>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {[
+        { q: '¿Cómo se cuentan las semanas de embarazo?', a: 'Las semanas de embarazo se cuentan desde el primer día de la última menstruación (FUM), no desde la concepción. Esto significa que al momento de la concepción (aproximadamente 2 semanas después de la FUM) ya se están \'en la semana 2\'. Por eso un embarazo de 40 semanas equivale a aproximadamente 38 semanas desde la fecundación.' },
+        { q: '¿Cuándo puedo detectar el embarazo con un test?', a: 'Los tests de embarazo caseros detectan la hormona hCG en orina. El nivel de hCG es detectable aproximadamente en la semana 4 gestacional (2 semanas después de la concepción). Los tests más sensibles pueden dar positivo desde el primer día del retraso menstrual. Las pruebas de sangre (beta-hCG) pueden detectarlo incluso antes (semana 3-4).' },
+        { q: '¿Cuándo comienza exactamente cada trimestre del embarazo?', a: 'Primer trimestre: semanas 1–12 (órganos principales). Segundo trimestre: semanas 13–26 (movimientos fetales, desarrollo sensorial). Tercer trimestre: semanas 27–40 (crecimiento rápido, maduración pulmonar). El parto prematuro se define antes de la semana 37; prematuro extremo antes de la semana 28.' },
+        { q: '¿Qué ocurre si mi ciclo menstrual es muy irregular?', a: 'Si tu ciclo es muy irregular, la fecha calculada puede tener un margen de error mayor. En ese caso, la ecografía de primer trimestre (entre las semanas 11 y 13) es el método más preciso para datar el embarazo y estimar la fecha de parto, ya que el tamaño del embrión en esas semanas varía muy poco entre individuos.' },
+      ].map((faq) => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
   </div>
 </CalculatorLayout>

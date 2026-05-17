@@ -4,17 +4,24 @@ import EdadCalculator from '../components/calculators/EdadCalculator';
 ---
 
 <CalculatorLayout
-  title="Calculadora de Edad Exacta en Años, Meses y Días | CalcFit"
-  description="Calcula tu edad exacta en años, meses, días y horas. También te dice cuántos días faltan para tu próximo cumpleaños."
+  title="Calculadora de Edad Exacta — Años, Meses, Días y Próximo Cumpleaños | CalcFit"
+  description="Calcula tu edad exacta en años, meses, días y semanas. Sabe cuántos días has vivido en total y cuántos faltan para tu próximo cumpleaños. Preciso al día."
   calculatorName="Calculadora de Edad"
   breadcrumbSlug="edad"
   ogImage="/og/edad.jpg"
+  keywords="calculadora edad exacta, cuántos años tengo, calcular edad años meses días, días vividos, cuánto falta para mi cumpleaños"
+  faqs={[
+    { q: '¿Los años bisiestos afectan al cálculo de mi edad?', a: 'Sí, los años bisiestos (febrero tiene 29 días) se tienen en cuenta al calcular los días exactos transcurridos. Las personas nacidas el 29 de febrero celebran su cumpleaños el 28 de febrero en años no bisiestos. Esta calculadora lo gestiona correctamente.' },
+    { q: '¿Para qué sirve saber mi edad exacta en días?', a: 'Conocer tu edad en días tiene aplicaciones prácticas en medicina (dosificación pediátrica, seguimiento de vacunas), trámites legales (mayoría de edad exacta, jubilación), cálculos de interés financiero y seguros de vida. También es útil para determinar con precisión el tiempo transcurrido entre eventos importantes.' },
+    { q: '¿Qué diferencia hay entre edad cronológica y edad biológica?', a: 'La edad cronológica es el tiempo transcurrido desde el nacimiento. La edad biológica refleja el estado real de tu organismo: dos personas de 50 años pueden tener órganos que \'funcionen\' como los de una persona de 40 o de 60, dependiendo de sus hábitos. Marcadores como la longitud de los telómeros, el VO2 máximo y ciertos biomarcadores permiten estimar la edad biológica.' },
+    { q: '¿Cómo calcular cuántos días faltan para una fecha específica?', a: 'Para calcular los días hasta una fecha futura (cumpleaños, viaje, evento), usa nuestra calculadora de \'Días entre Fechas\'. Introduce la fecha de hoy como fecha inicial y la fecha del evento como fecha final para obtener el número exacto de días, semanas y meses restantes.' },
+  ]}
 >
   <div style="background: var(--ink); padding: 40px 32px 32px;">
     <h1 style="font-family: var(--font-display); font-size: 64px; color: white; line-height: 0.92; margin-bottom: 12px;">
       Calculadora<br><span style="color: var(--acid);">de Edad</span>
     </h1>
-    <p style="font-size: 13px; color: #666; max-width: 480px; line-height: 1.7;">
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
       Descubre tu edad exacta en años, meses y días, junto con el total de días que has vivido y cuándo es tu próximo cumpleaños.
     </p>
   </div>
@@ -22,8 +29,24 @@ import EdadCalculator from '../components/calculators/EdadCalculator';
   <EdadCalculator client:load />
 
   <div slot="seo">
-    <p style="font-size: 14px; line-height: 1.7; color: var(--muted);">
-      Esta calculadora determina tu edad exacta comparando tu fecha de nacimiento con la fecha actual, teniendo en cuenta los años bisiestos y los meses de diferente duración.
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cómo se calcula la edad exacta?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 16px;">
+      La calculadora determina la diferencia exacta entre tu fecha de nacimiento y hoy, teniendo en cuenta los años bisiestos (cada 4 años, excepto los centenares no divisibles por 400) y la diferente duración de cada mes. El resultado muestra la edad en años completos, los meses adicionales y los días restantes.
     </p>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {[
+        { q: '¿Los años bisiestos afectan al cálculo de mi edad?', a: 'Sí, los años bisiestos (febrero tiene 29 días) se tienen en cuenta al calcular los días exactos transcurridos. Las personas nacidas el 29 de febrero celebran su cumpleaños el 28 de febrero en años no bisiestos. Esta calculadora lo gestiona correctamente.' },
+        { q: '¿Para qué sirve saber mi edad exacta en días?', a: 'Conocer tu edad en días tiene aplicaciones prácticas en medicina (dosificación pediátrica, seguimiento de vacunas), trámites legales (mayoría de edad exacta, jubilación), cálculos de interés financiero y seguros de vida. También es útil para determinar con precisión el tiempo transcurrido entre eventos importantes.' },
+        { q: '¿Qué diferencia hay entre edad cronológica y edad biológica?', a: 'La edad cronológica es el tiempo transcurrido desde el nacimiento. La edad biológica refleja el estado real de tu organismo: dos personas de 50 años pueden tener órganos que \'funcionen\' como los de una persona de 40 o de 60, dependiendo de sus hábitos. Marcadores como la longitud de los telómeros, el VO2 máximo y ciertos biomarcadores permiten estimar la edad biológica.' },
+        { q: '¿Cómo calcular cuántos días faltan para una fecha específica?', a: 'Para calcular los días hasta una fecha futura (cumpleaños, viaje, evento), usa nuestra calculadora de \'Días entre Fechas\'. Introduce la fecha de hoy como fecha inicial y la fecha del evento como fecha final para obtener el número exacto de días, semanas y meses restantes.' },
+      ].map((faq) => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
   </div>
 </CalculatorLayout>

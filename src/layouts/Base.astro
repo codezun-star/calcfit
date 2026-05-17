@@ -4,6 +4,7 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description: string;
+  keywords?: string;
   ogImage?: string;
   schema?: object;
 }
@@ -11,6 +12,7 @@ interface Props {
 const {
   title,
   description,
+  keywords,
   ogImage = '/og/default.jpg',
   schema,
 } = Astro.props;
@@ -20,10 +22,39 @@ const ogImageURL = new URL(ogImage, Astro.site);
 
 const websiteSchema = {
   '@context': 'https://schema.org',
-  '@type': 'WebSite',
-  name: 'CalcFit',
-  url: 'https://www.calcfit.com',
-  description: 'Calculadoras de salud gratuitas y validadas científicamente',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      name: 'CalcFit',
+      url: 'https://www.calcfit.com',
+      description: 'Calculadoras de salud gratuitas y validadas científicamente para toda Latinoamérica',
+      inLanguage: 'es',
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: { '@type': 'EntryPoint', urlTemplate: 'https://www.calcfit.com/?q={search_term_string}' },
+        'query-input': 'required name=search_term_string',
+      },
+    },
+    {
+      '@type': 'Organization',
+      name: 'CalcFit',
+      url: 'https://www.calcfit.com',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://www.calcfit.com/favicon.svg',
+        width: 32,
+        height: 32,
+      },
+      contactPoint: {
+        '@type': 'ContactPoint',
+        email: 'codezun@gmail.com',
+        contactType: 'customer support',
+        availableLanguage: 'Spanish',
+      },
+      sameAs: ['https://github.com/codezun-star/calcfit'],
+      description: 'Calculadoras de salud gratuitas, sin registro y validadas científicamente',
+    },
+  ],
 };
 ---
 
@@ -36,16 +67,23 @@ const websiteSchema = {
 
     <title>{title}</title>
     <meta name="description" content={description} />
+    {keywords && <meta name="keywords" content={keywords} />}
+    <meta name="author" content="CalcFit" />
     <link rel="canonical" href={canonicalURL} />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImageURL} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:url" content={canonicalURL} />
-    <meta property="og:locale" content="es_ES" />
+    <meta property="og:locale" content="es_419" />
+    <meta property="og:locale:alternate" content="es_ES" />
+    <meta property="og:locale:alternate" content="es_MX" />
+    <meta property="og:locale:alternate" content="es_AR" />
     <meta property="og:site_name" content="CalcFit" />
 
     <!-- Twitter Card -->
@@ -53,6 +91,7 @@ const websiteSchema = {
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageURL} />
+    <meta name="twitter:site" content="@calcfit" />
 
     <!-- JSON-LD -->
     <script is:inline type="application/ld+json" set:html={JSON.stringify(schema ?? websiteSchema)} />

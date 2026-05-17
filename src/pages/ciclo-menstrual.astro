@@ -4,17 +4,25 @@ import CicloMenstrualCalculator from '../components/calculators/CicloMenstrualCa
 ---
 
 <CalculatorLayout
-  title="Calculadora Ciclo Menstrual — Fases y Próximo Período | CalcFit"
-  description="Calcula las fases de tu ciclo menstrual: menstruación, folicular, ovulación y lútea. Sabe cuándo llegará tu próximo período."
+  title="Calculadora Ciclo Menstrual — Fases, Ovulación y Próximo Período | CalcFit"
+  description="Calcula las 4 fases de tu ciclo menstrual y cuándo llegará tu próximo período. Conoce en qué fase estás hoy: menstruación, folicular, ovulación o lútea. Gratis."
   calculatorName="Calculadora Ciclo Menstrual"
   breadcrumbSlug="ciclo-menstrual"
   ogImage="/og/ciclo-menstrual.jpg"
+  keywords="calculadora ciclo menstrual, próximo periodo, fases ciclo menstrual, cuándo me baja, calculadora regla, ovulación ciclo"
+  faqs={[
+    { q: '¿Cuánto dura un ciclo menstrual normal?', a: 'La mayoría de los ciclos duran entre 21 y 35 días, con una media de 28 días. La duración puede variar mes a mes incluso en personas con ciclos regulares. Variaciones de ±7 días se consideran normales.' },
+    { q: '¿Qué puede hacer que el ciclo sea irregular?', a: 'El estrés, cambios en el peso (tanto pérdida como ganancia), ejercicio intenso, alteraciones tiroideas, síndrome de ovario poliquístico (SOP), cambios en anticonceptivos, viajes con cambio de huso horario y enfermedades pueden alterar la regularidad del ciclo.' },
+    { q: '¿Es precisa la predicción de ovulación basada en el ciclo?', a: 'El método del calendario es orientativo. La ovulación puede adelantarse o atrasarse en respuesta a factores externos. Para mayor precisión, combine esta calculadora con la medición de temperatura basal corporal o tests de LH en orina.' },
+    { q: '¿Cómo afecta el estrés al ciclo menstrual?', a: 'El estrés crónico eleva el cortisol, que interfiere con la producción de GnRH (hormona liberadora de gonadotropinas). Esto puede retrasar o suprimir la ovulación, alargando el ciclo o causando amenorrea (ausencia de menstruación). El estrés agudo (examen, viaje, cambio de zona horaria) puede adelantar o retrasar la menstruación de 1–10 días.' },
+    { q: '¿Es normal que mi ciclo cambie de longitud cada mes?', a: 'Una variación de ±7 días entre ciclos se considera normal. Ciclos que varían más de 7 días regularmente pueden indicar anovulación, síndrome de ovario poliquístico (SOP), alteraciones tiroideas o perimenopausia. Si tu ciclo varía más de 10 días frecuentemente, consulta a un ginecólogo para descartar causas hormonales.' },
+  ]}
 >
   <div style="background: var(--ink); padding: 40px 32px 32px;">
     <h1 style="font-family: var(--font-display); font-size: 64px; color: white; line-height: 0.92; margin-bottom: 12px;">
       Ciclo<br><span style="color: var(--acid);">Menstrual</span>
     </h1>
-    <p style="font-size: 13px; color: #666; max-width: 480px; line-height: 1.7;">
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
       Conoce en qué fase de tu ciclo te encuentras hoy y cuándo comenzará tu próximo período. Basado en el modelo estándar de 4 fases del ciclo menstrual.
     </p>
   </div>
@@ -50,6 +58,8 @@ import CicloMenstrualCalculator from '../components/calculators/CicloMenstrualCa
         { q: '¿Cuánto dura un ciclo menstrual normal?', a: 'La mayoría de los ciclos duran entre 21 y 35 días, con una media de 28 días. La duración puede variar mes a mes incluso en personas con ciclos regulares. Variaciones de ±7 días se consideran normales.' },
         { q: '¿Qué puede hacer que el ciclo sea irregular?', a: 'El estrés, cambios en el peso (tanto pérdida como ganancia), ejercicio intenso, alteraciones tiroideas, síndrome de ovario poliquístico (SOP), cambios en anticonceptivos, viajes con cambio de huso horario y enfermedades pueden alterar la regularidad del ciclo.' },
         { q: '¿Es precisa la predicción de ovulación basada en el ciclo?', a: 'El método del calendario es orientativo. La ovulación puede adelantarse o atrasarse en respuesta a factores externos. Para mayor precisión, combine esta calculadora con la medición de temperatura basal corporal o tests de LH en orina.' },
+        { q: '¿Cómo afecta el estrés al ciclo menstrual?', a: 'El estrés crónico eleva el cortisol, que interfiere con la producción de GnRH (hormona liberadora de gonadotropinas). Esto puede retrasar o suprimir la ovulación, alargando el ciclo o causando amenorrea (ausencia de menstruación). El estrés agudo (examen, viaje, cambio de zona horaria) puede adelantar o retrasar la menstruación de 1–10 días.' },
+        { q: '¿Es normal que mi ciclo cambie de longitud cada mes?', a: 'Una variación de ±7 días entre ciclos se considera normal. Ciclos que varían más de 7 días regularmente pueden indicar anovulación, síndrome de ovario poliquístico (SOP), alteraciones tiroideas o perimenopausia. Si tu ciclo varía más de 10 días frecuentemente, consulta a un ginecólogo para descartar causas hormonales.' },
       ].map(faq => (
         <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
           <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>

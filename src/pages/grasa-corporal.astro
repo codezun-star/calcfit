@@ -4,17 +4,25 @@ import GrasaCalculator from '../components/calculators/GrasaCalculator';
 ---
 
 <CalculatorLayout
-  title="Calculadora de Grasa Corporal — Método US Navy | CalcFit"
-  description="Calcula tu porcentaje de grasa corporal con el método Marina US Navy. Resultados precisos con solo tu altura, cuello y cintura."
+  title="Calculadora de Grasa Corporal sin Báscula — Método US Navy | CalcFit"
+  description="Calcula tu porcentaje de grasa corporal sin báscula especial. Método Marina US Navy: solo necesitas cuello, cintura y cadera. Resultado con categoría e interpretación. Gratis."
   calculatorName="Grasa Corporal"
   breadcrumbSlug="grasa-corporal"
   ogImage="/og/grasa.jpg"
+  keywords="calculadora grasa corporal, porcentaje grasa corporal, método US Navy grasa, grasa corporal sin báscula, cómo medir grasa corporal en casa"
+  faqs={[
+    { q: '¿Cuál es un porcentaje de grasa corporal saludable?', a: 'Para hombres, el rango fitness (saludable y visualmente definido) es 14–17%. Para mujeres, 21–24%. Los atletas pueden estar por debajo de estos valores. Por encima del 25% en hombres y 32% en mujeres se clasifica como obesidad, con mayor riesgo cardiovascular y metabólico.' },
+    { q: '¿Qué tan preciso es el método US Navy?', a: 'El método US Navy tiene un margen de error de ±3–4% comparado con métodos de referencia como DEXA. Es menos preciso que la pesada hidrostática o DEXA, pero mucho más accesible. Su mayor limitación es que depende de la precisión de las mediciones: un error de 1 cm en la cintura puede alterar el resultado hasta en 1.5%.' },
+    { q: '¿Cómo medir correctamente la cintura para esta calculadora?', a: 'La cintura se mide a la altura del ombligo, al final de una espiración normal. No metas el vientre ni aguantes la respiración. La cinta debe estar horizontal y ajustada sin comprimir la piel. Para hombres se usa solo cintura y cuello; para mujeres se añade la cadera en su punto más ancho.' },
+    { q: '¿Qué diferencia hay entre grasa visceral y grasa subcutánea?', a: 'La grasa visceral rodea los órganos abdominales y es metabólicamente activa: libera sustancias inflamatorias y hormones que aumentan el riesgo de diabetes, enfermedad cardiovascular y síndrome metabólico. La grasa subcutánea está justo bajo la piel y es menos peligrosa. Una cintura grande indica mayor grasa visceral.' },
+    { q: '¿Cómo se puede bajar el porcentaje de grasa corporal?', a: 'La combinación más efectiva es déficit calórico moderado (300-500 kcal/día) + entrenamiento de fuerza + cardio. El entrenamiento de fuerza es crucial porque preserva la masa muscular durante la dieta. El HIIT también es eficaz para reducir grasa visceral. La clave es la consistencia: un déficit sostenido es más efectivo que dietas extremas cortas.' },
+  ]}
 >
   <div style="background: var(--ink); padding: 40px 32px 32px;">
     <h1 style="font-family: var(--font-display); font-size: 64px; color: white; line-height: 0.92; margin-bottom: 12px;">
       Grasa<br><span style="color: var(--acid);">Corporal</span>
     </h1>
-    <p style="font-size: 13px; color: #666; max-width: 480px; line-height: 1.7;">
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
       Usa el método circunferencial de la Marina de EE.UU. para estimar tu porcentaje de grasa corporal sin básculas especiales.
     </p>
   </div>
@@ -47,5 +55,21 @@ import GrasaCalculator from '../components/calculators/GrasaCalculator';
         ))}
       </tbody>
     </table>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {[
+        { q: '¿Cuál es un porcentaje de grasa corporal saludable?', a: 'Para hombres, el rango fitness (saludable y visualmente definido) es 14–17%. Para mujeres, 21–24%. Los atletas pueden estar por debajo de estos valores. Por encima del 25% en hombres y 32% en mujeres se clasifica como obesidad, con mayor riesgo cardiovascular y metabólico.' },
+        { q: '¿Qué tan preciso es el método US Navy?', a: 'El método US Navy tiene un margen de error de ±3–4% comparado con métodos de referencia como DEXA. Es menos preciso que la pesada hidrostática o DEXA, pero mucho más accesible. Su mayor limitación es que depende de la precisión de las mediciones: un error de 1 cm en la cintura puede alterar el resultado hasta en 1.5%.' },
+        { q: '¿Cómo medir correctamente la cintura para esta calculadora?', a: 'La cintura se mide a la altura del ombligo, al final de una espiración normal. No metas el vientre ni aguantes la respiración. La cinta debe estar horizontal y ajustada sin comprimir la piel. Para hombres se usa solo cintura y cuello; para mujeres se añade la cadera en su punto más ancho.' },
+        { q: '¿Qué diferencia hay entre grasa visceral y grasa subcutánea?', a: 'La grasa visceral rodea los órganos abdominales y es metabólicamente activa: libera sustancias inflamatorias y hormones que aumentan el riesgo de diabetes, enfermedad cardiovascular y síndrome metabólico. La grasa subcutánea está justo bajo la piel y es menos peligrosa. Una cintura grande indica mayor grasa visceral.' },
+        { q: '¿Cómo se puede bajar el porcentaje de grasa corporal?', a: 'La combinación más efectiva es déficit calórico moderado (300-500 kcal/día) + entrenamiento de fuerza + cardio. El entrenamiento de fuerza es crucial porque preserva la masa muscular durante la dieta. El HIIT también es eficaz para reducir grasa visceral. La clave es la consistencia: un déficit sostenido es más efectivo que dietas extremas cortas.' },
+      ].map((faq) => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
   </div>
 </CalculatorLayout>

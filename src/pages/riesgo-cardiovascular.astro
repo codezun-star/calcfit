@@ -4,11 +4,18 @@ import RiesgoCardiovascularCalculator from '../components/calculators/RiesgoCard
 ---
 
 <CalculatorLayout
-  title="Calculadora de Riesgo Cardiovascular a 10 Años — Basada en Framingham | CalcFit"
-  description="Estima tu riesgo de infarto o ictus a 10 años con la calculadora Framingham simplificada. Introduce edad, presión arterial, IMC, tabaquismo y diabetes para obtener tu categoría de riesgo."
+  title="Calculadora Riesgo Cardiovascular a 10 Años — Modelo Framingham | CalcFit"
+  description="Estima tu probabilidad de infarto o ictus a 10 años con el modelo Framingham simplificado sin análisis de sangre. Por edad, presión, IMC, tabaquismo y diabetes."
   calculatorName="Riesgo Cardiovascular"
   breadcrumbSlug="riesgo-cardiovascular"
   ogImage="/og/riesgo-cardiovascular.jpg"
+  keywords="calculadora riesgo cardiovascular, riesgo infarto 10 años, modelo Framingham, riesgo ictus, factores de riesgo cardiovascular"
+  faqs={[
+    { q: '¿Qué factores de riesgo cardiovascular son modificables?', a: 'Los principales factores modificables son: hipertensión arterial, tabaquismo, diabetes, obesidad, sedentarismo, dislipemia (colesterol elevado), dieta poco saludable y estrés crónico. La edad, el sexo y los antecedentes familiares son factores no modificables pero igualmente importantes para evaluar el riesgo global.' },
+    { q: '¿En qué se basa el modelo Framingham?', a: 'El Estudio Framingham (Massachusetts, EE.UU.) es el estudio cardiovascular más longevo del mundo, iniciado en 1948 y con más de 15 000 participantes seguidos durante décadas. El modelo de puntuación sin laboratorio (non-laboratory Framingham) predice el riesgo a 10 años usando variables clínicas básicas sin necesidad de análisis de sangre.' },
+    { q: '¿Cómo puedo reducir mi riesgo cardiovascular?', a: 'Las intervenciones más efectivas son: dejar de fumar (reduce el riesgo un 50% en 1 año), controlar la presión arterial (objetivo < 130/80 mmHg), actividad física regular (150 min/semana de intensidad moderada), dieta mediterránea, control del peso corporal y gestión del estrés. Si hay diabetes, el control glucémico estricto es crítico.' },
+    { q: '¿Esta calculadora sustituye a la valoración médica?', a: 'No. Esta herramienta es orientativa y educativa. La evaluación clínica real incluye análisis de lípidos (colesterol total, LDL, HDL, triglicéridos), glucosa, función renal, ECG y otras pruebas según el perfil. Consulta siempre a tu médico para una valoración cardiovascular completa y personalizada.' },
+  ]}
 >
   <div style="background: var(--ink); padding: 40px 32px 32px;">
     <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">

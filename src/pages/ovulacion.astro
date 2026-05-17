@@ -4,17 +4,25 @@ import OvulacionCalculator from '../components/calculators/OvulacionCalculator';
 ---
 
 <CalculatorLayout
-  title="Calculadora de Ovulación y Días Fértiles | CalcFit"
-  description="Calcula tu fecha de ovulación y ventana fértil. Conoce tus días más fértiles para planificar o evitar un embarazo."
+  title="Calculadora de Ovulación y Días Fértiles del Ciclo Menstrual | CalcFit"
+  description="Predice tu fecha de ovulación y ventana fértil de hasta 6 días según tu ciclo menstrual. Planifica o evita el embarazo con el método del calendario. Gratis, sin registro."
   calculatorName="Ovulación"
   breadcrumbSlug="ovulacion"
   ogImage="/og/ovulacion.jpg"
+  keywords="calculadora ovulación, días fértiles, cuándo ovulo, calculadora fertilidad, fecha ovulación ciclo menstrual, ventana fértil"
+  faqs={[
+    { q: '¿Cuántos días antes del período ocurre la ovulación?', a: 'La ovulación ocurre aproximadamente 14 días ANTES del inicio del siguiente período, no 14 días después del último. Esto significa que en ciclos irregulares, el día de ovulación varía, pero el tiempo entre la ovulación y el siguiente período suele ser fijo (fase lútea: 12–14 días).' },
+    { q: '¿Cuántos días dura la ventana fértil?', a: 'La ventana fértil tiene una duración de aproximadamente 6 días: los 5 días previos a la ovulación más el día de la ovulación. Los días más fértiles son los 2–3 días anteriores a la ovulación, cuando la probabilidad de concepción es del 27–33%. El óvulo solo es viable 12–24 horas tras la ovulación.' },
+    { q: '¿Es fiable el método del calendario para evitar embarazos?', a: 'Con uso perfecto, el método del calendario tiene una tasa de fallo del 9% anual. Con uso típico (considerando errores humanos), sube al 24%. Es menos fiable que los métodos anticonceptivos modernos. Los ciclos irregulares, el estrés, las enfermedades y los cambios de horario pueden alterar la ovulación y hacer el método muy poco predecible.' },
+    { q: '¿Cuáles son los síntomas de la ovulación?', a: 'Algunos síntomas físicos de la ovulación incluyen: dolor o molestia en la parte baja del abdomen (Mittelschmerz), aumento del flujo vaginal con textura similar a la clara de huevo, ligero aumento de la temperatura corporal basal (0.2–0.5°C), sensibilidad mamaria y aumento de la libido. Sin embargo, muchas mujeres no experimentan síntomas perceptibles.' },
+    { q: '¿Qué puede alterar la regularidad de la ovulación?', a: 'El estrés crónico, los cambios bruscos de peso, el ejercicio físico muy intenso, las alteraciones tiroideas, el síndrome de ovario poliquístico (SOP), el uso reciente de anticonceptivos hormonales, las enfermedades agudas, los viajes con cambio de huso horario y la lactancia materna pueden alterar o suprimir la ovulación temporalmente.' },
+  ]}
 >
   <div style="background: var(--ink); padding: 40px 32px 32px;">
     <h1 style="font-family: var(--font-display); font-size: 64px; color: white; line-height: 0.92; margin-bottom: 12px;">
       Calculadora<br><span style="color: var(--acid);">Ovulación</span>
     </h1>
-    <p style="font-size: 13px; color: #666; max-width: 480px; line-height: 1.7;">
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
       Predice tu fecha de ovulación y el período fértil de hasta 6 días basándote en tu último ciclo menstrual.
     </p>
   </div>
@@ -26,8 +34,24 @@ import OvulacionCalculator from '../components/calculators/OvulacionCalculator';
     <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 16px;">
       La ovulación ocurre aproximadamente <strong>14 días antes del inicio del siguiente período menstrual</strong>, independientemente de la duración del ciclo. En un ciclo de 28 días, esto sucede alrededor del día 14. En un ciclo de 32 días, ocurre alrededor del día 18.
     </p>
-    <p style="font-size: 14px; line-height: 1.7; color: var(--muted);">
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
       La ventana fértil incluye los 5 días previos a la ovulación más el día de la ovulación, ya que los espermatozoides pueden sobrevivir hasta 5 días en el tracto reproductor femenino.
     </p>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {[
+        { q: '¿Cuántos días antes del período ocurre la ovulación?', a: 'La ovulación ocurre aproximadamente 14 días ANTES del inicio del siguiente período, no 14 días después del último. Esto significa que en ciclos irregulares, el día de ovulación varía, pero el tiempo entre la ovulación y el siguiente período suele ser fijo (fase lútea: 12–14 días).' },
+        { q: '¿Cuántos días dura la ventana fértil?', a: 'La ventana fértil tiene una duración de aproximadamente 6 días: los 5 días previos a la ovulación más el día de la ovulación. Los días más fértiles son los 2–3 días anteriores a la ovulación, cuando la probabilidad de concepción es del 27–33%. El óvulo solo es viable 12–24 horas tras la ovulación.' },
+        { q: '¿Es fiable el método del calendario para evitar embarazos?', a: 'Con uso perfecto, el método del calendario tiene una tasa de fallo del 9% anual. Con uso típico (considerando errores humanos), sube al 24%. Es menos fiable que los métodos anticonceptivos modernos. Los ciclos irregulares, el estrés, las enfermedades y los cambios de horario pueden alterar la ovulación y hacer el método muy poco predecible.' },
+        { q: '¿Cuáles son los síntomas de la ovulación?', a: 'Algunos síntomas físicos de la ovulación incluyen: dolor o molestia en la parte baja del abdomen (Mittelschmerz), aumento del flujo vaginal con textura similar a la clara de huevo, ligero aumento de la temperatura corporal basal (0.2–0.5°C), sensibilidad mamaria y aumento de la libido. Sin embargo, muchas mujeres no experimentan síntomas perceptibles.' },
+        { q: '¿Qué puede alterar la regularidad de la ovulación?', a: 'El estrés crónico, los cambios bruscos de peso, el ejercicio físico muy intenso, las alteraciones tiroideas, el síndrome de ovario poliquístico (SOP), el uso reciente de anticonceptivos hormonales, las enfermedades agudas, los viajes con cambio de huso horario y la lactancia materna pueden alterar o suprimir la ovulación temporalmente.' },
+      ].map((faq) => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
   </div>
 </CalculatorLayout>

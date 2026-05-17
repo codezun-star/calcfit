@@ -4,17 +4,25 @@ import CaloriasEjercicioCalculator from '../components/calculators/CaloriasEjerc
 ---
 
 <CalculatorLayout
-  title="Calculadora Calorías Quemadas en Ejercicio | CalcFit"
-  description="Calcula cuántas calorías quemas con cada actividad física. Basado en valores MET validados por el ACSM. Más de 12 actividades disponibles."
+  title="Calculadora Calorías Quemadas en Ejercicio — Valores MET Validados | CalcFit"
+  description="Calcula exactamente cuántas calorías quemas en cada actividad física. Valores MET del Compendium ACSM. 12 actividades: correr, natación, ciclismo, pesas, HIIT y más."
   calculatorName="Calorías Quemadas en Ejercicio"
   breadcrumbSlug="calorias-ejercicio"
   ogImage="/og/calorias-ejercicio.jpg"
+  keywords="calculadora calorías ejercicio, calorías quemadas corriendo, calorías natación, calorías bicicleta, cuántas calorías quemo al día MET"
+  faqs={[
+    { q: '¿Por qué el peso afecta tanto a las calorías quemadas?', a: 'Porque las calorías quemadas son proporcionales al peso corporal. Una persona más pesada consume más energía para mover su masa. Por eso la fórmula MET incluye el peso como multiplicador directo.' },
+    { q: '¿Son exactos estos cálculos?', a: 'Los valores MET son estimaciones basadas en poblaciones. La variabilidad individual (composición corporal, eficiencia mecánica, condición física) puede hacer que el gasto real sea hasta un 20% mayor o menor. Para mayor precisión, use un monitor de frecuencia cardíaca.' },
+    { q: '¿Qué actividad quema más calorías?', a: 'Las actividades de alta intensidad como correr a 12 km/h o HIIT queman más calorías por minuto (11-12 kcal/min para 70 kg). Sin embargo, actividades de menor intensidad sostenidas durante más tiempo pueden lograr un gasto total similar.' },
+    { q: '¿Cuántas calorías quemo corriendo 30 minutos?', a: 'A 8 km/h (MET 8.0), una persona de 70 kg quema aproximadamente 280 kcal en 30 minutos. A 10 km/h (MET 10.0), el gasto sube a 350 kcal. A 12 km/h (MET 11.5), alcanza las 402 kcal. El gasto es proporcional al peso: una persona de 85 kg quema aproximadamente un 21% más que una de 70 kg a la misma velocidad.' },
+    { q: '¿Qué actividad quema más calorías por hora?', a: 'Las actividades de mayor gasto calórico son: correr a 12 km/h (~800 kcal/h para 70 kg), ciclismo de competición, remo, natación a crol intenso y el esquí de fondo. El HIIT puede alcanzar 700–900 kcal/h en picos de intensidad, pero al ser intervalado el gasto medio es menor. El peso corporal amplifica estas cifras: más peso = más calorías por el mismo ejercicio.' },
+  ]}
 >
   <div style="background: var(--ink); padding: 40px 32px 32px;">
     <h1 style="font-family: var(--font-display); font-size: 64px; color: white; line-height: 0.92; margin-bottom: 12px;">
       Calorías<br><span style="color: var(--acid);">en Ejercicio</span>
     </h1>
-    <p style="font-size: 13px; color: #666; max-width: 480px; line-height: 1.7;">
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
       Calcula con precisión las calorías quemadas en tu entrenamiento usando los valores MET (Equivalente Metabólico) del Compendium of Physical Activities, el estándar científico de referencia.
     </p>
   </div>
@@ -66,6 +74,8 @@ import CaloriasEjercicioCalculator from '../components/calculators/CaloriasEjerc
         { q: '¿Por qué el peso afecta tanto a las calorías quemadas?', a: 'Porque las calorías quemadas son proporcionales al peso corporal. Una persona más pesada consume más energía para mover su masa. Por eso la fórmula MET incluye el peso como multiplicador directo.' },
         { q: '¿Son exactos estos cálculos?', a: 'Los valores MET son estimaciones basadas en poblaciones. La variabilidad individual (composición corporal, eficiencia mecánica, condición física) puede hacer que el gasto real sea hasta un 20% mayor o menor. Para mayor precisión, use un monitor de frecuencia cardíaca.' },
         { q: '¿Qué actividad quema más calorías?', a: 'Las actividades de alta intensidad como correr a 12 km/h o HIIT queman más calorías por minuto (11-12 kcal/min para 70 kg). Sin embargo, actividades de menor intensidad sostenidas durante más tiempo pueden lograr un gasto total similar.' },
+        { q: '¿Cuántas calorías quemo corriendo 30 minutos?', a: 'A 8 km/h (MET 8.0), una persona de 70 kg quema aproximadamente 280 kcal en 30 minutos. A 10 km/h (MET 10.0), el gasto sube a 350 kcal. A 12 km/h (MET 11.5), alcanza las 402 kcal. El gasto es proporcional al peso: una persona de 85 kg quema aproximadamente un 21% más que una de 70 kg a la misma velocidad.' },
+        { q: '¿Qué actividad quema más calorías por hora?', a: 'Las actividades de mayor gasto calórico son: correr a 12 km/h (~800 kcal/h para 70 kg), ciclismo de competición, remo, natación a crol intenso y el esquí de fondo. El HIIT puede alcanzar 700–900 kcal/h en picos de intensidad, pero al ser intervalado el gasto medio es menor. El peso corporal amplifica estas cifras: más peso = más calorías por el mismo ejercicio.' },
       ].map(faq => (
         <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
           <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>

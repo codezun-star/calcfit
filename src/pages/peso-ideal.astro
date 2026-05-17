@@ -4,17 +4,24 @@ import PesoIdealCalculator from '../components/calculators/PesoIdealCalculator';
 ---
 
 <CalculatorLayout
-  title="Calculadora de Peso Ideal — 5 Fórmulas Médicas | CalcFit"
-  description="Calcula tu peso ideal con 5 fórmulas médicas: Devine, Robinson, Miller, Hamwi y Broca. Rango personalizado por altura y sexo."
+  title="Calculadora de Peso Ideal — 5 Fórmulas Médicas por Altura y Sexo | CalcFit"
+  description="Calcula tu peso ideal con 5 fórmulas médicas validadas: Devine, Robinson, Miller, Hamwi y Broca. Rango personalizado por altura y sexo. Gratis, resultado inmediato."
   calculatorName="Peso Ideal"
   breadcrumbSlug="peso-ideal"
   ogImage="/og/peso-ideal.jpg"
+  keywords="calculadora peso ideal, cuál es mi peso ideal, peso ideal por altura, peso saludable mujer hombre, fórmula peso ideal Devine"
+  faqs={[
+    { q: '¿Qué fórmula de peso ideal es la más precisa?', a: 'No existe una fórmula universalmente superior. La Devine (1974) es la más citada en farmacología para ajustar dosis de medicamentos. La Broca es la más antigua pero menos precisa para personas de baja estatura. La media de las 5 fórmulas ofrece la mejor estimación individual, ya que promedia los sesgos de cada una.' },
+    { q: '¿El peso ideal es el mismo para hombres y mujeres con la misma altura?', a: 'No. Para una misma altura, el peso ideal en mujeres suele ser 2-5 kg menor que en hombres, reflejando las diferencias en composición corporal (los hombres tienen naturalmente mayor masa muscular y densidad ósea). Todas las fórmulas de esta calculadora consideran el sexo como variable.' },
+    { q: '¿Qué hago si mi peso está muy lejos del peso ideal?', a: 'Un peso distante del ideal no es un juicio de valor, sino un indicador de salud. Si estás significativamente por encima, un déficit calórico moderado y ejercicio regular son el camino más seguro. Si estás por debajo, aumentar la ingesta calórica con alimentos de alta densidad nutricional es prioritario. Siempre consulta con un profesional de la salud para un plan personalizado.' },
+    { q: '¿El peso ideal tiene en cuenta la complexión corporal?', a: 'La mayoría de estas fórmulas no ajustan por complexión corporal (tamaño de los huesos). Una persona con complexión grande puede pesar 5-10% más que su \'peso ideal\' estándar y seguir siendo saludable. Para una estimación más personalizada, combina esta calculadora con la de complexión corporal.' },
+  ]}
 >
   <div style="background: var(--ink); padding: 40px 32px 32px;">
     <h1 style="font-family: var(--font-display); font-size: 64px; color: white; line-height: 0.92; margin-bottom: 12px;">
       Peso<br><span style="color: var(--acid);">Ideal</span>
     </h1>
-    <p style="font-size: 13px; color: #666; max-width: 480px; line-height: 1.7;">
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
       Calcula tu peso ideal usando 5 fórmulas científicas ampliamente utilizadas en medicina clínica.
     </p>
   </div>
@@ -47,5 +54,20 @@ import PesoIdealCalculator from '../components/calculators/PesoIdealCalculator';
         ))}
       </tbody>
     </table>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {[
+        { q: '¿Qué fórmula de peso ideal es la más precisa?', a: 'No existe una fórmula universalmente superior. La Devine (1974) es la más citada en farmacología para ajustar dosis de medicamentos. La Broca es la más antigua pero menos precisa para personas de baja estatura. La media de las 5 fórmulas ofrece la mejor estimación individual, ya que promedia los sesgos de cada una.' },
+        { q: '¿El peso ideal es el mismo para hombres y mujeres con la misma altura?', a: 'No. Para una misma altura, el peso ideal en mujeres suele ser 2-5 kg menor que en hombres, reflejando las diferencias en composición corporal (los hombres tienen naturalmente mayor masa muscular y densidad ósea). Todas las fórmulas de esta calculadora consideran el sexo como variable.' },
+        { q: '¿Qué hago si mi peso está muy lejos del peso ideal?', a: 'Un peso distante del ideal no es un juicio de valor, sino un indicador de salud. Si estás significativamente por encima, un déficit calórico moderado y ejercicio regular son el camino más seguro. Si estás por debajo, aumentar la ingesta calórica con alimentos de alta densidad nutricional es prioritario. Siempre consulta con un profesional de la salud para un plan personalizado.' },
+        { q: '¿El peso ideal tiene en cuenta la complexión corporal?', a: 'La mayoría de estas fórmulas no ajustan por complexión corporal (tamaño de los huesos). Una persona con complexión grande puede pesar 5-10% más que su \'peso ideal\' estándar y seguir siendo saludable. Para una estimación más personalizada, combina esta calculadora con la de complexión corporal.' },
+      ].map((faq) => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
   </div>
 </CalculatorLayout>

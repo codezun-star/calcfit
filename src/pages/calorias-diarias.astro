@@ -4,17 +4,24 @@ import CaloriasCalculator from '../components/calculators/CaloriasCalculator';
 ---
 
 <CalculatorLayout
-  title="Calculadora de Calorías Diarias (TDEE) | CalcFit"
-  description="Calcula tus calorías diarias de mantenimiento, déficit y superávit con la fórmula Mifflin-St Jeor. Gratis, sin registro."
+  title="Calculadora de Calorías Diarias TDEE — Fórmula Mifflin-St Jeor | CalcFit"
+  description="Calcula tus calorías diarias de mantenimiento, déficit y superávit. Fórmula Mifflin-St Jeor, la más precisa según la evidencia científica. Personalizado por peso, altura, edad y actividad."
   calculatorName="Calorías Diarias"
   breadcrumbSlug="calorias-diarias"
   ogImage="/og/calorias.jpg"
+  keywords="calculadora calorías diarias, TDEE, cuántas calorías necesito al día, gasto calórico diario, TMB metabolismo basal calorías"
+  faqs={[
+    { q: '¿Cuántas calorías debo comer para perder peso?', a: 'Para perder peso necesitas un déficit calórico: consumir menos calorías que tu TDEE. Un déficit de 500 kcal/día produce aproximadamente 0.5 kg de pérdida por semana, que es el ritmo más recomendado por los expertos en nutrición. Nunca comas menos de tu TMB durante períodos prolongados.' },
+    { q: '¿Qué es el TDEE y cómo se diferencia de la TMB?', a: 'La TMB (Tasa Metabólica Basal) es la energía que tu cuerpo necesita en reposo absoluto. El TDEE (Total Daily Energy Expenditure) es tu gasto calórico real, que incluye la actividad física: TDEE = TMB × Factor de actividad. Para perder peso, consume por debajo de tu TDEE; para ganar masa muscular, por encima.' },
+    { q: '¿Es la fórmula Mifflin-St Jeor más precisa que Harris-Benedict?', a: 'Sí. Un metaanálisis publicado en el Journal of the American Dietetic Association (2005) demostró que Mifflin-St Jeor predice el gasto metabólico basal con un margen de error del 5% en el 82% de los casos, frente al 74% de Harris-Benedict revisada. Por eso es la recomendada actualmente por la Academy of Nutrition and Dietetics.' },
+    { q: '¿Cambian mis calorías necesarias si hago más ejercicio?', a: 'Sí, directamente. El factor de actividad multiplica tu TMB: de 1.2 (sedentario) a 1.9 (muy activo). Si pasas de sedentario a moderado, tus calorías de mantenimiento aumentan aproximadamente un 29%. Recalcula tu TDEE si cambias significativamente tu nivel de actividad o cada vez que pierdas o ganes más de 5 kg.' },
+  ]}
 >
   <div style="background: var(--ink); padding: 40px 32px 32px;">
     <h1 style="font-family: var(--font-display); font-size: 64px; color: white; line-height: 0.92; margin-bottom: 12px;">
       Calorías<br><span style="color: var(--acid);">Diarias</span>
     </h1>
-    <p style="font-size: 13px; color: #666; max-width: 480px; line-height: 1.7;">
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
       Calcula tu TDEE (Total Daily Energy Expenditure): las calorías que necesitas para mantener, perder o ganar peso según tu nivel de actividad.
     </p>
   </div>
@@ -57,5 +64,20 @@ import CaloriasCalculator from '../components/calculators/CaloriasCalculator';
         ))}
       </tbody>
     </table>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {[
+        { q: '¿Cuántas calorías debo comer para perder peso?', a: 'Para perder peso necesitas un déficit calórico: consumir menos calorías que tu TDEE. Un déficit de 500 kcal/día produce aproximadamente 0.5 kg de pérdida por semana, que es el ritmo más recomendado por los expertos en nutrición. Nunca comas menos de tu TMB durante períodos prolongados.' },
+        { q: '¿Qué es el TDEE y cómo se diferencia de la TMB?', a: 'La TMB (Tasa Metabólica Basal) es la energía que tu cuerpo necesita en reposo absoluto. El TDEE (Total Daily Energy Expenditure) es tu gasto calórico real, que incluye la actividad física: TDEE = TMB × Factor de actividad. Para perder peso, consume por debajo de tu TDEE; para ganar masa muscular, por encima.' },
+        { q: '¿Es la fórmula Mifflin-St Jeor más precisa que Harris-Benedict?', a: 'Sí. Un metaanálisis publicado en el Journal of the American Dietetic Association (2005) demostró que Mifflin-St Jeor predice el gasto metabólico basal con un margen de error del 5% en el 82% de los casos, frente al 74% de Harris-Benedict revisada. Por eso es la recomendada actualmente por la Academy of Nutrition and Dietetics.' },
+        { q: '¿Cambian mis calorías necesarias si hago más ejercicio?', a: 'Sí, directamente. El factor de actividad multiplica tu TMB: de 1.2 (sedentario) a 1.9 (muy activo). Si pasas de sedentario a moderado, tus calorías de mantenimiento aumentan aproximadamente un 29%. Recalcula tu TDEE si cambias significativamente tu nivel de actividad o cada vez que pierdas o ganes más de 5 kg.' },
+      ].map((faq) => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
   </div>
 </CalculatorLayout>

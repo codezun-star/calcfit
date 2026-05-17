@@ -4,18 +4,26 @@ import IMCCalculator from '../components/calculators/IMCCalculator';
 ---
 
 <CalculatorLayout
-  title="Calculadora IMC — Índice de Masa Corporal | CalcFit"
-  description="Calcula tu IMC gratis con la fórmula de la OMS. Conoce si tu peso es saludable según tu altura. Resultado inmediato con clasificación y recomendaciones."
+  title="Calculadora de IMC Gratis — Fórmula OMS y Tabla de Clasificación | CalcFit"
+  description="Calcula tu Índice de Masa Corporal (IMC) al instante con la fórmula OMS: peso ÷ altura². Clasificación en 6 categorías con gráfico visual y recomendaciones. Sin registro."
   calculatorName="Calculadora IMC"
   breadcrumbSlug="imc"
   ogImage="/og/imc.jpg"
+  keywords="calculadora IMC, índice de masa corporal, calcular IMC gratis, IMC normal OMS, fórmula IMC peso altura, imc saludable"
+  faqs={[
+    { q: '¿El IMC es suficiente para evaluar la salud?', a: 'El IMC es una herramienta de cribado, no un diagnóstico. No distingue entre masa muscular y grasa. Atletas pueden tener un IMC elevado siendo saludables. Complementa siempre con otras medidas como la circunferencia de cintura o el % de grasa corporal.' },
+    { q: '¿Es diferente el IMC para hombres y mujeres?', a: 'La fórmula es la misma, pero la composición corporal ideal varía. Las mujeres naturalmente tienen mayor porcentaje de grasa corporal. Los rangos de la OMS aplican a ambos sexos por igual.' },
+    { q: '¿Qué IMC se considera saludable?', a: 'La OMS define el rango normal entre 18.5 y 24.9 kg/m². Sin embargo, algunas autoridades de salud ajustan estos rangos para poblaciones asiáticas, donde el riesgo metabólico aumenta con un IMC más bajo.' },
+    { q: '¿A partir de qué IMC existe riesgo para la salud?', a: 'La OMS considera riesgo aumentado desde IMC ≥ 25 (sobrepeso) y riesgo elevado desde IMC ≥ 30 (obesidad). Sin embargo, el riesgo es gradual: un IMC de 27 ya se asocia con mayor probabilidad de hipertensión y diabetes tipo 2 respecto al rango normal. También existe riesgo por debajo de 18.5 (desnutrición, fragilidad ósea).' },
+    { q: '¿El IMC es diferente para personas de origen asiático?', a: 'Sí. Varias organizaciones de salud, incluyendo la OMS, reconocen que las poblaciones del sudeste asiático tienen mayor riesgo metabólico con valores de IMC más bajos. Algunos países asiáticos usan el punto de corte 23 para sobrepeso (en lugar de 25) y 27.5 para obesidad (en lugar de 30).' },
+  ]}
 >
   <!-- Header -->
   <div style="background: var(--ink); padding: 40px 32px 32px;">
     <h1 style="font-family: var(--font-display); font-size: 64px; color: white; line-height: 0.92; margin-bottom: 12px;">
       Calculadora<br><span style="color: var(--acid);">IMC</span>
     </h1>
-    <p style="font-size: 13px; color: #666; max-width: 480px; line-height: 1.7;">
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
       El Índice de Masa Corporal (IMC) es una medida que relaciona tu peso con tu altura para evaluar si estás en un rango de peso saludable, según los criterios de la Organización Mundial de la Salud.
     </p>
   </div>
@@ -61,6 +69,8 @@ import IMCCalculator from '../components/calculators/IMCCalculator';
         { q: '¿El IMC es suficiente para evaluar la salud?', a: 'El IMC es una herramienta de cribado, no un diagnóstico. No distingue entre masa muscular y grasa. Atletas pueden tener un IMC elevado siendo saludables. Complementa siempre con otras medidas como la circunferencia de cintura o el % de grasa corporal.' },
         { q: '¿Es diferente el IMC para hombres y mujeres?', a: 'La fórmula es la misma, pero la composición corporal ideal varía. Las mujeres naturalmente tienen mayor porcentaje de grasa corporal. Los rangos de la OMS aplican a ambos sexos por igual.' },
         { q: '¿Qué IMC se considera saludable?', a: 'La OMS define el rango normal entre 18.5 y 24.9 kg/m². Sin embargo, algunas autoridades de salud ajustan estos rangos para poblaciones asiáticas, donde el riesgo metabólico aumenta con un IMC más bajo.' },
+        { q: '¿A partir de qué IMC existe riesgo para la salud?', a: 'La OMS considera riesgo aumentado desde IMC ≥ 25 (sobrepeso) y riesgo elevado desde IMC ≥ 30 (obesidad). Sin embargo, el riesgo es gradual: un IMC de 27 ya se asocia con mayor probabilidad de hipertensión y diabetes tipo 2 respecto al rango normal. También existe riesgo por debajo de 18.5 (desnutrición, fragilidad ósea).' },
+        { q: '¿El IMC es diferente para personas de origen asiático?', a: 'Sí. Varias organizaciones de salud, incluyendo la OMS, reconocen que las poblaciones del sudeste asiático tienen mayor riesgo metabólico con valores de IMC más bajos. Algunos países asiáticos usan el punto de corte 23 para sobrepeso (en lugar de 25) y 27.5 para obesidad (en lugar de 30).' },
       ].map((faq) => (
         <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
           <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
