@@ -481,10 +481,40 @@ Tres visualizaciones específicas en `src/components/calculators/`:
 
 ## Homepage (src/pages/index.astro)
 
-La homepage muestra las **34 calculadoras** en 4 categorías. Los íconos SVG están definidos como strings en el objeto `I` al inicio del frontmatter y se renderizan con `<Fragment set:html={calc.icon} />`.
+La homepage muestra las **39 calculadoras** en 4 categorías. Los íconos SVG están definidos como strings en el objeto `I` al inicio del frontmatter y se renderizan con `<Fragment set:html={calc.icon} />`.
+
+### Secciones de la homepage y dónde aparece el contador
+
+| Sección | Ubicación en el archivo | Qué actualizar |
+|---|---|---|
+| `<Base title=…>` | línea ~174 | Número en el título |
+| Schema `Organization` | campo `description` | Número en texto |
+| Schema `ItemList` | campo `numberOfItems` | Número entero |
+| **Ticker** (banda acid bajo el hero) | array inline, campo `num` | Número como string `'39'` |
+| `<Base description=…>` | línea ~175 | Número en la descripción |
+| **Sección CTA** (fondo acid, al final) | párrafo inline | "39 calculadoras gratuitas te esperan." |
+
+### Hero — imagen de fondo (actualizado 2026-05-16)
+
+La columna izquierda del hero (`.hero-left`) tiene una imagen de fondo de gimnasio libre de Unsplash con overlay oscuro:
+
+```css
+.hero-left {
+  background-image:
+    linear-gradient(rgba(10, 10, 9, 0.72), rgba(10, 10, 9, 0.72)),
+    url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1400&q=80&fit=crop');
+  background-size: cover;
+  background-position: center top;
+}
+```
+
+- El overlay `rgba(10,10,9,0.72)` asegura contraste suficiente para el texto blanco.
+- En móvil (`max-width: 768px`) se aplica `background-position: center center` y `min-height: 420px`.
+- La columna derecha (`.hero-nums`) mantiene fondo sólido `var(--ink-2)` sin imagen.
+- Si se cambia la imagen, verificar que el overlay siga siendo opaco suficiente (mínimo 0.65).
 
 Categorías y conteo actual (total: 39):
-1. **Fitness & salud** (24 calculadoras) — imc, peso-ideal, grasa-corporal, ffmi, complexion-corporal, somatotipo, indice-adiposidad, frecuencia-cardiaca, vo2-maximo, presion-arterial, riesgo-cardiovascular, cintura-cadera, cintura-estatura, 1rm, volumen-entrenamiento, fuerza-relativa, masa-muscular, calorias-ejercicio, calorias-caminando, calorias-ciclismo, ritmo-carrera, agua-diaria, calorias-diarias
+1. **Fitness & salud** (23 calculadoras) — imc, peso-ideal, grasa-corporal, ffmi, complexion-corporal, somatotipo, indice-adiposidad, frecuencia-cardiaca, vo2-maximo, presion-arterial, riesgo-cardiovascular, cintura-cadera, cintura-estatura, 1rm, volumen-entrenamiento, fuerza-relativa, masa-muscular, calorias-ejercicio, calorias-caminando, calorias-ciclismo, ritmo-carrera, agua-diaria, calorias-diarias
 2. **Embarazo & fertilidad** (4 calculadoras) — ovulacion, ciclo-menstrual, semana-embarazo, fecha-parto
 3. **Fechas & tiempo** (2 calculadoras) — edad, dias-fechas
 4. **Nutrición & bienestar** (10 calculadoras) — macronutrientes, proteinas, metabolismo-basal, deficit-calorico, resistencia-insulina, glucosa, colesterol, sueno, ayuno-intermitente, alcoholemia
@@ -631,13 +661,15 @@ npm run preview  # preview del build
 **4. Sincronización de la homepage** (`src/pages/index.astro`)
 - Añadir el ícono SVG al objeto `I` al inicio del frontmatter
 - Añadir la entrada al array `calculadoras` con: `{ slug, nombre, desc, badge, destacada, num, icon }`
-  - `num` debe ser el número siguiente (ej. si había 34, el nuevo es '35')
+  - `num` debe ser el número siguiente (ej. si había 39, el nuevo es '40')
   - `badge`: `'popular'` | `'new'` | `'essential'` | `null`
 - Añadir el slug al array correcto en `categorias` (Fitness, Embarazo, Fechas, Nutrición)
-- Actualizar el `numberOfItems` en el schema `ItemList` de la homepage (buscar `numberOfItems: 34`)
+- Actualizar el `numberOfItems` en el schema `ItemList` de la homepage
 - Actualizar el title y description de la homepage si el número de calculadoras cambia
-  - Title: `"CalcFit — 35 Calculadoras de Salud..."` (actualizar número)
-  - Description: `"35 calculadoras de salud..."` (actualizar número)
+  - Title: `"CalcFit — 40 Calculadoras de Salud..."` (actualizar número)
+  - Description: `"40 calculadoras de salud..."` (actualizar número)
+- Actualizar el **ticker** del hero: `{ num: '39', txt: 'Calculadoras gratuitas' }` → nuevo número
+- Actualizar el texto de la **sección CTA**: `"39 calculadoras gratuitas te esperan."` → nuevo número
 
 **5. Footer** (`src/components/layout/Footer.astro`)
 - Actualizar el texto del enlace: `"Ver las 34 →"` → `"Ver las 35 →"` (ajustar número)
@@ -651,7 +683,7 @@ npm run preview  # preview del build
 
 **7. Verificación final**
 - Ejecutar `npm run build` — debe completar sin errores
-- El número de páginas en el build debe coincidir (40 base + 1 por nueva calculadora)
+- El número de páginas en el build debe coincidir (actualmente 45: 39 calculadoras + 1 homepage + 5 estáticas)
 
 ---
 
@@ -662,7 +694,7 @@ npm run preview  # preview del build
 | `src/lib/calculators.ts` | Nueva función pura |
 | `src/components/calculators/NombreCalculator.tsx` | Nuevo componente |
 | `src/pages/slug.astro` | Nueva página con SEO completo |
-| `src/pages/index.astro` | Ícono en `I`, entrada en `calculadoras`, slug en `categorias`, `numberOfItems`, title, description |
+| `src/pages/index.astro` | Ícono en `I`, entrada en `calculadoras`, slug en `categorias`, `numberOfItems`, title, description, **ticker** (`num: 'N'`), **CTA** ("N calculadoras te esperan") |
 | `src/components/layout/Footer.astro` | Número en "Ver las N →" |
 | `CLAUDE.md` | Función, archivos, contadores, registro de cambios |
 
@@ -711,6 +743,7 @@ Siempre verificar `typeof window !== 'undefined'` antes de acceder a localStorag
 
 | Fecha | Acción |
 |---|---|
+| 2026-05-16 | Hero: imagen de gym Unsplash con overlay oscuro en columna izquierda. Ticker y CTA actualizados a 39. |
 | 2026-05-16 | Batch 4: +5 calculadoras (glucosa, colesterol, calorias-ciclismo, fuerza-relativa, masa-muscular). Total: 39. |
 | 2026-05-16 | Batch 3: +10 calculadoras (metabolismo-basal, 1rm, calorias-caminando, deficit-calorico, complexion-corporal, resistencia-insulina, somatotipo, riesgo-cardiovascular, indice-adiposidad, volumen-entrenamiento). Total: 34. |
 | 2026-05-16 | SEO agresivo: Base.astro con Organization schema + SearchAction. CalculatorLayout.astro con props `keywords`, `faqs`, `dateModified` y generación automática de FAQPage + BreadcrumbList en @graph. Todas las 34 páginas actualizadas con titles/descriptions optimizados, keywords meta y FAQs en JSON-LD. Footer corregido a "Ver las 34". Homepage con ItemList schema y título actualizado. |
