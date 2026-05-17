@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Footer from '../components/layout/Footer.astro';
+import CalculatorBrowser from '../components/CalculatorBrowser';
 
 const I = {
   imc:               `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="9" y1="3" x2="9" y2="15"/><line x1="3" y1="9" x2="15" y2="9"/><path d="M3 9 5.5 14 .5 14Z" fill="currentColor" stroke="none"/><path d="M15 9 12.5 14 17.5 14Z" fill="currentColor" stroke="none"/></svg>`,
@@ -37,6 +38,11 @@ const I = {
   riesgoCV:          `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 15S2.5 10.5 2.5 6a3.5 3.5 0 017 0 3.5 3.5 0 017 0C16.5 10.5 9 15 9 15z"/><line x1="9" y1="7.5" x2="9" y2="5.5"/><circle cx="9" cy="9" r="0.6" fill="currentColor" stroke="none"/></svg>`,
   bai:               `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="9" cy="3" r="2"/><path d="M5.5 7C3.5 8.5 2.5 11.5 3.5 14.5L4.5 17h9l1-2.5c1-3-.5-6-2.5-7.5H5.5z"/><line x1="2.5" y1="12" x2="15.5" y2="12" stroke-dasharray="2 1.5"/></svg>`,
   volumen:           `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="6" y="7" width="6" height="4"/><rect x="1" y="6" width="2.5" height="6"/><rect x="14.5" y="6" width="2.5" height="6"/><line x1="3.5" y1="9" x2="6" y2="9"/><line x1="12" y1="9" x2="14.5" y2="9"/><line x1="3" y1="14.5" x2="15" y2="14.5"/><line x1="3" y1="12.5" x2="15" y2="12.5"/></svg>`,
+  glucosa:           `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 2L5 9a4 4 0 008 0L9 2z"/><line x1="6" y1="7" x2="12" y2="7"/><line x1="5.5" y1="10" x2="12.5" y2="10"/></svg>`,
+  colesterol:        `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="9" cy="9" r="7"/><line x1="9" y1="4" x2="9" y2="14"/><line x1="4" y1="7" x2="14" y2="7"/><line x1="4" y1="11" x2="14" y2="11"/></svg>`,
+  calCiclismo:       `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="4" cy="13" r="3"/><circle cx="14" cy="13" r="3"/><path d="M4 13L7 7h4l2 3"/><circle cx="11" cy="4" r="1.5"/><line x1="9" y1="7" x2="14" y2="10"/></svg>`,
+  fuerzaRel:         `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="6" y="8" width="6" height="3"/><rect x="1" y="6.5" width="2" height="6"/><rect x="15" y="6.5" width="2" height="6"/><line x1="3" y1="9.5" x2="6" y2="9.5"/><line x1="12" y1="9.5" x2="15" y2="9.5"/><line x1="6" y1="4" x2="12" y2="4"/><polyline points="8,2 6,4 8,6"/></svg>`,
+  masaMuscular:      `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 12c0-3 1.5-5 4-5.5L11 5c2-1 4 0 4 2s-1.5 3-3.5 3L9 9.5"/><path d="M4 12c0 2 1.5 3.5 4 3.5s4-1.5 4-3.5"/><line x1="2" y1="14" x2="16" y2="14"/></svg>`,
 };
 
 const calculadoras = [
@@ -74,41 +80,100 @@ const calculadoras = [
   { slug: '/riesgo-cardiovascular',nombre: 'Riesgo Cardiovascular',      desc: 'Riesgo a 10 años (Framingham simplif.)',   badge: 'new',       destacada: false, num: '32', icon: I.riesgoCV },
   { slug: '/indice-adiposidad',   nombre: 'Índice Adiposidad (BAI)',      desc: 'Grasa corporal con cadera y altura',       badge: 'new',       destacada: false, num: '33', icon: I.bai },
   { slug: '/volumen-entrenamiento',nombre: 'Volumen de Entrenamiento',    desc: 'Series semanales por músculo (MEV/MRV)',   badge: 'new',       destacada: false, num: '34', icon: I.volumen },
+  { slug: '/glucosa',              nombre: 'Glucosa en Sangre',           desc: 'Ayunas, postprandial y HbA1c (ADA 2024)',  badge: 'new',       destacada: false, num: '35', icon: I.glucosa },
+  { slug: '/colesterol',           nombre: 'Colesterol y LDL',            desc: 'Friedewald: LDL, HDL, TG y perfil lipídico', badge: 'new',     destacada: false, num: '36', icon: I.colesterol },
+  { slug: '/calorias-ciclismo',    nombre: 'Calorías en Ciclismo',        desc: 'Gasto calórico por velocidad e intensidad', badge: 'new',       destacada: false, num: '37', icon: I.calCiclismo },
+  { slug: '/fuerza-relativa',      nombre: 'Fuerza Relativa',             desc: 'Ratio 1RM/peso: press, sentadilla, muerto', badge: 'new',       destacada: false, num: '38', icon: I.fuerzaRel },
+  { slug: '/masa-muscular',        nombre: 'Masa Muscular',               desc: 'Masa muscular esquelética y SMI (Lee 2000)', badge: 'new',      destacada: false, num: '39', icon: I.masaMuscular },
 ];
-
-const calcsBySlug = Object.fromEntries(calculadoras.map(c => [c.slug, c]));
 
 const categorias = [
   {
     label: 'Fitness & salud',
-    slugs: ['/imc', '/calorias-diarias', '/peso-ideal', '/grasa-corporal', '/frecuencia-cardiaca', '/agua-diaria', '/cintura-cadera', '/calorias-ejercicio', '/ffmi', '/vo2-maximo', '/presion-arterial', '/cintura-estatura', '/complexion-corporal', '/somatotipo', '/riesgo-cardiovascular', '/indice-adiposidad', '/1rm', '/calorias-caminando', '/volumen-entrenamiento'],
+    slugs: [
+      '/imc', '/peso-ideal', '/grasa-corporal', '/ffmi', '/complexion-corporal', '/somatotipo', '/indice-adiposidad',
+      '/frecuencia-cardiaca', '/vo2-maximo', '/presion-arterial', '/riesgo-cardiovascular',
+      '/cintura-cadera', '/cintura-estatura',
+      '/1rm', '/volumen-entrenamiento', '/fuerza-relativa', '/masa-muscular',
+      '/calorias-ejercicio', '/calorias-caminando', '/calorias-ciclismo', '/ritmo-carrera',
+      '/agua-diaria', '/calorias-diarias',
+    ],
   },
   {
     label: 'Embarazo & fertilidad',
-    slugs: ['/ovulacion', '/semana-embarazo', '/fecha-parto', '/ciclo-menstrual'],
+    slugs: ['/ovulacion', '/ciclo-menstrual', '/semana-embarazo', '/fecha-parto'],
   },
   {
     label: 'Fechas & tiempo',
-    slugs: ['/edad', '/dias-fechas', '/ritmo-carrera'],
+    slugs: ['/edad', '/dias-fechas'],
   },
   {
     label: 'Nutrición & bienestar',
-    slugs: ['/macronutrientes', '/proteinas', '/sueno', '/ayuno-intermitente', '/alcoholemia', '/metabolismo-basal', '/deficit-calorico', '/resistencia-insulina'],
+    slugs: ['/macronutrientes', '/proteinas', '/metabolismo-basal', '/deficit-calorico', '/resistencia-insulina', '/glucosa', '/colesterol', '/sueno', '/ayuno-intermitente', '/alcoholemia'],
   },
 ];
 
+// Mapa slug → categoría para pasar al componente React
+const catBySlug: Record<string, string> = {};
+for (const cat of categorias) {
+  for (const slug of cat.slugs) catBySlug[slug] = cat.label;
+}
+const calcWithCat = calculadoras.map(c => ({ ...c, categoria: catBySlug[c.slug] ?? '' }));
+const catLabels = categorias.map(c => c.label);
+
 const schema = {
   '@context': 'https://schema.org',
-  '@type': 'WebSite',
-  name: 'CalcFit',
-  url: 'https://www.calcfit.com',
-  description: 'Calculadoras de salud gratuitas validadas científicamente.',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      name: 'CalcFit',
+      url: 'https://www.calcfit.com',
+      description: 'Calculadoras de salud gratuitas y validadas científicamente para toda Latinoamérica',
+      inLanguage: 'es',
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: { '@type': 'EntryPoint', urlTemplate: 'https://www.calcfit.com/?q={search_term_string}' },
+        'query-input': 'required name=search_term_string',
+      },
+    },
+    {
+      '@type': 'Organization',
+      name: 'CalcFit',
+      url: 'https://www.calcfit.com',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://www.calcfit.com/favicon.svg',
+        width: 32,
+        height: 32,
+      },
+      contactPoint: {
+        '@type': 'ContactPoint',
+        email: 'codezun@gmail.com',
+        contactType: 'customer support',
+        availableLanguage: 'Spanish',
+      },
+      description: '39 calculadoras de salud gratuitas, validadas científicamente, sin registro ni cookies de rastreo.',
+    },
+    {
+      '@type': 'ItemList',
+      name: 'Calculadoras de salud CalcFit',
+      numberOfItems: 39,
+      itemListElement: calculadoras.map((c, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: c.nombre,
+        url: `https://www.calcfit.com${c.slug}`,
+        description: c.desc,
+      })),
+    },
+  ],
 };
 ---
 
 <Base
-  title="CalcFit — Calculadoras de Salud Gratuitas y Científicas"
-  description="34 calculadoras de salud gratuitas: IMC, calorías, 1RM, metabolismo basal, somatotipo, déficit calórico, riesgo cardiovascular y más. Validadas científicamente."
+  title="CalcFit — 39 Calculadoras de Salud Gratuitas y Validadas Científicamente"
+  description="39 calculadoras de salud gratuitas: IMC, calorías, glucosa, colesterol, masa muscular, 1RM, riesgo cardiovascular y más. Sin registro. Validadas científicamente."
+  keywords="calculadoras de salud gratis, calculadora IMC, calculadora calorías, calculadora peso ideal, calcular grasa corporal, calculadoras fitness"
   schema={schema}
 >
 
@@ -167,7 +232,7 @@ const schema = {
 <div style="background: var(--acid); padding: 10px 32px; display: flex; align-items: center; gap: 24px; flex-wrap: wrap;">
   {[
     { num: '100K+', txt: 'Usuarios activos' },
-    { num: '24',    txt: 'Calculadoras gratuitas' },
+    { num: '34',    txt: 'Calculadoras gratuitas' },
     { num: '99.9%', txt: 'Precisión científica' },
     { num: '0',     txt: 'Datos almacenados' },
     { num: 'OMS',   txt: 'Validación internacional' },
@@ -184,44 +249,10 @@ const schema = {
 
 <!-- CALCULADORAS -->
 <section id="calculadoras" style="background: var(--cream); padding: 48px 32px;">
-  <div style="display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px; padding-bottom: 16px; border-bottom: 1px solid var(--border); margin-bottom: 32px;">
+  <div style="display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px; padding-bottom: 16px; border-bottom: 1px solid var(--border); margin-bottom: 24px;">
     <h2 style="font-family: var(--font-display); font-size: 48px; color: var(--ink);">Calculadoras</h2>
-    <span style="font-family: var(--font-mono); font-size: 11px; color: var(--muted);">24 herramientas disponibles</span>
   </div>
-
-  {categorias.map((cat) => (
-    <div style="margin-bottom: 32px;">
-      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 1px;">
-        <span style="border: 1px solid var(--ink); padding: 4px 12px; font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--ink); flex-shrink: 0;">
-          {cat.label}
-        </span>
-        <div style="flex: 1; height: 1px; background: var(--border);"></div>
-      </div>
-      <div class="calc-grid-3col" style="gap: 1px; background: var(--border);">
-        {cat.slugs.map((slug) => {
-          const calc = calcsBySlug[slug];
-          if (!calc) return null;
-          return (
-            <a href={calc.slug} style="background: var(--cream); padding: 20px; text-decoration: none; display: block; position: relative; transition: background 0.12s;"
-              onmouseover="this.style.background='#EDE9E0'"
-              onmouseout="this.style.background='var(--cream)'">
-              <span style="position: absolute; top: 12px; right: 14px; font-family: var(--font-mono); font-size: 10px; color: #bbb;">{calc.num}</span>
-              <div style={`width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; background: ${calc.destacada ? 'var(--acid)' : 'var(--ink)'}; color: ${calc.destacada ? 'var(--ink)' : 'var(--acid)'};`}>
-                <Fragment set:html={calc.icon} />
-              </div>
-              <div style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 4px;">{calc.nombre}</div>
-              <div style="font-size: 11px; color: var(--muted); line-height: 1.5; margin-bottom: 8px;">{calc.desc}</div>
-              {calc.badge && (
-                <span style={`font-family: var(--font-mono); font-size: 9px; padding: 2px 7px; letter-spacing: 0.8px; text-transform: uppercase; display: inline-block; ${calc.badge === 'popular' ? 'background: var(--acid); color: #1a1a00;' : calc.badge === 'essential' ? 'border: 1px solid var(--ink); color: var(--ink);' : 'background: var(--ink); color: var(--acid);'}`}>
-                  {calc.badge === 'popular' ? 'Popular' : calc.badge === 'essential' ? 'Esencial' : 'Nuevo'}
-                </span>
-              )}
-            </a>
-          );
-        })}
-      </div>
-    </div>
-  ))}
+  <CalculatorBrowser calculadoras={calcWithCat} categorias={catLabels} client:load />
 </section>
 
 <!-- MANIFESTO -->
@@ -253,7 +284,7 @@ const schema = {
 <section class="cta-section" style="background: var(--acid); padding: 52px 32px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px;">
   <div>
     <h2 style="font-family: var(--font-display); font-size: 58px; color: var(--ink); line-height: 0.95;">Empieza /<br>ahora.</h2>
-    <p style="font-size: 13px; color: #3a3900; margin-top: 8px;">24 calculadoras gratuitas te esperan.</p>
+    <p style="font-size: 13px; color: #3a3900; margin-top: 8px;">34 calculadoras gratuitas te esperan.</p>
   </div>
   <div style="display: flex; gap: 12px; flex-wrap: wrap;">
     <a href="#calculadoras" style="background: var(--ink); color: var(--acid); padding: 14px 28px; font-weight: 600; font-size: 13px; text-decoration: none;">Ver calculadoras</a>

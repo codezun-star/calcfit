@@ -62,7 +62,7 @@ calcfit-astro/
 │   │   │   ├── HistoryTable.tsx
 │   │   │   ├── ShareButtons.tsx
 │   │   │   └── Badge.tsx              ← popular | new | essential
-│   │   └── calculators/               ← 34 componentes React
+│   │   └── calculators/               ← 39 componentes React
 │   │       ├── IMCCalculator.tsx
 │   │       ├── CaloriasCalculator.tsx
 │   │       ├── PesoIdealCalculator.tsx
@@ -97,6 +97,11 @@ calcfit-astro/
 │   │       ├── RiesgoCardiovascularCalculator.tsx
 │   │       ├── IndiceAdipositadCalculator.tsx
 │   │       ├── VolumenEntrenamientoCalculator.tsx
+│   │       ├── GlucosaCalculator.tsx
+│   │       ├── ColesterolCalculator.tsx
+│   │       ├── CaloriasCiclismoCalculator.tsx
+│   │       ├── FuerzaRelativaCalculator.tsx
+│   │       ├── MasaMuscularCalculator.tsx
 │   │       ├── GaugeIMC.tsx           ← gauge SVG semicircular animado
 │   │       ├── ZonasCardiaca.tsx      ← barras horizontales de zonas cardíacas
 │   │       └── BarrasCaloria.tsx      ← barras verticales déficit/mant/superávit
@@ -106,7 +111,7 @@ calcfit-astro/
 │   │   ├── useValidation.ts           ← hook de validación de campos
 │   │   └── useHistory.ts              ← hook de historial en localStorage
 │   └── pages/
-│       ├── index.astro                ← homepage con las 34 calculadoras
+│       ├── index.astro                ← homepage con las 39 calculadoras
 │       ├── imc.astro
 │       ├── calorias-diarias.astro
 │       ├── peso-ideal.astro
@@ -141,6 +146,11 @@ calcfit-astro/
 │       ├── riesgo-cardiovascular.astro
 │       ├── indice-adiposidad.astro
 │       ├── volumen-entrenamiento.astro
+│       ├── glucosa.astro
+│       ├── colesterol.astro
+│       ├── calorias-ciclismo.astro
+│       ├── fuerza-relativa.astro
+│       ├── masa-muscular.astro
 │       ├── sobre-nosotros.astro       ← página estática
 │       ├── contacto.astro             ← solo email, sin formulario
 │       ├── aviso-legal.astro          ← LSSI-CE
@@ -231,23 +241,61 @@ El Toggle siempre muestra **"kg · cm"** y **"lb · pies"** — nunca "Métrico"
 
 ## Arquitectura de páginas
 
-Cada página de calculadora sigue este patrón exacto:
+Cada página de calculadora sigue este patrón exacto (incluye los props SEO obligatorios):
 
 ```astro
-<CalculatorLayout title="..." description="..." calculatorName="..." breadcrumbSlug="...">
-  <!-- Header oscuro con H1 -->
+<CalculatorLayout
+  title="Calculadora de Nombre — Variante / Beneficio | CalcFit"
+  description="Verbo de acción + keyword principal + beneficio concreto + CTA. Máx 155 chars."
+  calculatorName="Nombre Calculadora"
+  breadcrumbSlug="slug-url"
+  ogImage="/og/nombre.jpg"
+  keywords="keyword 1, keyword 2, keyword 3, keyword 4, keyword 5"
+  faqs={[
+    { q: '¿Pregunta frecuente 1?', a: 'Respuesta detallada de al menos 2 frases con datos concretos.' },
+    { q: '¿Pregunta frecuente 2?', a: 'Respuesta detallada...' },
+    { q: '¿Pregunta frecuente 3?', a: 'Respuesta detallada...' },
+    { q: '¿Pregunta frecuente 4?', a: 'Respuesta detallada...' },
+    { q: '¿Pregunta frecuente 5?', a: 'Respuesta detallada...' },
+  ]}
+>
+  <!-- Header oscuro con H1 — usar color: #999 (nunca #666) en párrafo descriptivo -->
   <div style="background: var(--ink); padding: 40px 32px 32px;">
-    <h1>Nombre <span style="color: var(--acid);">Calculadora</span></h1>
-    <p>Descripción breve</p>
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Nombre<br><span style="color: var(--acid);">Calculadora</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Descripción breve de qué hace y para qué sirve.
+    </p>
   </div>
 
   <!-- Componente React con client:load -->
   <NombreCalculator client:load />
 
-  <!-- Contenido SEO server-rendered (no JavaScript) -->
+  <!-- Contenido SEO server-rendered (no JavaScript) — OBLIGATORIO y rico -->
   <div slot="seo">
-    <h2>¿Cómo se calcula?</h2>
-    <!-- tabla de referencia, FAQ -->
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cómo se calcula?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      Explicación de la fórmula o método con referencias científicas.
+    </p>
+
+    <!-- Tabla de referencia (obligatoria si tiene rangos o categorías) -->
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px;">
+      <!-- ... -->
+    </table>
+
+    <!-- Preguntas frecuentes en HTML — MISMO contenido que el prop faqs -->
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {[
+        { q: '¿Pregunta?', a: 'Respuesta.' },
+      ].map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
   </div>
 </CalculatorLayout>
 ```
@@ -347,6 +395,28 @@ calcularVolumenEntrenamiento(nivel, diasPorSemana)
   → { grupos[], totalSetsSemana, recomendacion }
   // nivel: 'principiante' | 'intermedio' | 'avanzado'
   // grupos[]: { nombre, mev, mrv, recomendado } por grupo muscular (10 grupos)
+
+// Calculadoras batch 4 (5 nuevas — 2026-05-16)
+calcularGlucosa(valor, tipo)
+  → { valor, categoria, riesgo, color, recomendacion }
+  // tipo: 'ayunas' | 'postprandial' | 'hba1c' — criterios ADA 2024
+  // riesgo: 'normal' | 'prediabetes' | 'diabetes'
+calcularColesterol(total, hdl, trigliceridos, sexo)
+  → { ldl, noHdl, ratioTotal, clasificacion: { total, hdl, ldl, trigliceridos }, riesgo, riesgoNombre, color, recomendacion }
+  // Fórmula Friedewald: LDL = Total - HDL - TG/5. Válida con TG < 400 mg/dL
+  // clasificacion[].{valor, categoria, color} — NCEP ATP III
+calcularCaloriasCiclismo(pesoKg, duracionMin, intensidad)
+  → { calorias, km, met, intensidadNombre }
+  // intensidad: 'muy_lento' | 'lento' | 'moderado' | 'rapido' | 'muy_rapido'
+  // también exporta: INTENSIDADES_CICLISMO (constante con MET por velocidad)
+calcularFuerzaRelativa(pesoCorpoalKg, pesoLevantadoKg, ejercicio, sexo)
+  → { ratio, nivel, nivelNombre, color, descripcion, estandares[] }
+  // ejercicio: 'press_banca' | 'sentadilla' | 'peso_muerto' | 'press_militar'
+  // nivel: 'principiante' | 'novato' | 'intermedio' | 'avanzado' | 'elite'
+calcularMasaMuscular(pesoKg, alturaCm, edadAnios, sexo)
+  → { masaMuscularKg, smi, porcentaje, categoria, nivel, color, descripcion }
+  // Fórmula Lee 2000 validada contra DEXA (r=0.94)
+  // nivel: 'bajo' | 'normal' | 'alto' — umbrales EWGSOP2
 ```
 
 ### Conversión de unidades (src/lib/units.ts)
@@ -413,13 +483,13 @@ Tres visualizaciones específicas en `src/components/calculators/`:
 
 La homepage muestra las **34 calculadoras** en 4 categorías. Los íconos SVG están definidos como strings en el objeto `I` al inicio del frontmatter y se renderizan con `<Fragment set:html={calc.icon} />`.
 
-Categorías:
-1. **Fitness & salud** (19 calculadoras)
-2. **Embarazo & fertilidad** (4 calculadoras)
-3. **Fechas & tiempo** (3 calculadoras)
-4. **Nutrición & bienestar** (8 calculadoras)
+Categorías y conteo actual (total: 39):
+1. **Fitness & salud** (24 calculadoras) — imc, peso-ideal, grasa-corporal, ffmi, complexion-corporal, somatotipo, indice-adiposidad, frecuencia-cardiaca, vo2-maximo, presion-arterial, riesgo-cardiovascular, cintura-cadera, cintura-estatura, 1rm, volumen-entrenamiento, fuerza-relativa, masa-muscular, calorias-ejercicio, calorias-caminando, calorias-ciclismo, ritmo-carrera, agua-diaria, calorias-diarias
+2. **Embarazo & fertilidad** (4 calculadoras) — ovulacion, ciclo-menstrual, semana-embarazo, fecha-parto
+3. **Fechas & tiempo** (2 calculadoras) — edad, dias-fechas
+4. **Nutrición & bienestar** (10 calculadoras) — macronutrientes, proteinas, metabolismo-basal, deficit-calorico, resistencia-insulina, glucosa, colesterol, sueno, ayuno-intermitente, alcoholemia
 
-Al agregar una calculadora nueva, añadirla al array `calculadoras` con: `{ slug, nombre, desc, badge, icon }` y al map `calcsBySlug` para asignarla a su categoría.
+Al agregar una calculadora nueva, seguir el checklist completo de la sección "Reglas para agregar una calculadora nueva".
 
 ---
 
@@ -443,21 +513,73 @@ Google Analytics está activo en todas las páginas (ID: `G-NRM0FZ5W8S`). Se iny
 
 ---
 
-## SEO
+## SEO — Sistema completo (implementado 2026-05-16)
 
-### Por página
-- `Base.astro` genera automáticamente: meta charset/viewport, canonical, OG completo, Twitter Card, JSON-LD (`is:inline` obligatorio en el script)
-- `CalculatorLayout.astro` inyecta `MedicalWebContent` schema por defecto en páginas de calculadoras
-- Breadcrumb visible en todas las páginas interiores
+Este proyecto usa **SEO agresivo** en todas las calculadoras. Cada nueva calculadora DEBE seguir exactamente el mismo estándar.
+
+### Arquitectura de schemas JSON-LD
+
+`CalculatorLayout.astro` genera automáticamente un `@graph` con **3 schemas** por página:
+1. **`MedicalWebContent`** — describe el contenido médico con `lastReviewed`, `publisher`, `audience: Patient`
+2. **`BreadcrumbList`** — Inicio → Nombre Calculadora (necesario para rich results de breadcrumb)
+3. **`FAQPage`** — generado automáticamente si se pasa el prop `faqs` (produce las rich results de preguntas en Google)
+
+`Base.astro` tiene un schema `@graph` global en la homepage con `WebSite` (SearchAction) + `Organization`.
+
+### Props SEO del CalculatorLayout
+
+```astro
+<CalculatorLayout
+  title="..."          <!-- Obligatorio. Formato: "Keyword Principal — Variante | CalcFit". Máx 60 chars. -->
+  description="..."   <!-- Obligatorio. Máx 155 chars. Incluir keyword, verbo, beneficio y CTA. -->
+  keywords="..."      <!-- Obligatorio. 4-6 keywords separadas por comas. -->
+  faqs={[...]}        <!-- Obligatorio. Mínimo 4 preguntas. Genera FAQPage JSON-LD automáticamente. -->
+  calculatorName="..."
+  breadcrumbSlug="..."
+  ogImage="..."
+  dateModified="YYYY-MM-DD"  <!-- Opcional. Default: 2026-05-16 -->
+>
+```
+
+### Reglas de título (title)
+- **Keyword primero**: empezar con el término que la gente busca, no con "Calculadora de"
+- **Máx 60 caracteres** incluyendo " | CalcFit"
+- Formato: `"Keyword Principal — Variante o Beneficio | CalcFit"`
+- Ejemplos correctos:
+  - `"Calculadora de IMC Gratis — Fórmula OMS | CalcFit"` ✓
+  - `"Calculadora VO2 Máximo — Salud Cardiovascular | CalcFit"` ✓
+- Ejemplos incorrectos:
+  - `"CalcFit — Calculadora de IMC"` ✗ (marca primero)
+  - `"Calculadora de Índice de Masa Corporal según OMS 2024"` ✗ (demasiado largo)
+
+### Reglas de descripción (description)
+- **Máx 155 caracteres**
+- Estructura: `[Verbo acción] + [keyword] + [resultado concreto] + [beneficio]. [CTA o detalle técnico].`
+- Siempre terminar con "Gratis." o "Sin registro." o similar
+- La keyword principal debe aparecer en los primeros 100 chars
+
+### Reglas de keywords
+- 4-6 términos separados por coma
+- Incluir: keyword exacta + variantes de long tail + pregunta ("cuánto/cómo/cuál")
+- Ejemplo: `"calculadora IMC, índice de masa corporal, calcular IMC gratis, IMC normal OMS, fórmula IMC"`
+
+### Reglas de FAQs (prop faqs y slot="seo")
+- **Mínimo 4 preguntas**, ideal 5-6
+- Las preguntas deben responder a búsquedas reales ("¿cuánto...?", "¿cómo...?", "¿qué es...?", "¿es seguro...?")
+- Las respuestas deben tener al menos 2 frases con datos concretos (números, referencias, fuentes)
+- El array `faqs` del prop y las FAQs en el slot HTML deben ser **idénticos**
+- Sin FAQs no hay `FAQPage` schema → no hay rich results en Google
 
 ### JSON-LD schemas usados
-- `WebSite` en la homepage
-- `MedicalWebContent` en cada calculadora (con `audience: Patient` y `lastReviewed`)
+| Página | Schemas |
+|---|---|
+| Homepage (`index.astro`) | `WebSite` + `Organization` + `ItemList` (34 calculadoras) en `@graph` |
+| Cada calculadora | `MedicalWebContent` + `BreadcrumbList` + `FAQPage` en `@graph` |
 
 ### Sitemap
 Generado automáticamente por `@astrojs/sitemap`. Dos archivos en `/dist/`:
 - `sitemap-index.xml` — índice principal
-- `sitemap-0.xml` — 30 URLs, todas bajo `https://www.calcfit.com`
+- `sitemap-0.xml` — todas las URLs bajo `https://www.calcfit.com`
 
 URL a enviar en Google Search Console: `https://www.calcfit.com/sitemap-index.xml` (con www).
 
@@ -481,16 +603,68 @@ npm run preview  # preview del build
 
 ## Reglas para agregar una calculadora nueva
 
-1. Agregar la función de cálculo en `src/lib/calculators.ts` (función pura, cero efectos secundarios)
-2. Crear el componente React en `src/components/calculators/NombreCalculator.tsx`
-   - Importar la función de `calculators.ts`
-   - Usar `Toggle` si tiene peso/altura
-   - Usar `useValidation` o validación inline para los inputs
-   - Usar `Input`, `Button`, `ResultCard`, `ShareButtons`
-   - Respetar terminología LATAM (pies/pulg/ppm — ver tabla arriba)
-3. Crear la página en `src/pages/nombre.astro` usando `CalculatorLayout`
-4. Agregar al array `calculadoras` en `src/pages/index.astro` con su SVG icon y categoría
-5. Ejecutar `npm run build` y verificar que pasa sin errores
+### Checklist completo — en este orden exacto:
+
+**1. Lógica de cálculo**
+- Agregar la función en `src/lib/calculators.ts` (función pura, cero efectos secundarios)
+- Actualizar el bloque de documentación en CLAUDE.md → sección "Funciones disponibles"
+
+**2. Componente React**
+- Crear `src/components/calculators/NombreCalculator.tsx`
+- Importar la función de `calculators.ts` — nunca calcular inline en el componente
+- Usar `Toggle` si el formulario tiene peso o altura
+- Usar `useValidation` o validación inline para los inputs
+- Usar `Input`, `Button`, `ResultCard`, `ShareButtons`
+- Respetar terminología LATAM (pies/pulg/ppm — ver tabla arriba)
+- Agregar el nombre del archivo en la lista de calculators de CLAUDE.md
+
+**3. Página Astro con SEO completo**
+- Crear `src/pages/slug.astro` usando `CalculatorLayout`
+- Rellenar los 4 props SEO obligatorios: `title`, `description`, `keywords`, `faqs`
+  - `title`: keyword primero, máx 60 chars, formato "Keyword — Variante | CalcFit"
+  - `description`: máx 155 chars, verbo + keyword + beneficio + "Gratis."
+  - `keywords`: 4-6 términos en español separados por coma
+  - `faqs`: mínimo 4 preguntas con respuestas de 2+ frases con datos concretos
+- Añadir slot `"seo"` con: H2 intro + párrafo + tabla de referencia + sección FAQs (mismo contenido que el prop `faqs`)
+- El párrafo del header oscuro usa `color: #999` (nunca `#666`)
+
+**4. Sincronización de la homepage** (`src/pages/index.astro`)
+- Añadir el ícono SVG al objeto `I` al inicio del frontmatter
+- Añadir la entrada al array `calculadoras` con: `{ slug, nombre, desc, badge, destacada, num, icon }`
+  - `num` debe ser el número siguiente (ej. si había 34, el nuevo es '35')
+  - `badge`: `'popular'` | `'new'` | `'essential'` | `null`
+- Añadir el slug al array correcto en `categorias` (Fitness, Embarazo, Fechas, Nutrición)
+- Actualizar el `numberOfItems` en el schema `ItemList` de la homepage (buscar `numberOfItems: 34`)
+- Actualizar el title y description de la homepage si el número de calculadoras cambia
+  - Title: `"CalcFit — 35 Calculadoras de Salud..."` (actualizar número)
+  - Description: `"35 calculadoras de salud..."` (actualizar número)
+
+**5. Footer** (`src/components/layout/Footer.astro`)
+- Actualizar el texto del enlace: `"Ver las 34 →"` → `"Ver las 35 →"` (ajustar número)
+
+**6. CLAUDE.md** (este archivo)
+- Actualizar el contador en la sección de estructura de carpetas: `← 35 componentes React`
+- Añadir la función nueva a la sección "Funciones disponibles" de `calculators.ts`
+- Añadir el archivo `.astro` a la lista de páginas
+- Actualizar las categorías de la homepage si el conteo cambió
+- Añadir entrada al Registro de cambios
+
+**7. Verificación final**
+- Ejecutar `npm run build` — debe completar sin errores
+- El número de páginas en el build debe coincidir (40 base + 1 por nueva calculadora)
+
+---
+
+### Resumen rápido (puntos de sincronización al agregar calculadora)
+
+| Archivo | Qué actualizar |
+|---|---|
+| `src/lib/calculators.ts` | Nueva función pura |
+| `src/components/calculators/NombreCalculator.tsx` | Nuevo componente |
+| `src/pages/slug.astro` | Nueva página con SEO completo |
+| `src/pages/index.astro` | Ícono en `I`, entrada en `calculadoras`, slug en `categorias`, `numberOfItems`, title, description |
+| `src/components/layout/Footer.astro` | Número en "Ver las N →" |
+| `CLAUDE.md` | Función, archivos, contadores, registro de cambios |
 
 ---
 
@@ -537,4 +711,6 @@ Siempre verificar `typeof window !== 'undefined'` antes de acceder a localStorag
 
 | Fecha | Acción |
 |---|---|
+| 2026-05-16 | Batch 4: +5 calculadoras (glucosa, colesterol, calorias-ciclismo, fuerza-relativa, masa-muscular). Total: 39. |
 | 2026-05-16 | Batch 3: +10 calculadoras (metabolismo-basal, 1rm, calorias-caminando, deficit-calorico, complexion-corporal, resistencia-insulina, somatotipo, riesgo-cardiovascular, indice-adiposidad, volumen-entrenamiento). Total: 34. |
+| 2026-05-16 | SEO agresivo: Base.astro con Organization schema + SearchAction. CalculatorLayout.astro con props `keywords`, `faqs`, `dateModified` y generación automática de FAQPage + BreadcrumbList en @graph. Todas las 34 páginas actualizadas con titles/descriptions optimizados, keywords meta y FAQs en JSON-LD. Footer corregido a "Ver las 34". Homepage con ItemList schema y título actualizado. |

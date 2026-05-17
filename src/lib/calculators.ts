@@ -1153,3 +1153,207 @@ export function calcularSueno(horaDespertar: string): CicloSueno[] {
     };
   });
 }
+
+// ─── GLUCOSA EN SANGRE ────────────────────────────────────────────────────────
+export type TipoMedicionGlucosa = 'ayunas' | 'postprandial' | 'hba1c';
+
+export interface GlucosaResult {
+  valor:        number;
+  categoria:    string;
+  riesgo:       'normal' | 'prediabetes' | 'diabetes';
+  color:        string;
+  recomendacion: string;
+}
+
+export function calcularGlucosa(valor: number, tipo: TipoMedicionGlucosa): GlucosaResult {
+  if (tipo === 'ayunas') {
+    if (valor < 100) return { valor, categoria: 'Normal',       riesgo: 'normal',      color: '#34D399', recomendacion: 'Glucosa en ayunas normal. Mantén hábitos saludables y control anual.' };
+    if (valor < 126) return { valor, categoria: 'Prediabetes',  riesgo: 'prediabetes', color: '#FB923C', recomendacion: 'Glucosa elevada. Cambia dieta, aumenta actividad física y consulta a tu médico.' };
+    return             { valor, categoria: 'Diabetes',      riesgo: 'diabetes',    color: '#F87171', recomendacion: 'Valor diagnóstico de diabetes. Consulta a tu médico de inmediato.' };
+  }
+  if (tipo === 'postprandial') {
+    if (valor < 140) return { valor, categoria: 'Normal',      riesgo: 'normal',      color: '#34D399', recomendacion: 'Respuesta glucémica normal tras la comida.' };
+    if (valor < 200) return { valor, categoria: 'Prediabetes', riesgo: 'prediabetes', color: '#FB923C', recomendacion: 'Tolerancia a la glucosa alterada. Reduce los carbohidratos refinados y consulta a tu médico.' };
+    return             { valor, categoria: 'Diabetes',     riesgo: 'diabetes',    color: '#F87171', recomendacion: 'Valor diagnóstico de diabetes. Consulta a tu médico de inmediato.' };
+  }
+  // HbA1c (%)
+  if (valor < 5.7) return { valor, categoria: 'Normal',      riesgo: 'normal',      color: '#34D399', recomendacion: 'HbA1c normal. Mantén hábitos saludables.' };
+  if (valor < 6.5) return { valor, categoria: 'Prediabetes', riesgo: 'prediabetes', color: '#FB923C', recomendacion: 'HbA1c elevada. Modifica dieta y actividad física. Control cada 6 meses.' };
+  return             { valor, categoria: 'Diabetes',     riesgo: 'diabetes',    color: '#F87171', recomendacion: 'HbA1c en rango diagnóstico de diabetes. Consulta a tu médico de inmediato.' };
+}
+
+// ─── COLESTEROL ───────────────────────────────────────────────────────────────
+export interface ColesterolResult {
+  ldl:        number;
+  noHdl:      number;
+  ratioTotal: number;
+  clasificacion: {
+    total:        { valor: number; categoria: string; color: string };
+    hdl:          { valor: number; categoria: string; color: string };
+    ldl:          { valor: number; categoria: string; color: string };
+    trigliceridos:{ valor: number; categoria: string; color: string };
+  };
+  riesgo:        'optimo' | 'normal' | 'limite' | 'alto' | 'muy_alto';
+  riesgoNombre:  string;
+  color:         string;
+  recomendacion: string;
+}
+
+export function calcularColesterol(
+  total:        number,
+  hdl:          number,
+  trigliceridos: number,
+  sexo:         'hombre' | 'mujer',
+): ColesterolResult {
+  const ldl    = Math.round(total - hdl - trigliceridos / 5);
+  const noHdl  = total - hdl;
+  const ratioTotal = Math.round((total / hdl) * 10) / 10;
+
+  const clTotal =
+    total < 200 ? { valor: total, categoria: 'Deseable',      color: '#34D399' } :
+    total < 240 ? { valor: total, categoria: 'Límite alto',   color: '#FB923C' } :
+                  { valor: total, categoria: 'Alto',           color: '#F87171' };
+
+  const hdlMin = sexo === 'mujer' ? 50 : 40;
+  const clHDL =
+    hdl >= 60                      ? { valor: hdl, categoria: 'Protector',     color: '#34D399' } :
+    hdl >= hdlMin                  ? { valor: hdl, categoria: 'Normal',         color: '#CAFF00' } :
+                                     { valor: hdl, categoria: 'Bajo (riesgo)',  color: '#F87171' };
+
+  const clLDL =
+    ldl < 100 ? { valor: ldl, categoria: 'Óptimo',      color: '#34D399' } :
+    ldl < 130 ? { valor: ldl, categoria: 'Casi óptimo', color: '#CAFF00' } :
+    ldl < 160 ? { valor: ldl, categoria: 'Límite alto', color: '#FB923C' } :
+    ldl < 190 ? { valor: ldl, categoria: 'Alto',         color: '#F87171' } :
+                { valor: ldl, categoria: 'Muy alto',     color: '#EF4444' };
+
+  const clTG =
+    trigliceridos < 150  ? { valor: trigliceridos, categoria: 'Normal',       color: '#34D399' } :
+    trigliceridos < 200  ? { valor: trigliceridos, categoria: 'Límite alto',  color: '#FB923C' } :
+    trigliceridos < 500  ? { valor: trigliceridos, categoria: 'Alto',          color: '#F87171' } :
+                           { valor: trigliceridos, categoria: 'Muy alto',      color: '#EF4444' };
+
+  let riesgo: ColesterolResult['riesgo'];
+  let riesgoNombre: string;
+  let color: string;
+  let recomendacion: string;
+  if (ldl < 100 && hdl >= 60) { riesgo = 'optimo';   riesgoNombre = 'Perfil óptimo';    color = '#34D399'; recomendacion = 'Perfil lipídico óptimo. Mantén tu dieta y actividad física.'; }
+  else if (ldl < 130)         { riesgo = 'normal';   riesgoNombre = 'Perfil normal';    color = '#CAFF00'; recomendacion = 'Perfil dentro del rango normal. Control anual recomendado.'; }
+  else if (ldl < 160)         { riesgo = 'limite';   riesgoNombre = 'Límite alto';      color = '#FB923C'; recomendacion = 'LDL en el límite. Mejora la dieta y consulta a tu médico.'; }
+  else if (ldl < 190)         { riesgo = 'alto';     riesgoNombre = 'Riesgo alto';      color = '#F87171'; recomendacion = 'LDL elevado. Es probable que necesites tratamiento médico.'; }
+  else                        { riesgo = 'muy_alto'; riesgoNombre = 'Riesgo muy alto';  color = '#EF4444'; recomendacion = 'LDL muy elevado. Consulta a tu médico de inmediato.'; }
+
+  return { ldl, noHdl, ratioTotal, clasificacion: { total: clTotal, hdl: clHDL, ldl: clLDL, trigliceridos: clTG }, riesgo, riesgoNombre, color, recomendacion };
+}
+
+// ─── CALORÍAS CICLISMO ────────────────────────────────────────────────────────
+export type IntensidadCiclismo = 'muy_lento' | 'lento' | 'moderado' | 'rapido' | 'muy_rapido';
+
+export const INTENSIDADES_CICLISMO: Record<IntensidadCiclismo, { kmh: number; met: number; nombre: string }> = {
+  muy_lento:  { kmh: 14,  met: 4.0,  nombre: 'Muy lento (< 16 km/h)' },
+  lento:      { kmh: 17,  met: 6.8,  nombre: 'Lento (16–19 km/h)' },
+  moderado:   { kmh: 21,  met: 8.0,  nombre: 'Moderado (19–22 km/h)' },
+  rapido:     { kmh: 24,  met: 10.0, nombre: 'Rápido (22–26 km/h)' },
+  muy_rapido: { kmh: 28,  met: 12.0, nombre: 'Muy rápido (> 26 km/h)' },
+};
+
+export interface CaloriasCiclismoResult {
+  calorias:       number;
+  km:             number;
+  met:            number;
+  intensidadNombre: string;
+}
+
+export function calcularCaloriasCiclismo(
+  pesoKg:      number,
+  duracionMin: number,
+  intensidad:  IntensidadCiclismo,
+): CaloriasCiclismoResult {
+  const { kmh, met, nombre } = INTENSIDADES_CICLISMO[intensidad];
+  const horas = duracionMin / 60;
+  return {
+    calorias:        Math.round(met * pesoKg * horas),
+    km:              Math.round(kmh * horas * 10) / 10,
+    met,
+    intensidadNombre: nombre,
+  };
+}
+
+// ─── FUERZA RELATIVA ──────────────────────────────────────────────────────────
+export type EjercicioFuerza = 'press_banca' | 'sentadilla' | 'peso_muerto' | 'press_militar';
+
+export interface FuerzaRelativaResult {
+  ratio:       number;
+  nivel:       'principiante' | 'novato' | 'intermedio' | 'avanzado' | 'elite';
+  nivelNombre: string;
+  color:       string;
+  descripcion: string;
+  estandares:  { nivel: string; ratio: number; color: string }[];
+}
+
+export function calcularFuerzaRelativa(
+  pesoCorpoalKg:    number,
+  pesoLevantadoKg:  number,
+  ejercicio:        EjercicioFuerza,
+  sexo:             'hombre' | 'mujer',
+): FuerzaRelativaResult {
+  const ratio = Math.round((pesoLevantadoKg / pesoCorpoalKg) * 100) / 100;
+
+  type Umbral = [number, number, number, number];
+  const umbrales: Record<EjercicioFuerza, { h: Umbral; m: Umbral }> = {
+    press_banca:  { h: [0.5, 0.75, 1.25, 1.75], m: [0.35, 0.5, 0.75, 1.0] },
+    sentadilla:   { h: [0.75, 1.25, 1.75, 2.25], m: [0.5, 0.75, 1.25, 1.5] },
+    peso_muerto:  { h: [1.0, 1.5, 2.0, 2.5],    m: [0.75, 1.0, 1.5, 1.75] },
+    press_militar:{ h: [0.35, 0.55, 0.8, 1.1],  m: [0.2, 0.35, 0.5, 0.65] },
+  };
+
+  const [t1, t2, t3, t4] = sexo === 'hombre' ? umbrales[ejercicio].h : umbrales[ejercicio].m;
+
+  const estandares = [
+    { nivel: 'Principiante', ratio: t1!, color: '#60A5FA' },
+    { nivel: 'Novato',       ratio: t2!, color: '#34D399' },
+    { nivel: 'Intermedio',   ratio: t3!, color: '#CAFF00' },
+    { nivel: 'Avanzado',     ratio: t4!, color: '#FB923C' },
+    { nivel: 'Élite',        ratio: t4! + 0.5, color: '#F87171' },
+  ];
+
+  if (ratio < t1!)  return { ratio, nivel: 'principiante', nivelNombre: 'Principiante', color: '#60A5FA', descripcion: 'Nivel inicial. Con entrenamiento consistente avanzarás rápido.',      estandares };
+  if (ratio < t2!)  return { ratio, nivel: 'novato',       nivelNombre: 'Novato',       color: '#34D399', descripcion: 'Buen punto de partida. Sigue progresando con técnica correcta.',    estandares };
+  if (ratio < t3!)  return { ratio, nivel: 'intermedio',   nivelNombre: 'Intermedio',   color: '#CAFF00', descripcion: 'Nivel sólido. Aplica periodización para seguir avanzando.',         estandares };
+  if (ratio < t4!)  return { ratio, nivel: 'avanzado',     nivelNombre: 'Avanzado',     color: '#FB923C', descripcion: 'Fuerza relativa alta. Pocos llegan a este nivel.',                  estandares };
+  return              { ratio, nivel: 'elite',         nivelNombre: 'Élite',        color: '#F87171', descripcion: 'Fuerza de alto rendimiento. Nivel competitivo o deportista de élite.', estandares };
+}
+
+// ─── MASA MUSCULAR ESQUELÉTICA ────────────────────────────────────────────────
+export interface MasaMuscularResult {
+  masaMuscularKg: number;
+  smi:            number;
+  porcentaje:     number;
+  categoria:      string;
+  nivel:          'bajo' | 'normal' | 'alto';
+  color:          string;
+  descripcion:    string;
+}
+
+export function calcularMasaMuscular(
+  pesoKg:    number,
+  alturaCm:  number,
+  edadAnios: number,
+  sexo:      'hombre' | 'mujer',
+): MasaMuscularResult {
+  const alturaM   = alturaCm / 100;
+  const genero    = sexo === 'hombre' ? 1 : 0;
+  // Fórmula Lee 2000 (kg)
+  const masa = 0.244 * pesoKg + 7.80 * alturaM - 0.098 * edadAnios + 6.6 * genero - 3.3;
+  const masaMuscularKg = Math.round(masa * 10) / 10;
+  const smi            = Math.round((masa / (alturaM * alturaM)) * 10) / 10;
+  const porcentaje     = Math.round((masa / pesoKg) * 1000) / 10;
+
+  // EWGSOP2 cutpoints
+  const bajoCut  = sexo === 'hombre' ? 7.0 : 5.5;
+  const altoCut  = sexo === 'hombre' ? 9.5 : 7.5;
+
+  if (smi < bajoCut)  return { masaMuscularKg, smi, porcentaje, categoria: 'Masa muscular baja',    nivel: 'bajo',   color: '#F87171', descripcion: 'Por debajo del umbral de sarcopenia (EWGSOP2). Considera entrenamiento de fuerza y mayor ingesta proteica.' };
+  if (smi <= altoCut) return { masaMuscularKg, smi, porcentaje, categoria: 'Masa muscular normal',  nivel: 'normal', color: '#34D399', descripcion: 'Masa muscular esquelética en rango saludable. Mantén el entrenamiento de fuerza y una dieta rica en proteínas.' };
+  return                { masaMuscularKg, smi, porcentaje, categoria: 'Masa muscular alta',     nivel: 'alto',   color: '#CAFF00', descripcion: 'Masa muscular elevada. Propio de personas con entrenamiento de fuerza avanzado o deportistas.' };
+}

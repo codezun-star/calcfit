@@ -1,0 +1,82 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import CaloriasCiclismoCalculator from '../components/calculators/CaloriasCiclismoCalculator';
+---
+
+<CalculatorLayout
+  title="Calorías en Ciclismo — Calculadora por Velocidad y Duración | CalcFit"
+  description="Calcula las calorías quemadas en ciclismo según tu peso, duración e intensidad. Usa valores MET validados. Métrico e imperial. Gratis."
+  calculatorName="Calorías en Ciclismo"
+  breadcrumbSlug="calorias-ciclismo"
+  ogImage="/og/calorias-ciclismo.jpg"
+  keywords="calculadora calorías ciclismo, calorías bicicleta, gasto energético ciclismo, MET ciclismo, calorías pedalear, bicicleta calorías quemadas"
+  faqs={[
+    { q: '¿Cuántas calorías se queman pedaleando 1 hora?', a: 'Depende del peso y la intensidad. Una persona de 70 kg pedaleando a ritmo moderado (19–22 km/h, MET 8) quema aproximadamente 560 kcal por hora. A ritmo rápido (22–26 km/h, MET 10) la cifra sube a 700 kcal/hora.' },
+    { q: '¿Qué es el MET en ciclismo?', a: 'El MET (Equivalente Metabólico) es una medida de la intensidad del ejercicio relativa al metabolismo en reposo (1 MET ≈ 3.5 mL O₂/kg/min). Ciclismo muy lento tiene MET 4, ritmo moderado MET 8 y ciclismo rápido hasta MET 12. Las calorías se calculan como: MET × peso (kg) × horas.' },
+    { q: '¿El ciclismo en bicicleta estática quema las mismas calorías?', a: 'En términos de esfuerzo equivalente sí, pero la bicicleta estática no incluye el gasto por desplazamiento ni el equilibrio. Para comparaciones, usa la misma intensidad subjetiva. Muchas bicicletas estáticas modernas muestran su propia estimación de watts y calorías, que puede variar de esta calculadora.' },
+    { q: '¿Es mejor el ciclismo para quemar grasa que correr?', a: 'Correr quema más calorías por minuto (mayor impacto), pero el ciclismo permite sesiones más largas con menor riesgo de lesión articular. A igual duración e intensidad relativa, ambas actividades son comparables para la pérdida de grasa. La adherencia a largo plazo es más importante que el ejercicio elegido.' },
+    { q: '¿Cuántos km en bici equivalen a correr 1 km?', a: 'La equivalencia común es que 4–5 km en bicicleta equivalen aproximadamente a 1 km corriendo en términos de gasto calórico, aunque varía por la pendiente, el terreno y la posición aerodinámica. A MET equivalente, la distancia recorrida en bici siempre es mayor que corriendo.' },
+  ]}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Calorías<br><span style="color: var(--acid);">Ciclismo</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Calcula las calorías quemadas en bicicleta según tu peso, duración e intensidad de pedaleo. Usa valores MET del Compendium of Physical Activities validados científicamente.
+    </p>
+  </div>
+
+  <CaloriasCiclismoCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cómo se calculan las calorías en ciclismo?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      La fórmula estándar usa el MET (Equivalente Metabólico de Tarea): <strong>Calorías = MET × Peso (kg) × Tiempo (h)</strong>. Los valores MET provienen del Compendium of Physical Activities (Ainsworth et al., 2011), la referencia científica más utilizada para estimar el gasto energético del ejercicio.
+    </p>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Valores MET por intensidad</h2>
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 380px;">
+        <thead>
+          <tr style="border-bottom: 2px solid var(--border);">
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Intensidad</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Velocidad</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">MET</th>
+          </tr>
+        </thead>
+        <tbody>
+          {[
+            { int: 'Muy lento',  vel: '< 16 km/h',    met: '4.0' },
+            { int: 'Lento',      vel: '16–19 km/h',   met: '6.8' },
+            { int: 'Moderado',   vel: '19–22 km/h',   met: '8.0' },
+            { int: 'Rápido',     vel: '22–26 km/h',   met: '10.0' },
+            { int: 'Muy rápido', vel: '> 26 km/h',    met: '12.0' },
+          ].map((row) => (
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 10px 0; font-size: 13px; color: var(--ink);">{row.int}</td>
+              <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--muted);">{row.vel}</td>
+              <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink); font-weight: 600;">{row.met}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {[
+        { q: '¿Cuántas calorías se queman pedaleando 1 hora?', a: 'Depende del peso y la intensidad. Una persona de 70 kg pedaleando a ritmo moderado (19–22 km/h, MET 8) quema aproximadamente 560 kcal por hora. A ritmo rápido (22–26 km/h, MET 10) la cifra sube a 700 kcal/hora.' },
+        { q: '¿Qué es el MET en ciclismo?', a: 'El MET (Equivalente Metabólico) es una medida de la intensidad del ejercicio relativa al metabolismo en reposo (1 MET ≈ 3.5 mL O₂/kg/min). Ciclismo muy lento tiene MET 4, ritmo moderado MET 8 y ciclismo rápido hasta MET 12. Las calorías se calculan como: MET × peso (kg) × horas.' },
+        { q: '¿El ciclismo en bicicleta estática quema las mismas calorías?', a: 'En términos de esfuerzo equivalente sí, pero la bicicleta estática no incluye el gasto por desplazamiento ni el equilibrio. Para comparaciones, usa la misma intensidad subjetiva. Muchas bicicletas estáticas modernas muestran su propia estimación de watts y calorías, que puede variar de esta calculadora.' },
+        { q: '¿Es mejor el ciclismo para quemar grasa que correr?', a: 'Correr quema más calorías por minuto (mayor impacto), pero el ciclismo permite sesiones más largas con menor riesgo de lesión articular. A igual duración e intensidad relativa, ambas actividades son comparables para la pérdida de grasa. La adherencia a largo plazo es más importante que el ejercicio elegido.' },
+        { q: '¿Cuántos km en bici equivalen a correr 1 km?', a: 'La equivalencia común es que 4–5 km en bicicleta equivalen aproximadamente a 1 km corriendo en términos de gasto calórico, aunque varía por la pendiente, el terreno y la posición aerodinámica. A MET equivalente, la distancia recorrida en bici siempre es mayor que corriendo.' },
+      ].map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

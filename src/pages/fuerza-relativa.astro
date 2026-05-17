@@ -1,0 +1,84 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import FuerzaRelativaCalculator from '../components/calculators/FuerzaRelativaCalculator';
+---
+
+<CalculatorLayout
+  title="Calculadora de Fuerza Relativa — Nivel Press Banca, Sentadilla, Peso Muerto | CalcFit"
+  description="Calcula tu fuerza relativa (1RM ÷ peso corporal) y compara tu nivel en press de banca, sentadilla, peso muerto y press militar. Gratis."
+  calculatorName="Fuerza Relativa"
+  breadcrumbSlug="fuerza-relativa"
+  ogImage="/og/fuerza-relativa.jpg"
+  keywords="calculadora fuerza relativa, ratio fuerza peso corporal, nivel fuerza press banca, sentadilla nivel, fuerza 1RM relativa, estándares fuerza"
+  faqs={[
+    { q: '¿Qué es la fuerza relativa?', a: 'La fuerza relativa es el cociente entre el peso máximo levantado en un ejercicio (1RM) y el peso corporal del atleta. Por ejemplo, levantar 100 kg en press de banca pesando 80 kg da una fuerza relativa de 1.25×. Es una medida justa para comparar fuerza entre personas de diferente tamaño.' },
+    { q: '¿Cuánto debería poder levantar en press de banca?', a: 'Los estándares orientativos para hombres son: principiante 0.5× su peso, novato 0.75×, intermedio 1.25×, avanzado 1.75×. Para mujeres los valores son aproximadamente un 30% menores: principiante 0.35×, avanzado 1.0×. Estos son referencias, no metas obligatorias.' },
+    { q: '¿Qué ejercicio tiene el mayor estándar de fuerza relativa?', a: 'El peso muerto tiene los ratios más altos: un hombre de nivel intermedio puede mover 2× su peso corporal, y los levantadores de élite superan 3×. La sentadilla sigue de cerca. El press de banca y el press militar tienen los menores ratios por depender más de músculos específicos.' },
+    { q: '¿La fuerza relativa importa más que la absoluta?', a: 'Depende del objetivo. En deportes donde se compite por categoría de peso (powerlifting, weightlifting, artes marciales), la fuerza relativa es determinante. En deportes de fuerza pura sin límite de peso, la fuerza absoluta importa más. Para la salud general, ambas métricas son relevantes.' },
+    { q: '¿Con qué frecuencia debo entrenar para mejorar mi fuerza relativa?', a: 'Los principales movimientos de fuerza (sentadilla, peso muerto, press) requieren al menos 2 sesiones específicas por semana para mejorar. La progresión lineal funciona bien para principiantes; los intermedios y avanzados necesitan periodización (undulante o por bloques) para seguir avanzando.' },
+  ]}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Fuerza<br><span style="color: var(--acid);">Relativa</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Calcula tu ratio de fuerza relativa (1RM dividido entre tu peso corporal) y descubre en qué nivel estás en press de banca, sentadilla, peso muerto o press militar.
+    </p>
+  </div>
+
+  <FuerzaRelativaCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cómo se calcula la fuerza relativa?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      La fórmula es simple: <strong>Fuerza Relativa = 1RM (kg) ÷ Peso Corporal (kg)</strong>. Si no conoces tu 1RM exacto, puedes estimarlo con la calculadora de 1RM de CalcFit. Los estándares utilizados están basados en los datos de ExRx.net y la comunidad de powerlifting natural, separados por sexo y ejercicio.
+    </p>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Estándares orientativos (hombres)</h2>
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 420px;">
+        <thead>
+          <tr style="border-bottom: 2px solid var(--border);">
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Nivel</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Press banca</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Sentadilla</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Peso muerto</th>
+          </tr>
+        </thead>
+        <tbody>
+          {[
+            { nivel: 'Principiante', banca: '0.5×', sent: '0.75×', dead: '1.0×' },
+            { nivel: 'Novato',       banca: '0.75×', sent: '1.25×', dead: '1.5×' },
+            { nivel: 'Intermedio',   banca: '1.25×', sent: '1.75×', dead: '2.0×' },
+            { nivel: 'Avanzado',     banca: '1.75×', sent: '2.25×', dead: '2.5×' },
+            { nivel: 'Élite',        banca: '> 1.75×', sent: '> 2.25×', dead: '> 2.5×' },
+          ].map((row) => (
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 10px 0; font-size: 13px; color: var(--ink);">{row.nivel}</td>
+              <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.banca}</td>
+              <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.sent}</td>
+              <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.dead}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {[
+        { q: '¿Qué es la fuerza relativa?', a: 'La fuerza relativa es el cociente entre el peso máximo levantado en un ejercicio (1RM) y el peso corporal del atleta. Por ejemplo, levantar 100 kg en press de banca pesando 80 kg da una fuerza relativa de 1.25×. Es una medida justa para comparar fuerza entre personas de diferente tamaño.' },
+        { q: '¿Cuánto debería poder levantar en press de banca?', a: 'Los estándares orientativos para hombres son: principiante 0.5× su peso, novato 0.75×, intermedio 1.25×, avanzado 1.75×. Para mujeres los valores son aproximadamente un 30% menores: principiante 0.35×, avanzado 1.0×. Estos son referencias, no metas obligatorias.' },
+        { q: '¿Qué ejercicio tiene el mayor estándar de fuerza relativa?', a: 'El peso muerto tiene los ratios más altos: un hombre de nivel intermedio puede mover 2× su peso corporal, y los levantadores de élite superan 3×. La sentadilla sigue de cerca. El press de banca y el press militar tienen los menores ratios por depender más de músculos específicos.' },
+        { q: '¿La fuerza relativa importa más que la absoluta?', a: 'Depende del objetivo. En deportes donde se compite por categoría de peso (powerlifting, weightlifting, artes marciales), la fuerza relativa es determinante. En deportes de fuerza pura sin límite de peso, la fuerza absoluta importa más. Para la salud general, ambas métricas son relevantes.' },
+        { q: '¿Con qué frecuencia debo entrenar para mejorar mi fuerza relativa?', a: 'Los principales movimientos de fuerza (sentadilla, peso muerto, press) requieren al menos 2 sesiones específicas por semana para mejorar. La progresión lineal funciona bien para principiantes; los intermedios y avanzados necesitan periodización (undulante o por bloques) para seguir avanzando.' },
+      ].map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>
