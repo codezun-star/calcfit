@@ -1,0 +1,84 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import TestRockportCalculator from '../components/calculators/TestRockportCalculator';
+---
+
+<CalculatorLayout
+  title="Test de Rockport — VO₂ Máx Caminando 1 Milla | CalcFit"
+  description="Estima tu VO₂ máximo con el Test de Rockport: camina 1 milla (1.6 km) y anota tu tiempo y frecuencia cardíaca. Apto para todos. Gratis."
+  calculatorName="Test de Rockport"
+  breadcrumbSlug="test-rockport"
+  ogImage="/og/test-rockport.jpg"
+  keywords="test Rockport, VO2 máx caminando, test 1 milla caminar, capacidad aeróbica caminata, fórmula Kline Rockport"
+  faqs={[
+    { q: '¿Qué es el Test de Rockport?', a: 'El Test de Rockport (o Test de Caminata de 1 Milla) es una prueba de esfuerzo submáxima desarrollada por Kline et al. en 1987. Se camina 1 milla (1.609 km) lo más rápido posible sin correr, y al finalizar se registra el tiempo y la frecuencia cardíaca. A partir de estos datos se estima el VO₂ máximo.' },
+    { q: '¿Cuál es la fórmula del Test de Rockport?', a: 'La fórmula de Kline (1987): VO₂ máx = 132.853 − 0.0769×peso(lb) − 0.3877×edad − 3.2649×tiempo(min) − 0.1565×FC + 6.315×sexo, donde sexo = 1 para hombres y 0 para mujeres. Tiene una validez r = 0.88 contra VO₂ máx medido directamente.' },
+    { q: '¿Para quién es más adecuado el Test de Rockport vs el Test de Cooper?', a: 'El Test de Rockport es más adecuado para personas sedentarias, mayores de 40 años, con sobrepeso o con bajo nivel de condición física, ya que solo requiere caminar. El Test de Cooper (12 minutos corriendo) es más preciso para personas activas o jóvenes con buena condición física.' },
+    { q: '¿Cómo se mide la frecuencia cardíaca al finalizar?', a: 'Inmediatamente al completar la milla, detén el cronómetro y mide tu frecuencia cardíaca durante 15 segundos (multiplica por 4). Lo ideal es usar un pulsómetro para mayor precisión. Si tardas más de 15 segundos en empezar a contar, el resultado será menos preciso porque la FC baja rápido.' },
+    { q: '¿Cuántas calorías se queman en el Test de Rockport?', a: 'Una persona de 70 kg tarda aproximadamente 12–18 minutos en caminar 1 milla a paso rápido, quemando entre 80 y 120 kcal. Aunque el objetivo del test no es el gasto calórico sino medir la capacidad aeróbica, caminar 1 milla es una buena referencia para el ejercicio diario.' },
+  ]}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Test de<br><span style="color: var(--acid);">Rockport</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Estima tu VO₂ máximo caminando 1 milla (1.6 km) lo más rápido posible. Prueba submáxima apta para todas las edades y niveles de condición física.
+    </p>
+  </div>
+
+  <TestRockportCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cómo se calcula el VO₂ máx con Rockport?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      La fórmula de Kline et al. (1987): <strong>VO₂ máx = 132.853 − 0.0769×peso(lb) − 0.3877×edad − 3.2649×tiempo(min) − 0.1565×FC_final + 6.315×sexo</strong>, donde sexo = 1 (hombres) o 0 (mujeres). Validación: r = 0.88 frente a VO₂ medido en laboratorio.
+    </p>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Estándares VO₂ máx (mujeres)</h2>
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 380px;">
+        <thead>
+          <tr style="border-bottom: 2px solid var(--border);">
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Nivel</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">20–29</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">30–39</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">40–49</th>
+          </tr>
+        </thead>
+        <tbody>
+          {[
+            { nivel: 'Muy bajo',  c1: '< 29', c2: '< 27', c3: '< 25' },
+            { nivel: 'Bajo',      c1: '29–34', c2: '27–32', c3: '25–30' },
+            { nivel: 'Promedio',  c1: '35–40', c2: '33–38', c3: '31–36' },
+            { nivel: 'Bueno',     c1: '41–47', c2: '39–45', c3: '37–43' },
+            { nivel: 'Excelente', c1: '> 47',  c2: '> 45',  c3: '> 43' },
+          ].map((row) => (
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 10px 0; font-size: 13px; color: var(--ink); font-weight: 600;">{row.nivel}</td>
+              <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.c1}</td>
+              <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.c2}</td>
+              <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.c3}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {[
+        { q: '¿Qué es el Test de Rockport?', a: 'El Test de Rockport (o Test de Caminata de 1 Milla) es una prueba de esfuerzo submáxima desarrollada por Kline et al. en 1987. Se camina 1 milla (1.609 km) lo más rápido posible sin correr, y al finalizar se registra el tiempo y la frecuencia cardíaca. A partir de estos datos se estima el VO₂ máximo.' },
+        { q: '¿Cuál es la fórmula del Test de Rockport?', a: 'La fórmula de Kline (1987): VO₂ máx = 132.853 − 0.0769×peso(lb) − 0.3877×edad − 3.2649×tiempo(min) − 0.1565×FC + 6.315×sexo, donde sexo = 1 para hombres y 0 para mujeres. Tiene una validez r = 0.88 contra VO₂ máx medido directamente.' },
+        { q: '¿Para quién es más adecuado el Test de Rockport vs el Test de Cooper?', a: 'El Test de Rockport es más adecuado para personas sedentarias, mayores de 40 años, con sobrepeso o con bajo nivel de condición física, ya que solo requiere caminar. El Test de Cooper (12 minutos corriendo) es más preciso para personas activas o jóvenes con buena condición física.' },
+        { q: '¿Cómo se mide la frecuencia cardíaca al finalizar?', a: 'Inmediatamente al completar la milla, detén el cronómetro y mide tu frecuencia cardíaca durante 15 segundos (multiplica por 4). Lo ideal es usar un pulsómetro para mayor precisión. Si tardas más de 15 segundos en empezar a contar, el resultado será menos preciso porque la FC baja rápido.' },
+        { q: '¿Cuántas calorías se queman en el Test de Rockport?', a: 'Una persona de 70 kg tarda aproximadamente 12–18 minutos en caminar 1 milla a paso rápido, quemando entre 80 y 120 kcal. Aunque el objetivo del test no es el gasto calórico sino medir la capacidad aeróbica, caminar 1 milla es una buena referencia para el ejercicio diario.' },
+      ].map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

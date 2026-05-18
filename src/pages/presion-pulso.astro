@@ -1,0 +1,82 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import PresionPulsoCalculator from '../components/calculators/PresionPulsoCalculator';
+---
+
+<CalculatorLayout
+  title="Presión de Pulso — Rigidez Arterial y Riesgo CV | CalcFit"
+  description="Calcula tu presión de pulso (sistólica − diastólica) y evalúa el riesgo de rigidez arterial. Rangos clínicos incluidos. Gratis."
+  calculatorName="Presión de Pulso"
+  breadcrumbSlug="presion-pulso"
+  ogImage="/og/presion-pulso.jpg"
+  keywords="presión de pulso, presión diferencial, rigidez arterial, tensión arterial pulso, PP mmHg, riesgo cardiovascular tensión"
+  faqs={[
+    { q: '¿Qué es la presión de pulso?', a: 'La presión de pulso (PP) es la diferencia entre la presión arterial sistólica y la diastólica. Por ejemplo, con una tensión de 120/80 mmHg, la PP es 40 mmHg. Refleja la rigidez de las arterias: cuanto mayor es la PP, más rígidas están las paredes arteriales.' },
+    { q: '¿Cuál es la presión de pulso normal?', a: 'Se considera normal una PP entre 40 y 60 mmHg. Por debajo de 25 mmHg puede indicar bajo gasto cardíaco. Por encima de 60 mmHg sugiere rigidez arterial. Una PP > 80 mmHg es un marcador de riesgo cardiovascular elevado, especialmente en personas mayores.' },
+    { q: '¿Por qué aumenta la presión de pulso con la edad?', a: 'Con el envejecimiento, las paredes arteriales pierden elasticidad (arteriosclerosis). Una arteria rígida no puede amortiguar la onda de presión del latido cardíaco, lo que eleva la sistólica más que la diastólica, ampliando la PP. Es uno de los motivos por los que la presión sistólica aislada es el principal factor de riesgo en mayores de 60 años.' },
+    { q: '¿Puede una presión de pulso baja ser peligrosa?', a: 'Sí. Una PP < 25 mmHg puede indicar insuficiencia cardíaca, taponamiento pericárdico o estenosis aórtica severa, que son emergencias médicas. Si tienes tensión baja con una PP muy pequeña (como 90/75 = PP de 15 mmHg) junto con mareo o disnea, busca atención médica urgente.' },
+    { q: '¿Cómo se trata una presión de pulso elevada?', a: 'No existe tratamiento específico para la PP, pero reducir la presión arterial sistólica (con cambios en el estilo de vida y si es necesario medicación antihipertensiva) también reduce la PP. La dieta baja en sodio, el ejercicio aeróbico regular y no fumar contribuyen a mantener la elasticidad arterial.' },
+  ]}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Presión<br><span style="color: var(--acid);">de Pulso</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Calcula tu presión diferencial (sistólica − diastólica) y evalúa la rigidez arterial y el riesgo cardiovascular asociado.
+    </p>
+  </div>
+
+  <PresionPulsoCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cómo se calcula la presión de pulso?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      La fórmula es simple: <strong>PP = Presión sistólica − Presión diastólica</strong>. Los rangos de clasificación están basados en las guías ESC/ESH 2023 de hipertensión arterial y en estudios sobre rigidez arterial (Laurent et al., Hypertension 2006). Un PP normal es 40–60 mmHg en adultos.
+    </p>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Clasificación de la presión de pulso</h2>
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 320px;">
+        <thead>
+          <tr style="border-bottom: 2px solid var(--border);">
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Categoría</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">PP (mmHg)</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Implicación</th>
+          </tr>
+        </thead>
+        <tbody>
+          {[
+            { cat: 'Muy baja',    pp: '< 25',   imp: 'Posible bajo gasto cardíaco', color: '#60A5FA' },
+            { cat: 'Baja',        pp: '25–39',  imp: 'Monitorizar',                 color: '#93C5FD' },
+            { cat: 'Normal',      pp: '40–60',  imp: 'Sin acción requerida',        color: '#34D399' },
+            { cat: 'Elevada',     pp: '61–80',  imp: 'Rigidez arterial leve',       color: '#FB923C' },
+            { cat: 'Muy elevada', pp: '> 80',   imp: 'Alto riesgo cardiovascular',  color: '#F87171' },
+          ].map((row) => (
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 10px 0; font-size: 13px; color: var(--ink); font-weight: 600;">{row.cat}</td>
+              <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: row.color;">{row.pp}</td>
+              <td style="padding: 10px 0; font-size: 12px; color: var(--muted);">{row.imp}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {[
+        { q: '¿Qué es la presión de pulso?', a: 'La presión de pulso (PP) es la diferencia entre la presión arterial sistólica y la diastólica. Por ejemplo, con una tensión de 120/80 mmHg, la PP es 40 mmHg. Refleja la rigidez de las arterias: cuanto mayor es la PP, más rígidas están las paredes arteriales.' },
+        { q: '¿Cuál es la presión de pulso normal?', a: 'Se considera normal una PP entre 40 y 60 mmHg. Por debajo de 25 mmHg puede indicar bajo gasto cardíaco. Por encima de 60 mmHg sugiere rigidez arterial. Una PP > 80 mmHg es un marcador de riesgo cardiovascular elevado, especialmente en personas mayores.' },
+        { q: '¿Por qué aumenta la presión de pulso con la edad?', a: 'Con el envejecimiento, las paredes arteriales pierden elasticidad (arteriosclerosis). Una arteria rígida no puede amortiguar la onda de presión del latido cardíaco, lo que eleva la sistólica más que la diastólica, ampliando la PP. Es uno de los motivos por los que la presión sistólica aislada es el principal factor de riesgo en mayores de 60 años.' },
+        { q: '¿Puede una presión de pulso baja ser peligrosa?', a: 'Sí. Una PP < 25 mmHg puede indicar insuficiencia cardíaca, taponamiento pericárdico o estenosis aórtica severa, que son emergencias médicas. Si tienes tensión baja con una PP muy pequeña (como 90/75 = PP de 15 mmHg) junto con mareo o disnea, busca atención médica urgente.' },
+        { q: '¿Cómo se trata una presión de pulso elevada?', a: 'No existe tratamiento específico para la PP, pero reducir la presión arterial sistólica (con cambios en el estilo de vida y si es necesario medicación antihipertensiva) también reduce la PP. La dieta baja en sodio, el ejercicio aeróbico regular y no fumar contribuyen a mantener la elasticidad arterial.' },
+      ].map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

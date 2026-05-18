@@ -1357,3 +1357,262 @@ export function calcularMasaMuscular(
   if (smi <= altoCut) return { masaMuscularKg, smi, porcentaje, categoria: 'Masa muscular normal',  nivel: 'normal', color: '#34D399', descripcion: 'Masa muscular esquelética en rango saludable. Mantén el entrenamiento de fuerza y una dieta rica en proteínas.' };
   return                { masaMuscularKg, smi, porcentaje, categoria: 'Masa muscular alta',     nivel: 'alto',   color: '#CAFF00', descripcion: 'Masa muscular elevada. Propio de personas con entrenamiento de fuerza avanzado o deportistas.' };
 }
+
+// ─── CALORÍAS NATACIÓN ────────────────────────────────────────────────────────
+export type EstiloNatacion = 'recreacional' | 'crawl_lento' | 'crawl_rapido' | 'pecho' | 'espalda' | 'mariposa';
+
+export const ESTILOS_NATACION: Record<EstiloNatacion, { met: number; nombre: string }> = {
+  recreacional: { met: 5.8,  nombre: 'Recreacional (estilo libre suave)' },
+  crawl_lento:  { met: 7.0,  nombre: 'Crawl lento' },
+  crawl_rapido: { met: 9.8,  nombre: 'Crawl rápido / competición' },
+  pecho:        { met: 8.3,  nombre: 'Pecho (braza)' },
+  espalda:      { met: 7.0,  nombre: 'Espalda' },
+  mariposa:     { met: 13.8, nombre: 'Mariposa' },
+};
+
+export interface CaloriasNatacionResult {
+  calorias:     number;
+  met:          number;
+  estiloNombre: string;
+}
+
+export function calcularCaloriasNatacion(
+  pesoKg:      number,
+  duracionMin: number,
+  estilo:      EstiloNatacion,
+): CaloriasNatacionResult {
+  const { met, nombre } = ESTILOS_NATACION[estilo];
+  return {
+    calorias:     Math.round(met * pesoKg * (duracionMin / 60)),
+    met,
+    estiloNombre: nombre,
+  };
+}
+
+// ─── TEST DE COOPER (12 MINUTOS) ──────────────────────────────────────────────
+export interface TestCooperResult {
+  vo2max:      number;
+  categoria:   string;
+  color:       string;
+}
+
+export function calcularTestCooper(
+  distanciaMetros: number,
+  sexo:            'hombre' | 'mujer',
+  edad:            number,
+): TestCooperResult {
+  const vo2max = Math.round(((distanciaMetros - 504.9) / 44.73) * 10) / 10;
+
+  type Corte = [number, number, number, number];
+  const cortesH: Record<string, Corte> = {
+    '<30': [38, 44, 50, 56], '<40': [34, 40, 46, 52], '<50': [31, 37, 43, 49], '50+': [26, 32, 38, 44],
+  };
+  const cortesM: Record<string, Corte> = {
+    '<30': [29, 35, 41, 47], '<40': [27, 33, 39, 45], '<50': [25, 31, 37, 43], '50+': [22, 28, 34, 40],
+  };
+  const key = edad < 30 ? '<30' : edad < 40 ? '<40' : edad < 50 ? '<50' : '50+';
+  const [c1, c2, c3, c4] = (sexo === 'hombre' ? cortesH : cortesM)[key]!;
+
+  const etiquetas = ['Muy bajo', 'Bajo', 'Promedio', 'Bueno', 'Excelente'];
+  const colores   = ['#F87171', '#FB923C', '#CAFF00', '#34D399', '#60A5FA'];
+  const idx = vo2max < c1! ? 0 : vo2max < c2! ? 1 : vo2max < c3! ? 2 : vo2max < c4! ? 3 : 4;
+
+  return { vo2max, categoria: etiquetas[idx]!, color: colores[idx]! };
+}
+
+// ─── RECUPERACIÓN CARDÍACA ────────────────────────────────────────────────────
+export interface RecuperacionCardiacaResult {
+  diferencia:    number;
+  categoria:     string;
+  riesgo:        'excelente' | 'normal' | 'bajo' | 'anormal';
+  color:         string;
+  recomendacion: string;
+}
+
+export function calcularRecuperacionCardiaca(fcPico: number, fc1Min: number): RecuperacionCardiacaResult {
+  const diferencia = fcPico - fc1Min;
+  if (diferencia >= 22) return { diferencia, categoria: 'Excelente', riesgo: 'excelente', color: '#34D399', recomendacion: 'Recuperación cardíaca excelente. Indica alta aptitud cardiovascular aeróbica.' };
+  if (diferencia >= 12) return { diferencia, categoria: 'Normal',    riesgo: 'normal',    color: '#CAFF00', recomendacion: 'Recuperación dentro del rango normal. Mantén la actividad aeróbica regular.' };
+  if (diferencia >= 0)  return { diferencia, categoria: 'Baja',      riesgo: 'bajo',      color: '#FB923C', recomendacion: 'Recuperación lenta. Mejora tu condición aeróbica y consulta con un médico.' };
+  return                        { diferencia, categoria: 'Anormal',   riesgo: 'anormal',   color: '#F87171', recomendacion: 'La FC aumentó tras el ejercicio. Signo de alarma — consulta a tu médico.' };
+}
+
+// ─── TEMPERATURA CORPORAL ─────────────────────────────────────────────────────
+export type UnidadTemperatura = 'c' | 'f';
+
+export interface TemperaturaCorporalResult {
+  valorC:        number;
+  valorF:        number;
+  categoria:     string;
+  riesgo:        'hipotermia_grave' | 'hipotermia_leve' | 'normal' | 'febricula' | 'fiebre' | 'fiebre_alta' | 'hiperpirexia';
+  color:         string;
+  recomendacion: string;
+}
+
+export function calcularTemperaturaCorporal(valor: number, unidad: UnidadTemperatura): TemperaturaCorporalResult {
+  const valorC = unidad === 'f' ? Math.round((valor - 32) / 1.8 * 10) / 10 : valor;
+  const valorF = unidad === 'c' ? Math.round((valor * 1.8 + 32) * 10) / 10 : valor;
+  if (valorC < 32)   return { valorC, valorF, categoria: 'Hipotermia grave', riesgo: 'hipotermia_grave', color: '#60A5FA', recomendacion: 'Emergencia médica. Llama a urgencias de inmediato.' };
+  if (valorC < 35)   return { valorC, valorF, categoria: 'Hipotermia leve',  riesgo: 'hipotermia_leve',  color: '#93C5FD', recomendacion: 'Hipotermia. Calienta gradualmente y busca atención médica.' };
+  if (valorC <= 37.5)return { valorC, valorF, categoria: 'Normal',           riesgo: 'normal',           color: '#34D399', recomendacion: 'Temperatura corporal normal. Sin acción requerida.' };
+  if (valorC <= 38)  return { valorC, valorF, categoria: 'Febrícula',        riesgo: 'febricula',        color: '#CAFF00', recomendacion: 'Temperatura ligeramente elevada. Reposo, hidratación y monitoreo.' };
+  if (valorC <= 39)  return { valorC, valorF, categoria: 'Fiebre',           riesgo: 'fiebre',           color: '#FB923C', recomendacion: 'Fiebre moderada. Hidratación y antitérmico si hay malestar. Consultar si persiste.' };
+  if (valorC <= 40)  return { valorC, valorF, categoria: 'Fiebre alta',      riesgo: 'fiebre_alta',      color: '#EF4444', recomendacion: 'Fiebre alta. Antitérmico y consulta médica urgente.' };
+  return               { valorC, valorF, categoria: 'Hiperpirexia',      riesgo: 'hiperpirexia',      color: '#DC2626', recomendacion: 'Temperatura peligrosamente alta. Emergencia médica inmediata.' };
+}
+
+// ─── CARGA GLUCÉMICA ──────────────────────────────────────────────────────────
+export interface CargaGlucemicaResult {
+  cargaGlucemica: number;
+  categoria:      'baja' | 'media' | 'alta';
+  categoriaNombre: string;
+  color:          string;
+  recomendacion:  string;
+}
+
+export function calcularCargaGlucemica(indiceGlucemico: number, carbohidratosG: number): CargaGlucemicaResult {
+  const cargaGlucemica = Math.round((indiceGlucemico * carbohidratosG) / 100 * 10) / 10;
+  if (cargaGlucemica < 10) return { cargaGlucemica, categoria: 'baja',  categoriaNombre: 'Carga baja',  color: '#34D399', recomendacion: 'Impacto glucémico bajo. Adecuado para la mayoría, incluyendo personas con diabetes.' };
+  if (cargaGlucemica < 20) return { cargaGlucemica, categoria: 'media', categoriaNombre: 'Carga media', color: '#CAFF00', recomendacion: 'Impacto glucémico moderado. Consume con moderación si controlas el azúcar en sangre.' };
+  return                     { cargaGlucemica, categoria: 'alta',  categoriaNombre: 'Carga alta',  color: '#F87171', recomendacion: 'Impacto glucémico elevado. Limita su consumo, especialmente si eres diabético o prediabético.' };
+}
+
+// ─── GANANCIA DE PESO EN EL EMBARAZO (IOM 2009) ───────────────────────────────
+export interface PesoEmbarazoResult {
+  imc:                  number;
+  categoriaImc:         string;
+  gananciaTotalMin:     number;
+  gananciaTotalMax:     number;
+  gananciaSemanaMin:    number;
+  gananciaSemanaMax:    number;
+  gananciaAcumuladaMin: number;
+  gananciaAcumuladaMax: number;
+  dentroRango:          boolean | null;
+}
+
+export function calcularPesoEmbarazo(
+  pesoPreKg:     number,
+  alturaCm:      number,
+  semanaActual:  number,
+  pesoActualKg?: number,
+): PesoEmbarazoResult {
+  const alturaM = alturaCm / 100;
+  const imc     = Math.round((pesoPreKg / (alturaM ** 2)) * 10) / 10;
+
+  let categoriaImc: string, ganTMin: number, ganTMax: number, ganSMin: number, ganSMax: number;
+  if (imc < 18.5)      { categoriaImc = 'Bajo peso';  ganTMin = 12.5; ganTMax = 18;   ganSMin = 0.44; ganSMax = 0.58; }
+  else if (imc < 25)   { categoriaImc = 'Normal';     ganTMin = 11.5; ganTMax = 16;   ganSMin = 0.35; ganSMax = 0.50; }
+  else if (imc < 30)   { categoriaImc = 'Sobrepeso';  ganTMin = 7;    ganTMax = 11.5; ganSMin = 0.23; ganSMax = 0.33; }
+  else                 { categoriaImc = 'Obesidad';   ganTMin = 5;    ganTMax = 9;    ganSMin = 0.17; ganSMax = 0.27; }
+
+  const sT2y3 = Math.max(0, semanaActual - 13);
+  const acumMin = Math.round((Math.min(semanaActual, 13) * (2 / 13) + sT2y3 * ganSMin) * 10) / 10;
+  const acumMax = Math.round((Math.min(semanaActual, 13) * (2 / 13) + sT2y3 * ganSMax) * 10) / 10;
+
+  let dentroRango: boolean | null = null;
+  if (pesoActualKg !== undefined) {
+    const ganReal = pesoActualKg - pesoPreKg;
+    dentroRango   = ganReal >= acumMin && ganReal <= acumMax;
+  }
+
+  return { imc, categoriaImc, gananciaTotalMin: ganTMin, gananciaTotalMax: ganTMax, gananciaSemanaMin: ganSMin, gananciaSemanaMax: ganSMax, gananciaAcumuladaMin: acumMin, gananciaAcumuladaMax: acumMax, dentroRango };
+}
+
+// ─── PRESIÓN DE PULSO ─────────────────────────────────────────────────────────
+export interface PresionPulsoResult {
+  pp:            number;
+  categoria:     string;
+  riesgo:        'muy_baja' | 'baja' | 'normal' | 'elevada' | 'muy_elevada';
+  color:         string;
+  recomendacion: string;
+}
+
+export function calcularPresionPulso(sistolica: number, diastolica: number): PresionPulsoResult {
+  const pp = sistolica - diastolica;
+  if (pp < 25)  return { pp, categoria: 'Muy baja',     riesgo: 'muy_baja',    color: '#60A5FA', recomendacion: 'PP muy baja. Puede indicar bajo gasto cardíaco. Consulta médica urgente.' };
+  if (pp < 40)  return { pp, categoria: 'Baja',         riesgo: 'baja',        color: '#93C5FD', recomendacion: 'PP algo baja. Monitorea junto a otros síntomas y consulta con tu médico.' };
+  if (pp <= 60) return { pp, categoria: 'Normal',       riesgo: 'normal',      color: '#34D399', recomendacion: 'Presión de pulso normal (40–60 mmHg). Sin acción requerida.' };
+  if (pp <= 80) return { pp, categoria: 'Elevada',      riesgo: 'elevada',     color: '#FB923C', recomendacion: 'PP elevada. Asociada con rigidez arterial. Controla la tensión y consulta.' };
+  return          { pp, categoria: 'Muy elevada',  riesgo: 'muy_elevada', color: '#F87171', recomendacion: 'PP muy elevada. Riesgo cardiovascular aumentado. Consulta médica necesaria.' };
+}
+
+// ─── TALLA ADULTA PREDICHA (MID-PARENTAL HEIGHT) ─────────────────────────────
+export interface TallaPredichResult {
+  tallaPredichaCm:    number;
+  rangoMinCm:         number;
+  rangoMaxCm:         number;
+  tallaPredichaPies:  number;
+  tallaPredichaPulg:  number;
+}
+
+export function calcularTallaPredicha(
+  tallaPadreCm: number,
+  tallaMadreCm: number,
+  sexo:         'hombre' | 'mujer',
+): TallaPredichResult {
+  const ajuste          = sexo === 'hombre' ? 13 : -13;
+  const tallaPredichaCm = Math.round(((tallaPadreCm + tallaMadreCm + ajuste) / 2) * 10) / 10;
+  const rangoMinCm      = Math.round((tallaPredichaCm - 8.5) * 10) / 10;
+  const rangoMaxCm      = Math.round((tallaPredichaCm + 8.5) * 10) / 10;
+  const totalPulg       = tallaPredichaCm / 2.54;
+  return {
+    tallaPredichaCm,
+    rangoMinCm,
+    rangoMaxCm,
+    tallaPredichaPies: Math.floor(totalPulg / 12),
+    tallaPredichaPulg: Math.round(totalPulg % 12),
+  };
+}
+
+// ─── TEST DE ROCKPORT (1 MILLA) ───────────────────────────────────────────────
+export interface TestRockportResult {
+  vo2max:    number;
+  categoria: string;
+  color:     string;
+}
+
+export function calcularTestRockport(
+  tiempoMin:  number,
+  fcFinal:    number,
+  pesoKg:     number,
+  edadAnios:  number,
+  sexo:       'hombre' | 'mujer',
+): TestRockportResult {
+  const pesoPounds = pesoKg * 2.2046;
+  const sexoN      = sexo === 'hombre' ? 1 : 0;
+  const vo2max     = Math.round((132.853 - 0.0769 * pesoPounds - 0.3877 * edadAnios + 6.315 * sexoN - 3.2649 * tiempoMin - 0.1565 * fcFinal) * 10) / 10;
+
+  const cortes = sexo === 'hombre'
+    ? [35, 42, 49, 56]
+    : [28, 34, 41, 48];
+  const etiquetas = ['Muy bajo', 'Bajo', 'Promedio', 'Bueno', 'Excelente'];
+  const colores   = ['#F87171', '#FB923C', '#CAFF00', '#34D399', '#60A5FA'];
+  const idx = vo2max < cortes[0]! ? 0 : vo2max < cortes[1]! ? 1 : vo2max < cortes[2]! ? 2 : vo2max < cortes[3]! ? 3 : 4;
+
+  return { vo2max, categoria: etiquetas[idx]!, color: colores[idx]! };
+}
+
+// ─── DOSIS SEGURA DE CAFEÍNA ──────────────────────────────────────────────────
+export interface CafeinaResult {
+  dosisPorKg:   number;
+  nivelConsumo: 'bajo' | 'moderado' | 'alto' | 'excesivo';
+  nivelNombre:  string;
+  color:        string;
+  recomendacion: string;
+  equivalencias: { nombre: string; cantidad: number; unidad: string }[];
+  maxDiario:    number;
+}
+
+export function calcularCafeina(pesoKg: number, consumoMg: number): CafeinaResult {
+  const dosisPorKg  = Math.round((consumoMg / pesoKg) * 10) / 10;
+  const equivalencias = [
+    { nombre: 'Café espresso',      cantidad: Math.round(consumoMg / 63),  unidad: 'tazas' },
+    { nombre: 'Café de filtro',     cantidad: Math.round(consumoMg / 95),  unidad: 'tazas' },
+    { nombre: 'Red Bull (250 ml)',  cantidad: Math.round(consumoMg / 80),  unidad: 'latas' },
+    { nombre: 'Refresco cola (330 ml)', cantidad: Math.round(consumoMg / 35), unidad: 'latas' },
+  ];
+  if (dosisPorKg < 2) return { dosisPorKg, nivelConsumo: 'bajo',     nivelNombre: 'Bajo',     color: '#34D399', recomendacion: 'Consumo bajo y seguro. Dentro de los límites recomendados por la FDA y EFSA.', equivalencias, maxDiario: 400 };
+  if (dosisPorKg < 4) return { dosisPorKg, nivelConsumo: 'moderado', nivelNombre: 'Moderado', color: '#CAFF00', recomendacion: 'Consumo moderado. En el rango de dosis ergogénica para rendimiento deportivo (3–6 mg/kg).', equivalencias, maxDiario: 400 };
+  if (dosisPorKg < 6) return { dosisPorKg, nivelConsumo: 'alto',     nivelNombre: 'Alto',     color: '#FB923C', recomendacion: 'Consumo alto. Posibles efectos: insomnio, taquicardia, ansiedad. No superes 400 mg/día.', equivalencias, maxDiario: 400 };
+  return                { dosisPorKg, nivelConsumo: 'excesivo',  nivelNombre: 'Excesivo', color: '#F87171', recomendacion: 'Consumo excesivo. Riesgo de toxicidad por cafeína. Reduce la ingesta urgentemente.', equivalencias, maxDiario: 400 };
+}

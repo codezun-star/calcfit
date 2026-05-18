@@ -1,0 +1,83 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import CaloriasNatacionCalculator from '../components/calculators/CaloriasNatacionCalculator';
+---
+
+<CalculatorLayout
+  title="Calorías Natación — Por Estilo y Duración | CalcFit"
+  description="Calcula las calorías quemadas nadando según tu estilo (crawl, pecho, mariposa, espalda) y duración. Fórmula MET validada. Gratis."
+  calculatorName="Calorías Natación"
+  breadcrumbSlug="calorias-natacion"
+  ogImage="/og/calorias-natacion.jpg"
+  keywords="calorías natación, calorías nadando, calorías crawl, calorías braza, calorías mariposa, natación calorías quemadas"
+  faqs={[
+    { q: '¿Cuántas calorías se queman nadando 30 minutos?', a: 'Depende del estilo y el peso. Una persona de 70 kg nadando crawl lento durante 30 minutos quema aproximadamente 245 kcal. A ritmo de competición (crawl rápido) puede superar las 340 kcal. El estilo mariposa es el más intenso: más de 480 kcal en 30 minutos.' },
+    { q: '¿Qué estilo de natación quema más calorías?', a: 'El estilo mariposa tiene el MET más alto (13.8), seguido del crawl rápido (9.8), pecho o braza (8.3), crawl lento y espalda (7.0), y natación recreacional (5.8). Mariposa puede quemar hasta 2.5 veces más calorías que nadar suavemente.' },
+    { q: '¿Nada mejor que correr para quemar calorías?', a: 'Ambos son comparables. Correr a ritmo moderado tiene un MET de 8–10, similar al crawl rápido. La natación tiene la ventaja de ser de bajo impacto articular, por lo que es ideal para personas con lesiones, sobrepeso o problemas en las rodillas.' },
+    { q: '¿Por qué la natación puede no adelgazar si hago mucho?', a: 'El agua fría estimula el apetito más que el ejercicio terrestre (se denomina "compensación calórica"). Además, el cuerpo se adapta al entrenamiento repetitivo. Combinar natación con una dieta controlada y variar los estilos y la intensidad maximiza los resultados.' },
+    { q: '¿Cuántos metros recorro nadando durante 30 minutos?', a: 'A ritmo recreacional se cubren unos 800–1000 m en 30 minutos. Un nadador de nivel intermedio puede completar 1500 m, y un deportista avanzado puede superar los 2000 m. Esta calculadora no estima la distancia porque varía mucho según la técnica.' },
+  ]}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Calorías<br><span style="color: var(--acid);">Natación</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Calcula las calorías que quemas en la piscina según el estilo de natación y tu peso. Basado en valores MET validados por el Compendium of Physical Activities.
+    </p>
+  </div>
+
+  <CaloriasNatacionCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cómo se calcula el gasto calórico en natación?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      Usamos la fórmula MET estándar: <strong>Calorías = MET × Peso (kg) × Tiempo (h)</strong>. Los valores MET provienen del Compendium of Physical Activities (Ainsworth et al., 2011). Cada estilo tiene un MET distinto que refleja su intensidad metabólica relativa.
+    </p>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">MET por estilo de natación</h2>
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 360px;">
+        <thead>
+          <tr style="border-bottom: 2px solid var(--border);">
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Estilo</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">MET</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">kcal/h (70 kg)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {[
+            { estilo: 'Recreacional', met: '5.8', kcal: '406' },
+            { estilo: 'Crawl lento', met: '7.0', kcal: '490' },
+            { estilo: 'Espalda',     met: '7.0', kcal: '490' },
+            { estilo: 'Pecho (braza)', met: '8.3', kcal: '581' },
+            { estilo: 'Crawl rápido', met: '9.8', kcal: '686' },
+            { estilo: 'Mariposa',    met: '13.8', kcal: '966' },
+          ].map((row) => (
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 10px 0; font-size: 13px; color: var(--ink); font-weight: 600;">{row.estilo}</td>
+              <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.met}</td>
+              <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.kcal}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {[
+        { q: '¿Cuántas calorías se queman nadando 30 minutos?', a: 'Depende del estilo y el peso. Una persona de 70 kg nadando crawl lento durante 30 minutos quema aproximadamente 245 kcal. A ritmo de competición (crawl rápido) puede superar las 340 kcal. El estilo mariposa es el más intenso: más de 480 kcal en 30 minutos.' },
+        { q: '¿Qué estilo de natación quema más calorías?', a: 'El estilo mariposa tiene el MET más alto (13.8), seguido del crawl rápido (9.8), pecho o braza (8.3), crawl lento y espalda (7.0), y natación recreacional (5.8). Mariposa puede quemar hasta 2.5 veces más calorías que nadar suavemente.' },
+        { q: '¿Nada mejor que correr para quemar calorías?', a: 'Ambos son comparables. Correr a ritmo moderado tiene un MET de 8–10, similar al crawl rápido. La natación tiene la ventaja de ser de bajo impacto articular, por lo que es ideal para personas con lesiones, sobrepeso o problemas en las rodillas.' },
+        { q: '¿Por qué la natación puede no adelgazar si hago mucho?', a: 'El agua fría estimula el apetito más que el ejercicio terrestre (se denomina "compensación calórica"). Además, el cuerpo se adapta al entrenamiento repetitivo. Combinar natación con una dieta controlada y variar los estilos y la intensidad maximiza los resultados.' },
+        { q: '¿Cuántos metros recorro nadando durante 30 minutos?', a: 'A ritmo recreacional se cubren unos 800–1000 m en 30 minutos. Un nadador de nivel intermedio puede completar 1500 m, y un deportista avanzado puede superar los 2000 m. Esta calculadora no estima la distancia porque varía mucho según la técnica.' },
+      ].map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

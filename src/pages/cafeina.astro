@@ -1,0 +1,83 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import CafeinaCalculator from '../components/calculators/CafeinaCalculator';
+---
+
+<CalculatorLayout
+  title="Calculadora de Cafeína — Dosis Segura mg/kg | CalcFit"
+  description="Calcula tu dosis de cafeína diaria en mg/kg y comprueba si estás dentro de los límites seguros (FDA/EFSA). Con equivalencias en café, Red Bull y más. Gratis."
+  calculatorName="Cafeína"
+  breadcrumbSlug="cafeina"
+  ogImage="/og/cafeina.jpg"
+  keywords="calculadora cafeína, dosis cafeína segura, cafeína mg kg, cuánta cafeína tomar, límite cafeína diario, cafeína deportiva"
+  faqs={[
+    { q: '¿Cuánta cafeína es segura al día?', a: 'La FDA y la EFSA establecen el límite seguro en 400 mg/día para adultos sanos, o aproximadamente 5.7 mg/kg para una persona de 70 kg. Para mujeres embarazadas o en lactancia se recomienda no superar 200 mg/día. Los adolescentes no deberían superar 2.5 mg/kg/día.' },
+    { q: '¿Qué dosis de cafeína mejora el rendimiento deportivo?', a: 'La dosis ergogénica más estudiada es 3–6 mg/kg de peso corporal, tomada 30–60 minutos antes del ejercicio. Por debajo de 2 mg/kg el efecto es mínimo; por encima de 6 mg/kg los efectos secundarios (insomnio, taquicardia, ansiedad) superan los beneficios. El consenso del ISSN (2021) avala esta ventana.' },
+    { q: '¿Puede la cafeína ser peligrosa?', a: 'La toxicidad por cafeína aparece por encima de 10 mg/kg (700 mg para 70 kg) y puede causar taquicardia, convulsiones e hipertensión severa. Las muertes por sobredosis de cafeína son extremadamente raras con alimentos, pero han ocurrido con suplementos de cafeína en polvo o pastillas concentradas de alta dosis.' },
+    { q: '¿La tolerancia reduce el efecto de la cafeína?', a: 'Sí. Con consumo regular (> 100 mg/día), el cuerpo reduce los receptores de adenosina a los que se une la cafeína, disminuyendo su efecto estimulante. Un periodo de abstinencia de 2–4 días restaura parcialmente la sensibilidad. Por eso los atletas a veces hacen "ciclos" de cafeína antes de competiciones importantes.' },
+    { q: '¿Cuánto tiempo permanece la cafeína en el cuerpo?', a: 'La vida media de la cafeína en adultos sanos es de 4–6 horas. Esto significa que si tomas 200 mg a las 16:00, a las 22:00 aún tendrás unos 100 mg activos en sangre. En fumadores la metabolización es más rápida (2–3 h); en embarazadas más lenta (8–12 h). Para evitar el insomnio, evita la cafeína después de las 14:00–15:00.' },
+  ]}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Cafeína<br><span style="color: var(--acid);">Diaria</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Calcula tu ingesta de cafeína en mg/kg y comprueba si está dentro de los límites seguros según la FDA y la EFSA. Con equivalencias en café, té y bebidas energéticas.
+    </p>
+  </div>
+
+  <CafeinaCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cómo se evalúa la dosis de cafeína?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      La dosis se calcula en <strong>mg de cafeína / kg de peso corporal</strong>, que permite comparar el consumo independientemente del tamaño corporal. Los umbrales de seguridad y rendimiento están basados en la revisión EFSA 2015, la FDA (2018) y el consenso de posición del ISSN sobre cafeína (Goldstein et al., 2021).
+    </p>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Cafeína en bebidas comunes</h2>
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 320px;">
+        <thead>
+          <tr style="border-bottom: 2px solid var(--border);">
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Bebida</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Cafeína</th>
+          </tr>
+        </thead>
+        <tbody>
+          {[
+            { bebida: 'Café espresso (30 ml)',      mg: '60–75 mg' },
+            { bebida: 'Café de filtro (240 ml)',    mg: '80–130 mg' },
+            { bebida: 'Café instantáneo (240 ml)', mg: '60–80 mg' },
+            { bebida: 'Té negro (240 ml)',          mg: '40–70 mg' },
+            { bebida: 'Té verde (240 ml)',          mg: '20–45 mg' },
+            { bebida: 'Red Bull (250 ml)',          mg: '80 mg' },
+            { bebida: 'Refresco cola (330 ml)',     mg: '30–40 mg' },
+            { bebida: 'Pastilla cafeína',           mg: '100–200 mg' },
+          ].map((row) => (
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 10px 0; font-size: 13px; color: var(--ink); font-weight: 600;">{row.bebida}</td>
+              <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.mg}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {[
+        { q: '¿Cuánta cafeína es segura al día?', a: 'La FDA y la EFSA establecen el límite seguro en 400 mg/día para adultos sanos, o aproximadamente 5.7 mg/kg para una persona de 70 kg. Para mujeres embarazadas o en lactancia se recomienda no superar 200 mg/día. Los adolescentes no deberían superar 2.5 mg/kg/día.' },
+        { q: '¿Qué dosis de cafeína mejora el rendimiento deportivo?', a: 'La dosis ergogénica más estudiada es 3–6 mg/kg de peso corporal, tomada 30–60 minutos antes del ejercicio. Por debajo de 2 mg/kg el efecto es mínimo; por encima de 6 mg/kg los efectos secundarios (insomnio, taquicardia, ansiedad) superan los beneficios. El consenso del ISSN (2021) avala esta ventana.' },
+        { q: '¿Puede la cafeína ser peligrosa?', a: 'La toxicidad por cafeína aparece por encima de 10 mg/kg (700 mg para 70 kg) y puede causar taquicardia, convulsiones e hipertensión severa. Las muertes por sobredosis de cafeína son extremadamente raras con alimentos, pero han ocurrido con suplementos de cafeína en polvo o pastillas concentradas de alta dosis.' },
+        { q: '¿La tolerancia reduce el efecto de la cafeína?', a: 'Sí. Con consumo regular (> 100 mg/día), el cuerpo reduce los receptores de adenosina a los que se une la cafeína, disminuyendo su efecto estimulante. Un periodo de abstinencia de 2–4 días restaura parcialmente la sensibilidad. Por eso los atletas a veces hacen "ciclos" de cafeína antes de competiciones importantes.' },
+        { q: '¿Cuánto tiempo permanece la cafeína en el cuerpo?', a: 'La vida media de la cafeína en adultos sanos es de 4–6 horas. Esto significa que si tomas 200 mg a las 16:00, a las 22:00 aún tendrás unos 100 mg activos en sangre. En fumadores la metabolización es más rápida (2–3 h); en embarazadas más lenta (8–12 h). Para evitar el insomnio, evita la cafeína después de las 14:00–15:00.' },
+      ].map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

@@ -1,0 +1,84 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import TemperaturaCorporalCalculator from '../components/calculators/TemperaturaCorporalCalculator';
+---
+
+<CalculatorLayout
+  title="Temperatura Corporal — Fiebre, Febrícula, Hipotermia | CalcFit"
+  description="Interpreta tu temperatura corporal en °C o °F: normal, febrícula, fiebre o hipotermia. Con tabla de rangos clínicos. Gratis."
+  calculatorName="Temperatura Corporal"
+  breadcrumbSlug="temperatura-corporal"
+  ogImage="/og/temperatura-corporal.jpg"
+  keywords="temperatura corporal normal, fiebre temperatura, febrícula temperatura, hipotermia temperatura, calcular fiebre, temperatura en fahrenheit"
+  faqs={[
+    { q: '¿Cuál es la temperatura corporal normal?', a: 'La temperatura corporal normal oscila entre 36.1 °C y 37.2 °C (97 °F – 99 °F). La temperatura promedio clásica de 37 °C (98.6 °F) fue descrita por Carl Wunderlich en 1851. Estudios modernos (Protsiv et al., 2020, eLife) muestran que la temperatura media actual es ligeramente más baja: 36.6 °C.' },
+    { q: '¿A partir de qué temperatura hay fiebre?', a: 'Se considera fiebre cuando la temperatura supera los 38 °C (100.4 °F) en adultos. Entre 37.5 °C y 38 °C se habla de febrícula. La fiebre es un mecanismo de defensa del sistema inmunológico que inhibe la replicación de muchos patógenos y activa la respuesta inmune.' },
+    { q: '¿Qué es la hiperpirexia y cuándo es una emergencia?', a: 'La hiperpirexia es una temperatura superior a 40 °C (104 °F). Es una emergencia médica porque puede causar daño cerebral, convulsiones y fallo multiorgánico. Debe tratarse de inmediato con antitérmicos, compresión con agua tibia y atención hospitalaria urgente.' },
+    { q: '¿Cuáles son los síntomas de hipotermia?', a: 'La hipotermia leve (32–35 °C) causa escalofríos intensos, confusión y torpeza motora. La hipotermia grave (< 32 °C) produce pérdida de la conciencia, arritmias cardíacas y puede ser fatal. El calentamiento debe ser gradual; no friccionar la piel bruscamente.' },
+    { q: '¿Afecta el lugar de medición la temperatura?', a: 'Sí. La temperatura rectal es la más cercana a la central y suele ser 0.3–0.5 °C más alta que la axilar. La temperatura oral está en un punto intermedio. La timpánica (oído) y la axilar pueden variar más. Para una comparación precisa, usa siempre el mismo método.' },
+  ]}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Temperatura<br><span style="color: var(--acid);">Corporal</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Introduce tu temperatura en °C o °F y obtén una interpretación clínica: hipotermia, normal, febrícula, fiebre o hiperpirexia.
+    </p>
+  </div>
+
+  <TemperaturaCorporalCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">Rangos de temperatura corporal</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      Los rangos clínicos están basados en guías de la OMS y los criterios diagnósticos de la Sociedad Española de Medicina de Urgencias (SEMES). La conversión °C ↔ °F usa la fórmula estándar: <strong>°F = °C × 1.8 + 32</strong>.
+    </p>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Clasificación clínica</h2>
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 340px;">
+        <thead>
+          <tr style="border-bottom: 2px solid var(--border);">
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Categoría</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">°C</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">°F</th>
+          </tr>
+        </thead>
+        <tbody>
+          {[
+            { cat: 'Hipotermia grave', c: '< 32',       f: '< 89.6',    color: '#60A5FA' },
+            { cat: 'Hipotermia leve',  c: '32–34.9',    f: '89.6–94.8', color: '#93C5FD' },
+            { cat: 'Normal',           c: '35–37.5',    f: '95–99.5',   color: '#34D399' },
+            { cat: 'Febrícula',        c: '37.6–38',    f: '99.6–100.4',color: '#CAFF00' },
+            { cat: 'Fiebre',           c: '38.1–39',    f: '100.5–102.2',color: '#FB923C' },
+            { cat: 'Fiebre alta',      c: '39.1–40',    f: '102.3–104', color: '#EF4444' },
+            { cat: 'Hiperpirexia',     c: '> 40',       f: '> 104',     color: '#DC2626' },
+          ].map((row) => (
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 10px 0; font-size: 13px; color: var(--ink); font-weight: 600;">{row.cat}</td>
+              <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: row.color;">{row.c}</td>
+              <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--muted);">{row.f}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {[
+        { q: '¿Cuál es la temperatura corporal normal?', a: 'La temperatura corporal normal oscila entre 36.1 °C y 37.2 °C (97 °F – 99 °F). La temperatura promedio clásica de 37 °C (98.6 °F) fue descrita por Carl Wunderlich en 1851. Estudios modernos (Protsiv et al., 2020, eLife) muestran que la temperatura media actual es ligeramente más baja: 36.6 °C.' },
+        { q: '¿A partir de qué temperatura hay fiebre?', a: 'Se considera fiebre cuando la temperatura supera los 38 °C (100.4 °F) en adultos. Entre 37.5 °C y 38 °C se habla de febrícula. La fiebre es un mecanismo de defensa del sistema inmunológico que inhibe la replicación de muchos patógenos y activa la respuesta inmune.' },
+        { q: '¿Qué es la hiperpirexia y cuándo es una emergencia?', a: 'La hiperpirexia es una temperatura superior a 40 °C (104 °F). Es una emergencia médica porque puede causar daño cerebral, convulsiones y fallo multiorgánico. Debe tratarse de inmediato con antitérmicos, compresión con agua tibia y atención hospitalaria urgente.' },
+        { q: '¿Cuáles son los síntomas de hipotermia?', a: 'La hipotermia leve (32–35 °C) causa escalofríos intensos, confusión y torpeza motora. La hipotermia grave (< 32 °C) produce pérdida de la conciencia, arritmias cardíacas y puede ser fatal. El calentamiento debe ser gradual; no friccionar la piel bruscamente.' },
+        { q: '¿Afecta el lugar de medición la temperatura?', a: 'Sí. La temperatura rectal es la más cercana a la central y suele ser 0.3–0.5 °C más alta que la axilar. La temperatura oral está en un punto intermedio. La timpánica (oído) y la axilar pueden variar más. Para una comparación precisa, usa siempre el mismo método.' },
+      ].map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

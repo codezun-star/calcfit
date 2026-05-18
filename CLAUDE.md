@@ -102,6 +102,16 @@ calcfit-astro/
 │   │       ├── CaloriasCiclismoCalculator.tsx
 │   │       ├── FuerzaRelativaCalculator.tsx
 │   │       ├── MasaMuscularCalculator.tsx
+│   │       ├── CaloriasNatacionCalculator.tsx
+│   │       ├── TestCooperCalculator.tsx
+│   │       ├── RecuperacionCardiacaCalculator.tsx
+│   │       ├── TemperaturaCorporalCalculator.tsx
+│   │       ├── CargaGlucemicaCalculator.tsx
+│   │       ├── PesoEmbarazoCalculator.tsx
+│   │       ├── PresionPulsoCalculator.tsx
+│   │       ├── TallaPredichCalculator.tsx
+│   │       ├── TestRockportCalculator.tsx
+│   │       ├── CafeinaCalculator.tsx
 │   │       ├── GaugeIMC.tsx           ← gauge SVG semicircular animado
 │   │       ├── ZonasCardiaca.tsx      ← barras horizontales de zonas cardíacas
 │   │       └── BarrasCaloria.tsx      ← barras verticales déficit/mant/superávit
@@ -151,6 +161,16 @@ calcfit-astro/
 │       ├── calorias-ciclismo.astro
 │       ├── fuerza-relativa.astro
 │       ├── masa-muscular.astro
+│       ├── calorias-natacion.astro
+│       ├── test-cooper.astro
+│       ├── recuperacion-cardiaca.astro
+│       ├── temperatura-corporal.astro
+│       ├── carga-glucemica.astro
+│       ├── peso-embarazo.astro
+│       ├── presion-pulso.astro
+│       ├── talla-predicha.astro
+│       ├── test-rockport.astro
+│       ├── cafeina.astro
 │       ├── sobre-nosotros.astro       ← página estática
 │       ├── contacto.astro             ← solo email, sin formulario
 │       ├── aviso-legal.astro          ← LSSI-CE
@@ -417,6 +437,39 @@ calcularMasaMuscular(pesoKg, alturaCm, edadAnios, sexo)
   → { masaMuscularKg, smi, porcentaje, categoria, nivel, color, descripcion }
   // Fórmula Lee 2000 validada contra DEXA (r=0.94)
   // nivel: 'bajo' | 'normal' | 'alto' — umbrales EWGSOP2
+
+// Calculadoras batch 5 (10 nuevas — 2026-05-18)
+export const ESTILOS_NATACION: Record<EstiloNatacion, {met, nombre}>
+calcularCaloriasNatacion(pesoKg, duracionMin, estilo)
+  → { calorias, met, estiloNombre }
+  // estilo: 'recreacional' | 'crawl_lento' | 'crawl_rapido' | 'pecho' | 'espalda' | 'mariposa'
+calcularTestCooper(distanciaMetros, sexo, edad)
+  → { vo2max, categoria, color }
+  // Fórmula Cooper 1968: VO₂ = (distancia − 504.9) / 44.73
+calcularRecuperacionCardiaca(fcPico, fc1Min)
+  → { diferencia, categoria, riesgo, color, recomendacion }
+  // riesgo: 'excelente' | 'normal' | 'bajo' | 'anormal' — Cole et al. NEJM 1999
+calcularTemperaturaCorporal(valor, unidad)
+  → { valorC, valorF, categoria, riesgo, color, recomendacion }
+  // unidad: 'c' | 'f' — riesgo: 'hipotermia_grave'...'hiperpirexia'
+calcularCargaGlucemica(indiceGlucemico, carbohidratosG)
+  → { cargaGlucemica, categoria, categoriaNombre, color, recomendacion }
+  // baja < 10, media 10–19, alta ≥ 20
+calcularPesoEmbarazo(pesoPreKg, alturaCm, semanaActual, pesoActualKg?)
+  → { imc, categoriaImc, gananciaTotalMin, gananciaTotalMax, gananciaSemanaMin, gananciaSemanaMax, gananciaAcumuladaMin, gananciaAcumuladaMax, dentroRango }
+  // Guías IOM 2009 por IMC pre-gestacional
+calcularPresionPulso(sistolica, diastolica)
+  → { pp, categoria, riesgo, color, recomendacion }
+  // riesgo: 'muy_baja' | 'baja' | 'normal' | 'elevada' | 'muy_elevada'
+calcularTallaPredicha(tallaPadreCm, tallaMadreCm, sexo)
+  → { tallaPredichaCm, rangoMinCm, rangoMaxCm, tallaPredichaPies, tallaPredichaPulg }
+  // Fórmula mid-parental height (Tanner) — rango ±8.5 cm (95% CI)
+calcularTestRockport(tiempoMin, fcFinal, pesoKg, edadAnios, sexo)
+  → { vo2max, categoria, color }
+  // Fórmula Kline 1987 — r = 0.88 validación
+calcularCafeina(pesoKg, consumoMg)
+  → { dosisPorKg, nivelConsumo, nivelNombre, color, recomendacion, equivalencias[], maxDiario }
+  // nivelConsumo: 'bajo' | 'moderado' | 'alto' | 'excesivo' — FDA/EFSA/ISSN
 ```
 
 ### Conversión de unidades (src/lib/units.ts)
@@ -513,11 +566,11 @@ La columna izquierda del hero (`.hero-left`) tiene una imagen de fondo de gimnas
 - La columna derecha (`.hero-nums`) mantiene fondo sólido `var(--ink-2)` sin imagen.
 - Si se cambia la imagen, verificar que el overlay siga siendo opaco suficiente (mínimo 0.65).
 
-Categorías y conteo actual (total: 39):
-1. **Fitness & salud** (23 calculadoras) — imc, peso-ideal, grasa-corporal, ffmi, complexion-corporal, somatotipo, indice-adiposidad, frecuencia-cardiaca, vo2-maximo, presion-arterial, riesgo-cardiovascular, cintura-cadera, cintura-estatura, 1rm, volumen-entrenamiento, fuerza-relativa, masa-muscular, calorias-ejercicio, calorias-caminando, calorias-ciclismo, ritmo-carrera, agua-diaria, calorias-diarias
-2. **Embarazo & fertilidad** (4 calculadoras) — ovulacion, ciclo-menstrual, semana-embarazo, fecha-parto
+Categorías y conteo actual (total: 49):
+1. **Fitness & salud** (32 calculadoras) — imc, peso-ideal, grasa-corporal, ffmi, complexion-corporal, somatotipo, indice-adiposidad, frecuencia-cardiaca, vo2-maximo, presion-arterial, riesgo-cardiovascular, cintura-cadera, cintura-estatura, 1rm, volumen-entrenamiento, fuerza-relativa, masa-muscular, calorias-ejercicio, calorias-caminando, calorias-ciclismo, calorias-natacion, ritmo-carrera, agua-diaria, calorias-diarias, test-cooper, test-rockport, recuperacion-cardiaca, temperatura-corporal, presion-pulso, talla-predicha
+2. **Embarazo & fertilidad** (5 calculadoras) — ovulacion, ciclo-menstrual, semana-embarazo, fecha-parto, peso-embarazo
 3. **Fechas & tiempo** (2 calculadoras) — edad, dias-fechas
-4. **Nutrición & bienestar** (10 calculadoras) — macronutrientes, proteinas, metabolismo-basal, deficit-calorico, resistencia-insulina, glucosa, colesterol, sueno, ayuno-intermitente, alcoholemia
+4. **Nutrición & bienestar** (12 calculadoras) — macronutrientes, proteinas, metabolismo-basal, deficit-calorico, resistencia-insulina, glucosa, colesterol, carga-glucemica, cafeina, sueno, ayuno-intermitente, alcoholemia
 
 Al agregar una calculadora nueva, seguir el checklist completo de la sección "Reglas para agregar una calculadora nueva".
 
@@ -683,7 +736,7 @@ npm run preview  # preview del build
 
 **7. Verificación final**
 - Ejecutar `npm run build` — debe completar sin errores
-- El número de páginas en el build debe coincidir (actualmente 45: 39 calculadoras + 1 homepage + 5 estáticas)
+- El número de páginas en el build debe coincidir (actualmente 55: 49 calculadoras + 1 homepage + 5 estáticas)
 
 ---
 
@@ -744,6 +797,7 @@ Siempre verificar `typeof window !== 'undefined'` antes de acceder a localStorag
 | Fecha | Acción |
 |---|---|
 | 2026-05-16 | Hero: imagen de gym Unsplash con overlay oscuro en columna izquierda. Ticker y CTA actualizados a 39. |
+| 2026-05-18 | Batch 5: +10 calculadoras (calorias-natacion, test-cooper, recuperacion-cardiaca, temperatura-corporal, carga-glucemica, peso-embarazo, presion-pulso, talla-predicha, test-rockport, cafeina). Total: 49. |
 | 2026-05-16 | Batch 4: +5 calculadoras (glucosa, colesterol, calorias-ciclismo, fuerza-relativa, masa-muscular). Total: 39. |
 | 2026-05-16 | Batch 3: +10 calculadoras (metabolismo-basal, 1rm, calorias-caminando, deficit-calorico, complexion-corporal, resistencia-insulina, somatotipo, riesgo-cardiovascular, indice-adiposidad, volumen-entrenamiento). Total: 34. |
 | 2026-05-16 | SEO agresivo: Base.astro con Organization schema + SearchAction. CalculatorLayout.astro con props `keywords`, `faqs`, `dateModified` y generación automática de FAQPage + BreadcrumbList en @graph. Todas las 34 páginas actualizadas con titles/descriptions optimizados, keywords meta y FAQs en JSON-LD. Footer corregido a "Ver las 34". Homepage con ItemList schema y título actualizado. |

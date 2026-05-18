@@ -1,0 +1,84 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import TestCooperCalculator from '../components/calculators/TestCooperCalculator';
+---
+
+<CalculatorLayout
+  title="Test de Cooper — VO₂ Máx en 12 Minutos | CalcFit"
+  description="Calcula tu VO₂ máximo con el Test de Cooper: corre 12 minutos e introduce la distancia recorrida. Evalúa tu capacidad aeróbica. Gratis."
+  calculatorName="Test de Cooper"
+  breadcrumbSlug="test-cooper"
+  ogImage="/og/test-cooper.jpg"
+  keywords="test de Cooper, VO2 máx 12 minutos, test Cooper running, capacidad aeróbica, fórmula Cooper VO2"
+  faqs={[
+    { q: '¿En qué consiste el Test de Cooper?', a: 'El Test de Cooper consiste en correr la mayor distancia posible en exactamente 12 minutos en una pista plana. Fue desarrollado por el Dr. Kenneth Cooper en 1968 para evaluar la condición física de militares estadounidenses. La distancia recorrida se introduce en la fórmula para estimar el VO₂ máximo.' },
+    { q: '¿Cómo se calcula el VO₂ máx con el Test de Cooper?', a: 'La fórmula de Cooper es: VO₂ máx (ml/kg/min) = (distancia en metros − 504.9) / 44.73. Por ejemplo, si recorres 2400 m en 12 minutos, tu VO₂ máx estimado es (2400 − 504.9) / 44.73 ≈ 42.4 ml/kg/min.' },
+    { q: '¿Qué VO₂ máx es bueno para mi edad?', a: 'Los valores varían por sexo y edad. Para hombres de 20–29 años, un VO₂ máx promedio es 44–50 ml/kg/min; bueno: 51–56; excelente: > 57. Para mujeres de 20–29: promedio 35–40; bueno: 41–47; excelente: > 48. Los deportistas de élite suelen superar 60–70 ml/kg/min.' },
+    { q: '¿Para quién NO es apto el Test de Cooper?', a: 'No está recomendado para personas sedentarias sin preparación previa, mayores de 60 años sin evaluación médica, o quienes padezcan enfermedades cardiovasculares, articulares o respiratorias. En esos casos, el Test de Rockport (caminata) es una alternativa más segura.' },
+    { q: '¿Con qué frecuencia debería realizar el Test de Cooper?', a: 'Para medir el progreso del entrenamiento, se recomienda realizarlo cada 4–8 semanas. Asegúrate de descansar bien el día anterior y hacer un calentamiento adecuado de 10 minutos antes de la prueba para obtener resultados fiables.' },
+  ]}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Test de<br><span style="color: var(--acid);">Cooper</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Corre 12 minutos e introduce la distancia recorrida para estimar tu VO₂ máximo con la fórmula original de Cooper (1968).
+    </p>
+  </div>
+
+  <TestCooperCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cómo funciona el Test de Cooper?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      La fórmula original: <strong>VO₂ máx = (distancia_metros − 504.9) / 44.73</strong>. La prueba requiere correr en una pista plana durante exactamente 12 minutos, registrando la distancia total. Los estándares de clasificación están ajustados por sexo y grupo de edad (Cooper Institute, 2018).
+    </p>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Estándares VO₂ máx (hombres)</h2>
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 380px;">
+        <thead>
+          <tr style="border-bottom: 2px solid var(--border);">
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Nivel</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">20–29</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">30–39</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">40–49</th>
+          </tr>
+        </thead>
+        <tbody>
+          {[
+            { nivel: 'Muy bajo',    c1: '< 38', c2: '< 34', c3: '< 31' },
+            { nivel: 'Bajo',        c1: '38–43', c2: '34–39', c3: '31–36' },
+            { nivel: 'Promedio',    c1: '44–50', c2: '40–46', c3: '37–43' },
+            { nivel: 'Bueno',       c1: '51–56', c2: '47–52', c3: '44–49' },
+            { nivel: 'Excelente',   c1: '> 56',  c2: '> 52',  c3: '> 49' },
+          ].map((row) => (
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 10px 0; font-size: 13px; color: var(--ink); font-weight: 600;">{row.nivel}</td>
+              <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.c1}</td>
+              <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.c2}</td>
+              <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.c3}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {[
+        { q: '¿En qué consiste el Test de Cooper?', a: 'El Test de Cooper consiste en correr la mayor distancia posible en exactamente 12 minutos en una pista plana. Fue desarrollado por el Dr. Kenneth Cooper en 1968 para evaluar la condición física de militares estadounidenses. La distancia recorrida se introduce en la fórmula para estimar el VO₂ máximo.' },
+        { q: '¿Cómo se calcula el VO₂ máx con el Test de Cooper?', a: 'La fórmula de Cooper es: VO₂ máx (ml/kg/min) = (distancia en metros − 504.9) / 44.73. Por ejemplo, si recorres 2400 m en 12 minutos, tu VO₂ máx estimado es (2400 − 504.9) / 44.73 ≈ 42.4 ml/kg/min.' },
+        { q: '¿Qué VO₂ máx es bueno para mi edad?', a: 'Los valores varían por sexo y edad. Para hombres de 20–29 años, un VO₂ máx promedio es 44–50 ml/kg/min; bueno: 51–56; excelente: > 57. Para mujeres de 20–29: promedio 35–40; bueno: 41–47; excelente: > 48. Los deportistas de élite suelen superar 60–70 ml/kg/min.' },
+        { q: '¿Para quién NO es apto el Test de Cooper?', a: 'No está recomendado para personas sedentarias sin preparación previa, mayores de 60 años sin evaluación médica, o quienes padezcan enfermedades cardiovasculares, articulares o respiratorias. En esos casos, el Test de Rockport (caminata) es una alternativa más segura.' },
+        { q: '¿Con qué frecuencia debería realizar el Test de Cooper?', a: 'Para medir el progreso del entrenamiento, se recomienda realizarlo cada 4–8 semanas. Asegúrate de descansar bien el día anterior y hacer un calentamiento adecuado de 10 minutos antes de la prueba para obtener resultados fiables.' },
+      ].map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>
