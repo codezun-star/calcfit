@@ -35,12 +35,15 @@ export default function VolumenEntrenamientoCalculator() {
       <div>
         <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '12px' }}>Días de entrenamiento por semana: <span style={{ color: 'var(--ink)' }}>{dias}</span></div>
         <div style={{ display: 'flex', gap: '4px' }}>
-          {[2, 3, 4, 5, 6].map(d => (
+          {[2, 3, 4].map(d => (
             <button key={d} onClick={() => setDias(d)} style={{ flex: 1, padding: '10px', border: '1px solid', borderColor: dias === d ? 'var(--ink)' : 'var(--border)', background: dias === d ? 'var(--ink)' : 'transparent', color: dias === d ? 'var(--acid)' : 'var(--muted)', fontFamily: 'var(--font-display)', fontSize: '20px', cursor: 'pointer' }}>
               {d}
             </button>
           ))}
         </div>
+        <p style={{ fontSize: '11px', color: 'var(--muted)', marginTop: '8px', lineHeight: 1.5 }}>
+          Los modelos MEV/MRV alcanzan su máximo a partir de 4 días. Si entrenas 5 o 6 días, aplica el volumen de 4 días distribuyendo los grupos musculares en más sesiones.
+        </p>
       </div>
 
       <Button onClick={calcular}>Calcular volumen semanal</Button>

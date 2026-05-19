@@ -46,6 +46,7 @@ export default function DeficitCaloricoCalculator() {
     const edadN     = parseInt(edad);
     if (isNaN(pesoKg)    || pesoKg < 20 || pesoKg > 300)       errs.peso    = 'Peso entre 20 y 300 kg';
     if (isNaN(pesoObjKg) || pesoObjKg < 20 || pesoObjKg > 300) errs.pesoObj = 'Peso objetivo entre 20 y 300 kg';
+    if (!errs.peso && !errs.pesoObj && pesoObjKg >= pesoKg)    errs.pesoObj = 'El peso objetivo debe ser menor al peso actual';
     if (isNaN(alturaCm)  || alturaCm < 100 || alturaCm > 250)  errs.altura  = 'Altura entre 100 y 250 cm';
     if (isNaN(edadN)     || edadN < 15 || edadN > 100)          errs.edad    = 'Edad entre 15 y 100 años';
     setErrors(errs);
@@ -109,7 +110,7 @@ export default function DeficitCaloricoCalculator() {
 
       {result && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-          <ResultCard label="Calorías diarias objetivo" value={result.deficit.caloriasDiarias} unit="kcal/día" interpretation={result.deficit.esSeguaro ? 'Déficit seguro y sostenible' : 'Déficit alto — mínimo 1 200 kcal aplicado'} />
+          <ResultCard label="Calorías diarias objetivo" value={result.deficit.caloriasDiarias} unit="kcal/día" interpretation={result.deficit.esSeguro ? 'Déficit seguro y sostenible' : 'Déficit alto — mínimo 1 200 kcal aplicado'} />
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '1px', background: 'var(--border)' }}>
             {[
               { label: 'TDEE (mantener)',  val: result.tdee,                    suf: 'kcal/día' },

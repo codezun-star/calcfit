@@ -12,17 +12,19 @@ export default function IndiceAdipositadCalculator() {
   const [sexo, setSexo]     = useState<'hombre' | 'mujer'>('hombre');
   const [altura, setAltura] = useState('');
   const [cadera, setCadera] = useState('');
-  const [ft, setFt]         = useState('');
-  const [inches, setInches] = useState('');
-  const [result, setResult] = useState<ReturnType<typeof calcularBAI> | null>(null);
-  const [errors, setErrors] = useState<{ altura?: string; cadera?: string }>({});
+  const [ft, setFt]           = useState('');
+  const [inches, setInches]   = useState('');
+  const [caderaIn, setCaderaIn] = useState('');
+  const [result, setResult]   = useState<ReturnType<typeof calcularBAI> | null>(null);
+  const [errors, setErrors]   = useState<{ altura?: string; cadera?: string }>({});
 
   const calcular = () => {
     const errs: typeof errors = {};
     const alturaCm = units === 'metric' ? parseFloat(altura) : toCm(parseFloat(ft), parseFloat(inches));
-    const caderaN  = parseFloat(cadera);
+    const caderaN  = units === 'metric' ? parseFloat(cadera) : toCm(0, parseFloat(caderaIn));
     if (isNaN(alturaCm) || alturaCm < 100 || alturaCm > 250) errs.altura = 'Altura entre 100 y 250 cm';
-    if (isNaN(caderaN)  || caderaN < 50   || caderaN > 200)  errs.cadera = 'Cadera entre 50 y 200 cm';
+    if (isNaN(caderaN)  || caderaN < 50   || caderaN > 200)
+      errs.cadera = units === 'metric' ? 'Cadera entre 50 y 200 cm' : 'Cadera entre 20 y 79 pulg';
     setErrors(errs);
     if (Object.keys(errs).length > 0) return;
     setResult(calcularBAI(alturaCm, caderaN, sexo));
@@ -47,9 +49,9 @@ export default function IndiceAdipositadCalculator() {
         </div>
       ) : (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(110px, 1fr))', gap: '20px' }}>
-          <Input label="Pies"             value={ft}     onChange={setFt}     suffix="pies" error={errors.altura} />
-          <Input label="Pulgadas"         value={inches} onChange={setInches} suffix="pulg" />
-          <Input label="Circ. de cadera" value={cadera} onChange={setCadera} suffix="cm"   error={errors.cadera} />
+          <Input label="Pies"             value={ft}       onChange={setFt}       suffix="pies" error={errors.altura} />
+          <Input label="Pulgadas"         value={inches}   onChange={setInches}   suffix="pulg" />
+          <Input label="Circ. de cadera" value={caderaIn} onChange={setCaderaIn} suffix="pulg" error={errors.cadera} />
         </div>
       )}
 

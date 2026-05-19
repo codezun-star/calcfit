@@ -88,6 +88,12 @@ export default function ColesterolCalculator() {
             </div>
           </div>
 
+          {parseFloat(trigliceridos) >= 400 && (
+            <div style={{ padding: '12px 16px', background: '#F8717122', borderLeft: '3px solid #F87171', fontSize: '12px', color: 'var(--ink)', lineHeight: 1.7 }}>
+              <strong>Aviso:</strong> Con triglicéridos ≥ 400 mg/dL la fórmula de Friedewald no es válida. El valor LDL mostrado no es fiable. Consulta a tu médico para un análisis de LDL directo.
+            </div>
+          )}
+
           <div style={{ padding: '14px 16px', background: result.color + '22', borderLeft: `3px solid ${result.color}`, fontSize: '13px', color: 'var(--ink)', lineHeight: 1.7 }}>
             {result.recomendacion}
           </div>

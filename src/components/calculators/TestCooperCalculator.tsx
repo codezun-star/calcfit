@@ -17,7 +17,7 @@ export default function TestCooperCalculator() {
     const ed  = parseFloat(edad);
     const dis = parseFloat(distancia);
     if (isNaN(ed)  || ed < 10  || ed > 80)    errs.edad      = 'Edad entre 10 y 80 años';
-    if (isNaN(dis) || dis < 500 || dis > 5000) errs.distancia = 'Distancia entre 500 y 5000 m';
+    if (isNaN(dis) || dis < 505 || dis > 5000) errs.distancia = 'Distancia entre 505 y 5000 m';
     setErrors(errs);
     if (Object.keys(errs).length > 0) return;
     setResult(calcularTestCooper(dis, sexo, ed));

@@ -884,7 +884,7 @@ export interface DeficitCaloricoResult {
   perdidaSemanal:  number;
   tiempoSemanas:   number;
   tiempoMeses:     number;
-  esSeguaro:       boolean;
+  esSeguro:        boolean;
 }
 
 export function calcularDeficitCalorico(
@@ -904,7 +904,7 @@ export function calcularDeficitCalorico(
     perdidaSemanal: Math.round(deficitDiario * 7 / 7700 * 100) / 100,
     tiempoSemanas:  semanas,
     tiempoMeses:    Math.round(semanas / 4.33 * 10) / 10,
-    esSeguaro:      deficitDiario <= 1000,
+    esSeguro:       deficitDiario <= 1000,
   };
 }
 
@@ -1292,12 +1292,12 @@ export interface FuerzaRelativaResult {
 }
 
 export function calcularFuerzaRelativa(
-  pesoCorpoalKg:    number,
+  pesoCorporalKg:   number,
   pesoLevantadoKg:  number,
   ejercicio:        EjercicioFuerza,
   sexo:             'hombre' | 'mujer',
 ): FuerzaRelativaResult {
-  const ratio = Math.round((pesoLevantadoKg / pesoCorpoalKg) * 100) / 100;
+  const ratio = Math.round((pesoLevantadoKg / pesoCorporalKg) * 100) / 100;
 
   type Umbral = [number, number, number, number];
   const umbrales: Record<EjercicioFuerza, { h: Umbral; m: Umbral }> = {

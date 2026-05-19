@@ -17,17 +17,27 @@ export default function GrasaCalculator() {
   const [cadera, setCadera] = useState('');
   const [result, setResult] = useState<ReturnType<typeof calcularGrasaCorporal> | null>(null);
   const { addEntry } = useHistory('grasa-history');
+  const [errors, setErrors] = useState<{ altura?: string; cuello?: string; cintura?: string; cadera?: string }>({});
 
   const calcular = () => {
-    const params = {
+    const errs: typeof errors = {};
+    const alturaN  = parseFloat(altura);
+    const cuelloN  = parseFloat(cuello);
+    const cinturaN = parseFloat(cintura);
+    const caderaN  = parseFloat(cadera);
+    if (isNaN(alturaN)  || alturaN < 130  || alturaN > 230)  errs.altura  = 'Altura entre 130 y 230 cm';
+    if (isNaN(cuelloN)  || cuelloN < 20   || cuelloN > 80)   errs.cuello  = 'Cuello entre 20 y 80 cm';
+    if (isNaN(cinturaN) || cinturaN < 50  || cinturaN > 200) errs.cintura = 'Cintura entre 50 y 200 cm';
+    if (sexo === 'mujer' && (isNaN(caderaN) || caderaN < 60 || caderaN > 200)) errs.cadera = 'Cadera entre 60 y 200 cm';
+    setErrors(errs);
+    if (Object.keys(errs).length > 0) return;
+    const res = calcularGrasaCorporal({
       sexo,
-      alturaCm:  parseFloat(altura),
-      cuelloCm:  parseFloat(cuello),
-      cinturaCm: parseFloat(cintura),
-      caderaCm:  sexo === 'mujer' ? parseFloat(cadera) : undefined,
-    };
-    if (Object.values(params).some((v) => v !== undefined && isNaN(v as number))) return;
-    const res = calcularGrasaCorporal(params);
+      alturaCm:  alturaN,
+      cuelloCm:  cuelloN,
+      cinturaCm: cinturaN,
+      caderaCm:  sexo === 'mujer' ? caderaN : undefined,
+    });
     setResult(res);
     addEntry(res.porcentaje);
   };
@@ -46,10 +56,10 @@ export default function GrasaCalculator() {
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: sexo === 'mujer' ? 'repeat(auto-fit, minmax(130px, 1fr))' : 'repeat(auto-fit, minmax(100px, 1fr))', gap: '20px' }}>
-        <Input label="Altura" value={altura} onChange={setAltura} suffix="cm" />
-        <Input label="Cuello" value={cuello} onChange={setCuello} suffix="cm" />
-        <Input label="Cintura" value={cintura} onChange={setCintura} suffix="cm" />
-        {sexo === 'mujer' && <Input label="Cadera" value={cadera} onChange={setCadera} suffix="cm" />}
+        <Input label="Altura" value={altura} onChange={setAltura} suffix="cm" error={errors.altura} />
+        <Input label="Cuello" value={cuello} onChange={setCuello} suffix="cm" error={errors.cuello} />
+        <Input label="Cintura" value={cintura} onChange={setCintura} suffix="cm" error={errors.cintura} />
+        {sexo === 'mujer' && <Input label="Cadera" value={cadera} onChange={setCadera} suffix="cm" error={errors.cadera} />}
       </div>
 
       <p style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--muted)', lineHeight: 1.5 }}>

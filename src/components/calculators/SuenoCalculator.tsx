@@ -93,7 +93,7 @@ export default function SuenoCalculator() {
 
       {selectedCiclo && (
         <ShareButtons
-          text={`Si quiero despertar a las ${horaDespertar}, lo ideal es dormir a las ${selectedCiclo.horaDormir} (${selectedCiclo.ciclos} ciclos, ${selectedCiclo.horas} horas). Calculá el tuyo en calcfit.com/sueno`}
+          text={`Para despertar a las ${horaDespertar}, lo ideal es dormir a las ${selectedCiclo.horaDormir} (${selectedCiclo.ciclos} ciclos, ${selectedCiclo.horas} horas). Calculado con CalcFit:`}
           url="https://www.calcfit.com/sueno"
         />
       )}

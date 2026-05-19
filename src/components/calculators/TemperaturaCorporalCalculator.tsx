@@ -86,7 +86,7 @@ export default function TemperaturaCorporalCalculator() {
           {RANGOS.map(r => (
             <div key={r.label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 12px', background: 'var(--cream)' }}>
               <span style={{ fontSize: '12px', color: 'var(--ink)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span style={{ display: 'inline-block', width: '8px', height: '8px', borderRadius: '50%', background: r.color, flexShrink: 0 }} />
+                <span style={{ display: 'inline-block', width: '8px', height: '8px', borderRadius: '2px', background: r.color, flexShrink: 0 }} />
                 {r.label}
               </span>
               <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--muted)' }}>{r.rango}</span>
