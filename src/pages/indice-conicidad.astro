@@ -1,0 +1,79 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import IndiceConicidadCalculator from '../components/calculators/IndiceConicidadCalculator';
+---
+
+<CalculatorLayout
+  title="Índice de Conicidad — Riesgo Cardiovascular por Grasa Abdominal | CalcFit"
+  description="Calcula el Índice de Conicidad (IC), un indicador de distribución de grasa más preciso que la cintura sola para predecir el riesgo cardiovascular. Gratis."
+  calculatorName="Índice de Conicidad"
+  breadcrumbSlug="indice-conicidad"
+  ogImage="/og/indice-conicidad.jpg"
+  keywords="índice de conicidad, riesgo cardiovascular grasa abdominal, grasa central, obesidad abdominal, IC cardiovascular"
+  faqs={[
+    { q: '¿Qué es el Índice de Conicidad?', a: 'El Índice de Conicidad (IC) fue propuesto por Valdez (1991) y mide la distribución de grasa corporal. Compara el perímetro de cintura con el que tendría un cilindro perfecto (distribución homogénea de peso y talla). Un IC de 1.0 indica distribución cilíndrica; valores superiores indican forma de "tonel" (más grasa abdominal), que se asocia a mayor riesgo cardiometabólico.' },
+    { q: '¿Cómo se interpreta el Índice de Conicidad?', a: 'Para hombres: IC <1.25 es bajo riesgo, 1.25–1.35 riesgo moderado, >1.35 riesgo alto. Para mujeres: IC <1.18 bajo riesgo, 1.18–1.28 moderado, >1.28 alto. Estos umbrales se establecieron con base en estudios que correlacionan el IC con factores de riesgo cardiovascular como hipertensión, dislipidemia y resistencia a la insulina.' },
+    { q: '¿Es el IC mejor que la cintura sola o el IMC?', a: 'El IC tiene ventajas sobre la cintura sola porque corrige por peso y talla, permitiendo comparaciones entre personas de diferente tamaño. Varios estudios lo consideran superior al IMC para predecir el riesgo cardiovascular, ya que diferencia la grasa abdominal (visceral) de la periférica. Sin embargo, el ratio cintura-estatura sigue siendo el más validado en guías clínicas actuales.' },
+    { q: '¿Cómo se mide correctamente el perímetro de cintura?', a: 'La cintura debe medirse al final de una espiración normal (sin contraer el abdomen) a la altura del punto medio entre la última costilla y la cresta ilíaca. En la mayoría de personas esto coincide con el ombligo. Usa una cinta métrica flexible, en contacto con la piel pero sin comprimir. Haz al menos 2 mediciones y promedia.' },
+    { q: '¿Qué puedo hacer para reducir el Índice de Conicidad?', a: 'La grasa visceral (abdominal) responde bien a la restricción calórica moderada (déficit de 300–500 kcal/día) y al ejercicio aeróbico (150 min/semana de intensidad moderada o 75 min de intensidad vigorosa). El ejercicio de fuerza combinado con cardio reduce la grasa visceral más eficazmente que el cardio solo. Reducir el alcohol y el azúcar refinado también ayuda.' },
+  ]}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Índice de<br><span style="color: var(--acid);">Conicidad</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      El Índice de Conicidad mide si tu distribución de grasa es más cilíndrica (saludable) o de tonel (riesgo cardiovascular elevado), corrigiendo por peso y talla.
+    </p>
+  </div>
+
+  <IndiceConicidadCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cómo se calcula el Índice de Conicidad?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      La fórmula es: <strong>IC = cintura (m) / [0.109 × √(peso (kg) / talla (m))]</strong>. El denominador representa el perímetro de cintura que tendría un cilindro perfecto con la misma masa y talla. Un valor de 1.0 indica distribución cilíndrica uniforme; valores mayores indican acumulación de grasa central (Valdez, 1991).
+    </p>
+
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 320px;">
+        <thead>
+          <tr style="border-bottom: 2px solid var(--border);">
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Categoría</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Hombres</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Mujeres</th>
+          </tr>
+        </thead>
+        <tbody>
+          {[
+            { cat: 'Bajo riesgo',     h: '< 1.25', m: '< 1.18' },
+            { cat: 'Riesgo moderado', h: '1.25–1.35', m: '1.18–1.28' },
+            { cat: 'Riesgo alto',     h: '> 1.35', m: '> 1.28' },
+          ].map(row => (
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 10px 0; font-size: 13px; color: var(--ink); font-weight: 600;">{row.cat}</td>
+              <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.h}</td>
+              <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.m}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {[
+        { q: '¿Qué es el Índice de Conicidad?', a: 'El Índice de Conicidad (IC) fue propuesto por Valdez (1991) y mide la distribución de grasa corporal. Compara el perímetro de cintura con el que tendría un cilindro perfecto (distribución homogénea de peso y talla). Un IC de 1.0 indica distribución cilíndrica; valores superiores indican forma de "tonel" (más grasa abdominal), que se asocia a mayor riesgo cardiometabólico.' },
+        { q: '¿Cómo se interpreta el Índice de Conicidad?', a: 'Para hombres: IC <1.25 es bajo riesgo, 1.25–1.35 riesgo moderado, >1.35 riesgo alto. Para mujeres: IC <1.18 bajo riesgo, 1.18–1.28 moderado, >1.28 alto. Estos umbrales se establecieron con base en estudios que correlacionan el IC con factores de riesgo cardiovascular como hipertensión, dislipidemia y resistencia a la insulina.' },
+        { q: '¿Es el IC mejor que la cintura sola o el IMC?', a: 'El IC tiene ventajas sobre la cintura sola porque corrige por peso y talla, permitiendo comparaciones entre personas de diferente tamaño. Varios estudios lo consideran superior al IMC para predecir el riesgo cardiovascular, ya que diferencia la grasa abdominal (visceral) de la periférica. Sin embargo, el ratio cintura-estatura sigue siendo el más validado en guías clínicas actuales.' },
+        { q: '¿Cómo se mide correctamente el perímetro de cintura?', a: 'La cintura debe medirse al final de una espiración normal (sin contraer el abdomen) a la altura del punto medio entre la última costilla y la cresta ilíaca. En la mayoría de personas esto coincide con el ombligo. Usa una cinta métrica flexible, en contacto con la piel pero sin comprimir. Haz al menos 2 mediciones y promedia.' },
+        { q: '¿Qué puedo hacer para reducir el Índice de Conicidad?', a: 'La grasa visceral (abdominal) responde bien a la restricción calórica moderada (déficit de 300–500 kcal/día) y al ejercicio aeróbico (150 min/semana de intensidad moderada o 75 min de intensidad vigorosa). El ejercicio de fuerza combinado con cardio reduce la grasa visceral más eficazmente que el cardio solo. Reducir el alcohol y el azúcar refinado también ayuda.' },
+      ].map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

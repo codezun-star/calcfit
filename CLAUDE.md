@@ -62,7 +62,7 @@ calcfit-astro/
 │   │   │   ├── HistoryTable.tsx
 │   │   │   ├── ShareButtons.tsx
 │   │   │   └── Badge.tsx              ← popular | new | essential
-│   │   └── calculators/               ← 39 componentes React
+│   │   └── calculators/               ← 59 componentes React
 │   │       ├── IMCCalculator.tsx
 │   │       ├── CaloriasCalculator.tsx
 │   │       ├── PesoIdealCalculator.tsx
@@ -112,6 +112,16 @@ calcfit-astro/
 │   │       ├── TallaPredichCalculator.tsx
 │   │       ├── TestRockportCalculator.tsx
 │   │       ├── CafeinaCalculator.tsx
+│   │       ├── VAMCalculator.tsx
+│   │       ├── IndiceMasaGrasaCalculator.tsx
+│   │       ├── CreatinaCalculator.tsx
+│   │       ├── RitmoMaratonCalculator.tsx
+│   │       ├── RiesgoDiabetesCalculator.tsx
+│   │       ├── IndiceConicicadCalculator.tsx
+│   │       ├── CaloriasBebidas Calculator.tsx
+│   │       ├── TasaSudoracionCalculator.tsx
+│   │       ├── MasaOseaCalculator.tsx
+│   │       ├── SindromeMetabolicoCalculator.tsx
 │   │       ├── GaugeIMC.tsx           ← gauge SVG semicircular animado
 │   │       ├── ZonasCardiaca.tsx      ← barras horizontales de zonas cardíacas
 │   │       └── BarrasCaloria.tsx      ← barras verticales déficit/mant/superávit
@@ -171,6 +181,16 @@ calcfit-astro/
 │       ├── talla-predicha.astro
 │       ├── test-rockport.astro
 │       ├── cafeina.astro
+│       ├── vam.astro
+│       ├── indice-masa-grasa.astro
+│       ├── creatina.astro
+│       ├── ritmo-maraton.astro
+│       ├── riesgo-diabetes.astro
+│       ├── indice-conicidad.astro
+│       ├── calorias-bebidas.astro
+│       ├── tasa-sudoracion.astro
+│       ├── masa-osea.astro
+│       ├── sindrome-metabolico.astro
 │       ├── sobre-nosotros.astro       ← página estática
 │       ├── contacto.astro             ← solo email, sin formulario
 │       ├── aviso-legal.astro          ← LSSI-CE
@@ -470,6 +490,59 @@ calcularTestRockport(tiempoMin, fcFinal, pesoKg, edadAnios, sexo)
 calcularCafeina(pesoKg, consumoMg)
   → { dosisPorKg, nivelConsumo, nivelNombre, color, recomendacion, equivalencias[], maxDiario }
   // nivelConsumo: 'bajo' | 'moderado' | 'alto' | 'excesivo' — FDA/EFSA/ISSN
+
+// Calculadoras batch 6 (10 nuevas — 2026-05-20)
+calcularVAM(vo2max)
+  → { vam, zonas[] }
+  // vam (km/h) = vo2max / 3.5
+  // zonas[]: { nombre, porcentajeMin, porcentajeMax, descripcion } — 5 zonas (Recuperación 60% a Supramáximo >100%)
+
+calcularFMIConSexo(pesoKg, alturaCm, grasaPorcentaje, sexo)
+  → { masaGrasaKg, fmi, categoria, riesgo, color, descripcion }
+  // FMI = masaGrasaKg / altura_m²
+  // Hombres: <3 muy bajo, 3-6 atlético, 6-12 saludable, 12-18 sobrepeso, >18 obesidad
+  // Mujeres: <8 muy bajo, 8-13 atlético, 13-20 saludable, 20-28 sobrepeso, >28 obesidad
+
+calcularCreatina(pesoKg, protocolo)
+  → { faseCarga, mantenimiento, diasSaturacion, pesoCreatinaTotal, recomendacion }
+  // protocolo: 'carga' | 'directo'
+  // Carga: 0.3 g/kg/día × 5 días (4 tomas), saturación 5-7 días
+  // Directo: 5 g/día, saturación ~28 días
+
+calcularRitmoMaraton(horasObj, minutosObj, segundosObj)
+  → { ritmoSegKm, ritmoStr, ritmoMinMilla, velocidadKmh, splits[], tiempoMediaMaraton, tiempoTotal }
+  // splits[]: { km, tiempoAcumulado, ritmo } — puntos: 5, 10, 15, 20, 21.1, 25, 30, 35, 40, 42.195
+
+calcularFINDRISC(resp, sexo)
+  → { puntuacion, categoria, probabilidad, color, riesgo, recomendacion }
+  // resp: RespuestasFINDRISC (8 preguntas)
+  // Score 0-7 bajo (1%), 8-11 ligeramente elevado (4%), 12-14 moderado (17%), 15-20 alto (33%), >20 muy alto (50%)
+
+calcularIndiceConicidad(cinturaCm, pesoKg, alturaCm, sexo)
+  → { ic, categoria, riesgo, color, recomendacion }
+  // IC = cinturaCm / (0.109 × √(pesoKg / altura_m)) — Valdez 1991
+  // Hombres: <1.25 bajo, 1.25-1.35 moderado, >1.35 alto
+  // Mujeres: <1.18 bajo, 1.18-1.28 moderado, >1.28 alto
+
+calcularCaloriasBebidas(cervezas, vinos, licores, cocktails)
+  → { totalKcal, totalAlcoholG, desglose[], equivalencias[] }
+  // Cerveza 330ml 5%: 153 kcal / Vino 150ml 12%: 123 kcal / Licor 40ml 40%: 95 kcal / Cocktail 200ml 10%: 142 kcal
+  // equivalencias: caminar, correr, ciclismo (en minutos)
+
+calcularTasaSudoracion(pesoAntesKg, pesoDespuesKg, fluidosLitros, duracionMin)
+  → { tasaMLhora, perdidaPorcentaje, recomendacionMLhora, estado, color, recomendacion }
+  // sweatRate = ((pesoAntes − pesDespues)×1000 + fluidos×1000) / (duracion/60) — fórmula ACSM
+
+calcularMasaOsea(pesoKg, alturaCm, sexo)
+  → { masaOseaKg, porcentajeCorporal, categoria, color, descripcion }
+  // Fórmula Kim 2002 — validada contra DEXA (r=0.84)
+  // Hombres: boneKg = −5.765 + 0.0685×h + 0.0513×p
+  // Mujeres:  boneKg = −3.651 + 0.0426×h + 0.0432×p
+
+calcularSindromeMetabolico(cinturaCm, sexo, trigliceridos, hdl, sistolica, diastolica, glucosaAyunas, medicacionTA, medicacionGlucosa)
+  → { criteriosCumplidos, tiene, criterios[], riesgo, color, recomendacion }
+  // Criterios IDF 2006 LATAM: cintura hombre >90cm (obligatorio), mujer >80cm (obligatorio)
+  // + ≥2 de: TG≥150, HDL<40/50, PA≥130/85, Glucosa≥100 (o medicación)
 ```
 
 ### Conversión de unidades (src/lib/units.ts)
@@ -543,9 +616,24 @@ La homepage muestra las **39 calculadoras** en 4 categorías. Los íconos SVG es
 | `<Base title=…>` | línea ~174 | Número en el título |
 | Schema `Organization` | campo `description` | Número en texto |
 | Schema `ItemList` | campo `numberOfItems` | Número entero |
-| **Ticker** (banda acid bajo el hero) | array inline, campo `num` | Número como string `'39'` |
 | `<Base description=…>` | línea ~175 | Número en la descripción |
-| **Sección CTA** (fondo acid, al final) | párrafo inline | "39 calculadoras gratuitas te esperan." |
+| **Sección CTA** (fondo acid, al final) | párrafo inline | "59 calculadoras gratuitas te esperan." |
+
+**Nota:** El ticker (banda acid) ya no incluye contador de calculadoras — fue eliminado. Los cards del grid tampoco muestran número de serie.
+
+### Navbar de la homepage — categorías
+
+El nav de la homepage (index.astro) tiene 4 links de categoría con scroll suave:
+- `#fitness` → Fitness & salud
+- `#embarazo` → Embarazo & fertilidad
+- `#fechas` → Fechas & tiempo
+- `#nutricion` → Nutrición & bienestar
+
+Estos links cambian el hash de la URL → `CalculatorBrowser` escucha `hashchange` y activa la categoría correspondiente automáticamente. El `scroll-padding-top: 64px` en `html` compensa el navbar fixed.
+
+### Navbar — position: fixed
+
+Tanto `Navbar.astro` (páginas calculadoras) como el nav inline de `index.astro` usan `position: fixed; top: 0; left: 0; right: 0`. El espaciado lo compensa un `<div style="height: 56px">` inmediatamente después del nav.
 
 ### Hero — imagen de fondo (actualizado 2026-05-16)
 
@@ -566,11 +654,11 @@ La columna izquierda del hero (`.hero-left`) tiene una imagen de fondo de gimnas
 - La columna derecha (`.hero-nums`) mantiene fondo sólido `var(--ink-2)` sin imagen.
 - Si se cambia la imagen, verificar que el overlay siga siendo opaco suficiente (mínimo 0.65).
 
-Categorías y conteo actual (total: 49):
-1. **Fitness & salud** (32 calculadoras) — imc, peso-ideal, grasa-corporal, ffmi, complexion-corporal, somatotipo, indice-adiposidad, frecuencia-cardiaca, vo2-maximo, presion-arterial, riesgo-cardiovascular, cintura-cadera, cintura-estatura, 1rm, volumen-entrenamiento, fuerza-relativa, masa-muscular, calorias-ejercicio, calorias-caminando, calorias-ciclismo, calorias-natacion, ritmo-carrera, agua-diaria, calorias-diarias, test-cooper, test-rockport, recuperacion-cardiaca, temperatura-corporal, presion-pulso, talla-predicha
+Categorías y conteo actual (total: 59):
+1. **Fitness & salud** (39 calculadoras) — imc, peso-ideal, grasa-corporal, ffmi, complexion-corporal, somatotipo, indice-adiposidad, frecuencia-cardiaca, vo2-maximo, presion-arterial, riesgo-cardiovascular, cintura-cadera, cintura-estatura, 1rm, volumen-entrenamiento, fuerza-relativa, masa-muscular, calorias-ejercicio, calorias-caminando, calorias-ciclismo, calorias-natacion, ritmo-carrera, agua-diaria, calorias-diarias, test-cooper, test-rockport, recuperacion-cardiaca, temperatura-corporal, presion-pulso, talla-predicha, vam, indice-masa-grasa, ritmo-maraton, indice-conicidad, tasa-sudoracion, masa-osea, sindrome-metabolico
 2. **Embarazo & fertilidad** (5 calculadoras) — ovulacion, ciclo-menstrual, semana-embarazo, fecha-parto, peso-embarazo
 3. **Fechas & tiempo** (2 calculadoras) — edad, dias-fechas
-4. **Nutrición & bienestar** (12 calculadoras) — macronutrientes, proteinas, metabolismo-basal, deficit-calorico, resistencia-insulina, glucosa, colesterol, carga-glucemica, cafeina, sueno, ayuno-intermitente, alcoholemia
+4. **Nutrición & bienestar** (15 calculadoras) — macronutrientes, proteinas, metabolismo-basal, deficit-calorico, resistencia-insulina, glucosa, colesterol, carga-glucemica, cafeina, sueno, ayuno-intermitente, alcoholemia, creatina, calorias-bebidas, riesgo-diabetes
 
 Al agregar una calculadora nueva, seguir el checklist completo de la sección "Reglas para agregar una calculadora nueva".
 
@@ -721,11 +809,11 @@ npm run preview  # preview del build
 - Actualizar el title y description de la homepage si el número de calculadoras cambia
   - Title: `"CalcFit — 40 Calculadoras de Salud..."` (actualizar número)
   - Description: `"40 calculadoras de salud..."` (actualizar número)
-- Actualizar el **ticker** del hero: `{ num: '39', txt: 'Calculadoras gratuitas' }` → nuevo número
-- Actualizar el texto de la **sección CTA**: `"39 calculadoras gratuitas te esperan."` → nuevo número
+- Actualizar el texto de la **sección CTA**: `"49 calculadoras gratuitas te esperan."` → nuevo número
+- **Nota:** El ticker ya no incluye contador de calculadoras (fue eliminado). El card number también fue eliminado del grid.
 
 **5. Footer** (`src/components/layout/Footer.astro`)
-- Actualizar el texto del enlace: `"Ver las 34 →"` → `"Ver las 35 →"` (ajustar número)
+- El enlace ya dice `"Ver todas →"` — no requiere actualización al agregar calculadoras
 
 **6. CLAUDE.md** (este archivo)
 - Actualizar el contador en la sección de estructura de carpetas: `← 35 componentes React`
@@ -736,7 +824,7 @@ npm run preview  # preview del build
 
 **7. Verificación final**
 - Ejecutar `npm run build` — debe completar sin errores
-- El número de páginas en el build debe coincidir (actualmente 55: 49 calculadoras + 1 homepage + 5 estáticas)
+- El número de páginas en el build debe coincidir (actualmente 65: 59 calculadoras + 1 homepage + 5 estáticas)
 
 ---
 
@@ -748,7 +836,7 @@ npm run preview  # preview del build
 | `src/components/calculators/NombreCalculator.tsx` | Nuevo componente |
 | `src/pages/slug.astro` | Nueva página con SEO completo |
 | `src/pages/index.astro` | Ícono en `I`, entrada en `calculadoras`, slug en `categorias`, `numberOfItems`, title, description, **ticker** (`num: 'N'`), **CTA** ("N calculadoras te esperan") |
-| `src/components/layout/Footer.astro` | Número en "Ver las N →" |
+| `src/components/layout/Footer.astro` | Sin cambios (dice "Ver todas →") |
 | `CLAUDE.md` | Función, archivos, contadores, registro de cambios |
 
 ---
@@ -787,7 +875,7 @@ Siempre verificar `typeof window !== 'undefined'` antes de acceder a localStorag
 
 ## Pendientes conocidos
 
-- Generar imágenes OG estáticas en `public/og/` (1200×630px por calculadora) — pendientes 10 nuevas de batch 3
+- Generar imágenes OG estáticas en `public/og/` (1200×630px por calculadora) — pendientes todas las de batch 3 al 6
 - Deploy en producción (Vercel / Netlify / Cloudflare Pages) — configurar redirect 301 de non-www a www
 - Verificar propiedad en Google Search Console y enviar sitemap con URL www
 - Agregar `apple-touch-icon` PNG 180×180 para homescreen iOS (actualmente no hay)
@@ -796,8 +884,11 @@ Siempre verificar `typeof window !== 'undefined'` antes de acceder a localStorag
 
 | Fecha | Acción |
 |---|---|
-| 2026-05-16 | Hero: imagen de gym Unsplash con overlay oscuro en columna izquierda. Ticker y CTA actualizados a 39. |
+| 2026-05-20 | Batch 6: +10 calculadoras (vam, indice-masa-grasa, creatina, ritmo-maraton, riesgo-diabetes, indice-conicidad, calorias-bebidas, tasa-sudoracion, masa-osea, sindrome-metabolico). Total: 59. |
+| 2026-05-20 | UI: Navbar cambiado a `position: fixed` en homepage y páginas calculadoras. CalculatorBrowser: eliminada pill "Todas", navegación por hash (#fitness, #embarazo, #fechas, #nutricion). Nav homepage: 4 links de categoría con scroll suave. Ticker: eliminado contador de calculadoras. Cards: eliminado número de serie. Footer: "Ver todas →" (sin número). |
+| 2026-05-20 | Bugfixes (12): GrasaCalculator validación, TestCooper fórmula Cooper, ColesterolCalculator warning TG≥400, DeficitCalorico validación peso objetivo, IndiceAdipositad imperial cadera, borderRadius '50%'→'2px' (PresionPulso/TemperaturaCorporal), renombres esSeguaro→esSeguro y pesoCorpoalKg→pesoCorporalKg, voseo en Sueno, VolumenEntrenamiento limitado a 2-4 días. |
 | 2026-05-18 | Batch 5: +10 calculadoras (calorias-natacion, test-cooper, recuperacion-cardiaca, temperatura-corporal, carga-glucemica, peso-embarazo, presion-pulso, talla-predicha, test-rockport, cafeina). Total: 49. |
 | 2026-05-16 | Batch 4: +5 calculadoras (glucosa, colesterol, calorias-ciclismo, fuerza-relativa, masa-muscular). Total: 39. |
 | 2026-05-16 | Batch 3: +10 calculadoras (metabolismo-basal, 1rm, calorias-caminando, deficit-calorico, complexion-corporal, resistencia-insulina, somatotipo, riesgo-cardiovascular, indice-adiposidad, volumen-entrenamiento). Total: 34. |
-| 2026-05-16 | SEO agresivo: Base.astro con Organization schema + SearchAction. CalculatorLayout.astro con props `keywords`, `faqs`, `dateModified` y generación automática de FAQPage + BreadcrumbList en @graph. Todas las 34 páginas actualizadas con titles/descriptions optimizados, keywords meta y FAQs en JSON-LD. Footer corregido a "Ver las 34". Homepage con ItemList schema y título actualizado. |
+| 2026-05-16 | SEO agresivo: Base.astro con Organization schema + SearchAction. CalculatorLayout.astro con props `keywords`, `faqs`, `dateModified` y generación automática de FAQPage + BreadcrumbList en @graph. Todas las 34 páginas actualizadas con titles/descriptions optimizados, keywords meta y FAQs en JSON-LD. Homepage con ItemList schema y título actualizado. |
+| 2026-05-16 | Hero: imagen de gym Unsplash con overlay oscuro en columna izquierda. |

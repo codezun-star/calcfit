@@ -1616,3 +1616,426 @@ export function calcularCafeina(pesoKg: number, consumoMg: number): CafeinaResul
   if (dosisPorKg < 6) return { dosisPorKg, nivelConsumo: 'alto',     nivelNombre: 'Alto',     color: '#FB923C', recomendacion: 'Consumo alto. Posibles efectos: insomnio, taquicardia, ansiedad. No superes 400 mg/día.', equivalencias, maxDiario: 400 };
   return                { dosisPorKg, nivelConsumo: 'excesivo',  nivelNombre: 'Excesivo', color: '#F87171', recomendacion: 'Consumo excesivo. Riesgo de toxicidad por cafeína. Reduce la ingesta urgentemente.', equivalencias, maxDiario: 400 };
 }
+
+// ─── BATCH 6 ──────────────────────────────────────────────────────────────────
+
+// ─── VAM (VELOCIDAD AERÓBICA MÁXIMA) ─────────────────────────────────────────
+export interface ZonaVAM {
+  nombre:        string;
+  porcentajeMin: number;
+  porcentajeMax: number;
+  descripcion:   string;
+}
+
+export interface VAMResult {
+  vam:   number;
+  zonas: ZonaVAM[];
+}
+
+export function calcularVAM(vo2max: number): VAMResult {
+  const vam = Math.round((vo2max / 3.5) * 10) / 10;
+  const zonas: ZonaVAM[] = [
+    { nombre: 'Recuperación',  porcentajeMin: 60,  porcentajeMax: 70,  descripcion: 'Rodajes suaves. Acelera la recuperación activa sin estrés fisiológico.' },
+    { nombre: 'Aeróbico',      porcentajeMin: 70,  porcentajeMax: 80,  descripcion: 'Base aeróbica. Mejora la eficiencia del sistema cardiovascular y la oxidación de grasas.' },
+    { nombre: 'Umbral',        porcentajeMin: 80,  porcentajeMax: 90,  descripcion: 'Entrenamiento de umbral anaeróbico. Eleva la VAM y retrasa la fatiga.' },
+    { nombre: 'VO₂ máx',      porcentajeMin: 90,  porcentajeMax: 100, descripcion: 'Intervalos de alta intensidad. Maximiza el consumo de oxígeno.' },
+    { nombre: 'Supramáximo',   porcentajeMin: 100, porcentajeMax: 120, descripcion: 'Sprints y esfuerzos anaeróbicos. Desarrolla la potencia y tolerancia al lactato.' },
+  ];
+  return { vam, zonas };
+}
+
+// ─── FMI (ÍNDICE DE MASA GRASA) ───────────────────────────────────────────────
+export interface FMIResult {
+  masaGrasaKg: number;
+  fmi:         number;
+  categoria:   string;
+  riesgo:      string;
+  color:       string;
+  descripcion: string;
+}
+
+export function calcularFMI(pesoKg: number, alturaCm: number, grasaPorcentaje: number): FMIResult {
+  const masaGrasaKg = Math.round((pesoKg * grasaPorcentaje / 100) * 10) / 10;
+  const alturaM     = alturaCm / 100;
+  const fmi         = Math.round((masaGrasaKg / (alturaM * alturaM)) * 10) / 10;
+
+  if (grasaPorcentaje <= 0 || grasaPorcentaje >= 100) {
+    return { masaGrasaKg, fmi, categoria: 'Sin datos', riesgo: 'indeterminado', color: '#888', descripcion: 'Introduce un porcentaje de grasa válido.' };
+  }
+
+  // Hombres
+  const esHombre = false; // se determina externamente en el componente; aquí la lógica usa rangos mixtos
+  // Umbrales FMI según Smalley et al. (hombres y mujeres se pasan como parámetro en la función que llama)
+  // Para simplificar: la función acepta el porcentaje de grasa y calcula el FMI; la categoría
+  // se evalúa externamente en el componente a partir del sexo.
+  // Sin embargo para no requerir sexo extra aquí devolvemos categoría genérica por FMI:
+  if (fmi < 3)   return { masaGrasaKg, fmi, categoria: 'Muy bajo',   riesgo: 'bajo',      color: '#60A5FA', descripcion: 'FMI muy bajo. Posible déficit de grasa corporal esencial.' };
+  if (fmi < 6)   return { masaGrasaKg, fmi, categoria: 'Atlético',   riesgo: 'optimo',    color: '#34D399', descripcion: 'FMI propio de deportistas. Excelente composición corporal.' };
+  if (fmi < 13)  return { masaGrasaKg, fmi, categoria: 'Saludable',  riesgo: 'normal',    color: '#CAFF00', descripcion: 'FMI en rango saludable. Buen equilibrio entre masa grasa y masa magra.' };
+  if (fmi < 20)  return { masaGrasaKg, fmi, categoria: 'Sobrepeso',  riesgo: 'elevado',   color: '#FB923C', descripcion: 'FMI elevado. Exceso de grasa corporal relativo a la talla.' };
+  return           { masaGrasaKg, fmi, categoria: 'Obesidad',   riesgo: 'alto',      color: '#F87171', descripcion: 'FMI en rango de obesidad. Riesgo metabólico y cardiovascular aumentado.' };
+}
+
+export function calcularFMIConSexo(pesoKg: number, alturaCm: number, grasaPorcentaje: number, sexo: 'hombre' | 'mujer'): FMIResult {
+  const masaGrasaKg = Math.round((pesoKg * grasaPorcentaje / 100) * 10) / 10;
+  const alturaM     = alturaCm / 100;
+  const fmi         = Math.round((masaGrasaKg / (alturaM * alturaM)) * 10) / 10;
+
+  if (sexo === 'hombre') {
+    if (fmi < 3)   return { masaGrasaKg, fmi, categoria: 'Muy bajo',   riesgo: 'bajo',    color: '#60A5FA', descripcion: 'FMI muy bajo. Posible déficit de grasa corporal esencial.' };
+    if (fmi < 6)   return { masaGrasaKg, fmi, categoria: 'Atlético',   riesgo: 'optimo',  color: '#34D399', descripcion: 'FMI de deportista. Excelente composición corporal.' };
+    if (fmi < 12)  return { masaGrasaKg, fmi, categoria: 'Saludable',  riesgo: 'normal',  color: '#CAFF00', descripcion: 'FMI en rango saludable para hombres.' };
+    if (fmi < 18)  return { masaGrasaKg, fmi, categoria: 'Sobrepeso',  riesgo: 'elevado', color: '#FB923C', descripcion: 'Exceso de grasa corporal. Considera dieta y ejercicio.' };
+    return           { masaGrasaKg, fmi, categoria: 'Obesidad',   riesgo: 'alto',    color: '#F87171', descripcion: 'FMI en rango de obesidad. Riesgo metabólico y cardiovascular elevado.' };
+  } else {
+    if (fmi < 8)   return { masaGrasaKg, fmi, categoria: 'Muy bajo',   riesgo: 'bajo',    color: '#60A5FA', descripcion: 'FMI muy bajo. Posible déficit de grasa corporal esencial.' };
+    if (fmi < 13)  return { masaGrasaKg, fmi, categoria: 'Atlético',   riesgo: 'optimo',  color: '#34D399', descripcion: 'FMI de deportista. Excelente composición corporal.' };
+    if (fmi < 20)  return { masaGrasaKg, fmi, categoria: 'Saludable',  riesgo: 'normal',  color: '#CAFF00', descripcion: 'FMI en rango saludable para mujeres.' };
+    if (fmi < 28)  return { masaGrasaKg, fmi, categoria: 'Sobrepeso',  riesgo: 'elevado', color: '#FB923C', descripcion: 'Exceso de grasa corporal. Considera dieta y ejercicio.' };
+    return           { masaGrasaKg, fmi, categoria: 'Obesidad',   riesgo: 'alto',    color: '#F87171', descripcion: 'FMI en rango de obesidad. Riesgo metabólico y cardiovascular elevado.' };
+  }
+}
+
+// ─── CREATINA ─────────────────────────────────────────────────────────────────
+export type ProtocoloCreatina = 'carga' | 'directo';
+
+export interface CreatinaResult {
+  faseCarga: { dosisGDia: number; dosisPorToma: number; tomas: number; duracionDias: number } | null;
+  mantenimiento: { dosisGDia: number };
+  diasSaturacion: number;
+  pesoCreatinaTotal: number;
+  recomendacion: string;
+}
+
+export function calcularCreatina(pesoKg: number, protocolo: ProtocoloCreatina): CreatinaResult {
+  const dosisCargaDia   = Math.round(pesoKg * 0.3 * 10) / 10;
+  const dosisPorToma    = Math.round((pesoKg * 0.075) * 10) / 10;
+  const pesoCreatinaTotal = Math.round(dosisCargaDia * 5 * 10) / 10;
+
+  if (protocolo === 'carga') {
+    return {
+      faseCarga: { dosisGDia: dosisCargaDia, dosisPorToma, tomas: 4, duracionDias: 5 },
+      mantenimiento: { dosisGDia: 5 },
+      diasSaturacion: 5,
+      pesoCreatinaTotal,
+      recomendacion: `Fase de carga: ${dosisCargaDia} g/día repartidos en 4 tomas de ${dosisPorToma} g durante 5 días, seguidos de 5 g/día de mantenimiento. Los músculos se saturan en 5–7 días.`,
+    };
+  } else {
+    return {
+      faseCarga: null,
+      mantenimiento: { dosisGDia: 5 },
+      diasSaturacion: 28,
+      pesoCreatinaTotal: 0,
+      recomendacion: 'Protocolo directo: 5 g/día de forma continua. Los músculos alcanzan la saturación en aproximadamente 28 días sin los posibles efectos gastrointestinales de la carga.',
+    };
+  }
+}
+
+// ─── RITMO DE MARATÓN ─────────────────────────────────────────────────────────
+export interface SplitMaraton {
+  km:              number;
+  tiempoAcumulado: string;
+  ritmo:           string;
+}
+
+export interface RitmoMaratonResult {
+  ritmoSegKm:         number;
+  ritmoStr:           string;
+  ritmoMinMilla:      string;
+  velocidadKmh:       number;
+  splits:             SplitMaraton[];
+  tiempoMediaMaraton: string;
+  tiempoTotal:        string;
+}
+
+function segsAStr(totalSegs: number): string {
+  const h = Math.floor(totalSegs / 3600);
+  const m = Math.floor((totalSegs % 3600) / 60);
+  const s = Math.round(totalSegs % 60);
+  const hh = String(h).padStart(2, '0');
+  const mm = String(m).padStart(2, '0');
+  const ss = String(s).padStart(2, '0');
+  return h > 0 ? `${hh}:${mm}:${ss}` : `${mm}:${ss}`;
+}
+
+export function calcularRitmoMaraton(horasObj: number, minutosObj: number, segundosObj: number): RitmoMaratonResult {
+  const totalSegundos = horasObj * 3600 + minutosObj * 60 + segundosObj;
+  const ritmoSegKm    = Math.round(totalSegundos / 42.195 * 10) / 10;
+  const ritmoMins     = Math.floor(ritmoSegKm / 60);
+  const ritmoSegs     = Math.round(ritmoSegKm % 60);
+  const ritmoStr      = `${ritmoMins}:${String(ritmoSegs).padStart(2, '0')} min/km`;
+
+  const milla = ritmoSegKm * 1.60934;
+  const mMins = Math.floor(milla / 60);
+  const mSegs = Math.round(milla % 60);
+  const ritmoMinMilla = `${mMins}:${String(mSegs).padStart(2, '0')} min/milla`;
+
+  const velocidadKmh = Math.round((3600 / ritmoSegKm) * 10) / 10;
+
+  const puntosKm = [5, 10, 15, 20, 21.1, 25, 30, 35, 40, 42.195];
+  const splits: SplitMaraton[] = puntosKm.map(km => ({
+    km,
+    tiempoAcumulado: segsAStr(Math.round(km * ritmoSegKm)),
+    ritmo: ritmoStr,
+  }));
+
+  return {
+    ritmoSegKm,
+    ritmoStr,
+    ritmoMinMilla,
+    velocidadKmh,
+    splits,
+    tiempoMediaMaraton: segsAStr(Math.round(21.1 * ritmoSegKm)),
+    tiempoTotal:        segsAStr(totalSegundos),
+  };
+}
+
+// ─── FINDRISC (RIESGO DE DIABETES TIPO 2) ────────────────────────────────────
+export interface RespuestasFINDRISC {
+  edad:              'menos45' | '45a54' | '55a64' | 'mas65';
+  imc:               'menos25' | '25a30' | 'mas30';
+  cintura:           'normal' | 'elevada' | 'muy_elevada';
+  actividadFisica:   boolean;
+  frutasVerduras:    boolean;
+  medicacionTA:      boolean;
+  glucosaAlta:       boolean;
+  familiarDiabetes:  'no' | 'segundo_grado' | 'primer_grado';
+}
+
+export interface FINDRISCResult {
+  puntuacion:    number;
+  categoria:     string;
+  probabilidad:  string;
+  color:         string;
+  riesgo:        string;
+  recomendacion: string;
+}
+
+export function calcularFINDRISC(resp: RespuestasFINDRISC, sexo: 'hombre' | 'mujer'): FINDRISCResult {
+  let pts = 0;
+
+  // Edad
+  if (resp.edad === '45a54')  pts += 2;
+  else if (resp.edad === '55a64')  pts += 3;
+  else if (resp.edad === 'mas65')  pts += 4;
+
+  // IMC
+  if (resp.imc === '25a30')   pts += 1;
+  else if (resp.imc === 'mas30')   pts += 3;
+
+  // Cintura (hombres: normal <94, elevada 94–102, muy_elevada >102; mujeres: <80, 80–88, >88)
+  if (resp.cintura === 'elevada')       pts += 3;
+  else if (resp.cintura === 'muy_elevada') pts += 4;
+
+  // Actividad física (No = +2)
+  if (!resp.actividadFisica) pts += 2;
+
+  // Frutas y verduras (No = +1)
+  if (!resp.frutasVerduras)  pts += 1;
+
+  // Medicación para tensión arterial
+  if (resp.medicacionTA)     pts += 2;
+
+  // Glucosa alta previa
+  if (resp.glucosaAlta)      pts += 5;
+
+  // Antecedentes familiares
+  if (resp.familiarDiabetes === 'segundo_grado') pts += 3;
+  else if (resp.familiarDiabetes === 'primer_grado')   pts += 5;
+
+  if (pts <= 7)  return { puntuacion: pts, categoria: 'Bajo',              probabilidad: '1 de cada 100',  color: '#34D399', riesgo: 'bajo',         recomendacion: 'Riesgo bajo de desarrollar diabetes tipo 2. Mantén hábitos saludables y realiza controles periódicos.' };
+  if (pts <= 11) return { puntuacion: pts, categoria: 'Ligeramente elevado', probabilidad: '1 de cada 25', color: '#CAFF00', riesgo: 'leve',          recomendacion: 'Riesgo ligeramente elevado. Mejora tu dieta, aumenta la actividad física y realiza una glucemia en ayunas.' };
+  if (pts <= 14) return { puntuacion: pts, categoria: 'Moderado',          probabilidad: '1 de cada 6',    color: '#FB923C', riesgo: 'moderado',      recomendacion: 'Riesgo moderado. Consulta con tu médico para una evaluación metabólica completa y cambios en el estilo de vida.' };
+  if (pts <= 20) return { puntuacion: pts, categoria: 'Alto',              probabilidad: '1 de cada 3',    color: '#F87171', riesgo: 'alto',          recomendacion: 'Riesgo alto. Es probable que ya tengas glucosa alterada o diabetes no diagnosticada. Consulta a tu médico urgentemente.' };
+  return           { puntuacion: pts, categoria: 'Muy alto',           probabilidad: '1 de cada 2',    color: '#DC2626', riesgo: 'muy_alto',      recomendacion: 'Riesgo muy alto. Probabilidad del 50% de tener diabetes tipo 2 no diagnosticada. Busca atención médica de inmediato.' };
+}
+
+// ─── ÍNDICE DE CONICIDAD ──────────────────────────────────────────────────────
+export interface IndiceConicidadResult {
+  ic:            number;
+  categoria:     string;
+  riesgo:        string;
+  color:         string;
+  recomendacion: string;
+}
+
+export function calcularIndiceConicidad(
+  cinturaCm: number,
+  pesoKg:    number,
+  alturaCm:  number,
+  sexo:      'hombre' | 'mujer',
+): IndiceConicidadResult {
+  const alturaM = alturaCm / 100;
+  const ic = Math.round((cinturaCm / 100 / (0.109 * Math.sqrt(pesoKg / alturaM))) * 1000) / 1000;
+
+  if (sexo === 'hombre') {
+    if (ic < 1.25) return { ic, categoria: 'Bajo riesgo',      riesgo: 'bajo',     color: '#34D399', recomendacion: 'Distribución de grasa favorable. Riesgo cardiovascular bajo.' };
+    if (ic < 1.35) return { ic, categoria: 'Riesgo moderado',  riesgo: 'moderado', color: '#FB923C', recomendacion: 'Riesgo moderado. Considera reducir la grasa abdominal con ejercicio y dieta.' };
+    return           { ic, categoria: 'Riesgo alto',       riesgo: 'alto',     color: '#F87171', recomendacion: 'Riesgo cardiovascular elevado. Consulta con tu médico y mejora tu composición corporal.' };
+  } else {
+    if (ic < 1.18) return { ic, categoria: 'Bajo riesgo',      riesgo: 'bajo',     color: '#34D399', recomendacion: 'Distribución de grasa favorable. Riesgo cardiovascular bajo.' };
+    if (ic < 1.28) return { ic, categoria: 'Riesgo moderado',  riesgo: 'moderado', color: '#FB923C', recomendacion: 'Riesgo moderado. Considera reducir la grasa abdominal con ejercicio y dieta.' };
+    return           { ic, categoria: 'Riesgo alto',       riesgo: 'alto',     color: '#F87171', recomendacion: 'Riesgo cardiovascular elevado. Consulta con tu médico y mejora tu composición corporal.' };
+  }
+}
+
+// ─── CALORÍAS EN BEBIDAS ALCOHÓLICAS ─────────────────────────────────────────
+export interface BebidaItem {
+  nombre:      string;
+  cantidad:    number;
+  kcalUnitaria: number;
+  kcalTotal:   number;
+  alcoholG:    number;
+}
+
+export interface CaloriasBedidasResult {
+  totalKcal:    number;
+  totalAlcoholG: number;
+  desglose:     BebidaItem[];
+  equivalencias: { actividad: string; minutos: number }[];
+}
+
+export function calcularCaloriasBebidas(
+  cervezas:  number,
+  vinos:     number,
+  licores:   number,
+  cocktails: number,
+): CaloriasBedidasResult {
+  const bebidas: BebidaItem[] = [
+    { nombre: 'Cerveza (330 ml 5%)',   cantidad: cervezas,  kcalUnitaria: 153, kcalTotal: cervezas * 153,  alcoholG: cervezas * 13   },
+    { nombre: 'Vino (150 ml 12%)',     cantidad: vinos,     kcalUnitaria: 123, kcalTotal: vinos * 123,     alcoholG: vinos * 14.4    },
+    { nombre: 'Licor/copa (40 ml 40%)',cantidad: licores,   kcalUnitaria: 95,  kcalTotal: licores * 95,    alcoholG: licores * 12.6  },
+    { nombre: 'Cocktail (200 ml 10%)', cantidad: cocktails, kcalUnitaria: 142, kcalTotal: cocktails * 142, alcoholG: cocktails * 16  },
+  ].filter(b => b.cantidad > 0);
+
+  const totalKcal     = Math.round(bebidas.reduce((s, b) => s + b.kcalTotal, 0));
+  const totalAlcoholG = Math.round(bebidas.reduce((s, b) => s + b.alcoholG, 0) * 10) / 10;
+
+  const equivalencias = [
+    { actividad: 'Caminar',   minutos: Math.round(totalKcal / 4) },
+    { actividad: 'Correr',    minutos: Math.round(totalKcal / 10) },
+    { actividad: 'Ciclismo',  minutos: Math.round(totalKcal / 8) },
+  ];
+
+  return { totalKcal, totalAlcoholG, desglose: bebidas, equivalencias };
+}
+
+// ─── TASA DE SUDORACIÓN ───────────────────────────────────────────────────────
+export interface TasaSudoracionResult {
+  tasaMLhora:          number;
+  perdidaPorcentaje:   number;
+  recomendacionMLhora: number;
+  estado:              string;
+  color:               string;
+  recomendacion:       string;
+}
+
+export function calcularTasaSudoracion(
+  pesoAntesKg:   number,
+  pesoDespuesKg: number,
+  fluidosLitros: number,
+  duracionMin:   number,
+): TasaSudoracionResult {
+  const perdidaKg     = pesoAntesKg - pesoDespuesKg;
+  const tasaMLhora    = Math.round(((perdidaKg * 1000 + fluidosLitros * 1000) / (duracionMin / 60)));
+  const perdidaPorcentaje = Math.round((perdidaKg / pesoAntesKg) * 1000) / 10;
+  const recomendacionMLhora = tasaMLhora;
+
+  if (tasaMLhora < 500)  return { tasaMLhora, perdidaPorcentaje, recomendacionMLhora, estado: 'Muy baja',   color: '#60A5FA', recomendacion: 'Tasa de sudoración muy baja. Es posible que el esfuerzo o las condiciones ambientales sean leves.' };
+  if (tasaMLhora < 1000) return { tasaMLhora, perdidaPorcentaje, recomendacionMLhora, estado: 'Baja',       color: '#34D399', recomendacion: 'Tasa de sudoración baja. Bebe al menos 500 mL/h durante el ejercicio.' };
+  if (tasaMLhora < 1500) return { tasaMLhora, perdidaPorcentaje, recomendacionMLhora, estado: 'Normal',     color: '#CAFF00', recomendacion: `Tasa normal. Repón ${tasaMLhora} mL/h. Puedes usar agua o bebida isotónica si el ejercicio supera 60 min.` };
+  if (tasaMLhora < 2000) return { tasaMLhora, perdidaPorcentaje, recomendacionMLhora, estado: 'Alta',       color: '#FB923C', recomendacion: `Tasa alta. Repón ${tasaMLhora} mL/h y añade electrolitos (sodio, potasio) en ejercicios prolongados.` };
+  return                   { tasaMLhora, perdidaPorcentaje, recomendacionMLhora, estado: 'Muy alta',    color: '#F87171', recomendacion: `Tasa muy alta (>${tasaMLhora} mL/h). Prioriza la hidratación con bebidas con electrolitos. Consulta con un especialista en nutrición deportiva.` };
+}
+
+// ─── MASA ÓSEA ────────────────────────────────────────────────────────────────
+export interface MasaOseaResult {
+  masaOseaKg:        number;
+  porcentajeCorporal: number;
+  categoria:         string;
+  color:             string;
+  descripcion:       string;
+}
+
+export function calcularMasaOsea(pesoKg: number, alturaCm: number, sexo: 'hombre' | 'mujer'): MasaOseaResult {
+  let masa: number;
+  if (sexo === 'hombre') {
+    masa = -5.765 + 0.0685 * alturaCm + 0.0513 * pesoKg;
+  } else {
+    masa = -3.651 + 0.0426 * alturaCm + 0.0432 * pesoKg;
+  }
+  const masaOseaKg        = Math.round(masa * 100) / 100;
+  const porcentajeCorporal = Math.round((masa / pesoKg) * 1000) / 10;
+
+  if (sexo === 'hombre') {
+    if (porcentajeCorporal < 12) return { masaOseaKg, porcentajeCorporal, categoria: 'Baja',    color: '#F87171', descripcion: 'Masa ósea por debajo del rango normal para hombres. Considera consultar a tu médico.' };
+    if (porcentajeCorporal <= 16) return { masaOseaKg, porcentajeCorporal, categoria: 'Normal',  color: '#34D399', descripcion: 'Masa ósea dentro del rango normal para hombres. Mantén calcio, vitamina D y ejercicio de impacto.' };
+    return                         { masaOseaKg, porcentajeCorporal, categoria: 'Alta',    color: '#60A5FA', descripcion: 'Masa ósea elevada. Propio de personas con entrenamiento de fuerza o mayor densidad ósea natural.' };
+  } else {
+    if (porcentajeCorporal < 10) return { masaOseaKg, porcentajeCorporal, categoria: 'Baja',    color: '#F87171', descripcion: 'Masa ósea por debajo del rango normal para mujeres. Consulta a tu médico.' };
+    if (porcentajeCorporal <= 14) return { masaOseaKg, porcentajeCorporal, categoria: 'Normal',  color: '#34D399', descripcion: 'Masa ósea dentro del rango normal para mujeres. Mantén calcio, vitamina D y ejercicio físico.' };
+    return                         { masaOseaKg, porcentajeCorporal, categoria: 'Alta',    color: '#60A5FA', descripcion: 'Masa ósea elevada. Favorecida por entrenamiento de fuerza o buena genética ósea.' };
+  }
+}
+
+// ─── SÍNDROME METABÓLICO (IDF 2006) ──────────────────────────────────────────
+export interface CriterioMetabolico {
+  nombre:  string;
+  valor:   string;
+  umbral:  string;
+  cumple:  boolean;
+}
+
+export interface SindromeMetabolicoResult {
+  criteriosCumplidos: number;
+  tiene:              boolean;
+  criterios:          CriterioMetabolico[];
+  riesgo:             string;
+  color:              string;
+  recomendacion:      string;
+}
+
+export function calcularSindromeMetabolico(
+  cinturaCm:       number,
+  sexo:            'hombre' | 'mujer',
+  trigliceridos:   number,
+  hdl:             number,
+  sistolica:       number,
+  diastolica:      number,
+  glucosaAyunas:   number,
+  medicacionTA:    boolean,
+  medicacionGlucosa: boolean,
+): SindromeMetabolicoResult {
+  // Criterio 1 (OBLIGATORIO): Obesidad central — IDF LATAM
+  const cinturaMax  = sexo === 'hombre' ? 90 : 80;
+  const cumpleCintura = cinturaCm > cinturaMax;
+
+  // Criterio 2: Triglicéridos
+  const cumpleTG = trigliceridos >= 150;
+
+  // Criterio 3: HDL bajo
+  const hdlMin    = sexo === 'mujer' ? 50 : 40;
+  const cumpleHDL = hdl < hdlMin;
+
+  // Criterio 4: Presión arterial
+  const cumplePA  = sistolica >= 130 || diastolica >= 85 || medicacionTA;
+
+  // Criterio 5: Glucosa
+  const cumpleGlucosa = glucosaAyunas >= 100 || medicacionGlucosa;
+
+  const criterios: CriterioMetabolico[] = [
+    { nombre: 'Obesidad central',   valor: `${cinturaCm} cm`,        umbral: `> ${cinturaMax} cm`,         cumple: cumpleCintura },
+    { nombre: 'Triglicéridos',      valor: `${trigliceridos} mg/dL`, umbral: '≥ 150 mg/dL',                cumple: cumpleTG },
+    { nombre: 'HDL colesterol',     valor: `${hdl} mg/dL`,           umbral: `< ${hdlMin} mg/dL`,          cumple: cumpleHDL },
+    { nombre: 'Presión arterial',   valor: `${sistolica}/${diastolica} mmHg`, umbral: '≥ 130/85 mmHg',     cumple: cumplePA },
+    { nombre: 'Glucosa en ayunas',  valor: `${glucosaAyunas} mg/dL`, umbral: '≥ 100 mg/dL',               cumple: cumpleGlucosa },
+  ];
+
+  const criteriosAdicionales = [cumpleTG, cumpleHDL, cumplePA, cumpleGlucosa].filter(Boolean).length;
+  const criteriosCumplidos   = [cumpleCintura, cumpleTG, cumpleHDL, cumplePA, cumpleGlucosa].filter(Boolean).length;
+  const tiene = cumpleCintura && criteriosAdicionales >= 2;
+
+  if (!tiene) return { criteriosCumplidos, tiene, criterios, riesgo: 'sin_sindrome', color: '#34D399', recomendacion: 'No cumples los criterios diagnósticos de síndrome metabólico. Mantén hábitos saludables y controles periódicos.' };
+  if (criteriosCumplidos === 3) return { criteriosCumplidos, tiene, criterios, riesgo: 'moderado', color: '#FB923C', recomendacion: 'Síndrome metabólico presente (3 criterios). Consulta a tu médico y adopta cambios inmediatos en dieta y ejercicio.' };
+  return { criteriosCumplidos, tiene, criterios, riesgo: 'alto', color: '#F87171', recomendacion: 'Síndrome metabólico con múltiples criterios. Riesgo cardiovascular y de diabetes tipo 2 significativamente elevado. Atención médica urgente.' };
+}

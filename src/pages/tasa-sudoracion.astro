@@ -1,0 +1,81 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import TasaSudoracionCalculator from '../components/calculators/TasaSudoracionCalculator';
+---
+
+<CalculatorLayout
+  title="Calculadora Tasa de Sudoración — Hidratación en el Ejercicio | CalcFit"
+  description="Calcula tu tasa de sudoración en mL/hora y la cantidad de líquidos que necesitas reponer durante el ejercicio. Método validado por ACSM. Gratis."
+  calculatorName="Tasa de Sudoración"
+  breadcrumbSlug="tasa-sudoracion"
+  ogImage="/og/tasa-sudoracion.jpg"
+  keywords="tasa de sudoración, hidratación deportiva, cuánto sudar, reposición de líquidos, sweat rate, deshidratación ejercicio"
+  faqs={[
+    { q: '¿Qué es la tasa de sudoración?', a: 'La tasa de sudoración (sweat rate) es la cantidad de sudor producida por hora durante el ejercicio, expresada en mL/hora. En deportistas activos varía entre 500–2500 mL/h dependiendo de la intensidad, la temperatura ambiental y las características individuales. Medirla permite calcular exactamente cuánto líquido debes reponer para evitar la deshidratación.' },
+    { q: '¿Cómo se mide la tasa de sudoración?', a: 'El método es sencillo: pésate sin ropa justo antes del ejercicio, realiza la sesión, registra los líquidos consumidos, vuelve a pesarte sin ropa al terminar. La fórmula es: tasa (mL/h) = [(peso previo − peso posterior) × 1000 + líquidos consumidos en mL] / duración en horas. Cada 1 kg de peso perdido equivale aproximadamente a 1000 mL de sudor.' },
+    { q: '¿Qué porcentaje de pérdida de peso es peligroso?', a: 'La deshidratación del 1–2% del peso corporal ya reduce el rendimiento deportivo en un 5–10%. Una pérdida del 2–3% provoca deterioro cognitivo, aumento de la frecuencia cardíaca y mayor percepción del esfuerzo. A partir del 5–6% hay riesgo de golpe de calor. El objetivo es no superar el 2% de pérdida durante el ejercicio.' },
+    { q: '¿Cuándo debo usar bebidas isotónicas en lugar de agua?', a: 'Para ejercicios de menos de 60 minutos de intensidad moderada, el agua es suficiente. Para sesiones de más de 60–90 minutos, en calor o con alta intensidad, las bebidas con electrolitos (sodio 40–80 mmol/L, carbohidratos 6–8%) son superiores al agua sola para mantener la hidratación y el rendimiento. El sodio es el electrolito más importante para retener líquidos y estimular la sed.' },
+    { q: '¿Varía mucho la tasa de sudoración entre personas?', a: 'Sí, enormemente. La variabilidad interpersonal es de hasta 5 veces: algunas personas sudan 500 mL/h y otras 2500 mL/h en las mismas condiciones. Los factores que la determinan incluyen la genética, el nivel de entrenamiento (los atletas bien entrenados sudan más y antes para termorregular mejor), el tamaño corporal, la temperatura ambiental y la humedad relativa.' },
+  ]}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Tasa de<br><span style="color: var(--acid);">Sudoración</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Calcula tu tasa de sudoración en mL/hora y la reposición exacta de líquidos para tu próxima sesión de entrenamiento. Método ACSM recomendado.
+    </p>
+  </div>
+
+  <TasaSudoracionCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cómo se calcula la tasa de sudoración?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      La fórmula (American College of Sports Medicine): <strong>tasa (mL/h) = [(peso antes − peso después en kg) × 1000 + líquidos consumidos en mL] / duración en horas</strong>. Si no bebiste durante el ejercicio (poco recomendable), la fórmula simplificada es: (kg perdidos × 1000) / duración en horas. El porcentaje de pérdida de peso = (kg perdidos / peso inicial) × 100.
+    </p>
+
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 320px;">
+        <thead>
+          <tr style="border-bottom: 2px solid var(--border);">
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Tasa (mL/h)</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Nivel</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Contexto típico</th>
+          </tr>
+        </thead>
+        <tbody>
+          {[
+            { tasa: '< 500',       nivel: 'Muy baja',  ctx: 'Ejercicio leve en ambiente fresco' },
+            { tasa: '500–1000',    nivel: 'Baja',      ctx: 'Actividad moderada en condiciones normales' },
+            { tasa: '1000–1500',   nivel: 'Normal',    ctx: 'Ejercicio moderado-intenso' },
+            { tasa: '1500–2000',   nivel: 'Alta',      ctx: 'Intensidad alta o calor ambiental' },
+            { tasa: '> 2000',      nivel: 'Muy alta',  ctx: 'Calor extremo o intensidad máxima' },
+          ].map(row => (
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.tasa}</td>
+              <td style="padding: 10px 0; font-size: 13px; color: var(--ink); font-weight: 600;">{row.nivel}</td>
+              <td style="padding: 10px 0; font-size: 12px; color: var(--muted);">{row.ctx}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {[
+        { q: '¿Qué es la tasa de sudoración?', a: 'La tasa de sudoración (sweat rate) es la cantidad de sudor producida por hora durante el ejercicio, expresada en mL/hora. En deportistas activos varía entre 500–2500 mL/h dependiendo de la intensidad, la temperatura ambiental y las características individuales. Medirla permite calcular exactamente cuánto líquido debes reponer para evitar la deshidratación.' },
+        { q: '¿Cómo se mide la tasa de sudoración?', a: 'El método es sencillo: pésate sin ropa justo antes del ejercicio, realiza la sesión, registra los líquidos consumidos, vuelve a pesarte sin ropa al terminar. La fórmula es: tasa (mL/h) = [(peso previo − peso posterior) × 1000 + líquidos consumidos en mL] / duración en horas. Cada 1 kg de peso perdido equivale aproximadamente a 1000 mL de sudor.' },
+        { q: '¿Qué porcentaje de pérdida de peso es peligroso?', a: 'La deshidratación del 1–2% del peso corporal ya reduce el rendimiento deportivo en un 5–10%. Una pérdida del 2–3% provoca deterioro cognitivo, aumento de la frecuencia cardíaca y mayor percepción del esfuerzo. A partir del 5–6% hay riesgo de golpe de calor. El objetivo es no superar el 2% de pérdida durante el ejercicio.' },
+        { q: '¿Cuándo debo usar bebidas isotónicas en lugar de agua?', a: 'Para ejercicios de menos de 60 minutos de intensidad moderada, el agua es suficiente. Para sesiones de más de 60–90 minutos, en calor o con alta intensidad, las bebidas con electrolitos (sodio 40–80 mmol/L, carbohidratos 6–8%) son superiores al agua sola para mantener la hidratación y el rendimiento. El sodio es el electrolito más importante para retener líquidos y estimular la sed.' },
+        { q: '¿Varía mucho la tasa de sudoración entre personas?', a: 'Sí, enormemente. La variabilidad interpersonal es de hasta 5 veces: algunas personas sudan 500 mL/h y otras 2500 mL/h en las mismas condiciones. Los factores que la determinan incluyen la genética, el nivel de entrenamiento (los atletas bien entrenados sudan más y antes para termorregular mejor), el tamaño corporal, la temperatura ambiental y la humedad relativa.' },
+      ].map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

@@ -1,0 +1,81 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import IndiceMasaGrasaCalculator from '../components/calculators/IndiceMasaGrasaCalculator';
+---
+
+<CalculatorLayout
+  title="Calculadora FMI — Índice de Masa Grasa corporal | CalcFit"
+  description="Calcula tu FMI (Índice de Masa Grasa) con tu peso, talla y porcentaje de grasa. Más preciso que el IMC para valorar composición corporal. Gratis."
+  calculatorName="Índice de Masa Grasa"
+  breadcrumbSlug="indice-masa-grasa"
+  ogImage="/og/indice-masa-grasa.jpg"
+  keywords="calculadora FMI, índice masa grasa, fat mass index, composición corporal, porcentaje grasa corporal"
+  faqs={[
+    { q: '¿Qué es el FMI y en qué se diferencia del IMC?', a: 'El FMI (Fat Mass Index o Índice de Masa Grasa) divide la masa grasa en kilogramos entre la talla al cuadrado. A diferencia del IMC, que no distingue entre masa grasa y masa muscular, el FMI identifica directamente el exceso de tejido adiposo. Una persona musculada puede tener un IMC alto pero un FMI normal; y al revés, alguien con "peso normal" puede tener un FMI elevado (obesidad de peso normal).' },
+    { q: '¿Cuáles son los valores normales del FMI?', a: 'En hombres: atlético 3–6, saludable 6–12, sobrepeso 12–18, obesidad >18. En mujeres (que tienen más grasa esencial): atlético 8–13, saludable 13–20, sobrepeso 20–28, obesidad >28. Estos rangos provienen de los datos de referencia de Smalley et al. (1990) y estudios posteriores con DEXA.' },
+    { q: '¿Necesito conocer mi porcentaje de grasa para calcularlo?', a: 'Sí. Puedes medirlo con bioimpedancia (báscula inteligente), plicometría (cáliper de pliegues), DEXA o la fórmula de la Marina de EE. UU. (perímetros corporales). La precisión del FMI depende directamente de la precisión de la medición del porcentaje de grasa. La bioimpedancia tiene un margen de error de ±3–4%.' },
+    { q: '¿El FMI varía con la edad?', a: 'Sí. Con el envejecimiento es normal un ligero aumento del FMI aunque el peso no cambie, debido a la redistribución de grasa y pérdida de masa muscular (sarcopenia). Los valores de referencia ideales son ligeramente más altos a partir de los 60 años, aunque los umbrales de riesgo clínico permanecen similares.' },
+    { q: '¿Qué significa un FMI muy bajo?', a: 'Un FMI inferior a 3 kg/m² en hombres o 8 kg/m² en mujeres indica déficit de grasa corporal. Esto puede ocurrir en deportistas de resistencia de élite o en personas con desnutrición. La grasa esencial (3–5% en hombres, 10–13% en mujeres) es necesaria para el funcionamiento hormonal, protección de órganos y aislamiento térmico.' },
+  ]}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Índice de<br><span style="color: var(--acid);">Masa Grasa</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      El FMI (Fat Mass Index) mide la grasa corporal relativa a tu talla, independientemente de la masa muscular. Más preciso que el IMC para evaluar composición corporal.
+    </p>
+  </div>
+
+  <IndiceMasaGrasaCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cómo se calcula el FMI?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      La fórmula es: <strong>FMI = masa grasa (kg) / talla² (m)</strong>. Primero se calcula la masa grasa multiplicando el peso por el porcentaje de grasa; luego se divide entre el cuadrado de la talla en metros. El resultado tiene las mismas unidades que el IMC (kg/m²), pero representa exclusivamente la grasa corporal.
+    </p>
+
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 380px;">
+        <thead>
+          <tr style="border-bottom: 2px solid var(--border);">
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Categoría</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">FMI hombres</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">FMI mujeres</th>
+          </tr>
+        </thead>
+        <tbody>
+          {[
+            { cat: 'Muy bajo',  h: '< 3 kg/m²',   m: '< 8 kg/m²'   },
+            { cat: 'Atlético',  h: '3–6 kg/m²',   m: '8–13 kg/m²'  },
+            { cat: 'Saludable', h: '6–12 kg/m²',  m: '13–20 kg/m²' },
+            { cat: 'Sobrepeso', h: '12–18 kg/m²', m: '20–28 kg/m²' },
+            { cat: 'Obesidad',  h: '> 18 kg/m²',  m: '> 28 kg/m²'  },
+          ].map(row => (
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 10px 0; font-size: 13px; color: var(--ink); font-weight: 600;">{row.cat}</td>
+              <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.h}</td>
+              <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.m}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {[
+        { q: '¿Qué es el FMI y en qué se diferencia del IMC?', a: 'El FMI (Fat Mass Index o Índice de Masa Grasa) divide la masa grasa en kilogramos entre la talla al cuadrado. A diferencia del IMC, que no distingue entre masa grasa y masa muscular, el FMI identifica directamente el exceso de tejido adiposo. Una persona musculada puede tener un IMC alto pero un FMI normal; y al revés, alguien con "peso normal" puede tener un FMI elevado (obesidad de peso normal).' },
+        { q: '¿Cuáles son los valores normales del FMI?', a: 'En hombres: atlético 3–6, saludable 6–12, sobrepeso 12–18, obesidad >18. En mujeres (que tienen más grasa esencial): atlético 8–13, saludable 13–20, sobrepeso 20–28, obesidad >28. Estos rangos provienen de los datos de referencia de Smalley et al. (1990) y estudios posteriores con DEXA.' },
+        { q: '¿Necesito conocer mi porcentaje de grasa para calcularlo?', a: 'Sí. Puedes medirlo con bioimpedancia (báscula inteligente), plicometría (cáliper de pliegues), DEXA o la fórmula de la Marina de EE. UU. (perímetros corporales). La precisión del FMI depende directamente de la precisión de la medición del porcentaje de grasa. La bioimpedancia tiene un margen de error de ±3–4%.' },
+        { q: '¿El FMI varía con la edad?', a: 'Sí. Con el envejecimiento es normal un ligero aumento del FMI aunque el peso no cambie, debido a la redistribución de grasa y pérdida de masa muscular (sarcopenia). Los valores de referencia ideales son ligeramente más altos a partir de los 60 años, aunque los umbrales de riesgo clínico permanecen similares.' },
+        { q: '¿Qué significa un FMI muy bajo?', a: 'Un FMI inferior a 3 kg/m² en hombres o 8 kg/m² en mujeres indica déficit de grasa corporal. Esto puede ocurrir en deportistas de resistencia de élite o en personas con desnutrición. La grasa esencial (3–5% en hombres, 10–13% en mujeres) es necesaria para el funcionamiento hormonal, protección de órganos y aislamiento térmico.' },
+      ].map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

@@ -1,0 +1,81 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import VAMCalculator from '../components/calculators/VAMCalculator';
+---
+
+<CalculatorLayout
+  title="Calculadora VAM — Velocidad Aeróbica Máxima y Zonas | CalcFit"
+  description="Calcula tu VAM (Velocidad Aeróbica Máxima) a partir del VO₂ máx y obtén las 5 zonas de entrenamiento en km/h. Gratis y sin registro."
+  calculatorName="VAM"
+  breadcrumbSlug="vam"
+  ogImage="/og/vam.jpg"
+  keywords="calculadora VAM, velocidad aeróbica máxima, zonas de entrenamiento carrera, VAM VO2max, entrenar por zonas running"
+  faqs={[
+    { q: '¿Qué es la VAM?', a: 'La Velocidad Aeróbica Máxima (VAM) es la velocidad mínima a la que un corredor alcanza su consumo máximo de oxígeno (VO₂ máx). Se calcula dividiendo el VO₂ máx entre 3.5 (coeficiente de equivalencia metabólica a velocidad de carrera). Un corredor de élite tiene una VAM de 22–25 km/h; un aficionado avanzado, de 16–19 km/h.' },
+    { q: '¿Cómo se usan las zonas de VAM para entrenar?', a: 'Las zonas se expresan como porcentaje de la VAM: la zona de recuperación (60–70% VAM) se usa en rodajes suaves; la zona aeróbica (70–80%) para el volumen base; la zona de umbral (80–90%) en series y tempo runs; la zona VO₂ máx (90–100%) en intervalos cortos; y la zona supramáxima (>100%) en sprints y repeticiones muy cortas.' },
+    { q: '¿Cómo mido mi VO₂ máx para calcular la VAM?', a: 'Puedes estimarlo con el Test de Cooper (12 minutos), el Test de Rockport (1 milla caminando) o con las fórmulas de FC en reposo y máxima. Los relojes GPS con pulsómetro también ofrecen una estimación. Para mayor precisión se requiere una prueba de esfuerzo en laboratorio con analizador de gases.' },
+    { q: '¿Con qué frecuencia debo entrenar en la zona VAM?', a: 'Los intervalos al 90–100% VAM deben representar no más del 10–15% del volumen semanal total. Lo habitual es 1–2 sesiones por semana en este rango, con un mínimo de 48 h de recuperación entre ellas. Un volumen excesivo a alta intensidad aumenta el riesgo de sobreentrenamiento y lesiones.' },
+    { q: '¿Cuánto mejora la VAM con el entrenamiento?', a: 'Un corredor principiante puede mejorar su VAM entre un 5–15% en la primera temporada. Corredores avanzados mejoran un 2–5% anual. El entrenamiento interválico a intensidades del 90–105% VAM es el método más eficaz para elevarla, según la evidencia científica (Billat, 2001).' },
+  ]}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Velocidad<br><span style="color: var(--acid);">Aeróbica Máxima</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Calcula tu VAM a partir del VO₂ máx y descubre las velocidades exactas para cada zona de entrenamiento: recuperación, aeróbico, umbral y VO₂ máx.
+    </p>
+  </div>
+
+  <VAMCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cómo se calcula la VAM?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      La VAM se obtiene con la fórmula: <strong>VAM (km/h) = VO₂ máx / 3.5</strong>. El divisor 3.5 representa el equivalente metabólico (MET) de la carrera: un corredor consume aproximadamente 3.5 mL de O₂ por kg por minuto por cada km/h de velocidad. Las zonas de entrenamiento se expresan como porcentaje de la VAM (Billat y Koralsztein, 1996).
+    </p>
+
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 340px;">
+        <thead>
+          <tr style="border-bottom: 2px solid var(--border);">
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Zona</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">% VAM</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Objetivo</th>
+          </tr>
+        </thead>
+        <tbody>
+          {[
+            { zona: 'Recuperación',  pct: '60–70%', obj: 'Rodajes suaves, regeneración activa' },
+            { zona: 'Aeróbico',      pct: '70–80%', obj: 'Volumen base, quema de grasas' },
+            { zona: 'Umbral',        pct: '80–90%', obj: 'Tempo runs, mejora del umbral anaeróbico' },
+            { zona: 'VO₂ máx',      pct: '90–100%', obj: 'Intervalos, mejora del consumo máximo de O₂' },
+            { zona: 'Supramáximo',   pct: '>100%', obj: 'Sprints, tolerancia al lactato' },
+          ].map(row => (
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 10px 0; font-size: 13px; color: var(--ink); font-weight: 600;">{row.zona}</td>
+              <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.pct}</td>
+              <td style="padding: 10px 0; font-size: 12px; color: var(--muted);">{row.obj}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {[
+        { q: '¿Qué es la VAM?', a: 'La Velocidad Aeróbica Máxima (VAM) es la velocidad mínima a la que un corredor alcanza su consumo máximo de oxígeno (VO₂ máx). Se calcula dividiendo el VO₂ máx entre 3.5 (coeficiente de equivalencia metabólica a velocidad de carrera). Un corredor de élite tiene una VAM de 22–25 km/h; un aficionado avanzado, de 16–19 km/h.' },
+        { q: '¿Cómo se usan las zonas de VAM para entrenar?', a: 'Las zonas se expresan como porcentaje de la VAM: la zona de recuperación (60–70% VAM) se usa en rodajes suaves; la zona aeróbica (70–80%) para el volumen base; la zona de umbral (80–90%) en series y tempo runs; la zona VO₂ máx (90–100%) en intervalos cortos; y la zona supramáxima (>100%) en sprints y repeticiones muy cortas.' },
+        { q: '¿Cómo mido mi VO₂ máx para calcular la VAM?', a: 'Puedes estimarlo con el Test de Cooper (12 minutos), el Test de Rockport (1 milla caminando) o con las fórmulas de FC en reposo y máxima. Los relojes GPS con pulsómetro también ofrecen una estimación. Para mayor precisión se requiere una prueba de esfuerzo en laboratorio con analizador de gases.' },
+        { q: '¿Con qué frecuencia debo entrenar en la zona VAM?', a: 'Los intervalos al 90–100% VAM deben representar no más del 10–15% del volumen semanal total. Lo habitual es 1–2 sesiones por semana en este rango, con un mínimo de 48 h de recuperación entre ellas. Un volumen excesivo a alta intensidad aumenta el riesgo de sobreentrenamiento y lesiones.' },
+        { q: '¿Cuánto mejora la VAM con el entrenamiento?', a: 'Un corredor principiante puede mejorar su VAM entre un 5–15% en la primera temporada. Corredores avanzados mejoran un 2–5% anual. El entrenamiento interválico a intensidades del 90–105% VAM es el método más eficaz para elevarla, según la evidencia científica (Billat, 2001).' },
+      ].map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

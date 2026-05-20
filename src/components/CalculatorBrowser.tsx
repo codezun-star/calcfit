@@ -1,4 +1,11 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
+
+const HASH_MAP: Record<string, string> = {
+  'fitness':   'Fitness & salud',
+  'embarazo':  'Embarazo & fertilidad',
+  'fechas':    'Fechas & tiempo',
+  'nutricion': 'Nutrición & bienestar',
+};
 
 type Calc = {
   slug: string;
@@ -19,19 +26,31 @@ export default function CalculatorBrowser({
   categorias: string[];
 }) {
   const [query, setQuery] = useState('');
-  const [activeCategory, setActiveCategory] = useState('Todas');
+  const [activeCategory, setActiveCategory] = useState(categorias[0] ?? '');
   const [focusedSearch, setFocusedSearch] = useState(false);
+
+  useEffect(() => {
+    const applyHash = () => {
+      const hash = window.location.hash.replace('#', '');
+      const mapped = HASH_MAP[hash];
+      if (mapped && categorias.includes(mapped)) {
+        setActiveCategory(mapped);
+      }
+    };
+    applyHash();
+    window.addEventListener('hashchange', applyHash);
+    return () => window.removeEventListener('hashchange', applyHash);
+  }, []);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     return calculadoras.filter(c => {
       const matchQ = !q || c.nombre.toLowerCase().includes(q) || c.desc.toLowerCase().includes(q);
-      const matchCat = activeCategory === 'Todas' || c.categoria === activeCategory;
-      return matchQ && matchCat;
+      return matchQ && c.categoria === activeCategory;
     });
   }, [calculadoras, query, activeCategory]);
 
-  const pills = ['Todas', ...categorias];
+  const pills = [...categorias];
 
   return (
     <div>
@@ -143,7 +162,7 @@ export default function CalculatorBrowser({
             No hay calculadoras que coincidan con <em>"{query}"</em>
           </p>
           <button
-            onClick={() => { setQuery(''); setActiveCategory('Todas'); }}
+            onClick={() => { setQuery(''); setActiveCategory(categorias[0] ?? ''); }}
             style={{
               marginTop: 12,
               padding: '6px 16px',
@@ -157,7 +176,7 @@ export default function CalculatorBrowser({
               color: 'var(--muted)',
             }}
           >
-            Ver todas
+            Limpiar búsqueda
           </button>
         </div>
       ) : (
@@ -181,17 +200,7 @@ export default function CalculatorBrowser({
               onMouseEnter={e => (e.currentTarget.style.background = '#EDE9E0')}
               onMouseLeave={e => (e.currentTarget.style.background = 'var(--cream)')}
             >
-              <span style={{
-                position: 'absolute',
-                top: 12,
-                right: 14,
-                fontFamily: 'var(--font-mono)',
-                fontSize: 10,
-                color: '#bbb',
-              }}>
-                {calc.num}
-              </span>
-              <div
+<div
                 style={{
                   width: 36,
                   height: 36,

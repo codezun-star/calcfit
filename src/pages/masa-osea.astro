@@ -1,0 +1,79 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import MasaOseaCalculator from '../components/calculators/MasaOseaCalculator';
+---
+
+<CalculatorLayout
+  title="Calculadora de Masa Ósea — Estimación sin DEXA | CalcFit"
+  description="Estima tu masa ósea en kg y porcentaje corporal con la fórmula de Kim et al. (2002), validada contra DEXA. Sin análisis de sangre. Gratis."
+  calculatorName="Masa Ósea"
+  breadcrumbSlug="masa-osea"
+  ogImage="/og/masa-osea.jpg"
+  keywords="calculadora masa ósea, densidad ósea, hueso corporal, osteoporosis, composición corporal ósea, estimación masa ósea"
+  faqs={[
+    { q: '¿Qué es la masa ósea?', a: 'La masa ósea (o masa mineral ósea) es el peso total del tejido óseo mineralizado. Representa el 12–20% del peso corporal en adultos sanos. En kg, oscila entre 2.5–4.5 kg en mujeres y 3.5–5.5 kg en hombres según la talla y el peso. La densidad mineral ósea (DMO, en g/cm²) es la medida clínica estándar para diagnosticar osteoporosis, diferente a la masa ósea total.' },
+    { q: '¿Qué fórmula usa esta calculadora?', a: 'Se utiliza la fórmula de Kim et al. (2002), desarrollada a partir de datos de absortometría de rayos X de doble energía (DEXA): Hombres: masa ósea = −5.765 + 0.0685 × talla (cm) + 0.0513 × peso (kg); Mujeres: masa ósea = −3.651 + 0.0426 × talla (cm) + 0.0432 × peso (kg). Esta ecuación tiene un coeficiente de correlación r = 0.84 frente a DEXA.' },
+    { q: '¿Cuánto representa la masa ósea del peso corporal?', a: 'En personas adultas sanas la masa ósea representa aproximadamente el 12–16% del peso corporal en hombres y el 10–14% en mujeres. La diferencia por sexo se debe a que los hombres tienen mayor densidad ósea por efecto de la testosterona. Con el envejecimiento, la masa ósea disminuye gradualmente (especialmente en mujeres tras la menopausia).' },
+    { q: '¿Cómo se puede aumentar la masa ósea?', a: 'La masa ósea pico se alcanza entre los 25–30 años y depende de la genética (~80%) y factores ambientales (~20%). Para maximizarla: ejercicio de impacto (correr, saltar, pesas) estimula la formación ósea; la ingesta adecuada de calcio (1000–1200 mg/día) y vitamina D (800–2000 UI/día) son imprescindibles; evitar el tabaco y el exceso de alcohol también ayuda.' },
+    { q: '¿Esta calculadora puede detectar osteoporosis?', a: 'No. Esta calculadora estima la masa ósea total, no la densidad mineral ósea (DMO) ni el T-score necesarios para diagnosticar osteoporosis o osteopenia. El diagnóstico oficial requiere una densitometría ósea (DEXA). Esta herramienta es útil para tener una referencia de la composición corporal global, pero no reemplaza la evaluación médica.' },
+  ]}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Masa<br><span style="color: var(--acid);">Ósea</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Estima tu masa ósea total en kg y su porcentaje del peso corporal usando la fórmula de Kim et al. (2002), validada contra DEXA (r = 0.84).
+    </p>
+  </div>
+
+  <MasaOseaCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cómo se calcula la masa ósea?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      La estimación se basa en la fórmula de <strong>Kim et al. (2002)</strong>, derivada de regresión lineal sobre mediciones DEXA en una amplia muestra de adultos. Las variables predictoras son el peso y la talla, que explican la mayor parte de la varianza en masa ósea. El porcentaje se calcula dividiendo la masa ósea entre el peso total.
+    </p>
+
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 320px;">
+        <thead>
+          <tr style="border-bottom: 2px solid var(--border);">
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Categoría</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Hombres</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Mujeres</th>
+          </tr>
+        </thead>
+        <tbody>
+          {[
+            { cat: 'Baja',   h: '< 12%', m: '< 10%'  },
+            { cat: 'Normal', h: '12–16%', m: '10–14%' },
+            { cat: 'Alta',   h: '> 16%', m: '> 14%'  },
+          ].map(row => (
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 10px 0; font-size: 13px; color: var(--ink); font-weight: 600;">{row.cat}</td>
+              <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.h}</td>
+              <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.m}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {[
+        { q: '¿Qué es la masa ósea?', a: 'La masa ósea (o masa mineral ósea) es el peso total del tejido óseo mineralizado. Representa el 12–20% del peso corporal en adultos sanos. En kg, oscila entre 2.5–4.5 kg en mujeres y 3.5–5.5 kg en hombres según la talla y el peso. La densidad mineral ósea (DMO, en g/cm²) es la medida clínica estándar para diagnosticar osteoporosis, diferente a la masa ósea total.' },
+        { q: '¿Qué fórmula usa esta calculadora?', a: 'Se utiliza la fórmula de Kim et al. (2002), desarrollada a partir de datos de absortometría de rayos X de doble energía (DEXA): Hombres: masa ósea = −5.765 + 0.0685 × talla (cm) + 0.0513 × peso (kg); Mujeres: masa ósea = −3.651 + 0.0426 × talla (cm) + 0.0432 × peso (kg). Esta ecuación tiene un coeficiente de correlación r = 0.84 frente a DEXA.' },
+        { q: '¿Cuánto representa la masa ósea del peso corporal?', a: 'En personas adultas sanas la masa ósea representa aproximadamente el 12–16% del peso corporal en hombres y el 10–14% en mujeres. La diferencia por sexo se debe a que los hombres tienen mayor densidad ósea por efecto de la testosterona. Con el envejecimiento, la masa ósea disminuye gradualmente (especialmente en mujeres tras la menopausia).' },
+        { q: '¿Cómo se puede aumentar la masa ósea?', a: 'La masa ósea pico se alcanza entre los 25–30 años y depende de la genética (~80%) y factores ambientales (~20%). Para maximizarla: ejercicio de impacto (correr, saltar, pesas) estimula la formación ósea; la ingesta adecuada de calcio (1000–1200 mg/día) y vitamina D (800–2000 UI/día) son imprescindibles; evitar el tabaco y el exceso de alcohol también ayuda.' },
+        { q: '¿Esta calculadora puede detectar osteoporosis?', a: 'No. Esta calculadora estima la masa ósea total, no la densidad mineral ósea (DMO) ni el T-score necesarios para diagnosticar osteoporosis o osteopenia. El diagnóstico oficial requiere una densitometría ósea (DEXA). Esta herramienta es útil para tener una referencia de la composición corporal global, pero no reemplaza la evaluación médica.' },
+      ].map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

@@ -1,0 +1,81 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import RiesgoDiabetesCalculator from '../components/calculators/RiesgoDiabetesCalculator';
+---
+
+<CalculatorLayout
+  title="FINDRISC — Calculadora de Riesgo de Diabetes Tipo 2 | CalcFit"
+  description="Evalúa tu probabilidad de desarrollar diabetes tipo 2 en 10 años con el cuestionario FINDRISC validado por la OMS. Sin análisis de sangre. Gratis."
+  calculatorName="Riesgo de Diabetes"
+  breadcrumbSlug="riesgo-diabetes"
+  ogImage="/og/riesgo-diabetes.jpg"
+  keywords="FINDRISC, riesgo diabetes tipo 2, calculadora diabetes, probabilidad diabetes, prevención diabetes, prediabetes"
+  faqs={[
+    { q: '¿Qué es el FINDRISC?', a: 'El FINDRISC (Finnish Diabetes Risk Score) es un cuestionario de 8 preguntas validado internacionalmente para estimar el riesgo de desarrollar diabetes tipo 2 en los próximos 10 años sin necesidad de análisis de sangre. Fue desarrollado por Lindström y Tuomilehto (2003) en Finlandia y adoptado por la OMS y múltiples guías clínicas europeas y latinoamericanas.' },
+    { q: '¿Con qué precisión predice el FINDRISC la diabetes?', a: 'El FINDRISC tiene una sensibilidad del 76–81% y una especificidad del 76–77% para detectar diabetes no diagnosticada. Una puntuación ≥12 identifica al 34% de la población con mayor riesgo, que concentra el 78% de los casos de diabetes no diagnosticada. No es una prueba diagnóstica, sino una herramienta de cribado que indica cuándo hacer una analítica.' },
+    { q: '¿Qué factores aumentan más el riesgo FINDRISC?', a: 'La glucosa alta previa (historial de hiperglucemia) suma 5 puntos — el mayor peso individual. Los antecedentes familiares de primer grado (padre, madre, hermano o hijo con diabetes) suman 5 puntos. La obesidad (IMC >30) añade 3 puntos. La hipertensión en tratamiento suma 2 puntos. Controlar estos factores tiene el mayor impacto en la reducción del riesgo.' },
+    { q: '¿Qué hago si mi puntuación es alta?', a: 'Una puntuación ≥12 puntos (riesgo moderado) indica que debes consultar a tu médico y solicitar una glucemia en ayunas. Con ≥15 puntos (riesgo alto), es probable que ya tengas glucosa alterada o diabetes sin diagnosticar — busca atención médica urgente. La buena noticia: el Programa de Prevención de la Diabetes (DPP) demostró que cambios de estilo de vida reducen el riesgo hasta un 58%.' },
+    { q: '¿Puedo reducir mi riesgo FINDRISC?', a: 'Sí, varios factores del FINDRISC son modificables. Perder el 5–7% del peso corporal si hay sobrepeso u obesidad, realizar al menos 150 min/semana de actividad moderada, aumentar el consumo de fibra y vegetales, y reducir el consumo de azúcares refinados reduce la puntuación y el riesgo real de diabetes tipo 2 de forma significativa.' },
+  ]}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Riesgo de<br><span style="color: var(--acid);">Diabetes</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Cuestionario FINDRISC validado por la OMS. Responde 8 preguntas para estimar tu probabilidad de desarrollar diabetes tipo 2 en los próximos 10 años. No requiere analítica de sangre.
+    </p>
+  </div>
+
+  <RiesgoDiabetesCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cómo se interpreta el FINDRISC?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      El FINDRISC suma puntos según 8 factores de riesgo: edad, IMC, perímetro de cintura, actividad física, consumo de frutas y verduras, medicación para la tensión arterial, historial de glucosa alta y antecedentes familiares de diabetes. La puntuación máxima es 26 puntos. A mayor puntuación, mayor probabilidad de desarrollar diabetes tipo 2 en 10 años.
+    </p>
+
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 320px;">
+        <thead>
+          <tr style="border-bottom: 2px solid var(--border);">
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Puntuación</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Riesgo</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Probabilidad 10 años</th>
+          </tr>
+        </thead>
+        <tbody>
+          {[
+            { pts: '0–7',   riesgo: 'Bajo',              prob: '1 de cada 100' },
+            { pts: '8–11',  riesgo: 'Ligeramente elevado', prob: '1 de cada 25' },
+            { pts: '12–14', riesgo: 'Moderado',           prob: '1 de cada 6' },
+            { pts: '15–20', riesgo: 'Alto',               prob: '1 de cada 3' },
+            { pts: '> 20',  riesgo: 'Muy alto',           prob: '1 de cada 2' },
+          ].map(row => (
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.pts}</td>
+              <td style="padding: 10px 0; font-size: 13px; color: var(--ink); font-weight: 600;">{row.riesgo}</td>
+              <td style="padding: 10px 0; font-size: 12px; color: var(--muted);">{row.prob}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {[
+        { q: '¿Qué es el FINDRISC?', a: 'El FINDRISC (Finnish Diabetes Risk Score) es un cuestionario de 8 preguntas validado internacionalmente para estimar el riesgo de desarrollar diabetes tipo 2 en los próximos 10 años sin necesidad de análisis de sangre. Fue desarrollado por Lindström y Tuomilehto (2003) en Finlandia y adoptado por la OMS y múltiples guías clínicas europeas y latinoamericanas.' },
+        { q: '¿Con qué precisión predice el FINDRISC la diabetes?', a: 'El FINDRISC tiene una sensibilidad del 76–81% y una especificidad del 76–77% para detectar diabetes no diagnosticada. Una puntuación ≥12 identifica al 34% de la población con mayor riesgo, que concentra el 78% de los casos de diabetes no diagnosticada. No es una prueba diagnóstica, sino una herramienta de cribado que indica cuándo hacer una analítica.' },
+        { q: '¿Qué factores aumentan más el riesgo FINDRISC?', a: 'La glucosa alta previa (historial de hiperglucemia) suma 5 puntos — el mayor peso individual. Los antecedentes familiares de primer grado (padre, madre, hermano o hijo con diabetes) suman 5 puntos. La obesidad (IMC >30) añade 3 puntos. La hipertensión en tratamiento suma 2 puntos. Controlar estos factores tiene el mayor impacto en la reducción del riesgo.' },
+        { q: '¿Qué hago si mi puntuación es alta?', a: 'Una puntuación ≥12 puntos (riesgo moderado) indica que debes consultar a tu médico y solicitar una glucemia en ayunas. Con ≥15 puntos (riesgo alto), es probable que ya tengas glucosa alterada o diabetes sin diagnosticar — busca atención médica urgente. La buena noticia: el Programa de Prevención de la Diabetes (DPP) demostró que cambios de estilo de vida reducen el riesgo hasta un 58%.' },
+        { q: '¿Puedo reducir mi riesgo FINDRISC?', a: 'Sí, varios factores del FINDRISC son modificables. Perder el 5–7% del peso corporal si hay sobrepeso u obesidad, realizar al menos 150 min/semana de actividad moderada, aumentar el consumo de fibra y vegetales, y reducir el consumo de azúcares refinados reduce la puntuación y el riesgo real de diabetes tipo 2 de forma significativa.' },
+      ].map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>
