@@ -29,7 +29,7 @@ export default function OximetriaCalculator() {
   ];
 
   return (
-    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '560px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
       <div style={{ padding: '12px 16px', background: 'var(--cream)', borderLeft: '3px solid var(--border)', fontSize: '12px', color: 'var(--muted)', lineHeight: 1.6 }}>
         La oximetría de pulso (SpO2) mide el porcentaje de hemoglobina saturada con oxígeno en sangre. A mayor altitud el valor esperado es menor.
       </div>

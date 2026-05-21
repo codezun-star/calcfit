@@ -37,7 +37,7 @@ export default function VitaminaDCalculator() {
   }
 
   return (
-    <div style={{ padding: 'clamp(16px, 4vw, 32px)', background: 'var(--cream)' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '640px', margin: '0 auto' }}>
       {/* Tipo de piel */}
       <div style={{ marginBottom: '24px' }}>
         <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '10px' }}>

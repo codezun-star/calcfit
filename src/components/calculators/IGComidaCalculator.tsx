@@ -53,7 +53,7 @@ export default function IGComidaCalculator() {
   }
 
   return (
-    <div style={{ padding: 'clamp(16px, 4vw, 32px)', background: 'var(--cream)' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '640px', margin: '0 auto' }}>
       <p style={{ fontSize: '13px', color: 'var(--muted)', marginBottom: '20px', lineHeight: 1.6 }}>
         Introduce los alimentos de tu comida con su IG y cantidad de carbohidratos para calcular el índice y carga glucémica total.
       </p>

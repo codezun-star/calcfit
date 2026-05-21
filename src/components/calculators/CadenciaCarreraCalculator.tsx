@@ -23,7 +23,7 @@ export default function CadenciaCarreraCalculator() {
   }
 
   return (
-    <div style={{ padding: 'clamp(16px, 4vw, 32px)', background: 'var(--cream)' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '640px', margin: '0 auto' }}>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '16px', marginBottom: '24px' }}>
         <Input label="Cadencia (pasos/min)" value={cadencia} onChange={setCadencia} suffix="ppm" type="number" />
         <Input label="Velocidad (opcional)" value={velocidad} onChange={setVelocidad} suffix="km/h" type="number" />

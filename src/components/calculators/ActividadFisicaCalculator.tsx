@@ -25,7 +25,7 @@ export default function ActividadFisicaCalculator() {
   };
 
   return (
-    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '600px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
       <div style={{ padding: '12px 16px', background: 'var(--cream)', borderLeft: '3px solid var(--border)', fontSize: '12px', color: 'var(--muted)', lineHeight: 1.6 }}>
         <strong>OMS 2020 — Adultos 18–64 años:</strong> ≥150 min de actividad moderada (o ≥75 min vigorosa) más ≥2 días de fuerza por semana.
         Actividad moderada: caminar rápido, ciclismo suave, baile. Vigorosa: correr, natación rápida, ciclismo intenso.

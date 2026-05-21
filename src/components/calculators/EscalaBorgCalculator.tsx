@@ -44,7 +44,7 @@ export default function EscalaBorgCalculator() {
   };
 
   return (
-    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '580px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
       <div style={{ padding: '12px 16px', background: 'var(--cream)', borderLeft: '3px solid var(--border)', fontSize: '12px', color: 'var(--muted)', lineHeight: 1.6 }}>
         La escala de Borg mide el esfuerzo percibido durante el ejercicio. La escala original va de 6 a 20 (RPE × 10 ≈ %FC máx). La CR10 va de 0 a 10.
       </div>
