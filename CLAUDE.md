@@ -906,6 +906,7 @@ npm run preview  # preview del build
 
 **2. Componente React**
 - Crear `src/components/calculators/NombreCalculator.tsx`
+- **El div raíz DEBE ser siempre:** `<div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>` — sin esto el contenido no se centra
 - Importar la función de `calculators.ts` — nunca calcular inline en el componente
 - Usar `Toggle` si el formulario tiene peso o altura
 - Usar `useValidation` o validación inline para los inputs
@@ -973,6 +974,36 @@ npm run preview  # preview del build
 - Nunca agregar `border-radius` mayor a 2px
 - Nunca agregar `box-shadow`
 - Nunca agregar gradientes
+
+### Div raíz de cada componente calculadora — OBLIGATORIO
+
+**Todo componente en `src/components/calculators/` DEBE tener este div raíz exacto:**
+
+```tsx
+<div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+```
+
+Las 4 propiedades son **no negociables**:
+
+| Propiedad | Valor | Razón |
+|---|---|---|
+| `padding` | `clamp(16px, 4vw, 32px)` | Responsive sin media queries |
+| `maxWidth` | `640px` | Limita el ancho en pantallas grandes |
+| `margin` | `0 auto` | **Centra horizontalmente** — sin esto el contenido se pega a la izquierda |
+| `display` + `flexDirection` + `gap` | `flex / column / 24px` | Espaciado uniforme entre secciones |
+
+**Lo que NO se debe poner en el div raíz:**
+- `background: 'var(--cream)'` — el layout ya lo hereda, es redundante
+- Ningún `maxWidth` diferente a `640px` para el wrapper principal (excepto `VolumenEntrenamiento` que usa 720px por su tabla)
+
+**Error típico a evitar (batch 7B):**
+```tsx
+// ✗ MAL — sin centrado, sin maxWidth
+<div style={{ padding: 'clamp(16px, 4vw, 32px)', background: 'var(--cream)' }}>
+
+// ✓ BIEN
+<div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+```
 
 ### Responsive — patrones establecidos
 
