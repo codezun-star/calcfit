@@ -1,0 +1,79 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import GrasaVisceralCalculator from '../components/calculators/GrasaVisceralCalculator';
+---
+
+<CalculatorLayout
+  title="Calculadora de Grasa Visceral — Nivel 1-20 Estimado | CalcFit"
+  description="Estima tu nivel de grasa visceral abdominal (escala 1–20) a partir de medidas corporales y edad. Sin analítica. Gratis y sin registro."
+  calculatorName="Grasa Visceral"
+  breadcrumbSlug="grasa-visceral"
+  ogImage="/og/grasa-visceral.jpg"
+  keywords="calculadora grasa visceral, nivel grasa visceral, grasa abdominal interna, riesgo metabólico, escala tanita grasa visceral"
+  faqs={[
+    { q: '¿Qué es la grasa visceral?', a: 'La grasa visceral es la grasa que se acumula alrededor de los órganos internos del abdomen (hígado, páncreas, intestinos). A diferencia de la grasa subcutánea (debajo de la piel), la grasa visceral es metabólicamente activa: libera ácidos grasos y citoquinas inflamatorias que aumentan el riesgo de diabetes tipo 2, enfermedades cardiovasculares y síndrome metabólico.' },
+    { q: '¿Cómo se mide la grasa visceral con precisión?', a: 'El estándar de oro es la resonancia magnética (RM) o tomografía axial computarizada (TAC) del abdomen. Las básculas de bioimpedancia Tanita estiman el nivel en una escala del 1 al 20. La calculadora usa medidas antropométricas y el ratio cintura-estatura (WHtR) como estimación práctica sin equipo especializado.' },
+    { q: '¿Qué nivel de grasa visceral es saludable?', a: 'En la escala Tanita, niveles de 1 a 9 se consideran saludables. Niveles de 10 a 14 indican exceso con riesgo moderado. Niveles de 15 a 20 representan alto riesgo y se asocian con resistencia a la insulina, hipertensión y síndrome metabólico. El perímetro de cintura por encima de 90 cm en hombres o 80 cm en mujeres ya es señal de alerta.' },
+    { q: '¿Cómo se reduce la grasa visceral?', a: 'La grasa visceral responde muy bien al ejercicio aeróbico: 150–300 min semanales de actividad moderada reducen significativamente los niveles viscerales incluso sin perder mucho peso total. La dieta mediterránea, reducir el alcohol y controlar el estrés (cortisol) también son fundamentales. En 12 semanas de cambios sostenidos se pueden apreciar reducciones medibles.' },
+    { q: '¿Por qué el estrés aumenta la grasa visceral?', a: 'El cortisol (hormona del estrés) favorece el depósito de grasa en el abdomen y activa el apetito por alimentos calóricos. El estrés crónico también altera el sueño, lo que a su vez eleva la ghrelina (hormona del hambre) y reduce la leptina. Técnicas de gestión del estrés como meditación, yoga o actividad física regular ayudan a normalizar los niveles de cortisol.' },
+  ]}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Grasa<br><span style="color: var(--acid);">Visceral</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Estima tu nivel de grasa visceral abdominal en escala 1–20 a partir de cintura, cadera, estatura y edad. Sin analítica de sangre.
+    </p>
+  </div>
+
+  <GrasaVisceralCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cómo se estima la grasa visceral?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      La calculadora usa el <strong>ratio cintura-estatura (WHtR)</strong> como proxy de grasa visceral, ajustado por edad y sexo: <strong>nivel = WHtR × 30 + (edad &gt; 40 ? 2 : 0) + (hombre ? 1 : 0)</strong>, redondeado al 1–20. El WHtR ha demostrado ser mejor predictor de riesgo cardiovascular y metabólico que el IMC (Browning et al., 2010).
+    </p>
+
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 300px;">
+        <thead>
+          <tr style="border-bottom: 2px solid var(--border);">
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Nivel (escala 1-20)</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Categoría</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Riesgo</th>
+          </tr>
+        </thead>
+        <tbody>
+          {[
+            { nivel: '1–9',   cat: 'Saludable',   riesgo: 'Bajo' },
+            { nivel: '10–14', cat: 'Exceso',       riesgo: 'Moderado' },
+            { nivel: '15–20', cat: 'Alto riesgo',  riesgo: 'Alto' },
+          ].map(row => (
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.nivel}</td>
+              <td style="padding: 10px 0; font-size: 13px; color: var(--ink); font-weight: 600;">{row.cat}</td>
+              <td style="padding: 10px 0; font-size: 12px; color: var(--muted);">{row.riesgo}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {[
+        { q: '¿Qué es la grasa visceral?', a: 'La grasa visceral es la grasa que se acumula alrededor de los órganos internos del abdomen (hígado, páncreas, intestinos). A diferencia de la grasa subcutánea (debajo de la piel), la grasa visceral es metabólicamente activa: libera ácidos grasos y citoquinas inflamatorias que aumentan el riesgo de diabetes tipo 2, enfermedades cardiovasculares y síndrome metabólico.' },
+        { q: '¿Cómo se mide la grasa visceral con precisión?', a: 'El estándar de oro es la resonancia magnética (RM) o tomografía axial computarizada (TAC) del abdomen. Las básculas de bioimpedancia Tanita estiman el nivel en una escala del 1 al 20. La calculadora usa medidas antropométricas y el ratio cintura-estatura (WHtR) como estimación práctica sin equipo especializado.' },
+        { q: '¿Qué nivel de grasa visceral es saludable?', a: 'En la escala Tanita, niveles de 1 a 9 se consideran saludables. Niveles de 10 a 14 indican exceso con riesgo moderado. Niveles de 15 a 20 representan alto riesgo y se asocian con resistencia a la insulina, hipertensión y síndrome metabólico. El perímetro de cintura por encima de 90 cm en hombres o 80 cm en mujeres ya es señal de alerta.' },
+        { q: '¿Cómo se reduce la grasa visceral?', a: 'La grasa visceral responde muy bien al ejercicio aeróbico: 150–300 min semanales de actividad moderada reducen significativamente los niveles viscerales incluso sin perder mucho peso total. La dieta mediterránea, reducir el alcohol y controlar el estrés (cortisol) también son fundamentales. En 12 semanas de cambios sostenidos se pueden apreciar reducciones medibles.' },
+        { q: '¿Por qué el estrés aumenta la grasa visceral?', a: 'El cortisol (hormona del estrés) favorece el depósito de grasa en el abdomen y activa el apetito por alimentos calóricos. El estrés crónico también altera el sueño, lo que a su vez eleva la ghrelina (hormona del hambre) y reduce la leptina. Técnicas de gestión del estrés como meditación, yoga o actividad física regular ayudan a normalizar los niveles de cortisol.' },
+      ].map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

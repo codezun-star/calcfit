@@ -1,0 +1,73 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import ProteinaPorComidaCalculator from '../components/calculators/ProteinaPorComidaCalculator';
+
+const faqs = [
+  { q: '¿Cuánta proteína puedo absorber por comida?', a: 'El concepto de "máximo de absorción" es relativo. El organismo absorbe prácticamente toda la proteína ingerida, pero la síntesis proteica muscular (MPS) se maximiza con ~0.4 g/kg por toma (30–40 g para una persona de 75 kg). El exceso se oxida para obtener energía. Distribuir la proteína en varias comidas es más eficiente.' },
+  { q: '¿Cuántas veces al día debo comer proteína para ganar músculo?', a: 'La investigación actual (Morton 2018, Witard 2014) recomienda distribuir la ingesta en 3–5 tomas proteicas al día, separadas 3–4 horas, para maximizar la síntesis proteica muscular. Una sola comida muy alta en proteína es menos eficiente que distribuirla.' },
+  { q: '¿Cuánta proteína necesito para perder grasa sin perder músculo?', a: 'Durante una fase de restricción calórica, la recomendación aumenta a 2.2–2.4 g/kg/día para preservar la masa muscular. La proteína aumenta la saciedad, tiene mayor efecto térmico (30% de las calorías se usan en su digestión) y protege el tejido muscular ante el déficit calórico.' },
+  { q: '¿Cuáles son las mejores fuentes de proteína por comida?', a: 'Las fuentes de mayor valor biológico incluyen: pollo y pavo (25–30 g/100g), atún (28 g/100g), clara de huevo (11 g/100g), yogur griego (10 g/100g), requesón (11 g/100g) y legumbres combinadas con cereales (proteína completa). Los batidos de whey son útiles para complementar pero no deben sustituir alimentos enteros.' },
+  { q: '¿La proteína de la noche se asimila igual que la del día?', a: 'Sí. Un estudio de Res et al. (2012) demostró que 40 g de caseína antes de dormir aumentan la síntesis proteica nocturna y la masa muscular. La proteína de digestión lenta (caseína, requesón) es especialmente adecuada para la última comida del día.' },
+];
+---
+
+<CalculatorLayout
+  title="Proteína por Comida — Distribución Óptima Diaria | CalcFit"
+  description="Calcula cuánta proteína necesitas por comida y al día según tu peso y objetivo. Distribución óptima para hipertrofia, mantenimiento o pérdida de grasa."
+  calculatorName="Proteína por Comida"
+  breadcrumbSlug="proteina-por-comida"
+  ogImage="/og/proteina-por-comida.jpg"
+  keywords="cuánta proteína por comida, distribución proteína diaria, proteína para hipertrofia, gramos proteína por kilo, máximo proteína absorción"
+  faqs={faqs}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Proteína<br><span style="color: var(--acid);">por Comida</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Calcula la dosis óptima de proteína por toma y la distribución diaria según tu peso y objetivo (mantenimiento, hipertrofia o pérdida de grasa).
+    </p>
+  </div>
+
+  <ProteinaPorComidaCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cuánta proteína necesitas al día?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      Las recomendaciones de proteína dependen del objetivo. La ISSN (International Society of Sports Nutrition) y revisiones meta-analíticas recientes (Morton 2018) establecen que para maximizar la síntesis proteica muscular se necesitan entre 1.6 y 2.4 g/kg/día, distribuidos en 3–5 tomas. El valor de 0.4 g/kg por toma como "máximo funcional" per comida proviene de estudios de Moore (2009) que evaluaron la respuesta de MPS a dosis crecientes de proteína de suero.
+    </p>
+
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px;">
+      <thead>
+        <tr style="background: var(--ink); color: var(--acid);">
+          <th style="padding: 10px 14px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Objetivo</th>
+          <th style="padding: 10px 14px; text-align: left;">Ingesta diaria</th>
+          <th style="padding: 10px 14px; text-align: left;">Referencia</th>
+        </tr>
+      </thead>
+      <tbody>
+        {[
+          ['Mantenimiento', '1.6 g/kg/día', 'Morton 2018, ISSN'],
+          ['Hipertrofia (ganancia muscular)', '2.0 g/kg/día', 'Stokes 2018, ISSN'],
+          ['Pérdida de grasa (retención muscular)', '2.4 g/kg/día', 'Helms 2014, Barakat 2020'],
+        ].map(([obj, ingesta, ref], i) => (
+          <tr style={`background: ${i % 2 === 0 ? 'white' : '#f9f6f0'};`}>
+            <td style="padding: 10px 14px;">{obj}</td>
+            <td style="padding: 10px 14px; font-family: var(--font-mono); font-size: 12px;">{ingesta}</td>
+            <td style="padding: 10px 14px; color: var(--muted);">{ref}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {faqs.map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

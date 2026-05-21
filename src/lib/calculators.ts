@@ -2039,3 +2039,877 @@ export function calcularSindromeMetabolico(
   if (criteriosCumplidos === 3) return { criteriosCumplidos, tiene, criterios, riesgo: 'moderado', color: '#FB923C', recomendacion: 'Síndrome metabólico presente (3 criterios). Consulta a tu médico y adopta cambios inmediatos en dieta y ejercicio.' };
   return { criteriosCumplidos, tiene, criterios, riesgo: 'alto', color: '#F87171', recomendacion: 'Síndrome metabólico con múltiples criterios. Riesgo cardiovascular y de diabetes tipo 2 significativamente elevado. Atención médica urgente.' };
 }
+
+// ─── BATCH 7A ─────────────────────────────────────────────────────────────────
+
+// ─── POTENCIA DE SALTO ────────────────────────────────────────────────────────
+export interface PotenciaSaltoResult {
+  potenciaPicoW:  number;
+  potenciaMediaW: number;
+  wattsPerKg:     number;
+  nivel:          string;
+  nivelNombre:    string;
+  color:          string;
+  descripcion:    string;
+}
+
+export function calcularPotenciaSalto(
+  pesoKg:    number,
+  alturasCm: number,
+  sexo:      'hombre' | 'mujer',
+): PotenciaSaltoResult {
+  // Sayers 1999: P_pico(W) = 60.7 × alturaCm + 45.3 × pesoKg − 2055
+  const potenciaPicoW  = Math.round(60.7 * alturasCm + 45.3 * pesoKg - 2055);
+  const potenciaMediaW = Math.round(21.2 * alturasCm + 23.0 * pesoKg - 1393);
+  const wattsPerKg     = Math.round((potenciaPicoW / pesoKg) * 10) / 10;
+
+  // Umbrales W/kg según sexo
+  const umbrales = sexo === 'hombre'
+    ? [{ nivel: 'excelente', min: 45, nombre: 'Excelente', color: '#34D399', desc: 'Potencia explosiva de nivel élite o avanzado.' },
+       { nivel: 'bueno',     min: 35, nombre: 'Bueno',     color: '#CAFF00', desc: 'Potencia superior a la media. Buen nivel atlético.' },
+       { nivel: 'promedio',  min: 25, nombre: 'Promedio',  color: '#60A5FA', desc: 'Potencia dentro del rango normal para adultos activos.' },
+       { nivel: 'bajo',      min: 15, nombre: 'Bajo',      color: '#FB923C', desc: 'Potencia por debajo del promedio. Entrenamiento explosivo recomendado.' },
+       { nivel: 'muy_bajo',  min: 0,  nombre: 'Muy bajo',  color: '#F87171', desc: 'Potencia muy baja. Considera añadir pliometría y ejercicios de fuerza.' }]
+    : [{ nivel: 'excelente', min: 35, nombre: 'Excelente', color: '#34D399', desc: 'Potencia explosiva de nivel élite o avanzado.' },
+       { nivel: 'bueno',     min: 25, nombre: 'Bueno',     color: '#CAFF00', desc: 'Potencia superior a la media. Buen nivel atlético.' },
+       { nivel: 'promedio',  min: 18, nombre: 'Promedio',  color: '#60A5FA', desc: 'Potencia dentro del rango normal para adultos activas.' },
+       { nivel: 'bajo',      min: 10, nombre: 'Bajo',      color: '#FB923C', desc: 'Potencia por debajo del promedio. Entrenamiento explosivo recomendado.' },
+       { nivel: 'muy_bajo',  min: 0,  nombre: 'Muy bajo',  color: '#F87171', desc: 'Potencia muy baja. Considera añadir pliometría y ejercicios de fuerza.' }];
+
+  const cat = umbrales.find(u => wattsPerKg >= u.min) ?? umbrales[umbrales.length - 1];
+  return {
+    potenciaPicoW,
+    potenciaMediaW,
+    wattsPerKg,
+    nivel:       cat.nivel,
+    nivelNombre: cat.nombre,
+    color:       cat.color,
+    descripcion: cat.desc,
+  };
+}
+
+// ─── GRASA VISCERAL ───────────────────────────────────────────────────────────
+export interface GrasaVisceralResult {
+  nivelEstimado: number;
+  categoria:     string;
+  color:         string;
+  riesgo:        string;
+  recomendacion: string;
+}
+
+export function calcularGrasaVisceral(
+  cinturaCm: number,
+  caderaCm:  number,
+  alturaCm:  number,
+  edadAnios: number,
+  sexo:      'hombre' | 'mujer',
+): GrasaVisceralResult {
+  const whtr      = cinturaCm / alturaCm;
+  const edadBonus = edadAnios > 40 ? 2 : 0;
+  const sexoBonus = sexo === 'hombre' ? 1 : 0;
+  const nivelRaw  = whtr * 30 + edadBonus + sexoBonus;
+  const nivelEstimado = Math.min(20, Math.max(1, Math.round(nivelRaw)));
+
+  if (nivelEstimado <= 9)  return { nivelEstimado, categoria: 'Saludable',    color: '#34D399', riesgo: 'bajo',   recomendacion: 'Tu nivel de grasa visceral es saludable. Mantén tu dieta y actividad física actuales.' };
+  if (nivelEstimado <= 14) return { nivelEstimado, categoria: 'Exceso',       color: '#FB923C', riesgo: 'moderado', recomendacion: 'Nivel de grasa visceral elevado. Reduce carbohidratos refinados, aumenta el cardio y el entrenamiento de fuerza.' };
+  return                          { nivelEstimado, categoria: 'Alto riesgo',  color: '#F87171', riesgo: 'alto',   recomendacion: 'Grasa visceral en rango de alto riesgo. Consulta a tu médico y modifica urgentemente tu dieta y actividad física.' };
+}
+
+// ─── OXIMETRÍA ────────────────────────────────────────────────────────────────
+export interface OximetriaResult {
+  categoria:             string;
+  color:                 string;
+  riesgo:                string;
+  recomendacion:         string;
+  spo2AjustadoAltitud:   number;
+}
+
+export function calcularOximetria(
+  spo2:     number,
+  altitudM: number,
+): OximetriaResult {
+  // SpO2 esperado según altitud (aprox para > 2500 m)
+  const ajuste = altitudM > 2500 ? (altitudM / 300) * 0.9 : 0;
+  const spo2AjustadoAltitud = Math.max(80, Math.round((98 - ajuste) * 10) / 10);
+
+  if (spo2 >= 95) return { categoria: 'Normal',             color: '#34D399', riesgo: 'bajo',    spo2AjustadoAltitud, recomendacion: 'Saturación de oxígeno normal. No se requiere ninguna acción.' };
+  if (spo2 >= 91) return { categoria: 'Hipoxia leve',       color: '#CAFF00', riesgo: 'leve',    spo2AjustadoAltitud, recomendacion: 'Saturación ligeramente reducida. Monitoriza y consulta a un médico si persiste o tienes síntomas.' };
+  if (spo2 >= 86) return { categoria: 'Hipoxia moderada',   color: '#FB923C', riesgo: 'moderado', spo2AjustadoAltitud, recomendacion: 'Saturación moderadamente baja. Busca atención médica pronto. Evita el esfuerzo físico.' };
+  return                 { categoria: 'Hipoxia grave',      color: '#F87171', riesgo: 'grave',   spo2AjustadoAltitud, recomendacion: 'Saturación críticamente baja. Busca atención de emergencia de inmediato.' };
+}
+
+// ─── UMBRAL ANAERÓBICO ────────────────────────────────────────────────────────
+export interface UmbralAnaerobicoResult {
+  fcUmbral:         number;
+  fcUmbralMin:      number;
+  fcUmbralMax:      number;
+  porcentajeFCmax:  number;
+  fcMaxUsada:       number;
+  zonaDescripcion:  string;
+  recomendacion:    string;
+}
+
+export function calcularUmbralAnaerobico(
+  edadAnios: number,
+  fcReposo:  number,
+  fcMax?:    number,
+): UmbralAnaerobicoResult {
+  const fcMaxUsada = fcMax ?? (220 - edadAnios);
+  // Karvonen al 87%
+  const fcUmbral    = Math.round(fcReposo + 0.87 * (fcMaxUsada - fcReposo));
+  const fcUmbralMin = fcUmbral - 5;
+  const fcUmbralMax = fcUmbral + 5;
+  const porcentajeFCmax = Math.round((fcUmbral / fcMaxUsada) * 100);
+
+  return {
+    fcUmbral,
+    fcUmbralMin,
+    fcUmbralMax,
+    porcentajeFCmax,
+    fcMaxUsada,
+    zonaDescripcion: 'Zona de umbral anaeróbico (≈ 85–90% FC máx). En este rango el lactato empieza a acumularse más rápido de lo que el cuerpo puede eliminarlo.',
+    recomendacion:   'Entrena en este rango con series de tempo o intervalos de 20–40 min para elevar tu umbral y mejorar el rendimiento de resistencia.',
+  };
+}
+
+// ─── CARGA DE ENTRENAMIENTO ───────────────────────────────────────────────────
+export interface SesionRPE {
+  rpe:         number;
+  duracionMin: number;
+}
+
+export interface CargaEntrenamientoResult {
+  cargaSemanalUA: number;
+  promedioDiario: number;
+  monotonia:      number;
+  strain:         number;
+  categoria:      string;
+  color:          string;
+  recomendacion:  string;
+}
+
+export function calcularCargaEntrenamiento(sesiones: SesionRPE[]): CargaEntrenamientoResult {
+  if (sesiones.length === 0) {
+    return { cargaSemanalUA: 0, promedioDiario: 0, monotonia: 0, strain: 0, categoria: 'Sin datos', color: '#888', recomendacion: 'Introduce al menos una sesión de entrenamiento.' };
+  }
+
+  const uas = sesiones.map(s => s.rpe * s.duracionMin);
+  const cargaSemanalUA = uas.reduce((a, b) => a + b, 0);
+
+  // Rellenar con ceros los días sin sesión hasta completar 7 días
+  const diasCompletos = [...uas];
+  while (diasCompletos.length < 7) diasCompletos.push(0);
+
+  const media = diasCompletos.reduce((a, b) => a + b, 0) / diasCompletos.length;
+  const promedioDiario = Math.round(media);
+
+  const varianza = diasCompletos.reduce((acc, ua) => acc + Math.pow(ua - media, 2), 0) / diasCompletos.length;
+  const sd = Math.sqrt(varianza);
+
+  const monotonia = sd > 0 ? Math.round((media / sd) * 100) / 100 : 0;
+  const strain    = Math.round(cargaSemanalUA * monotonia);
+
+  if (cargaSemanalUA < 1000) return { cargaSemanalUA, promedioDiario, monotonia, strain, categoria: 'Carga baja',    color: '#60A5FA', recomendacion: 'Carga semanal insuficiente para generar adaptaciones significativas. Aumenta el volumen o la intensidad.' };
+  if (cargaSemanalUA <= 3000 && monotonia < 2) return { cargaSemanalUA, promedioDiario, monotonia, strain, categoria: 'Carga óptima',  color: '#34D399', recomendacion: 'Carga y variabilidad en rango óptimo. Mantén la planificación actual.' };
+  if (monotonia >= 2) return { cargaSemanalUA, promedioDiario, monotonia, strain, categoria: 'Monotonía alta', color: '#FB923C', recomendacion: 'Monotonía elevada (≥ 2): riesgo de sobreentrenamiento y lesión. Varía la intensidad entre sesiones.' };
+  return { cargaSemanalUA, promedioDiario, monotonia, strain, categoria: 'Carga alta',   color: '#F87171', recomendacion: 'Carga semanal muy elevada (> 3000 UA). Considera semanas de descarga cada 3–4 semanas.' };
+}
+
+// ─── ESCALA DE BORG ───────────────────────────────────────────────────────────
+export interface EscalaBorgResult {
+  descripcion:       string;
+  porcentajeFCmax:   number;
+  intensidad:        string;
+  zonaEntrenamiento: string;
+  color:             string;
+  recomendacion:     string;
+}
+
+export function calcularEscalaBorg(
+  rpe:    number,
+  escala: 'borg6_20' | 'cr10',
+): EscalaBorgResult {
+  // Convertir CR10 a Borg 6-20
+  const borgValue = escala === 'cr10' ? Math.min(20, Math.max(6, Math.round(rpe * 1.5 + 6))) : rpe;
+  const pctFCmax  = borgValue * 10;
+
+  const NIVELES = [
+    { min: 6,  max: 9,  desc: 'Muy ligero', intensidad: 'Muy baja',    zona: 'Calentamiento / recuperación activa',     color: '#60A5FA', rec: 'Ideal para calentamiento, enfriamiento o días de recuperación activa.' },
+    { min: 10, max: 11, desc: 'Ligero',     intensidad: 'Baja',        zona: 'Zona 1 — quema de grasas',                color: '#34D399', rec: 'Ritmo conversacional cómodo. Útil para rodajes de recuperación.' },
+    { min: 12, max: 13, desc: 'Moderado',   intensidad: 'Moderada',    zona: 'Zona 2 — aeróbico base',                  color: '#CAFF00', rec: 'Zona aeróbica base. Debe representar el 70–80% de tu volumen semanal.' },
+    { min: 14, max: 15, desc: 'Algo duro',  intensidad: 'Media-alta',  zona: 'Zona 3 — umbral aeróbico',                color: '#FB923C', rec: 'Zona de tempo. Duro pero sostenible 20–60 min. Eleva el umbral aeróbico.' },
+    { min: 16, max: 17, desc: 'Duro',       intensidad: 'Alta',        zona: 'Zona 4 — umbral anaeróbico',              color: '#F87171', rec: 'Zona de intervalos. Máximo 15% del volumen semanal para evitar sobreentrenamiento.' },
+    { min: 18, max: 20, desc: 'Muy duro / Máximo', intensidad: 'Máxima', zona: 'Zona 5 — VO₂ máx / anaeróbico',      color: '#DC2626', rec: 'Zona de sprints y esfuerzo máximo. Limita a 1–2 sesiones semanales con buena recuperación.' },
+  ];
+
+  const nivel = NIVELES.find(n => borgValue >= n.min && borgValue <= n.max) ?? NIVELES[NIVELES.length - 1];
+
+  return {
+    descripcion:       nivel.desc,
+    porcentajeFCmax:   Math.min(100, pctFCmax),
+    intensidad:        nivel.intensidad,
+    zonaEntrenamiento: nivel.zona,
+    color:             nivel.color,
+    recomendacion:     nivel.rec,
+  };
+}
+
+// ─── FC EN REPOSO ─────────────────────────────────────────────────────────────
+export interface FCReposoResult {
+  categoria:        string;
+  nivelFitness:     string;
+  color:            string;
+  fcMaxEstimada:    number;
+  reservaCardiaca:  number;
+  descripcion:      string;
+}
+
+export function calcularFCReposo(
+  fcReposo:  number,
+  edadAnios: number,
+  sexo:      'hombre' | 'mujer',
+): FCReposoResult {
+  const fcMaxEstimada  = 220 - edadAnios;
+  const reservaCardiaca = fcMaxEstimada - fcReposo;
+
+  const tablas = {
+    hombre: [
+      { max: 49,  cat: 'Atleta',    fitness: 'Atleta/Élite',  color: '#34D399', desc: 'FC en reposo de deportista de élite. Indica muy alta eficiencia cardíaca.' },
+      { max: 58,  cat: 'Excelente', fitness: 'Excelente',     color: '#CAFF00', desc: 'Excelente capacidad cardiovascular. Propio de personas muy activas.' },
+      { max: 65,  cat: 'Bueno',     fitness: 'Bueno',         color: '#60A5FA', desc: 'Buena condición cardiovascular. Por encima del promedio.' },
+      { max: 72,  cat: 'Normal',    fitness: 'Normal',        color: '#888',    desc: 'FC en reposo dentro del rango normal para adultos.' },
+      { max: 81,  cat: 'Bajo',      fitness: 'Bajo',          color: '#FB923C', desc: 'FC en reposo elevada. Considera aumentar la actividad aeróbica.' },
+      { max: 999, cat: 'Pobre',     fitness: 'Pobre',         color: '#F87171', desc: 'FC en reposo muy alta. Consulta con tu médico y adopta hábitos más activos.' },
+    ],
+    mujer: [
+      { max: 53,  cat: 'Atleta',    fitness: 'Atleta/Élite',  color: '#34D399', desc: 'FC en reposo de deportista de élite. Indica muy alta eficiencia cardíaca.' },
+      { max: 60,  cat: 'Excelente', fitness: 'Excelente',     color: '#CAFF00', desc: 'Excelente capacidad cardiovascular. Propio de personas muy activas.' },
+      { max: 67,  cat: 'Bueno',     fitness: 'Bueno',         color: '#60A5FA', desc: 'Buena condición cardiovascular. Por encima del promedio.' },
+      { max: 73,  cat: 'Normal',    fitness: 'Normal',        color: '#888',    desc: 'FC en reposo dentro del rango normal para adultos.' },
+      { max: 82,  cat: 'Bajo',      fitness: 'Bajo',          color: '#FB923C', desc: 'FC en reposo elevada. Considera aumentar la actividad aeróbica.' },
+      { max: 999, cat: 'Pobre',     fitness: 'Pobre',         color: '#F87171', desc: 'FC en reposo muy alta. Consulta con tu médico y adopta hábitos más activos.' },
+    ],
+  };
+
+  const fila = tablas[sexo].find(f => fcReposo <= f.max) ?? tablas[sexo][tablas[sexo].length - 1];
+  return {
+    categoria:       fila.cat,
+    nivelFitness:    fila.fitness,
+    color:           fila.color,
+    fcMaxEstimada,
+    reservaCardiaca,
+    descripcion:     fila.desc,
+  };
+}
+
+// ─── ACTIVIDAD FÍSICA OMS ─────────────────────────────────────────────────────
+export type NivelActividad_OMS = 'inactivo' | 'insuficiente' | 'suficiente' | 'optimo';
+
+export interface ActividadFisicaOMSResult {
+  metMinSemana:        number;
+  nivelOMS:            NivelActividad_OMS;
+  nivelNombre:         string;
+  color:               string;
+  cumpleRecomendacion: boolean;
+  equivalenteModera:   number;
+  recomendacion:       string;
+}
+
+export function calcularActividadFisicaOMS(
+  minutosModera:   number,
+  minutosVigoroso: number,
+  diasFuerza:      number,
+): ActividadFisicaOMSResult {
+  const metMinSemana    = minutosModera * 4 + minutosVigoroso * 8;
+  const equivalenteModera = Math.round(metMinSemana / 4);
+  const cumpleAerob     = metMinSemana >= 600; // ≥150 min moderada equivalente
+  const cumpleFuerza    = diasFuerza >= 2;
+  const cumpleRecomendacion = cumpleAerob && cumpleFuerza;
+
+  if (metMinSemana === 0)    return { metMinSemana, nivelOMS: 'inactivo',     nivelNombre: 'Inactivo',              color: '#F87171', cumpleRecomendacion, equivalenteModera, recomendacion: 'No registras actividad física. La OMS recomienda al menos 150 min de actividad moderada y 2 días de fuerza a la semana.' };
+  if (metMinSemana < 600)    return { metMinSemana, nivelOMS: 'insuficiente', nivelNombre: 'Insuficiente',          color: '#FB923C', cumpleRecomendacion, equivalenteModera, recomendacion: 'Actividad insuficiente según la OMS 2020. Aumenta gradualmente hasta alcanzar los 150 min de moderada o 75 min de vigorosa.' };
+  if (metMinSemana < 1200)   return { metMinSemana, nivelOMS: 'suficiente',   nivelNombre: 'Suficiente',            color: '#CAFF00', cumpleRecomendacion, equivalenteModera, recomendacion: `Cumples la recomendación mínima de la OMS${!cumpleFuerza ? ', pero añade ≥2 días de entrenamiento de fuerza' : ''}. ¡Buen trabajo!` };
+  return                            { metMinSemana, nivelOMS: 'optimo',       nivelNombre: 'Óptimo',                color: '#34D399', cumpleRecomendacion, equivalenteModera, recomendacion: `Superas la recomendación de la OMS (≥1200 MET·min/sem)${!cumpleFuerza ? '. Recuerda añadir ≥2 días de fuerza' : ''}. Excelente nivel de actividad.` };
+}
+
+// ─── HIDRATACIÓN DEPORTIVA ────────────────────────────────────────────────────
+export interface HidratacionDeportivaResult {
+  aguaPreEjercicioMl:    number;
+  aguaDuranteML_15min:   number;
+  aguaPostEjercicioMl:   number;
+  totalMl:               number;
+  electrolitosNecesarios: boolean;
+  recomendacion:         string;
+}
+
+export function calcularHidratacionDeportiva(
+  pesoKg:      number,
+  duracionMin: number,
+  intensidad:  'baja' | 'moderada' | 'alta' | 'muy_alta',
+  temperatura: 'fresco' | 'templado' | 'calido' | 'muy_calido',
+): HidratacionDeportivaResult {
+  // Pre: 5 mL/kg
+  const aguaPreEjercicioMl = Math.round(pesoKg * 5);
+
+  // Durante: mL cada 15 min según intensidad + temperatura
+  const matrizDurante: Record<string, Record<string, number>> = {
+    baja:     { fresco: 150, templado: 175, calido: 200, muy_calido: 250 },
+    moderada: { fresco: 175, templado: 200, calido: 250, muy_calido: 300 },
+    alta:     { fresco: 200, templado: 250, calido: 300, muy_calido: 350 },
+    muy_alta: { fresco: 250, templado: 300, calido: 350, muy_calido: 400 },
+  };
+  const aguaDuranteML_15min = matrizDurante[intensidad][temperatura];
+
+  // Post: estimación de pérdida × 1.5
+  const tasaL_h: Record<string, number> = { baja: 0.5, moderada: 0.8, alta: 1.2, muy_alta: 1.8 };
+  const factorTemp: Record<string, number> = { fresco: 0.8, templado: 1.0, calido: 1.2, muy_calido: 1.5 };
+  const perdidaKg = tasaL_h[intensidad] * factorTemp[temperatura] * (duracionMin / 60);
+  const aguaPostEjercicioMl = Math.round(perdidaKg * 1500); // 1.5 L por kg perdido
+
+  const totalMl = aguaPreEjercicioMl + Math.round((duracionMin / 15) * aguaDuranteML_15min) + aguaPostEjercicioMl;
+  const electrolitosNecesarios = duracionMin > 60 && (intensidad === 'moderada' || intensidad === 'alta' || intensidad === 'muy_alta');
+
+  return {
+    aguaPreEjercicioMl,
+    aguaDuranteML_15min,
+    aguaPostEjercicioMl,
+    totalMl,
+    electrolitosNecesarios,
+    recomendacion: electrolitosNecesarios
+      ? 'Con más de 60 min de ejercicio moderado/intenso, repón también electrolitos (sodio, potasio). Una bebida isotónica o agua con sales puede prevenir la hiponatremia.'
+      : 'El agua sola es suficiente para esta sesión. Bebe antes de tener sed y monitoriza el color de tu orina (debe ser amarillo pálido).',
+  };
+}
+
+// ─── RITMO DE NATACIÓN ────────────────────────────────────────────────────────
+export interface RitmoNatacionResult {
+  ritmoPor100m:    string;
+  ritmoPor50m:     string;
+  velocidadMps:    number;
+  velocidadKmh:    number;
+  largosPorMinuto: number;
+  categoria:       string;
+  color:           string;
+}
+
+export function calcularRitmoNatacion(
+  distanciaM: number,
+  tiempoMin:  number,
+  tiempoSeg:  number,
+  largo:      25 | 50,
+): RitmoNatacionResult {
+  const tiempoTotalSeg = tiempoMin * 60 + tiempoSeg;
+  const seg100m        = (tiempoTotalSeg / distanciaM) * 100;
+  const seg50m         = seg100m / 2;
+
+  const fmt = (s: number) => {
+    const m  = Math.floor(s / 60);
+    const ss = Math.round(s % 60).toString().padStart(2, '0');
+    return `${m}:${ss}`;
+  };
+
+  const velocidadMps    = Math.round((distanciaM / tiempoTotalSeg) * 100) / 100;
+  const velocidadKmh    = Math.round(velocidadMps * 3.6 * 10) / 10;
+  const largosPorMinuto = Math.round((distanciaM / largo) / (tiempoTotalSeg / 60) * 10) / 10;
+
+  if (seg100m < 60)  return { ritmoPor100m: `${fmt(seg100m)} /100m`, ritmoPor50m: `${fmt(seg50m)} /50m`, velocidadMps, velocidadKmh, largosPorMinuto, categoria: 'Élite / Competitivo',  color: '#34D399' };
+  if (seg100m < 80)  return { ritmoPor100m: `${fmt(seg100m)} /100m`, ritmoPor50m: `${fmt(seg50m)} /50m`, velocidadMps, velocidadKmh, largosPorMinuto, categoria: 'Competitivo',          color: '#CAFF00' };
+  if (seg100m < 100) return { ritmoPor100m: `${fmt(seg100m)} /100m`, ritmoPor50m: `${fmt(seg50m)} /50m`, velocidadMps, velocidadKmh, largosPorMinuto, categoria: 'Fitness / Avanzado',   color: '#60A5FA' };
+  if (seg100m < 120) return { ritmoPor100m: `${fmt(seg100m)} /100m`, ritmoPor50m: `${fmt(seg50m)} /50m`, velocidadMps, velocidadKmh, largosPorMinuto, categoria: 'Principiante',         color: '#FB923C' };
+  return                    { ritmoPor100m: `${fmt(seg100m)} /100m`, ritmoPor50m: `${fmt(seg50m)} /50m`, velocidadMps, velocidadKmh, largosPorMinuto, categoria: 'Muy principiante',     color: '#F87171' };
+}
+
+// ─── BATCH 7B ────────────────────────────────────────────────────────────────
+
+// ─── FTP CICLISMO ─────────────────────────────────────────────────────────────
+export type ProtocoloFTP = 'test20min' | 'test8min' | 'rampa';
+
+export interface ZonaFTP {
+  nombre:      string;
+  minW:        number;
+  maxW:        number;
+  descripcion: string;
+}
+
+export interface FTPResult {
+  ftpW:        number;
+  wPerKg:      number;
+  nivel:       string;
+  nivelNombre: string;
+  color:       string;
+  zonas:       ZonaFTP[];
+}
+
+export function calcularFTP(potenciaW: number, protocolo: ProtocoloFTP, pesoKg: number): FTPResult {
+  let ftpW: number;
+  if (protocolo === 'test20min')      ftpW = Math.round(potenciaW * 0.95);
+  else if (protocolo === 'test8min')  ftpW = Math.round(potenciaW * 0.90);
+  else                                ftpW = Math.round(potenciaW * 0.75); // rampa
+
+  const wPerKg = Math.round((ftpW / pesoKg) * 100) / 100;
+
+  let nivel: string;
+  let nivelNombre: string;
+  let color: string;
+  if (wPerKg < 2.0)      { nivel = 'sin_categoria'; nivelNombre = 'Sin categoría'; color = '#9CA3AF'; }
+  else if (wPerKg < 2.5) { nivel = 'cat4';          nivelNombre = 'Categoría 4';   color = '#60A5FA'; }
+  else if (wPerKg < 3.0) { nivel = 'cat3';          nivelNombre = 'Categoría 3';   color = '#34D399'; }
+  else if (wPerKg < 3.5) { nivel = 'cat2';          nivelNombre = 'Categoría 2';   color = '#CAFF00'; }
+  else if (wPerKg < 4.0) { nivel = 'cat1';          nivelNombre = 'Categoría 1';   color = '#FB923C'; }
+  else if (wPerKg < 4.5) { nivel = 'pro';           nivelNombre = 'Pro';           color = '#F87171'; }
+  else                   { nivel = 'elite';         nivelNombre = 'Elite';         color = '#DC2626'; }
+
+  const zonas: ZonaFTP[] = [
+    { nombre: 'Z1 — Recuperación activa', minW: 0,                    maxW: Math.round(ftpW * 0.55), descripcion: 'Intensidad muy baja. Ideal para días de recuperación.' },
+    { nombre: 'Z2 — Base aeróbica',       minW: Math.round(ftpW * 0.56), maxW: Math.round(ftpW * 0.75), descripcion: 'Resistencia aeróbica. Base de entrenamiento de fondo.' },
+    { nombre: 'Z3 — Tempo',               minW: Math.round(ftpW * 0.76), maxW: Math.round(ftpW * 0.90), descripcion: 'Esfuerzo moderado-alto. Mejora la eficiencia aeróbica.' },
+    { nombre: 'Z4 — Umbral',              minW: Math.round(ftpW * 0.91), maxW: Math.round(ftpW * 1.05), descripcion: 'Entrenamiento al umbral de lactato. Alta intensidad sostenida.' },
+    { nombre: 'Z5 — VO₂ máx',            minW: Math.round(ftpW * 1.06), maxW: Math.round(ftpW * 1.20), descripcion: 'Intervalos de alta intensidad. Mejora el VO₂ máximo.' },
+    { nombre: 'Z6 — Anaeróbico',          minW: Math.round(ftpW * 1.21), maxW: 9999,                    descripcion: 'Esfuerzo máximo y supramáximo. Sprints y potencia pico.' },
+  ];
+
+  return { ftpW, wPerKg, nivel, nivelNombre, color, zonas };
+}
+
+// ─── CADENCIA DE CARRERA ──────────────────────────────────────────────────────
+export interface CadenciaCarreraResult {
+  cadencia:          number;
+  categoria:         string;
+  color:             string;
+  longitudZancadaCm: number | null;
+  eficiencia:        string;
+  recomendacion:     string;
+}
+
+export function calcularCadenciaCarrera(pasosPorMinuto: number, velocidadKmh?: number): CadenciaCarreraResult {
+  let categoria: string;
+  let color: string;
+  let eficiencia: string;
+  let recomendacion: string;
+
+  if (pasosPorMinuto < 160) {
+    categoria = 'Muy baja';  color = '#F87171'; eficiencia = 'Ineficiente';
+    recomendacion = 'Cadencia muy baja. Aumenta gradualmente 5 ppm por semana. Una cadencia baja incrementa el riesgo de lesiones y el impacto en articulaciones.';
+  } else if (pasosPorMinuto < 170) {
+    categoria = 'Baja';      color = '#FB923C'; eficiencia = 'Por mejorar';
+    recomendacion = 'Cadencia algo baja. Intenta aumentar la frecuencia de zancada acortando el paso y aterrizando bajo el centro de masa.';
+  } else if (pasosPorMinuto < 180) {
+    categoria = 'Aceptable'; color = '#CAFF00'; eficiencia = 'Aceptable';
+    recomendacion = 'Cadencia aceptable. Estás cerca del rango óptimo. Trabaja en la postura y el aterrizaje para llegar a 180 ppm.';
+  } else if (pasosPorMinuto <= 185) {
+    categoria = 'Óptima';   color = '#34D399'; eficiencia = 'Óptima';
+    recomendacion = 'Cadencia óptima según estándares de biomecánica (Jack Daniels). Minimiza el impacto y maximiza la eficiencia energética.';
+  } else {
+    categoria = 'Alta';     color = '#60A5FA'; eficiencia = 'Elevada';
+    recomendacion = 'Cadencia alta. Puede ser normal en corredores élite a ritmos rápidos. Verifica que la zancada no sea excesivamente corta.';
+  }
+
+  let longitudZancadaCm: number | null = null;
+  if (velocidadKmh !== undefined && velocidadKmh > 0) {
+    const velocidadMps = velocidadKmh / 3.6;
+    longitudZancadaCm  = Math.round((velocidadMps / (pasosPorMinuto / 60)) * 100);
+  }
+
+  return { cadencia: pasosPorMinuto, categoria, color, longitudZancadaCm, eficiencia, recomendacion };
+}
+
+// ─── PREDICTOR DE CARRERA (RIEGEL) ────────────────────────────────────────────
+export interface PredictorCarreraResult {
+  tiempoPredichoStr: string;
+  tiempoPredichoSeg: number;
+  ritmoPredichoStr:  string;
+  velocidadKmh:      number;
+  formula:           string;
+}
+
+export function calcularPredictorCarrera(
+  tiempoMin:     number,
+  tiempoSeg:     number,
+  distanciaKm1:  number,
+  distanciaKm2:  number,
+): PredictorCarreraResult {
+  const t1Seg = tiempoMin * 60 + tiempoSeg;
+  const t2Seg = t1Seg * Math.pow(distanciaKm2 / distanciaKm1, 1.06);
+
+  const h  = Math.floor(t2Seg / 3600);
+  const m  = Math.floor((t2Seg % 3600) / 60);
+  const s  = Math.round(t2Seg % 60);
+  const hh = String(h).padStart(2, '0');
+  const mm = String(m).padStart(2, '0');
+  const ss = String(s).padStart(2, '0');
+  const tiempoPredichoStr = h > 0 ? `${hh}:${mm}:${ss}` : `${mm}:${ss}`;
+
+  const ritmoSegPorKm = t2Seg / distanciaKm2;
+  const ritmoM        = Math.floor(ritmoSegPorKm / 60);
+  const ritmoS        = Math.round(ritmoSegPorKm % 60);
+  const ritmoPredichoStr = `${ritmoM}:${String(ritmoS).padStart(2, '0')} min/km`;
+
+  const velocidadKmh = Math.round((distanciaKm2 / (t2Seg / 3600)) * 10) / 10;
+
+  return {
+    tiempoPredichoStr,
+    tiempoPredichoSeg: Math.round(t2Seg),
+    ritmoPredichoStr,
+    velocidadKmh,
+    formula: 'Fórmula de Riegel: t2 = t1 × (d2/d1)^1.06',
+  };
+}
+
+// ─── VITAMINA D SOLAR ─────────────────────────────────────────────────────────
+export interface VitaminaDResult {
+  minutosNecesarios: number;
+  vitaminaDUI:       number;
+  recomendacion:     string;
+  advertencia:       string | null;
+}
+
+export function calcularVitaminaDSolar(
+  tipoPiel:   1 | 2 | 3 | 4 | 5 | 6,
+  latitud:    'tropical' | 'subtropical' | 'templado' | 'frio',
+  estacion:   'verano' | 'primavera' | 'otono' | 'invierno',
+  superficie: 'brazos' | 'brazos_piernas' | 'bikini',
+): VitaminaDResult {
+  const baseMin: Record<number, number> = { 1: 10, 2: 14, 3: 20, 4: 28, 5: 35, 6: 40 };
+  let minutos = baseMin[tipoPiel];
+
+  const latMult: Record<string, number>  = { tropical: 1.0, subtropical: 1.2, templado: 1.5, frio: 2.0 };
+  const estMult: Record<string, number>  = { verano: 1.0, primavera: 1.5, otono: 2.0, invierno: 4.0 };
+  const supMult: Record<string, number>  = { bikini: 1.0, brazos_piernas: 1.4, brazos: 2.0 };
+
+  minutos = Math.round(minutos * latMult[latitud] * estMult[estacion] * supMult[superficie]);
+
+  let advertencia: string | null = null;
+  if (estacion === 'invierno' && latitud === 'frio') {
+    advertencia = 'En invierno a latitudes altas, la síntesis de vitamina D solar es prácticamente imposible. Considera suplementación.';
+    minutos = 0;
+  }
+
+  const supUI: Record<string, number> = { bikini: 3000, brazos_piernas: 2000, brazos: 1000 };
+  const vitaminaDUI = advertencia ? 0 : supUI[superficie];
+
+  const recomendacion = advertencia
+    ? 'Consulta a tu médico sobre suplementación con vitamina D3 (800–2000 UI/día es el rango habitual).'
+    : `Exponte al sol ${minutos} min en las horas de mayor radiación (10–15h). No apliques protector solar durante ese tiempo. Evita quemaduras.`;
+
+  return { minutosNecesarios: minutos, vitaminaDUI, recomendacion, advertencia };
+}
+
+// ─── PROTEÍNA POR COMIDA ──────────────────────────────────────────────────────
+export interface DistribucionComida {
+  comida:   number;
+  gramos:   number;
+  ejemplos: string;
+}
+
+export interface ProteinaPorComidaResult {
+  totalDiarioG:     number;
+  porComidaG:       number;
+  maximoAbsorcionG: number;
+  distribucion:     DistribucionComida[];
+  recomendacion:    string;
+}
+
+export function calcularProteinaPorComida(
+  pesoKg:     number,
+  objetivo:   'mantenimiento' | 'hipertrofia' | 'perdida_grasa',
+  comidasDia: number,
+): ProteinaPorComidaResult {
+  const grPorKg: Record<string, number> = { mantenimiento: 1.6, hipertrofia: 2.0, perdida_grasa: 2.4 };
+  const totalDiarioG     = Math.round(pesoKg * grPorKg[objetivo]);
+  const porComidaG       = Math.round(totalDiarioG / comidasDia);
+  const maximoAbsorcionG = Math.round(pesoKg * 0.4);
+
+  const ejemplosPorComida = [
+    'Huevos, yogur griego, cottage cheese',
+    'Batido de proteína, frutos secos con proteína',
+    'Pollo, pavo, atún, legumbres',
+    'Requesón, jamón, queso fresco',
+    'Salmón, ternera, claras de huevo',
+    'Caseína, leche, queso (antes de dormir)',
+  ];
+
+  const distribucion: DistribucionComida[] = Array.from({ length: comidasDia }, (_, i) => ({
+    comida:   i + 1,
+    gramos:   porComidaG,
+    ejemplos: ejemplosPorComida[i % ejemplosPorComida.length],
+  }));
+
+  const recomendacion = `Con ${comidasDia} comidas al día distribuye ${porComidaG} g de proteína por comida. El máximo aprovechable por toma es ~${maximoAbsorcionG} g (0.4 g/kg), por lo que ${porComidaG > maximoAbsorcionG ? 'considera aumentar el número de comidas.' : 'tu distribución es óptima.'}`;
+
+  return { totalDiarioG, porComidaG, maximoAbsorcionG, distribucion, recomendacion };
+}
+
+// ─── ÍNDICE GLUCÉMICO DE COMIDA ───────────────────────────────────────────────
+export interface AlimentoIG {
+  nombre: string;
+  ig:     number;
+  carbsG: number;
+}
+
+export interface IGComidaResult {
+  igPonderado:    number;
+  cargaGlucemica: number;
+  categoria:      string;
+  color:          string;
+  recomendacion:  string;
+}
+
+export function calcularIGComida(alimentos: AlimentoIG[]): IGComidaResult {
+  const totalCarbs = alimentos.reduce((s, a) => s + a.carbsG, 0);
+  if (totalCarbs === 0) {
+    return { igPonderado: 0, cargaGlucemica: 0, categoria: 'Sin carbohidratos', color: '#9CA3AF', recomendacion: 'No se detectaron carbohidratos en la comida.' };
+  }
+
+  const igPonderado    = Math.round(alimentos.reduce((s, a) => s + a.ig * a.carbsG, 0) / totalCarbs);
+  const cargaGlucemica = Math.round((igPonderado * totalCarbs) / 100);
+
+  const catIG  = igPonderado < 55 ? 'IG bajo' : igPonderado < 70 ? 'IG medio' : 'IG alto';
+  const catCG  = cargaGlucemica < 10 ? 'CG baja' : cargaGlucemica < 20 ? 'CG media' : 'CG alta';
+  const color  = cargaGlucemica >= 20 ? '#F87171' : igPonderado >= 70 ? '#FB923C' : '#34D399';
+
+  const recomendacion = cargaGlucemica >= 20
+    ? 'Carga glucémica alta. Reduce los carbohidratos refinados o añade fibra, proteína y grasa para modular la respuesta glucémica.'
+    : cargaGlucemica >= 10
+      ? 'Carga glucémica moderada. Combina con proteína y grasa para reducir el impacto sobre la glucosa.'
+      : 'Carga glucémica baja. Esta combinación produce una respuesta glucémica controlada.';
+
+  return { igPonderado, cargaGlucemica, categoria: `${catIG} · ${catCG}`, color, recomendacion };
+}
+
+// ─── RATIO OMEGA-3/6 ──────────────────────────────────────────────────────────
+export interface OmegaRatioResult {
+  ratio:             number;
+  categoriaRatio:    string;
+  color:             string;
+  recomendacion:     string;
+  omega3Recomendado: number;
+  deficit:           number | null;
+}
+
+export function calcularOmegaRatio(omega3G: number, omega6G: number): OmegaRatioResult {
+  const omega3Recomendado = 1.6;
+  const deficit = omega3G < omega3Recomendado ? Math.round((omega3Recomendado - omega3G) * 10) / 10 : null;
+
+  if (omega3G === 0) {
+    return { ratio: 0, categoriaRatio: 'Sin omega-3', color: '#F87171', recomendacion: 'No se detectó omega-3 en tu dieta. Consume pescado azul, nueces o semillas de chía. Considera suplementación con omega-3 EPA/DHA.', omega3Recomendado, deficit: omega3Recomendado };
+  }
+
+  const ratio = Math.round((omega6G / omega3G) * 10) / 10;
+
+  let categoriaRatio: string;
+  let color: string;
+  let recomendacion: string;
+  if (ratio <= 4)       { categoriaRatio = 'Óptimo';      color = '#34D399'; recomendacion = 'Ratio omega-6/omega-3 óptimo. Tu dieta favorece un perfil antiinflamatorio y protege la salud cardiovascular.'; }
+  else if (ratio <= 7)  { categoriaRatio = 'Aceptable';   color = '#CAFF00'; recomendacion = 'Ratio algo elevado. Aumenta el consumo de omega-3 (salmón, sardinas, nueces, chía) para alcanzar la proporción ideal 4:1.'; }
+  else if (ratio <= 15) { categoriaRatio = 'Elevado';     color = '#FB923C'; recomendacion = 'Ratio elevado, típico de la dieta occidental. Reduce aceites vegetales (girasol, maíz) y aumenta omega-3 de pescado azul o suplementos EPA/DHA.'; }
+  else                  { categoriaRatio = 'Muy elevado'; color = '#F87171'; recomendacion = 'Ratio muy elevado (15–20:1 típico de dieta occidental). Asociado a inflamación crónica y mayor riesgo cardiovascular. Revisa tu dieta con un nutricionista.'; }
+
+  return { ratio, categoriaRatio, color, recomendacion, omega3Recomendado, deficit };
+}
+
+// ─── RECUPERACIÓN MUSCULAR ────────────────────────────────────────────────────
+export type IntensidadEntrenamiento = 'ligero' | 'moderado' | 'intenso' | 'muy_intenso';
+
+export interface RecuperacionMuscularResult {
+  horasRecuperacion:   number;
+  diasRecuperacion:    number;
+  estrategias:         string[];
+  senalesPorRecuperar: string[];
+  recomendacion:       string;
+}
+
+export function calcularRecuperacionMuscular(
+  grupoMuscular:    string,
+  volumenSeries:    number,
+  intensidad:       IntensidadEntrenamiento,
+  nivelExperiencia: 'principiante' | 'intermedio' | 'avanzado',
+): RecuperacionMuscularResult {
+  const baseHoras: Record<IntensidadEntrenamiento, number> = {
+    ligero: 30, moderado: 60, intenso: 84, muy_intenso: 108,
+  };
+  let horas = baseHoras[intensidad];
+
+  if (nivelExperiencia === 'principiante') horas += 24;
+  else if (nivelExperiencia === 'avanzado') horas -= 12;
+
+  if (volumenSeries > 20) horas += 24;
+
+  const gruposGrandes = ['piernas', 'gluteos', 'espalda'];
+  if (gruposGrandes.includes(grupoMuscular)) horas += 12;
+
+  horas = Math.max(24, horas);
+  const diasRecuperacion = Math.round((horas / 24) * 10) / 10;
+
+  const estrategias = [
+    'Duerme 7–9 horas por noche (90% de la recuperación ocurre durante el sueño)',
+    'Consume 20–40 g de proteína dentro de las 2 horas post-entrenamiento',
+    'Hidrátate bien: repón 500 mL por cada 0.5 kg perdido',
+    'Aplica frío local (10–15 min) en las primeras 24 h si hay dolor intenso',
+    'Foam rolling y estiramientos suaves a las 24–48 h',
+  ];
+
+  const senalesPorRecuperar = [
+    'Dolor muscular al tacto o al movimiento (DOMS)',
+    'Reducción del rendimiento en la siguiente sesión',
+    'Sensación de pesadez o rigidez muscular',
+    'Hinchazón o temperatura local elevada',
+  ];
+
+  const recomendacion = `Para ${grupoMuscular} con intensidad ${intensidad} y nivel ${nivelExperiencia}, necesitas aproximadamente ${horas} horas (${diasRecuperacion} días) antes de volver a entrenar el mismo grupo.`;
+
+  return { horasRecuperacion: horas, diasRecuperacion, estrategias, senalesPorRecuperar, recomendacion };
+}
+
+// ─── IMC PEDIÁTRICO (OMS) ─────────────────────────────────────────────────────
+export interface IMCInfantilResult {
+  imc:           number;
+  percentil:     number;
+  categoria:     string;
+  color:         string;
+  zScore:        number;
+  recomendacion: string;
+}
+
+// Percentil 85 y 95 por edad (años) y sexo — OMS Growth Reference 5–19 años
+const P85_NINO: Record<number, [number, number]> = {
+  2:[18.1,19.5], 3:[17.6,19.0], 4:[17.3,18.8], 5:[17.1,18.7], 6:[17.1,18.9],
+  7:[17.3,19.2], 8:[17.7,19.8], 9:[18.2,20.5], 10:[18.7,21.2], 11:[19.4,22.1],
+  12:[20.1,23.0], 13:[20.8,23.9], 14:[21.5,24.7], 15:[22.1,25.4], 16:[22.6,25.9],
+  17:[23.0,26.4], 18:[23.3,26.7], 19:[23.5,26.9],
+};
+const P85_NINA: Record<number, [number, number]> = {
+  2:[18.0,19.4], 3:[17.5,18.9], 4:[17.2,18.7], 5:[17.1,18.8], 6:[17.2,19.1],
+  7:[17.5,19.7], 8:[18.0,20.5], 9:[18.6,21.4], 10:[19.3,22.3], 11:[20.1,23.2],
+  12:[20.9,24.1], 13:[21.6,24.9], 14:[22.2,25.6], 15:[22.7,26.1], 16:[23.1,26.5],
+  17:[23.4,26.8], 18:[23.6,27.0], 19:[23.7,27.1],
+};
+
+export function calcularIMCInfantil(
+  pesoKg:    number,
+  alturaCm:  number,
+  edadMeses: number,
+  sexo:      'nino' | 'nina',
+): IMCInfantilResult {
+  const alturaM   = alturaCm / 100;
+  const imc       = Math.round((pesoKg / (alturaM * alturaM)) * 10) / 10;
+  const edadAnios = Math.floor(edadMeses / 12);
+
+  const tabla   = sexo === 'nino' ? P85_NINO : P85_NINA;
+  const edadKey = Math.min(Math.max(edadAnios, 2), 19);
+  const umbral  = tabla[edadKey];
+
+  if (!umbral) {
+    return { imc, percentil: 50, categoria: 'Edad fuera de rango', color: '#9CA3AF', zScore: 0, recomendacion: 'Esta calculadora es válida para edades entre 2 y 19 años.' };
+  }
+
+  const [p85, p95] = umbral;
+  const p5  = p85 - 4;
+  const p50 = p85 - 2;
+
+  let percentil: number;
+  let zScore: number;
+  let categoria: string;
+  let color: string;
+  let recomendacion: string;
+
+  if (imc < p5) {
+    percentil = 3; zScore = -2.1; categoria = 'Bajo peso'; color = '#60A5FA';
+    recomendacion = 'El IMC está por debajo del percentil 5. Consulta al pediatra para descartar déficit nutricional o patología subyacente.';
+  } else if (imc < p85) {
+    const fraccion = (imc - p5) / (p85 - p5);
+    percentil = Math.round(5 + fraccion * 80);
+    zScore    = Math.round(((imc - p50) / (p85 - p50)) * 10) / 10;
+    categoria = 'Peso normal'; color = '#34D399';
+    recomendacion = 'IMC dentro del rango normal para su edad. Mantén una alimentación equilibrada y actividad física regular.';
+  } else if (imc < p95) {
+    percentil = 90; zScore = 1.3; categoria = 'Sobrepeso'; color = '#FB923C';
+    recomendacion = 'IMC entre el percentil 85 y 95 (sobrepeso). Promueve hábitos alimentarios saludables y actividad física. Consulta al pediatra.';
+  } else {
+    percentil = 97; zScore = 2.1; categoria = 'Obesidad'; color = '#F87171';
+    recomendacion = 'IMC por encima del percentil 95 (obesidad). Es importante consultar al pediatra para una evaluación y plan de acción personalizado.';
+  }
+
+  return { imc, percentil, categoria, color, zScore, recomendacion };
+}
+
+// ─── EDAD BIOLÓGICA ───────────────────────────────────────────────────────────
+export interface RespuestasEdadBiologica {
+  actividadFisica: 'sedentario' | 'moderado' | 'activo' | 'muy_activo';
+  tabaco:          'nunca' | 'exfumador' | 'fumador';
+  alcohol:         'nunca' | 'moderado' | 'exceso';
+  sueno:           'menos6' | 'entre6_8' | 'mas8';
+  estres:          'bajo' | 'moderado' | 'alto' | 'muy_alto';
+  dieta:           'mala' | 'regular' | 'buena' | 'excelente';
+  imc:             'bajo' | 'normal' | 'sobrepeso' | 'obesidad';
+  checkups:        boolean;
+}
+
+export interface EdadBiologicaResult {
+  edadBiologica:    number;
+  diferencia:       number;
+  categoria:        string;
+  color:            string;
+  factoresPositivos: string[];
+  factoresNegativos: string[];
+  recomendacion:    string;
+}
+
+export function calcularEdadBiologica(
+  edadCronologica: number,
+  respuestas:      RespuestasEdadBiologica,
+): EdadBiologicaResult {
+  let ajuste = 0;
+  const factoresPositivos: string[] = [];
+  const factoresNegativos: string[] = [];
+
+  if (respuestas.actividadFisica === 'muy_activo')  { ajuste -= 5; factoresPositivos.push('Actividad física muy alta (−5 años)'); }
+  else if (respuestas.actividadFisica === 'activo') { ajuste -= 3; factoresPositivos.push('Actividad física activa (−3 años)'); }
+  else if (respuestas.actividadFisica === 'moderado') { ajuste -= 1; factoresPositivos.push('Actividad física moderada (−1 año)'); }
+  else { ajuste += 4; factoresNegativos.push('Sedentarismo (+4 años)'); }
+
+  if (respuestas.tabaco === 'fumador')       { ajuste += 7; factoresNegativos.push('Fumador activo (+7 años)'); }
+  else if (respuestas.tabaco === 'exfumador') { ajuste += 2; factoresNegativos.push('Ex fumador (+2 años)'); }
+  else { factoresPositivos.push('No fumador (0)'); }
+
+  if (respuestas.alcohol === 'exceso') { ajuste += 4; factoresNegativos.push('Consumo excesivo de alcohol (+4 años)'); }
+
+  if (respuestas.sueno === 'menos6')    { ajuste += 3; factoresNegativos.push('Sueño insuficiente <6h (+3 años)'); }
+  else if (respuestas.sueno === 'mas8') { ajuste += 2; factoresNegativos.push('Sueño excesivo >8h (+2 años)'); }
+  else { factoresPositivos.push('Sueño óptimo 6–8 h (0)'); }
+
+  if (respuestas.estres === 'muy_alto') { ajuste += 5; factoresNegativos.push('Estrés muy alto (+5 años)'); }
+  else if (respuestas.estres === 'alto') { ajuste += 3; factoresNegativos.push('Estrés alto (+3 años)'); }
+  else if (respuestas.estres === 'bajo') { ajuste -= 1; factoresPositivos.push('Estrés bajo (−1 año)'); }
+
+  if (respuestas.dieta === 'excelente')   { ajuste -= 3; factoresPositivos.push('Dieta excelente (−3 años)'); }
+  else if (respuestas.dieta === 'buena') { ajuste -= 1; factoresPositivos.push('Buena dieta (−1 año)'); }
+  else if (respuestas.dieta === 'regular') { ajuste += 1; factoresNegativos.push('Dieta regular (+1 año)'); }
+  else { ajuste += 4; factoresNegativos.push('Mala dieta (+4 años)'); }
+
+  if (respuestas.imc === 'obesidad')      { ajuste += 5; factoresNegativos.push('Obesidad (+5 años)'); }
+  else if (respuestas.imc === 'sobrepeso') { ajuste += 2; factoresNegativos.push('Sobrepeso (+2 años)'); }
+  else if (respuestas.imc === 'bajo')     { ajuste += 1; factoresNegativos.push('Bajo peso (+1 año)'); }
+  else { factoresPositivos.push('Peso normal (0)'); }
+
+  if (respuestas.checkups) { ajuste -= 1; factoresPositivos.push('Chequeos médicos regulares (−1 año)'); }
+  else { ajuste += 1; factoresNegativos.push('Sin chequeos médicos regulares (+1 año)'); }
+
+  const edadBiologica = Math.max(18, edadCronologica + ajuste);
+  const diferencia    = edadBiologica - edadCronologica;
+
+  let categoria: string;
+  let color: string;
+  if (diferencia <= -5)     { categoria = 'Muy joven biológicamente';  color = '#34D399'; }
+  else if (diferencia <= -2) { categoria = 'Joven biológicamente';      color = '#CAFF00'; }
+  else if (diferencia <= 2)  { categoria = 'Acorde a tu edad';          color = '#60A5FA'; }
+  else if (diferencia <= 5)  { categoria = 'Algo mayor biológicamente'; color = '#FB923C'; }
+  else                       { categoria = 'Significativamente mayor';  color = '#F87171'; }
+
+  const recomendacion = diferencia > 2
+    ? 'Tu edad biológica es mayor que tu edad cronológica. Los factores negativos aceleran el envejecimiento celular. Pequeños cambios de hábitos tienen un gran impacto.'
+    : diferencia < -2
+      ? 'Excelente. Tu estilo de vida ralentiza el envejecimiento biológico. Mantén tus hábitos positivos y los chequeos médicos periódicos.'
+      : 'Tu edad biológica está alineada con tu edad cronológica. Hay margen de mejora trabajando en los factores negativos detectados.';
+
+  return { edadBiologica, diferencia, categoria, color, factoresPositivos, factoresNegativos, recomendacion };
+}

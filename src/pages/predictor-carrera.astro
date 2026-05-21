@@ -1,0 +1,75 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import PredictorCarreraCalculator from '../components/calculators/PredictorCarreraCalculator';
+
+const faqs = [
+  { q: '¿Qué es la fórmula de Riegel para predecir tiempos?', a: 'Peter Riegel publicó en 1981 en American Scientist la fórmula t2 = t1 × (d2/d1)^1.06. El exponente 1.06 refleja que la velocidad disminuye ligeramente al aumentar la distancia, ya que el cuerpo no puede mantener la misma intensidad relativa en distancias más largas.' },
+  { q: '¿Con qué precisión predice la fórmula de Riegel?', a: 'La fórmula tiene una precisión de ±3–5% para distancias similares. Es más precisa cuando la distancia origen y destino no difieren en más de 3–4 veces. Predicciones de 5K a maratón tienen mayor margen de error porque el ritmo de carrera cambia con la distancia.' },
+  { q: '¿Puedo usar el predictor para cualquier distancia?', a: 'Sí, la calculadora acepta distancias personalizadas. Funciona mejor con distancias de entre 1 km y 100 km. Para ultramaratones, la fatiga acumulada y las condiciones del terreno hacen que la predicción sea menos fiable.' },
+  { q: '¿Por qué mi tiempo real puede diferir del predicho?', a: 'Varios factores afectan la predicción: el nivel de entrenamiento específico para la distancia objetivo, el desnivel del recorrido, las condiciones climáticas, la estrategia de carrera y el estado de forma del día. La fórmula asume condiciones planas y óptimas.' },
+  { q: '¿Qué tiempo de 10K necesito para hacer una maratón en 4 horas?', a: 'Según la fórmula de Riegel, un tiempo de 10K de aproximadamente 53:30 min equivale a una maratón en torno a 4 horas. Sin embargo, necesitarás un programa de entrenamiento específico para maratón (volumen, tiradas largas) para ejecutar esa predicción.' },
+];
+---
+
+<CalculatorLayout
+  title="Predictor de Carrera — Fórmula de Riegel para Tiempos | CalcFit"
+  description="Predice tu tiempo en cualquier distancia usando la fórmula de Riegel (exponente 1.06). Convierte tu tiempo de 5K a maratón. Gratis y sin registro."
+  calculatorName="Predictor de Carrera"
+  breadcrumbSlug="predictor-carrera"
+  ogImage="/og/predictor-carrera.jpg"
+  keywords="predictor tiempo carrera, fórmula Riegel running, predecir tiempo maratón, calculadora pace running, tiempo 10K a maratón"
+  faqs={faqs}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Predictor<br><span style="color: var(--acid);">de Carrera</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Predice tu tiempo objetivo en cualquier distancia a partir de un tiempo conocido. Basado en la fórmula de Riegel (1981): t2 = t1 × (d2/d1)^1.06.
+    </p>
+  </div>
+
+  <PredictorCarreraCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">La fórmula de Riegel: cómo funciona</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      Peter Riegel, ingeniero y corredor, publicó en 1981 que los tiempos de carrera siguen una ley de potencia: t2 = t1 × (d2/d1)^1.06. El exponente 1.06 (mayor que 1) captura el fenómeno de que la velocidad disminuye progresivamente al aumentar la distancia. Esto se debe al agotamiento glucogénico, la acumulación de lactato y el aumento del coste energético con la fatiga.
+    </p>
+
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px;">
+      <thead>
+        <tr style="background: var(--ink); color: var(--acid);">
+          <th style="padding: 10px 14px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Tiempo 10K</th>
+          <th style="padding: 10px 14px; text-align: left;">Media maratón</th>
+          <th style="padding: 10px 14px; text-align: left;">Maratón (predicho)</th>
+        </tr>
+      </thead>
+      <tbody>
+        {[
+          ['40:00', '1:28:30', '3:05:00'],
+          ['45:00', '1:40:00', '3:28:00'],
+          ['50:00', '1:51:30', '3:51:00'],
+          ['55:00', '2:03:00', '4:15:00'],
+          ['60:00', '2:14:30', '4:38:00'],
+        ].map(([t10, tm, tmar], i) => (
+          <tr style={`background: ${i % 2 === 0 ? 'white' : '#f9f6f0'};`}>
+            <td style="padding: 10px 14px; font-family: var(--font-mono); font-size: 12px;">{t10}</td>
+            <td style="padding: 10px 14px;">{tm}</td>
+            <td style="padding: 10px 14px; color: var(--muted);">{tmar}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {faqs.map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

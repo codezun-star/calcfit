@@ -1,0 +1,81 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import UmbralAnaerobicoCalculator from '../components/calculators/UmbralAnaerobicoCalculator';
+---
+
+<CalculatorLayout
+  title="Calculadora de Umbral Anaeróbico — FC Umbral en ppm | CalcFit"
+  description="Estima tu umbral anaeróbico (FC en ppm) con la fórmula de Karvonen al 87% FC máx. Entrena en la zona correcta para mejorar el rendimiento. Gratis."
+  calculatorName="Umbral Anaeróbico"
+  breadcrumbSlug="umbral-anaerobico"
+  ogImage="/og/umbral-anaerobico.jpg"
+  keywords="calculadora umbral anaeróbico, umbral láctico frecuencia cardíaca, entrenar por zonas, karvonen umbral, FC umbral anaeróbico"
+  faqs={[
+    { q: '¿Qué es el umbral anaeróbico?', a: 'El umbral anaeróbico (también llamado umbral láctico o umbral de lactato) es la intensidad de ejercicio a partir de la cual el lactato se acumula en sangre más rápido de lo que el cuerpo puede eliminarlo. Por encima de este umbral el esfuerzo no puede sostenerse mucho tiempo. Se sitúa aproximadamente al 85–90% de la FC máxima.' },
+    { q: '¿Cómo se calcula el umbral anaeróbico con la FC?', a: 'La estimación más práctica usa la fórmula de Karvonen: FC umbral = FC reposo + 0.87 × (FC máx − FC reposo). Esto corresponde al 87% de la reserva cardíaca, que en la mayoría de adultos equivale al 85–92% de la FC máxima. El test de lactato en laboratorio es el estándar de oro.' },
+    { q: '¿Cómo sé si estoy entrenando en el umbral?', a: 'En el umbral anaeróbico puedes mantener una conversación con esfuerzo, pronunciando pocas palabras entre respiraciones. La respiración es rápida pero no jadeante. En la escala de Borg 6-20, corresponde a 14–16 (algo duro a duro). El tiempo máximo sostenible a esta intensidad es 20–60 minutos para un atleta entrenado.' },
+    { q: '¿Cómo mejoro mi umbral anaeróbico?', a: 'El entrenamiento de tempo o umbral es el más eficaz: series de 20–40 minutos al ritmo umbral, o intervalos de 8–12 minutos al 90–95% FCumbral con pausa activa. El volumen en zona 2 (aeróbico base) también eleva el umbral a largo plazo. Mejoras del 5–15% son esperables en una temporada de 12–16 semanas.' },
+    { q: '¿El umbral anaeróbico cambia con el entrenamiento?', a: 'Sí. El entrenamiento aeróbico y de umbral elevan tanto el VO₂ máx como el porcentaje al que se alcanza el umbral. Un corredor bien entrenado puede sostener el 85–90% de su VO₂ máx en el umbral, mientras que uno sedentario lo alcanza al 50–60%. Esto explica por qué los atletas de élite de resistencia pueden mantener ritmos muy altos durante horas.' },
+  ]}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Umbral<br><span style="color: var(--acid);">Anaeróbico</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Estima tu frecuencia cardíaca en el umbral anaeróbico (ppm) con la fórmula de Karvonen. Conoce la zona exacta donde entrenar para mejorar tu resistencia.
+    </p>
+  </div>
+
+  <UmbralAnaerobicoCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cómo se calcula el umbral anaeróbico?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      Se usa la fórmula de Karvonen al 87% de la reserva cardíaca: <strong>FC umbral = FC reposo + 0.87 × (FC máx − FC reposo)</strong>. Si no conoces tu FC máxima, la calculadora estima con 220 − edad. El rango de umbral se amplía ±5 ppm para cubrir la variabilidad individual. El método Karvonen ha sido validado contra el test de lactato en múltiples estudios (r=0.79–0.88).
+    </p>
+
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 320px;">
+        <thead>
+          <tr style="border-bottom: 2px solid var(--border);">
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Zona</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">% FC máx</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Uso</th>
+          </tr>
+        </thead>
+        <tbody>
+          {[
+            { zona: 'Recuperación',       pct: '60–70%', uso: 'Rodajes suaves, calentamiento' },
+            { zona: 'Aeróbico base',      pct: '70–80%', uso: 'Volumen base, quema de grasas' },
+            { zona: 'Umbral aeróbico',    pct: '80–87%', uso: 'Steady state, mejora de base' },
+            { zona: 'Umbral anaeróbico',  pct: '87–93%', uso: 'Tempo, intervalos, mejora umbral' },
+            { zona: 'VO₂ máx',           pct: '93–100%', uso: 'Series cortas, alta intensidad' },
+          ].map(row => (
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 10px 0; font-size: 13px; color: var(--ink); font-weight: 600;">{row.zona}</td>
+              <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.pct}</td>
+              <td style="padding: 10px 0; font-size: 12px; color: var(--muted);">{row.uso}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {[
+        { q: '¿Qué es el umbral anaeróbico?', a: 'El umbral anaeróbico (también llamado umbral láctico o umbral de lactato) es la intensidad de ejercicio a partir de la cual el lactato se acumula en sangre más rápido de lo que el cuerpo puede eliminarlo. Por encima de este umbral el esfuerzo no puede sostenerse mucho tiempo. Se sitúa aproximadamente al 85–90% de la FC máxima.' },
+        { q: '¿Cómo se calcula el umbral anaeróbico con la FC?', a: 'La estimación más práctica usa la fórmula de Karvonen: FC umbral = FC reposo + 0.87 × (FC máx − FC reposo). Esto corresponde al 87% de la reserva cardíaca, que en la mayoría de adultos equivale al 85–92% de la FC máxima. El test de lactato en laboratorio es el estándar de oro.' },
+        { q: '¿Cómo sé si estoy entrenando en el umbral?', a: 'En el umbral anaeróbico puedes mantener una conversación con esfuerzo, pronunciando pocas palabras entre respiraciones. La respiración es rápida pero no jadeante. En la escala de Borg 6-20, corresponde a 14–16 (algo duro a duro). El tiempo máximo sostenible a esta intensidad es 20–60 minutos para un atleta entrenado.' },
+        { q: '¿Cómo mejoro mi umbral anaeróbico?', a: 'El entrenamiento de tempo o umbral es el más eficaz: series de 20–40 minutos al ritmo umbral, o intervalos de 8–12 minutos al 90–95% FCumbral con pausa activa. El volumen en zona 2 (aeróbico base) también eleva el umbral a largo plazo. Mejoras del 5–15% son esperables en una temporada de 12–16 semanas.' },
+        { q: '¿El umbral anaeróbico cambia con el entrenamiento?', a: 'Sí. El entrenamiento aeróbico y de umbral elevan tanto el VO₂ máx como el porcentaje al que se alcanza el umbral. Un corredor bien entrenado puede sostener el 85–90% de su VO₂ máx en el umbral, mientras que uno sedentario lo alcanza al 50–60%. Esto explica por qué los atletas de élite de resistencia pueden mantener ritmos muy altos durante horas.' },
+      ].map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>
