@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Button from '../ui/Button';
 import Input from '../ui/Input';
 import { calcularPredictorCarrera } from '../../lib/calculators';
+import ShareButtons from '../ui/ShareButtons';
 
 const DISTANCIAS = [
   { label: '5 km',      km: 5 },
@@ -121,6 +122,10 @@ export default function PredictorCarreraCalculator() {
           <div style={{ marginTop: '16px', borderTop: '1px solid #333', paddingTop: '12px' }}>
             <p style={{ fontSize: '11px', color: '#888', fontFamily: 'var(--font-mono)' }}>{resultado.formula}</p>
           </div>
+          <ShareButtons
+            text={`Mi predicción de carrera: ${resultado.tiempoPredichoStr} (ritmo ${resultado.ritmoPredichoStr}/km). Predice el tuyo en CalcFit:`}
+            url="https://www.calcfit.com/predictor-carrera"
+          />
         </div>
       )}
     </div>

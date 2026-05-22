@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Button from '../ui/Button';
 import Input from '../ui/Input';
 import { calcularEdadBiologica, type RespuestasEdadBiologica } from '../../lib/calculators';
+import ShareButtons from '../ui/ShareButtons';
 
 type ActFisica = RespuestasEdadBiologica['actividadFisica'];
 type Tabaco    = RespuestasEdadBiologica['tabaco'];
@@ -189,6 +190,10 @@ export default function EdadBiologicaCalculator() {
           <div style={{ background: '#f9f6f0', border: '1px solid var(--border)', padding: '16px' }}>
             <p style={{ fontSize: '13px', color: 'var(--ink)', lineHeight: 1.6 }}>{resultado.recomendacion}</p>
           </div>
+          <ShareButtons
+            text={`Mi edad biológica es ${resultado.edadBiologica} años (${resultado.diferencia > 0 ? '+' : ''}${resultado.diferencia} vs mi edad real). Calcula la tuya en CalcFit:`}
+            url="https://www.calcfit.com/edad-biologica"
+          />
         </div>
       )}
     </div>

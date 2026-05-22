@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Button from '../ui/Button';
 import { calcularVitaminaDSolar } from '../../lib/calculators';
+import ShareButtons from '../ui/ShareButtons';
 
 type TipoPiel = 1 | 2 | 3 | 4 | 5 | 6;
 type Latitud = 'tropical' | 'subtropical' | 'templado' | 'frio';
@@ -127,6 +128,10 @@ export default function VitaminaDCalculator() {
           <div style={{ background: '#f9f6f0', border: '1px solid var(--border)', padding: '16px', marginTop: '16px' }}>
             <p style={{ fontSize: '13px', color: 'var(--ink)', lineHeight: 1.6 }}>{resultado.recomendacion}</p>
           </div>
+          <ShareButtons
+            text={`Necesito ${resultado.minutosNecesarios} min de sol para sintetizar vitamina D (~${resultado.vitaminaDUI} UI). Calcula el tuyo en CalcFit:`}
+            url="https://www.calcfit.com/vitamina-d"
+          />
         </div>
       )}
     </div>

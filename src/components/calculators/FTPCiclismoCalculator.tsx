@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Button from '../ui/Button';
 import Input from '../ui/Input';
 import { calcularFTP, type ProtocoloFTP } from '../../lib/calculators';
+import ShareButtons from '../ui/ShareButtons';
 
 export default function FTPCiclismoCalculator() {
   const [potencia, setPotencia] = useState('');
@@ -92,6 +93,10 @@ export default function FTPCiclismoCalculator() {
               </div>
             ))}
           </div>
+          <ShareButtons
+            text={`Mi FTP es ${resultado.ftpW} W (${resultado.wPerKg} W/kg) — nivel ${resultado.nivelNombre}. Calcula el tuyo en CalcFit:`}
+            url="https://www.calcfit.com/ftp-ciclismo"
+          />
         </div>
       )}
     </div>

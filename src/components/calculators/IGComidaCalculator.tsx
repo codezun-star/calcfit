@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Button from '../ui/Button';
 import Input from '../ui/Input';
 import { calcularIGComida, type AlimentoIG } from '../../lib/calculators';
+import ShareButtons from '../ui/ShareButtons';
 
 const ALIMENTOS_COMUNES: AlimentoIG[] = [
   { nombre: 'Pan blanco',     ig: 75, carbsG: 0 },
@@ -128,6 +129,10 @@ export default function IGComidaCalculator() {
           <div style={{ background: '#f9f6f0', border: '1px solid var(--border)', padding: '16px', marginTop: '1px' }}>
             <p style={{ fontSize: '13px', color: 'var(--ink)', lineHeight: 1.6 }}>{resultado.recomendacion}</p>
           </div>
+          <ShareButtons
+            text={`El IG ponderado de mi comida es ${resultado.igPonderado} — ${resultado.categoria}. Calcula el tuyo en CalcFit:`}
+            url="https://www.calcfit.com/ig-comida"
+          />
         </div>
       )}
     </div>

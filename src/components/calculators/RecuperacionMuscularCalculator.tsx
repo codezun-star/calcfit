@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Button from '../ui/Button';
 import { calcularRecuperacionMuscular, type IntensidadEntrenamiento } from '../../lib/calculators';
+import ShareButtons from '../ui/ShareButtons';
 
 type NivelExp = 'principiante' | 'intermedio' | 'avanzado';
 
@@ -118,6 +119,10 @@ export default function RecuperacionMuscularCalculator() {
           <div style={{ background: '#f9f6f0', border: '1px solid var(--border)', padding: '16px' }}>
             <p style={{ fontSize: '13px', color: 'var(--ink)', lineHeight: 1.6 }}>{resultado.recomendacion}</p>
           </div>
+          <ShareButtons
+            text={`Mi recuperación muscular estimada: ${resultado.horasRecuperacion}h (${resultado.diasRecuperacion} días). Calcula la tuya en CalcFit:`}
+            url="https://www.calcfit.com/recuperacion-muscular"
+          />
         </div>
       )}
     </div>

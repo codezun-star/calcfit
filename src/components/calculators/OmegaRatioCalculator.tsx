@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Button from '../ui/Button';
 import Input from '../ui/Input';
 import { calcularOmegaRatio } from '../../lib/calculators';
+import ShareButtons from '../ui/ShareButtons';
 
 export default function OmegaRatioCalculator() {
   const [omega3, setOmega3]   = useState('');
@@ -88,6 +89,10 @@ export default function OmegaRatioCalculator() {
               }} />
             </div>
           </div>
+          <ShareButtons
+            text={`Mi ratio omega-6/omega-3 es ${resultado.ratio}:1 — ${resultado.categoriaRatio}. Calcula el tuyo en CalcFit:`}
+            url="https://www.calcfit.com/omega-ratio"
+          />
         </div>
       )}
     </div>

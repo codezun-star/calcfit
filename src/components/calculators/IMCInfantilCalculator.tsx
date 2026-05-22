@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Button from '../ui/Button';
 import Input from '../ui/Input';
 import { calcularIMCInfantil } from '../../lib/calculators';
+import ShareButtons from '../ui/ShareButtons';
 
 export default function IMCInfantilCalculator() {
   const [peso, setPeso]         = useState('');
@@ -111,6 +112,10 @@ export default function IMCInfantilCalculator() {
               <p style={{ fontSize: '13px', color: 'var(--ink)', lineHeight: 1.6 }}>{resultado.recomendacion}</p>
             </div>
           </div>
+          <ShareButtons
+            text={`IMC pediátrico: ${resultado.imc} kg/m² — percentil ${resultado.percentil} (${resultado.categoria}). Calculado con CalcFit:`}
+            url="https://www.calcfit.com/imc-infantil"
+          />
         </div>
       )}
     </div>

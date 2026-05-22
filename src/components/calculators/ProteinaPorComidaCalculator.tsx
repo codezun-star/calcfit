@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Button from '../ui/Button';
 import Input from '../ui/Input';
 import { calcularProteinaPorComida } from '../../lib/calculators';
+import ShareButtons from '../ui/ShareButtons';
 
 type Objetivo = 'mantenimiento' | 'hipertrofia' | 'perdida_grasa';
 
@@ -95,6 +96,10 @@ export default function ProteinaPorComidaCalculator() {
           <div style={{ background: '#f9f6f0', border: '1px solid var(--border)', padding: '16px' }}>
             <p style={{ fontSize: '13px', color: 'var(--ink)', lineHeight: 1.6 }}>{resultado.recomendacion}</p>
           </div>
+          <ShareButtons
+            text={`Mi distribución de proteína: ${resultado.totalDiarioG} g/día, ${resultado.porComidaG} g por comida. Calcula la tuya en CalcFit:`}
+            url="https://www.calcfit.com/proteina-por-comida"
+          />
         </div>
       )}
     </div>
