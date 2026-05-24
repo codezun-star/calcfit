@@ -133,7 +133,9 @@ En fondos `var(--ink)` (#0F0E0D) y similares, usar mínimo `#888` para texto sec
 
 ### Logo y favicon
 
-El logo (`public/logo.svg`) y el favicon (`public/favicon.svg`) son **idénticos**: texto "Calc**Fit**" en fondo cream (`#F5F1E8`), "Calc" en ink (`#0F0E0D`) y "Fit" en acid (`#CAFF00`). ViewBox `160×48`, fuente Segoe UI 30px bold, sin imagen/cruz.
+El **logo** (`public/logo.svg`) es texto "Calc**Fit**" en fondo cream (`#F5F1E8`), "Calc" en ink y "Fit" en acid. ViewBox `160×48`, fuente Segoe UI 30px bold.
+
+El **favicon** (`public/favicon.svg`) es una cruz `+` acid (`#CAFF00`) sobre fondo ink (`#0F0E0D`). ViewBox `32×32` — dos rectángulos perpendiculares de 6px de ancho.
 
 - `Navbar.astro` — usa `<img src="/logo.svg" height="44">` (renderiza ~27px de texto)
 - `index.astro` — mismo `<img>` en el nav inline de la homepage

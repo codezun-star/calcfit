@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 48">
-  <rect width="160" height="48" fill="#F5F1E8" rx="4"/>
-  <text x="80" y="34" text-anchor="middle" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="30" font-weight="700" letter-spacing="-0.5" fill="#0F0E0D">Calc<tspan fill="#CAFF00">Fit</tspan></text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" fill="#0F0E0D"/>
+  <rect x="13" y="2" width="6" height="28" fill="#CAFF00"/>
+  <rect x="2" y="13" width="28" height="6" fill="#CAFF00"/>
 </svg>
