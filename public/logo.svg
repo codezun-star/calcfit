@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 220">
-  <rect x="0" y="0" width="680" height="220" fill="#FFFFFF" rx="10"/>
+  <rect x="0" y="0" width="680" height="220" fill="#F5F1E8" rx="10"/>
   <rect x="0" y="155" width="680" height="65" fill="#0F0E0D"/>
   <rect x="0" y="210" width="680" height="10" fill="#0F0E0D"/>
-  <text x="340" y="118" text-anchor="middle" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="72" font-weight="700" letter-spacing="-2" fill="#0F0E0D">Calc<tspan fill="#22C55E">Fit</tspan></text>
+  <text x="340" y="118" text-anchor="middle" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="72" font-weight="700" letter-spacing="-2" fill="#0F0E0D">Calc<tspan fill="#CAFF00">Fit</tspan></text>
   <text x="340" y="186" text-anchor="middle" font-family="'Segoe UI', Arial, Helvetica, sans-serif" font-size="11.5" font-weight="400" letter-spacing="4" fill="#888888">FITNESS · NUTRICIÓN · EMBARAZO · FECHAS</text>
 </svg>
