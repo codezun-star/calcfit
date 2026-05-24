@@ -1,4 +1,4 @@
-# CalcFit — Contexto del Proyecto
+﻿# CalcFit — Contexto del Proyecto
 
 ## Qué es este proyecto
 
@@ -62,86 +62,8 @@ calcfit-astro/
 │   │   │   ├── HistoryTable.tsx
 │   │   │   ├── ShareButtons.tsx
 │   │   │   └── Badge.tsx              ← popular | new | essential
-│   │   └── calculators/               ← 79 componentes React
-│   │       ├── IMCCalculator.tsx
-│   │       ├── CaloriasCalculator.tsx
-│   │       ├── PesoIdealCalculator.tsx
-│   │       ├── GrasaCalculator.tsx
-│   │       ├── FCMCalculator.tsx
-│   │       ├── AguaCalculator.tsx
-│   │       ├── OvulacionCalculator.tsx
-│   │       ├── EmbarazoCalculator.tsx
-│   │       ├── PartoCalculator.tsx
-│   │       ├── EdadCalculator.tsx
-│   │       ├── DiasFechasCalculator.tsx
-│   │       ├── MacroCalculator.tsx
-│   │       ├── ProteinasCalculator.tsx
-│   │       ├── SuenoCalculator.tsx
-│   │       ├── CinturaCaderaCalculator.tsx
-│   │       ├── CaloriasEjercicioCalculator.tsx
-│   │       ├── AlcoholemiaCalculator.tsx
-│   │       ├── PresionArterialCalculator.tsx
-│   │       ├── VO2MaxCalculator.tsx
-│   │       ├── FFMICalculator.tsx
-│   │       ├── CicloMenstrualCalculator.tsx
-│   │       ├── RitmoCarreraCalculator.tsx
-│   │       ├── CinturaEstaturaCalculator.tsx
-│   │       ├── AyunoCalculator.tsx
-│   │       ├── MetabolismoBasalCalculator.tsx
-│   │       ├── UnRepeticionMaximaCalculator.tsx
-│   │       ├── CaloriasCaminandoCalculator.tsx
-│   │       ├── DeficitCaloricoCalculator.tsx
-│   │       ├── ComplexionCorporalCalculator.tsx
-│   │       ├── ResistenciaInsulinaCalculator.tsx
-│   │       ├── SomatotipoCalculator.tsx
-│   │       ├── RiesgoCardiovascularCalculator.tsx
-│   │       ├── IndiceAdipositadCalculator.tsx
-│   │       ├── VolumenEntrenamientoCalculator.tsx
-│   │       ├── GlucosaCalculator.tsx
-│   │       ├── ColesterolCalculator.tsx
-│   │       ├── CaloriasCiclismoCalculator.tsx
-│   │       ├── FuerzaRelativaCalculator.tsx
-│   │       ├── MasaMuscularCalculator.tsx
-│   │       ├── CaloriasNatacionCalculator.tsx
-│   │       ├── TestCooperCalculator.tsx
-│   │       ├── RecuperacionCardiacaCalculator.tsx
-│   │       ├── TemperaturaCorporalCalculator.tsx
-│   │       ├── CargaGlucemicaCalculator.tsx
-│   │       ├── PesoEmbarazoCalculator.tsx
-│   │       ├── PresionPulsoCalculator.tsx
-│   │       ├── TallaPredichCalculator.tsx
-│   │       ├── TestRockportCalculator.tsx
-│   │       ├── CafeinaCalculator.tsx
-│   │       ├── VAMCalculator.tsx
-│   │       ├── IndiceMasaGrasaCalculator.tsx
-│   │       ├── CreatinaCalculator.tsx
-│   │       ├── RitmoMaratonCalculator.tsx
-│   │       ├── RiesgoDiabetesCalculator.tsx
-│   │       ├── IndiceConicidadCalculator.tsx
-│   │       ├── CaloriasBedidasCalculator.tsx
-│   │       ├── TasaSudoracionCalculator.tsx
-│   │       ├── MasaOseaCalculator.tsx
-│   │       ├── SindromeMetabolicoCalculator.tsx
-│   │       ├── PotenciaSaltoCalculator.tsx
-│   │       ├── GrasaVisceralCalculator.tsx
-│   │       ├── OximetriaCalculator.tsx
-│   │       ├── UmbralAnaerobicoCalculator.tsx
-│   │       ├── CargaEntrenamientoCalculator.tsx
-│   │       ├── EscalaBorgCalculator.tsx
-│   │       ├── FCReposoCalculator.tsx
-│   │       ├── ActividadFisicaCalculator.tsx
-│   │       ├── HidratacionDeportivaCalculator.tsx
-│   │       ├── RitmoNatacionCalculator.tsx
-│   │       ├── FTPCiclismoCalculator.tsx
-│   │       ├── CadenciaCarreraCalculator.tsx
-│   │       ├── PredictorCarreraCalculator.tsx
-│   │       ├── RecuperacionMuscularCalculator.tsx
-│   │       ├── VitaminaDCalculator.tsx
-│   │       ├── ProteinaPorComidaCalculator.tsx
-│   │       ├── IGComidaCalculator.tsx
-│   │       ├── OmegaRatioCalculator.tsx
-│   │       ├── IMCInfantilCalculator.tsx
-│   │       ├── EdadBiologicaCalculator.tsx
+│   │   └── calculators/               ← 79 componentes React (ver calculadoras.md)
+│   │       ├── [NombreCalculator].tsx ← un archivo por calculadora
 │   │       ├── GaugeIMC.tsx           ← gauge SVG semicircular animado
 │   │       ├── ZonasCardiaca.tsx      ← barras horizontales de zonas cardíacas
 │   │       └── BarrasCaloria.tsx      ← barras verticales déficit/mant/superávit
@@ -152,85 +74,7 @@ calcfit-astro/
 │   │   └── useHistory.ts              ← hook de historial en localStorage
 │   └── pages/
 │       ├── index.astro                ← homepage con las 79 calculadoras
-│       ├── imc.astro
-│       ├── calorias-diarias.astro
-│       ├── peso-ideal.astro
-│       ├── grasa-corporal.astro
-│       ├── frecuencia-cardiaca.astro
-│       ├── agua-diaria.astro
-│       ├── ovulacion.astro
-│       ├── semana-embarazo.astro
-│       ├── fecha-parto.astro
-│       ├── edad.astro
-│       ├── dias-fechas.astro
-│       ├── macronutrientes.astro
-│       ├── proteinas.astro
-│       ├── sueno.astro
-│       ├── cintura-cadera.astro
-│       ├── calorias-ejercicio.astro
-│       ├── alcoholemia.astro
-│       ├── presion-arterial.astro
-│       ├── vo2-maximo.astro
-│       ├── ffmi.astro
-│       ├── ciclo-menstrual.astro
-│       ├── ritmo-carrera.astro
-│       ├── cintura-estatura.astro
-│       ├── ayuno-intermitente.astro
-│       ├── metabolismo-basal.astro
-│       ├── 1rm.astro
-│       ├── calorias-caminando.astro
-│       ├── deficit-calorico.astro
-│       ├── complexion-corporal.astro
-│       ├── resistencia-insulina.astro
-│       ├── somatotipo.astro
-│       ├── riesgo-cardiovascular.astro
-│       ├── indice-adiposidad.astro
-│       ├── volumen-entrenamiento.astro
-│       ├── glucosa.astro
-│       ├── colesterol.astro
-│       ├── calorias-ciclismo.astro
-│       ├── fuerza-relativa.astro
-│       ├── masa-muscular.astro
-│       ├── calorias-natacion.astro
-│       ├── test-cooper.astro
-│       ├── recuperacion-cardiaca.astro
-│       ├── temperatura-corporal.astro
-│       ├── carga-glucemica.astro
-│       ├── peso-embarazo.astro
-│       ├── presion-pulso.astro
-│       ├── talla-predicha.astro
-│       ├── test-rockport.astro
-│       ├── cafeina.astro
-│       ├── vam.astro
-│       ├── indice-masa-grasa.astro
-│       ├── creatina.astro
-│       ├── ritmo-maraton.astro
-│       ├── riesgo-diabetes.astro
-│       ├── indice-conicidad.astro
-│       ├── calorias-bebidas.astro
-│       ├── tasa-sudoracion.astro
-│       ├── masa-osea.astro
-│       ├── sindrome-metabolico.astro
-│       ├── potencia-salto.astro
-│       ├── grasa-visceral.astro
-│       ├── oximetria.astro
-│       ├── umbral-anaerobico.astro
-│       ├── carga-entrenamiento.astro
-│       ├── escala-borg.astro
-│       ├── fc-reposo.astro
-│       ├── actividad-fisica.astro
-│       ├── hidratacion-deportiva.astro
-│       ├── ritmo-natacion.astro
-│       ├── ftp-ciclismo.astro
-│       ├── cadencia-carrera.astro
-│       ├── predictor-carrera.astro
-│       ├── recuperacion-muscular.astro
-│       ├── vitamina-d.astro
-│       ├── proteina-por-comida.astro
-│       ├── ig-comida.astro
-│       ├── omega-ratio.astro
-│       ├── imc-infantil.astro
-│       ├── edad-biologica.astro
+│       ├── [slug].astro               ← 79 páginas calculadora (ver calculadoras.md)
 │       ├── sobre-nosotros.astro       ← página estática
 │       ├── contacto.astro             ← solo email, sin formulario
 │       ├── aviso-legal.astro          ← LSSI-CE
@@ -289,10 +133,11 @@ En fondos `var(--ink)` (#0F0E0D) y similares, usar mínimo `#888` para texto sec
 
 ### Logo y favicon
 
-El logo es una **cruz "+"** SVG con los rectángulos en `fill="#CAFF00"`. Se usa en:
-- `public/favicon.svg` — fondo `#0F0E0D`, cruz acid 32×32. Proporciones alineadas al navbar: brazos en y=2/x=2, grosor 6px, largo 28px.
-- `Navbar.astro` — cruz SVG 18×18 inline junto al texto "CalcFit"
-- `Footer.astro` — cruz SVG 15×15 inline junto al texto "CalcFit"
+El logo (`public/logo.svg`) y el favicon (`public/favicon.svg`) son **idénticos**: texto "Calc**Fit**" en fondo cream (`#F5F1E8`), "Calc" en ink (`#0F0E0D`) y "Fit" en acid (`#CAFF00`). ViewBox `160×48`, fuente Segoe UI 30px bold, sin imagen/cruz.
+
+- `Navbar.astro` — usa `<img src="/logo.svg" height="44">` (renderiza ~27px de texto)
+- `index.astro` — mismo `<img>` en el nav inline de la homepage
+- `public/favicon.ico` — fallback para Safari iOS
 
 **Soporte favicon SVG:** Chrome 80+, Firefox 82+, Edge 80+, Safari 12+ ✓ — Safari iOS ✗ (usa el `.ico` de fallback). Si el favicon no aparece en el browser durante desarrollo, es caché — hacer Ctrl+Shift+R o abrir `/favicon.svg` directamente.
 
@@ -390,284 +235,9 @@ Cada página de calculadora sigue este patrón exacto (incluye los props SEO obl
 
 ### Funciones disponibles
 
-```typescript
-// Calculadoras originales (14)
-calcularIMC(pesoKg, alturaCm)
-  → { imc, categoria, rango }
-calcularTDEE({ pesoKg, alturaCm, edadAnios, sexo, actividad })
-  → { tmb, tdee, deficit, superavit }
-calcularPesoIdeal(alturaCm, sexo)
-  → { devine, robinson, miller, hamwi, broca, promedio }
-calcularGrasaCorporal({ sexo, alturaCm, cuelloCm, cinturaCm, caderaCm? })
-  → { porcentaje, categoria }
-calcularFCM(edad)
-  → { fcm, zonas[] }
-calcularAguaDiaria({ pesoKg, actividad, clima })
-  → { litros, vasos }
-calcularOvulacion({ ultimaMenstruacion, duracionCiclo })
-  → { ovulacion, inicioFertil, finFertil, diasFertiles[] }
-calcularSemanaEmbarazo(ultimaMenstruacion)
-  → { semanas, dias, trimestre, fechaParto }
-calcularFechaParto(ultimaMenstruacion)
-  → { fechaParto, semanasRestantes }
-calcularEdad(fechaNacimiento)
-  → { anios, meses, dias, totalDias, proximoCumple }
-calcularDiasFechas(fechaInicio, fechaFin)
-  → { dias, semanas, meses, anios }
-calcularMacronutrientes({ pesoKg, objetivo, actividad })
-  → { proteinas, carbohidratos, grasas, calorias }
-calcularProteinasDiarias({ pesoKg, nivel })
-  → { minimo, optimo }
-calcularSueno(horaDespertar)
-  → CicloSueno[]  (6 opciones de horario)
+Las 79 funciones están documentadas en [calculadoras.md](../calculadoras.md) — columna "Función en calculators.ts". La firma completa (parámetros y tipo de retorno) vive en el propio archivo `src/lib/calculators.ts` con TypeScript estricto.
 
-// Calculadoras batch 2 (10)
-calcularCinturaCadera({ sexo, cinturaCm, caderaCm })
-  → { ratio, categoria, riesgo }
-calcularCaloriasEjercicio({ pesoKg, duracionMin, actividad })
-  → { calorias, met, actividadNombre }
-  // también exporta: METS (constante con todos los tipos de actividad y sus MET)
-calcularAlcoholemia({ pesoKg, sexo, bebidasCerveza, bebidasVino, bebidasCopa, horasTranscurridas })
-  → { bac, estado, aptoConducir, horasHastaCero }
-calcularPresionArterial(sistolica, diastolica)
-  → { categoria, riesgo, recomendacion, color }
-calcularVO2Max(edad, sexo, fcReposo, fcMaxima?)
-  → { vo2max, categoria, nivel }
-calcularFFMI(pesoKg, alturaCm, grasaPorcentaje)
-  → { ffmi, ffmiNormalizado, masaMagraKg, categoria, nivel }
-calcularCicloMenstrual(ultimaMenstruacion, duracionCiclo, duracionPeriodo)
-  → { proximaMenstruacion, fases, diaActual, faseActual }
-calcularRitmoCarrera(distanciaKm, minutosTotal)
-  → { ritmoMinPorKm, ritmoMinPorMilla, velocidadKmh, tiempos[] }
-calcularCinturaEstatura(cinturaCm, alturaCm)
-  → { ratio, categoria, riesgo, recomendacion }
-calcularAyunoIntermitente({ protocolo, horaInicioComida })
-  → { horaFinComida, horaInicioAyuno, horaFinAyuno, horasAyuno, horasComida, beneficios }
-
-// Calculadoras batch 3 (10 nuevas — 2026-05-16)
-calcularMetabolismoBasal(pesoKg, alturaCm, edadAnios, sexo)
-  → { mifflin, harris, schofield, promedio, categoria }
-calcularUnaRepeticionMaxima(pesoKg, reps)
-  → { brzycki, epley, lander, promedio, tabla[] }
-  // tabla: [{ porcentaje, peso, reps }] — del 100% al 50%
-calcularCaloriasCaminando(pesoKg, duracionMin, velocidad)
-  → { calorias, km, pasos, velocidadNombre }
-  // también exporta: VELOCIDADES_CAMINATA (constante con 5 velocidades y sus METs)
-calcularDeficitCalorico(tdee, pesoActualKg, pesoObjetivoKg, objetivo)
-  → { caloriasDiarias, deficitDiario, perdidaSemanal, tiempoSemanas, tiempoMeses, esSeguaro }
-  // objetivo: '0.25' | '0.5' | '0.75' | '1.0' (kg por semana)
-calcularComplexionCorporal(alturaCm, munecaCm, sexo)
-  → { tipo, tipoNombre, indice, descripcion }
-  // tipo: 'pequena' | 'mediana' | 'grande'
-calcularHOMAIR(glucosaAyunas, insulinaAyunas)
-  → { homaIR, categoria, riesgo, descripcion, color }
-  // riesgo: 'sensible' | 'normal' | 'limite' | 'resistente'
-calcularSomatotipo(pesoKg, alturaCm, munecaCm, sexo)
-  → { tipo, tipoNombre, descripcion, puntaje, recomendaciones }
-  // tipo: 'ectomorfo' | 'mesomorfo' | 'endomorfo' | 'ecto_meso' | 'endo_meso'
-calcularRiesgoCardiovascular({ edad, sexo, sistolica, imc, fumador, diabetes, antecedentes })
-  → { riesgo10Anios, categoria, categoriaNombre, color, recomendacion }
-  // basado en modelo Framingham sin laboratorio
-calcularBAI(alturaCm, caderaCm, sexo)
-  → { bai, categoria, riesgo, color }
-  // BAI = (cadera / altura^1.5) - 18
-calcularVolumenEntrenamiento(nivel, diasPorSemana)
-  → { grupos[], totalSetsSemana, recomendacion }
-  // nivel: 'principiante' | 'intermedio' | 'avanzado'
-  // grupos[]: { nombre, mev, mrv, recomendado } por grupo muscular (10 grupos)
-
-// Calculadoras batch 4 (5 nuevas — 2026-05-16)
-calcularGlucosa(valor, tipo)
-  → { valor, categoria, riesgo, color, recomendacion }
-  // tipo: 'ayunas' | 'postprandial' | 'hba1c' — criterios ADA 2024
-  // riesgo: 'normal' | 'prediabetes' | 'diabetes'
-calcularColesterol(total, hdl, trigliceridos, sexo)
-  → { ldl, noHdl, ratioTotal, clasificacion: { total, hdl, ldl, trigliceridos }, riesgo, riesgoNombre, color, recomendacion }
-  // Fórmula Friedewald: LDL = Total - HDL - TG/5. Válida con TG < 400 mg/dL
-  // clasificacion[].{valor, categoria, color} — NCEP ATP III
-calcularCaloriasCiclismo(pesoKg, duracionMin, intensidad)
-  → { calorias, km, met, intensidadNombre }
-  // intensidad: 'muy_lento' | 'lento' | 'moderado' | 'rapido' | 'muy_rapido'
-  // también exporta: INTENSIDADES_CICLISMO (constante con MET por velocidad)
-calcularFuerzaRelativa(pesoCorpoalKg, pesoLevantadoKg, ejercicio, sexo)
-  → { ratio, nivel, nivelNombre, color, descripcion, estandares[] }
-  // ejercicio: 'press_banca' | 'sentadilla' | 'peso_muerto' | 'press_militar'
-  // nivel: 'principiante' | 'novato' | 'intermedio' | 'avanzado' | 'elite'
-calcularMasaMuscular(pesoKg, alturaCm, edadAnios, sexo)
-  → { masaMuscularKg, smi, porcentaje, categoria, nivel, color, descripcion }
-  // Fórmula Lee 2000 validada contra DEXA (r=0.94)
-  // nivel: 'bajo' | 'normal' | 'alto' — umbrales EWGSOP2
-
-// Calculadoras batch 5 (10 nuevas — 2026-05-18)
-export const ESTILOS_NATACION: Record<EstiloNatacion, {met, nombre}>
-calcularCaloriasNatacion(pesoKg, duracionMin, estilo)
-  → { calorias, met, estiloNombre }
-  // estilo: 'recreacional' | 'crawl_lento' | 'crawl_rapido' | 'pecho' | 'espalda' | 'mariposa'
-calcularTestCooper(distanciaMetros, sexo, edad)
-  → { vo2max, categoria, color }
-  // Fórmula Cooper 1968: VO₂ = (distancia − 504.9) / 44.73
-calcularRecuperacionCardiaca(fcPico, fc1Min)
-  → { diferencia, categoria, riesgo, color, recomendacion }
-  // riesgo: 'excelente' | 'normal' | 'bajo' | 'anormal' — Cole et al. NEJM 1999
-calcularTemperaturaCorporal(valor, unidad)
-  → { valorC, valorF, categoria, riesgo, color, recomendacion }
-  // unidad: 'c' | 'f' — riesgo: 'hipotermia_grave'...'hiperpirexia'
-calcularCargaGlucemica(indiceGlucemico, carbohidratosG)
-  → { cargaGlucemica, categoria, categoriaNombre, color, recomendacion }
-  // baja < 10, media 10–19, alta ≥ 20
-calcularPesoEmbarazo(pesoPreKg, alturaCm, semanaActual, pesoActualKg?)
-  → { imc, categoriaImc, gananciaTotalMin, gananciaTotalMax, gananciaSemanaMin, gananciaSemanaMax, gananciaAcumuladaMin, gananciaAcumuladaMax, dentroRango }
-  // Guías IOM 2009 por IMC pre-gestacional
-calcularPresionPulso(sistolica, diastolica)
-  → { pp, categoria, riesgo, color, recomendacion }
-  // riesgo: 'muy_baja' | 'baja' | 'normal' | 'elevada' | 'muy_elevada'
-calcularTallaPredicha(tallaPadreCm, tallaMadreCm, sexo)
-  → { tallaPredichaCm, rangoMinCm, rangoMaxCm, tallaPredichaPies, tallaPredichaPulg }
-  // Fórmula mid-parental height (Tanner) — rango ±8.5 cm (95% CI)
-calcularTestRockport(tiempoMin, fcFinal, pesoKg, edadAnios, sexo)
-  → { vo2max, categoria, color }
-  // Fórmula Kline 1987 — r = 0.88 validación
-calcularCafeina(pesoKg, consumoMg)
-  → { dosisPorKg, nivelConsumo, nivelNombre, color, recomendacion, equivalencias[], maxDiario }
-  // nivelConsumo: 'bajo' | 'moderado' | 'alto' | 'excesivo' — FDA/EFSA/ISSN
-
-// Calculadoras batch 6 (10 nuevas — 2026-05-20)
-calcularVAM(vo2max)
-  → { vam, zonas[] }
-  // vam (km/h) = vo2max / 3.5
-  // zonas[]: { nombre, porcentajeMin, porcentajeMax, descripcion } — 5 zonas (Recuperación 60% a Supramáximo >100%)
-
-calcularFMIConSexo(pesoKg, alturaCm, grasaPorcentaje, sexo)
-  → { masaGrasaKg, fmi, categoria, riesgo, color, descripcion }
-  // FMI = masaGrasaKg / altura_m²
-  // Hombres: <3 muy bajo, 3-6 atlético, 6-12 saludable, 12-18 sobrepeso, >18 obesidad
-  // Mujeres: <8 muy bajo, 8-13 atlético, 13-20 saludable, 20-28 sobrepeso, >28 obesidad
-
-calcularCreatina(pesoKg, protocolo)
-  → { faseCarga, mantenimiento, diasSaturacion, pesoCreatinaTotal, recomendacion }
-  // protocolo: 'carga' | 'directo'
-  // Carga: 0.3 g/kg/día × 5 días (4 tomas), saturación 5-7 días
-  // Directo: 5 g/día, saturación ~28 días
-
-calcularRitmoMaraton(horasObj, minutosObj, segundosObj)
-  → { ritmoSegKm, ritmoStr, ritmoMinMilla, velocidadKmh, splits[], tiempoMediaMaraton, tiempoTotal }
-  // splits[]: { km, tiempoAcumulado, ritmo } — puntos: 5, 10, 15, 20, 21.1, 25, 30, 35, 40, 42.195
-
-calcularFINDRISC(resp, sexo)
-  → { puntuacion, categoria, probabilidad, color, riesgo, recomendacion }
-  // resp: RespuestasFINDRISC (8 preguntas)
-  // Score 0-7 bajo (1%), 8-11 ligeramente elevado (4%), 12-14 moderado (17%), 15-20 alto (33%), >20 muy alto (50%)
-
-calcularIndiceConicidad(cinturaCm, pesoKg, alturaCm, sexo)
-  → { ic, categoria, riesgo, color, recomendacion }
-  // IC = cinturaCm / (0.109 × √(pesoKg / altura_m)) — Valdez 1991
-  // Hombres: <1.25 bajo, 1.25-1.35 moderado, >1.35 alto
-  // Mujeres: <1.18 bajo, 1.18-1.28 moderado, >1.28 alto
-
-calcularCaloriasBebidas(cervezas, vinos, licores, cocktails)
-  → { totalKcal, totalAlcoholG, desglose[], equivalencias[] }
-  // Cerveza 330ml 5%: 153 kcal / Vino 150ml 12%: 123 kcal / Licor 40ml 40%: 95 kcal / Cocktail 200ml 10%: 142 kcal
-  // equivalencias: caminar, correr, ciclismo (en minutos)
-
-calcularTasaSudoracion(pesoAntesKg, pesoDespuesKg, fluidosLitros, duracionMin)
-  → { tasaMLhora, perdidaPorcentaje, recomendacionMLhora, estado, color, recomendacion }
-  // sweatRate = ((pesoAntes − pesDespues)×1000 + fluidos×1000) / (duracion/60) — fórmula ACSM
-
-calcularMasaOsea(pesoKg, alturaCm, sexo)
-  → { masaOseaKg, porcentajeCorporal, categoria, color, descripcion }
-  // Fórmula Kim 2002 — validada contra DEXA (r=0.84)
-  // Hombres: boneKg = −5.765 + 0.0685×h + 0.0513×p
-  // Mujeres:  boneKg = −3.651 + 0.0426×h + 0.0432×p
-
-calcularSindromeMetabolico(cinturaCm, sexo, trigliceridos, hdl, sistolica, diastolica, glucosaAyunas, medicacionTA, medicacionGlucosa)
-  → { criteriosCumplidos, tiene, criterios[], riesgo, color, recomendacion }
-  // Criterios IDF 2006 LATAM: cintura hombre >90cm (obligatorio), mujer >80cm (obligatorio)
-  // + ≥2 de: TG≥150, HDL<40/50, PA≥130/85, Glucosa≥100 (o medicación)
-
-// Calculadoras batch 7A (10 nuevas — fitness avanzado — 2026-05-20)
-calcularPotenciaSalto(pesoKg, alturasCm, sexo)
-  → { potenciaPicoW, potenciaMediaW, wattsPerKg, nivel, nivelNombre, color, descripcion }
-  // Fórmula Sayers 1999: P_pico = 60.7×h + 45.3×p − 2055
-
-calcularGrasaVisceral(cinturaCm, caderaCm, alturaCm, edadAnios, sexo)
-  → { nivelEstimado, categoria, color, riesgo, recomendacion }
-  // Estimación basada en WHtR + ajuste por edad y sexo. Escala 1–20 (Tanita)
-
-calcularOximetria(spo2, altitudM)
-  → { categoria, color, riesgo, recomendacion, spo2AjustadoAltitud }
-  // riesgo: 'bajo' | 'leve' | 'moderado' | 'grave' — ajuste automático por altitud >2500 m
-
-calcularUmbralAnaerobico(edadAnios, fcReposo, fcMax?)
-  → { fcUmbral, fcUmbralMin, fcUmbralMax, porcentajeFCmax, fcMaxUsada, zonaDescripcion, recomendacion }
-  // Karvonen al 87%: fcUmbral = fcReposo + 0.87 × (fcMax − fcReposo)
-
-calcularCargaEntrenamiento(sesiones: SesionRPE[])
-  → { cargaSemanalUA, promedioDiario, monotonia, strain, categoria, color, recomendacion }
-  // SesionRPE: { rpe, duracionMin } — UA = RPE × duracion — monotonia = media/SD
-
-calcularEscalaBorg(rpe, escala: 'borg6_20' | 'cr10')
-  → { descripcion, porcentajeFCmax, intensidad, zonaEntrenamiento, color, recomendacion }
-  // CR10 se convierte a Borg 6–20: borgValue = rpe × 1.5 + 6
-
-calcularFCReposo(fcReposo, edadAnios, sexo)
-  → { categoria, nivelFitness, color, fcMaxEstimada, reservaCardiaca, descripcion }
-  // Tablas por sexo: Atleta/Élite < 49 ppm (H) / < 53 ppm (M) hasta Pobre
-
-calcularActividadFisicaOMS(minutosModera, minutosVigoroso, diasFuerza)
-  → { metMinSemana, nivelOMS, nivelNombre, color, cumpleRecomendacion, equivalenteModera, recomendacion }
-  // OMS 2020: ≥600 MET·min/sem aeróbico + ≥2 días fuerza = suficiente; ≥1200 = óptimo
-
-calcularHidratacionDeportiva(pesoKg, duracionMin, intensidad, temperatura)
-  → { aguaPreEjercicioMl, aguaDuranteML_15min, aguaPostEjercicioMl, totalMl, electrolitosNecesarios, recomendacion }
-  // intensidad: 'baja' | 'moderada' | 'alta' | 'muy_alta' — temperatura: 'fresco' | 'templado' | 'calido' | 'muy_calido'
-
-calcularRitmoNatacion(distanciaM, tiempoMin, tiempoSeg, largo: 25 | 50)
-  → { ritmoPor100m, ritmoPor50m, velocidadMps, velocidadKmh, largosPorMinuto, categoria, color }
-  // categorias: Élite (<60s/100m), Competitivo, Fitness/Avanzado, Principiante, Muy principiante
-
-// Calculadoras batch 7B (10 nuevas — mixto — 2026-05-20)
-calcularFTP(potenciaW, protocolo: ProtocoloFTP, pesoKg)
-  → { ftpW, wPerKg, nivel, nivelNombre, color, zonas[] }
-  // protocolo: 'test20min' (×0.95) | 'test8min' (×0.90) | 'rampa' (×0.75)
-  // zonas[]: { nombre, minW, maxW, descripcion } — Z1 a Z6 (Coggan)
-
-calcularCadenciaCarrera(pasosPorMinuto, velocidadKmh?)
-  → { cadencia, categoria, color, longitudZancadaCm, eficiencia, recomendacion }
-  // Óptima: 180–185 ppm (Jack Daniels). longitudZancadaCm solo si se pasa velocidad
-
-calcularPredictorCarrera(tiempoMin, tiempoSeg, distanciaKm1, distanciaKm2)
-  → { tiempoPredichoStr, tiempoPredichoSeg, ritmoPredichoStr, velocidadKmh, formula }
-  // Fórmula de Riegel: t2 = t1 × (d2/d1)^1.06
-
-calcularVitaminaDSolar(tipoPiel: 1–6, latitud, estacion, superficie)
-  → { minutosNecesarios, vitaminaDUI, recomendacion, advertencia }
-  // tipoPiel 1 (muy clara) a 6 (muy oscura) — advertencia en invierno+frío (síntesis imposible)
-
-calcularProteinaPorComida(pesoKg, objetivo, comidasDia)
-  → { totalDiarioG, porComidaG, maximoAbsorcionG, distribucion[], recomendacion }
-  // objetivo: 'mantenimiento' (1.6g) | 'hipertrofia' (2.0g) | 'perdida_grasa' (2.4g) por kg
-  // maximoAbsorcionG = 0.4 g/kg por toma
-
-calcularIGComida(alimentos: AlimentoIG[])
-  → { igPonderado, cargaGlucemica, categoria, color, recomendacion }
-  // AlimentoIG: { nombre, ig, carbsG } — IG ponderado + CG total de la comida completa
-
-calcularOmegaRatio(omega3G, omega6G)
-  → { ratio, categoriaRatio, color, recomendacion, omega3Recomendado, deficit }
-  // Ratio omega-6/omega-3. Óptimo ≤4:1; típico dieta occidental 15–20:1
-
-calcularRecuperacionMuscular(grupoMuscular, volumenSeries, intensidad, nivelExperiencia)
-  → { horasRecuperacion, diasRecuperacion, estrategias[], senalesPorRecuperar[], recomendacion }
-  // intensidad: 'ligero' | 'moderado' | 'intenso' | 'muy_intenso'
-
-calcularIMCInfantil(pesoKg, alturaCm, edadMeses, sexo: 'nino' | 'nina')
-  → { imc, percentil, categoria, color, zScore, recomendacion }
-  // Tablas OMS Growth Reference 5–19 años — percentiles 5, 85, 95 por edad y sexo
-
-calcularEdadBiologica(edadCronologica, respuestas: RespuestasEdadBiologica)
-  → { edadBiologica, diferencia, categoria, color, factoresPositivos[], factoresNegativos[], recomendacion }
-  // 8 factores (actividad, tabaco, alcohol, sueño, estrés, dieta, IMC, chequeos)
-```
+Convención: todas las funciones son `export function calcularXxx(...)` sin efectos secundarios.
 
 ### Conversión de unidades (src/lib/units.ts)
 
@@ -778,11 +348,8 @@ La columna izquierda del hero (`.hero-left`) tiene una imagen de fondo de gimnas
 - La columna derecha (`.hero-nums`) mantiene fondo sólido `var(--ink-2)` sin imagen.
 - Si se cambia la imagen, verificar que el overlay siga siendo opaco suficiente (mínimo 0.65).
 
-Categorías y conteo actual (total: 79):
-1. **Fitness & salud** (51 calculadoras) — imc, peso-ideal, grasa-corporal, ffmi, complexion-corporal, somatotipo, indice-adiposidad, frecuencia-cardiaca, vo2-maximo, presion-arterial, riesgo-cardiovascular, cintura-cadera, cintura-estatura, 1rm, volumen-entrenamiento, fuerza-relativa, masa-muscular, calorias-ejercicio, calorias-caminando, calorias-ciclismo, calorias-natacion, ritmo-carrera, agua-diaria, calorias-diarias, test-cooper, test-rockport, recuperacion-cardiaca, temperatura-corporal, presion-pulso, talla-predicha, vam, indice-masa-grasa, ritmo-maraton, indice-conicidad, tasa-sudoracion, masa-osea, sindrome-metabolico, potencia-salto, grasa-visceral, oximetria, umbral-anaerobico, carga-entrenamiento, escala-borg, fc-reposo, actividad-fisica, hidratacion-deportiva, ritmo-natacion, ftp-ciclismo, cadencia-carrera, predictor-carrera, recuperacion-muscular
-2. **Embarazo & fertilidad** (6 calculadoras) — ovulacion, ciclo-menstrual, semana-embarazo, fecha-parto, peso-embarazo, imc-infantil
-3. **Fechas & tiempo** (3 calculadoras) — edad, dias-fechas, edad-biologica
-4. **Nutrición & bienestar** (19 calculadoras) — macronutrientes, proteinas, metabolismo-basal, deficit-calorico, resistencia-insulina, glucosa, colesterol, carga-glucemica, cafeina, sueno, ayuno-intermitente, alcoholemia, creatina, calorias-bebidas, riesgo-diabetes, vitamina-d, proteina-por-comida, ig-comida, omega-ratio
+Categorías y conteo actual (total: 79) — ver detalle en [calculadoras.md](../calculadoras.md):
+- Fitness & salud (51) · Embarazo & fertilidad (6) · Fechas & tiempo (3) · Nutrición & bienestar (19)
 
 Al agregar una calculadora nueva, seguir el checklist completo de la sección "Reglas para agregar una calculadora nueva".
 
