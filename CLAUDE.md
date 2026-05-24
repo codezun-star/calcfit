@@ -62,7 +62,7 @@ calcfit-astro/
 │   │   │   ├── HistoryTable.tsx
 │   │   │   ├── ShareButtons.tsx
 │   │   │   └── Badge.tsx              ← popular | new | essential
-│   │   └── calculators/               ← 79 componentes React (ver calculadoras.md)
+│   │   └── calculators/               ← 89 componentes React (ver calculadoras.md)
 │   │       ├── [NombreCalculator].tsx ← un archivo por calculadora
 │   │       ├── GaugeIMC.tsx           ← gauge SVG semicircular animado
 │   │       ├── ZonasCardiaca.tsx      ← barras horizontales de zonas cardíacas
@@ -73,8 +73,8 @@ calcfit-astro/
 │   │   ├── useValidation.ts           ← hook de validación de campos
 │   │   └── useHistory.ts              ← hook de historial en localStorage
 │   └── pages/
-│       ├── index.astro                ← homepage con las 79 calculadoras
-│       ├── [slug].astro               ← 79 páginas calculadora (ver calculadoras.md)
+│       ├── index.astro                ← homepage con las 89 calculadoras
+│       ├── [slug].astro               ← 89 páginas calculadora (ver calculadoras.md)
 │       ├── sobre-nosotros.astro       ← página estática
 │       ├── contacto.astro             ← solo email, sin formulario
 │       ├── aviso-legal.astro          ← LSSI-CE
@@ -348,8 +348,8 @@ La columna izquierda del hero (`.hero-left`) tiene una imagen de fondo de gimnas
 - La columna derecha (`.hero-nums`) mantiene fondo sólido `var(--ink-2)` sin imagen.
 - Si se cambia la imagen, verificar que el overlay siga siendo opaco suficiente (mínimo 0.65).
 
-Categorías y conteo actual (total: 79) — ver detalle en [calculadoras.md](../calculadoras.md):
-- Fitness & salud (51) · Embarazo & fertilidad (6) · Fechas & tiempo (3) · Nutrición & bienestar (19)
+Categorías y conteo actual (total: 89) — ver detalle en [calculadoras.md](../calculadoras.md):
+- Fitness & salud (51) · Embarazo & fertilidad (10) · Fechas & tiempo (8) · Nutrición & bienestar (20)
 
 Al agregar una calculadora nueva, seguir el checklist completo de la sección "Reglas para agregar una calculadora nueva".
 
@@ -516,7 +516,7 @@ npm run preview  # preview del build
 
 **7. Verificación final**
 - Ejecutar `npm run build` — debe completar sin errores
-- El número de páginas en el build debe coincidir (actualmente 85: 79 calculadoras + 1 homepage + 5 estáticas)
+- El número de páginas en el build debe coincidir (actualmente 95: 89 calculadoras + 1 homepage + 5 estáticas)
 
 ---
 
@@ -606,6 +606,7 @@ Siempre verificar `typeof window !== 'undefined'` antes de acceder a localStorag
 
 | Fecha | Acción |
 |---|---|
+| 2026-05-23 | Batch 8: +10 calculadoras (cuenta-regresiva, semanas-de-vida, generacion, jubilacion, edad-planetas, cuando-test-embarazo, peso-bebe-semana, lactancia, fecha-concepcion, fibra-diaria). Total: 89. |
 | 2026-05-20 | Badges: eliminada etiqueta `'new'` de todas las cards (65 instancias → `null`). Solo se mantienen `'popular'` y `'essential'`. |
 | 2026-05-20 | Batch 7B: +10 calculadoras (ftp-ciclismo, cadencia-carrera, predictor-carrera, recuperacion-muscular, vitamina-d, proteina-por-comida, ig-comida, omega-ratio, imc-infantil, edad-biologica). Total: 79. |
 | 2026-05-20 | Batch 7A: +10 calculadoras (potencia-salto, grasa-visceral, oximetria, umbral-anaerobico, carga-entrenamiento, escala-borg, fc-reposo, actividad-fisica, hidratacion-deportiva, ritmo-natacion). Total: 69. |

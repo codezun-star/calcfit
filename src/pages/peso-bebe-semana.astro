@@ -1,0 +1,77 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import PesoBebeCalculator from '../components/calculators/PesoBebeSemanaCalculator';
+
+const faqs = [
+  { q: '¿Cuánto pesa el bebé en la semana 20?', a: 'En la semana 20 de gestación (mitad del embarazo), el bebé pesa aproximadamente 280–320 g y mide alrededor de 25–26 cm. En este momento ya puede escuchar sonidos y tiene una capa protectora de vérnix sobre la piel. Es la semana típica de la ecografía morfológica.' },
+  { q: '¿Cuánto pesa un bebé al nacer?', a: 'El peso medio al nacimiento a término (semana 40) es de 3.200–3.600 g, con una talla de 50–51 cm. Según la OMS, se considera bajo peso al nacer cuando el bebé pesa menos de 2.500 g (semana 37+). El peso también varía según el sexo: los niños suelen pesar entre 100 y 200 g más que las niñas.' },
+  { q: '¿Cuándo empieza a ganar peso rápidamente el bebé?', a: 'El crecimiento más rápido en peso ocurre en el tercer trimestre, especialmente entre las semanas 28 y 40. En este período el bebé pasa de unos 900 g a 3.200–3.600 g, ganando aproximadamente 200–250 g por semana. El tejido adiposo (grasa) se acumula principalmente en las últimas 8 semanas de gestación.' },
+  { q: '¿Para qué sirve conocer el peso fetal estimado?', a: 'El peso fetal estimado permite detectar restricción de crecimiento intrauterino (RCIU) o macrosomía (bebé demasiado grande), ambas situaciones que requieren seguimiento médico. No sustituye a la biometría fetal por ecografía, que es más precisa. Esta calculadora es orientativa y educativa, no diagnóstica.' },
+  { q: '¿Qué influye en el peso del bebé durante el embarazo?', a: 'Los principales factores son la genética de los padres, la nutrición materna, las condiciones de salud de la madre (diabetes gestacional, hipertensión), el número de fetos (gemelar vs único) y el sexo del bebé. El tabaco y el alcohol reducen significativamente el peso fetal. Una dieta equilibrada con aporte suficiente de proteínas y hierro favorece el crecimiento adecuado.' },
+];
+---
+
+<CalculatorLayout
+  title="Peso del Bebé por Semana — Tablas OMS Gestación | CalcFit"
+  description="Consulta el peso y talla fetal estimados semana a semana según tablas OMS. Introduce la semana de gestación y ve los valores de referencia normales. Gratis."
+  calculatorName="Peso del Bebé"
+  breadcrumbSlug="peso-bebe-semana"
+  ogImage="/og/peso-bebe-semana.jpg"
+  keywords="peso bebe semana embarazo, talla fetal semana gestación, peso fetal OMS, desarrollo fetal semana a semana, cuánto pesa el bebé"
+  faqs={faqs}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Peso del<br><span style="color: var(--acid);">Bebé</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Consulta el peso y la talla fetal estimados según la semana de gestación. Valores de referencia basados en las tablas de la OMS.
+    </p>
+  </div>
+
+  <PesoBebeCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">Desarrollo fetal semana a semana</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      Los valores de peso y talla son estimaciones basadas en las tablas de crecimiento fetal de la Organización Mundial de la Salud (OMS) y el estudio INTERGROWTH-21. Representan los percentiles 10–90 para una gestación única sin complicaciones. Los valores reales pueden variar; la ecografía obstétrica sigue siendo el método más preciso para evaluar el crecimiento fetal.
+    </p>
+
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px;">
+      <thead>
+        <tr style="background: var(--ink); color: var(--acid);">
+          <th style="padding: 10px 14px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Semana</th>
+          <th style="padding: 10px 14px; text-align: left;">Peso medio</th>
+          <th style="padding: 10px 14px; text-align: left;">Talla media</th>
+          <th style="padding: 10px 14px; text-align: left;">Hito</th>
+        </tr>
+      </thead>
+      <tbody>
+        {[
+          ['12', '14 g',     '6 cm',  'Fin 1er trimestre'],
+          ['20', '300 g',    '25 cm', 'Eco morfológica'],
+          ['28', '1.000 g',  '37 cm', 'Inicio 3er trimestre'],
+          ['36', '2.750 g',  '47 cm', 'Casi a término'],
+          ['40', '3.400 g',  '50 cm', 'Término completo'],
+        ].map(([sem, peso, talla, hito], i) => (
+          <tr style={`background: ${i % 2 === 0 ? 'white' : '#f9f6f0'};`}>
+            <td style="padding: 10px 14px; font-weight: 600;">Sem. {sem}</td>
+            <td style="padding: 10px 14px;">{peso}</td>
+            <td style="padding: 10px 14px;">{talla}</td>
+            <td style="padding: 10px 14px; color: var(--muted);">{hito}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {faqs.map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

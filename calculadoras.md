@@ -1,6 +1,6 @@
 # CalcFit — Registro de Calculadoras
 
-> **Total: 79 calculadoras** | Referencia completa: componentes, páginas, funciones y categorías.
+> **Total: 89 calculadoras** | Referencia completa: componentes, páginas, funciones y categorías.
 > Ver también: [CLAUDE.md](CLAUDE.md) para arquitectura, diseño y reglas de desarrollo.
 
 ---
@@ -88,6 +88,16 @@
 | 77 | Ratio Omega | `/omega-ratio` | `OmegaRatioCalculator.tsx` | `calcularOmegaRatio` | Nutrición | 7B |
 | 78 | IMC Infantil | `/imc-infantil` | `IMCInfantilCalculator.tsx` | `calcularIMCInfantil` | Embarazo | 7B |
 | 79 | Edad Biológica | `/edad-biologica` | `EdadBiologicaCalculator.tsx` | `calcularEdadBiologica` | Fechas | 7B |
+| 80 | Cuenta Regresiva | `/cuenta-regresiva` | `CuentaRegresivaCalculator.tsx` | `calcularCuentaRegresiva` | Fechas | 8 |
+| 81 | Semanas de Vida | `/semanas-de-vida` | `SemanasDeVidaCalculator.tsx` | `calcularSemanasDeVida` | Fechas | 8 |
+| 82 | Mi Generación | `/generacion` | `GeneracionCalculator.tsx` | `calcularGeneracion` | Fechas | 8 |
+| 83 | Edad de Jubilación | `/jubilacion` | `JubilacionCalculator.tsx` | `calcularJubilacion` | Fechas | 8 |
+| 84 | Edad en Planetas | `/edad-planetas` | `EdadPlanetasCalculator.tsx` | `calcularEdadPlanetas` | Fechas | 8 |
+| 85 | Test de Embarazo | `/cuando-test-embarazo` | `CuandoTestEmbarazoCalculator.tsx` | `calcularCuandoTestEmbarazo` | Embarazo | 8 |
+| 86 | Peso del Bebé | `/peso-bebe-semana` | `PesoBebeSemanaCalculator.tsx` | `calcularPesoBebeSemanaPorSemana` | Embarazo | 8 |
+| 87 | Lactancia Materna | `/lactancia` | `LactanciaCalculator.tsx` | `calcularLactancia` | Embarazo | 8 |
+| 88 | Fecha de Concepción | `/fecha-concepcion` | `FechaConcecionCalculator.tsx` | `calcularFechaConcepcion` | Embarazo | 8 |
+| 89 | Fibra Diaria | `/fibra-diaria` | `FibraDiariaCalculator.tsx` | `calcularFibraDiaria` | Nutrición | 8 |
 
 ---
 
@@ -96,14 +106,14 @@
 ### Fitness & salud (51)
 `imc` · `calorias-diarias` · `peso-ideal` · `grasa-corporal` · `frecuencia-cardiaca` · `agua-diaria` · `ffmi` · `complexion-corporal` · `somatotipo` · `indice-adiposidad` · `vo2-maximo` · `presion-arterial` · `riesgo-cardiovascular` · `cintura-cadera` · `cintura-estatura` · `1rm` · `volumen-entrenamiento` · `fuerza-relativa` · `masa-muscular` · `calorias-ejercicio` · `calorias-caminando` · `calorias-ciclismo` · `calorias-natacion` · `ritmo-carrera` · `test-cooper` · `test-rockport` · `recuperacion-cardiaca` · `temperatura-corporal` · `presion-pulso` · `talla-predicha` · `vam` · `indice-masa-grasa` · `ritmo-maraton` · `indice-conicidad` · `tasa-sudoracion` · `masa-osea` · `sindrome-metabolico` · `potencia-salto` · `grasa-visceral` · `oximetria` · `umbral-anaerobico` · `carga-entrenamiento` · `escala-borg` · `fc-reposo` · `actividad-fisica` · `hidratacion-deportiva` · `ritmo-natacion` · `ftp-ciclismo` · `cadencia-carrera` · `predictor-carrera` · `recuperacion-muscular`
 
-### Embarazo & fertilidad (6)
-`ovulacion` · `ciclo-menstrual` · `semana-embarazo` · `fecha-parto` · `peso-embarazo` · `imc-infantil`
+### Embarazo & fertilidad (10)
+`ovulacion` · `ciclo-menstrual` · `semana-embarazo` · `fecha-parto` · `peso-embarazo` · `imc-infantil` · `cuando-test-embarazo` · `peso-bebe-semana` · `lactancia` · `fecha-concepcion`
 
-### Fechas & tiempo (3)
-`edad` · `dias-fechas` · `edad-biologica`
+### Fechas & tiempo (8)
+`edad` · `dias-fechas` · `edad-biologica` · `cuenta-regresiva` · `semanas-de-vida` · `generacion` · `jubilacion` · `edad-planetas`
 
-### Nutrición & bienestar (19)
-`macronutrientes` · `proteinas` · `metabolismo-basal` · `deficit-calorico` · `resistencia-insulina` · `glucosa` · `colesterol` · `carga-glucemica` · `cafeina` · `sueno` · `ayuno-intermitente` · `alcoholemia` · `creatina` · `calorias-bebidas` · `riesgo-diabetes` · `vitamina-d` · `proteina-por-comida` · `ig-comida` · `omega-ratio`
+### Nutrición & bienestar (20)
+`macronutrientes` · `proteinas` · `metabolismo-basal` · `deficit-calorico` · `resistencia-insulina` · `glucosa` · `colesterol` · `carga-glucemica` · `cafeina` · `sueno` · `ayuno-intermitente` · `alcoholemia` · `creatina` · `calorias-bebidas` · `riesgo-diabetes` · `vitamina-d` · `proteina-por-comida` · `ig-comida` · `omega-ratio` · `fibra-diaria`
 
 ---
 
@@ -119,4 +129,4 @@
 
 ## Próximo número de serie
 
-Al agregar una nueva calculadora, el número siguiente es **#80**.
+Al agregar una nueva calculadora, el número siguiente es **#90**.

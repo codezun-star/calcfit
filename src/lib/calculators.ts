@@ -2913,3 +2913,305 @@ export function calcularEdadBiologica(
 
   return { edadBiologica, diferencia, categoria, color, factoresPositivos, factoresNegativos, recomendacion };
 }
+
+// ─── CUENTA REGRESIVA A FECHA ────────────────────────────────────────────────
+export function calcularCuentaRegresiva(fechaObjetivo: string): {
+  dias: number; horas: number; minutos: number; segundos: number;
+  totalSegundos: number; pasado: boolean; fechaFormateada: string;
+} {
+  const ahora  = new Date();
+  const target = new Date(fechaObjetivo + 'T00:00:00');
+  const diff   = target.getTime() - ahora.getTime();
+  const pasado = diff < 0;
+  const abs    = Math.abs(diff);
+  const totalSegundos = Math.floor(abs / 1000);
+  const dias    = Math.floor(abs / (1000 * 60 * 60 * 24));
+  const horas   = Math.floor((abs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutos = Math.floor((abs % (1000 * 60 * 60)) / (1000 * 60));
+  const segundos = Math.floor((abs % (1000 * 60)) / 1000);
+  const fechaFormateada = target.toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+  return { dias, horas, minutos, segundos, totalSegundos, pasado, fechaFormateada };
+}
+
+// ─── SEMANAS DE VIDA ─────────────────────────────────────────────────────────
+export function calcularSemanasDeVida(fechaNacimiento: string): {
+  totalSemanas: number; totalDias: number; anios: number; meses: number;
+  proximaSemanaClave: number; semanasHastaProxima: number;
+} {
+  const nacimiento = new Date(fechaNacimiento);
+  const hoy = new Date();
+  const diffMs = hoy.getTime() - nacimiento.getTime();
+  const totalDias = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+  const totalSemanas = Math.floor(totalDias / 7);
+  const anios  = Math.floor(totalDias / 365.25);
+  const meses  = Math.floor(totalDias / 30.44);
+  const hitos  = [500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 5500, 6000];
+  const proximaSemanaClave = hitos.find(h => h > totalSemanas) ?? (Math.ceil(totalSemanas / 500) * 500 + 500);
+  const semanasHastaProxima = proximaSemanaClave - totalSemanas;
+  return { totalSemanas, totalDias, anios, meses, proximaSemanaClave, semanasHastaProxima };
+}
+
+// ─── CALCULADORA DE GENERACIÓN ───────────────────────────────────────────────
+export function calcularGeneracion(anioNacimiento: number): {
+  generacion: string; rangoAnios: string; descripcion: string;
+  caracteristicas: string[]; color: string; edadActual: number;
+} {
+  const edadActual = new Date().getFullYear() - anioNacimiento;
+  let generacion: string, rangoAnios: string, descripcion: string, caracteristicas: string[], color: string;
+  if (anioNacimiento < 1946) {
+    generacion = 'Generación Silenciosa'; rangoAnios = '1928–1945'; color = '#94A3B8';
+    descripcion = 'La generación que creció durante la Gran Depresión y la Segunda Guerra Mundial. Marcada por la austeridad, el sacrificio colectivo y el respeto a la autoridad.';
+    caracteristicas = ['Máxima lealtad institucional', 'Ahorro y austeridad como valores', 'Respeto a la jerarquía', 'Alta resiliencia ante la adversidad'];
+  } else if (anioNacimiento <= 1964) {
+    generacion = 'Baby Boomer'; rangoAnios = '1946–1964'; color = '#F59E0B';
+    descripcion = 'La generación del auge demográfico postguerra. Testigos de la televisión, el rock and roll y los primeros viajes espaciales. Impulsaron el movimiento de los derechos civiles.';
+    caracteristicas = ['Optimismo y fe en el progreso', 'Fuerte ética de trabajo', 'Lealtad a la empresa', 'Pioneros de la contracultura'];
+  } else if (anioNacimiento <= 1980) {
+    generacion = 'Generación X'; rangoAnios = '1965–1980'; color = '#8B5CF6';
+    descripcion = 'La generación "olvidada" entre los Boomers y los Millennials. Creció con el surgimiento de la MTV, el fin de la Guerra Fría y los primeros ordenadores personales.';
+    caracteristicas = ['Alta independencia y autonomía', 'Escepticismo saludable', 'Equilibrio trabajo-vida personal', 'Adaptabilidad tecnológica'];
+  } else if (anioNacimiento <= 1996) {
+    generacion = 'Millennial'; rangoAnios = '1981–1996'; color = '#06B6D4';
+    descripcion = 'La primera generación verdaderamente digital. Creció con internet y los móviles. Más educada que las anteriores, pero enfrentó la Gran Recesión de 2008 y la crisis del empleo.';
+    caracteristicas = ['Nativos digitales tempranos', 'Mentalidad colaborativa', 'Valores de propósito en el trabajo', 'Endeudados pero optimistas'];
+  } else if (anioNacimiento <= 2012) {
+    generacion = 'Generación Z'; rangoAnios = '1997–2012'; color = '#10B981';
+    descripcion = 'La primera generación que nunca conoció el mundo sin smartphones e internet. Creció con las redes sociales, la crisis climática y la pandemia de COVID-19.';
+    caracteristicas = ['Nativos digitales totales', 'Pragmatismo financiero', 'Alta conciencia social y ambiental', 'Comunicación visual e instantánea'];
+  } else {
+    generacion = 'Generación Alpha'; rangoAnios = '2013–actualidad'; color = '#F43F5E';
+    descripcion = 'La generación más joven, nacida en un mundo completamente digital, con inteligencia artificial, TikTok y streaming desde el inicio. Aún en formación como generación.';
+    caracteristicas = ['Hiper-conectados desde el nacimiento', 'Influenciados por creadores de contenido', 'Educación híbrida presencial-digital', 'Nativos de la IA'];
+  }
+  return { generacion, rangoAnios, descripcion, caracteristicas, color, edadActual };
+}
+
+// ─── FECHA DE JUBILACIÓN ─────────────────────────────────────────────────────
+export type PaisJubilacion =
+  'argentina' | 'mexico' | 'colombia' | 'chile' | 'peru' | 'espana' |
+  'venezuela' | 'ecuador' | 'bolivia' | 'paraguay' | 'uruguay' | 'otro';
+
+const EDADES_JUBILACION: Record<PaisJubilacion, { hombre: number; mujer: number; nombre: string }> = {
+  argentina: { hombre: 65, mujer: 60, nombre: 'Argentina' },
+  mexico:    { hombre: 65, mujer: 65, nombre: 'México' },
+  colombia:  { hombre: 62, mujer: 57, nombre: 'Colombia' },
+  chile:     { hombre: 65, mujer: 65, nombre: 'Chile' },
+  peru:      { hombre: 65, mujer: 65, nombre: 'Perú' },
+  espana:    { hombre: 67, mujer: 67, nombre: 'España' },
+  venezuela: { hombre: 60, mujer: 55, nombre: 'Venezuela' },
+  ecuador:   { hombre: 65, mujer: 65, nombre: 'Ecuador' },
+  bolivia:   { hombre: 65, mujer: 60, nombre: 'Bolivia' },
+  paraguay:  { hombre: 60, mujer: 60, nombre: 'Paraguay' },
+  uruguay:   { hombre: 65, mujer: 65, nombre: 'Uruguay' },
+  otro:      { hombre: 65, mujer: 65, nombre: 'País no listado' },
+};
+
+export function calcularJubilacion(edadActual: number, sexo: 'hombre' | 'mujer', pais: PaisJubilacion): {
+  edadJubilacion: number; aniosRestantes: number; mesesRestantes: number;
+  yaJubilado: boolean; paisNombre: string; anioEstimado: number;
+  descripcion: string;
+} {
+  const datos = EDADES_JUBILACION[pais];
+  const edadJubilacion = datos[sexo];
+  const aniosRestantes = Math.max(0, edadJubilacion - edadActual);
+  const mesesRestantes = aniosRestantes * 12;
+  const anioEstimado   = new Date().getFullYear() + aniosRestantes;
+  const yaJubilado     = edadActual >= edadJubilacion;
+  const descripcion    = yaJubilado
+    ? `Has alcanzado la edad de jubilación legal en ${datos.nombre} (${edadJubilacion} años).`
+    : `En ${datos.nombre}, la edad legal de jubilación para ${sexo === 'hombre' ? 'hombres' : 'mujeres'} es ${edadJubilacion} años. Te quedan aproximadamente ${aniosRestantes} año${aniosRestantes !== 1 ? 's' : ''}.`;
+  return { edadJubilacion, aniosRestantes, mesesRestantes, yaJubilado, paisNombre: datos.nombre, anioEstimado, descripcion };
+}
+
+// ─── EDAD EN OTROS PLANETAS ──────────────────────────────────────────────────
+export function calcularEdadPlanetas(edadAnios: number): {
+  planetas: { nombre: string; periodo: number; edad: number; emoji: string; descripcion: string }[];
+} {
+  const datos = [
+    { nombre: 'Mercurio',  periodo: 0.2408, emoji: '☿', descripcion: 'El más cercano al Sol. Su año dura solo 88 días terrestres.' },
+    { nombre: 'Venus',     periodo: 0.6152, emoji: '♀', descripcion: 'El planeta más caliente. Su año dura 225 días terrestres.' },
+    { nombre: 'Marte',     periodo: 1.881,  emoji: '♂', descripcion: 'El planeta rojo. Su año equivale a casi 2 años terrestres.' },
+    { nombre: 'Júpiter',   periodo: 11.86,  emoji: '♃', descripcion: 'El gigante gaseoso. Su año dura casi 12 años terrestres.' },
+    { nombre: 'Saturno',   periodo: 29.46,  emoji: '♄', descripcion: 'Con sus anillos icónicos. Su año dura casi 30 años terrestres.' },
+    { nombre: 'Urano',     periodo: 84.01,  emoji: '⛢', descripcion: 'El planeta inclinado. Su año dura 84 años terrestres.' },
+    { nombre: 'Neptuno',   periodo: 164.8,  emoji: '♆', descripcion: 'El más lejano. Su año dura 165 años terrestres.' },
+  ];
+  const planetas = datos.map(p => ({
+    ...p,
+    edad: parseFloat((edadAnios / p.periodo).toFixed(2)),
+  }));
+  return { planetas };
+}
+
+// ─── CUÁNDO HACER EL TEST DE EMBARAZO ────────────────────────────────────────
+export function calcularCuandoTestEmbarazo(ultimaMenstruacion: string, duracionCiclo: number): {
+  fechaOvulacion: string; diaTestMinimo: string; diaTestOptimo: string;
+  diasHastaTestOptimo: number; puedeHacerTest: boolean; explicacion: string;
+} {
+  const um   = new Date(ultimaMenstruacion);
+  const hoy  = new Date();
+  const ovulacionMs = um.getTime() + (duracionCiclo - 14) * 24 * 60 * 60 * 1000;
+  const ovulacion   = new Date(ovulacionMs);
+  const testMinimo  = new Date(ovulacionMs + 10 * 24 * 60 * 60 * 1000);
+  const testOptimo  = new Date(ovulacionMs + 14 * 24 * 60 * 60 * 1000);
+  const diasHastaTestOptimo = Math.ceil((testOptimo.getTime() - hoy.getTime()) / (1000 * 60 * 60 * 24));
+  const puedeHacerTest = hoy >= testMinimo;
+  const fmt = (d: Date) => d.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+  const explicacion = puedeHacerTest
+    ? 'Ya puedes realizarte el test. Para mayor precisión, hazlo por la mañana con la primera orina del día.'
+    : `El test puede dar negativo falso si se hace muy pronto. Espera hasta el día óptimo para una lectura fiable.`;
+  return {
+    fechaOvulacion: fmt(ovulacion),
+    diaTestMinimo:  fmt(testMinimo),
+    diaTestOptimo:  fmt(testOptimo),
+    diasHastaTestOptimo: Math.max(0, diasHastaTestOptimo),
+    puedeHacerTest,
+    explicacion,
+  };
+}
+
+// ─── PESO DEL BEBÉ POR SEMANA ────────────────────────────────────────────────
+const PESO_BEBE_OMS: Record<number, { pesoMinG: number; pesoMaxG: number; tallaMinCm: number; tallaMaxCm: number; descripcion: string }> = {
+  8:  { pesoMinG: 1,    pesoMaxG: 2,    tallaMinCm: 1.6,  tallaMaxCm: 2,    descripcion: 'Tamaño de una frambuesa. Se forman los principales órganos.' },
+  10: { pesoMinG: 4,    pesoMaxG: 5,    tallaMinCm: 3,    tallaMaxCm: 3.5,  descripcion: 'Tamaño de una ciruela. Ya tiene todos los órganos formados.' },
+  12: { pesoMinG: 14,   pesoMaxG: 18,   tallaMinCm: 5.5,  tallaMaxCm: 6,    descripcion: 'Tamaño de una lima. Finaliza el primer trimestre.' },
+  16: { pesoMinG: 100,  pesoMaxG: 120,  tallaMinCm: 11,   tallaMaxCm: 12,   descripcion: 'Tamaño de un aguacate. Puede escuchar sonidos.' },
+  20: { pesoMinG: 280,  pesoMaxG: 320,  tallaMinCm: 25,   tallaMaxCm: 26,   descripcion: 'Tamaño de un plátano. Mitad del embarazo.' },
+  24: { pesoMinG: 530,  pesoMaxG: 600,  tallaMinCm: 29,   tallaMaxCm: 30,   descripcion: 'Tamaño de una mazorca de maíz. Se forman las huellas dactilares.' },
+  28: { pesoMinG: 900,  pesoMaxG: 1100, tallaMinCm: 36,   tallaMaxCm: 37,   descripcion: 'Tamaño de una berenjena. Abre y cierra los ojos.' },
+  32: { pesoMinG: 1700, pesoMaxG: 1900, tallaMinCm: 41,   tallaMaxCm: 43,   descripcion: 'Tamaño de un coco. El cerebro se desarrolla rápidamente.' },
+  36: { pesoMinG: 2600, pesoMaxG: 2900, tallaMinCm: 47,   tallaMaxCm: 48,   descripcion: 'Casi a término. Los pulmones están casi maduros.' },
+  40: { pesoMinG: 3200, pesoMaxG: 3600, tallaMinCm: 50,   tallaMaxCm: 51,   descripcion: 'A término completo. Listo para nacer.' },
+};
+
+export function calcularPesoBebeSemanaPorSemana(semana: number): {
+  semana: number; pesoMinG: number; pesoMaxG: number; pesoMedioG: number;
+  tallaMinCm: number; tallaMaxCm: number; tallaMediaCm: number;
+  descripcion: string; trimestre: number;
+} {
+  const semanas = Object.keys(PESO_BEBE_OMS).map(Number).sort((a, b) => a - b);
+  let inferior = semanas[0], superior = semanas[semanas.length - 1];
+  for (let i = 0; i < semanas.length - 1; i++) {
+    if (semana >= semanas[i] && semana <= semanas[i + 1]) {
+      inferior = semanas[i]; superior = semanas[i + 1]; break;
+    }
+  }
+  if (semana <= semanas[0]) { inferior = superior = semanas[0]; }
+  if (semana >= semanas[semanas.length - 1]) { inferior = superior = semanas[semanas.length - 1]; }
+  const a = PESO_BEBE_OMS[inferior], b = PESO_BEBE_OMS[superior];
+  const t = inferior === superior ? 0 : (semana - inferior) / (superior - inferior);
+  const interp = (x: number, y: number) => Math.round(x + (y - x) * t);
+  const interpF = (x: number, y: number) => parseFloat((x + (y - x) * t).toFixed(1));
+  const pesoMinG   = interp(a.pesoMinG, b.pesoMinG);
+  const pesoMaxG   = interp(a.pesoMaxG, b.pesoMaxG);
+  const tallaMinCm = interpF(a.tallaMinCm, b.tallaMinCm);
+  const tallaMaxCm = interpF(a.tallaMaxCm, b.tallaMaxCm);
+  const descripcion = inferior === superior ? PESO_BEBE_OMS[inferior].descripcion : PESO_BEBE_OMS[inferior].descripcion;
+  const trimestre   = semana <= 13 ? 1 : semana <= 26 ? 2 : 3;
+  return {
+    semana,
+    pesoMinG, pesoMaxG, pesoMedioG: Math.round((pesoMinG + pesoMaxG) / 2),
+    tallaMinCm, tallaMaxCm, tallaMediaCm: interpF(a.tallaMinCm, b.tallaMaxCm),
+    descripcion, trimestre,
+  };
+}
+
+// ─── CALCULADORA DE LACTANCIA ────────────────────────────────────────────────
+export function calcularLactancia(pesoMadreKg: number, frecuenciaTomas: number): {
+  mlPorToma: number; mlTotalDia: number; caloriasExtra: number;
+  duracionRecomendadaMeses: number; beneficiosBebe: string[]; beneficiosMadre: string[];
+  recomendacion: string;
+} {
+  const mlPorToma    = Math.round(600 / Math.max(1, frecuenciaTomas));
+  const mlTotalDia   = mlPorToma * frecuenciaTomas;
+  const caloriasExtra = Math.round(pesoMadreKg > 0 ? 500 : 500);
+  const beneficiosBebe: string[] = [
+    'Anticuerpos que protegen de infecciones',
+    'Menor riesgo de alergias y asma',
+    'Desarrollo cognitivo optimizado',
+    'Menor riesgo de obesidad infantil',
+    'Vínculo afectivo reforzado',
+  ];
+  const beneficiosMadre: string[] = [
+    'Recuperación uterina más rápida',
+    'Reducción del riesgo de cáncer de mama',
+    'Quema aproximada de 500 kcal adicionales por día',
+    'Menor riesgo de osteoporosis a largo plazo',
+    'Reducción del riesgo de diabetes tipo 2',
+  ];
+  const recomendacion = 'La OMS recomienda lactancia materna exclusiva durante los primeros 6 meses de vida, y continuar hasta los 2 años o más junto con alimentación complementaria.';
+  return {
+    mlPorToma, mlTotalDia, caloriasExtra: 500,
+    duracionRecomendadaMeses: 24, beneficiosBebe, beneficiosMadre, recomendacion,
+  };
+}
+
+// ─── FECHA DE CONCEPCIÓN ─────────────────────────────────────────────────────
+export function calcularFechaConcepcion(
+  tipo: 'parto' | 'regla',
+  fecha: string,
+  duracionCiclo: number = 28
+): {
+  fechaConcepcionEstimada: string; ventanaInicio: string; ventanaFin: string;
+  semanasActuales: number; explicacion: string;
+} {
+  let concepcion: Date;
+  if (tipo === 'parto') {
+    const parto = new Date(fecha);
+    concepcion = new Date(parto.getTime() - 266 * 24 * 60 * 60 * 1000);
+  } else {
+    const regla = new Date(fecha);
+    concepcion = new Date(regla.getTime() + (duracionCiclo - 14) * 24 * 60 * 60 * 1000);
+  }
+  const ventanaInicio = new Date(concepcion.getTime() - 3 * 24 * 60 * 60 * 1000);
+  const ventanaFin    = new Date(concepcion.getTime() + 2 * 24 * 60 * 60 * 1000);
+  const hoy = new Date();
+  const semanasActuales = Math.floor((hoy.getTime() - concepcion.getTime()) / (7 * 24 * 60 * 60 * 1000));
+  const fmt = (d: Date) => d.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+  const explicacion = tipo === 'parto'
+    ? 'Estimación basada en la fecha probable de parto. La concepción ocurre ~266 días antes del parto (38 semanas de embarazo real).'
+    : 'Estimación basada en la última regla. La concepción ocurre alrededor del día de ovulación (ciclo − 14 días).';
+  return {
+    fechaConcepcionEstimada: fmt(concepcion),
+    ventanaInicio: fmt(ventanaInicio),
+    ventanaFin:    fmt(ventanaFin),
+    semanasActuales: Math.max(0, semanasActuales),
+    explicacion,
+  };
+}
+
+// ─── FIBRA DIARIA RECOMENDADA ────────────────────────────────────────────────
+export type ObjetivoFibra = 'digestivo' | 'cardiovascular' | 'peso';
+
+export function calcularFibraDiaria(edadAnios: number, sexo: 'hombre' | 'mujer', objetivo: ObjetivoFibra): {
+  gramosDiarios: number; gramosSolubles: number; gramosInsolubles: number;
+  fuentesSolubles: { alimento: string; gramosPorRacion: string }[];
+  fuentesInsolubles: { alimento: string; gramosPorRacion: string }[];
+  beneficio: string; recomendacion: string;
+} {
+  let base = sexo === 'hombre' ? 38 : 25;
+  if (edadAnios > 50) base = sexo === 'hombre' ? 30 : 21;
+  const extra = objetivo === 'cardiovascular' ? 5 : objetivo === 'peso' ? 5 : 0;
+  const gramosDiarios    = base + extra;
+  const gramosSolubles   = Math.round(gramosDiarios * 0.35);
+  const gramosInsolubles = gramosDiarios - gramosSolubles;
+  const fuentesSolubles = [
+    { alimento: 'Avena (80 g)',         gramosPorRacion: '4 g' },
+    { alimento: 'Manzana con piel',     gramosPorRacion: '3 g' },
+    { alimento: 'Legumbres cocidas (200 g)', gramosPorRacion: '6 g' },
+    { alimento: 'Zanahoria (100 g)',    gramosPorRacion: '2 g' },
+  ];
+  const fuentesInsolubles = [
+    { alimento: 'Salvado de trigo (15 g)', gramosPorRacion: '4 g' },
+    { alimento: 'Pan integral (2 rebanadas)', gramosPorRacion: '4 g' },
+    { alimento: 'Brócoli cocido (150 g)',  gramosPorRacion: '4 g' },
+    { alimento: 'Almendras (30 g)',        gramosPorRacion: '2 g' },
+  ];
+  const beneficioMap: Record<ObjetivoFibra, string> = {
+    digestivo:      'Regula el tránsito intestinal, previene el estreñimiento y reduce el riesgo de cáncer de colon.',
+    cardiovascular: 'La fibra soluble reduce el colesterol LDL hasta un 5–10% y mejora el control glucémico.',
+    peso:           'La fibra aumenta la saciedad y ralentiza la absorción de nutrientes, favoreciendo el control del apetito.',
+  };
+  const recomendacion = `Distribuye tu ingesta de fibra a lo largo del día y aumenta gradualmente para evitar molestias digestivas. Acompaña siempre con al menos 1.5–2 L de agua diarios.`;
+  return { gramosDiarios, gramosSolubles, gramosInsolubles, fuentesSolubles, fuentesInsolubles, beneficio: beneficioMap[objetivo], recomendacion };
+}

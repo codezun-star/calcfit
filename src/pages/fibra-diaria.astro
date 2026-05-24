@@ -1,0 +1,76 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import FibraDiariaCalculator from '../components/calculators/FibraDiariaCalculator';
+
+const faqs = [
+  { q: '¿Cuánta fibra debo comer al día?', a: 'La Academia de Nutrición y Dietética y la OMS recomiendan 25 g/día para mujeres menores de 50 años y 38 g/día para hombres menores de 50 años. A partir de los 50 años las recomendaciones bajan a 21 g y 30 g respectivamente. La mayoría de los adultos consume solo 15–17 g/día, menos del 50% de lo recomendado.' },
+  { q: '¿Cuál es la diferencia entre fibra soluble e insoluble?', a: 'La fibra soluble (avena, legumbres, manzana, psyllium) se disuelve en agua y forma un gel que ralentiza la digestión, reduce el colesterol LDL y estabiliza la glucosa. La fibra insoluble (trigo integral, verduras, salvado) no se disuelve y añade volumen a las heces, acelerando el tránsito intestinal y previniendo el estreñimiento. Una dieta equilibrada debe incluir ambos tipos.' },
+  { q: '¿Puede la fibra ayudar a perder peso?', a: 'Sí. La fibra soluble aumenta la saciedad al ralentizar el vaciado gástrico y reducir la velocidad de absorción de nutrientes. Estudios publicados en el American Journal of Clinical Nutrition muestran que aumentar la ingesta de fibra en 14 g/día se asocia con una reducción espontánea del consumo calórico de ~10%. Sin embargo, la fibra no sustituye un déficit calórico global.' },
+  { q: '¿Puedo tomar demasiada fibra?', a: 'Sí. Consumir más de 70 g/día puede causar gases, distensión abdominal, diarrea e interferir con la absorción de minerales como hierro, zinc y calcio. Al aumentar la fibra, hazlo gradualmente (5 g/semana) y bebe suficiente agua (al menos 8 vasos/día), ya que la fibra necesita líquido para funcionar correctamente y no causar estreñimiento.' },
+  { q: '¿Qué alimentos tienen más fibra?', a: 'Los alimentos con mayor contenido de fibra por ración son: legumbres (lentejas, garbanzos: 12–16 g/taza cocida), semillas de chía (10 g/28 g), alcachofas (10 g/unidad), aguacate (10 g/unidad), peras con piel (5.5 g/unidad), frambuesas (8 g/taza), avena (4 g/taza), y pan integral (2 g/rebanada). Los alimentos procesados y refinados pierden gran parte de su fibra durante la fabricación.' },
+];
+---
+
+<CalculatorLayout
+  title="Fibra Diaria — Cuánta Fibra Necesitas al Día | CalcFit"
+  description="Calcula tu ingesta diaria de fibra recomendada según edad, sexo y objetivo (digestivo, cardiovascular o control de peso). Fuentes y tipos. Gratis."
+  calculatorName="Fibra Diaria"
+  breadcrumbSlug="fibra-diaria"
+  ogImage="/og/fibra-diaria.jpg"
+  keywords="fibra diaria recomendada, cuánta fibra necesito, fibra soluble insoluble, fibra para bajar de peso, ingesta fibra OMS"
+  faqs={faqs}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Fibra<br><span style="color: var(--acid);">Diaria</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Calcula cuánta fibra debes consumir al día según tu edad, sexo y objetivo de salud. Incluye distribución soluble/insoluble y fuentes alimentarias.
+    </p>
+  </div>
+
+  <FibraDiariaCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cuánta fibra necesito al día?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      Las recomendaciones de ingesta diaria de fibra dietética se basan en los valores de referencia de la Academia de Nutrición y Dietética y la OMS. La cifra varía según el sexo y la edad: hombres jóvenes necesitan más (38 g/día) que mujeres mayores de 50 (21 g/día). Según el objetivo de salud, la calculadora añade hasta 5 g extra para optimizar el efecto cardiovascular o de saciedad. La fibra debe provenir de los alimentos y no exclusivamente de suplementos.
+    </p>
+
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px;">
+      <thead>
+        <tr style="background: var(--ink); color: var(--acid);">
+          <th style="padding: 10px 14px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Grupo</th>
+          <th style="padding: 10px 14px; text-align: left;">Fibra diaria (g/día)</th>
+          <th style="padding: 10px 14px; text-align: left;">Fuente</th>
+        </tr>
+      </thead>
+      <tbody>
+        {[
+          ['Hombre < 50 años',  '38 g/día', 'AND / OMS'],
+          ['Hombre ≥ 50 años',  '30 g/día', 'AND / OMS'],
+          ['Mujer < 50 años',   '25 g/día', 'AND / OMS'],
+          ['Mujer ≥ 50 años',   '21 g/día', 'AND / OMS'],
+          ['Niños 4–8 años',    '25 g/día', 'IOM 2002'],
+          ['Adolescentes 9–13', '26–31 g/día', 'IOM 2002'],
+        ].map(([grupo, gramos, fuente], i) => (
+          <tr style={`background: ${i % 2 === 0 ? 'white' : '#f9f6f0'};`}>
+            <td style="padding: 10px 14px; font-weight: 600;">{grupo}</td>
+            <td style="padding: 10px 14px;">{gramos}</td>
+            <td style="padding: 10px 14px; color: var(--muted); font-size: 12px;">{fuente}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {faqs.map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

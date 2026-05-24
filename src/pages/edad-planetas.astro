@@ -1,0 +1,77 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import EdadPlanetasCalculator from '../components/calculators/EdadPlanetasCalculator';
+
+const faqs = [
+  { q: '¿Cómo se calcula la edad en otro planeta?', a: 'La edad en un planeta es el número de veces que ese planeta ha completado una órbita alrededor del Sol desde tu nacimiento. Se calcula dividiendo tu edad en años terrestres entre el período orbital del planeta (expresado en años terrestres). Por ejemplo, si tienes 30 años terrestres: en Marte (1,881 años) serías de 30 ÷ 1,881 ≈ 15,95 años marcianos.' },
+  { q: '¿Cuánto dura un año en cada planeta?', a: 'Los períodos orbitales son: Mercurio 88 días (0,24 años), Venus 225 días (0,62 años), Marte 687 días (1,88 años), Júpiter 11,86 años, Saturno 29,46 años, Urano 84,01 años y Neptuno 164,8 años. Plutón, aunque ya no se considera planeta, tiene un año de 247,9 años terrestres.' },
+  { q: '¿Por qué en Mercurio tendría más años que en la Tierra?', a: 'Porque el año de Mercurio es mucho más corto (88 días). En ese mismo tiempo, Mercurio completa una órbita completa alrededor del Sol. Si tienes 30 años terrestres, el Sol ha salido y se ha puesto en Mercurio muchas más veces: 30 ÷ 0,24 ≈ 125 "años" mercurianos.' },
+  { q: '¿Se puede vivir en estos planetas?', a: 'Actualmente ningún otro planeta del Sistema Solar es habitable para los humanos. Mercurio y Venus son demasiado calientes (430°C y 465°C en superficie). Marte tiene una atmósfera muy tenue y temperaturas de -60°C de media. Los planetas gigantes gaseosos (Júpiter, Saturno, Urano, Neptuno) no tienen superficie sólida en la que habitar.' },
+  { q: '¿Por qué en Neptuno tendría tan pocos años?', a: 'Porque el año de Neptuno dura 164,8 años terrestres. Neptuno ha completado solo una órbita completa desde 1846 (cuando fue descubierto) hasta 2011. Si tienes 40 años terrestres, habrías vivido solo 40 ÷ 164,8 ≈ 0,24 "años" neptunianos.' },
+];
+---
+
+<CalculatorLayout
+  title="Edad en Otros Planetas — Sistema Solar | CalcFit"
+  description="Calcula cuántos años tendrías en Mercurio, Venus, Marte, Júpiter, Saturno, Urano y Neptuno según su año orbital. Curioso y educativo. Gratis."
+  calculatorName="Edad en Planetas"
+  breadcrumbSlug="edad-planetas"
+  ogImage="/og/edad-planetas.jpg"
+  keywords="edad en otros planetas, cuántos años tendría en Marte, calculadora planetas sistema solar, año en Júpiter Saturno, años en planetas"
+  faqs={faqs}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Edad en<br><span style="color: var(--acid);">Planetas</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Introduce tu edad y descubre cuántos "años" tendrías en cada planeta del Sistema Solar según su período orbital alrededor del Sol.
+    </p>
+  </div>
+
+  <EdadPlanetasCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">Períodos orbitales del Sistema Solar</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      Un "año" en cualquier planeta es el tiempo que tarda ese planeta en completar una órbita alrededor del Sol. La duración varía enormemente: de los 88 días de Mercurio a los 165 años terrestres de Neptuno. La edad en otro planeta es simplemente tu tiempo de vida dividido entre la duración del año de ese planeta.
+    </p>
+
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px;">
+      <thead>
+        <tr style="background: var(--ink); color: var(--acid);">
+          <th style="padding: 10px 14px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Planeta</th>
+          <th style="padding: 10px 14px; text-align: left;">Año orbital</th>
+          <th style="padding: 10px 14px; text-align: left;">Distancia media al Sol</th>
+        </tr>
+      </thead>
+      <tbody>
+        {[
+          ['Mercurio', '88 días (0,24 años)',    '57,9 millones km'],
+          ['Venus',    '225 días (0,62 años)',   '108,2 millones km'],
+          ['Marte',    '687 días (1,88 años)',   '227,9 millones km'],
+          ['Júpiter',  '11,86 años terrestres',  '778,5 millones km'],
+          ['Saturno',  '29,46 años terrestres',  '1.432 millones km'],
+          ['Urano',    '84 años terrestres',     '2.867 millones km'],
+          ['Neptuno',  '165 años terrestres',    '4.515 millones km'],
+        ].map(([planeta, año, dist], i) => (
+          <tr style={`background: ${i % 2 === 0 ? 'white' : '#f9f6f0'};`}>
+            <td style="padding: 10px 14px; font-weight: 600;">{planeta}</td>
+            <td style="padding: 10px 14px;">{año}</td>
+            <td style="padding: 10px 14px; color: var(--muted);">{dist}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {faqs.map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>
