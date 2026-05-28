@@ -1,0 +1,111 @@
+---
+import Base from '../../layouts/Base.astro';
+import Navbar from '../../components/layout/Navbar.astro';
+import Footer from '../../components/layout/Footer.astro';
+import { getCollection } from 'astro:content';
+import { searchUnsplash } from '../../lib/unsplash';
+
+const todos = await getCollection('blog', (e) => e.data.publicado !== false);
+const sorted = todos.sort((a, b) => b.data.fecha.localeCompare(a.data.fecha));
+
+const UNSPLASH_KEY = import.meta.env.UNSPLASH_ACCESS_KEY ?? '';
+
+const articulos = await Promise.all(
+  sorted.map(async (art) => {
+    const query = art.data.unsplashQuery ?? art.data.keywords.slice(0, 3).join(' ');
+    const photo = await searchUnsplash(query, UNSPLASH_KEY, 'landscape');
+    return { art, photo };
+  })
+);
+
+const categorias: Record<string, string> = {
+  fitness:  'Fitness',
+  nutricion: 'Nutrición',
+  salud:    'Salud',
+  guias:    'Guías',
+  general:  'General',
+};
+---
+
+<Base
+  title="Blog — CalcFit"
+  description="Artículos sobre fitness, nutrición y salud respaldados por evidencia científica para toda Latinoamérica."
+>
+  <Navbar />
+
+  <!-- Header -->
+  <div style="background:var(--ink); padding:40px 20px 32px; margin-top:56px;">
+    <div style="max-width:1000px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-size:12px; color:#888; margin-bottom:16px; font-family:var(--font-mono);">
+        <a href="/" style="text-decoration:none; color:#888;">INICIO</a>
+        <span>/</span>
+        <span style="color:var(--acid);">BLOG</span>
+      </div>
+      <h1 style="font-family:var(--font-display); font-size:clamp(36px, 6vw, 60px); color:var(--cream); margin:0 0 8px; letter-spacing:0.5px; line-height:1;">
+        BLOG
+      </h1>
+      <p style="font-size:15px; color:#888; line-height:1.6; max-width:480px; margin:0; font-family:var(--font-body);">
+        Artículos sobre fitness, nutrición y salud respaldados por evidencia científica.
+      </p>
+    </div>
+  </div>
+
+  <!-- Lista -->
+  <main style="max-width:1000px; margin:0 auto; padding:40px 20px 80px; min-height:60vh;">
+    {articulos.length === 0 ? (
+      <div style="text-align:center; padding:80px 20px;">
+        <p style="font-size:15px; color:var(--muted); font-family:var(--font-body);">No hay artículos publicados aún.</p>
+      </div>
+    ) : (
+      <div style="display:flex; flex-direction:column; gap:1px; background:var(--border);">
+        {articulos.map(({ art, photo }) => (
+          <a
+            href={`/blog/${art.id}`}
+            style="display:flex; align-items:flex-start; gap:0; background:var(--cream); text-decoration:none; border-left:3px solid transparent; transition:background 0.15s, border-color 0.15s; overflow:hidden;"
+            onmouseover="this.style.background='#EDE9DF'; this.style.borderLeftColor='var(--acid)'"
+            onmouseout="this.style.background='var(--cream)'; this.style.borderLeftColor='transparent'"
+          >
+            {photo && (
+              <div style="flex-shrink:0; width:180px; min-height:120px; overflow:hidden;">
+                <img
+                  src={photo.urls.small}
+                  alt={photo.alt_description ?? art.data.titulo}
+                  width="180"
+                  height="120"
+                  loading="lazy"
+                  style="width:180px; height:120px; object-fit:cover; display:block;"
+                />
+              </div>
+            )}
+            <div style="flex:1; min-width:0; padding:20px 20px 20px 24px;">
+              <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px; flex-wrap:wrap;">
+                {art.data.categoria && (
+                  <span style="font-size:10px; font-weight:500; text-transform:uppercase; letter-spacing:0.08em; background:var(--ink); color:var(--acid); padding:2px 8px; font-family:var(--font-mono);">
+                    {categorias[art.data.categoria] ?? art.data.categoria}
+                  </span>
+                )}
+                <span style="font-size:11px; color:var(--muted); font-family:var(--font-mono);">{art.data.fecha}</span>
+              </div>
+              <p style="font-size:16px; font-weight:600; color:var(--ink); margin:0 0 6px; line-height:1.3; font-family:var(--font-body);">
+                {art.data.titulo}
+              </p>
+              {art.data.descripcion && (
+                <p style="font-size:13px; color:var(--muted); margin:0; line-height:1.6; font-family:var(--font-body); display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">
+                  {art.data.descripcion}
+                </p>
+              )}
+            </div>
+            <div style="padding:20px 20px 0 0; flex-shrink:0;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </div>
+          </a>
+        ))}
+      </div>
+    )}
+  </main>
+
+  <Footer />
+</Base>

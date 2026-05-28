@@ -62,7 +62,7 @@ calcfit-astro/
 │   │   │   ├── HistoryTable.tsx
 │   │   │   ├── ShareButtons.tsx
 │   │   │   └── Badge.tsx              ← popular | new | essential
-│   │   └── calculators/               ← 89 componentes React (ver calculadoras.md)
+│   │   └── calculators/               ← 89 componentes React (ver CALCULADORAS.md)
 │   │       ├── [NombreCalculator].tsx ← un archivo por calculadora
 │   │       ├── GaugeIMC.tsx           ← gauge SVG semicircular animado
 │   │       ├── ZonasCardiaca.tsx      ← barras horizontales de zonas cardíacas
@@ -72,9 +72,15 @@ calcfit-astro/
 │   │   ├── units.ts                   ← conversiones métrico ↔ imperial
 │   │   ├── useValidation.ts           ← hook de validación de campos
 │   │   └── useHistory.ts              ← hook de historial en localStorage
+│   ├── content.config.ts              ← schema Zod del blog (Content Layer API, Astro 6)
+│   ├── content/
+│   │   └── blog/                      ← artículos .md (nombre del archivo = slug de URL)
 │   └── pages/
 │       ├── index.astro                ← homepage con las 89 calculadoras
-│       ├── [slug].astro               ← 89 páginas calculadora (ver calculadoras.md)
+│       ├── [slug].astro               ← 89 páginas calculadora (ver CALCULADORAS.md)
+│       ├── blog/
+│       │   ├── index.astro            ← lista de artículos del blog
+│       │   └── [slug].astro           ← artículo individual con JSON-LD Article
 │       ├── sobre-nosotros.astro       ← página estática
 │       ├── contacto.astro             ← solo email, sin formulario
 │       ├── aviso-legal.astro          ← LSSI-CE
@@ -237,7 +243,7 @@ Cada página de calculadora sigue este patrón exacto (incluye los props SEO obl
 
 ### Funciones disponibles
 
-Las 79 funciones están documentadas en [calculadoras.md](../calculadoras.md) — columna "Función en calculators.ts". La firma completa (parámetros y tipo de retorno) vive en el propio archivo `src/lib/calculators.ts` con TypeScript estricto.
+Las 89 funciones están documentadas en [CALCULADORAS.md](CALCULADORAS.md) (índice) y en los archivos de detalle por categoría: [CALCULADORAS-FITNESS.md](CALCULADORAS-FITNESS.md), [CALCULADORAS-NUTRICION.md](CALCULADORAS-NUTRICION.md), [CALCULADORAS-EMBARAZO.md](CALCULADORAS-EMBARAZO.md), [CALCULADORAS-FECHAS.md](CALCULADORAS-FECHAS.md) — columna "Función en calculators.ts". La firma completa (parámetros y tipo de retorno) vive en el propio archivo `src/lib/calculators.ts` con TypeScript estricto.
 
 Convención: todas las funciones son `export function calcularXxx(...)` sin efectos secundarios.
 
@@ -350,10 +356,88 @@ La columna izquierda del hero (`.hero-left`) tiene una imagen de fondo de gimnas
 - La columna derecha (`.hero-nums`) mantiene fondo sólido `var(--ink-2)` sin imagen.
 - Si se cambia la imagen, verificar que el overlay siga siendo opaco suficiente (mínimo 0.65).
 
-Categorías y conteo actual (total: 89) — ver detalle en [calculadoras.md](../calculadoras.md):
+Categorías y conteo actual (total: 89) — ver detalle en [CALCULADORAS.md](CALCULADORAS.md) y archivos por categoría:
 - Fitness & salud (51) · Embarazo & fertilidad (10) · Fechas & tiempo (8) · Nutrición & bienestar (20)
 
 Al agregar una calculadora nueva, seguir el checklist completo de la sección "Reglas para agregar una calculadora nueva".
+
+---
+
+## Blog — Content Collections
+
+El blog usa el **Content Layer API de Astro 6** con archivos `.md` en `src/content/blog/`.
+
+### Archivos del sistema
+
+| Archivo | Descripción |
+|---|---|
+| `src/content.config.ts` | Schema Zod con `glob` loader (Astro 6) |
+| `src/pages/blog/index.astro` | Lista de artículos ordenados por fecha |
+| `src/pages/blog/[slug].astro` | Template de artículo individual con JSON-LD Article |
+| `src/content/blog/*.md` | Artículos — el nombre del archivo ES la URL |
+
+### Schema de artículo (`src/content.config.ts`)
+
+```ts
+{
+  titulo: string,
+  descripcion?: string,
+  categoria: 'fitness' | 'nutricion' | 'salud' | 'guias' | 'general',  // default: 'general'
+  fecha: string,        // ISO "YYYY-MM-DD" — solo para ordenación, no aparece en la URL
+  keywords: string[],
+  autor: string,        // default: 'Equipo CalcFit'
+  publicado: boolean,   // default: true — false oculta el artículo sin borrar el archivo
+}
+```
+
+### Cómo crear un artículo nuevo
+
+1. Crear `src/content/blog/[slug].md` — el nombre del archivo es la URL final (`/blog/slug`).
+2. Escribir el frontmatter con los campos del schema.
+3. El cuerpo puede ser Markdown o HTML.
+
+Ejemplo mínimo:
+```md
+---
+titulo: "Título del artículo"
+descripcion: "Descripción para SEO y cards."
+categoria: "fitness"
+fecha: "2026-05-27"
+keywords: ["keyword 1", "keyword 2"]
+---
+
+## Sección
+
+Contenido del artículo...
+```
+
+### Reglas evergreen (OBLIGATORIO)
+
+- **NUNCA incluir el año en el slug, título ni keywords.**
+  - Correcto: `que-es-el-imc`, "Qué es el IMC"
+  - Incorrecto: `que-es-el-imc-2026`, "Qué es el IMC 2026"
+- El campo `fecha` solo sirve para ordenar artículos — no sale en la URL.
+
+### Rutas del blog en la navegación
+
+El blog está enlazado desde:
+- **Navbar.astro** — link "Blog" visible en escritorio (oculto en móvil con `.nav-hide`)
+- **Homepage (index.astro)** — link "Blog" en el nav de categorías + sección "DESDE EL BLOG" con los 3 artículos más recientes
+- **Footer.astro** — link "Blog" en la columna "CalcFit"
+
+### Sección "Desde el blog" en la homepage
+
+La homepage muestra los **3 artículos más recientes** (publicado: true) con `getCollection`. La sección aparece solo si hay artículos publicados. Los artículos se ordenan por el campo `fecha` descendente.
+
+### Sitemap
+
+El sitemap se genera automáticamente con `@astrojs/sitemap` — las rutas `/blog/*` quedan incluidas sin configuración adicional.
+
+### Checklist al agregar un artículo
+
+1. Crear `src/content/blog/[slug].md` con frontmatter válido.
+2. Ejecutar `npm run build` para verificar que no hay errores de schema.
+3. El artículo aparecerá automáticamente en `/blog`, en la sección "Desde el blog" de la homepage (si es el más reciente) y en el sitemap.
 
 ---
 
@@ -608,6 +692,7 @@ Siempre verificar `typeof window !== 'undefined'` antes de acceder a localStorag
 
 | Fecha | Acción |
 |---|---|
+| 2026-05-27 | Blog: Content Layer API con `src/content.config.ts` + `src/pages/blog/`. Sección "Desde el blog" en homepage. Links en Navbar, homepage nav y Footer. |
 | 2026-05-23 | Batch 8: +10 calculadoras (cuenta-regresiva, semanas-de-vida, generacion, jubilacion, edad-planetas, cuando-test-embarazo, peso-bebe-semana, lactancia, fecha-concepcion, fibra-diaria). Total: 89. |
 | 2026-05-20 | Badges: eliminada etiqueta `'new'` de todas las cards (65 instancias → `null`). Solo se mantienen `'popular'` y `'essential'`. |
 | 2026-05-20 | Batch 7B: +10 calculadoras (ftp-ciclismo, cadencia-carrera, predictor-carrera, recuperacion-muscular, vitamina-d, proteina-por-comida, ig-comida, omega-ratio, imc-infantil, edad-biologica). Total: 79. |
