@@ -11,6 +11,7 @@ keywords:
   - "agua para deportistas"
   - "deshidratacion sintomas"
 autor: "Equipo CalcFit"
+imagen: "https://images.unsplash.com/photo-1600679472233-eabc13b79f07?ixid=M3w5NjI4Mjh8MHwxfHNlYXJjaHwxfHx3YXRlciUyMGJvdHRsZSUyMGh5ZHJhdGlvbiUyMHNwb3J0cyUyMGRyaW5rJTIwYXRobGV0ZSUyMGd5bSUyMHdvcmtvdXR8ZW58MHwwfHx8MTc3OTkzMDk1MHww&ixlib=rb-4.1.0&w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 unsplashQuery: "water bottle hydration sports drink athlete gym workout"
 ---

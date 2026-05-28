@@ -11,6 +11,7 @@ keywords:
   - "creatina hace daño riniones"
   - "cuándo tomar creatina"
 autor: "Equipo CalcFit"
+imagen: "https://images.unsplash.com/photo-1683394572742-1e471f60fc2a?ixid=M3w5NjI4Mjh8MHwxfHNlYXJjaHwxfHxjcmVhdGluZSUyMHN1cHBsZW1lbnQlMjBneW0lMjB3b3Jrb3V0JTIwcG93ZGVyJTIwc3BvcnRzJTIwbnV0cml0aW9ufGVufDB8MHx8fDE3Nzk5MzA5NTB8MA&ixlib=rb-4.1.0&w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 unsplashQuery: "creatine supplement gym workout powder sports nutrition"
 ---

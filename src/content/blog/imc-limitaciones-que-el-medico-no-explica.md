@@ -11,6 +11,7 @@ keywords:
   - "alternativas al imc"
   - "imc y grasa corporal diferencia"
 autor: "Equipo CalcFit"
+imagen: "https://images.unsplash.com/photo-1522844990619-4951c40f7eda?ixid=M3w5NjI4Mjh8MHwxfHNlYXJjaHwxfHxkb2N0b3IlMjBzY2FsZSUyMHdlaWdodCUyMGJvZHklMjBtZWFzdXJlbWVudCUyMGhlYWx0aCUyMGNoZWNrfGVufDB8MHx8fDE3Nzk5MzA5NTJ8MA&ixlib=rb-4.1.0&w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 unsplashQuery: "doctor scale weight body measurement health check"
 ---

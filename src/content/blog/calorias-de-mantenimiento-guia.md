@@ -11,6 +11,7 @@ keywords:
   - "gasto calorico total diario"
   - "cuantas calorias necesito al dia"
 autor: "Equipo CalcFit"
+imagen: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?ixid=M3w5NjI4Mjh8MHwxfHNlYXJjaHwxfHxudXRyaXRpb24lMjBiYWxhbmNlZCUyMGRpZXQlMjBmb29kJTIwY2Fsb3JpZXMlMjBoZWFsdGh5JTIwbGlmZXN0eWxlfGVufDB8MHx8fDE3Nzk5MzA5NDl8MA&ixlib=rb-4.1.0&w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 unsplashQuery: "nutrition balanced diet food calories healthy lifestyle"
 ---

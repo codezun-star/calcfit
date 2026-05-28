@@ -3,20 +3,13 @@ import Base from '../../layouts/Base.astro';
 import Navbar from '../../components/layout/Navbar.astro';
 import Footer from '../../components/layout/Footer.astro';
 import { getCollection } from 'astro:content';
-import { searchUnsplash } from '../../lib/unsplash';
 
 const todos = await getCollection('blog', (e) => e.data.publicado !== false);
 const sorted = todos.sort((a, b) => b.data.fecha.localeCompare(a.data.fecha));
 
-const UNSPLASH_KEY = import.meta.env.UNSPLASH_ACCESS_KEY ?? '';
-
-const articulos = await Promise.all(
-  sorted.map(async (art) => {
-    const query = art.data.unsplashQuery ?? art.data.keywords.slice(0, 3).join(' ');
-    const photo = await searchUnsplash(query, UNSPLASH_KEY, 'landscape');
-    return { art, photo };
-  })
-);
+function thumbUrl(url: string): string {
+  return url.replace(/&w=\d+/, '&w=400').replace(/&h=\d+/, '&h=267');
+}
 
 const categorias: Record<string, string> = {
   fitness:  'Fitness',
@@ -28,8 +21,8 @@ const categorias: Record<string, string> = {
 ---
 
 <Base
-  title="Blog — CalcFit"
-  description="Artículos sobre fitness, nutrición y salud respaldados por evidencia científica para toda Latinoamérica."
+  title="Blog de Fitness y Nutrición — Artículos con Evidencia Científica | CalcFit"
+  description="Artículos sobre fitness, nutrición y salud respaldados por evidencia científica. Aprende a calcular calorías, perder grasa, mejorar tu rendimiento y más."
 >
   <Navbar />
 
@@ -52,32 +45,32 @@ const categorias: Record<string, string> = {
 
   <!-- Lista -->
   <main style="max-width:1000px; margin:0 auto; padding:40px 20px 80px; min-height:60vh;">
-    {articulos.length === 0 ? (
+    {sorted.length === 0 ? (
       <div style="text-align:center; padding:80px 20px;">
         <p style="font-size:15px; color:var(--muted); font-family:var(--font-body);">No hay artículos publicados aún.</p>
       </div>
     ) : (
       <div style="display:flex; flex-direction:column; gap:1px; background:var(--border);">
-        {articulos.map(({ art, photo }) => (
+        {sorted.map((art) => (
           <a
             href={`/blog/${art.id}`}
             style="display:flex; align-items:flex-start; gap:0; background:var(--cream); text-decoration:none; border-left:3px solid transparent; transition:background 0.15s, border-color 0.15s; overflow:hidden;"
             onmouseover="this.style.background='#EDE9DF'; this.style.borderLeftColor='var(--acid)'"
             onmouseout="this.style.background='var(--cream)'; this.style.borderLeftColor='transparent'"
           >
-            {photo && (
-              <div style="flex-shrink:0; width:180px; min-height:120px; overflow:hidden;">
+            {art.data.imagen && (
+              <div style="flex-shrink:0; width:160px; min-height:107px; overflow:hidden;">
                 <img
-                  src={photo.urls.small}
-                  alt={photo.alt_description ?? art.data.titulo}
-                  width="180"
-                  height="120"
+                  src={thumbUrl(art.data.imagen)}
+                  alt={art.data.titulo}
+                  width="160"
+                  height="107"
                   loading="lazy"
-                  style="width:180px; height:120px; object-fit:cover; display:block;"
+                  style="width:160px; height:107px; object-fit:cover; display:block;"
                 />
               </div>
             )}
-            <div style="flex:1; min-width:0; padding:20px 20px 20px 24px;">
+            <div style="flex:1; min-width:0; padding:18px 16px 18px 20px;">
               <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px; flex-wrap:wrap;">
                 {art.data.categoria && (
                   <span style="font-size:10px; font-weight:500; text-transform:uppercase; letter-spacing:0.08em; background:var(--ink); color:var(--acid); padding:2px 8px; font-family:var(--font-mono);">
@@ -95,7 +88,7 @@ const categorias: Record<string, string> = {
                 </p>
               )}
             </div>
-            <div style="padding:20px 20px 0 0; flex-shrink:0;">
+            <div style="padding:18px 16px 0 0; flex-shrink:0;">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="5" y1="12" x2="19" y2="12"></line>
                 <polyline points="12 5 19 12 12 19"></polyline>

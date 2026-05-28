@@ -11,6 +11,7 @@ keywords:
   - "metabolismo lento mito"
   - "que afecta el metabolismo"
 autor: "Equipo CalcFit"
+imagen: "https://images.unsplash.com/photo-1539137071648-943c78fcbc84?ixid=M3w5NjI4Mjh8MHwxfHNlYXJjaHwxfHxtZXRhYm9saXNtJTIwZW5lcmd5JTIwaGVhbHRoeSUyMGZvb2QlMjBhY3RpdmUlMjBsaWZlc3R5bGUlMjBmaXRuZXNzJTIwd29tYW58ZW58MHwwfHx8MTc3OTkzMDk1M3ww&ixlib=rb-4.1.0&w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 unsplashQuery: "metabolism energy healthy food active lifestyle fitness woman"
 ---

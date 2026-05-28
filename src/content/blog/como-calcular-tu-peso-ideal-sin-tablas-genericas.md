@@ -11,6 +11,7 @@ keywords:
   - "formula peso ideal adulto"
   - "peso ideal no es el mismo para todos"
 autor: "Equipo CalcFit"
+imagen: "https://images.unsplash.com/photo-1522844990619-4951c40f7eda?ixid=M3w5NjI4Mjh8MHwxfHNlYXJjaHwxfHxoZWFsdGh5JTIwd2VpZ2h0JTIwYm9keSUyMHNjYWxlJTIwZml0bmVzcyUyMHdvbWFuJTIwbWFuJTIwbWVhc3VyZW1lbnR8ZW58MHwwfHx8MTc3OTkzMDk0OXww&ixlib=rb-4.1.0&w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 unsplashQuery: "healthy weight body scale fitness woman man measurement"
 ---
