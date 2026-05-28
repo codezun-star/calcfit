@@ -59,7 +59,7 @@ const categorias: Record<string, string> = {
             onmouseout="this.style.background='var(--cream)'; this.style.borderLeftColor='transparent'"
           >
             {art.data.imagen && (
-              <div style="flex-shrink:0; width:160px; min-height:107px; overflow:hidden;">
+              <div class="blog-thumb" style="flex-shrink:0; width:160px; min-height:107px; overflow:hidden;">
                 <img
                   src={thumbUrl(art.data.imagen)}
                   alt={art.data.titulo}
@@ -102,3 +102,9 @@ const categorias: Record<string, string> = {
 
   <Footer />
 </Base>
+
+<style>
+  @media (max-width: 480px) {
+    .blog-thumb { display: none !important; }
+  }
+</style>
