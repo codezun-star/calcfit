@@ -122,6 +122,7 @@ calcfit-astro/
 - **border-radius máximo 2px** en todo — diseño cuadrado, no redondeado
 - Todos los valores numéricos de resultado van en **Bebas Neue**
 - El color acid (`#CAFF00`) es el único color de acento — no agregar otros sin consultar
+- **Todas las URLs sin trailing slash.** Nunca crear rutas ni enlaces con `/` al final. El sitio usa `trailingSlash: 'never'` en `astro.config.mjs` y `build.format: 'file'` (genera `page.html`, no `page/index.html`). Cloudflare Pages redirige `/page/` → `/page` (301) vía `public/_redirects`. Cualquier enlace interno con slash final rompe el canonical y genera un redirect innecesario.
 
 ### Contraste de texto en fondos oscuros
 
