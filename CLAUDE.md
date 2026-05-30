@@ -692,6 +692,7 @@ Siempre verificar `typeof window !== 'undefined'` antes de acceder a localStorag
 
 | Fecha | Acción |
 |---|---|
+| 2026-05-29 | SEO/URLs: `trailingSlash: 'never'` en `astro.config.mjs`. Redirect 301 `/*/→/:splat` en `public/_redirects` (Cloudflare Pages) para normalizar URLs con slash final. |
 | 2026-05-27 | Blog: Content Layer API con `src/content.config.ts` + `src/pages/blog/`. Sección "Desde el blog" en homepage. Links en Navbar, homepage nav y Footer. |
 | 2026-05-23 | Batch 8: +10 calculadoras (cuenta-regresiva, semanas-de-vida, generacion, jubilacion, edad-planetas, cuando-test-embarazo, peso-bebe-semana, lactancia, fecha-concepcion, fibra-diaria). Total: 89. |
 | 2026-05-20 | Badges: eliminada etiqueta `'new'` de todas las cards (65 instancias → `null`). Solo se mantienen `'popular'` y `'essential'`. |

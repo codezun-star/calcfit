@@ -15,4 +15,5 @@ export default defineConfig({
     compress(),
   ],
   output: 'static',
+  trailingSlash: 'never',
 });
