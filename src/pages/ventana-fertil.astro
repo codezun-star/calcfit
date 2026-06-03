@@ -1,0 +1,83 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import VentanaFertilCalculator from '../components/calculators/VentanaFertilCalculator';
+---
+
+<CalculatorLayout
+  title="Ventana Fértil — 6 Días con Mayor Probabilidad de Concepción | CalcFit"
+  description="Calcula tu ventana fértil exacta: los 6 días de mayor probabilidad de concepción según tu ciclo. Incluye % de probabilidad por día. Gratis, sin registro."
+  calculatorName="Ventana Fértil"
+  breadcrumbSlug="ventana-fertil"
+  ogImage="/og/ventana-fertil.jpg"
+  keywords="ventana fértil, días fértiles del ciclo, cuándo soy más fértil, probabilidad de concepción por día, calculadora fertilidad, días para quedar embarazada"
+  faqs={[
+    { q: '¿Qué es la ventana fértil y cuántos días dura?', a: 'La ventana fértil son los 6 días del ciclo menstrual en los que es posible la concepción: los 5 días previos a la ovulación más el día de la ovulación. Aunque el óvulo solo es viable 12–24 horas, los espermatozoides pueden sobrevivir hasta 5 días en el tracto reproductor femenino, de ahí que la ventana sea de 6 días.' },
+    { q: '¿Cuál es el día de mayor fertilidad dentro de la ventana?', a: 'El día de mayor probabilidad de concepción es el que precede inmediatamente a la ovulación (día −1), con una probabilidad estimada del 33%. Le siguen los días −2 (27%) y −3 (22%). El día de la ovulación en sí tiene una probabilidad del 15% porque el óvulo se está agotando. Estas cifras provienen del estudio de Wilcox et al. (1995) en New England Journal of Medicine.' },
+    { q: '¿Cómo sé cuándo es mi ovulación?', a: 'La ovulación ocurre aproximadamente 14 días ANTES del inicio del siguiente período, independientemente de la duración del ciclo. En un ciclo de 28 días sucede alrededor del día 14; en uno de 32 días, alrededor del día 18. Para confirmarlo con mayor precisión puedes usar tiras de LH (test de ovulación), medir la temperatura basal o monitorear el moco cervical (método Billings).' },
+    { q: '¿Puedo quedar embarazada fuera de la ventana fértil?', a: 'La probabilidad es muy baja pero no nula si el ciclo varía. Los espermatozoides depositados días antes de la ovulación pueden sobrevivir y fecundar el óvulo si la ovulación se adelanta. En ciclos irregulares, la ventana puede desplazarse significativamente, lo que hace más difícil predecirla con precisión usando solo el método del calendario.' },
+    { q: '¿La ventana fértil sirve también como método anticonceptivo?', a: 'El método del calendario o de la ventana fértil tiene una tasa de fallo del 9% con uso perfecto y del 24% con uso típico (fallos humanos). No es tan fiable como los métodos anticonceptivos modernos. Los ciclos irregulares, el estrés, enfermedades y cambios de horario pueden desplazar la ovulación, haciendo el método muy poco predecible.' },
+  ]}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Ventana<br><span style="color: var(--acid);">Fértil</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Calcula los 6 días de mayor probabilidad de concepción de tu ciclo, con el porcentaje exacto por día según investigación científica.
+    </p>
+  </div>
+
+  <VentanaFertilCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cómo se calcula la ventana fértil?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 16px;">
+      La ventana fértil se calcula a partir del día estimado de ovulación, que ocurre aproximadamente <strong>14 días antes del inicio del siguiente período</strong>. Sumando los 5 días anteriores a la ovulación (cuando los espermatozoides pueden sobrevivir en espera) y el propio día de la ovulación, se obtienen los 6 días de la ventana fértil.
+    </p>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      Las probabilidades de concepción por día provienen del estudio clásico de Wilcox et al. publicado en el <em>New England Journal of Medicine</em> (1995), basado en 625 ciclos menstruales monitorizados.
+    </p>
+
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px;">
+      <thead>
+        <tr style="background: var(--ink); color: var(--cream);">
+          <th style="padding: 10px 12px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Día respecto a ovulación</th>
+          <th style="padding: 10px 12px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Probabilidad de concepción</th>
+          <th style="padding: 10px 12px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Clasificación</th>
+        </tr>
+      </thead>
+      <tbody>
+        {[
+          { dia: '−5', prob: '10%', label: 'Fértil' },
+          { dia: '−4', prob: '14%', label: 'Fértil' },
+          { dia: '−3', prob: '22%', label: 'Muy fértil' },
+          { dia: '−2', prob: '27%', label: 'Muy fértil' },
+          { dia: '−1', prob: '33%', label: 'Más fértil — PICO' },
+          { dia: '0 (ovulación)', prob: '15%', label: 'Alta fertilidad' },
+        ].map((r, i) => (
+          <tr style={`background: ${i % 2 === 0 ? 'var(--cream)' : 'white'}`}>
+            <td style="padding: 9px 12px; color: var(--ink); font-weight: 600;">{r.dia}</td>
+            <td style="padding: 9px 12px; color: var(--acid); font-family: var(--font-display); font-size: 16px;">{r.prob}</td>
+            <td style="padding: 9px 12px; color: var(--muted);">{r.label}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {[
+        { q: '¿Qué es la ventana fértil y cuántos días dura?', a: 'La ventana fértil son los 6 días del ciclo menstrual en los que es posible la concepción: los 5 días previos a la ovulación más el día de la ovulación. Aunque el óvulo solo es viable 12–24 horas, los espermatozoides pueden sobrevivir hasta 5 días en el tracto reproductor femenino, de ahí que la ventana sea de 6 días.' },
+        { q: '¿Cuál es el día de mayor fertilidad dentro de la ventana?', a: 'El día de mayor probabilidad de concepción es el que precede inmediatamente a la ovulación (día −1), con una probabilidad estimada del 33%. Le siguen los días −2 (27%) y −3 (22%). El día de la ovulación en sí tiene una probabilidad del 15% porque el óvulo se está agotando. Estas cifras provienen del estudio de Wilcox et al. (1995) en New England Journal of Medicine.' },
+        { q: '¿Cómo sé cuándo es mi ovulación?', a: 'La ovulación ocurre aproximadamente 14 días ANTES del inicio del siguiente período, independientemente de la duración del ciclo. En un ciclo de 28 días sucede alrededor del día 14; en uno de 32 días, alrededor del día 18. Para confirmarlo con mayor precisión puedes usar tiras de LH (test de ovulación), medir la temperatura basal o monitorear el moco cervical (método Billings).' },
+        { q: '¿Puedo quedar embarazada fuera de la ventana fértil?', a: 'La probabilidad es muy baja pero no nula si el ciclo varía. Los espermatozoides depositados días antes de la ovulación pueden sobrevivir y fecundar el óvulo si la ovulación se adelanta. En ciclos irregulares, la ventana puede desplazarse significativamente, lo que hace más difícil predecirla con precisión usando solo el método del calendario.' },
+        { q: '¿La ventana fértil sirve también como método anticonceptivo?', a: 'El método del calendario o de la ventana fértil tiene una tasa de fallo del 9% con uso perfecto y del 24% con uso típico (fallos humanos). No es tan fiable como los métodos anticonceptivos modernos. Los ciclos irregulares, el estrés, enfermedades y cambios de horario pueden desplazar la ovulación, haciendo el método muy poco predecible.' },
+      ].map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

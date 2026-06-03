@@ -1,0 +1,78 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import EdadGestacionalCalculator from '../components/calculators/EdadGestacionalCalculator';
+---
+
+<CalculatorLayout
+  title="Calculadora de Edad Gestacional — Semanas Exactas de Embarazo | CalcFit"
+  description="Calcula la edad gestacional exacta en semanas y días desde la FUR o la fecha de concepción. Muestra la fecha probable de parto y el hito actual del bebé. Gratis."
+  calculatorName="Edad Gestacional"
+  breadcrumbSlug="edad-gestacional"
+  ogImage="/og/edad-gestacional.jpg"
+  keywords="calculadora edad gestacional, semanas de embarazo exactas, cuántas semanas tengo de embarazo, semanas desde la FUR, fecha probable de parto, semanas de gestación"
+  faqs={[
+    { q: '¿Qué es la edad gestacional y cómo se mide?', a: 'La edad gestacional es el tiempo transcurrido desde el primer día de la última regla (FUR), no desde la concepción. Se expresa en semanas y días (ej. 12 semanas + 3 días). La FUR se usa como punto de partida porque la fecha de concepción exacta rara vez se conoce con precisión, y la ovulación ocurre ~14 días después de la FUR.' },
+    { q: '¿Cuál es la diferencia entre edad gestacional y edad embrionaria?', a: 'La edad gestacional (FUR) es 2 semanas mayor que la edad embrionaria o desde la concepción. Si tienes 12 semanas de gestación, el embrión lleva solo 10 semanas de desarrollo real. La ecografía del primer trimestre (semanas 11–13) es el método más preciso para confirmar la edad gestacional, con un margen de error de ±3–5 días.' },
+    { q: '¿Cuándo se considera que un bebé nació a término?', a: 'Un bebé se considera a término cuando nace entre las semanas 37 y 42. Antes de la semana 37 es prematuro. La semana 40 es el término completo (280 días desde la FUR, 266 desde la concepción). Entre semanas 37–38 es "a término temprano" y entre 39–40 "a término completo". Más de 42 semanas es postérmino y puede requerir inducción.' },
+    { q: '¿Qué tan precisa es la fecha probable de parto (FPP)?', a: 'La fecha probable de parto es una estimación. Solo el 5% de los bebés nace exactamente en la FPP. El 80% nace dentro de los 10 días previos o posteriores. La ecografía del primer trimestre (semana 11–13) es más precisa que el cálculo por FUR para determinar la FPP, especialmente en ciclos irregulares.' },
+    { q: '¿Cómo afectan los ciclos irregulares al cálculo de la edad gestacional?', a: 'En ciclos irregulares, la ovulación no ocurre en el día 14 del ciclo, lo que puede hacer que la edad gestacional calculada por FUR sea inexacta. La ecografía del primer trimestre es la herramienta más fiable para establecer la edad gestacional correcta cuando el ciclo es irregular o se desconoce la FUR.' },
+  ]}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Edad<br><span style="color: var(--acid);">Gestacional</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Calcula las semanas y días exactos de embarazo desde tu última regla o desde la fecha de concepción.
+    </p>
+  </div>
+
+  <EdadGestacionalCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cómo se calcula la edad gestacional?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 16px;">
+      La edad gestacional se calcula sumando los días transcurridos desde el <strong>primer día de la última regla (FUR)</strong> hasta hoy. Se divide en semanas y días (ej. 12 semanas + 3 días). La fecha probable de parto (FPP) se obtiene sumando <strong>280 días a la FUR</strong> (regla de Naegele).
+    </p>
+
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px;">
+      <thead>
+        <tr style="background: var(--ink); color: var(--cream);">
+          <th style="padding: 10px 12px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Etapa</th>
+          <th style="padding: 10px 12px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Semanas</th>
+          <th style="padding: 10px 12px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Hito principal</th>
+        </tr>
+      </thead>
+      <tbody>
+        {[
+          { etapa: '1er trimestre', sem: '1–13', hito: 'Formación de todos los órganos principales' },
+          { etapa: '2º trimestre', sem: '14–27', hito: 'Crecimiento y maduración, movimientos perceptibles' },
+          { etapa: '3er trimestre', sem: '28–40', hito: 'Maduración pulmonar, ganancia de peso, preparación para el parto' },
+          { etapa: 'A término', sem: '37–42', hito: 'Bebé listo para nacer' },
+        ].map((r, i) => (
+          <tr style={`background: ${i % 2 === 0 ? 'var(--cream)' : 'white'}`}>
+            <td style="padding: 9px 12px; color: var(--ink); font-weight: 600;">{r.etapa}</td>
+            <td style="padding: 9px 12px; color: var(--acid); font-family: var(--font-display); font-size: 16px;">{r.sem}</td>
+            <td style="padding: 9px 12px; color: var(--muted);">{r.hito}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {[
+        { q: '¿Qué es la edad gestacional y cómo se mide?', a: 'La edad gestacional es el tiempo transcurrido desde el primer día de la última regla (FUR), no desde la concepción. Se expresa en semanas y días (ej. 12 semanas + 3 días). La FUR se usa como punto de partida porque la fecha de concepción exacta rara vez se conoce con precisión, y la ovulación ocurre ~14 días después de la FUR.' },
+        { q: '¿Cuál es la diferencia entre edad gestacional y edad embrionaria?', a: 'La edad gestacional (FUR) es 2 semanas mayor que la edad embrionaria o desde la concepción. Si tienes 12 semanas de gestación, el embrión lleva solo 10 semanas de desarrollo real. La ecografía del primer trimestre (semanas 11–13) es el método más preciso para confirmar la edad gestacional, con un margen de error de ±3–5 días.' },
+        { q: '¿Cuándo se considera que un bebé nació a término?', a: 'Un bebé se considera a término cuando nace entre las semanas 37 y 42. Antes de la semana 37 es prematuro. La semana 40 es el término completo (280 días desde la FUR, 266 desde la concepción). Entre semanas 37–38 es "a término temprano" y entre 39–40 "a término completo". Más de 42 semanas es postérmino y puede requerir inducción.' },
+        { q: '¿Qué tan precisa es la fecha probable de parto (FPP)?', a: 'La fecha probable de parto es una estimación. Solo el 5% de los bebés nace exactamente en la FPP. El 80% nace dentro de los 10 días previos o posteriores. La ecografía del primer trimestre (semana 11–13) es más precisa que el cálculo por FUR para determinar la FPP, especialmente en ciclos irregulares.' },
+        { q: '¿Cómo afectan los ciclos irregulares al cálculo de la edad gestacional?', a: 'En ciclos irregulares, la ovulación no ocurre en el día 14 del ciclo, lo que puede hacer que la edad gestacional calculada por FUR sea inexacta. La ecografía del primer trimestre es la herramienta más fiable para establecer la edad gestacional correcta cuando el ciclo es irregular o se desconoce la FUR.' },
+      ].map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

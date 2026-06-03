@@ -1,0 +1,80 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import KickCounterCalculator from '../components/calculators/KickCounterCalculator';
+---
+
+<CalculatorLayout
+  title="Contador de Movimientos Fetales — 10 Patadas en 2 Horas | CalcFit"
+  description="Registra los movimientos de tu bebé y recibe alerta si bajan de lo normal. Método de las 10 patadas en 2 horas recomendado por ACOG. Desde semana 28. Gratis."
+  calculatorName="Contador de Movimientos Fetales"
+  breadcrumbSlug="kick-counter"
+  ogImage="/og/kick-counter.jpg"
+  keywords="contador de patadas fetal, movimientos fetales por hora, cuántas patadas debe dar el bebé, kick counter embarazo, monitoreo movimientos fetales semana 28"
+  faqs={[
+    { q: '¿Cuántos movimientos fetales son normales por día?', a: 'A partir de la semana 28, se espera que el bebé realice al menos 10 movimientos en un período de 2 horas (método de Cardiff). La mayoría de los bebés alcanzan los 10 movimientos en menos de 30 minutos. No hay un número fijo diario universal, pero lo importante es que el patrón sea regular y consistente en comparación con días anteriores.' },
+    { q: '¿Desde cuándo debo contar los movimientos fetales?', a: 'Se recomienda iniciar el conteo regular a partir de la semana 28 de gestación, cuando los movimientos ya son consistentes. Antes de esta semana, los movimientos son más irregulares y difíciles de contar. El mejor momento para el conteo es después de comer, cuando el bebé suele estar más activo.' },
+    { q: '¿Qué hago si mi bebé se mueve menos de lo normal?', a: 'Si en 2 horas de conteo no alcanzas los 10 movimientos, no esperes hasta el día siguiente: contacta a tu médico u obstétrica o ve a urgencias. Una reducción brusca de los movimientos puede ser una señal de sufrimiento fetal. Es mejor acudir a una revisión innecesaria que pasar por alto una señal importante.' },
+    { q: '¿Por qué el bebé se mueve más después de comer?', a: 'Tras una comida, la glucosa materna aumenta, lo que activa al bebé. También el bebé tiene ciclos de sueño-vigilia de 20–40 minutos, y puede ser que lo encuentres dormido al inicio del conteo. Si no hay movimientos en 1 hora, toma algo dulce (zumo, fruta), recuéstate sobre el lado izquierdo y espera 30 minutos más.' },
+    { q: '¿Qué se considera un movimiento fetal?', a: 'Un movimiento fetal es cualquier patada, golpe, rollo, giro o burbujeo que sientas en el abdomen. Los movimientos rítmicos repetidos (como hipo) se cuentan como un solo movimiento. Las contracciones de Braxton Hicks no son movimientos fetales.' },
+  ]}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Contador de<br><span style="color: var(--acid);">Movimientos Fetales</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Registra las patadas de tu bebé y recibe una alerta si no alcanza los 10 movimientos en 2 horas. Recomendado desde la semana 28.
+    </p>
+  </div>
+
+  <KickCounterCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">Método de las 10 patadas (Cardiff)</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 16px;">
+      El método de Cardiff, avalado por el ACOG (Colegio Americano de Obstetras y Ginecólogos), consiste en contar los movimientos fetales hasta alcanzar <strong>10 movimientos en un máximo de 2 horas</strong>. La mayoría de los bebés activos lo logran en 20–30 minutos.
+    </p>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      Si no se alcanzan los 10 movimientos en 2 horas, se debe contactar al médico inmediatamente. Una reducción del 50% en el patrón habitual de movimientos también es motivo de consulta urgente.
+    </p>
+
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px;">
+      <thead>
+        <tr style="background: var(--ink); color: var(--cream);">
+          <th style="padding: 10px 12px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Resultado del conteo</th>
+          <th style="padding: 10px 12px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Interpretación</th>
+          <th style="padding: 10px 12px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        {[
+          { result: '10 mov. en < 2 h', interp: 'Normal', accion: 'Continúa el monitoreo diario' },
+          { result: '< 10 mov. en 2 h', interp: 'Alerta', accion: 'Llama a tu médico o ve a urgencias' },
+          { result: 'Reducción > 50%', interp: 'Cambio de patrón', accion: 'Consulta médica ese mismo día' },
+        ].map((r, i) => (
+          <tr style={`background: ${i % 2 === 0 ? 'var(--cream)' : 'white'}`}>
+            <td style="padding: 9px 12px; color: var(--ink); font-weight: 600;">{r.result}</td>
+            <td style={`padding: 9px 12px; color: ${i === 0 ? '#34D399' : '#F87171'}; font-family: var(--font-mono);`}>{r.interp}</td>
+            <td style="padding: 9px 12px; color: var(--muted);">{r.accion}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {[
+        { q: '¿Cuántos movimientos fetales son normales por día?', a: 'A partir de la semana 28, se espera que el bebé realice al menos 10 movimientos en un período de 2 horas (método de Cardiff). La mayoría de los bebés alcanzan los 10 movimientos en menos de 30 minutos. No hay un número fijo diario universal, pero lo importante es que el patrón sea regular y consistente en comparación con días anteriores.' },
+        { q: '¿Desde cuándo debo contar los movimientos fetales?', a: 'Se recomienda iniciar el conteo regular a partir de la semana 28 de gestación, cuando los movimientos ya son consistentes. Antes de esta semana, los movimientos son más irregulares y difíciles de contar. El mejor momento para el conteo es después de comer, cuando el bebé suele estar más activo.' },
+        { q: '¿Qué hago si mi bebé se mueve menos de lo normal?', a: 'Si en 2 horas de conteo no alcanzas los 10 movimientos, no esperes hasta el día siguiente: contacta a tu médico u obstétrica o ve a urgencias. Una reducción brusca de los movimientos puede ser una señal de sufrimiento fetal. Es mejor acudir a una revisión innecesaria que pasar por alto una señal importante.' },
+        { q: '¿Por qué el bebé se mueve más después de comer?', a: 'Tras una comida, la glucosa materna aumenta, lo que activa al bebé. También el bebé tiene ciclos de sueño-vigilia de 20–40 minutos, y puede ser que lo encuentres dormido al inicio del conteo. Si no hay movimientos en 1 hora, toma algo dulce (zumo, fruta), recuéstate sobre el lado izquierdo y espera 30 minutos más.' },
+        { q: '¿Qué se considera un movimiento fetal?', a: 'Un movimiento fetal es cualquier patada, golpe, rollo, giro o burbujeo que sientas en el abdomen. Los movimientos rítmicos repetidos (como hipo) se cuentan como un solo movimiento. Las contracciones de Braxton Hicks no son movimientos fetales.' },
+      ].map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

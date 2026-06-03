@@ -1,0 +1,81 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import CompatibilidadLactanciaCalculator from '../components/calculators/CompatibilidadLactanciaCalculator';
+---
+
+<CalculatorLayout
+  title="Medicamentos y Lactancia — Compatibilidad con Lactancia Materna | CalcFit"
+  description="Consulta si un medicamento es compatible con la lactancia materna. Base de datos con +30 medicamentos comunes, clasificación Hale L1–L5 y alternativas seguras. Gratis."
+  calculatorName="Medicamentos y Lactancia"
+  breadcrumbSlug="compatibilidad-lactancia"
+  ogImage="/og/compatibilidad-lactancia.jpg"
+  keywords="medicamentos compatibles con lactancia materna, ibuprofeno lactancia, paracetamol lactancia, antibiótico lactancia, escala Hale lactancia, qué medicamento puedo tomar dando el pecho"
+  faqs={[
+    { q: '¿Qué es la escala Hale de compatibilidad con la lactancia?', a: 'La escala Hale (de Thomas Hale, farmacólogo) clasifica los medicamentos en 5 niveles de riesgo durante la lactancia: L1 (Más seguro) → sin riesgo demostrado; L2 (Más seguro) → estudios limitados sin efectos adversos; L3 (Moderadamente seguro) → efectos adversos posibles pero leves; L4 (Posiblemente peligroso) → evidencia de riesgo; L5 (Contraindicado) → riesgo mayor que el beneficio. Esta clasificación es el estándar de referencia mundial.' },
+    { q: '¿El paracetamol y el ibuprofeno son seguros durante la lactancia?', a: 'Sí, ambos están clasificados como L1 (máxima seguridad) durante la lactancia. El paracetamol pasa en cantidades mínimas a la leche materna y no afecta al lactante a dosis habituales. El ibuprofeno también es seguro y es preferible al naproxeno (L3) por su vida media más corta. Evitar la aspirina a dosis altas (solo es aceptable en dosis antiagregante).' },
+    { q: '¿Los antibióticos se pueden tomar durante la lactancia?', a: 'Depende del antibiótico: amoxicilina (L1) y azitromicina (L2) son generalmente seguros. La ciprofloxacina es L3 y se prefiere evitar. La doxiciclina está contraindicada en tratamientos largos. Siempre consulta con tu médico, que puede prescribir el antibiótico más compatible con la lactancia para tu infección específica.' },
+    { q: '¿Los antidepresivos son seguros si doy el pecho?', a: 'La sertralina es el antidepresivo de primera elección durante la lactancia (L2): niveles muy bajos en leche y en sangre del lactante. La fluoxetina requiere más precaución por acumulación de su metabolito. En ningún caso debe interrumpirse un tratamiento antidepresivo sin supervisión médica: la depresión postparto no tratada es un riesgo mayor.' },
+    { q: '¿Dónde puedo consultar información actualizada sobre medicamentos y lactancia?', a: 'Las fuentes más fiables son: LactMed (NIH, base de datos gratuita en línea), el libro Medications and Mothers Milk de Thomas Hale, el portal e-lactancia.org (en español, del Hospital Marina Alta de España) y la aplicación LactApp. Siempre consulta con tu médico o farmacéutico antes de tomar cualquier medicamento.' },
+  ]}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Medicamentos<br><span style="color: var(--acid);">y Lactancia</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Consulta la compatibilidad de más de 30 medicamentos comunes con la lactancia materna según la clasificación de Hale (L1–L5).
+    </p>
+  </div>
+
+  <CompatibilidadLactanciaCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">Escala Hale de compatibilidad con la lactancia</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      La clasificación de Hale es el estándar internacional para evaluar la seguridad de los medicamentos durante la lactancia materna. Se basa en la evidencia disponible sobre el paso del fármaco a la leche y sus efectos en el lactante.
+    </p>
+
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px;">
+      <thead>
+        <tr style="background: var(--ink); color: var(--cream);">
+          <th style="padding: 10px 12px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Nivel</th>
+          <th style="padding: 10px 12px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Denominación</th>
+          <th style="padding: 10px 12px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Descripción</th>
+          <th style="padding: 10px 12px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Ejemplos</th>
+        </tr>
+      </thead>
+      <tbody>
+        {[
+          { nivel: 'L1', nombre: 'Compatible', desc: 'Máxima seguridad. Estudios controlados sin efectos adversos.', ej: 'Paracetamol, ibuprofeno, loratadina', color: '#34D399' },
+          { nivel: 'L2', nombre: 'Probablemente compatible', desc: 'Estudios limitados sin evidencia de riesgo aumentado.', ej: 'Sertralina, azitromicina, omeprazol', color: '#34D399' },
+          { nivel: 'L3', nombre: 'Moderadamente seguro', desc: 'Sin estudios controlados. Efectos adversos posibles.', ej: 'Naproxeno, ciprofloxacina, alprazolam', color: '#CAFF00' },
+          { nivel: 'L4', nombre: 'Posiblemente peligroso', desc: 'Evidencia de riesgo para el lactante.', ej: 'Codeína, diazepam, doxiciclina', color: '#FB923C' },
+          { nivel: 'L5', nombre: 'Contraindicado', desc: 'Riesgo demostrado mayor que el beneficio.', ej: 'Metotrexato, atorvastatina', color: '#F87171' },
+        ].map((r, i) => (
+          <tr style={`background: ${i % 2 === 0 ? 'var(--cream)' : 'white'}`}>
+            <td style={`padding: 9px 12px; color: ${r.color}; font-family: var(--font-display); font-size: 18px;`}>{r.nivel}</td>
+            <td style="padding: 9px 12px; color: var(--ink); font-weight: 600;">{r.nombre}</td>
+            <td style="padding: 9px 12px; color: var(--muted); font-size: 12px;">{r.desc}</td>
+            <td style="padding: 9px 12px; color: var(--muted); font-size: 12px;">{r.ej}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {[
+        { q: '¿Qué es la escala Hale de compatibilidad con la lactancia?', a: 'La escala Hale (de Thomas Hale, farmacólogo) clasifica los medicamentos en 5 niveles de riesgo durante la lactancia: L1 (Más seguro) → sin riesgo demostrado; L2 (Más seguro) → estudios limitados sin efectos adversos; L3 (Moderadamente seguro) → efectos adversos posibles pero leves; L4 (Posiblemente peligroso) → evidencia de riesgo; L5 (Contraindicado) → riesgo mayor que el beneficio. Esta clasificación es el estándar de referencia mundial.' },
+        { q: '¿El paracetamol y el ibuprofeno son seguros durante la lactancia?', a: 'Sí, ambos están clasificados como L1 (máxima seguridad) durante la lactancia. El paracetamol pasa en cantidades mínimas a la leche materna y no afecta al lactante a dosis habituales. El ibuprofeno también es seguro y es preferible al naproxeno (L3) por su vida media más corta. Evitar la aspirina a dosis altas (solo es aceptable en dosis antiagregante).' },
+        { q: '¿Los antibióticos se pueden tomar durante la lactancia?', a: 'Depende del antibiótico: amoxicilina (L1) y azitromicina (L2) son generalmente seguros. La ciprofloxacina es L3 y se prefiere evitar. La doxiciclina está contraindicada en tratamientos largos. Siempre consulta con tu médico, que puede prescribir el antibiótico más compatible con la lactancia para tu infección específica.' },
+        { q: '¿Los antidepresivos son seguros si doy el pecho?', a: 'La sertralina es el antidepresivo de primera elección durante la lactancia (L2): niveles muy bajos en leche y en sangre del lactante. La fluoxetina requiere más precaución por acumulación de su metabolito. En ningún caso debe interrumpirse un tratamiento antidepresivo sin supervisión médica: la depresión postparto no tratada es un riesgo mayor.' },
+        { q: '¿Dónde puedo consultar información actualizada sobre medicamentos y lactancia?', a: 'Las fuentes más fiables son: LactMed (NIH, base de datos gratuita en línea), el libro Medications and Mothers Milk de Thomas Hale, el portal e-lactancia.org (en español, del Hospital Marina Alta de España) y la aplicación LactApp. Siempre consulta con tu médico o farmacéutico antes de tomar cualquier medicamento.' },
+      ].map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

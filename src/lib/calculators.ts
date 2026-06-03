@@ -3180,6 +3180,644 @@ export function calcularFechaConcepcion(
   };
 }
 
+// ─── BATCH EMBARAZO EXTRA ────────────────────────────────────────────────────
+
+// ─── VENTANA FÉRTIL CON PROBABILIDADES ───────────────────────────────────────
+export interface DiaFertilidad {
+  fecha: Date;
+  diaRelativo: number;
+  probabilidad: number;
+  etiqueta: string;
+  color: string;
+}
+
+export interface VentanaFertilResult {
+  ovulacion: Date;
+  diasFertiles: DiaFertilidad[];
+  inicioVentana: Date;
+  finVentana: Date;
+  diasHastaOvulacion: number;
+  proximoCiclo: Date;
+  enVentanaAhora: boolean;
+}
+
+export function calcularVentanaFertil(
+  ultimaMenstruacion: Date,
+  duracionCiclo: number,
+): VentanaFertilResult {
+  const diaOvulacion = duracionCiclo - 14;
+  const ovulacion = new Date(ultimaMenstruacion.getTime() + diaOvulacion * 86400000);
+  const hoy = new Date();
+
+  const probs: { diaRelativo: number; prob: number; etiqueta: string; color: string }[] = [
+    { diaRelativo: -5, prob: 10, etiqueta: 'Fértil',     color: '#60A5FA' },
+    { diaRelativo: -4, prob: 14, etiqueta: 'Fértil',     color: '#60A5FA' },
+    { diaRelativo: -3, prob: 22, etiqueta: 'Muy fértil', color: '#FB923C' },
+    { diaRelativo: -2, prob: 27, etiqueta: 'Muy fértil', color: '#FB923C' },
+    { diaRelativo: -1, prob: 33, etiqueta: 'Más fértil', color: '#CAFF00' },
+    { diaRelativo:  0, prob: 15, etiqueta: 'Ovulación',  color: '#F43F5E' },
+  ];
+
+  const diasFertiles: DiaFertilidad[] = probs.map(p => ({
+    fecha: new Date(ovulacion.getTime() + p.diaRelativo * 86400000),
+    diaRelativo: p.diaRelativo,
+    probabilidad: p.prob,
+    etiqueta: p.etiqueta,
+    color: p.color,
+  }));
+
+  const inicioVentana = diasFertiles[0].fecha;
+  const finVentana    = diasFertiles[5].fecha;
+  const diasHastaOvulacion = Math.ceil((ovulacion.getTime() - hoy.getTime()) / 86400000);
+  const proximoCiclo  = new Date(ultimaMenstruacion.getTime() + duracionCiclo * 86400000);
+  const enVentanaAhora = hoy >= inicioVentana && hoy <= new Date(finVentana.getTime() + 86400000);
+
+  return { ovulacion, diasFertiles, inicioVentana, finVentana, diasHastaOvulacion, proximoCiclo, enVentanaAhora };
+}
+
+// ─── EDAD GESTACIONAL ─────────────────────────────────────────────────────────
+export interface EdadGestacionalResult {
+  semanas: number;
+  diasExtra: number;
+  totalDias: number;
+  trimestre: 1 | 2 | 3;
+  fpp: Date;
+  fechaConcepcionEstimada: Date;
+  etapa: string;
+  hitoActual: string;
+  diasParaParto: number;
+  porcentajeCompletado: number;
+}
+
+export function calcularEdadGestacional(
+  tipo: 'fur' | 'concepcion',
+  fecha: Date,
+): EdadGestacionalResult {
+  const fur = tipo === 'fur'
+    ? fecha
+    : new Date(fecha.getTime() - 14 * 86400000);
+
+  const fechaConcepcionEstimada = new Date(fur.getTime() + 14 * 86400000);
+  const hoy = new Date();
+  const totalDias = Math.floor((hoy.getTime() - fur.getTime()) / 86400000);
+  const semanas   = Math.floor(totalDias / 7);
+  const diasExtra = totalDias % 7;
+  const fpp       = new Date(fur.getTime() + 280 * 86400000);
+  const diasParaParto = Math.max(0, Math.ceil((fpp.getTime() - hoy.getTime()) / 86400000));
+  const porcentajeCompletado = Math.min(100, Math.round((totalDias / 280) * 100));
+  const trimestre: 1 | 2 | 3 = semanas < 14 ? 1 : semanas < 28 ? 2 : 3;
+
+  let etapa: string;
+  let hitoActual: string;
+  if (semanas < 6)       { etapa = 'Embrión temprano';         hitoActual = 'Implantación completada. Inicio de la formación del saco amniótico y vellosidades coriónicas.'; }
+  else if (semanas < 9)  { etapa = 'Período embrionario';      hitoActual = 'El corazón ya late (semana 6). Se forman el tubo neural, los miembros y los principales órganos.'; }
+  else if (semanas < 14) { etapa = 'Final del 1er trimestre';  hitoActual = 'Todos los órganos están formados. El bebé puede cerrar el puño y tiene huellas dactilares visibles.'; }
+  else if (semanas < 20) { etapa = '2° trimestre temprano';    hitoActual = 'El bebé puede oír. Movimientos visibles en ecografía. Se distingue el sexo del bebé.'; }
+  else if (semanas < 28) { etapa = '2° trimestre tardío';      hitoActual = 'El bebé abre los ojos. Ciclos de sueño-vigilia establecidos. Los pulmones maduran.'; }
+  else if (semanas < 32) { etapa = '3er trimestre temprano';   hitoActual = 'El cerebro se desarrolla rápidamente. El bebé almacena grasa y gana peso notable.'; }
+  else if (semanas < 37) { etapa = 'Pretérmino tardío';        hitoActual = 'Pulmones casi maduros. El bebé adopta posición cefálica. Ganancia de peso final.'; }
+  else                   { etapa = 'A término completo';       hitoActual = 'El bebé está listo para nacer. Peso aprox. 3–3.5 kg. El parto puede ocurrir en cualquier momento.'; }
+
+  return { semanas, diasExtra, totalDias, trimestre, fpp, fechaConcepcionEstimada, etapa, hitoActual, diasParaParto, porcentajeCompletado };
+}
+
+// ─── TRIMESTRE DEL EMBARAZO ───────────────────────────────────────────────────
+export interface HitoEmbarazo { semana: number; descripcion: string; }
+
+export interface TrimestreEmbarazoResult {
+  trimestre: 1 | 2 | 3;
+  semanasRestantesTrimestre: number;
+  semanaInicioTrimestre: number;
+  semanaFinTrimestre: number;
+  hitosBebe: HitoEmbarazo[];
+  hitosEmbarazada: string[];
+  checklistMedico: string[];
+  color: string;
+}
+
+export function calcularTrimestreEmbarazo(semanas: number): TrimestreEmbarazoResult {
+  let trimestre: 1 | 2 | 3;
+  let semanaInicioTrimestre: number;
+  let semanaFinTrimestre: number;
+  let color: string;
+  let hitosBebe: HitoEmbarazo[];
+  let hitosEmbarazada: string[];
+  let checklistMedico: string[];
+
+  if (semanas <= 13) {
+    trimestre = 1; semanaInicioTrimestre = 1; semanaFinTrimestre = 13; color = '#60A5FA';
+    hitosBebe = [
+      { semana: 6,  descripcion: 'El corazón comienza a latir (110–160 latidos/min)' },
+      { semana: 8,  descripcion: 'Tamaño de una frambuesa. Se forman todos los órganos principales' },
+      { semana: 10, descripcion: 'Dedos completamente formados. Puede mover los miembros' },
+      { semana: 12, descripcion: 'Puede abrir y cerrar el puño. Se ven las huellas dactilares' },
+      { semana: 13, descripcion: 'Tamaño de un limón. El riesgo de aborto cae drásticamente' },
+    ];
+    hitosEmbarazada = ['Náuseas y fatiga intensa (primer trimestre)', 'Aumento del pecho y sensibilidad mamaria', 'Primera ecografía (semanas 11–13) con translucencia nucal', 'Análisis de sangre del primer trimestre'];
+    checklistMedico = ['Primera consulta prenatal antes de la semana 10', 'Analítica completa + grupo sanguíneo + serologías', 'Ecografía 11–13 semanas + marcadores bioquímicos', 'Comenzar ácido fólico 400–800 mcg/día (antes y durante)', 'Evitar alcohol, tabaco y medicamentos sin prescripción'];
+  } else if (semanas <= 26) {
+    trimestre = 2; semanaInicioTrimestre = 14; semanaFinTrimestre = 26; color = '#34D399';
+    hitosBebe = [
+      { semana: 16, descripcion: 'Tamaño de un aguacate. Puede escuchar sonidos y voces' },
+      { semana: 18, descripcion: 'Se distingue el sexo en ecografía. Bosteza y se chupa el pulgar' },
+      { semana: 20, descripcion: 'Ecografía morfológica. Mide ~25 cm. Mitad del embarazo' },
+      { semana: 24, descripcion: 'Umbral de viabilidad extrauterina. Huellas dactilares completas' },
+      { semana: 26, descripcion: 'Abre y cierra los ojos. Los pulmones producen surfactante' },
+    ];
+    hitosEmbarazada = ['Generalmente cesan las náuseas', 'Movimiento fetal perceptible (semana 16–20)', 'Crecimiento visible del abdomen', 'Posibles dolores de espalda y ligamentos redondos'];
+    checklistMedico = ['Ecografía morfológica (semana 20)', 'Test de O\'Sullivan para diabetes gestacional (semanas 24–28)', 'Control tensional en cada visita', 'Hierro oral si hay anemia ferropénica', 'Vacuna dTpa (tosferina) entre semanas 27 y 36'];
+  } else {
+    trimestre = 3; semanaInicioTrimestre = 27; semanaFinTrimestre = 40; color = '#FB923C';
+    hitosBebe = [
+      { semana: 28, descripcion: 'Tamaño de berenjena. El cerebro se pliega y desarrolla rápidamente' },
+      { semana: 32, descripcion: 'Los pulmones casi maduros. El bebé almacena grasa rápidamente' },
+      { semana: 36, descripcion: 'Posición cefálica (cabeza abajo) para el parto. Pulmones casi listos' },
+      { semana: 38, descripcion: 'A término temprano. Puede nacer en cualquier momento' },
+      { semana: 40, descripcion: 'Término completo. Peso promedio: 3.2–3.6 kg, talla: 50–51 cm' },
+    ];
+    hitosEmbarazada = ['Mayor cansancio y dificultad para dormir', 'Contracciones de Braxton Hicks frecuentes', 'Descenso del bebé hacia la pelvis (semana 36+)', 'Preparación para el parto y la lactancia'];
+    checklistMedico = ['Controles cada 2 semanas (semanas 28–36), luego semanales', 'Ecografía de crecimiento fetal', 'Cultivo de estreptococo grupo B (semanas 35–37)', 'Elaborar plan de parto', 'Preparar bolsa de hospital'];
+  }
+
+  const semanasRestantesTrimestre = Math.max(0, semanaFinTrimestre - semanas);
+  return { trimestre, semanasRestantesTrimestre, semanaInicioTrimestre, semanaFinTrimestre, hitosBebe, hitosEmbarazada, checklistMedico, color };
+}
+
+// ─── GANANCIA DE PESO EN EL EMBARAZO (IOM 2009 / OMS) ────────────────────────
+export interface GananciaTrimestre { trimestre: number; gananciaKg: string; ritmoSem: string; }
+
+export interface GananciaPesoEmbarazoResult {
+  imcPreEmbarazo: number;
+  categoriaIMC:   string;
+  gananciaMinKg:  number;
+  gananciaMaxKg:  number;
+  gananciaActualKg: number;
+  gananciaEsperadaKg: number;
+  estado:         string;
+  color:          string;
+  porTrimestre:   GananciaTrimestre[];
+  recomendacion:  string;
+}
+
+export function calcularGananciaPesoEmbarazo(
+  pesoInicialKg:  number,
+  alturaCm:       number,
+  pesoActualKg:   number,
+  semanasActuales: number,
+  gemelar:        boolean,
+): GananciaPesoEmbarazoResult {
+  const alturaM = alturaCm / 100;
+  const imcPreEmbarazo = Math.round((pesoInicialKg / (alturaM * alturaM)) * 10) / 10;
+
+  let categoriaIMC: string;
+  let gananciaMinKg: number;
+  let gananciaMaxKg: number;
+  let ritmo1: number;
+  let ritmo23: number;
+
+  if (imcPreEmbarazo < 18.5) {
+    categoriaIMC = 'Bajo peso';
+    gananciaMinKg = gemelar ? 22.7 : 12.5; gananciaMaxKg = gemelar ? 28.1 : 18;
+    ritmo1 = 0.5; ritmo23 = 0.5;
+  } else if (imcPreEmbarazo < 25) {
+    categoriaIMC = 'Peso normal';
+    gananciaMinKg = gemelar ? 16.8 : 11.5; gananciaMaxKg = gemelar ? 24.5 : 16;
+    ritmo1 = 0.4; ritmo23 = 0.45;
+  } else if (imcPreEmbarazo < 30) {
+    categoriaIMC = 'Sobrepeso';
+    gananciaMinKg = gemelar ? 14.1 : 7; gananciaMaxKg = gemelar ? 22.7 : 11.5;
+    ritmo1 = 0.3; ritmo23 = 0.3;
+  } else {
+    categoriaIMC = 'Obesidad';
+    gananciaMinKg = gemelar ? 11.3 : 5; gananciaMaxKg = gemelar ? 19.1 : 9;
+    ritmo1 = 0.2; ritmo23 = 0.25;
+  }
+
+  const gananciaActualKg = Math.round((pesoActualKg - pesoInicialKg) * 10) / 10;
+  const gananciaEsperadaKg = Math.round((semanasActuales <= 13
+    ? ritmo1 * semanasActuales
+    : ritmo1 * 13 + ritmo23 * (semanasActuales - 13)) * 10) / 10;
+
+  const diff = gananciaActualKg - gananciaEsperadaKg;
+  let estado: string;
+  let color: string;
+  if (diff < -2)       { estado = 'Por debajo de lo esperado'; color = '#60A5FA'; }
+  else if (diff > 2.5) { estado = 'Por encima de lo esperado'; color = '#F87171'; }
+  else                 { estado = 'Dentro del rango esperado'; color = '#34D399'; }
+
+  const porTrimestre: GananciaTrimestre[] = [
+    { trimestre: 1, gananciaKg: `1–2 kg`, ritmoSem: `${ritmo1} kg/sem` },
+    { trimestre: 2, gananciaKg: `${Math.round(ritmo23 * 13 * 10) / 10} kg`, ritmoSem: `${ritmo23} kg/sem` },
+    { trimestre: 3, gananciaKg: `${Math.round(ritmo23 * 14 * 10) / 10} kg`, ritmoSem: `${ritmo23} kg/sem` },
+  ];
+
+  const recomendacion = `IMC pre-embarazo ${imcPreEmbarazo} (${categoriaIMC}). Ganancia total recomendada: ${gananciaMinKg}–${gananciaMaxKg} kg${gemelar ? ' (gemelar)' : ''}. Consulta con tu obstetra o matrona.`;
+
+  return { imcPreEmbarazo, categoriaIMC, gananciaMinKg, gananciaMaxKg, gananciaActualKg, gananciaEsperadaKg, estado, color, porTrimestre, recomendacion };
+}
+
+// ─── CONTADOR DE MOVIMIENTOS FETALES ─────────────────────────────────────────
+export interface KickCounterResult {
+  cantidad:            number;
+  minutosTranscurridos: number;
+  objetivo:            number;
+  alcanzado:           boolean;
+  velocidad:           string;
+  alerta:              boolean;
+  mensaje:             string;
+  color:               string;
+}
+
+export function evaluarKickCounter(
+  cantidad:            number,
+  minutosTranscurridos: number,
+  semanasEmbarazo:     number,
+): KickCounterResult {
+  const objetivo = 10;
+  const alcanzado = cantidad >= objetivo;
+  const seg = minutosTranscurridos > 0 && cantidad > 0
+    ? Math.round(minutosTranscurridos / cantidad)
+    : 0;
+  const velocidad = cantidad > 0 ? `1 mov. cada ${seg} min` : 'Sin movimientos aún';
+
+  let alerta: boolean;
+  let mensaje: string;
+  let color: string;
+
+  if (semanasEmbarazo < 28) {
+    alerta = false; color = '#60A5FA';
+    mensaje = 'Antes de la semana 28 los movimientos son más irregulares. Monitoriza diariamente a partir de la semana 28.';
+  } else if (alcanzado) {
+    alerta = false; color = '#34D399';
+    mensaje = `¡Excelente! ${cantidad} movimientos en ${minutosTranscurridos} min. Patrón normal. Repite mañana a la misma hora.`;
+  } else if (minutosTranscurridos >= 120) {
+    alerta = true; color = '#F87171';
+    mensaje = `Solo ${cantidad} de ${objetivo} movimientos en 2 horas. Contacta a tu médico o ve a urgencias. No esperes.`;
+  } else {
+    alerta = false; color = '#FB923C';
+    mensaje = `${cantidad} de ${objetivo} movimientos. Continúa contando. Si en 2 horas no llegas a 10, llama a tu médico.`;
+  }
+
+  return { cantidad, minutosTranscurridos, objetivo, alcanzado, velocidad, alerta, mensaje, color };
+}
+
+// ─── DÍAS ÓPTIMOS PARA TEST DE OVULACIÓN LH ──────────────────────────────────
+export interface DiaTestOvulacion {
+  dia: number;
+  fecha: Date;
+  recomendado: boolean;
+  etiqueta: string;
+}
+
+export interface TestOvulacionLHResult {
+  diaInicioTest:      number;
+  diaFinTest:         number;
+  fechaInicioTest:    Date;
+  diaOvulacion:       number;
+  diasTest:           DiaTestOvulacion[];
+  instrucciones:      string[];
+  advertencias:       string[];
+}
+
+export function calcularTestOvulacionLH(
+  ultimaMenstruacion: Date,
+  duracionCiclo:      number,
+): TestOvulacionLHResult {
+  const diaOvulacion   = duracionCiclo - 14;
+  const diaInicioTest  = Math.max(1, diaOvulacion - 4);
+  const diaFinTest     = diaOvulacion + 2;
+  const fechaInicioTest = new Date(ultimaMenstruacion.getTime() + diaInicioTest * 86400000);
+
+  const diasTest: DiaTestOvulacion[] = [];
+  for (let d = diaInicioTest; d <= diaFinTest; d++) {
+    const fecha = new Date(ultimaMenstruacion.getTime() + d * 86400000);
+    const recomendado = d >= diaOvulacion - 2 && d <= diaOvulacion;
+    let etiqueta: string;
+    if (d === diaOvulacion)     etiqueta = 'Ovulación estimada';
+    else if (d === diaOvulacion - 1) etiqueta = 'Pico de LH probable';
+    else if (d === diaOvulacion - 2) etiqueta = 'Alta probabilidad LH+';
+    else if (d < diaOvulacion)  etiqueta = 'Inicio monitoreo';
+    else                         etiqueta = 'Confirmación';
+    diasTest.push({ dia: d, fecha, recomendado, etiqueta });
+  }
+
+  const instrucciones = [
+    'Haz el test entre las 10:00 y las 20:00 (el LH sube en la mañana y se detecta en orina horas después)',
+    'Usa la segunda orina del día, no la primera de la mañana',
+    'Reduce la ingesta de líquidos las 2 horas previas para no diluir la muestra',
+    'Lee el resultado a los 3–5 minutos exactos',
+    'Resultado positivo: línea de test tan oscura o más oscura que la línea de control',
+    'Tras el pico de LH, la ovulación ocurre en las próximas 24–36 horas',
+  ];
+
+  const advertencias = [
+    'Los ciclos irregulares pueden requerir empezar el test antes del día indicado',
+    'El SOP puede dar picos de LH múltiples sin ovulación real',
+    'Las tiras tienen sensibilidades variables (20–40 mIU/ml) — revisa las instrucciones del fabricante',
+  ];
+
+  return { diaInicioTest, diaFinTest, fechaInicioTest, diaOvulacion, diasTest, instrucciones, advertencias };
+}
+
+// ─── BETA HCG ─────────────────────────────────────────────────────────────────
+export interface BetaHCGResult {
+  tasaAumentoPct:    number;
+  tiempoDuplicacion: number;
+  interpretacion:    string;
+  color:             string;
+  recomendacion:     string;
+  semanaEstimada:    string;
+  ascensoAdecuado:   boolean;
+}
+
+export function calcularBetaHCG(
+  hcg1: number,
+  hcg2: number,
+  dias: number,
+): BetaHCGResult {
+  const ratio = hcg2 / hcg1;
+  const tasaAumentoPct = Math.round((ratio - 1) * 100);
+  const tiempoDuplicacion = ratio > 1
+    ? Math.round((dias * Math.LN2) / Math.log(ratio) * 10) / 10
+    : 0;
+
+  // Normalized increase to 48h equivalent
+  const aumento48h = dias > 0 ? Math.pow(ratio, 2 / dias) - 1 : 0;
+
+  let interpretacion: string;
+  let color: string;
+  let recomendacion: string;
+  let ascensoAdecuado: boolean;
+
+  if (hcg2 < hcg1) {
+    interpretacion = 'Descenso de hCG';
+    color = '#F87171'; ascensoAdecuado = false;
+    recomendacion = 'El descenso de hCG puede indicar aborto espontáneo o embarazo ectópico en resolución. Consulta a tu médico urgentemente.';
+  } else if (aumento48h >= 0.66) {
+    interpretacion = 'Ascenso normal (≥66% en 48 h)';
+    color = '#34D399'; ascensoAdecuado = true;
+    recomendacion = 'El ascenso de hCG es adecuado para un embarazo intrauterino evolutivo. Continúa con los controles programados por tu médico.';
+  } else if (aumento48h >= 0.53) {
+    interpretacion = 'Ascenso en el límite bajo (53–66% en 48 h)';
+    color = '#CAFF00'; ascensoAdecuado = true;
+    recomendacion = 'Ascenso en el límite inferior aceptable. Repite la beta-hCG en 48 h y realiza ecografía transvaginal para confirmar localización del embarazo.';
+  } else {
+    interpretacion = 'Ascenso insuficiente (<53% en 48 h)';
+    color = '#FB923C'; ascensoAdecuado = false;
+    recomendacion = 'Un ascenso menor al 53% en 48 h puede indicar embarazo ectópico o gestación no evolutiva. Acude a urgencias obstétricas sin demora.';
+  }
+
+  let semanaEstimada: string;
+  if (hcg2 < 1200)       semanaEstimada = '3–4 semanas';
+  else if (hcg2 < 6000)  semanaEstimada = '4–5 semanas';
+  else if (hcg2 < 32000) semanaEstimada = '5–6 semanas';
+  else if (hcg2 < 100000) semanaEstimada = '6–7 semanas';
+  else                   semanaEstimada = '> 7 semanas';
+
+  return { tasaAumentoPct, tiempoDuplicacion, interpretacion, color, recomendacion, semanaEstimada, ascensoAdecuado };
+}
+
+// ─── PROBABILIDAD DE EMBARAZO POR DÍA DEL CICLO ──────────────────────────────
+export interface ProbabilidadEmbarazoResult {
+  probabilidadPct: number;
+  etapa:           string;
+  color:           string;
+  descripcion:     string;
+  diasDesdeOvulacion: number;
+  recomendacion:   string;
+}
+
+export function calcularProbabilidadEmbarazo(
+  diasDesdeFUR:  number,
+  duracionCiclo: number,
+  relaciones:    'una' | 'repetidas' | 'ninguna',
+): ProbabilidadEmbarazoResult {
+  const diaOvulacion = duracionCiclo - 14;
+  const diasDesdeOvulacion = diasDesdeFUR - diaOvulacion;
+
+  const probIndividual: Record<number, number> = {
+    [-5]: 0.10, [-4]: 0.14, [-3]: 0.22, [-2]: 0.27, [-1]: 0.33,
+    [0]: 0.15, [1]: 0.05, [2]: 0.02,
+  };
+
+  const prob = probIndividual[diasDesdeOvulacion] ?? (diasDesdeOvulacion < -5 ? 0.01 : 0.01);
+
+  let probabilidadPct: number;
+  if (relaciones === 'ninguna')   probabilidadPct = 1;
+  else if (relaciones === 'repetidas') probabilidadPct = Math.min(85, Math.round(prob * 160));
+  else                            probabilidadPct = Math.round(prob * 100);
+
+  let etapa: string;
+  let color: string;
+  let descripcion: string;
+
+  if (diasDesdeOvulacion < -5) {
+    etapa = 'Fase folicular'; color = '#60A5FA';
+    descripcion = 'Antes de la ventana fértil. Los espermatozoides no pueden sobrevivir hasta la ovulación.';
+  } else if (diasDesdeOvulacion <= -1) {
+    etapa = 'Ventana fértil'; color = '#CAFF00';
+    descripcion = 'Días de mayor probabilidad de concepción. Los espermatozoides sobreviven 3–5 días en el tracto reproductor.';
+  } else if (diasDesdeOvulacion === 0) {
+    etapa = 'Día de ovulación'; color = '#FB923C';
+    descripcion = 'El óvulo es viable solo 12–24 horas. Alta probabilidad con relaciones hoy.';
+  } else if (diasDesdeOvulacion <= 2) {
+    etapa = 'Post-ovulación'; color = '#FB923C';
+    descripcion = 'Probabilidad baja. El óvulo no suele ser viable más de 24 h tras la ovulación.';
+  } else {
+    etapa = 'Fase lútea'; color = '#9CA3AF';
+    descripcion = 'Fuera de la ventana fértil. La probabilidad de concepción es mínima.';
+  }
+
+  const recomendacion = relaciones === 'ninguna'
+    ? 'Sin relaciones sexuales en este ciclo, la probabilidad de embarazo es prácticamente nula.'
+    : `En el día ${diasDesdeFUR} del ciclo (${diasDesdeOvulacion > 0 ? '+' : ''}${diasDesdeOvulacion} respecto a la ovulación), la probabilidad estimada es del ${probabilidadPct}%.`;
+
+  return { probabilidadPct, etapa, color, descripcion, diasDesdeOvulacion, recomendacion };
+}
+
+// ─── RECUPERACIÓN POSTPARTO ───────────────────────────────────────────────────
+export interface EtapaPostparto {
+  nombre:       string;
+  descripcion:  string;
+  semanaInicio: number;
+  semanaFin:    number;
+  sintomas:     string[];
+  consejos:     string[];
+}
+
+export interface TiempoPostpartoResult {
+  semanasPostparto:       number;
+  diasPostparto:          number;
+  etapaActual:            EtapaPostparto;
+  proxControl:            string;
+  alertas:                string[];
+  progresoCicatrizacion:  string;
+}
+
+export function calcularTiempoPostparto(fechaParto: Date): TiempoPostpartoResult {
+  const hoy = new Date();
+  const diasPostparto    = Math.floor((hoy.getTime() - fechaParto.getTime()) / 86400000);
+  const semanasPostparto = Math.floor(diasPostparto / 7);
+
+  const etapas: EtapaPostparto[] = [
+    {
+      nombre: 'Puerperio inmediato', descripcion: 'Primeras 24 h. Estabilización y primeros momentos con el bebé.',
+      semanaInicio: 0, semanaFin: 0,
+      sintomas: ['Sangrado (loquios rojos)', 'Dolor perineal o de cesárea', 'Contracciones uterinas', 'Calor y sudoración intensa'],
+      consejos: ['Contacto piel con piel con el bebé', 'Inicio de lactancia en la primera hora si es posible', 'Reposo y observación médica en las primeras horas'],
+    },
+    {
+      nombre: 'Puerperio temprano', descripcion: 'Días 2–7. El útero comienza a involucionar.',
+      semanaInicio: 0, semanaFin: 1,
+      sintomas: ['Loquios rosados-marrones', 'Ingurgitación mamaria (día 3–5)', 'Baby blues leve (70% de las madres)', 'Fatiga intensa'],
+      consejos: ['Tomas frecuentes para establecer la lactancia (8–12 al día)', 'Reposo relativo', 'Higiene perineal con agua tibia', 'No ignorar signos de alarma'],
+    },
+    {
+      nombre: 'Puerperio tardío', descripcion: 'Semanas 2–6. Recuperación física progresiva.',
+      semanaInicio: 2, semanaFin: 6,
+      sintomas: ['Loquios amarillo-blancos (disminuyendo)', 'Fatiga acumulada', 'Cambios de humor', 'Posible dolor en cicatriz'],
+      consejos: ['Caminatas suaves a partir de la semana 2', 'Ejercicios de Kegel para el suelo pélvico', 'Apoyo familiar para el descanso', 'Control del estado emocional'],
+    },
+    {
+      nombre: 'Recuperación media', descripcion: 'Semanas 6–12. Revisión puerperal y retorno a la actividad.',
+      semanaInicio: 6, semanaFin: 12,
+      sintomas: ['Cese de loquios', 'Posible retorno de la menstruación (sin lactancia)', 'Caída del cabello (efluvio posparto)', 'Mejora energética progresiva'],
+      consejos: ['Consulta puerperal obligatoria (semana 6)', 'Retomar ejercicio gradualmente', 'Fisioterapia de suelo pélvico si hay síntomas', 'Hablar de anticoncepción con el médico'],
+    },
+    {
+      nombre: 'Recuperación avanzada', descripcion: 'A partir de semana 12. Estabilización general.',
+      semanaInicio: 12, semanaFin: 999,
+      sintomas: ['Caída de cabello máxima (semana 12–16)', 'Cambios corporales que persisten', 'Energía gradualmente recuperada'],
+      consejos: ['Ejercicio de intensidad moderada (consultar con médico)', 'Nutrición equilibrada especialmente en lactancia', 'Screening de depresión posparto', 'Revisión ginecológica anual'],
+    },
+  ];
+
+  const etapaActual = etapas.find(e => semanasPostparto >= e.semanaInicio && semanasPostparto <= e.semanaFin) ?? etapas[etapas.length - 1];
+
+  let proxControl: string;
+  if (semanasPostparto < 1)      proxControl = 'Control de puerperio inmediato (24–48 h)';
+  else if (semanasPostparto < 6) proxControl = 'Revisión puerperal a las 6 semanas del parto';
+  else if (semanasPostparto < 12) proxControl = 'Consulta de suelo pélvico recomendada';
+  else                           proxControl = 'Revisión ginecológica anual + suelo pélvico';
+
+  const alertas = [
+    'Fiebre > 38°C (posible infección puerperal)',
+    'Loquios con mal olor intenso o color verdoso',
+    'Dolor abdominal intenso no habitual',
+    'Tristeza profunda > 2 semanas o incapacidad de cuidar al bebé (depresión posparto)',
+    'Dolor, calor o hinchazón en una pierna (posible trombosis)',
+    'Herida de episiotomía o cesárea con signos de infección',
+  ];
+
+  const progresoCicatrizacion = semanasPostparto < 2
+    ? 'Cicatrización inicial — reposo y evitar esfuerzos'
+    : semanasPostparto < 6
+      ? 'Cicatrización en progreso — higiene cuidadosa y reposo relativo'
+      : 'Cicatriz estabilizada — iniciar rehabilitación de suelo pélvico';
+
+  return { semanasPostparto, diasPostparto, etapaActual, proxControl, alertas, progresoCicatrizacion };
+}
+
+// ─── COMPATIBILIDAD DE MEDICAMENTOS CON LACTANCIA ─────────────────────────────
+export type NivelLactancia = 'L1' | 'L2' | 'L3' | 'L4' | 'L5';
+
+interface MedDB {
+  nombre: string; nivel: NivelLactancia; descripcion: string;
+  recomendacion: string; color: string; alternativa: string | null;
+}
+
+const DB_LACTANCIA: MedDB[] = [
+  { nombre: 'paracetamol',       nivel: 'L1', descripcion: 'Paso mínimo a la leche materna. Ampliamente usado en madres lactantes.',                               recomendacion: 'Compatible. Primera línea para dolor y fiebre.',                                                        color: '#34D399', alternativa: null },
+  { nombre: 'acetaminofen',      nivel: 'L1', descripcion: 'Paso mínimo a la leche materna. Ampliamente usado en madres lactantes.',                               recomendacion: 'Compatible. Primera línea para dolor y fiebre.',                                                        color: '#34D399', alternativa: null },
+  { nombre: 'ibuprofeno',        nivel: 'L1', descripcion: 'Paso muy bajo a la leche materna. Considerado seguro en lactancia.',                                   recomendacion: 'Compatible. Dosis habituales. Preferido frente a naproxeno.',                                            color: '#34D399', alternativa: null },
+  { nombre: 'naproxeno',         nivel: 'L3', descripcion: 'Vida media larga. Puede acumularse en leche con uso prolongado.',                                       recomendacion: 'Preferir ibuprofeno. Si se usa, dosis únicas y espaciadas.',                                            color: '#CAFF00', alternativa: 'ibuprofeno' },
+  { nombre: 'aspirina',          nivel: 'L3', descripcion: 'Asociado a síndrome de Reye en lactantes con dosis altas.',                                             recomendacion: 'Evitar para dolor/fiebre. Solo en dosis antiagregante (100 mg/día) si es imprescindible.',              color: '#CAFF00', alternativa: 'paracetamol o ibuprofeno' },
+  { nombre: 'amoxicilina',       nivel: 'L1', descripcion: 'Pasa en pequeñas cantidades a la leche, sin efectos adversos relevantes.',                             recomendacion: 'Compatible. Puede causar diarrea leve o candidiasis oral en el lactante.',                              color: '#34D399', alternativa: null },
+  { nombre: 'azitromicina',      nivel: 'L2', descripcion: 'Paso bajo a la leche. Vigilar posible diarrea en el lactante.',                                        recomendacion: 'Compatible. Segunda línea si amoxicilina no es adecuada.',                                              color: '#34D399', alternativa: null },
+  { nombre: 'claritromicina',    nivel: 'L2', descripcion: 'Datos limitados pero generalmente aceptado.',                                                          recomendacion: 'Compatible con precaución. Vigilar tolerancia digestiva del lactante.',                                color: '#34D399', alternativa: null },
+  { nombre: 'ciprofloxacina',    nivel: 'L3', descripcion: 'Puede afectar la flora intestinal del lactante. Uso puntual aceptable.',                               recomendacion: 'Evitar si hay alternativa. Uso puntual vigilando al lactante.',                                          color: '#CAFF00', alternativa: 'amoxicilina o cefalexina' },
+  { nombre: 'metronidazol',      nivel: 'L2', descripcion: 'Compatible en ciclos cortos. Tras dosis única de 2 g, suspender lactancia 24 h.',                     recomendacion: 'Compatible en tratamientos cortos.',                                                                    color: '#34D399', alternativa: null },
+  { nombre: 'omeprazol',         nivel: 'L1', descripcion: 'Paso insignificante a la leche materna. Amplia experiencia de uso.',                                   recomendacion: 'Compatible. Primera línea para reflujo/gastritis.',                                                     color: '#34D399', alternativa: null },
+  { nombre: 'loratadina',        nivel: 'L1', descripcion: 'Antihistamínico no sedante con mínimo paso a la leche.',                                              recomendacion: 'Antihistamínico de elección en lactancia.',                                                              color: '#34D399', alternativa: null },
+  { nombre: 'cetirizina',        nivel: 'L2', descripcion: 'Puede causar somnolencia leve en el lactante.',                                                        recomendacion: 'Compatible. Preferir loratadina si es posible.',                                                         color: '#34D399', alternativa: 'loratadina' },
+  { nombre: 'sertralina',        nivel: 'L2', descripcion: 'ISRS de elección en lactancia. Niveles plasmáticos bajos en el lactante.',                             recomendacion: 'Compatible. Primera línea para depresión/ansiedad posparto.',                                           color: '#34D399', alternativa: null },
+  { nombre: 'fluoxetina',        nivel: 'L2', descripcion: 'Acumulación de metabolito activo (norfluoxetina) en el lactante.',                                      recomendacion: 'Precaución. Preferir sertralina. Vigilar irritabilidad y alteraciones del sueño en el lactante.',      color: '#CAFF00', alternativa: 'sertralina' },
+  { nombre: 'alprazolam',        nivel: 'L3', descripcion: 'Benzodiacepina de vida media corta. Puede causar sedación en el lactante.',                            recomendacion: 'Evitar uso prolongado. Dosis puntuales mínimas.',                                                       color: '#CAFF00', alternativa: 'sertralina' },
+  { nombre: 'clonazepam',        nivel: 'L3', descripcion: 'Puede acumularse en el lactante causando sedación.',                                                    recomendacion: 'Solo si es imprescindible. Dosis mínima eficaz.',                                                       color: '#CAFF00', alternativa: null },
+  { nombre: 'diazepam',          nivel: 'L4', descripcion: 'Vida media larga. Acumulación significativa. Riesgo de sedación, hipotermia y apnea en el lactante.', recomendacion: 'Contraindicado en lactancia mantenida. Solo uso puntual de urgencia.',                                 color: '#FB923C', alternativa: 'lorazepam en dosis puntual' },
+  { nombre: 'levotiroxina',      nivel: 'L1', descripcion: 'Hormona tiroidea fisiológica. Paso mínimo a la leche. Necesaria para el hipotiroidismo.',              recomendacion: 'Compatible. No suspender. El hipotiroidismo no tratado afecta más a la lactancia.',                    color: '#34D399', alternativa: null },
+  { nombre: 'metformina',        nivel: 'L1', descripcion: 'Paso muy bajo a la leche. Ampliamente usada en diabetes durante la lactancia.',                        recomendacion: 'Compatible. No suspender si es necesaria para el control glucémico.',                                  color: '#34D399', alternativa: null },
+  { nombre: 'insulina',          nivel: 'L1', descripcion: 'No pasa a la leche materna. Se destruye en el tracto digestivo si hubiera algún paso.',                recomendacion: 'Completamente compatible. Continuar sin restricciones.',                                                 color: '#34D399', alternativa: null },
+  { nombre: 'prednisona',        nivel: 'L2', descripcion: 'Compatible a dosis bajas (< 20 mg/día). A dosis altas esperar 4 h tras la toma.',                     recomendacion: 'Compatible a dosis habituales. A dosis altas (> 40 mg/día), esperar 4 h antes de lactar.',           color: '#34D399', alternativa: null },
+  { nombre: 'enalapril',         nivel: 'L2', descripcion: 'IECA con paso mínimo a la leche. Datos de seguridad favorables.',                                      recomendacion: 'Compatible. Antihipertensivo de elección en lactancia.',                                                color: '#34D399', alternativa: null },
+  { nombre: 'warfarina',         nivel: 'L2', descripcion: 'Paso muy bajo a la leche. No anticoagula al lactante a dosis terapéuticas maternas.',                  recomendacion: 'Compatible. Monitorizar signos de sangrado en el lactante.',                                            color: '#34D399', alternativa: null },
+  { nombre: 'codeina',           nivel: 'L4', descripcion: 'Metabolizadores ultrarrápidos CYP2D6 pueden causar sobredosis y muerte en el lactante.',               recomendacion: 'CONTRAINDICADO en lactancia. Usar paracetamol e ibuprofeno.',                                            color: '#F87171', alternativa: 'paracetamol + ibuprofeno' },
+  { nombre: 'tramadol',          nivel: 'L3', descripcion: 'Opioide con paso significativo a la leche. Puede causar sedación y depresión respiratoria.',           recomendacion: 'Evitar si es posible. Uso muy puntual a dosis mínimas.',                                                color: '#FB923C', alternativa: 'paracetamol + ibuprofeno' },
+  { nombre: 'doxiciclina',       nivel: 'L4', descripcion: 'Puede causar coloración dental y alteración del crecimiento óseo en el lactante con uso prolongado.', recomendacion: 'Contraindicado en tratamientos > 3 semanas. Valorar riesgo/beneficio en tratamientos cortos.',        color: '#F87171', alternativa: 'amoxicilina o azitromicina' },
+  { nombre: 'metotrexato',       nivel: 'L5', descripcion: 'Antimetabolito citotóxico. Puede causar supresión medular grave en el lactante.',                      recomendacion: 'CONTRAINDICADO. Suspender la lactancia.',                                                               color: '#F87171', alternativa: null },
+  { nombre: 'atorvastatina',     nivel: 'L5', descripcion: 'Sin datos de seguridad en lactancia. Potencial efecto en el desarrollo del lactante.',                 recomendacion: 'CONTRAINDICADO. Suspender lactancia o el tratamiento.',                                                 color: '#F87171', alternativa: null },
+  { nombre: 'simvastatina',      nivel: 'L5', descripcion: 'Las estatinas interfieren con la síntesis de colesterol, esencial para el desarrollo del lactante.',  recomendacion: 'CONTRAINDICADO. No usar durante la lactancia.',                                                          color: '#F87171', alternativa: null },
+  { nombre: 'cotrimoxazol',      nivel: 'L3', descripcion: 'Evitar en prematuros y neonatos con ictericia o déficit de G6PD.',                                     recomendacion: 'Precaución. Evitar las primeras 4 semanas de vida del lactante.',                                       color: '#CAFF00', alternativa: 'amoxicilina' },
+  { nombre: 'propranolol',       nivel: 'L2', descripcion: 'Beta-bloqueante con paso mínimo a la leche.',                                                          recomendacion: 'Compatible. Vigilar signos de bradicardia, hipoglucemia y somnolencia en el lactante.',               color: '#34D399', alternativa: null },
+  { nombre: 'metoprolol',        nivel: 'L3', descripcion: 'Paso mayor que propranolol. Monitorizar bradicardia en el lactante.',                                  recomendacion: 'Precaución. Preferir propranolol. Vigilar frecuencia cardíaca del lactante.',                          color: '#CAFF00', alternativa: 'propranolol' },
+];
+
+export interface CompatibilidadLactanciaResult {
+  encontrado:    boolean;
+  medicamento:   string;
+  nivel:         NivelLactancia | null;
+  descripcion:   string;
+  recomendacion: string;
+  color:         string;
+  alternativa:   string | null;
+  nivelTexto:    string;
+}
+
+export function verificarCompatibilidadLactancia(
+  medicamento: string,
+): CompatibilidadLactanciaResult {
+  const normalizar = (s: string) =>
+    s.toLowerCase().trim().normalize('NFD').replace(/[̀-ͯ]/g, '');
+  const busqueda = normalizar(medicamento);
+
+  const encontrado = DB_LACTANCIA.find(m => {
+    const n = normalizar(m.nombre);
+    return n === busqueda || busqueda.includes(n) || n.includes(busqueda);
+  });
+
+  const nivelTextos: Record<NivelLactancia, string> = {
+    L1: 'Compatible — Máxima seguridad',
+    L2: 'Compatible con precaución',
+    L3: 'Precaución moderada',
+    L4: 'Riesgo potencial — Evitar',
+    L5: 'CONTRAINDICADO',
+  };
+
+  if (!encontrado) {
+    return {
+      encontrado: false,
+      medicamento,
+      nivel: null,
+      descripcion: 'Medicamento no encontrado en nuestra base de datos. No significa que sea inseguro. Consulta con tu médico, farmacéutico o la base de datos LactMed (NIH) para información actualizada.',
+      recomendacion: 'Consulta siempre con tu médico o farmacéutico antes de tomar cualquier medicamento durante la lactancia.',
+      color: '#9CA3AF',
+      alternativa: null,
+      nivelTexto: 'Sin datos — Consulta a tu médico',
+    };
+  }
+
+  return {
+    encontrado: true,
+    medicamento: encontrado.nombre,
+    nivel: encontrado.nivel,
+    descripcion: encontrado.descripcion,
+    recomendacion: encontrado.recomendacion,
+    color: encontrado.color,
+    alternativa: encontrado.alternativa,
+    nivelTexto: nivelTextos[encontrado.nivel],
+  };
+}
+
 // ─── FIBRA DIARIA RECOMENDADA ────────────────────────────────────────────────
 export type ObjetivoFibra = 'digestivo' | 'cardiovascular' | 'peso';
 

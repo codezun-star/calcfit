@@ -94,6 +94,16 @@ const I = {
   lactancia:        `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="9" cy="4" r="2.5"/><path d="M5.5 8C3.5 9.5 3 12 4 14.5L5 17h8l1-2.5c1-2.5.5-5-1.5-6.5H5.5z"/><path d="M7 11c1 2 3 2.5 4 1.5"/></svg>`,
   fechaConcepcion:  `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 2c0 0 4 4.5 4 8a4 4 0 01-8 0C5 7 7 4.5 9 2z"/><path d="M7 11.5c.5 1 1 1.5 2 1.5"/><circle cx="9" cy="2" r="0.8" fill="currentColor" stroke="none"/></svg>`,
   fibraDiaria:      `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 14V8c0-3 2-6 5-6s5 3 5 6v6"/><line x1="2" y1="14" x2="16" y2="14"/><line x1="7" y1="10" x2="11" y2="10" stroke-dasharray="2 1"/><line x1="7" y1="12" x2="11" y2="12" stroke-dasharray="2 1"/></svg>`,
+  ventanaFertil:    `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="14" height="13"/><line x1="2" y1="7" x2="16" y2="7"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="12" y1="1" x2="12" y2="4"/><circle cx="6" cy="11" r="1.2" fill="currentColor" stroke="none"/><circle cx="9" cy="11" r="1.2" fill="currentColor" stroke="none"/><circle cx="12" cy="11" r="1.2" fill="currentColor" stroke="none"/></svg>`,
+  edadGestacional:  `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="9" cy="9" r="7"/><path d="M9 9V5"/><path d="M9 9l4 2.5"/><circle cx="9" cy="9" r="1.2" fill="currentColor" stroke="none"/></svg>`,
+  trimestreEmb:     `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="9" cy="9" r="7"/><path d="M9 9L9 2"/><path d="M9 9L15 12.5"/><path d="M9 9L3 12.5"/></svg>`,
+  aumentoPeso:      `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 13h14"/><path d="M9 13V7"/><circle cx="9" cy="10" r="3" stroke-dasharray="2 1.5"/><circle cx="9" cy="4" r="1.5"/></svg>`,
+  kickCounter:      `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 8c.5-3 2-5 4-4.5"/><path d="M10 3.5c1.5.5 2.5 2.5 2 5L10 14l-3 2.5"/><path d="M10 10l3.5 3"/><circle cx="10" cy="3" r="1" fill="currentColor" stroke="none"/></svg>`,
+  testOvulacionLH:  `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="7" y="2" width="4" height="14"/><line x1="7" y1="7" x2="11" y2="7"/><line x1="7" y1="10" x2="11" y2="10" stroke-width="2"/><path d="M5 16h8"/><path d="M5 2h8"/></svg>`,
+  betaHcg:          `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="7" y="5" width="4" height="10"/><path d="M7 5l-2-3h6l-2 3"/><polyline points="3,14 7,10 11,12 15,7"/></svg>`,
+  probabilidadEmb:  `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="9" cy="9" r="7"/><path d="M9 9V5"/><path d="M9 9l3.5 2"/><line x1="5" y1="14" x2="9" y2="9"/></svg>`,
+  tiempoPostparto:  `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 13c2-4 3-7 5-7l2 5 3-4 2 6"/><line x1="2" y1="16" x2="16" y2="16"/></svg>`,
+  compatLactancia:  `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="5" y="4" width="8" height="11"/><path d="M8 4V2h2v2"/><line x1="7" y1="8" x2="11" y2="8"/><polyline points="7,11 8.5,12.5 11,10"/></svg>`,
 };
 
 const calculadoras = [
@@ -185,7 +195,17 @@ const calculadoras = [
   { slug: '/peso-bebe-semana',     nombre: 'Peso del Bebé',              desc: 'Peso y talla fetal estimados por semana de gestación',   badge: null, destacada: false, num: '86', icon: I.pesoBebe },
   { slug: '/lactancia',            nombre: 'Lactancia Materna',          desc: 'Calorías extra, ml por toma y beneficios OMS',           badge: null, destacada: false, num: '87', icon: I.lactancia },
   { slug: '/fecha-concepcion',     nombre: 'Fecha de Concepción',        desc: 'Estima cuándo ocurrió la concepción desde parto o regla', badge: null, destacada: false, num: '88', icon: I.fechaConcepcion },
-  { slug: '/fibra-diaria',         nombre: 'Fibra Diaria',               desc: 'Gramos de fibra recomendados según edad, sexo y objetivo', badge: null, destacada: false, num: '89', icon: I.fibraDiaria },
+  { slug: '/fibra-diaria',          nombre: 'Fibra Diaria',                desc: 'Gramos de fibra recomendados según edad, sexo y objetivo', badge: null, destacada: false, num: '89', icon: I.fibraDiaria },
+  { slug: '/ventana-fertil',        nombre: 'Ventana Fértil',              desc: '6 días fértiles con % de probabilidad por día (Wilcox)',  badge: null, destacada: false, num: '90', icon: I.ventanaFertil },
+  { slug: '/edad-gestacional',      nombre: 'Edad Gestacional',            desc: 'Semanas exactas desde FUR o concepción + FPP',            badge: null, destacada: false, num: '91', icon: I.edadGestacional },
+  { slug: '/trimestre-embarazo',    nombre: 'Trimestre del Embarazo',      desc: 'Trimestre actual, hitos del bebé y checklist médico',      badge: null, destacada: false, num: '92', icon: I.trimestreEmb },
+  { slug: '/aumento-peso-embarazo', nombre: 'Ganancia de Peso Embarazo',   desc: 'Peso ideal por trimestre según IMC previo (IOM 2009)',     badge: null, destacada: false, num: '93', icon: I.aumentoPeso },
+  { slug: '/kick-counter',          nombre: 'Contador Movimientos Fetal',  desc: 'Registra patadas y alerta si bajan de lo normal',          badge: null, destacada: false, num: '94', icon: I.kickCounter },
+  { slug: '/test-ovulacion',        nombre: 'Test de Ovulación LH',        desc: 'Días óptimos para usar tiras de LH según tu ciclo',       badge: null, destacada: false, num: '95', icon: I.testOvulacionLH },
+  { slug: '/beta-hcg',              nombre: 'Calculadora Beta-hCG',        desc: 'Interpreta si el ascenso de hCG es adecuado',             badge: null, destacada: false, num: '96', icon: I.betaHcg },
+  { slug: '/probabilidad-embarazo', nombre: 'Probabilidad de Embarazo',    desc: '% de concepción según día del ciclo y relaciones',        badge: null, destacada: false, num: '97', icon: I.probabilidadEmb },
+  { slug: '/tiempo-postparto',      nombre: 'Recuperación Postparto',      desc: 'Semanas desde el parto + síntomas y consejos por etapa',  badge: null, destacada: false, num: '98', icon: I.tiempoPostparto },
+  { slug: '/compatibilidad-lactancia', nombre: 'Medicamentos y Lactancia', desc: 'Compatibilidad con lactancia materna (escala Hale L1–L5)', badge: null, destacada: false, num: '99', icon: I.compatLactancia },
 ];
 
 const categorias = [
@@ -207,7 +227,7 @@ const categorias = [
   },
   {
     label: 'Embarazo & fertilidad',
-    slugs: ['/ovulacion', '/ciclo-menstrual', '/semana-embarazo', '/fecha-parto', '/peso-embarazo', '/imc-infantil', '/cuando-test-embarazo', '/peso-bebe-semana', '/lactancia', '/fecha-concepcion'],
+    slugs: ['/ovulacion', '/ciclo-menstrual', '/semana-embarazo', '/fecha-parto', '/peso-embarazo', '/imc-infantil', '/cuando-test-embarazo', '/peso-bebe-semana', '/lactancia', '/fecha-concepcion', '/ventana-fertil', '/edad-gestacional', '/trimestre-embarazo', '/aumento-peso-embarazo', '/kick-counter', '/test-ovulacion', '/beta-hcg', '/probabilidad-embarazo', '/tiempo-postparto', '/compatibilidad-lactancia'],
   },
   {
     label: 'Fechas & tiempo',
@@ -264,12 +284,12 @@ const schema = {
         contactType: 'customer support',
         availableLanguage: 'Spanish',
       },
-      description: '89 calculadoras de salud gratuitas, validadas científicamente, sin registro ni cookies de rastreo.',
+      description: '99 calculadoras de salud gratuitas, validadas científicamente, sin registro ni cookies de rastreo.',
     },
     {
       '@type': 'ItemList',
       name: 'Calculadoras de salud CalcFit',
-      numberOfItems: 89,
+      numberOfItems: 99,
       itemListElement: calculadoras.map((c, i) => ({
         '@type': 'ListItem',
         position: i + 1,
@@ -291,8 +311,8 @@ function blogThumb(url: string): string {
 ---
 
 <Base
-  title="CalcFit — 89 Calculadoras de Salud Gratuitas y Validadas Científicamente"
-  description="89 calculadoras de salud gratuitas: IMC, calorías, glucosa, colesterol, masa muscular, 1RM, riesgo cardiovascular y más. Sin registro. Validadas científicamente."
+  title="CalcFit — 99 Calculadoras de Salud Gratuitas y Validadas Científicamente"
+  description="99 calculadoras de salud gratuitas: IMC, calorías, embarazo, glucosa, colesterol, masa muscular, 1RM, riesgo cardiovascular y más. Sin registro. Validadas científicamente."
   keywords="calculadoras de salud gratis, calculadora IMC, calculadora calorías, calculadora peso ideal, calcular grasa corporal, calculadoras fitness"
   schema={schema}
 >
@@ -408,7 +428,7 @@ function blogThumb(url: string): string {
 <section class="cta-section" style="background: var(--acid); padding: 52px 32px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px;">
   <div>
     <h2 style="font-family: var(--font-display); font-size: 58px; color: var(--ink); line-height: 0.95;">Empieza /<br>ahora.</h2>
-    <p style="font-size: 13px; color: #3a3900; margin-top: 8px;">89 calculadoras gratuitas te esperan.</p>
+    <p style="font-size: 13px; color: #3a3900; margin-top: 8px;">99 calculadoras gratuitas te esperan.</p>
   </div>
   <div style="display: flex; gap: 12px; flex-wrap: wrap;">
     <a href="#calculadoras" style="background: var(--ink); color: var(--acid); padding: 14px 28px; font-weight: 600; font-size: 13px; text-decoration: none;">Ver calculadoras</a>

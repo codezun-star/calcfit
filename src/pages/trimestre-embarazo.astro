@@ -1,0 +1,79 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import TrimestreEmbarazoCalculator from '../components/calculators/TrimestreEmbarazoCalculator';
+---
+
+<CalculatorLayout
+  title="Trimestre del Embarazo — Hitos del Bebé y Checklist Médico | CalcFit"
+  description="Ingresa tu semana de gestación y descubre en qué trimestre estás, los hitos del bebé en esta etapa y el checklist médico obligatorio. Gratis, sin registro."
+  calculatorName="Trimestre del Embarazo"
+  breadcrumbSlug="trimestre-embarazo"
+  ogImage="/og/trimestre-embarazo.jpg"
+  keywords="en qué trimestre estoy del embarazo, trimestre de embarazo por semanas, hitos del bebé por trimestre, desarrollo fetal por semana, checklist prenatal primer trimestre"
+  faqs={[
+    { q: '¿Cuántas semanas tiene cada trimestre del embarazo?', a: 'El embarazo se divide en tres trimestres: el primero va de la semana 1 a la 13, el segundo de la semana 14 a la 27, y el tercero de la semana 28 hasta el parto (semana 40–42). Cada trimestre tiene características específicas en el desarrollo del bebé y en los cambios que experimenta la madre.' },
+    { q: '¿Qué pruebas médicas son obligatorias en el primer trimestre?', a: 'En el primer trimestre (antes de la semana 13) son clave: la ecografía de translucencia nucal (semanas 11–13), la analítica completa con grupo sanguíneo y serología (toxoplasmosis, rubéola, sífilis, VIH, hepatitis B), y el inicio del ácido fólico (400–800 mcg/día). También se debe confirmar la fecha de parto.' },
+    { q: '¿Cuándo se siente el primer movimiento del bebé?', a: 'La mayoría de las madres perciben los primeros movimientos fetales entre las semanas 16 y 22. Las primerizas suelen notarlos algo más tarde (semana 20–22), mientras que las mujeres en embarazos posteriores pueden percibirlos desde la semana 16–18. Al inicio se sienten como burbujitas o aleteos leves.' },
+    { q: '¿Qué es la ecografía morfológica y cuándo se hace?', a: 'La ecografía morfológica (o de la semana 20) es el estudio más completo del embarazo. Se realiza entre las semanas 18–22 y evalúa la anatomía fetal detallada: corazón, cerebro, columna, órganos abdominales, extremidades y cara. También permite medir la longitud del cuello uterino y valorar la placenta y el líquido amniótico.' },
+    { q: '¿Cuándo debe ceder el bebé la posición para el parto?', a: 'La posición cefálica (cabeza abajo) se establece típicamente entre las semanas 32 y 36. Antes de eso es normal que el bebé cambie de posición. Si a la semana 36 el bebé está en presentación podálica (de nalgas), el obstetra puede proponer una versión cefálica externa (VCE) o planificar una cesárea.' },
+  ]}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Trimestre<br><span style="color: var(--acid);">del Embarazo</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Ingresa tu semana gestacional y descubre en qué trimestre estás, los hitos del bebé y el checklist médico de esta etapa.
+    </p>
+  </div>
+
+  <TrimestreEmbarazoCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">Los tres trimestres del embarazo</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      El embarazo dura aproximadamente 40 semanas desde la última regla, divididas en tres trimestres con características propias en el desarrollo del bebé y los cambios maternos. Conocer en qué etapa estás ayuda a anticipar síntomas, controles y decisiones médicas.
+    </p>
+
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px;">
+      <thead>
+        <tr style="background: var(--ink); color: var(--cream);">
+          <th style="padding: 10px 12px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Trimestre</th>
+          <th style="padding: 10px 12px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Semanas</th>
+          <th style="padding: 10px 12px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Control clave</th>
+          <th style="padding: 10px 12px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Hito del bebé</th>
+        </tr>
+      </thead>
+      <tbody>
+        {[
+          { t: '1.º', sem: '1–13', control: 'Eco translucencia nucal', hito: 'Todos los órganos formados' },
+          { t: '2.º', sem: '14–27', control: 'Eco morfológica (sem. 20)', hito: 'Movimientos perceptibles' },
+          { t: '3.º', sem: '28–40', control: 'Cultivo estreptococo (sem. 36)', hito: 'Maduración pulmonar' },
+        ].map((r, i) => (
+          <tr style={`background: ${i % 2 === 0 ? 'var(--cream)' : 'white'}`}>
+            <td style="padding: 9px 12px; color: var(--ink); font-family: var(--font-display); font-size: 18px;">{r.t}</td>
+            <td style="padding: 9px 12px; color: var(--acid); font-family: var(--font-display); font-size: 16px;">{r.sem}</td>
+            <td style="padding: 9px 12px; color: var(--muted);">{r.control}</td>
+            <td style="padding: 9px 12px; color: var(--muted);">{r.hito}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {[
+        { q: '¿Cuántas semanas tiene cada trimestre del embarazo?', a: 'El embarazo se divide en tres trimestres: el primero va de la semana 1 a la 13, el segundo de la semana 14 a la 27, y el tercero de la semana 28 hasta el parto (semana 40–42). Cada trimestre tiene características específicas en el desarrollo del bebé y en los cambios que experimenta la madre.' },
+        { q: '¿Qué pruebas médicas son obligatorias en el primer trimestre?', a: 'En el primer trimestre (antes de la semana 13) son clave: la ecografía de translucencia nucal (semanas 11–13), la analítica completa con grupo sanguíneo y serología (toxoplasmosis, rubéola, sífilis, VIH, hepatitis B), y el inicio del ácido fólico (400–800 mcg/día). También se debe confirmar la fecha de parto.' },
+        { q: '¿Cuándo se siente el primer movimiento del bebé?', a: 'La mayoría de las madres perciben los primeros movimientos fetales entre las semanas 16 y 22. Las primerizas suelen notarlos algo más tarde (semana 20–22), mientras que las mujeres en embarazos posteriores pueden percibirlos desde la semana 16–18. Al inicio se sienten como burbujitas o aleteos leves.' },
+        { q: '¿Qué es la ecografía morfológica y cuándo se hace?', a: 'La ecografía morfológica (o de la semana 20) es el estudio más completo del embarazo. Se realiza entre las semanas 18–22 y evalúa la anatomía fetal detallada: corazón, cerebro, columna, órganos abdominales, extremidades y cara. También permite medir la longitud del cuello uterino y valorar la placenta y el líquido amniótico.' },
+        { q: '¿Cuándo debe ceder el bebé la posición para el parto?', a: 'La posición cefálica (cabeza abajo) se establece típicamente entre las semanas 32 y 36. Antes de eso es normal que el bebé cambie de posición. Si a la semana 36 el bebé está en presentación podálica (de nalgas), el obstetra puede proponer una versión cefálica externa (VCE) o planificar una cesárea.' },
+      ].map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

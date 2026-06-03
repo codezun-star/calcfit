@@ -62,7 +62,7 @@ calcfit-astro/
 │   │   │   ├── HistoryTable.tsx
 │   │   │   ├── ShareButtons.tsx
 │   │   │   └── Badge.tsx              ← popular | new | essential
-│   │   └── calculators/               ← 89 componentes React (ver CALCULADORAS.md)
+│   │   └── calculators/               ← 99 componentes React (ver CALCULADORAS.md)
 │   │       ├── [NombreCalculator].tsx ← un archivo por calculadora
 │   │       ├── GaugeIMC.tsx           ← gauge SVG semicircular animado
 │   │       ├── ZonasCardiaca.tsx      ← barras horizontales de zonas cardíacas
@@ -357,8 +357,8 @@ La columna izquierda del hero (`.hero-left`) tiene una imagen de fondo de gimnas
 - La columna derecha (`.hero-nums`) mantiene fondo sólido `var(--ink-2)` sin imagen.
 - Si se cambia la imagen, verificar que el overlay siga siendo opaco suficiente (mínimo 0.65).
 
-Categorías y conteo actual (total: 89) — ver detalle en [CALCULADORAS.md](CALCULADORAS.md) y archivos por categoría:
-- Fitness & salud (51) · Embarazo & fertilidad (10) · Fechas & tiempo (8) · Nutrición & bienestar (20)
+Categorías y conteo actual (total: 99) — ver detalle en [CALCULADORAS.md](CALCULADORAS.md) y archivos por categoría:
+- Fitness & salud (51) · Embarazo & fertilidad (20) · Fechas & tiempo (8) · Nutrición & bienestar (20)
 
 Al agregar una calculadora nueva, seguir el checklist completo de la sección "Reglas para agregar una calculadora nueva".
 
@@ -694,6 +694,7 @@ Siempre verificar `typeof window !== 'undefined'` antes de acceder a localStorag
 | Fecha | Acción |
 |---|---|
 | 2026-06-02 | Blog: +20 artículos SEO (grasa-abdominal, ganar-musculo-siendo-delgado, cuanto-tarda-verse-el-musculo, running-para-principiantes, entrenamiento-mayores-40, vo2-maximo-como-mejorar, calorias-alimentos-comunes, proteina-vegetal-vs-animal, alcohol-y-calorias, dieta-mediterranea, carga-glucemica-practica, omega-3-beneficios, colesterol-alto-que-comer, presion-arterial-normal, glucosa-en-sangre, frecuencia-cardiaca-reposo, magnesio-deficiencia, sarcopenia-perdida-muscular, perder-peso-sin-efecto-rebote, salud-hormonal-y-ejercicio). Total blog: 48 artículos. |
+| 2026-06-03 | Batch 9 Embarazo: +10 calculadoras (ventana-fertil, edad-gestacional, trimestre-embarazo, aumento-peso-embarazo, kick-counter, test-ovulacion, beta-hcg, probabilidad-embarazo, tiempo-postparto, compatibilidad-lactancia). Total: 99. Embarazo & fertilidad pasa de 10 a 20. |
 | 2026-06-02 | Blog: paginación implementada. `index.astro` reemplazado por `[...page].astro` con `paginate()` (20 artículos/página). Navegación prev/next + números de página. |
 | 2026-05-29 | SEO/URLs: `trailingSlash: 'never'` en `astro.config.mjs`. Redirect 301 `/*/→/:splat` en `public/_redirects` (Cloudflare Pages) para normalizar URLs con slash final. |
 | 2026-05-27 | Blog: Content Layer API con `src/content.config.ts` + `src/pages/blog/`. Sección "Desde el blog" en homepage. Links en Navbar, homepage nav y Footer. |
