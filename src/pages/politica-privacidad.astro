@@ -7,7 +7,7 @@ import AdBanner from '../components/layout/AdBanner.astro';
 
 <Base
   title="Política de Privacidad — CalcFit"
-  description="Política de privacidad de CalcFit. Sin registro, sin cookies de rastreo, sin datos enviados al servidor. Todo el cálculo ocurre en tu navegador."
+  description="Política de privacidad de CalcFit. Sin registro de usuarios. Los cálculos ocurren en tu navegador y no se envían datos personales al servidor."
 >
   <Navbar />
 
@@ -28,7 +28,7 @@ import AdBanner from '../components/layout/AdBanner.astro';
     <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: #9aaa00;">
       {[
         { n: '01', t: 'Cero datos al servidor', d: 'Ningún dato que introduces se envía a nuestros servidores. Los cálculos ocurren en tu navegador.' },
-        { n: '02', t: 'Sin cookies de rastreo', d: 'No usamos cookies de analítica, publicidad ni seguimiento de ningún tipo.' },
+        { n: '02', t: 'Sin registro de usuarios', d: 'No creamos cuentas ni perfiles de usuario. No pedimos nombre, email ni contraseña.' },
         { n: '03', t: 'Historial 100% local', d: 'El historial opcional se guarda solo en tu dispositivo (localStorage). Puedes borrarlo cuando quieras.' },
       ].map(item => (
         <div style="background: var(--acid); padding: 20px;">
@@ -72,7 +72,7 @@ import AdBanner from '../components/layout/AdBanner.astro';
         num: '04',
         titulo: 'Cookies',
         contenido: [
-          'CalcFit no utiliza cookies de rastreo, analítica, publicidad ni perfiles. Para más información, consulte nuestra <a href="/politica-cookies" style="color: var(--ink); text-decoration: underline;">Política de Cookies</a>.',
+          'CalcFit puede utilizar cookies técnicas, de analítica y de publicidad. Para más información, consulte nuestra <a href="/politica-cookies" style="color: var(--ink); text-decoration: underline;">Política de Cookies</a>.',
         ],
       },
       {
