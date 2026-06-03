@@ -2,15 +2,16 @@
 import Base from '../../layouts/Base.astro';
 import Navbar from '../../components/layout/Navbar.astro';
 import Footer from '../../components/layout/Footer.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import type { GetStaticPathsOptions, Page } from 'astro';
 
-export async function getStaticPaths({ paginate }: { paginate: Function }) {
-  const todos = await getCollection('blog', (e: any) => e.data.publicado !== false);
-  const sorted = todos.sort((a: any, b: any) => b.data.fecha.localeCompare(a.data.fecha));
+export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
+  const todos = await getCollection('blog', (e) => e.data.publicado !== false);
+  const sorted = todos.sort((a, b) => b.data.fecha.localeCompare(a.data.fecha));
   return paginate(sorted, { pageSize: 20 });
 }
 
-const { page } = Astro.props;
+const { page } = Astro.props as { page: Page<CollectionEntry<'blog'>> };
 
 function thumbUrl(url: string): string {
   return url.replace(/&w=\d+/, '&w=400').replace(/&h=\d+/, '&h=267');
@@ -75,6 +76,7 @@ const titleSuffix = page.currentPage > 1 ? ` — Página ${page.currentPage}` : 
                     height="107"
                     loading="lazy"
                     style="width:160px; height:107px; object-fit:cover; display:block;"
+                    onerror="this.closest('.blog-thumb').style.display='none'"
                   />
                 </div>
               )}
@@ -85,7 +87,6 @@ const titleSuffix = page.currentPage > 1 ? ` — Página ${page.currentPage}` : 
                       {categorias[art.data.categoria] ?? art.data.categoria}
                     </span>
                   )}
-                  <span style="font-size:11px; color:var(--muted); font-family:var(--font-mono);">{art.data.fecha}</span>
                 </div>
                 <p style="font-size:16px; font-weight:600; color:var(--ink); margin:0 0 6px; line-height:1.3; font-family:var(--font-body);">
                   {art.data.titulo}

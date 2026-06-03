@@ -11,7 +11,7 @@ keywords:
   - "magnesio y calambres musculares"
   - "deficiencia de magnesio cómo saber si me falta"
 autor: "Equipo CalcFit"
-imagen: "https://images.unsplash.com/photo-1548817029-1ecd45c9fa95?w=1200&h=630&fit=crop&q=80&auto=format"
+imagen: "https://images.unsplash.com/photo-1511690743698-d9d85f2fbf38?w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 unsplashQuery: "nuts seeds magnesium healthy food minerals"
 ---
