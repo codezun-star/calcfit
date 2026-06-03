@@ -79,7 +79,7 @@ calcfit-astro/
 │       ├── index.astro                ← homepage con las 89 calculadoras
 │       ├── [slug].astro               ← 89 páginas calculadora (ver CALCULADORAS.md)
 │       ├── blog/
-│       │   ├── index.astro            ← lista de artículos del blog
+│       │   ├── [...page].astro        ← lista paginada (20 art/pág) — /blog, /blog/2, /blog/3...
 │       │   └── [slug].astro           ← artículo individual con JSON-LD Article
 │       ├── sobre-nosotros.astro       ← página estática
 │       ├── contacto.astro             ← solo email, sin formulario
@@ -373,7 +373,7 @@ El blog usa el **Content Layer API de Astro 6** con archivos `.md` en `src/conte
 | Archivo | Descripción |
 |---|---|
 | `src/content.config.ts` | Schema Zod con `glob` loader (Astro 6) |
-| `src/pages/blog/index.astro` | Lista de artículos ordenados por fecha |
+| `src/pages/blog/[...page].astro` | Lista paginada (20 artículos/página). Genera `/blog`, `/blog/2`, etc. Usa `getStaticPaths` + `paginate()`. |
 | `src/pages/blog/[slug].astro` | Template de artículo individual con JSON-LD Article |
 | `src/content/blog/*.md` | Artículos — el nombre del archivo ES la URL |
 
@@ -693,6 +693,8 @@ Siempre verificar `typeof window !== 'undefined'` antes de acceder a localStorag
 
 | Fecha | Acción |
 |---|---|
+| 2026-06-02 | Blog: +20 artículos SEO (grasa-abdominal, ganar-musculo-siendo-delgado, cuanto-tarda-verse-el-musculo, running-para-principiantes, entrenamiento-mayores-40, vo2-maximo-como-mejorar, calorias-alimentos-comunes, proteina-vegetal-vs-animal, alcohol-y-calorias, dieta-mediterranea, carga-glucemica-practica, omega-3-beneficios, colesterol-alto-que-comer, presion-arterial-normal, glucosa-en-sangre, frecuencia-cardiaca-reposo, magnesio-deficiencia, sarcopenia-perdida-muscular, perder-peso-sin-efecto-rebote, salud-hormonal-y-ejercicio). Total blog: 48 artículos. |
+| 2026-06-02 | Blog: paginación implementada. `index.astro` reemplazado por `[...page].astro` con `paginate()` (20 artículos/página). Navegación prev/next + números de página. |
 | 2026-05-29 | SEO/URLs: `trailingSlash: 'never'` en `astro.config.mjs`. Redirect 301 `/*/→/:splat` en `public/_redirects` (Cloudflare Pages) para normalizar URLs con slash final. |
 | 2026-05-27 | Blog: Content Layer API con `src/content.config.ts` + `src/pages/blog/`. Sección "Desde el blog" en homepage. Links en Navbar, homepage nav y Footer. |
 | 2026-05-23 | Batch 8: +10 calculadoras (cuenta-regresiva, semanas-de-vida, generacion, jubilacion, edad-planetas, cuando-test-embarazo, peso-bebe-semana, lactancia, fecha-concepcion, fibra-diaria). Total: 89. |
