@@ -1,0 +1,152 @@
+---
+import Base from '../../layouts/Base.astro';
+import Navbar from '../../components/layout/Navbar.astro';
+import Footer from '../../components/layout/Footer.astro';
+import { calculadoras, categorias } from '../../lib/calcData';
+import type { GetStaticPathsOptions, Page } from 'astro';
+import type { Calc } from '../../lib/calcData';
+
+const cat = categorias.find(c => c.slug === 'embarazo')!;
+const slugSet = new Set(cat.slugs);
+const allCalcs = calculadoras.filter(c => slugSet.has(c.slug));
+
+export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
+  const { calculadoras, categorias } = await import('../../lib/calcData');
+  const cat = categorias.find(c => c.slug === 'embarazo')!;
+  const slugSet = new Set(cat.slugs);
+  const items = calculadoras.filter(c => slugSet.has(c.slug));
+  return paginate(items, { pageSize: 20 });
+}
+
+const { page } = Astro.props as { page: Page<Calc> };
+const titleSuffix = page.currentPage > 1 ? ` — Página ${page.currentPage}` : '';
+---
+
+<Base
+  title={`Calculadoras de Embarazo y Fertilidad${titleSuffix} — ${allCalcs.length} Herramientas Gratis | CalcFit`}
+  description={`${allCalcs.length} calculadoras de embarazo y fertilidad gratuitas: ovulación, ciclo menstrual, fecha de parto, semana de embarazo y más. Validadas científicamente.`}
+  keywords="calculadoras embarazo, calculadora ovulación, ciclo menstrual, fecha de parto, semana embarazo, calculadoras fertilidad gratis"
+>
+  <Navbar />
+
+  <!-- Header -->
+  <div style="background:var(--ink); padding:40px 20px 32px; margin-top:56px;">
+    <div style="max-width:1200px; margin:0 auto;">
+      <div style="display:flex; align-items:center; gap:6px; font-family:var(--font-mono); font-size:11px; color:#888; margin-bottom:16px; text-transform:uppercase; letter-spacing:0.08em;">
+        <a href="/" style="color:#888; text-decoration:none;">Inicio</a>
+        <span>/</span>
+        <span style="color:var(--acid);">Embarazo & Fertilidad</span>
+      </div>
+      <h1 style="font-family:var(--font-display); font-size:clamp(36px,6vw,64px); color:white; margin:0 0 10px; line-height:0.95;">
+        Calculadoras de<br><span style="color:var(--acid);">Embarazo & Fertilidad</span>
+      </h1>
+      <p style="font-size:13px; color:#999; margin:0; line-height:1.7; font-family:var(--font-body);">
+        {allCalcs.length} herramientas gratuitas · Validadas científicamente · Sin registro
+      </p>
+    </div>
+  </div>
+
+  <!-- Grid -->
+  <main style="background:var(--cream); padding:32px 20px 64px;">
+    <div style="max-width:1200px; margin:0 auto;">
+
+      <div class="calc-grid">
+        {page.data.map(calc => (
+          <a href={calc.slug} class="calc-card">
+            <div class={`calc-icon ${calc.destacada ? 'calc-icon--dest' : ''}`}>
+              <Fragment set:html={calc.icon} />
+            </div>
+            <div class="calc-nombre">{calc.nombre}</div>
+            <div class="calc-desc">{calc.desc}</div>
+            {calc.badge && (
+              <span class={`calc-badge calc-badge--${calc.badge}`}>
+                {calc.badge === 'popular' ? 'Popular' : 'Esencial'}
+              </span>
+            )}
+          </a>
+        ))}
+      </div>
+
+      <!-- Paginación (solo visible si hay más de 1 página) -->
+      {page.lastPage > 1 && (
+        <nav style="display:flex; align-items:center; justify-content:center; gap:8px; flex-wrap:wrap; margin-top:32px;">
+          {page.url.prev && (
+            <a href={page.url.prev} class="page-link">← Anterior</a>
+          )}
+          {Array.from({ length: page.lastPage }, (_, i) => i + 1).map(n => (
+            <a
+              href={n === 1 ? '/embarazo' : `/embarazo/${n}`}
+              class={`page-link ${n === page.currentPage ? 'page-link--active' : ''}`}
+            >
+              {n}
+            </a>
+          ))}
+          {page.url.next && (
+            <a href={page.url.next} class="page-link">Siguiente →</a>
+          )}
+        </nav>
+      )}
+
+    </div>
+  </main>
+
+  <Footer />
+</Base>
+
+<style>
+  .calc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    margin-bottom: 2px;
+  }
+  .calc-card {
+    background: var(--cream);
+    padding: 20px;
+    text-decoration: none;
+    display: block;
+    position: relative;
+  }
+  .calc-card:hover { background: #EDE9E0; }
+  .calc-icon {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    background: var(--ink);
+    color: var(--acid);
+    flex-shrink: 0;
+  }
+  .calc-icon--dest { background: var(--acid); color: var(--ink); }
+  .calc-nombre { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+  .calc-desc   { font-size: 11px; color: var(--muted); line-height: 1.5; margin-bottom: 8px; }
+  .calc-badge {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    padding: 2px 7px;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    display: inline-block;
+  }
+  .calc-badge--popular   { background: var(--acid); color: #1a1a00; }
+  .calc-badge--essential { border: 1px solid var(--ink); color: var(--ink); }
+  .page-link {
+    padding: 6px 14px;
+    border: 1px solid var(--border);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--ink);
+    text-decoration: none;
+    background: transparent;
+  }
+  .page-link:hover { border-color: var(--ink); }
+  .page-link--active { background: var(--ink); color: var(--acid); border-color: var(--ink); }
+  @media (max-width: 600px) {
+    .calc-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>

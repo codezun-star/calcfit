@@ -21,9 +21,13 @@ type Calc = {
 export default function CalculatorBrowser({
   calculadoras,
   categorias,
+  limit,
+  categoryPageUrls,
 }: {
   calculadoras: Calc[];
   categorias: string[];
+  limit?: number;
+  categoryPageUrls?: Record<string, string>;
 }) {
   const [query, setQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState(categorias[0] ?? '');
@@ -42,13 +46,24 @@ export default function CalculatorBrowser({
     return () => window.removeEventListener('hashchange', applyHash);
   }, []);
 
+  const allInCategory = useMemo(
+    () => calculadoras.filter(c => c.categoria === activeCategory),
+    [calculadoras, activeCategory],
+  );
+
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
-    return calculadoras.filter(c => {
-      const matchQ = !q || c.nombre.toLowerCase().includes(q) || c.desc.toLowerCase().includes(q);
-      return matchQ && c.categoria === activeCategory;
-    });
-  }, [calculadoras, query, activeCategory]);
+    if (q) {
+      return allInCategory.filter(
+        c => c.nombre.toLowerCase().includes(q) || c.desc.toLowerCase().includes(q),
+      );
+    }
+    return limit ? allInCategory.slice(0, limit) : allInCategory;
+  }, [allInCategory, query, limit]);
+
+  const isSearching = query.trim().length > 0;
+  const hasMore = !isSearching && limit != null && allInCategory.length > limit;
+  const categoryPageUrl = categoryPageUrls?.[activeCategory];
 
   const pills = [...categorias];
 
@@ -150,7 +165,7 @@ export default function CalculatorBrowser({
           letterSpacing: '1px',
           alignSelf: 'center',
         }}>
-          {filtered.length} herramientas
+          {isSearching ? `${filtered.length} resultados` : `${allInCategory.length} herramientas`}
         </span>
       </div>
 
@@ -200,7 +215,7 @@ export default function CalculatorBrowser({
               onMouseEnter={e => (e.currentTarget.style.background = '#EDE9E0')}
               onMouseLeave={e => (e.currentTarget.style.background = 'var(--cream)')}
             >
-<div
+              <div
                 style={{
                   width: 36,
                   height: 36,
@@ -239,6 +254,41 @@ export default function CalculatorBrowser({
               )}
             </a>
           ))}
+        </div>
+      )}
+
+      {/* Enlace "Ver todas" cuando hay límite */}
+      {hasMore && categoryPageUrl && (
+        <div style={{ borderTop: '1px solid var(--border)', marginTop: 1, padding: '16px 0', display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'var(--cream)' }}>
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: 10, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '1px' }}>
+            Mostrando {limit} de {allInCategory.length}
+          </span>
+          <a
+            href={categoryPageUrl}
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: 10,
+              textTransform: 'uppercase',
+              letterSpacing: '1px',
+              color: 'var(--ink)',
+              textDecoration: 'none',
+              padding: '6px 14px',
+              border: '1px solid var(--ink)',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 6,
+            }}
+            onMouseEnter={e => {
+              (e.currentTarget as HTMLAnchorElement).style.background = 'var(--ink)';
+              (e.currentTarget as HTMLAnchorElement).style.color = 'var(--acid)';
+            }}
+            onMouseLeave={e => {
+              (e.currentTarget as HTMLAnchorElement).style.background = 'transparent';
+              (e.currentTarget as HTMLAnchorElement).style.color = 'var(--ink)';
+            }}
+          >
+            Ver las {allInCategory.length - limit!} restantes →
+          </a>
         </div>
       )}
     </div>

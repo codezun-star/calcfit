@@ -226,6 +226,12 @@ for (const cat of categorias) {
 }
 const calcWithCat = calculadoras.map(c => ({ ...c, categoria: catBySlug[c.slug] ?? '' }));
 const catLabels = categorias.map(c => c.label);
+const categoryPageUrls: Record<string, string> = {
+  'Fitness & salud':       '/fitness',
+  'Embarazo & fertilidad': '/embarazo',
+  'Fechas & tiempo':       '/fechas',
+  'Nutrición & bienestar': '/nutricion',
+};
 
 const schema = {
   '@context': 'https://schema.org',
@@ -370,7 +376,7 @@ function blogThumb(url: string): string {
   <div style="display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px; padding-bottom: 16px; border-bottom: 1px solid var(--border); margin-bottom: 24px;">
     <h2 style="font-family: var(--font-display); font-size: 48px; color: var(--ink);">Calculadoras</h2>
   </div>
-  <CalculatorBrowser calculadoras={calcWithCat} categorias={catLabels} client:load />
+  <CalculatorBrowser calculadoras={calcWithCat} categorias={catLabels} limit={15} categoryPageUrls={categoryPageUrls} client:load />
 </section>
 
 <!-- MANIFESTO -->
