@@ -1,6 +1,7 @@
 ---
 titulo: "Presión arterial: rangos normales por edad, causas de hipertensión y qué hacer"
-descripcion: "120/80 es el valor de referencia pero los rangos normales varían. Qué significan el sistólico y diastólico, causas de tensión alta y las intervenciones no farmacológicas más eficaces."
+tituloSeo: "Presión Arterial: Rangos Normales y Control"
+descripcion: "120/80 es la referencia pero los rangos varían. Sistólico, diastólico, causas de tensión alta y las intervenciones no farmacológicas más eficaces."
 categoria: "salud"
 fecha: "2026-06-04"
 keywords:

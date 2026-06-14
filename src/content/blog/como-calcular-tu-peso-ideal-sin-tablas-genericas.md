@@ -1,5 +1,6 @@
 ---
 titulo: "Cómo calcular tu peso ideal sin depender de tablas genéricas que no te conocen"
+tituloSeo: "Cómo Calcular tu Peso Ideal Real"
 descripcion: "Las tablas de peso ideal son promedios que ignoran tu composición corporal, complexión y nivel de actividad. Te explico cómo encontrar tu peso óptimo real."
 categoria: "salud"
 fecha: "2026-05-05"

@@ -1,6 +1,7 @@
 ---
 titulo: "Ayuno intermitente: lo que funciona, lo que no y para quién sirve realmente"
-descripcion: "El ayuno intermitente no es una dieta milagrosa ni una pérdida de tiempo. Funciona para algunas personas y falla en otras. Te explico exactamente por qué y cómo aplicarlo."
+tituloSeo: "Ayuno Intermitente: Lo Que Funciona"
+descripcion: "El ayuno intermitente no es milagroso ni pérdida de tiempo. Para quién funciona, cuándo falla y cómo aplicar el 16:8 sin pasar hambre. Gratis."
 categoria: "nutricion"
 fecha: "2026-05-21"
 keywords:

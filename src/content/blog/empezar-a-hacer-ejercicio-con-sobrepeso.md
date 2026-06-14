@@ -1,6 +1,7 @@
 ---
 titulo: "Cómo empezar a hacer ejercicio con sobrepeso sin lesionarte ni abandonar en el intento"
-descripcion: "Empezar con sobrepeso no es igual que empezar en un peso saludable. Las articulaciones, el sistema cardiovascular y la psicología del ejercicio funcionan diferente. Aquí está la guía real."
+tituloSeo: "Ejercicio con Sobrepeso: Por Dónde Empezar"
+descripcion: "Guía real para empezar a hacer ejercicio con sobrepeso: actividades seguras para las rodillas, cómo progresar sin lesiones y cómo no abandonar."
 categoria: "fitness"
 fecha: "2026-06-09"
 keywords:

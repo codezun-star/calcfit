@@ -54,13 +54,13 @@ export default function IGComidaCalculator() {
   }
 
   return (
-    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '640px', margin: '0 auto' }}>
-      <p style={{ fontSize: '13px', color: 'var(--muted)', marginBottom: '20px', lineHeight: 1.6 }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      <p style={{ fontSize: '13px', color: 'var(--muted)', lineHeight: 1.6 }}>
         Introduce los alimentos de tu comida con su IG y cantidad de carbohidratos para calcular el índice y carga glucémica total.
       </p>
 
       {/* Tabla de alimentos */}
-      <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch', marginBottom: '16px' }}>
+      <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
         <div style={{ minWidth: '500px' }}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 80px 100px 32px', gap: '8px', marginBottom: '8px' }}>
             <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '1px' }}>Alimento</span>
@@ -81,7 +81,7 @@ export default function IGComidaCalculator() {
 
       {/* Alimentos comunes */}
       {filas.length < 5 && (
-        <div style={{ marginBottom: '16px' }}>
+        <div>
           <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '6px' }}>
             Búsqueda rápida (solo aplica nombre e IG)
           </div>
@@ -99,7 +99,7 @@ export default function IGComidaCalculator() {
         </div>
       )}
 
-      <div style={{ display: 'flex', gap: '8px', marginBottom: '16px', flexWrap: 'wrap' }}>
+      <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
         {filas.length < 5 && (
           <button onClick={() => setFilas(prev => [...prev, emptyRow()])} style={{ padding: '8px 16px', border: '1px solid var(--border)', background: 'transparent', color: 'var(--muted)', fontFamily: 'var(--font-mono)', fontSize: '11px', cursor: 'pointer' }}>
             + Añadir alimento
@@ -111,7 +111,7 @@ export default function IGComidaCalculator() {
       {error && <p style={{ color: '#F87171', fontSize: '13px', marginBottom: '16px' }}>{error}</p>}
 
       {resultado && (
-        <div style={{ marginTop: '16px' }}>
+        <div>
           <div style={{ background: 'var(--ink)', padding: '24px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '16px' }}>
             <div>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: '#999', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '4px' }}>IG ponderado</div>

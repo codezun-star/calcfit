@@ -37,7 +37,8 @@ const faqs = [
       Un "año" en cualquier planeta es el tiempo que tarda ese planeta en completar una órbita alrededor del Sol. La duración varía enormemente: de los 88 días de Mercurio a los 165 años terrestres de Neptuno. La edad en otro planeta es simplemente tu tiempo de vida dividido entre la duración del año de ese planeta.
     </p>
 
-    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px;">
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 380px;">
       <thead>
         <tr style="background: var(--ink); color: var(--acid);">
           <th style="padding: 10px 14px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Planeta</th>
@@ -63,6 +64,7 @@ const faqs = [
         ))}
       </tbody>
     </table>
+    </div>
 
     <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
     <div style="display: flex; flex-direction: column; gap: 16px;">

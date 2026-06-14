@@ -1,6 +1,7 @@
 ---
 titulo: "Hierro: síntomas de déficit, anemia y cómo absorberlo mejor en la dieta"
-descripcion: "El déficit de hierro es la carencia nutricional más común del mundo. Síntomas, grupos de riesgo, hierro hemo vs no hemo y cómo maximizar su absorción. Sin registro."
+tituloSeo: "Hierro: Síntomas de Déficit y Cómo Absorberlo"
+descripcion: "El déficit de hierro es la carencia más común del mundo. Síntomas, grupos de riesgo, hierro hemo vs no hemo y cómo maximizar la absorción. Gratis."
 categoria: "salud"
 fecha: "2026-06-07"
 keywords:

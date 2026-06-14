@@ -1,6 +1,7 @@
 ---
 titulo: "Grasa corporal vs peso en báscula: por qué el número que ves no es lo que importa"
-descripcion: "La báscula no mide grasa, mide masa total. Puedes estar ganando músculo y perdiendo grasa al mismo tiempo mientras el número no cambia. Aquí está la explicación completa."
+tituloSeo: "Grasa Corporal vs Báscula: Lo que Importa"
+descripcion: "La báscula no mide grasa, mide masa total. Puedes ganar músculo y perder grasa mientras el número no cambia. Aquí está la explicación completa."
 categoria: "fitness"
 fecha: "2026-05-19"
 keywords:

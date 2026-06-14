@@ -1,6 +1,7 @@
 ---
 titulo: "Sueño y pérdida de grasa: la conexión que sabotea tu dieta sin que lo sepas"
-descripcion: "Dormir mal no solo te cansa. Altera las hormonas del hambre, reduce el metabolismo y favorece la pérdida de músculo en lugar de grasa. La ciencia es clara al respecto."
+tituloSeo: "Sueño y Pérdida de Grasa: La Conexión Clave"
+descripcion: "Dormir mal altera las hormonas del hambre y favorece perder músculo en vez de grasa. La ciencia sobre sueño y composición corporal. Gratis."
 categoria: "salud"
 fecha: "2026-05-02"
 keywords:

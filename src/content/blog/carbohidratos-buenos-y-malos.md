@@ -1,6 +1,7 @@
 ---
 titulo: "Carbohidratos: cuáles comer, cuáles limitar y por qué el índice glucémico no lo es todo"
-descripcion: "No todos los carbohidratos son iguales y tampoco son el enemigo. La diferencia entre arroz blanco y avena no es solo el índice glucémico — es el contexto completo del alimento."
+tituloSeo: "Carbohidratos: Buenos y Malos, la Guía Real"
+descripcion: "No todos los carbohidratos son iguales ni son el enemigo. Cuáles comer, cuáles limitar y por qué el índice glucémico no lo dice todo. Gratis."
 categoria: "nutricion"
 fecha: "2026-06-12"
 keywords:

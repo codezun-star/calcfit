@@ -1,6 +1,7 @@
 ---
 titulo: "Dieta cetogénica: para quién funciona, para quién no y qué dice la ciencia"
-descripcion: "La keto es la dieta de moda con más evidencia y más malentendidos al mismo tiempo. Te explico los mecanismos reales, los resultados documentados y los contextos donde no es la respuesta."
+tituloSeo: "Dieta Cetogénica: Para Quién Funciona"
+descripcion: "La keto tiene evidencia sólida y muchos malentendidos. Mecanismos reales, resultados documentados y cuándo no es la mejor opción. Gratis."
 categoria: "nutricion"
 fecha: "2026-06-11"
 keywords:

@@ -1,6 +1,7 @@
 ---
 titulo: "Dieta mediterránea para Latinoamérica: qué comer, menú semanal y beneficios reales"
-descripcion: "La dieta con más evidencia científica del mundo adaptada a los ingredientes de LATAM. Qué comer, qué evitar, menú semanal y por qué reduce el riesgo cardiovascular un 30%."
+tituloSeo: "Dieta Mediterránea para Latinoamérica"
+descripcion: "La dieta con más evidencia del mundo, adaptada a LATAM. Qué comer, qué evitar, menú semanal y por qué reduce el riesgo cardiovascular un 30%. Gratis."
 categoria: "nutricion"
 fecha: "2026-06-03"
 keywords:

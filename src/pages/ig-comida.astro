@@ -37,7 +37,8 @@ const faqs = [
       El IG de una comida mixta se calcula ponderando el IG de cada alimento por su proporción de carbohidratos en el total: IG_comida = Σ(IG_i × carbs_i) / Σ(carbs_i). La carga glucémica total es CG = (IG_ponderado × carbs_totales) / 100. Esta metodología, descrita por Brand-Miller et al., permite evaluar el impacto glucémico real de comidas completas, no solo de alimentos individuales.
     </p>
 
-    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px;">
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 300px;">
       <thead>
         <tr style="background: var(--ink); color: var(--acid);">
           <th style="padding: 10px 14px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Clasificación</th>
@@ -59,6 +60,7 @@ const faqs = [
         ))}
       </tbody>
     </table>
+    </div>
 
     <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
     <div style="display: flex; flex-direction: column; gap: 16px;">

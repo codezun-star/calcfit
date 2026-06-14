@@ -1,6 +1,7 @@
 ---
 titulo: "Proteína en el desayuno: por qué los primeros gramos del día son los más importantes"
-descripcion: "El desayuno proteíco reduce el hambre durante todo el día y mejora la composición corporal. Cuántos gramos necesitas, qué alimentos usar y qué dice la ciencia. Gratis."
+tituloSeo: "Proteína en el Desayuno: Por Qué Importa"
+descripcion: "El desayuno proteico reduce el hambre todo el día y mejora la composición corporal. Cuántos gramos necesitas y qué alimentos usar. Con evidencia."
 categoria: "nutricion"
 fecha: "2026-06-07"
 keywords:

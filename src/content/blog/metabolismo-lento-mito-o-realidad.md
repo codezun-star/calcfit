@@ -1,6 +1,7 @@
 ---
 titulo: "Metabolismo lento: mito o realidad, y qué puedes hacer al respecto"
-descripcion: "Casi todo el mundo cree que tiene el metabolismo lento. La ciencia dice algo diferente. Te explico qué es real, qué es mito y cómo calcular tu gasto metabólico real."
+tituloSeo: "Metabolismo Lento: Mito o Realidad"
+descripcion: "Casi todos creen tener metabolismo lento. La ciencia dice algo diferente. Qué es real, qué es mito y cómo calcular tu gasto metabólico real. Gratis."
 categoria: "salud"
 fecha: "2026-05-14"
 keywords:

@@ -1,6 +1,7 @@
 ---
 titulo: "Recomposición corporal: perder grasa y ganar músculo a la vez (y cuándo funciona)"
-descripcion: "La recomposición corporal es real pero lenta. Cuándo funciona, para quién, cómo estructurar la dieta y el entrenamiento para lograrla sin hacer dos fases separadas. Gratis."
+tituloSeo: "Recomposición Corporal: Cómo Hacerla"
+descripcion: "Perder grasa y ganar músculo a la vez es posible, pero lento. Cuándo funciona la recomposición corporal, para quién y cómo estructurarla. Gratis."
 categoria: "fitness"
 fecha: "2026-06-07"
 keywords:

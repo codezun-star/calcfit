@@ -1,6 +1,7 @@
 ---
 titulo: "Cuánta proteína necesito al día: los números reales según tu peso y objetivo"
-descripcion: "Sedentario, activo o queriendo ganar músculo: la cantidad exacta de proteína que necesitas al día cambia. Te doy los gramos por kilo de peso con respaldo científico."
+tituloSeo: "Cuánta Proteína Necesito al Día"
+descripcion: "Cuánta proteína al día según tu objetivo: sedentario, activo o ganando músculo. Gramos exactos por kilo de peso con respaldo científico. Gratis."
 categoria: "nutricion"
 fecha: "2026-05-27"
 keywords:

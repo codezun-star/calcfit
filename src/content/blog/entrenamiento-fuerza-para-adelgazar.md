@@ -1,6 +1,7 @@
 ---
 titulo: "Por qué el entrenamiento de fuerza quema más grasa que el cardio a largo plazo"
-descripcion: "El cardio quema calorías durante el ejercicio. Las pesas las queman el resto del día. Te explico la ciencia detrás de por qué el músculo transforma la composición corporal de forma permanente."
+tituloSeo: "Entrenamiento de Fuerza para Adelgazar"
+descripcion: "Las pesas queman grasa el resto del día, no solo en el gym. Descubre por qué el músculo eleva el metabolismo basal y cómo empezar. Gratis."
 categoria: "fitness"
 fecha: "2026-05-29"
 keywords:

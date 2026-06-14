@@ -1,6 +1,7 @@
 ---
 titulo: "Suplementos deportivos: cuáles tienen evidencia real y cuáles son marketing puro"
-descripcion: "La industria de suplementos mueve 50.000 millones de dólares anuales. Solo un puñado tiene evidencia sólida. Te cuento cuáles son y en qué categoría está cada uno."
+tituloSeo: "Suplementos Deportivos: Cuáles Funcionan"
+descripcion: "La industria de suplementos mueve 50.000 millones al año. Solo un puñado tiene evidencia sólida. Cuáles son y en qué categoría está cada uno. Gratis."
 categoria: "salud"
 fecha: "2026-06-08"
 keywords:

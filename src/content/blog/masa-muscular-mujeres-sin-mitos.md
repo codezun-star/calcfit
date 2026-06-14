@@ -1,6 +1,7 @@
 ---
 titulo: "Masa muscular en mujeres: el mito de 'ponerse grande' que frena tu progreso"
-descripcion: "Las mujeres no se ponen grandes por levantar pesas. Tienen 10-20 veces menos testosterona que los hombres. Te explico lo que sí pasa y por qué el músculo es tu mejor aliado."
+tituloSeo: "Masa Muscular en Mujeres: Mitos y Realidad"
+descripcion: "Las mujeres no se ponen grandes con las pesas: tienen 10-20 veces menos testosterona. Lo que sí pasa cuando levantás pesas y por qué importa."
 categoria: "fitness"
 fecha: "2026-06-03"
 keywords:

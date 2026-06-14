@@ -35,7 +35,8 @@ import AumentoPesoEmbarazoCalculator from '../components/calculators/AumentoPeso
       Las guías del Instituto de Medicina (IOM, 2009) son el estándar internacional para la ganancia de peso gestacional. Se basan en el IMC previo al embarazo y se expresan como un rango que minimiza los riesgos para la madre y el bebé.
     </p>
 
-    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px;">
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 460px;">
       <thead>
         <tr style="background: var(--ink); color: var(--cream);">
           <th style="padding: 10px 12px; text-align: left; font-family: var(--font-mono); font-weight: 400;">IMC pre-embarazo</th>
@@ -60,6 +61,7 @@ import AumentoPesoEmbarazoCalculator from '../components/calculators/AumentoPeso
         ))}
       </tbody>
     </table>
+    </div>
 
     <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
     <div style="display: flex; flex-direction: column; gap: 16px;">

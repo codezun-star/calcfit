@@ -27,9 +27,9 @@ export default function FTPCiclismoCalculator() {
   ];
 
   return (
-    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '640px', margin: '0 auto' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
       {/* Protocolo */}
-      <div style={{ marginBottom: '24px' }}>
+      <div>
         <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px' }}>
           Protocolo de test
         </div>
@@ -49,7 +49,7 @@ export default function FTPCiclismoCalculator() {
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '16px', marginBottom: '24px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '16px' }}>
         <Input label="Potencia media (W)" value={potencia} onChange={setPotencia} suffix="W" type="number" />
         <Input label="Peso corporal" value={peso} onChange={setPeso} suffix="kg" type="number" />
       </div>
@@ -59,7 +59,7 @@ export default function FTPCiclismoCalculator() {
       <Button onClick={calcular}>Calcular FTP</Button>
 
       {resultado && (
-        <div style={{ marginTop: '32px' }}>
+        <div>
           {/* Resultado principal */}
           <div style={{ background: 'var(--ink)', padding: '24px', marginBottom: '24px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '16px' }}>
             <div>

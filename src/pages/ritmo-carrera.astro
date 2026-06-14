@@ -19,7 +19,7 @@ import RitmoCarreraCalculator from '../components/calculators/RitmoCarreraCalcul
   ]}
 >
   <div style="background: var(--ink); padding: 40px 32px 32px;">
-    <h1 style="font-family: var(--font-display); font-size: 64px; color: white; line-height: 0.92; margin-bottom: 12px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
       Ritmo de<br><span style="color: var(--acid);">Carrera</span>
     </h1>
     <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
@@ -36,32 +36,34 @@ import RitmoCarreraCalculator from '../components/calculators/RitmoCarreraCalcul
     </p>
 
     <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Tiempos de referencia por nivel</h2>
-    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px;">
-      <thead>
-        <tr style="border-bottom: 2px solid var(--border);">
-          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Nivel</th>
-          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Pace /km</th>
-          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">5K</th>
-          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">10K</th>
-        </tr>
-      </thead>
-      <tbody>
-        {[
-          { nivel: 'Principiante',  pace: '7:00 – 8:30', k5: '35–42 min', k10: '1h10–1h25' },
-          { nivel: 'Intermedio',    pace: '5:30 – 7:00', k5: '27–35 min', k10: '55–1h10' },
-          { nivel: 'Avanzado',      pace: '4:30 – 5:30', k5: '22–27 min', k10: '45–55 min' },
-          { nivel: 'Competitivo',   pace: '3:30 – 4:30', k5: '17–22 min', k10: '35–45 min' },
-          { nivel: 'Élite (hombre)',pace: '< 2:50',      k5: '< 14 min',  k10: '< 28 min' },
-        ].map(row => (
-          <tr style="border-bottom: 1px solid var(--border);">
-            <td style="padding: 10px 0; font-size: 13px; color: var(--ink);">{row.nivel}</td>
-            <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.pace}</td>
-            <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.k5}</td>
-            <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.k10}</td>
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 460px;">
+        <thead>
+          <tr style="border-bottom: 2px solid var(--border);">
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Nivel</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Pace /km</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">5K</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">10K</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {[
+            { nivel: 'Principiante',  pace: '7:00 – 8:30', k5: '35–42 min', k10: '1h10–1h25' },
+            { nivel: 'Intermedio',    pace: '5:30 – 7:00', k5: '27–35 min', k10: '55–1h10' },
+            { nivel: 'Avanzado',      pace: '4:30 – 5:30', k5: '22–27 min', k10: '45–55 min' },
+            { nivel: 'Competitivo',   pace: '3:30 – 4:30', k5: '17–22 min', k10: '35–45 min' },
+            { nivel: 'Élite (hombre)',pace: '< 2:50',      k5: '< 14 min',  k10: '< 28 min' },
+          ].map(row => (
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 10px 0; font-size: 13px; color: var(--ink);">{row.nivel}</td>
+              <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.pace}</td>
+              <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.k5}</td>
+              <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.k10}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
 
     <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
     <div style="display: flex; flex-direction: column; gap: 16px;">

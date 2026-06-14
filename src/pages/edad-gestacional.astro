@@ -35,7 +35,8 @@ import EdadGestacionalCalculator from '../components/calculators/EdadGestacional
       La edad gestacional se calcula sumando los días transcurridos desde el <strong>primer día de la última regla (FUR)</strong> hasta hoy. Se divide en semanas y días (ej. 12 semanas + 3 días). La fecha probable de parto (FPP) se obtiene sumando <strong>280 días a la FUR</strong> (regla de Naegele).
     </p>
 
-    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px;">
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 360px;">
       <thead>
         <tr style="background: var(--ink); color: var(--cream);">
           <th style="padding: 10px 12px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Etapa</th>
@@ -58,6 +59,7 @@ import EdadGestacionalCalculator from '../components/calculators/EdadGestacional
         ))}
       </tbody>
     </table>
+    </div>
 
     <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
     <div style="display: flex; flex-direction: column; gap: 16px;">

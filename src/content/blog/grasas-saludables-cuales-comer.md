@@ -1,6 +1,7 @@
 ---
 titulo: "Grasas saludables: cuáles comer, cuáles evitar y el mito de la dieta baja en grasas"
-descripcion: "La guerra contra la grasa dietética fue el error nutricional más grande del siglo XX. La evidencia actual es clara: el tipo de grasa importa más que la cantidad total."
+tituloSeo: "Grasas Saludables: Cuáles Comer y Cuáles Evitar"
+descripcion: "El tipo de grasa importa más que la cantidad total. Omega-3, grasas trans, aceite de oliva: qué dice la ciencia y qué comer de verdad. Gratis."
 categoria: "nutricion"
 fecha: "2026-06-06"
 keywords:

@@ -1,6 +1,7 @@
 ---
 titulo: "Entrenamiento en casa: ¿puede dar los mismos resultados que el gimnasio?"
-descripcion: "El entrenamiento en casa funciona, con condiciones. Cuándo el gym es superior, cuándo no importa la diferencia, y cómo diseñar una rutina en casa que realmente progresa."
+tituloSeo: "Entrenamiento en Casa: ¿Funciona de Verdad?"
+descripcion: "El entrenamiento en casa funciona, con condiciones. Cuándo el gym es superior y cómo diseñar una rutina casera que progresa de verdad. Gratis."
 categoria: "fitness"
 fecha: "2026-06-07"
 keywords:

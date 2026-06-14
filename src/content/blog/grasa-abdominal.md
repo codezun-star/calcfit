@@ -1,6 +1,7 @@
 ---
 titulo: "Cómo eliminar la grasa abdominal: lo que dice la ciencia (y lo que no funciona)"
-descripcion: "La grasa abdominal no se elimina con abdominales. Se elimina con déficit calórico, proteína alta y sueño. Aquí está la evidencia y el plan real para bajar la barriga."
+tituloSeo: "Cómo Eliminar la Grasa Abdominal"
+descripcion: "La grasa abdominal no se elimina con abdominales. Se elimina con déficit calórico, proteína alta y sueño. La evidencia y el plan real para la barriga."
 categoria: "fitness"
 fecha: "2026-06-02"
 keywords:

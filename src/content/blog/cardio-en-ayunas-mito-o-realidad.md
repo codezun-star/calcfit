@@ -1,6 +1,7 @@
 ---
 titulo: "Cardio en ayunas: qué dice la ciencia y cuándo tiene sentido hacerlo"
-descripcion: "La idea de que correr en ayunas quema más grasa es parcialmente cierta y parcialmente un mito. Los estudios muestran algo más matizado que lo que circula en redes."
+tituloSeo: "Cardio en Ayunas: Mito o Realidad"
+descripcion: "El cardio en ayunas quema más grasa, pero no de la forma que imaginas. Qué dice la evidencia y cuándo tiene sentido hacerlo de verdad."
 categoria: "fitness"
 fecha: "2026-06-04"
 keywords:

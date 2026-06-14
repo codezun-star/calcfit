@@ -18,7 +18,7 @@ import ProteinasCalculator from '../components/calculators/ProteinasCalculator';
   ]}
 >
   <div style="background: var(--ink); padding: 40px 32px 32px;">
-    <h1 style="font-family: var(--font-display); font-size: 64px; color: white; line-height: 0.92; margin-bottom: 12px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
       Proteínas<br><span style="color: var(--acid);">Diarias</span>
     </h1>
     <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
@@ -33,7 +33,8 @@ import ProteinasCalculator from '../components/calculators/ProteinasCalculator';
     <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 16px;">
       La OMS establece un mínimo de <strong>0.8 g/kg de peso</strong> para adultos sedentarios. Sin embargo, para personas activas, la evidencia actual sugiere rangos más altos para optimizar la composición corporal y el rendimiento deportivo.
     </p>
-    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px;">
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 300px;">
       <thead>
         <tr style="border-bottom: 2px solid var(--border);">
           <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase;">Perfil</th>
@@ -54,6 +55,7 @@ import ProteinasCalculator from '../components/calculators/ProteinasCalculator';
         ))}
       </tbody>
     </table>
+    </div>
 
     <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
     <div style="display: flex; flex-direction: column; gap: 16px;">

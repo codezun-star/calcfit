@@ -1,5 +1,6 @@
 ---
 titulo: "Proteína whey: guía completa sin publicidad para elegir la que te conviene"
+tituloSeo: "Proteína Whey: Guía Completa sin Publicidad"
 descripcion: "Concentrado, aislado, hidrolizado. Te explico las diferencias reales, cuándo tomarla y si de verdad necesitas gastar más en la versión 'premium'."
 categoria: "nutricion"
 fecha: "2026-05-28"

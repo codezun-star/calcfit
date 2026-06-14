@@ -1,6 +1,7 @@
 ---
 titulo: "Zinc: deficiencia silenciosa, testosterona e inmunidad — lo que deberías saber"
-descripcion: "El zinc afecta la testosterona, la cicatrización, el sistema inmune y el sueño. Síntomas de deficiencia, alimentos ricos en zinc y dosis según la evidencia. Gratis."
+tituloSeo: "Zinc: Deficiencia, Testosterona e Inmunidad"
+descripcion: "El zinc afecta testosterona, cicatrización, inmunidad y sueño. Síntomas de deficiencia, alimentos ricos en zinc y dosis según la evidencia. Gratis."
 categoria: "salud"
 fecha: "2026-06-07"
 keywords:

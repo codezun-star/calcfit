@@ -37,29 +37,31 @@ const faqs = [
       La recuperación muscular completa requiere la resíntesis de proteínas dañadas, la reposición del glucógeno muscular y la recuperación del sistema nervioso central. Herda et al. (2015) y McLester et al. (2003) documentaron que entrenar antes de la recuperación completa no solo es menos efectivo sino que incrementa el riesgo de lesiones crónicas. Los estudios de frecuencia de entrenamiento (Schoenfeld 2016) sugieren que 2 sesiones semanales por grupo muscular optimizan el balance entre estímulo y recuperación.
     </p>
 
-    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px;">
-      <thead>
-        <tr style="background: var(--ink); color: var(--acid);">
-          <th style="padding: 10px 14px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Intensidad (RPE)</th>
-          <th style="padding: 10px 14px; text-align: left;">Recuperación base</th>
-          <th style="padding: 10px 14px; text-align: left;">Ajuste principiante</th>
-        </tr>
-      </thead>
-      <tbody>
-        {[
-          ['Ligero (RPE ≤6)', '24–36 h', '+24 h extra'],
-          ['Moderado (RPE 7–8)', '48–72 h', '+24 h extra'],
-          ['Intenso (RPE 9)', '72–96 h', '+24 h extra'],
-          ['Máximo (RPE 10)', '96–120 h', '+24 h extra'],
-        ].map(([int, rec, adj], i) => (
-          <tr style={`background: ${i % 2 === 0 ? 'white' : '#f9f6f0'};`}>
-            <td style="padding: 10px 14px;">{int}</td>
-            <td style="padding: 10px 14px; font-family: var(--font-mono); font-size: 12px;">{rec}</td>
-            <td style="padding: 10px 14px; color: var(--muted);">{adj}</td>
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 380px;">
+        <thead>
+          <tr style="background: var(--ink); color: var(--acid);">
+            <th style="padding: 10px 14px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Intensidad (RPE)</th>
+            <th style="padding: 10px 14px; text-align: left;">Recuperación base</th>
+            <th style="padding: 10px 14px; text-align: left;">Ajuste principiante</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {[
+            ['Ligero (RPE ≤6)', '24–36 h', '+24 h extra'],
+            ['Moderado (RPE 7–8)', '48–72 h', '+24 h extra'],
+            ['Intenso (RPE 9)', '72–96 h', '+24 h extra'],
+            ['Máximo (RPE 10)', '96–120 h', '+24 h extra'],
+          ].map(([int, rec, adj], i) => (
+            <tr style={`background: ${i % 2 === 0 ? 'white' : '#f9f6f0'};`}>
+              <td style="padding: 10px 14px;">{int}</td>
+              <td style="padding: 10px 14px; font-family: var(--font-mono); font-size: 12px;">{rec}</td>
+              <td style="padding: 10px 14px; color: var(--muted);">{adj}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
 
     <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
     <div style="display: flex; flex-direction: column; gap: 16px;">

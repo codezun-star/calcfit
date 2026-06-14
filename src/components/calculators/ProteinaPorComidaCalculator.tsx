@@ -32,8 +32,8 @@ export default function ProteinaPorComidaCalculator() {
   });
 
   return (
-    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '640px', margin: '0 auto' }}>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '16px', marginBottom: '24px' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '16px' }}>
         <Input label="Peso corporal" value={peso} onChange={setPeso} suffix="kg" type="number" />
         <div>
           <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px' }}>
@@ -47,7 +47,7 @@ export default function ProteinaPorComidaCalculator() {
         </div>
       </div>
 
-      <div style={{ marginBottom: '24px' }}>
+      <div>
         <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px' }}>
           Objetivo
         </div>
@@ -63,7 +63,7 @@ export default function ProteinaPorComidaCalculator() {
       <Button onClick={calcular}>Calcular distribución</Button>
 
       {resultado && (
-        <div style={{ marginTop: '32px' }}>
+        <div>
           <div style={{ background: 'var(--ink)', padding: '24px', marginBottom: '24px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '16px' }}>
             <div>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: '#999', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '4px' }}>Total diario</div>

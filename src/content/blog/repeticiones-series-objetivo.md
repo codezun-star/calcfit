@@ -1,6 +1,7 @@
 ---
 titulo: "Cuántas series y repeticiones hacer según tu objetivo: la guía definitiva"
-descripcion: "¿4x12 o 5x5? Depende de tu objetivo. Rangos de repeticiones para fuerza, hipertrofia y resistencia muscular según la evidencia más reciente. Sin dogmas de gimnasio."
+tituloSeo: "Cuántas Series y Repeticiones según tu Objetivo"
+descripcion: "4x12 o 5x5: depende de tu objetivo. Rangos de repeticiones para fuerza, hipertrofia y resistencia muscular con evidencia real. Sin dogmas de gym."
 categoria: "fitness"
 fecha: "2026-06-07"
 keywords:

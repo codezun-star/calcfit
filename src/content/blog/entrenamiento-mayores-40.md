@@ -1,6 +1,7 @@
 ---
 titulo: "Cómo entrenar después de los 40: lo que cambia en tu cuerpo y cómo adaptarlo"
-descripcion: "Después de los 40 el cuerpo cambia, pero no de la forma que te han dicho. La fuerza, la masa muscular y la salud cardiovascular siguen mejorando con el entrenamiento correcto."
+tituloSeo: "Entrenamiento después de los 40 Años"
+descripcion: "Después de los 40 el cuerpo cambia, pero la fuerza y el músculo siguen mejorando. Qué adaptar en tu entreno para progresar sin lesiones. Gratis."
 categoria: "fitness"
 fecha: "2026-06-02"
 keywords:

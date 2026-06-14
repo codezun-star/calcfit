@@ -37,29 +37,31 @@ const faqs = [
       La OMS publicó en 2007 las tablas de crecimiento para niños de 5 a 19 años (OMS Growth Reference) que permiten clasificar el IMC por edad y sexo en percentiles y z-scores. La fórmula es la misma que en adultos (peso / altura²), pero la interpretación cambia con la edad. El z-score indica cuántas desviaciones estándar se aleja el valor de la mediana de referencia.
     </p>
 
-    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px;">
-      <thead>
-        <tr style="background: var(--ink); color: var(--acid);">
-          <th style="padding: 10px 14px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Clasificación</th>
-          <th style="padding: 10px 14px; text-align: left;">Percentil</th>
-          <th style="padding: 10px 14px; text-align: left;">Z-score</th>
-        </tr>
-      </thead>
-      <tbody>
-        {[
-          ['Bajo peso', '< p5', '< −1.65'],
-          ['Peso normal', 'p5 – p84', '−1.65 a +1.04'],
-          ['Sobrepeso', 'p85 – p94', '+1.04 a +1.65'],
-          ['Obesidad', '≥ p95', '≥ +1.65'],
-        ].map(([cat, per, z], i) => (
-          <tr style={`background: ${i % 2 === 0 ? 'white' : '#f9f6f0'};`}>
-            <td style="padding: 10px 14px;">{cat}</td>
-            <td style="padding: 10px 14px; font-family: var(--font-mono); font-size: 12px;">{per}</td>
-            <td style="padding: 10px 14px; color: var(--muted);">{z}</td>
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 340px;">
+        <thead>
+          <tr style="background: var(--ink); color: var(--acid);">
+            <th style="padding: 10px 14px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Clasificación</th>
+            <th style="padding: 10px 14px; text-align: left;">Percentil</th>
+            <th style="padding: 10px 14px; text-align: left;">Z-score</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {[
+            ['Bajo peso', '< p5', '< −1.65'],
+            ['Peso normal', 'p5 – p84', '−1.65 a +1.04'],
+            ['Sobrepeso', 'p85 – p94', '+1.04 a +1.65'],
+            ['Obesidad', '≥ p95', '≥ +1.65'],
+          ].map(([cat, per, z], i) => (
+            <tr style={`background: ${i % 2 === 0 ? 'white' : '#f9f6f0'};`}>
+              <td style="padding: 10px 14px;">{cat}</td>
+              <td style="padding: 10px 14px; font-family: var(--font-mono); font-size: 12px;">{per}</td>
+              <td style="padding: 10px 14px; color: var(--muted);">{z}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
 
     <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
     <div style="display: flex; flex-direction: column; gap: 16px;">

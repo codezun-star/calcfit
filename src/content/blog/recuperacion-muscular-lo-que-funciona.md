@@ -1,6 +1,7 @@
 ---
 titulo: "Recuperación muscular: qué funciona, qué es placebo y cómo saber cuánto descasar"
-descripcion: "El DOMS no mide cuánto trabajaste. El hielo no acelera la recuperación como crees. Te explico qué dice la evidencia sobre sueño, nutrición y descanso activo."
+tituloSeo: "Recuperación Muscular: Qué Funciona Realmente"
+descripcion: "DOMS, hielo, proteína o sueño: qué funciona de verdad para recuperarse del entreno. Evidencia sobre descanso activo, nutrición y tiempo. Gratis."
 categoria: "fitness"
 fecha: "2026-06-05"
 keywords:

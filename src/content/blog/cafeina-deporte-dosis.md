@@ -1,6 +1,7 @@
 ---
 titulo: "Cafeína y deporte: dosis, timing y por qué es el suplemento más respaldado"
-descripcion: "La cafeína mejora la fuerza, la resistencia y la concentración. Dosis óptima por peso, cuándo tomarla, cómo manejar la tolerancia y efectos secundarios. Con evidencia."
+tituloSeo: "Cafeína y Deporte: Dosis y Timing Óptimos"
+descripcion: "La cafeína mejora fuerza, resistencia y concentración. Dosis óptima por peso, cuándo tomarla y cómo manejar la tolerancia. El suplemento más respaldado."
 categoria: "fitness"
 fecha: "2026-06-07"
 keywords:

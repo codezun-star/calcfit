@@ -15,10 +15,14 @@ export default function PesoIdealCalculator() {
   const [inches, setInches] = useState('');
   const [sexo, setSexo] = useState<Sexo>('hombre');
   const [result, setResult] = useState<ReturnType<typeof calcularPesoIdeal> | null>(null);
+  const [errors, setErrors] = useState<{ altura?: string }>({});
 
   const calcular = () => {
+    const errs: typeof errors = {};
     const alturaCm = units === 'metric' ? parseFloat(altura) : toCm(parseFloat(ft), parseFloat(inches));
-    if (isNaN(alturaCm) || alturaCm < 100) return;
+    if (isNaN(alturaCm) || alturaCm < 100 || alturaCm > 250) errs.altura = 'Altura entre 100 y 250 cm';
+    setErrors(errs);
+    if (Object.keys(errs).length > 0) return;
     setResult(calcularPesoIdeal(alturaCm, sexo));
   };
 
@@ -30,10 +34,10 @@ export default function PesoIdealCalculator() {
       <Toggle value={units} onChange={setUnits} />
 
       {units === 'metric' ? (
-        <Input label="Altura" value={altura} onChange={setAltura} suffix="cm" />
+        <Input label="Altura" value={altura} onChange={setAltura} suffix="cm" error={errors.altura} />
       ) : (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '20px' }}>
-          <Input label="Pies" value={ft} onChange={setFt} suffix="pies" />
+          <Input label="Pies" value={ft} onChange={setFt} suffix="pies" error={errors.altura} />
           <Input label="Pulgadas" value={inches} onChange={setInches} suffix="pulg" />
         </div>
       )}

@@ -1,6 +1,7 @@
 ---
 titulo: "Azúcar: cuánto es demasiado y qué le hace realmente a tu cuerpo"
-descripcion: "La OMS recomienda menos de 25 g de azúcar libre al día. El latinoamericano promedio consume el triple. Te explico dónde está ese azúcar oculto y qué efectos reales tiene."
+tituloSeo: "Azúcar: Cuánto Es Demasiado"
+descripcion: "La OMS recomienda menos de 25g de azúcar libre al día. El latinoamericano promedio consume el triple. Dónde está el azúcar oculto y sus efectos reales."
 categoria: "salud"
 fecha: "2026-06-07"
 keywords:

@@ -1,6 +1,7 @@
 ---
 titulo: "Déficit calórico sin pasar hambre: cómo calcularlo y aplicarlo de verdad"
-descripcion: "El déficit calórico es la única forma real de perder grasa. El problema es que la mayoría lo aplica demasiado agresivo y termina con ansiedad, rebote y músculo perdido."
+tituloSeo: "Déficit Calórico sin Pasar Hambre"
+descripcion: "El déficit calórico es la única forma de perder grasa. Cómo calcularlo sin volverlo agresivo, evitar el rebote y preservar el músculo. Gratis."
 categoria: "nutricion"
 fecha: "2026-05-26"
 keywords:

@@ -37,7 +37,8 @@ const faqs = [
       Las recomendaciones de ingesta diaria de fibra dietética se basan en los valores de referencia de la Academia de Nutrición y Dietética y la OMS. La cifra varía según el sexo y la edad: hombres jóvenes necesitan más (38 g/día) que mujeres mayores de 50 (21 g/día). Según el objetivo de salud, la calculadora añade hasta 5 g extra para optimizar el efecto cardiovascular o de saciedad. La fibra debe provenir de los alimentos y no exclusivamente de suplementos.
     </p>
 
-    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px;">
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 360px;">
       <thead>
         <tr style="background: var(--ink); color: var(--acid);">
           <th style="padding: 10px 14px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Grupo</th>
@@ -62,6 +63,7 @@ const faqs = [
         ))}
       </tbody>
     </table>
+    </div>
 
     <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
     <div style="display: flex; flex-direction: column; gap: 16px;">

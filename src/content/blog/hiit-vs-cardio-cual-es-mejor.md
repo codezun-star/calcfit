@@ -1,6 +1,7 @@
 ---
 titulo: "HIIT vs cardio tradicional: cuál quema más grasa según tu objetivo y condición"
-descripcion: "No hay una respuesta única. El HIIT gana en eficiencia de tiempo, el cardio moderado en volumen y recuperación. Te explico cuándo usar cada uno con evidencia real."
+tituloSeo: "HIIT vs Cardio: Cuál Quema Más Grasa"
+descripcion: "HIIT o cardio moderado: cuál elegir según tu objetivo, tiempo y nivel. Evidencia sobre gasto calórico, EPOC y adherencia. Gratis."
 categoria: "fitness"
 fecha: "2026-05-30"
 keywords:

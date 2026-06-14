@@ -1,6 +1,7 @@
 ---
 titulo: "Cuánta agua necesitas al día según tu peso: más allá de los 8 vasos"
-descripcion: "Los '8 vasos de agua al día' son un mito. La cantidad real que necesitas depende de tu peso, actividad física, clima y alimentación. Aquí están los cálculos reales."
+tituloSeo: "Cuánta Agua Necesitas al Día según tu Peso"
+descripcion: "Los '8 vasos al día' son un mito. La cantidad real depende de tu peso, actividad física y clima. Cómo calcular tu hidratación personalizada. Gratis."
 categoria: "salud"
 fecha: "2026-05-17"
 keywords:

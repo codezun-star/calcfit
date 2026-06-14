@@ -1,6 +1,7 @@
 ---
 titulo: "Cómo organizar tu semana de entrenamiento según tu objetivo y tiempo disponible"
-descripcion: "No hay una distribución semanal perfecta universal. Hay principios claros y varias estructuras que funcionan. Te explico cómo elegir la tuya y por qué el descanso no es tiempo perdido."
+tituloSeo: "Cómo Organizar tu Semana de Entrenamiento"
+descripcion: "Elige la estructura semanal ideal: full body, upper/lower o PPL. Principios de evidencia sobre volumen, frecuencia y descanso. Gratis."
 categoria: "fitness"
 fecha: "2026-06-10"
 keywords:

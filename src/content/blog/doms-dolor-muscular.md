@@ -1,6 +1,7 @@
 ---
 titulo: "DOMS: por qué duelen los músculos 48h después de entrenar y qué hacer"
-descripcion: "Las agujetas no son ácido láctico ni indican que entrenaste bien. Qué es el DOMS, cuánto dura, qué lo reduce realmente y cuándo es señal de que algo está mal."
+tituloSeo: "DOMS: Por Qué Duelen los Músculos Después"
+descripcion: "Las agujetas no son ácido láctico. Qué es el DOMS, cuánto dura, qué lo reduce realmente y cuándo es señal de que algo está mal."
 categoria: "fitness"
 fecha: "2026-06-07"
 keywords:

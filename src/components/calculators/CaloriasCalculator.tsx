@@ -32,19 +32,27 @@ export default function CaloriasCalculator() {
   const [sexo, setSexo] = useState<Sexo>('hombre');
   const [actividad, setActividad] = useState<Actividad>('moderado');
   const [result, setResult] = useState<ReturnType<typeof calcularTDEE> | null>(null);
+  const [errors, setErrors] = useState<{ peso?: string; altura?: string; edad?: string }>({});
   const { addEntry } = useHistory('calorias-history');
 
   const calcular = () => {
+    const errs: typeof errors = {};
     let pesoKg: number, alturaCm: number;
     if (units === 'metric') {
       pesoKg = parseFloat(peso); alturaCm = parseFloat(altura);
+      if (isNaN(pesoKg)   || pesoKg < 20   || pesoKg > 300)   errs.peso   = 'Peso entre 20 y 300 kg';
+      if (isNaN(alturaCm) || alturaCm < 100 || alturaCm > 250) errs.altura = 'Altura entre 100 y 250 cm';
     } else {
       pesoKg = toKg(parseFloat(lb)); alturaCm = toCm(parseFloat(ft), parseFloat(inches));
+      if (isNaN(pesoKg)   || pesoKg < 20)   errs.peso   = 'Peso inválido';
+      if (isNaN(alturaCm) || alturaCm < 100) errs.altura = 'Altura inválida';
     }
     const edadN = parseInt(edad, 10);
-    if (isNaN(pesoKg) || isNaN(alturaCm) || isNaN(edadN)) return;
+    if (isNaN(edadN) || edadN < 10 || edadN > 100) errs.edad = 'Edad entre 10 y 100 años';
+    setErrors(errs);
+    if (Object.keys(errs).length > 0) return;
 
-    const res = calcularTDEE({ pesoKg, alturaCm, edadAnios: edadN, sexo, actividad });
+    const res = calcularTDEE({ pesoKg: pesoKg!, alturaCm: alturaCm!, edadAnios: edadN, sexo, actividad });
     setResult(res);
     addEntry(res.tdee);
   };
@@ -62,18 +70,18 @@ export default function CaloriasCalculator() {
 
       {units === 'metric' ? (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '20px' }}>
-          <Input label="Peso" value={peso} onChange={setPeso} suffix="kg" />
-          <Input label="Altura" value={altura} onChange={setAltura} suffix="cm" />
+          <Input label="Peso" value={peso} onChange={setPeso} suffix="kg" error={errors.peso} />
+          <Input label="Altura" value={altura} onChange={setAltura} suffix="cm" error={errors.altura} />
         </div>
       ) : (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))', gap: '20px' }}>
-          <Input label="Peso" value={lb} onChange={setLb} suffix="lb" />
-          <Input label="Pies" value={ft} onChange={setFt} suffix="pies" />
+          <Input label="Peso" value={lb} onChange={setLb} suffix="lb" error={errors.peso} />
+          <Input label="Pies" value={ft} onChange={setFt} suffix="pies" error={errors.altura} />
           <Input label="Pulgadas" value={inches} onChange={setInches} suffix="pulg" />
         </div>
       )}
 
-      <Input label="Edad" value={edad} onChange={setEdad} suffix="años" />
+      <Input label="Edad" value={edad} onChange={setEdad} suffix="años" error={errors.edad} />
 
       <div>
         <p style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--muted)', marginBottom: '8px' }}>Sexo</p>

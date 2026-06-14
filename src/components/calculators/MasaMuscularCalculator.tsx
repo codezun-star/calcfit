@@ -35,7 +35,7 @@ export default function MasaMuscularCalculator() {
   const nivelColor: Record<string, string> = { bajo: '#F87171', normal: '#34D399', alto: '#CAFF00' };
 
   return (
-    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '600px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
       <Toggle value={units} onChange={setUnits} />
 
       <div style={{ display: 'flex', gap: '8px' }}>

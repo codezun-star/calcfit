@@ -19,7 +19,7 @@ import CaloriasEjercicioCalculator from '../components/calculators/CaloriasEjerc
   ]}
 >
   <div style="background: var(--ink); padding: 40px 32px 32px;">
-    <h1 style="font-family: var(--font-display); font-size: 64px; color: white; line-height: 0.92; margin-bottom: 12px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
       Calorías<br><span style="color: var(--acid);">en Ejercicio</span>
     </h1>
     <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
@@ -36,7 +36,8 @@ import CaloriasEjercicioCalculator from '../components/calculators/CaloriasEjerc
     </p>
 
     <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Valores MET de actividades comunes</h2>
-    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px;">
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 380px;">
       <thead>
         <tr style="border-bottom: 2px solid var(--border);">
           <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Actividad</th>
@@ -67,6 +68,7 @@ import CaloriasEjercicioCalculator from '../components/calculators/CaloriasEjerc
         ))}
       </tbody>
     </table>
+    </div>
 
     <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
     <div style="display: flex; flex-direction: column; gap: 16px;">

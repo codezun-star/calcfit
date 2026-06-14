@@ -19,7 +19,7 @@ import SuenoCalculator from '../components/calculators/SuenoCalculator';
   ]}
 >
   <div style="background: var(--ink); padding: 40px 32px 32px;">
-    <h1 style="font-family: var(--font-display); font-size: 64px; color: white; line-height: 0.92; margin-bottom: 12px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
       Tiempo de<br><span style="color: var(--acid);">Sueño</span>
     </h1>
     <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
@@ -34,7 +34,8 @@ import SuenoCalculator from '../components/calculators/SuenoCalculator';
     <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 16px;">
       El sueño no es uniforme: se organiza en ciclos de aproximadamente <strong>90 minutos</strong>, cada uno compuesto por fases de sueño ligero, sueño profundo y REM. Despertarse durante el sueño profundo o REM produce sensación de aturdimiento (inercia del sueño).
     </p>
-    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px;">
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 300px;">
       <thead>
         <tr style="border-bottom: 2px solid var(--border);">
           <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase;">Ciclos</th>
@@ -57,6 +58,7 @@ import SuenoCalculator from '../components/calculators/SuenoCalculator';
         ))}
       </tbody>
     </table>
+    </div>
     <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
       Se incluyen 15 minutos adicionales de tiempo para conciliar el sueño en todos los cálculos, que es el promedio para adultos sin problemas de insomnio.
     </p>

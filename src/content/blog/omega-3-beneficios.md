@@ -1,6 +1,7 @@
 ---
 titulo: "Omega-3: beneficios reales con evidencia, fuentes y cuánto necesitas al día"
-descripcion: "El omega-3 reduce triglicéridos, inflamación y riesgo cardiovascular con evidencia sólida. Diferencias entre ALA, EPA y DHA, las mejores fuentes alimentarias y cuándo suplementar."
+tituloSeo: "Omega-3: Beneficios, Fuentes y Dosis"
+descripcion: "El omega-3 reduce triglicéridos, inflamación y riesgo cardiovascular. Diferencias entre ALA, EPA y DHA, mejores fuentes y cuándo suplementar. Gratis."
 categoria: "nutricion"
 fecha: "2026-06-04"
 keywords:

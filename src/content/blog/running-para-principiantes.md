@@ -1,6 +1,7 @@
 ---
 titulo: "Running para principiantes: plan de 8 semanas del sofá al 5K sin lesiones"
-descripcion: "El mayor error al empezar a correr es ir demasiado rápido demasiado pronto. Este plan de 8 semanas con ritmo progresivo te lleva del sofá al 5K sin dolor en las rodillas."
+tituloSeo: "Running para Principiantes: Plan 8 Semanas"
+descripcion: "Plan de 8 semanas del sofá al 5K: ritmo progresivo, descanso y técnica para empezar a correr sin lesionarte desde el primer día. Gratis."
 categoria: "fitness"
 fecha: "2026-06-02"
 keywords:

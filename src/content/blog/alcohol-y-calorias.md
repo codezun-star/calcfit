@@ -1,6 +1,7 @@
 ---
 titulo: "Calorías en el alcohol: cuánto engordan las bebidas alcohólicas de verdad"
-descripcion: "El alcohol tiene 7 kcal por gramo — más que los carbohidratos y casi tanto como la grasa. Tabla completa de calorías por bebida y cómo el alcohol bloquea la quema de grasa."
+tituloSeo: "Calorías en el Alcohol: Cuánto Engordan"
+descripcion: "El alcohol tiene 7 kcal/g, más que los carbohidratos. Tabla completa de calorías por bebida y cómo el alcohol bloquea la quema de grasa. Gratis."
 categoria: "nutricion"
 fecha: "2026-06-03"
 keywords:

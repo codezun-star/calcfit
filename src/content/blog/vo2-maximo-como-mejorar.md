@@ -1,6 +1,7 @@
 ---
 titulo: "VO₂ máximo: qué es, cómo medirlo sin laboratorio y cómo mejorarlo"
-descripcion: "El VO₂ máximo es el mejor predictor de longevidad cardiovascular. Valores normales por edad, cómo calcularlo con el test de Cooper y los entrenamientos que más lo mejoran."
+tituloSeo: "VO₂ Máximo: Qué Es y Cómo Mejorarlo"
+descripcion: "El VO₂ máximo es el mejor predictor de longevidad. Valores normales por edad, test de Cooper y los entrenamientos que más lo mejoran. Gratis."
 categoria: "fitness"
 fecha: "2026-06-03"
 keywords:

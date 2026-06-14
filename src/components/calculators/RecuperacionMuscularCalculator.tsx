@@ -28,9 +28,9 @@ export default function RecuperacionMuscularCalculator() {
   });
 
   return (
-    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '640px', margin: '0 auto' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
       {/* Grupo muscular */}
-      <div style={{ marginBottom: '20px' }}>
+      <div>
         <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px' }}>
           Grupo muscular entrenado
         </div>
@@ -44,7 +44,7 @@ export default function RecuperacionMuscularCalculator() {
       </div>
 
       {/* Volumen */}
-      <div style={{ marginBottom: '20px' }}>
+      <div>
         <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px' }}>
           Volumen (series totales)
         </div>
@@ -56,7 +56,7 @@ export default function RecuperacionMuscularCalculator() {
       </div>
 
       {/* Intensidad */}
-      <div style={{ marginBottom: '20px' }}>
+      <div>
         <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px' }}>
           Intensidad (RPE)
         </div>
@@ -68,7 +68,7 @@ export default function RecuperacionMuscularCalculator() {
       </div>
 
       {/* Experiencia */}
-      <div style={{ marginBottom: '24px' }}>
+      <div>
         <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px' }}>
           Nivel de experiencia
         </div>

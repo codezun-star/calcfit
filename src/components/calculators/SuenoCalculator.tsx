@@ -25,7 +25,7 @@ export default function SuenoCalculator() {
   const selectedCiclo = result && selectedRow !== null ? result[selectedRow] : null;
 
   return (
-    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '680px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
         <label style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--muted)', letterSpacing: '0.3px' }}>
           Hora a la que quiero despertar

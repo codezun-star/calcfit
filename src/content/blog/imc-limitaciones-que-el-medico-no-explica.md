@@ -1,6 +1,7 @@
 ---
 titulo: "IMC: qué te dice y qué te oculta (lo que el médico no siempre explica)"
-descripcion: "El IMC es el indicador de salud más usado en el mundo y también uno de los más malinterpretados. Te cuento cuándo sirve, cuándo falla y qué alternativas existen."
+tituloSeo: "IMC: Qué Te Dice y Qué Te Oculta"
+descripcion: "El IMC es el indicador más usado y también uno de los más malinterpretados. Cuándo sirve, cuándo falla y qué alternativas existen. Gratis."
 categoria: "salud"
 fecha: "2026-05-25"
 keywords:

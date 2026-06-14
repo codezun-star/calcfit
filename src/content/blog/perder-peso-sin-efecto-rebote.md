@@ -1,6 +1,7 @@
 ---
 titulo: "Perder peso sin efecto rebote: por qué lo recuperas y cómo evitarlo para siempre"
-descripcion: "El 80% de las personas que adelgazan recuperan el peso en 2 años. No es falta de voluntad: es fisiología. Aquí están los mecanismos del rebote y las estrategias que sí funcionan."
+tituloSeo: "Perder Peso sin Efecto Rebote"
+descripcion: "El 80% recupera el peso perdido en 2 años. No es falta de voluntad: es fisiología. Los mecanismos del rebote y las estrategias reales. Gratis."
 categoria: "fitness"
 fecha: "2026-06-05"
 keywords:

@@ -1,6 +1,7 @@
 ---
 titulo: "Testosterona baja en hombres: síntomas reales, causas y cómo recuperarla"
-descripcion: "Fatiga, grasa abdominal, bajo rendimiento: pueden ser síntomas de testosterona baja. Valores normales por edad, causas corregibles y lo que dice la evidencia. Sin mitos."
+tituloSeo: "Testosterona Baja: Síntomas y Cómo Recuperarla"
+descripcion: "Fatiga, grasa abdominal y bajo rendimiento pueden ser testosterona baja. Valores normales, causas corregibles y evidencia real. Sin mitos. Gratis."
 categoria: "salud"
 fecha: "2026-06-07"
 keywords:

@@ -1,6 +1,7 @@
 ---
 titulo: "Zonas de frecuencia cardíaca para quemar grasa: la guía que nadie te da en el gym"
-descripcion: "Entrenar en la 'zona de quema de grasa' no siempre es lo más efectivo. Te explico las 5 zonas cardíacas, qué pasa en cada una y cómo usarlas según tu objetivo real."
+tituloSeo: "Zonas de Frecuencia Cardíaca para Quemar Grasa"
+descripcion: "Las 5 zonas de frecuencia cardíaca explicadas: cuál quema más grasa, cómo calcular las tuyas y cuál usar según tu objetivo. Con calculadora."
 categoria: "fitness"
 fecha: "2026-05-08"
 keywords:

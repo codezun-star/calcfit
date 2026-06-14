@@ -1,6 +1,7 @@
 ---
 titulo: "Fibra dietética: para qué sirve realmente más allá del tránsito intestinal"
-descripcion: "La fibra no solo regula el intestino. Reduce el colesterol, estabiliza la glucosa, aumenta la saciedad y alimenta tu microbiota. Cuánta necesitas y de dónde obtenerla."
+tituloSeo: "Fibra Dietética: Para Qué Sirve Realmente"
+descripcion: "La fibra no solo regula el intestino: reduce el colesterol, estabiliza la glucosa y alimenta tu microbiota. Cuánta necesitas y de dónde obtenerla."
 categoria: "nutricion"
 fecha: "2026-04-28"
 keywords:

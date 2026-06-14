@@ -38,7 +38,8 @@ import VentanaFertilCalculator from '../components/calculators/VentanaFertilCalc
       Las probabilidades de concepción por día provienen del estudio clásico de Wilcox et al. publicado en el <em>New England Journal of Medicine</em> (1995), basado en 625 ciclos menstruales monitorizados.
     </p>
 
-    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px;">
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 360px;">
       <thead>
         <tr style="background: var(--ink); color: var(--cream);">
           <th style="padding: 10px 12px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Día respecto a ovulación</th>
@@ -63,6 +64,7 @@ import VentanaFertilCalculator from '../components/calculators/VentanaFertilCalc
         ))}
       </tbody>
     </table>
+    </div>
 
     <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
     <div style="display: flex; flex-direction: column; gap: 16px;">

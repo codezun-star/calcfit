@@ -38,9 +38,9 @@ export default function VitaminaDCalculator() {
   }
 
   return (
-    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '640px', margin: '0 auto' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
       {/* Tipo de piel */}
-      <div style={{ marginBottom: '24px' }}>
+      <div>
         <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '10px' }}>
           Tipo de piel (escala Fitzpatrick)
         </div>
@@ -63,7 +63,7 @@ export default function VitaminaDCalculator() {
       </div>
 
       {/* Latitud */}
-      <div style={{ marginBottom: '16px' }}>
+      <div>
         <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px' }}>
           Zona geográfica
         </div>
@@ -75,7 +75,7 @@ export default function VitaminaDCalculator() {
       </div>
 
       {/* Estación */}
-      <div style={{ marginBottom: '16px' }}>
+      <div>
         <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px' }}>
           Estación del año
         </div>
@@ -87,7 +87,7 @@ export default function VitaminaDCalculator() {
       </div>
 
       {/* Superficie */}
-      <div style={{ marginBottom: '24px' }}>
+      <div>
         <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px' }}>
           Superficie expuesta
         </div>
@@ -101,7 +101,7 @@ export default function VitaminaDCalculator() {
       <Button onClick={calcular}>Calcular exposición</Button>
 
       {resultado && (
-        <div style={{ marginTop: '32px' }}>
+        <div>
           {resultado.advertencia && (
             <div style={{ background: '#fff7ed', border: '1px solid #fb923c', padding: '16px', marginBottom: '16px' }}>
               <p style={{ fontSize: '13px', color: '#9a3412', lineHeight: 1.6 }}>{resultado.advertencia}</p>

@@ -1,6 +1,7 @@
 ---
 titulo: "Carga glucémica: por qué importa más que el índice glucémico y cómo usarla"
-descripcion: "El índice glucémico ignora las porciones. La carga glucémica no. Aprende a calcularla, qué alimentos tienen carga baja y cómo reducir los picos de glucosa sin eliminar los carbohidratos."
+tituloSeo: "Carga Glucémica: Qué Es y Cómo Usarla"
+descripcion: "La carga glucémica considera las porciones. Cómo calcularla, alimentos con carga baja y cómo reducir los picos de glucosa sin eliminar carbohidratos."
 categoria: "nutricion"
 fecha: "2026-06-04"
 keywords:

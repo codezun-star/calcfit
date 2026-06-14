@@ -1,6 +1,7 @@
 ---
 titulo: "Sarcopenia: por qué pierdes músculo con la edad y cómo prevenirla desde hoy"
-descripcion: "A partir de los 30 años pierdes músculo si no actúas. La sarcopenia se puede prevenir y revertir con entrenamiento de fuerza y proteína suficiente. Aquí está la evidencia y el plan."
+tituloSeo: "Sarcopenia: Prevenir la Pérdida Muscular"
+descripcion: "Desde los 30 años perdés músculo si no actuás. La sarcopenia se previene y revierte con fuerza y proteína. La evidencia y el plan completo. Gratis."
 categoria: "salud"
 fecha: "2026-06-05"
 keywords:

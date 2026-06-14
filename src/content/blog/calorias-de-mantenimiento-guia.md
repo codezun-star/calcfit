@@ -1,6 +1,7 @@
 ---
 titulo: "Calorías de mantenimiento: qué son, cómo calcularlas y por qué cambian"
-descripcion: "Tus calorías de mantenimiento son el número exacto que debes comer para no subir ni bajar de peso. Calcularlas bien es el primer paso de cualquier objetivo corporal."
+tituloSeo: "Calorías de Mantenimiento: Cómo Calcularlas"
+descripcion: "Tus calorías de mantenimiento son el número exacto para no subir ni bajar de peso. Cómo calcularlas, por qué cambian y por qué son el primer paso."
 categoria: "nutricion"
 fecha: "2026-05-23"
 keywords:

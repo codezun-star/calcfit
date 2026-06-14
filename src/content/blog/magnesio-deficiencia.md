@@ -1,6 +1,7 @@
 ---
 titulo: "Magnesio: síntomas de deficiencia, para qué sirve y cómo corregirla"
-descripcion: "El 60-80% de la población consume menos magnesio del recomendado. Síntomas de deficiencia, alimentos con mayor contenido, diferencia entre formas de suplemento y cuándo tomarlo."
+tituloSeo: "Magnesio: Síntomas de Déficit y Cómo Corregirlo"
+descripcion: "El 60-80% consume menos magnesio del recomendado. Síntomas, alimentos ricos, diferencia entre formas de suplemento y cuándo tomarlo. Gratis."
 categoria: "salud"
 fecha: "2026-06-05"
 keywords:

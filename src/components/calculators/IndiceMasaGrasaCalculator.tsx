@@ -26,7 +26,8 @@ export default function IndiceMasaGrasaCalculator() {
     const aIn = units === 'imperial' ? parseFloat(alturaIn) || 0 : 0;
     const g = parseFloat(grasa);
 
-    if (isNaN(p) || p < 20 || p > 300) errs.peso = units === 'metric' ? 'Entre 20 y 300 kg' : 'Entre 44 y 660 lb';
+    if (units === 'metric' ? (isNaN(p) || p < 20 || p > 300) : (isNaN(p) || p < 44 || p > 660))
+      errs.peso = units === 'metric' ? 'Entre 20 y 300 kg' : 'Entre 44 y 660 lb';
     if (units === 'metric' && (isNaN(a) || a < 100 || a > 250)) errs.altura = 'Entre 100 y 250 cm';
     if (units === 'imperial' && (isNaN(aFt) || aFt < 3 || aFt > 8)) errs.altura = 'Entre 3 y 8 pies';
     if (isNaN(g) || g < 1 || g > 70) errs.grasa = 'Entre 1 y 70%';
@@ -40,7 +41,7 @@ export default function IndiceMasaGrasaCalculator() {
   };
 
   return (
-    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '560px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
       <Toggle value={units} onChange={setUnits} />
 
       <div>

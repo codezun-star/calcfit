@@ -46,9 +46,9 @@ export default function PredictorCarreraCalculator() {
   });
 
   return (
-    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '640px', margin: '0 auto' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
       {/* Tiempo actual */}
-      <div style={{ marginBottom: '24px' }}>
+      <div>
         <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px' }}>
           Tiempo actual
         </div>
@@ -59,7 +59,7 @@ export default function PredictorCarreraCalculator() {
       </div>
 
       {/* Distancia origen */}
-      <div style={{ marginBottom: '16px' }}>
+      <div>
         <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px' }}>
           Distancia origen
         </div>
@@ -79,7 +79,7 @@ export default function PredictorCarreraCalculator() {
       </div>
 
       {/* Distancia destino */}
-      <div style={{ marginBottom: '24px' }}>
+      <div>
         <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px' }}>
           Distancia a predecir
         </div>
@@ -103,7 +103,7 @@ export default function PredictorCarreraCalculator() {
       <Button onClick={calcular}>Predecir tiempo</Button>
 
       {resultado && (
-        <div style={{ marginTop: '32px', background: 'var(--ink)', padding: '24px' }}>
+        <div style={{ background: 'var(--ink)', padding: '24px' }}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '16px' }}>
             <div>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: '#999', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '4px' }}>Tiempo predicho</div>

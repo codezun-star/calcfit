@@ -1,6 +1,7 @@
 ---
 titulo: "Frecuencia cardíaca en reposo: valores normales, qué indica y cómo mejorarla"
-descripcion: "La frecuencia cardíaca en reposo es uno de los indicadores más simples y poderosos de salud cardiovascular. Rangos normales por edad, qué significa una FCR alta y cómo bajarla."
+tituloSeo: "Frecuencia Cardíaca en Reposo: Valores Normales"
+descripcion: "La FCR es el indicador más simple de salud cardiovascular. Rangos normales por edad, qué significa una frecuencia cardíaca alta y cómo bajarla. Gratis."
 categoria: "salud"
 fecha: "2026-06-04"
 keywords:

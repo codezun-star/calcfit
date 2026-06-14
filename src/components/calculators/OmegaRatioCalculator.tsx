@@ -28,13 +28,13 @@ export default function OmegaRatioCalculator() {
   ];
 
   return (
-    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '640px', margin: '0 auto' }}>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '16px', marginBottom: '16px' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '16px' }}>
         <Input label="Omega-3 diario" value={omega3} onChange={setOmega3} suffix="g/día" type="number" />
         <Input label="Omega-6 diario" value={omega6} onChange={setOmega6} suffix="g/día" type="number" />
       </div>
 
-      <div style={{ marginBottom: '20px' }}>
+      <div>
         <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '6px' }}>
           Referencia omega-3 por alimento
         </div>
@@ -52,7 +52,7 @@ export default function OmegaRatioCalculator() {
       <Button onClick={calcular}>Calcular ratio</Button>
 
       {resultado && (
-        <div style={{ marginTop: '32px' }}>
+        <div>
           <div style={{ background: 'var(--ink)', padding: '24px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '16px', marginBottom: '1px' }}>
             <div>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: '#999', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '4px' }}>Ratio ω6 : ω3</div>

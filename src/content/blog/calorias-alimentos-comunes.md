@@ -1,6 +1,7 @@
 ---
 titulo: "Calorías de los alimentos más comunes: tabla completa de referencia"
-descripcion: "Tabla con las calorías, proteínas, carbohidratos y grasas de más de 60 alimentos cotidianos. Sin apps, sin registro: una referencia visual para entender lo que comes."
+tituloSeo: "Calorías de Alimentos Comunes: Tabla Completa"
+descripcion: "Tabla con calorías, proteínas, carbohidratos y grasas de más de 60 alimentos. Sin apps, sin registro: una referencia visual para entender lo que comés."
 categoria: "nutricion"
 fecha: "2026-06-03"
 keywords:

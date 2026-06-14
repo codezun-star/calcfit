@@ -12,6 +12,8 @@ const blog = defineCollection({
     autor: z.string().default('Equipo CalcFit'),
     imagen: z.string().optional(),
     publicado: z.boolean().default(true),
+    tituloSeo: z.string().optional(),
+    fechaModificada: z.string().optional(),
     unsplashQuery: z.string().optional(),
   }),
 });

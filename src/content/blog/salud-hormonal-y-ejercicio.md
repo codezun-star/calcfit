@@ -1,6 +1,7 @@
 ---
 titulo: "Ciclo menstrual y entrenamiento: cómo adaptar el ejercicio a cada fase"
-descripcion: "Tu rendimiento físico, la recuperación y el apetito cambian durante el ciclo menstrual. Qué ocurre en cada fase y cómo ajustar el entrenamiento y la nutrición para aprovecharlas."
+tituloSeo: "Ciclo Menstrual y Entrenamiento: Guía por Fases"
+descripcion: "Rendimiento, recuperación y apetito cambian en el ciclo menstrual. Qué ocurre en cada fase y cómo adaptar el entrenamiento y la nutrición. Gratis."
 categoria: "fitness"
 fecha: "2026-06-05"
 keywords:

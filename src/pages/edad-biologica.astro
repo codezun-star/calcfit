@@ -37,31 +37,33 @@ const faqs = [
       Esta calculadora usa un modelo de ajuste por factores de riesgo validados en la literatura epidemiológica. Cada hábito se traduce en un ajuste (positivo o negativo) sobre la edad cronológica, inspirado en los estudios de Levine et al. (2018) sobre relojes epigenéticos y los datos del Framingham Heart Study. Los factores de mayor impacto son el tabaquismo (+7 años), el sedentarismo (+4 años), la obesidad (+5 años) y el estrés muy alto (+5 años).
     </p>
 
-    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px;">
-      <thead>
-        <tr style="background: var(--ink); color: var(--acid);">
-          <th style="padding: 10px 14px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Factor</th>
-          <th style="padding: 10px 14px; text-align: left;">Mejor escenario</th>
-          <th style="padding: 10px 14px; text-align: left;">Peor escenario</th>
-        </tr>
-      </thead>
-      <tbody>
-        {[
-          ['Actividad física', '−5 años (muy activo)', '+4 años (sedentario)'],
-          ['Tabaco', '0 (nunca fumó)', '+7 años (fumador activo)'],
-          ['Sueño', '0 (6–8 h)', '+3 años (<6 h)'],
-          ['Estrés', '−1 año (bajo)', '+5 años (muy alto)'],
-          ['Dieta', '−3 años (excelente)', '+4 años (mala)'],
-          ['IMC', '0 (normal)', '+5 años (obesidad)'],
-        ].map(([f, mejor, peor], i) => (
-          <tr style={`background: ${i % 2 === 0 ? 'white' : '#f9f6f0'};`}>
-            <td style="padding: 10px 14px;">{f}</td>
-            <td style="padding: 10px 14px; color: #166534; font-size: 12px;">{mejor}</td>
-            <td style="padding: 10px 14px; color: #991b1b; font-size: 12px;">{peor}</td>
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 400px;">
+        <thead>
+          <tr style="background: var(--ink); color: var(--acid);">
+            <th style="padding: 10px 14px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Factor</th>
+            <th style="padding: 10px 14px; text-align: left;">Mejor escenario</th>
+            <th style="padding: 10px 14px; text-align: left;">Peor escenario</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {[
+            ['Actividad física', '−5 años (muy activo)', '+4 años (sedentario)'],
+            ['Tabaco', '0 (nunca fumó)', '+7 años (fumador activo)'],
+            ['Sueño', '0 (6–8 h)', '+3 años (<6 h)'],
+            ['Estrés', '−1 año (bajo)', '+5 años (muy alto)'],
+            ['Dieta', '−3 años (excelente)', '+4 años (mala)'],
+            ['IMC', '0 (normal)', '+5 años (obesidad)'],
+          ].map(([f, mejor, peor], i) => (
+            <tr style={`background: ${i % 2 === 0 ? 'white' : '#f9f6f0'};`}>
+              <td style="padding: 10px 14px;">{f}</td>
+              <td style="padding: 10px 14px; color: #166534; font-size: 12px;">{mejor}</td>
+              <td style="padding: 10px 14px; color: #991b1b; font-size: 12px;">{peor}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
 
     <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
     <div style="display: flex; flex-direction: column; gap: 16px;">

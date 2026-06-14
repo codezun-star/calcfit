@@ -1,6 +1,7 @@
 ---
 titulo: "Proteína vegetal vs animal: diferencias reales, calidad y cómo combinarlas"
-descripcion: "La proteína vegetal puede ser tan efectiva como la animal para ganar músculo si sabes cómo combinarla. Aquí están las diferencias de biodisponibilidad, PDCAAS y estrategias prácticas."
+tituloSeo: "Proteína Vegetal vs Animal: Diferencias Reales"
+descripcion: "La proteína vegetal puede ser igual de efectiva que la animal si sabés combinarla. Diferencias de biodisponibilidad, PDCAAS y cómo usarla. Gratis."
 categoria: "nutricion"
 fecha: "2026-06-03"
 keywords:

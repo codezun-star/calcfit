@@ -62,8 +62,8 @@ export default function EdadBiologicaCalculator() {
   }
 
   return (
-    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '640px', margin: '0 auto' }}>
-      <div style={{ marginBottom: '24px', maxWidth: '200px' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+      <div style={{ maxWidth: '200px' }}>
         <Input label="Edad cronológica" value={edad} onChange={setEdad} suffix="años" type="number" />
       </div>
 

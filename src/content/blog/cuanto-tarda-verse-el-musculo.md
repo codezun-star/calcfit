@@ -1,6 +1,7 @@
 ---
 titulo: "Cuánto tiempo tarda en verse el músculo que entrenas (sin mentiras)"
-descripcion: "En 4 semanas notas la ropa diferente. En 8 semanas lo ven los demás. En 12 semanas lo ves tú. Así funcionan realmente los tiempos de ganancia muscular según la fisiología."
+tituloSeo: "Cuánto Tarda en Verse el Músculo"
+descripcion: "En 4 semanas notás la ropa diferente. En 8 semanas lo ven los demás. En 12 semanas lo ves vos. Así funcionan los tiempos de ganancia muscular reales."
 categoria: "fitness"
 fecha: "2026-06-02"
 keywords:

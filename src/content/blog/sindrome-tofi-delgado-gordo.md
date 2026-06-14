@@ -1,6 +1,7 @@
 ---
 titulo: "Delgado pero gordo por dentro: el síndrome TOFI y sus riesgos metabólicos"
-descripcion: "Tener peso normal no garantiza salud metabólica. El síndrome TOFI afecta al 25% de personas con IMC normal. Qué es, cómo detectarlo sin laboratorio y qué hacer. Gratis."
+tituloSeo: "Síndrome TOFI: Delgado pero Gordo por Dentro"
+descripcion: "Peso normal no garantiza salud metabólica. El síndrome TOFI afecta al 25% con IMC normal. Qué es, cómo detectarlo sin laboratorio y qué hacer."
 categoria: "salud"
 fecha: "2026-06-07"
 keywords:

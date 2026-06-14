@@ -1,6 +1,7 @@
 ---
 titulo: "Cómo ganar músculo siendo delgado: el plan real para ectomorfos"
-descripcion: "Si eres delgado y no subes de peso por más que comas, el problema no es tu genética: es que probablemente no estás comiendo suficiente. Aquí está el plan con evidencia."
+tituloSeo: "Cómo Ganar Músculo siendo Delgado"
+descripcion: "Si eres delgado y no subís de peso, el problema no es la genética. Plan de alimentación y entrenamiento con evidencia para ectomorfos. Gratis."
 categoria: "fitness"
 fecha: "2026-06-02"
 keywords:

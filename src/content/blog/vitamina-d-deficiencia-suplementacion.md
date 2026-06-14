@@ -1,5 +1,6 @@
 ---
 titulo: "Vitamina D: la deficiencia que el médico no siempre busca y cómo corregirla"
+tituloSeo: "Vitamina D: Deficiencia y Cómo Corregirla"
 descripcion: "El 40% de la población latinoamericana tiene niveles insuficientes de vitamina D. Qué causa eso, cómo afecta al rendimiento físico y cuánto suplementar."
 categoria: "salud"
 fecha: "2026-06-02"

@@ -1,6 +1,7 @@
 ---
 titulo: "Glucosa en sangre: valores normales, picos después de comer y cómo controlarlos"
-descripcion: "Glucosa 100, 110 o 120 mg/dL en ayunas: qué significan cada uno. Rango normal, prediabetes, picos postprandiales y las estrategias más efectivas para estabilizar la glucemia."
+tituloSeo: "Glucosa en Sangre: Valores Normales y Control"
+descripcion: "Glucosa 100, 110 o 120 mg/dL: qué significa. Rango normal, prediabetes, picos postprandiales y estrategias para estabilizar la glucemia. Gratis."
 categoria: "salud"
 fecha: "2026-06-04"
 keywords:

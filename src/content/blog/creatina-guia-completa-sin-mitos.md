@@ -1,6 +1,7 @@
 ---
 titulo: "Creatina: la guía completa sin mitos para principiantes y deportistas"
-descripcion: "La creatina es el suplemento deportivo más estudiado del mundo. Funciona, es segura y está rodeada de mitos absurdos. Aquí está todo lo que necesitas saber para usarla bien."
+tituloSeo: "Creatina: Guía Completa sin Mitos"
+descripcion: "La creatina es el suplemento más estudiado del mundo. Funciona, es segura y está rodeada de mitos. Todo lo que necesitas saber para usarla bien. Gratis."
 categoria: "fitness"
 fecha: "2026-05-11"
 keywords:

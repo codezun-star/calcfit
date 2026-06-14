@@ -37,7 +37,8 @@ const faqs = [
       La calculadora obtiene la fecha y hora actual de tu dispositivo y la resta a la fecha objetivo que introduces. El resultado se descompone en días completos, horas, minutos y segundos. Se actualiza cada segundo mientras la página está abierta, sin ninguna llamada a servidores externos: todo el procesamiento ocurre en tu navegador.
     </p>
 
-    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px;">
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 320px;">
       <thead>
         <tr style="background: var(--ink); color: var(--acid);">
           <th style="padding: 10px 14px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Unidad</th>
@@ -58,6 +59,7 @@ const faqs = [
         ))}
       </tbody>
     </table>
+    </div>
 
     <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
     <div style="display: flex; flex-direction: column; gap: 16px;">

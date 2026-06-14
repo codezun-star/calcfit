@@ -1,6 +1,7 @@
 ---
 titulo: "Colesterol alto: qué comer, qué evitar y cómo bajarlo sin medicación"
-descripcion: "El colesterol LDL alto se puede reducir significativamente con dieta. Qué alimentos lo suben, cuáles lo bajan, cuándo es necesaria la medicación y cómo interpretar los valores."
+tituloSeo: "Colesterol Alto: Qué Comer para Bajarlo"
+descripcion: "El colesterol LDL alto se reduce con dieta. Qué alimentos lo suben, cuáles lo bajan, cuándo medicar y cómo interpretar los valores del análisis. Gratis."
 categoria: "salud"
 fecha: "2026-06-04"
 keywords:

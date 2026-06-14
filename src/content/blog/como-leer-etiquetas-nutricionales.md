@@ -1,6 +1,7 @@
 ---
 titulo: "Cómo leer etiquetas nutricionales: lo que importa y lo que es puro marketing"
-descripcion: "La mayoría mira solo las calorías. Hay 5 datos que importan más. Te enseño a leer una etiqueta en 30 segundos y a detectar los trucos más usados para confundirte."
+tituloSeo: "Cómo Leer Etiquetas Nutricionales"
+descripcion: "La mayoría mira solo las calorías. Hay 5 datos que importan más. Cómo leer una etiqueta en 30 segundos y detectar los trucos para confundirte. Gratis."
 categoria: "nutricion"
 fecha: "2026-06-01"
 keywords:

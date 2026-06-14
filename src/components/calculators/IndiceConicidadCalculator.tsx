@@ -27,7 +27,8 @@ export default function IndiceConicidadCalculator() {
     const aIn = units === 'imperial' ? parseFloat(alturaIn) || 0 : 0;
 
     if (isNaN(c) || c < 40 || c > 200) errs.cintura = 'Entre 40 y 200 cm';
-    if (isNaN(p) || p < 20 || p > 300) errs.peso = units === 'metric' ? 'Entre 20 y 300 kg' : 'Entre 44 y 660 lb';
+    if (units === 'metric' ? (isNaN(p) || p < 20 || p > 300) : (isNaN(p) || p < 44 || p > 660))
+      errs.peso = units === 'metric' ? 'Entre 20 y 300 kg' : 'Entre 44 y 660 lb';
     if (units === 'metric' && (isNaN(a) || a < 100 || a > 250)) errs.altura = 'Entre 100 y 250 cm';
     if (units === 'imperial' && (isNaN(aFt) || aFt < 3 || aFt > 8)) errs.altura = 'Entre 3 y 8 pies';
 
@@ -40,7 +41,7 @@ export default function IndiceConicidadCalculator() {
   };
 
   return (
-    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '560px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+    <div style={{ padding: 'clamp(16px, 4vw, 32px)', maxWidth: '640px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>
       <div style={{ padding: '12px 16px', background: 'var(--cream)', borderLeft: '3px solid var(--border)', fontSize: '12px', color: 'var(--muted)', lineHeight: 1.6 }}>
         El Índice de Conicidad (IC) mide la distribución de grasa corporal. Un valor alto indica forma de tonel (más grasa central), asociada a mayor riesgo cardiovascular.
       </div>
