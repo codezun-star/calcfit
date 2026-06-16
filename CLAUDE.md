@@ -310,7 +310,7 @@ Tres visualizaciones específicas en `src/components/calculators/`:
 
 ## Homepage (src/pages/index.astro)
 
-La homepage muestra las **79 calculadoras** en 4 categorías. Los íconos SVG están definidos como strings en el objeto `I` al inicio del frontmatter y se renderizan con `<Fragment set:html={calc.icon} />`.
+La homepage muestra las **99 calculadoras** en 4 categorías mediante el componente `CalculatorBrowser`. Los datos (calculadoras, categorías e íconos SVG) viven en `src/lib/calcData.ts` como **fuente única**: `index.astro` y las páginas de categoría (`/fitness`, `/embarazo`, `/fechas`, `/nutricion`) importan de ahí. Al añadir una calculadora se edita SOLO `calcData.ts`. Los íconos se renderizan con `set:html` / `dangerouslySetInnerHTML`.
 
 ### Secciones de la homepage y dónde aparece el contador
 
@@ -684,15 +684,16 @@ Siempre verificar `typeof window !== 'undefined'` antes de acceder a localStorag
 
 ## Pendientes conocidos
 
-- Generar imágenes OG estáticas en `public/og/` (1200×630px por calculadora) — pendientes todas las de batch 3 al 7
 - Deploy en producción (Vercel / Netlify / Cloudflare Pages) — configurar redirect 301 de non-www a www
 - Verificar propiedad en Google Search Console y enviar sitemap con URL www
-- Agregar `apple-touch-icon` PNG 180×180 para homescreen iOS (actualmente no hay)
+
+> Resueltos (2026-06-16): imágenes OG generadas para las 99 calculadoras + `default.jpg` con `scripts/generate-og.mjs` (regenerar tras añadir calculadoras); `apple-touch-icon.png` 180×180 añadido. El sitio **no usa anuncios** actualmente (Monetag y AdSense fueron eliminados); si se reactivan, revisar la coherencia de `politica-cookies`.
 
 ## Registro de cambios
 
 | Fecha | Acción |
 |---|---|
+| 2026-06-16 | Auditoría SEO + 7 tandas. (1) Eliminados TODOS los anuncios: Monetag (push/vignette/popunder) en Base.astro + componente AdSense `AdBanner.astro` y sus usos. (2) `calcData.ts` convertido en fuente única: integradas las 10 calculadoras del Batch 9 (Embarazo `/embarazo` pasa a 20) e `index.astro` ahora importa de calcData (fin de la duplicación). `og:type=article` en artículos del blog. (3) Corregidos 5 enlaces internos rotos del blog. (4) Generadas 99 imágenes OG de marca + `default.jpg` (`scripts/generate-og.mjs`); `ogImage` no estándar normalizados a `/og/[slug].jpg`. (5) 74 títulos acortados a ≤60 chars (keyword primero). (6) 45 meta descriptions acortadas a ≤155 chars. (7) Sitemap con prioridades por tipo (home 1.0, calc 0.8, blog 0.7, categoría 0.6, legal 0.3) y lastmod por build; breadcrumb de 3 niveles (Inicio→Categoría→Calculadora) en HTML y schema; `apple-touch-icon.png` 180×180; `og:image:alt`/`twitter:image:alt`; enlaces SSR a categorías en el footer. Total: 99 calculadoras. |
 | 2026-06-02 | Blog: +20 artículos SEO (grasa-abdominal, ganar-musculo-siendo-delgado, cuanto-tarda-verse-el-musculo, running-para-principiantes, entrenamiento-mayores-40, vo2-maximo-como-mejorar, calorias-alimentos-comunes, proteina-vegetal-vs-animal, alcohol-y-calorias, dieta-mediterranea, carga-glucemica-practica, omega-3-beneficios, colesterol-alto-que-comer, presion-arterial-normal, glucosa-en-sangre, frecuencia-cardiaca-reposo, magnesio-deficiencia, sarcopenia-perdida-muscular, perder-peso-sin-efecto-rebote, salud-hormonal-y-ejercicio). Total blog: 48 artículos. |
 | 2026-06-03 | Batch 9 Embarazo: +10 calculadoras (ventana-fertil, edad-gestacional, trimestre-embarazo, aumento-peso-embarazo, kick-counter, test-ovulacion, beta-hcg, probabilidad-embarazo, tiempo-postparto, compatibilidad-lactancia). Total: 99. Embarazo & fertilidad pasa de 10 a 20. |
 | 2026-06-02 | Blog: paginación implementada. `index.astro` reemplazado por `[...page].astro` con `paginate()` (20 artículos/página). Navegación prev/next + números de página. |
