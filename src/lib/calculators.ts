@@ -3853,3 +3853,107 @@ export function calcularFibraDiaria(edadAnios: number, sexo: 'hombre' | 'mujer',
   const recomendacion = `Distribuye tu ingesta de fibra a lo largo del día y aumenta gradualmente para evitar molestias digestivas. Acompaña siempre con al menos 1.5–2 L de agua diarios.`;
   return { gramosDiarios, gramosSolubles, gramosInsolubles, fuentesSolubles, fuentesInsolubles, beneficio: beneficioMap[objetivo], recomendacion };
 }
+
+// ── Calorías corriendo (MET del Compendium of Physical Activities 2011) ──
+export function calcularCaloriasCorriendo(pesoKg: number, distanciaKm: number, minutos: number): {
+  calorias: number; met: number; velocidadKmH: number; ritmo: string;
+  equivalencias: { alimento: string; cantidad: string }[];
+} {
+  const horas = minutos / 60;
+  const velocidadKmH = horas > 0 ? distanciaKm / horas : 0;
+  let met: number;
+  if (velocidadKmH < 8) met = 6.0;
+  else if (velocidadKmH < 9.7) met = 8.3;
+  else if (velocidadKmH < 10.8) met = 9.8;
+  else if (velocidadKmH < 11.3) met = 10.5;
+  else if (velocidadKmH < 12.9) met = 11.0;
+  else if (velocidadKmH < 13.9) met = 11.8;
+  else if (velocidadKmH < 14.5) met = 12.3;
+  else if (velocidadKmH < 16.1) met = 12.8;
+  else met = 14.5;
+  const calorias = Math.round((met * 3.5 * pesoKg / 200) * minutos);
+  const ritmoMin = velocidadKmH > 0 ? 60 / velocidadKmH : 0;
+  const rm = Math.floor(ritmoMin);
+  const rs = Math.round((ritmoMin - rm) * 60);
+  const ritmo = velocidadKmH > 0 ? `${rm}:${String(rs).padStart(2, '0')}` : '—';
+  const equivalencias = [
+    { alimento: 'Plátanos', cantidad: (calorias / 90).toFixed(1) },
+    { alimento: 'Rebanadas de pan', cantidad: (calorias / 75).toFixed(1) },
+    { alimento: 'Cervezas (330 ml)', cantidad: (calorias / 140).toFixed(1) },
+  ];
+  return { calorias, met, velocidadKmH: Math.round(velocidadKmH * 10) / 10, ritmo, equivalencias };
+}
+
+// ── Contador de contracciones de parto (regla 5-1-1) ──
+export function evaluarContracciones(contracciones: { start: number; durationSec: number }[]): {
+  total: number; frecuenciaMin: number; duracionSeg: number;
+  fase: 'sin-datos' | 'temprana' | 'activa' | 'hospital'; mensaje: string;
+} {
+  if (contracciones.length < 2) {
+    return { total: contracciones.length, frecuenciaMin: 0, duracionSeg: 0, fase: 'sin-datos',
+      mensaje: 'Registra al menos 2 contracciones para calcular la frecuencia.' };
+  }
+  const recientes = contracciones.slice(-6);
+  const intervalos: number[] = [];
+  for (let i = 1; i < recientes.length; i++) {
+    intervalos.push((recientes[i].start - recientes[i - 1].start) / 60000);
+  }
+  const frecuenciaMin = Math.round((intervalos.reduce((a, b) => a + b, 0) / intervalos.length) * 10) / 10;
+  const duracionSeg = Math.round(recientes.reduce((a, c) => a + c.durationSec, 0) / recientes.length);
+  let fase: 'temprana' | 'activa' | 'hospital';
+  let mensaje: string;
+  if (frecuenciaMin <= 5 && duracionSeg >= 45) {
+    fase = 'hospital';
+    mensaje = 'Patrón 5-1-1: contracciones cada 5 minutos o menos que duran cerca de 1 minuto. Contacta a tu médico o acude al hospital.';
+  } else if (frecuenciaMin <= 10) {
+    fase = 'activa';
+    mensaje = 'Trabajo de parto activo en progreso. Prepárate y mantén el registro del tiempo.';
+  } else {
+    fase = 'temprana';
+    mensaje = 'Fase temprana. Descansa, hidrátate y sigue registrando las contracciones.';
+  }
+  return { total: contracciones.length, frecuenciaMin, duracionSeg, fase, mensaje };
+}
+
+// ── Sumar o restar días/meses/años a una fecha ──
+export function calcularFechaDesplazada(fechaBase: string, dias: number, meses: number, anios: number, operacion: 'sumar' | 'restar'): {
+  fechaResultante: string; diaSemana: string; fechaLarga: string; diferenciaDias: number;
+} {
+  const [y, m, d] = fechaBase.split('-').map(Number);
+  const base = new Date(y, m - 1, d, 12, 0, 0);
+  const signo = operacion === 'restar' ? -1 : 1;
+  const r = new Date(base);
+  r.setFullYear(r.getFullYear() + signo * anios);
+  r.setMonth(r.getMonth() + signo * meses);
+  r.setDate(r.getDate() + signo * dias);
+  const diasSemana = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+  const mesesNombre = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+  const mm = String(r.getMonth() + 1).padStart(2, '0');
+  const dd = String(r.getDate()).padStart(2, '0');
+  const diferenciaDias = Math.round((r.getTime() - base.getTime()) / 86400000);
+  return {
+    fechaResultante: `${r.getFullYear()}-${mm}-${dd}`,
+    diaSemana: diasSemana[r.getDay()],
+    fechaLarga: `${r.getDate()} de ${mesesNombre[r.getMonth()]} de ${r.getFullYear()}`,
+    diferenciaDias,
+  };
+}
+
+// ── Azúcar diario recomendado (OMS: azúcares libres < 10% e ideal < 5% de la energía) ──
+export function calcularAzucarDiario(caloriasDiarias: number): {
+  limiteMaxG: number; idealG: number; limiteMaxCucharaditas: number; idealCucharaditas: number;
+  ejemplos: { alimento: string; azucarG: number; porcentajeDelLimite: number }[];
+} {
+  const limiteMaxG = Math.round((caloriasDiarias * 0.10) / 4);
+  const idealG = Math.round((caloriasDiarias * 0.05) / 4);
+  const limiteMaxCucharaditas = Math.round((limiteMaxG / 4) * 10) / 10;
+  const idealCucharaditas = Math.round((idealG / 4) * 10) / 10;
+  const ejemplos = [
+    { alimento: 'Lata de refresco (330 ml)', azucarG: 35 },
+    { alimento: 'Barra de chocolate con leche', azucarG: 24 },
+    { alimento: 'Vaso de jugo de naranja (250 ml)', azucarG: 21 },
+    { alimento: 'Yogur de sabores (125 g)', azucarG: 13 },
+    { alimento: 'Galletas dulces (2 unidades)', azucarG: 8 },
+  ].map(e => ({ ...e, porcentajeDelLimite: Math.round((e.azucarG / limiteMaxG) * 100) }));
+  return { limiteMaxG, idealG, limiteMaxCucharaditas, idealCucharaditas, ejemplos };
+}

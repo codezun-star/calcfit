@@ -61,7 +61,6 @@ const I: Record<string, string> = {
   recuperCardiaca:   `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14S3 10 3 6.5a3 3 0 016 0 3 3 0 016 0C15 10 9 14 9 14z"/><polyline points="5,11.5 7.5,9.5 10.5,12.5 13,10"/></svg>`,
   tempCorporal:      `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="7.5" y="2" width="3" height="10"/><circle cx="9" cy="14" r="2.5"/><line x1="10.5" y1="5" x2="13" y2="5"/><line x1="10.5" y1="8" x2="13" y2="8"/><line x1="10.5" y1="11" x2="13" y2="11"/></svg>`,
   cargaGlucemica:    `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,14 5,9 8,11 11,5 15,8 17,4"/><line x1="1" y1="14" x2="17" y2="14"/></svg>`,
-  pesoEmbarazo:      `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="9" cy="3" r="2"/><path d="M6 6.5c-2 2-2.5 5-1 7.5L6 16h6l1-2c1.5-2.5 1-5.5-1-7.5H6z"/><circle cx="9" cy="10.5" r="2" stroke-dasharray="2 1.5"/></svg>`,
   presionPulso:      `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,9 4,9 6,5 8,13 10,9 12,9 14,6 16,6"/><line x1="1" y1="14" x2="17" y2="14"/><line x1="9" y1="9" x2="9" y2="14" stroke-dasharray="2 1.5"/></svg>`,
   tallaPredicha:     `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="9" y1="1" x2="9" y2="17"/><polyline points="6,4 9,1 12,4"/><polyline points="6,14 9,17 12,14"/><line x1="11" y1="6" x2="14" y2="6"/><line x1="11" y1="9" x2="16" y2="9"/><line x1="11" y1="12" x2="14" y2="12"/></svg>`,
   testRockport:      `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="3" r="1.5"/><path d="M9.5 5.5L7 11l-3.5 2"/><path d="M9.5 5.5L13 8l1.5 4.5"/><path d="M6.5 11L5 16"/><path d="M1 16h16"/></svg>`,
@@ -106,7 +105,6 @@ const I: Record<string, string> = {
   lactancia:         `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="9" cy="4" r="2.5"/><path d="M5.5 8C3.5 9.5 3 12 4 14.5L5 17h8l1-2.5c1-2.5.5-5-1.5-6.5H5.5z"/><path d="M7 11c1 2 3 2.5 4 1.5"/></svg>`,
   fechaConcepcion:   `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 2c0 0 4 4.5 4 8a4 4 0 01-8 0C5 7 7 4.5 9 2z"/><path d="M7 11.5c.5 1 1 1.5 2 1.5"/><circle cx="9" cy="2" r="0.8" fill="currentColor" stroke="none"/></svg>`,
   fibraDiaria:       `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 14V8c0-3 2-6 5-6s5 3 5 6v6"/><line x1="2" y1="14" x2="16" y2="14"/><line x1="7" y1="10" x2="11" y2="10" stroke-dasharray="2 1"/><line x1="7" y1="12" x2="11" y2="12" stroke-dasharray="2 1"/></svg>`,
-  ventanaFertil:     `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="14" height="13"/><line x1="2" y1="7" x2="16" y2="7"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="12" y1="1" x2="12" y2="4"/><circle cx="6" cy="11" r="1.2" fill="currentColor" stroke="none"/><circle cx="9" cy="11" r="1.2" fill="currentColor" stroke="none"/><circle cx="12" cy="11" r="1.2" fill="currentColor" stroke="none"/></svg>`,
   edadGestacional:   `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="9" cy="9" r="7"/><path d="M9 9V5"/><path d="M9 9l4 2.5"/><circle cx="9" cy="9" r="1.2" fill="currentColor" stroke="none"/></svg>`,
   trimestreEmb:      `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="9" cy="9" r="7"/><path d="M9 9L9 2"/><path d="M9 9L15 12.5"/><path d="M9 9L3 12.5"/></svg>`,
   aumentoPeso:       `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 13h14"/><path d="M9 13V7"/><circle cx="9" cy="10" r="3" stroke-dasharray="2 1.5"/><circle cx="9" cy="4" r="1.5"/></svg>`,
@@ -116,6 +114,10 @@ const I: Record<string, string> = {
   probabilidadEmb:   `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="9" cy="9" r="7"/><path d="M9 9V5"/><path d="M9 9l3.5 2"/><line x1="5" y1="14" x2="9" y2="9"/></svg>`,
   tiempoPostparto:   `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 13c2-4 3-7 5-7l2 5 3-4 2 6"/><line x1="2" y1="16" x2="16" y2="16"/></svg>`,
   compatLactancia:   `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="5" y="4" width="8" height="11"/><path d="M8 4V2h2v2"/><line x1="7" y1="8" x2="11" y2="8"/><polyline points="7,11 8.5,12.5 11,10"/></svg>`,
+  correr:            `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="3" r="1.5"/><path d="M10.5 5.5 7.5 8l2 2-1 6"/><path d="M10.5 5.5 14 7l1.5-1"/><path d="M9.5 10 5 11.5"/><path d="M7.5 8 4 13"/></svg>`,
+  azucarCubo:        `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="12" height="9"/><path d="M3 6 5 3.5h8L15 6"/><circle cx="7" cy="10" r="0.6" fill="currentColor" stroke="none"/><circle cx="11" cy="11" r="0.6" fill="currentColor" stroke="none"/><circle cx="9.5" cy="8.5" r="0.6" fill="currentColor" stroke="none"/></svg>`,
+  calendarioMas:     `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="14" height="13"/><line x1="2" y1="7" x2="16" y2="7"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="12" y1="1" x2="12" y2="4"/><line x1="9" y1="9.5" x2="9" y2="13.5"/><line x1="7" y1="11.5" x2="11" y2="11.5"/></svg>`,
+  contracciones:     `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="10" r="6"/><line x1="7" y1="1.5" x2="11" y2="1.5"/><line x1="9" y1="1.5" x2="9" y2="4"/><path d="M6 10.5c1-2.5 2-2.5 3 0s2 2.5 3 0"/></svg>`,
 };
 
 export const calculadoras: Calc[] = [
@@ -163,7 +165,6 @@ export const calculadoras: Calc[] = [
   { slug: '/recuperacion-cardiaca',nombre: 'Recuperación Cardíaca',         desc: 'HRR: caída de FC al minuto post-ejercicio',        badge: null,        destacada: false, num: '42', icon: I.recuperCardiaca },
   { slug: '/temperatura-corporal', nombre: 'Temperatura Corporal',          desc: 'Fiebre, febrícula e hipotermia en °C/°F',          badge: null,        destacada: false, num: '43', icon: I.tempCorporal },
   { slug: '/carga-glucemica',      nombre: 'Carga Glucémica',               desc: 'Impacto glucémico real de cualquier alimento',     badge: null,        destacada: false, num: '44', icon: I.cargaGlucemica },
-  { slug: '/peso-embarazo',        nombre: 'Peso en el Embarazo',           desc: 'Ganancia de peso gestacional (IOM 2009)',          badge: null,        destacada: false, num: '45', icon: I.pesoEmbarazo },
   { slug: '/presion-pulso',        nombre: 'Presión de Pulso',              desc: 'Diferencial sistólica − diastólica (PP)',          badge: null,        destacada: false, num: '46', icon: I.presionPulso },
   { slug: '/talla-predicha',       nombre: 'Talla Adulta Predicha',         desc: 'Estatura adulta por altura de los padres',         badge: null,        destacada: false, num: '47', icon: I.tallaPredicha },
   { slug: '/test-rockport',        nombre: 'Test de Rockport',              desc: 'VO₂ máx caminando 1 milla (Kline 1987)',           badge: null,        destacada: false, num: '48', icon: I.testRockport },
@@ -208,7 +209,6 @@ export const calculadoras: Calc[] = [
   { slug: '/lactancia',            nombre: 'Lactancia Materna',              desc: 'Calorías extra, ml por toma y beneficios OMS',     badge: null,        destacada: false, num: '87', icon: I.lactancia },
   { slug: '/fecha-concepcion',     nombre: 'Fecha de Concepción',            desc: 'Estima cuándo ocurrió la concepción desde parto o regla', badge: null, destacada: false, num: '88', icon: I.fechaConcepcion },
   { slug: '/fibra-diaria',         nombre: 'Fibra Diaria',                   desc: 'Gramos de fibra recomendados según edad, sexo y objetivo', badge: null, destacada: false, num: '89', icon: I.fibraDiaria },
-  { slug: '/ventana-fertil',        nombre: 'Ventana Fértil',              desc: '6 días fértiles con % de probabilidad por día (Wilcox)',  badge: null, destacada: false, num: '90', icon: I.ventanaFertil },
   { slug: '/edad-gestacional',      nombre: 'Edad Gestacional',            desc: 'Semanas exactas desde FUR o concepción + FPP',            badge: null, destacada: false, num: '91', icon: I.edadGestacional },
   { slug: '/trimestre-embarazo',    nombre: 'Trimestre del Embarazo',      desc: 'Trimestre actual, hitos del bebé y checklist médico',      badge: null, destacada: false, num: '92', icon: I.trimestreEmb },
   { slug: '/aumento-peso-embarazo', nombre: 'Ganancia de Peso Embarazo',   desc: 'Peso ideal por trimestre según IMC previo (IOM 2009)',     badge: null, destacada: false, num: '93', icon: I.aumentoPeso },
@@ -218,6 +218,10 @@ export const calculadoras: Calc[] = [
   { slug: '/probabilidad-embarazo', nombre: 'Probabilidad de Embarazo',    desc: '% de concepción según día del ciclo y relaciones',        badge: null, destacada: false, num: '97', icon: I.probabilidadEmb },
   { slug: '/tiempo-postparto',      nombre: 'Recuperación Postparto',      desc: 'Semanas desde el parto + síntomas y consejos por etapa',  badge: null, destacada: false, num: '98', icon: I.tiempoPostparto },
   { slug: '/compatibilidad-lactancia', nombre: 'Medicamentos y Lactancia', desc: 'Compatibilidad con lactancia materna (escala Hale L1–L5)', badge: null, destacada: false, num: '99', icon: I.compatLactancia },
+  { slug: '/calorias-corriendo',    nombre: 'Calorías Corriendo',           desc: 'Gasto calórico al correr por peso, distancia y tiempo',   badge: null, destacada: false, num: '100', icon: I.correr },
+  { slug: '/contador-contracciones', nombre: 'Contador de Contracciones',   desc: 'Cronometra frecuencia y duración (regla 5-1-1)',          badge: null, destacada: false, num: '101', icon: I.contracciones },
+  { slug: '/sumar-restar-dias',      nombre: 'Sumar o Restar Días',          desc: 'Suma o resta días, meses y años a una fecha',            badge: null, destacada: false, num: '102', icon: I.calendarioMas },
+  { slug: '/azucar-diario',          nombre: 'Azúcar Diario',                desc: 'Gramos de azúcar recomendados al día según la OMS',      badge: null, destacada: false, num: '103', icon: I.azucarCubo },
 ];
 
 export const categorias: Categoria[] = [
@@ -235,23 +239,23 @@ export const categorias: Categoria[] = [
       '/presion-pulso', '/talla-predicha',
       '/vam', '/indice-masa-grasa', '/ritmo-maraton', '/indice-conicidad', '/tasa-sudoracion', '/masa-osea', '/sindrome-metabolico',
       '/potencia-salto', '/grasa-visceral', '/oximetria', '/umbral-anaerobico', '/carga-entrenamiento', '/escala-borg', '/fc-reposo', '/actividad-fisica', '/hidratacion-deportiva', '/ritmo-natacion',
-      '/ftp-ciclismo', '/cadencia-carrera', '/predictor-carrera', '/recuperacion-muscular',
+      '/ftp-ciclismo', '/cadencia-carrera', '/predictor-carrera', '/recuperacion-muscular', '/calorias-corriendo',
     ],
   },
   {
     label: 'Embarazo & fertilidad',
     slug: 'embarazo',
-    slugs: ['/ovulacion', '/ciclo-menstrual', '/semana-embarazo', '/fecha-parto', '/peso-embarazo', '/imc-infantil', '/cuando-test-embarazo', '/peso-bebe-semana', '/lactancia', '/fecha-concepcion', '/ventana-fertil', '/edad-gestacional', '/trimestre-embarazo', '/aumento-peso-embarazo', '/kick-counter', '/test-ovulacion', '/beta-hcg', '/probabilidad-embarazo', '/tiempo-postparto', '/compatibilidad-lactancia'],
+    slugs: ['/ovulacion', '/ciclo-menstrual', '/semana-embarazo', '/fecha-parto', '/imc-infantil', '/cuando-test-embarazo', '/peso-bebe-semana', '/lactancia', '/fecha-concepcion', '/edad-gestacional', '/trimestre-embarazo', '/aumento-peso-embarazo', '/kick-counter', '/test-ovulacion', '/beta-hcg', '/probabilidad-embarazo', '/tiempo-postparto', '/compatibilidad-lactancia', '/contador-contracciones'],
   },
   {
     label: 'Fechas & tiempo',
     slug: 'fechas',
-    slugs: ['/edad', '/dias-fechas', '/edad-biologica', '/cuenta-regresiva', '/semanas-de-vida', '/generacion', '/jubilacion', '/edad-planetas'],
+    slugs: ['/edad', '/dias-fechas', '/edad-biologica', '/cuenta-regresiva', '/semanas-de-vida', '/generacion', '/jubilacion', '/edad-planetas', '/sumar-restar-dias'],
   },
   {
     label: 'Nutrición & bienestar',
     slug: 'nutricion',
-    slugs: ['/macronutrientes', '/proteinas', '/metabolismo-basal', '/deficit-calorico', '/resistencia-insulina', '/glucosa', '/colesterol', '/carga-glucemica', '/cafeina', '/sueno', '/ayuno-intermitente', '/alcoholemia', '/creatina', '/calorias-bebidas', '/riesgo-diabetes', '/vitamina-d', '/proteina-por-comida', '/ig-comida', '/omega-ratio', '/fibra-diaria'],
+    slugs: ['/macronutrientes', '/proteinas', '/metabolismo-basal', '/deficit-calorico', '/resistencia-insulina', '/glucosa', '/colesterol', '/carga-glucemica', '/cafeina', '/sueno', '/ayuno-intermitente', '/alcoholemia', '/creatina', '/calorias-bebidas', '/riesgo-diabetes', '/vitamina-d', '/proteina-por-comida', '/ig-comida', '/omega-ratio', '/fibra-diaria', '/azucar-diario'],
   },
 ];
 

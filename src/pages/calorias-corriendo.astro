@@ -1,0 +1,79 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import CaloriasCorriendoCalculator from '../components/calculators/CaloriasCorriendoCalculator';
+
+const faqs = [
+  { q: '¿Cuántas calorías se queman al correr 5 km?', a: 'Una persona de 70 kg quema aproximadamente 350-400 kcal corriendo 5 km, dependiendo de la velocidad. A mayor peso y mayor velocidad, mayor gasto calórico. La regla práctica es ~1 kcal por kilo de peso y por kilómetro recorrido.' },
+  { q: '¿Se queman más calorías corriendo rápido o lento?', a: 'A igual distancia, correr más rápido quema algo más de calorías porque aumenta el valor MET, pero la diferencia es moderada. A igual tiempo, correr rápido sí quema bastante más. Lo que más influye en el total es la distancia recorrida y tu peso corporal.' },
+  { q: '¿Qué es el valor MET y cómo afecta al cálculo?', a: 'El MET (equivalente metabólico) mide la intensidad de una actividad respecto al reposo. Correr tiene entre 6 y 14,5 MET según la velocidad. La fórmula es: calorías = MET × 3,5 × peso(kg) / 200 × minutos, basada en el Compendium of Physical Activities (ACSM).' },
+  { q: '¿Correr en cinta quema las mismas calorías que al aire libre?', a: 'En cinta se quema ligeramente menos por la ausencia de resistencia del viento y porque la banda ayuda al movimiento. Poner una inclinación del 1% iguala aproximadamente el gasto al de correr en exterior a la misma velocidad.' },
+  { q: '¿Las calorías quemadas cuentan el metabolismo basal?', a: 'Esta calculadora estima el gasto total de la actividad, que incluye una pequeña parte que habrías gastado en reposo. Para el gasto "neto" de ejercicio restarías tu metabolismo basal de ese periodo, pero para uso práctico el total es la referencia habitual.' },
+];
+---
+
+<CalculatorLayout
+  title="Calorías Corriendo — Cuántas Quemas al Correr | CalcFit"
+  description="Calcula cuántas calorías quemas corriendo según tu peso, distancia y tiempo. Con velocidad, ritmo (min/km) y equivalencias. Fórmula MET del ACSM."
+  calculatorName="Calorías Corriendo"
+  breadcrumbSlug="calorias-corriendo"
+  ogImage="/og/calorias-corriendo.jpg"
+  keywords="calorías corriendo, calorías quemadas corriendo, cuántas calorías quemo al correr, gasto calórico running, calorías por kilómetro"
+  faqs={faqs}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Calorías<br><span style="color: var(--acid);">Corriendo</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Calcula las calorías que quemas al correr a partir de tu peso, la distancia y el tiempo, usando los valores MET validados del Compendium of Physical Activities.
+    </p>
+  </div>
+
+  <CaloriasCorriendoCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cómo se calculan las calorías al correr?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      El gasto se calcula con la fórmula estándar de intensidad: <strong>calorías = MET × 3,5 × peso (kg) ÷ 200 × minutos</strong>. El valor MET depende de tu velocidad: correr suave equivale a unos 8 MET y un ritmo rápido supera los 12 MET. Por eso, a igual tiempo, correr más rápido quema más; pero a igual distancia, lo que más pesa es tu masa corporal.
+    </p>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Intensidad (MET) según el ritmo</h2>
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 320px;">
+      <thead>
+        <tr style="border-bottom: 2px solid var(--border);">
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Velocidad</th>
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Ritmo aprox.</th>
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">MET</th>
+        </tr>
+      </thead>
+      <tbody>
+        {[
+          { v: '8 km/h', r: '7:30 min/km', m: '8,3' },
+          { v: '9,7 km/h', r: '6:11 min/km', m: '9,8' },
+          { v: '11,3 km/h', r: '5:18 min/km', m: '11,0' },
+          { v: '12,9 km/h', r: '4:39 min/km', m: '11,8' },
+          { v: '14,5 km/h', r: '4:08 min/km', m: '12,8' },
+          { v: '16+ km/h', r: '<3:45 min/km', m: '14,5' },
+        ].map((row) => (
+          <tr style="border-bottom: 1px solid var(--border);">
+            <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.v}</td>
+            <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.r}</td>
+            <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.m}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    </div>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {faqs.map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>
