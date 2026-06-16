@@ -81,6 +81,7 @@ const websiteSchema = {
     <meta property="og:image" content={ogImageURL} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:locale" content="es_419" />
     <meta property="og:locale:alternate" content="es_ES" />
@@ -93,14 +94,14 @@ const websiteSchema = {
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageURL} />
-    <meta name="twitter:site" content="@calcfit" />
+    <meta name="twitter:image:alt" content={title} />
 
     <!-- JSON-LD -->
     <script is:inline type="application/ld+json" set:html={JSON.stringify(schema ?? websiteSchema)} />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="alternate icon" href="/favicon.ico" sizes="any" />
-    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
     <!-- Google Analytics -->
     <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-NRM0FZ5W8S"></script>

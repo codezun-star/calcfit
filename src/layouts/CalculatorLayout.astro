@@ -2,6 +2,7 @@
 import Base from './Base.astro';
 import Navbar from '../components/layout/Navbar.astro';
 import Footer from '../components/layout/Footer.astro';
+import { categorias } from '../lib/calcData';
 
 interface Props {
   title: string;
@@ -45,13 +46,19 @@ const medicalContent = schema ?? {
   },
 };
 
-const breadcrumbSchema = {
-  '@type': 'BreadcrumbList',
-  itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://www.calcfit.com' },
-    { '@type': 'ListItem', position: 2, name: calculatorName, item: pageUrl },
-  ],
-};
+// Categoría de la calculadora (para breadcrumb de 3 niveles)
+const cat = categorias.find((c) => c.slugs.includes(`/${breadcrumbSlug}`));
+const categoryName = cat?.label ?? null;
+const categoryUrl = cat ? `https://www.calcfit.com/${cat.slug}` : null;
+
+const breadcrumbItems = [
+  { '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://www.calcfit.com' },
+];
+if (categoryName && categoryUrl) {
+  breadcrumbItems.push({ '@type': 'ListItem', position: 2, name: categoryName, item: categoryUrl });
+}
+breadcrumbItems.push({ '@type': 'ListItem', position: breadcrumbItems.length + 1, name: calculatorName, item: pageUrl });
+const breadcrumbSchema = { '@type': 'BreadcrumbList', itemListElement: breadcrumbItems };
 
 const faqSchema = faqs && faqs.length > 0
   ? {
@@ -77,6 +84,12 @@ const combinedSchema = { '@context': 'https://schema.org', '@graph': graphItems 
     <span style="font-family: var(--font-mono); font-size: 10px; color: var(--muted);">
       <a href="/" style="color: var(--muted); text-decoration: none;">Inicio</a>
       <span style="margin: 0 6px;">→</span>
+      {categoryName && categoryUrl && (
+        <>
+          <a href={categoryUrl} style="color: var(--muted); text-decoration: none;">{categoryName}</a>
+          <span style="margin: 0 6px;">→</span>
+        </>
+      )}
       <span style="color: var(--ink);">{calculatorName}</span>
     </span>
   </div>
