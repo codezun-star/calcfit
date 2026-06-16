@@ -42,7 +42,8 @@ calcfit-astro/
 │   ├── favicon.svg                    ← cruz "+" acid sobre fondo ink
 │   ├── favicon.ico
 │   ├── robots.txt
-│   └── og/                            ← imágenes OG estáticas (por generar)
+│   ├── og/                            ← imágenes OG estáticas (generadas, scripts/generate-og.mjs)
+│   └── apple-touch-icon.png           ← icono iOS 180×180
 ├── src/
 │   ├── styles/
 │   │   ├── tokens.css                 ← variables CSS (colores, tipografías)
@@ -76,8 +77,9 @@ calcfit-astro/
 │   ├── content/
 │   │   └── blog/                      ← artículos .md (nombre del archivo = slug de URL)
 │   └── pages/
-│       ├── index.astro                ← homepage con las 89 calculadoras
-│       ├── [slug].astro               ← 89 páginas calculadora (ver CALCULADORAS.md)
+│       ├── index.astro                ← homepage con las 99 calculadoras (importa de lib/calcData.ts)
+│       ├── [slug].astro               ← 99 páginas calculadora (ver CALCULADORAS.md)
+│       ├── fitness|embarazo|fechas|nutricion/[...page].astro ← páginas de categoría paginadas
 │       ├── blog/
 │       │   ├── [...page].astro        ← lista paginada (20 art/pág) — /blog, /blog/2, /blog/3...
 │       │   └── [slug].astro           ← artículo individual con JSON-LD Article
