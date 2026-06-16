@@ -75,7 +75,7 @@ Rangos generales:
 - **Activo (3-4 días de entrenamiento)**: 150-250 g/día
 - **Deportista de resistencia o alta intensidad**: 250-400+ g/día (la periodización de carbohidratos puede ser útil)
 
-Calcula tu distribución de macronutrientes con nuestra [calculadora de macros](/macros) y ajusta según tu respuesta individual.
+Calcula tu distribución de macronutrientes con nuestra [calculadora de macros](/macronutrientes) y ajusta según tu respuesta individual.
 
 ## El almidón resistente: el carbohidrato que actúa como fibra
 

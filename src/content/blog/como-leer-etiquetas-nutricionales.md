@@ -43,7 +43,7 @@ Para un adulto activo con objetivo de composición corporal, la proteína es la 
 
 Referencia: pollo cocinado tiene ~31 g/100 g, atún en agua ~26 g, huevo cocido ~13 g, yogur griego ~10 g.
 
-Calcula cuánta proteína necesitas en total con nuestra [calculadora de proteína diaria](/cuanta-proteina-necesito-al-dia).
+Calcula cuánta proteína necesitas en total con nuestra [calculadora de proteína diaria](/proteinas).
 
 ### 3. Azúcares (dentro de hidratos de carbono)
 

@@ -44,7 +44,7 @@ Además de bloquear la adenosina:
 
 Una mejora del 2-4% parece pequeña. En un maratón de 4 horas, equivale a 5-10 minutos menos. En el 1RM, puede ser la diferencia entre completar o no una repetición.
 
-Calcula tu rendimiento base con la [calculadora de VO₂ máximo](/vo2-max) o la [calculadora del test de Cooper](/test-cooper) para medir tus mejoras con objetividad.
+Calcula tu rendimiento base con la [calculadora de VO₂ máximo](/vo2-maximo) o la [calculadora del test de Cooper](/test-cooper) para medir tus mejoras con objetividad.
 
 ## Dosis óptima según tu peso
 

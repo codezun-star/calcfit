@@ -80,7 +80,7 @@ Esta bradicardia es completamente diferente a la bradicardia patológica, que se
 
 El entrenamiento aeróbico es la intervención más eficaz. Con 4-8 semanas de ejercicio aeróbico regular (150 min/semana de intensidad moderada), la FCR puede reducirse entre 5 y 15 ppm en personas sedentarias.
 
-Las zonas de entrenamiento de zona 2 (60-70% FCmáx) son especialmente efectivas para este propósito. Calcula tus zonas con la [calculadora de zonas de frecuencia cardíaca](/zonas-cardiaca).
+Las zonas de entrenamiento de zona 2 (60-70% FCmáx) son especialmente efectivas para este propósito. Calcula tus zonas con la [calculadora de zonas de frecuencia cardíaca](/frecuencia-cardiaca).
 
 Otras intervenciones con evidencia:
 - Gestión del estrés (meditación, respiración): -3 a -5 ppm

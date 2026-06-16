@@ -40,7 +40,7 @@ La dosis que muestra efectos consistentes en los estudios es **25-40 gramos** de
 | Pérdida de peso sin pérdida muscular | 30-40 g |
 | Persona sedentaria en mantenimiento | 20-25 g |
 
-Para calcular tus necesidades totales de proteína al día y distribuirlas correctamente, usa la [calculadora de proteína diaria](/proteina-diaria).
+Para calcular tus necesidades totales de proteína al día y distribuirlas correctamente, usa la [calculadora de proteína diaria](/proteinas).
 
 ## Alimentos con alta proteína para el desayuno
 

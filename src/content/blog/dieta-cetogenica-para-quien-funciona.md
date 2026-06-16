@@ -84,7 +84,7 @@ La adaptación completa (cuando el cuerpo oxida grasas eficientemente) toma 3-6 
 
 **No medir**: muchas personas creen estar en cetosis sin comprobarlo. Las tiras de orina dan una indicación, aunque no la más precisa.
 
-Calcula tus macros específicos para la keto con nuestra [calculadora de macronutrientes](/macros) y ajusta según tu peso y nivel de actividad.
+Calcula tus macros específicos para la keto con nuestra [calculadora de macronutrientes](/macronutrientes) y ajusta según tu peso y nivel de actividad.
 
 ---
 

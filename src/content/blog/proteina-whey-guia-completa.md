@@ -75,7 +75,7 @@ El suplemento nunca sustituye la comida real. Si ya alcanzas tu objetivo de prot
 - Necesitas una opción rápida y portable
 - Tienes poco apetito post-entrenamiento
 
-Para calcular tu objetivo diario de proteína, usa nuestra [calculadora de proteína diaria](/cuanta-proteina-necesito-al-dia) y después la [calculadora de masa muscular](/masa-muscular) si tu objetivo es hipertrofia.
+Para calcular tu objetivo diario de proteína, usa nuestra [calculadora de proteína diaria](/proteinas) y después la [calculadora de masa muscular](/masa-muscular) si tu objetivo es hipertrofia.
 
 ## Lo que dicen las etiquetas que no siempre dicen la verdad
 
