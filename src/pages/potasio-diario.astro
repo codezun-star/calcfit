@@ -1,0 +1,75 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import PotasioDiarioCalculator from '../components/calculators/PotasioDiarioCalculator';
+
+const faqs = [
+  { q: '¿Cuánto potasio se necesita al día?', a: 'La ingesta adecuada para un hombre adulto es de unos 3.400 mg de potasio al día y para una mujer, 2.600 mg. Estas cifras corresponden a las recomendaciones más recientes de ingesta adecuada.' },
+  { q: '¿Qué alimentos tienen más potasio?', a: 'El plátano es el más conocido, pero la papa, el aguacate, las legumbres, las espinacas, el tomate, los frutos secos y el pescado aportan incluso más potasio por ración.' },
+  { q: '¿Para qué sirve el potasio?', a: 'El potasio regula el equilibrio de líquidos, la contracción muscular y la transmisión nerviosa. Junto con un menor consumo de sodio, ayuda a controlar la presión arterial.' },
+  { q: '¿El potasio baja la presión arterial?', a: 'Una dieta rica en potasio se asocia a una menor presión arterial, porque contrarresta el efecto del sodio. Aumentar frutas y verduras es una estrategia clave para la salud cardiovascular.' },
+  { q: '¿Quién debe vigilar el potasio?', a: 'Las personas con enfermedad renal o que toman ciertos medicamentos deben controlar su ingesta de potasio bajo supervisión médica, ya que en ellas el exceso puede ser peligroso.' },
+];
+---
+
+<CalculatorLayout
+  title="Potasio Diario Recomendado por Edad y Sexo | CalcFit"
+  description="Calcula cuánto potasio necesitas al día según tu edad, sexo y etapa. Ingesta adecuada en mg para la presión arterial. Gratis."
+  calculatorName="Potasio Diario"
+  breadcrumbSlug="potasio-diario"
+  ogImage="/og/potasio-diario.jpg"
+  keywords="potasio diario, cuánto potasio al día, potasio recomendado, necesidades de potasio, potasio y presión arterial"
+  faqs={faqs}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Potasio<br><span style="color: var(--acid);">Diario</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Descubre cuántos miligramos de potasio necesitas al día según tu edad, sexo y etapa de la vida.
+    </p>
+  </div>
+
+  <PotasioDiarioCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cuánto potasio necesitas?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      El potasio es un mineral y electrolito esencial para el corazón, los músculos y el equilibrio de líquidos. La mayoría de las personas no alcanza la ingesta adecuada porque consume pocas frutas y verduras. Aumentar estos alimentos, junto con reducir la sal, mejora la presión arterial.
+    </p>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Potasio recomendado (mg/día)</h2>
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 320px;">
+      <thead>
+        <tr style="border-bottom: 2px solid var(--border);">
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Grupo</th>
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Potasio</th>
+        </tr>
+      </thead>
+      <tbody>
+        {[
+          { g: 'Niños 4–8 años', v: '2.300 mg' },
+          { g: 'Hombres 19+', v: '3.400 mg' },
+          { g: 'Mujeres 19+', v: '2.600 mg' },
+          { g: 'Embarazo / lactancia', v: '2.800–2.900 mg' },
+        ].map((row) => (
+          <tr style="border-bottom: 1px solid var(--border);">
+            <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.g}</td>
+            <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.v}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    </div>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {faqs.map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

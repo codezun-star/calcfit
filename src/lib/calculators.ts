@@ -3957,3 +3957,662 @@ export function calcularAzucarDiario(caloriasDiarias: number): {
   ].map(e => ({ ...e, porcentajeDelLimite: Math.round((e.azucarG / limiteMaxG) * 100) }));
   return { limiteMaxG, idealG, limiteMaxCucharaditas, idealCucharaditas, ejemplos };
 }
+
+// ════════════════════════════════════════════════════════════════
+//  FITNESS — nuevas calculadoras
+// ════════════════════════════════════════════════════════════════
+
+// ── Pasos a calorías y distancia ──
+export function calcularPasosCalorias(pasos: number, pesoKg: number, alturaCm = 170): {
+  calorias: number; distanciaKm: number; minutos: number; porcentajeObjetivo: number;
+} {
+  const zancadaM = alturaCm * 0.00415; // ~0.415 × altura (m)
+  const distanciaKm = Math.round((pasos * zancadaM / 1000) * 100) / 100;
+  const calorias = Math.round(pasos * 0.04 * (pesoKg / 70));
+  const minutos = Math.round(pasos / 100); // cadencia media ~100 pasos/min
+  const porcentajeObjetivo = Math.round((pasos / 10000) * 100);
+  return { calorias, distanciaKm, minutos, porcentajeObjetivo };
+}
+
+// ── Calorías saltando la cuerda ──
+export function calcularCaloriasSaltarCuerda(pesoKg: number, minutos: number, intensidad: 'lento' | 'moderado' | 'rapido'): {
+  calorias: number; met: number;
+} {
+  const met = intensidad === 'lento' ? 8.8 : intensidad === 'rapido' ? 12.3 : 11.8;
+  const calorias = Math.round((met * 3.5 * pesoKg / 200) * minutos);
+  return { calorias, met };
+}
+
+// ── Calorías bailando / zumba ──
+export function calcularCaloriasBailando(pesoKg: number, minutos: number, estilo: 'social' | 'zumba' | 'intenso'): {
+  calorias: number; met: number;
+} {
+  const met = estilo === 'social' ? 5.0 : estilo === 'intenso' ? 8.5 : 7.3;
+  const calorias = Math.round((met * 3.5 * pesoKg / 200) * minutos);
+  return { calorias, met };
+}
+
+// ── Calorías en elíptica ──
+export function calcularCaloriasEliptica(pesoKg: number, minutos: number, intensidad: 'suave' | 'moderada' | 'intensa'): {
+  calorias: number; met: number;
+} {
+  const met = intensidad === 'suave' ? 5.0 : intensidad === 'intensa' ? 8.0 : 6.8;
+  const calorias = Math.round((met * 3.5 * pesoKg / 200) * minutos);
+  return { calorias, met };
+}
+
+// ── Calorías levantando pesas ──
+export function calcularCaloriasPesas(pesoKg: number, minutos: number, intensidad: 'general' | 'vigoroso' | 'circuito'): {
+  calorias: number; met: number;
+} {
+  const met = intensidad === 'general' ? 3.5 : intensidad === 'circuito' ? 8.0 : 6.0;
+  const calorias = Math.round((met * 3.5 * pesoKg / 200) * minutos);
+  return { calorias, met };
+}
+
+// ── Calorías jugando fútbol ──
+export function calcularCaloriasFutbol(pesoKg: number, minutos: number, intensidad: 'recreativo' | 'competitivo'): {
+  calorias: number; met: number;
+} {
+  const met = intensidad === 'competitivo' ? 10.0 : 7.0;
+  const calorias = Math.round((met * 3.5 * pesoKg / 200) * minutos);
+  return { calorias, met };
+}
+
+// ── Masa corporal magra (fórmula de Boer) ──
+export function calcularMasaMagra(pesoKg: number, alturaCm: number, sexo: 'hombre' | 'mujer'): {
+  masaMagraKg: number; masaGrasaKg: number; porcentajeMagra: number; porcentajeGraso: number;
+} {
+  const lbm = sexo === 'hombre'
+    ? 0.407 * pesoKg + 0.267 * alturaCm - 19.2
+    : 0.252 * pesoKg + 0.473 * alturaCm - 48.3;
+  const masaMagraKg = Math.round(lbm * 10) / 10;
+  const masaGrasaKg = Math.round((pesoKg - lbm) * 10) / 10;
+  const porcentajeMagra = Math.round((lbm / pesoKg) * 1000) / 10;
+  const porcentajeGraso = Math.round(((pesoKg - lbm) / pesoKg) * 1000) / 10;
+  return { masaMagraKg, masaGrasaKg, porcentajeMagra, porcentajeGraso };
+}
+
+// ── Superficie corporal (BSA) ──
+export function calcularSuperficieCorporal(pesoKg: number, alturaCm: number): {
+  mosteller: number; duBois: number; promedio: number;
+} {
+  const mosteller = Math.sqrt((alturaCm * pesoKg) / 3600);
+  const duBois = 0.007184 * Math.pow(alturaCm, 0.725) * Math.pow(pesoKg, 0.425);
+  const r = (n: number) => Math.round(n * 100) / 100;
+  return { mosteller: r(mosteller), duBois: r(duBois), promedio: r((mosteller + duBois) / 2) };
+}
+
+// ── Porcentaje de peso perdido ──
+export function calcularPorcentajePesoPerdido(pesoInicial: number, pesoActual: number): {
+  diferenciaKg: number; porcentaje: number; gano: boolean; mensaje: string;
+} {
+  const diferenciaKg = Math.round((pesoInicial - pesoActual) * 10) / 10;
+  const porcentaje = Math.round((diferenciaKg / pesoInicial) * 1000) / 10;
+  const gano = diferenciaKg < 0;
+  let mensaje: string;
+  if (Math.abs(porcentaje) < 0.5) mensaje = 'Tu peso se mantiene prácticamente igual.';
+  else if (gano) mensaje = `Has ganado ${Math.abs(porcentaje)}% de tu peso inicial (${Math.abs(diferenciaKg)} kg).`;
+  else if (porcentaje >= 5) mensaje = `Has perdido un ${porcentaje}% de tu peso, una pérdida clínicamente significativa.`;
+  else mensaje = `Has perdido un ${porcentaje}% de tu peso inicial (${diferenciaKg} kg).`;
+  return { diferenciaKg, porcentaje, gano, mensaje };
+}
+
+// ── Frecuencia respiratoria normal ──
+export function evaluarFrecuenciaRespiratoria(rpm: number, edadAnios: number): {
+  categoria: 'bradipnea' | 'normal' | 'taquipnea'; rangoNormal: string; min: number; max: number; mensaje: string;
+} {
+  let min: number, max: number;
+  if (edadAnios < 1) { min = 30; max = 60; }
+  else if (edadAnios < 3) { min = 24; max = 40; }
+  else if (edadAnios < 6) { min = 22; max = 34; }
+  else if (edadAnios < 12) { min = 18; max = 30; }
+  else if (edadAnios < 18) { min = 12; max = 20; }
+  else { min = 12; max = 20; }
+  let categoria: 'bradipnea' | 'normal' | 'taquipnea';
+  let mensaje: string;
+  if (rpm < min) { categoria = 'bradipnea'; mensaje = 'Frecuencia por debajo de lo esperado (bradipnea). Si se acompaña de síntomas, consulta a un profesional.'; }
+  else if (rpm > max) { categoria = 'taquipnea'; mensaje = 'Frecuencia por encima de lo esperado (taquipnea). Puede deberse a esfuerzo, fiebre o ansiedad; valora el contexto.'; }
+  else { categoria = 'normal'; mensaje = 'Frecuencia respiratoria dentro del rango normal para la edad.'; }
+  return { categoria, rangoNormal: `${min}–${max} rpm`, min, max, mensaje };
+}
+
+// ════════════════════════════════════════════════════════════════
+//  NUTRICIÓN — nuevas calculadoras
+// ════════════════════════════════════════════════════════════════
+
+// ── Superávit calórico para ganar masa muscular ──
+export function calcularSuperavitCalorico(tdee: number): {
+  escenarios: { nombre: string; calorias: number; superavit: number; gananciaSemanalKg: number; gananciaMensualKg: number }[];
+} {
+  const niveles = [
+    { nombre: 'Lento (lean bulk)', superavit: 200 },
+    { nombre: 'Moderado', superavit: 350 },
+    { nombre: 'Rápido', superavit: 500 },
+  ];
+  const escenarios = niveles.map(n => {
+    const gananciaSemanalKg = Math.round((n.superavit * 7 / 7700) * 100) / 100;
+    return {
+      nombre: n.nombre,
+      calorias: Math.round(tdee + n.superavit),
+      superavit: n.superavit,
+      gananciaSemanalKg,
+      gananciaMensualKg: Math.round(gananciaSemanalKg * 4.345 * 100) / 100,
+    };
+  });
+  return { escenarios };
+}
+
+// ── Macros de dieta keto / cetogénica ──
+export function calcularKetoMacros(tdee: number, objetivo: 'perder' | 'mantener' | 'ganar'): {
+  calorias: number; grasaG: number; proteinaG: number; carbosG: number;
+  grasaPct: number; proteinaPct: number; carbosPct: number;
+} {
+  const factor = objetivo === 'perder' ? 0.80 : objetivo === 'ganar' ? 1.10 : 1.0;
+  const calorias = Math.round(tdee * factor);
+  const grasaPct = 70, proteinaPct = 25, carbosPct = 5;
+  return {
+    calorias,
+    grasaG: Math.round((calorias * grasaPct / 100) / 9),
+    proteinaG: Math.round((calorias * proteinaPct / 100) / 4),
+    carbosG: Math.round((calorias * carbosPct / 100) / 4),
+    grasaPct, proteinaPct, carbosPct,
+  };
+}
+
+// ── Sal y sodio recomendado (OMS < 5 g de sal / < 2 g de sodio) ──
+export function calcularSalDiaria(salConsumidaG: number): {
+  limiteSalG: number; limiteSodioMg: number; sodioConsumidoMg: number; porcentaje: number; mensaje: string;
+} {
+  const limiteSalG = 5;
+  const limiteSodioMg = 2000;
+  const sodioConsumidoMg = Math.round(salConsumidaG * 400); // 1 g sal ≈ 400 mg sodio
+  const porcentaje = Math.round((salConsumidaG / limiteSalG) * 100);
+  let mensaje: string;
+  if (porcentaje <= 100) mensaje = `Estás dentro del límite de la OMS (5 g de sal/día). Te queda margen de ${Math.max(0, 5 - salConsumidaG).toFixed(1)} g.`;
+  else mensaje = `Superas el límite de la OMS en un ${porcentaje - 100}%. Reducir la sal baja la presión arterial y el riesgo cardiovascular.`;
+  return { limiteSalG, limiteSodioMg, sodioConsumidoMg, porcentaje, mensaje };
+}
+
+// helper interno para tablas de micronutrientes por edad/sexo
+function rdaPorTramo(
+  edad: number, sexo: 'hombre' | 'mujer', etapa: 'ninguna' | 'embarazo' | 'lactancia',
+  tabla: { hasta: number; h: number; m: number }[], emb: number, lac: number,
+): number {
+  if (etapa === 'embarazo') return emb;
+  if (etapa === 'lactancia') return lac;
+  const tramo = tabla.find(t => edad <= t.hasta) ?? tabla[tabla.length - 1];
+  return sexo === 'hombre' ? tramo.h : tramo.m;
+}
+
+// ── Calcio diario recomendado (mg) ──
+export function calcularCalcioDiario(edad: number, sexo: 'hombre' | 'mujer', etapa: 'ninguna' | 'embarazo' | 'lactancia'): {
+  rdaMg: number; ulMg: number; mensaje: string;
+} {
+  const rdaMg = rdaPorTramo(edad, sexo, etapa, [
+    { hasta: 3, h: 700, m: 700 }, { hasta: 8, h: 1000, m: 1000 }, { hasta: 18, h: 1300, m: 1300 },
+    { hasta: 50, h: 1000, m: 1000 }, { hasta: 70, h: 1000, m: 1200 }, { hasta: 130, h: 1200, m: 1200 },
+  ], 1000, 1000);
+  return { rdaMg, ulMg: 2500, mensaje: 'El calcio es clave para huesos y dientes. Lácteos, sardinas, tofu y verduras de hoja verde son buenas fuentes.' };
+}
+
+// ── Hierro diario recomendado (mg) ──
+export function calcularHierroDiario(edad: number, sexo: 'hombre' | 'mujer', etapa: 'ninguna' | 'embarazo' | 'lactancia'): {
+  rdaMg: number; ulMg: number; mensaje: string;
+} {
+  const rdaMg = rdaPorTramo(edad, sexo, etapa, [
+    { hasta: 3, h: 7, m: 7 }, { hasta: 8, h: 10, m: 10 }, { hasta: 13, h: 8, m: 8 },
+    { hasta: 18, h: 11, m: 15 }, { hasta: 50, h: 8, m: 18 }, { hasta: 130, h: 8, m: 8 },
+  ], 27, 9);
+  return { rdaMg, ulMg: 45, mensaje: 'El hierro previene la anemia. La carne roja aporta hierro hemo (mejor absorbido); las legumbres, hierro no hemo (mejóralo con vitamina C).' };
+}
+
+// ── Magnesio diario recomendado (mg) ──
+export function calcularMagnesioDiario(edad: number, sexo: 'hombre' | 'mujer', etapa: 'ninguna' | 'embarazo' | 'lactancia'): {
+  rdaMg: number; mensaje: string;
+} {
+  const rdaMg = rdaPorTramo(edad, sexo, etapa, [
+    { hasta: 3, h: 80, m: 80 }, { hasta: 8, h: 130, m: 130 }, { hasta: 13, h: 240, m: 240 },
+    { hasta: 18, h: 410, m: 360 }, { hasta: 30, h: 400, m: 310 }, { hasta: 130, h: 420, m: 320 },
+  ], 360, 320);
+  return { rdaMg, mensaje: 'El magnesio participa en más de 300 reacciones enzimáticas. Frutos secos, semillas, legumbres y cereales integrales son ricos en magnesio.' };
+}
+
+// ── Zinc diario recomendado (mg) ──
+export function calcularZincDiario(edad: number, sexo: 'hombre' | 'mujer', etapa: 'ninguna' | 'embarazo' | 'lactancia'): {
+  rdaMg: number; ulMg: number; mensaje: string;
+} {
+  const rdaMg = rdaPorTramo(edad, sexo, etapa, [
+    { hasta: 3, h: 3, m: 3 }, { hasta: 8, h: 5, m: 5 }, { hasta: 13, h: 8, m: 8 },
+    { hasta: 18, h: 11, m: 9 }, { hasta: 130, h: 11, m: 8 },
+  ], 11, 12);
+  return { rdaMg, ulMg: 40, mensaje: 'El zinc es esencial para el sistema inmune y la cicatrización. Carnes, mariscos, semillas de calabaza y legumbres lo aportan.' };
+}
+
+// ── Vitamina C diaria recomendada (mg) ──
+export function calcularVitaminaCDiaria(edad: number, sexo: 'hombre' | 'mujer', etapa: 'ninguna' | 'embarazo' | 'lactancia', fumador: boolean): {
+  rdaMg: number; ulMg: number; mensaje: string;
+} {
+  let rdaMg = rdaPorTramo(edad, sexo, etapa, [
+    { hasta: 3, h: 15, m: 15 }, { hasta: 8, h: 25, m: 25 }, { hasta: 13, h: 45, m: 45 },
+    { hasta: 18, h: 75, m: 65 }, { hasta: 130, h: 90, m: 75 },
+  ], 85, 120);
+  if (fumador) rdaMg += 35;
+  return { rdaMg, ulMg: 2000, mensaje: 'La vitamina C es antioxidante y favorece la absorción del hierro. Cítricos, kiwi, pimiento y fresas son excelentes fuentes.' };
+}
+
+// ── Potasio diario recomendado (mg, ingesta adecuada) ──
+export function calcularPotasioDiario(edad: number, sexo: 'hombre' | 'mujer', etapa: 'ninguna' | 'embarazo' | 'lactancia'): {
+  rdaMg: number; mensaje: string;
+} {
+  const rdaMg = rdaPorTramo(edad, sexo, etapa, [
+    { hasta: 3, h: 2000, m: 2000 }, { hasta: 8, h: 2300, m: 2300 }, { hasta: 13, h: 2500, m: 2300 },
+    { hasta: 18, h: 3000, m: 2300 }, { hasta: 130, h: 3400, m: 2600 },
+  ], 2900, 2800);
+  return { rdaMg, mensaje: 'El potasio ayuda a controlar la presión arterial y el equilibrio de líquidos. Plátano, papa, legumbres, aguacate y espinaca destacan.' };
+}
+
+// ── Gramos de grasa al día (20–35 % de la energía) ──
+export function calcularGrasaDiaria(caloriasDiarias: number): {
+  minG: number; maxG: number; recomendadoG: number; saturadasMaxG: number;
+} {
+  return {
+    minG: Math.round((caloriasDiarias * 0.20) / 9),
+    maxG: Math.round((caloriasDiarias * 0.35) / 9),
+    recomendadoG: Math.round((caloriasDiarias * 0.30) / 9),
+    saturadasMaxG: Math.round((caloriasDiarias * 0.10) / 9),
+  };
+}
+
+// ════════════════════════════════════════════════════════════════
+//  EMBARAZO & FERTILIDAD — nuevas calculadoras
+// ════════════════════════════════════════════════════════════════
+
+// ── Calendario chino del bebé (predicción de sexo, sin base científica) ──
+const CHINO_CHART: Record<number, string> = {
+  18: 'NVNVVVVVVVVV', 19: 'VNVNNNNNNVVV', 20: 'NVNNNNNNNVVN', 21: 'NVNNNNNNNNNN',
+  22: 'VNNVNVVNVVVV', 23: 'NNVNNVNVNNNV', 24: 'NVNNVNNVVVVV', 25: 'VNNVNNVNNNVN',
+  26: 'NVNVNNNVNVVV', 27: 'VNVNVNNNVNVV', 28: 'NVNVVNNNVVVV', 29: 'VNVVNNNVVVNN',
+  30: 'NVVVVVVVVVNN', 31: 'NVNVVVVVVVVN', 32: 'NVNVVVVVVVVN', 33: 'VNVNVVNVVVVN',
+  34: 'NVNVVVVVVVNN', 35: 'NNVNVVNVVVNN', 36: 'NNNVNVNNVVVV', 37: 'VNNNVNVNVNVN',
+  38: 'NVNNNVNVNVNV', 39: 'VNNNNNVNVVVV', 40: 'NVNVNVNVNVNN', 41: 'VNVNVNVNNNNV',
+  42: 'NVNVNVNVNNVN', 43: 'VNNNVNVNVNNN', 44: 'NNVNNNVVNVNV', 45: 'VNNVNNVNVNVN',
+};
+export function calcularCalendarioChino(edadMadre: number, mesConcepcion: number): {
+  prediccion: 'niño' | 'niña'; edadLunar: number; mesConcepcion: number; valido: boolean;
+} {
+  const edadLunar = Math.min(45, Math.max(18, edadMadre + 1));
+  const fila = CHINO_CHART[edadLunar];
+  const valido = !!fila && mesConcepcion >= 1 && mesConcepcion <= 12;
+  const letra = valido ? fila[mesConcepcion - 1] : 'N';
+  return { prediccion: letra === 'V' ? 'niño' : 'niña', edadLunar, mesConcepcion, valido };
+}
+
+// ── Semanas de embarazo a meses ──
+export function convertirSemanasEmbarazoAMeses(semanas: number): {
+  mesNumero: number; texto: string; trimestre: 1 | 2 | 3; semanas: number;
+} {
+  const tabla = [
+    { mes: 1, hasta: 4 }, { mes: 2, hasta: 8 }, { mes: 3, hasta: 13 }, { mes: 4, hasta: 17 },
+    { mes: 5, hasta: 22 }, { mes: 6, hasta: 27 }, { mes: 7, hasta: 31 }, { mes: 8, hasta: 35 }, { mes: 9, hasta: 42 },
+  ];
+  const fila = tabla.find(t => semanas <= t.hasta) ?? tabla[tabla.length - 1];
+  const trimestre: 1 | 2 | 3 = semanas <= 13 ? 1 : semanas <= 27 ? 2 : 3;
+  return { mesNumero: fila.mes, texto: `${fila.mes}.º mes`, trimestre, semanas };
+}
+
+// ── Cuenta atrás para el parto ──
+export function calcularCuentaAtrasParto(fechaParto: string): {
+  diasRestantes: number; semanasTexto: string; semanasEmbarazo: number; porcentaje: number; mensaje: string;
+} {
+  const [y, m, d] = fechaParto.split('-').map(Number);
+  const fpp = new Date(y, m - 1, d, 12, 0, 0);
+  const hoy = new Date(); hoy.setHours(12, 0, 0, 0);
+  const diasRestantes = Math.round((fpp.getTime() - hoy.getTime()) / 86400000);
+  const semRest = Math.floor(Math.abs(diasRestantes) / 7);
+  const diasRest = Math.abs(diasRestantes) % 7;
+  const totalDias = 280;
+  const transcurridos = totalDias - diasRestantes;
+  const semanasEmbarazo = Math.max(0, Math.min(42, Math.floor(transcurridos / 7)));
+  const porcentaje = Math.max(0, Math.min(100, Math.round((transcurridos / totalDias) * 100)));
+  let mensaje: string;
+  if (diasRestantes < 0) mensaje = 'La fecha probable de parto ya pasó. Tu bebé puede nacer cualquier día; consulta con tu médico.';
+  else if (diasRestantes === 0) mensaje = '¡Hoy es la fecha probable de parto!';
+  else mensaje = `Estás de aproximadamente ${semanasEmbarazo} semanas. Faltan ${semRest} semanas y ${diasRest} días.`;
+  return { diasRestantes, semanasTexto: `${semRest} sem ${diasRest} d`, semanasEmbarazo, porcentaje, mensaje };
+}
+
+// ── Días post ovulación (DPO) ──
+export function calcularDPO(fechaOvulacion: string): {
+  dpo: number; fase: string; testFiable: string; mensaje: string;
+} {
+  const [y, m, d] = fechaOvulacion.split('-').map(Number);
+  const ovu = new Date(y, m - 1, d, 12, 0, 0);
+  const hoy = new Date(); hoy.setHours(12, 0, 0, 0);
+  const dpo = Math.round((hoy.getTime() - ovu.getTime()) / 86400000);
+  const fechaTest = new Date(ovu); fechaTest.setDate(fechaTest.getDate() + 14);
+  const testFiable = `${String(fechaTest.getDate()).padStart(2, '0')}/${String(fechaTest.getMonth() + 1).padStart(2, '0')}/${fechaTest.getFullYear()}`;
+  let fase: string, mensaje: string;
+  if (dpo < 0) { fase = 'Antes de la ovulación'; mensaje = 'La fecha de ovulación aún no ha llegado.'; }
+  else if (dpo <= 5) { fase = 'Fase lútea temprana'; mensaje = 'Es muy pronto para detectar el embarazo. El óvulo viaja hacia el útero.'; }
+  else if (dpo <= 12) { fase = 'Ventana de implantación'; mensaje = 'La implantación suele ocurrir entre los días 6 y 12 DPO. Un test aún puede dar falso negativo.'; }
+  else { fase = 'Fase de test fiable'; mensaje = 'A partir de 12-14 DPO un test de embarazo en orina ya es bastante fiable.'; }
+  return { dpo, fase, testFiable, mensaje };
+}
+
+// ── Ácido fólico en el embarazo ──
+export function calcularAcidoFolico(etapa: 'buscando' | 'embarazo' | 'lactancia', riesgo: 'normal' | 'alto'): {
+  dosisMcg: number; cuandoEmpezar: string; mensaje: string;
+} {
+  let dosisMcg: number, cuandoEmpezar: string;
+  if (riesgo === 'alto') {
+    dosisMcg = 4000;
+    cuandoEmpezar = 'Al menos 1 mes antes de concebir y durante el primer trimestre.';
+  } else if (etapa === 'lactancia') {
+    dosisMcg = 500;
+    cuandoEmpezar = 'Durante toda la lactancia materna.';
+  } else if (etapa === 'embarazo') {
+    dosisMcg = 600;
+    cuandoEmpezar = 'Desde la confirmación del embarazo hasta al menos la semana 12.';
+  } else {
+    dosisMcg = 400;
+    cuandoEmpezar = 'Desde al menos 1 mes antes de buscar el embarazo.';
+  }
+  const mensaje = riesgo === 'alto'
+    ? 'Dosis alta indicada en antecedentes de defectos del tubo neural, diabetes, epilepsia u obesidad. Siempre bajo supervisión médica.'
+    : 'El ácido fólico reduce el riesgo de defectos del tubo neural como la espina bífida. Consulta tu dosis con tu médico.';
+  return { dosisMcg, cuandoEmpezar, mensaje };
+}
+
+// ── Percentil estimado del bebé (peso o talla, OMS 0–24 meses) ──
+const OMS_PESO_NINO = [3.3,4.5,5.6,6.4,7.0,7.5,7.9,8.3,8.6,8.9,9.2,9.4,9.6,9.9,10.1,10.3,10.5,10.7,10.9,11.1,11.3,11.5,11.8,12.0,12.2];
+const OMS_PESO_NINA = [3.2,4.2,5.1,5.8,6.4,6.9,7.3,7.6,7.9,8.2,8.5,8.7,8.9,9.2,9.4,9.6,9.8,10.0,10.2,10.4,10.6,10.9,11.1,11.3,11.5];
+const OMS_TALLA_NINO = [49.9,54.7,58.4,61.4,63.9,65.9,67.6,69.2,70.6,72.0,73.3,74.5,75.7,76.9,78.0,79.1,80.2,81.2,82.3,83.2,84.2,85.1,86.0,86.9,87.8];
+const OMS_TALLA_NINA = [49.1,53.7,57.1,59.8,62.1,64.0,65.7,67.3,68.7,70.1,71.5,72.8,74.0,75.2,76.4,77.5,78.6,79.7,80.7,81.7,82.7,83.7,84.6,85.5,86.4];
+function normalCDF(z: number): number {
+  // Aproximación de Abramowitz & Stegun
+  const t = 1 / (1 + 0.2316419 * Math.abs(z));
+  const d = 0.3989423 * Math.exp(-z * z / 2);
+  let p = d * t * (0.3193815 + t * (-0.3565638 + t * (1.781478 + t * (-1.821256 + t * 1.330274))));
+  if (z > 0) p = 1 - p;
+  return p;
+}
+export function calcularPercentilBebe(sexo: 'nino' | 'nina', edadMeses: number, valor: number, tipo: 'peso' | 'talla'): {
+  percentil: number; mediana: number; z: number; categoria: string;
+} {
+  const idx = Math.min(24, Math.max(0, Math.round(edadMeses)));
+  const tabla = tipo === 'peso'
+    ? (sexo === 'nino' ? OMS_PESO_NINO : OMS_PESO_NINA)
+    : (sexo === 'nino' ? OMS_TALLA_NINO : OMS_TALLA_NINA);
+  const mediana = tabla[idx];
+  const sd = tipo === 'peso' ? mediana * 0.12 : mediana * 0.038;
+  const z = (valor - mediana) / sd;
+  let percentil = Math.round(normalCDF(z) * 100);
+  percentil = Math.min(99, Math.max(1, percentil));
+  let categoria: string;
+  if (percentil < 3) categoria = 'Por debajo de lo esperado';
+  else if (percentil < 15) categoria = 'En el rango bajo de la normalidad';
+  else if (percentil <= 85) categoria = 'En el rango normal';
+  else if (percentil <= 97) categoria = 'En el rango alto de la normalidad';
+  else categoria = 'Por encima de lo esperado';
+  return { percentil, mediana: Math.round(mediana * 10) / 10, z: Math.round(z * 100) / 100, categoria };
+}
+
+// ── Cantidad de leche que necesita el bebé ──
+export function calcularLecheBebe(pesoKg: number, edadMeses: number, tomas: number): {
+  totalDiaMl: number; porTomaMl: number; rangoMin: number; rangoMax: number; tomas: number;
+} {
+  // 150 ml/kg/día de referencia (rango 120–180), se estabiliza a partir de ~6 meses
+  const mlPorKg = edadMeses >= 6 ? 120 : 150;
+  let totalDiaMl = Math.round(pesoKg * mlPorKg);
+  if (totalDiaMl > 1000) totalDiaMl = 1000; // límite práctico de fórmula
+  const t = Math.max(1, tomas);
+  return {
+    totalDiaMl,
+    porTomaMl: Math.round(totalDiaMl / t),
+    rangoMin: Math.round((pesoKg * 120) / t),
+    rangoMax: Math.round((pesoKg * 180) / t),
+    tomas: t,
+  };
+}
+
+// ── Edad corregida del bebé prematuro ──
+export function calcularEdadCorregida(fechaNacimiento: string, semanasGestacion: number): {
+  edadCronologicaSemanas: number; edadCorregidaSemanas: number; semanasPrematuro: number;
+  cronologicaTexto: string; corregidaTexto: string; mensaje: string;
+} {
+  const [y, m, d] = fechaNacimiento.split('-').map(Number);
+  const nac = new Date(y, m - 1, d, 12, 0, 0);
+  const hoy = new Date(); hoy.setHours(12, 0, 0, 0);
+  const edadCronologicaSemanas = Math.max(0, Math.round((hoy.getTime() - nac.getTime()) / (86400000 * 7)));
+  const semanasPrematuro = Math.max(0, 40 - semanasGestacion);
+  const edadCorregidaSemanas = Math.max(0, edadCronologicaSemanas - semanasPrematuro);
+  const fmt = (sem: number) => {
+    const meses = Math.floor(sem / 4.345);
+    const resto = Math.round(sem - meses * 4.345);
+    return meses >= 1 ? `${meses} mes${meses > 1 ? 'es' : ''} y ${resto} sem` : `${sem} semanas`;
+  };
+  return {
+    edadCronologicaSemanas, edadCorregidaSemanas, semanasPrematuro,
+    cronologicaTexto: fmt(edadCronologicaSemanas),
+    corregidaTexto: fmt(edadCorregidaSemanas),
+    mensaje: 'La edad corregida se usa para valorar el desarrollo del prematuro, normalmente hasta los 2 años.',
+  };
+}
+
+// ── Fertilidad según la edad de la mujer ──
+export function calcularFertilidadPorEdad(edad: number): {
+  probabilidadCiclo: number; probabilidadAnual: number; reserva: string; mensaje: string;
+} {
+  let probabilidadCiclo: number, probabilidadAnual: number, reserva: string;
+  if (edad < 25) { probabilidadCiclo = 25; probabilidadAnual = 96; reserva = 'Óptima'; }
+  else if (edad < 30) { probabilidadCiclo = 20; probabilidadAnual = 91; reserva = 'Muy buena'; }
+  else if (edad < 35) { probabilidadCiclo = 15; probabilidadAnual = 86; reserva = 'Buena'; }
+  else if (edad < 38) { probabilidadCiclo = 10; probabilidadAnual = 78; reserva = 'En descenso'; }
+  else if (edad < 41) { probabilidadCiclo = 7; probabilidadAnual = 65; reserva = 'Reducida'; }
+  else if (edad < 44) { probabilidadCiclo = 4; probabilidadAnual = 40; reserva = 'Baja'; }
+  else { probabilidadCiclo = 2; probabilidadAnual = 15; reserva = 'Muy baja'; }
+  const mensaje = edad >= 35
+    ? 'La fertilidad desciende de forma más marcada a partir de los 35 años. Si llevas 6 meses buscando, consulta a un especialista.'
+    : 'Cifras orientativas de parejas sanas sin problemas de fertilidad. La mayoría logra el embarazo dentro del primer año.';
+  return { probabilidadCiclo, probabilidadAnual, reserva, mensaje };
+}
+
+// ── Fecha de parto por FIV (transferencia embrionaria) ──
+export function calcularFechaPartoFIV(fechaTransferencia: string, diaEmbrion: 3 | 5): {
+  fechaParto: string; fechaPartoLarga: string; semanasActuales: string; diasRestantes: number;
+} {
+  const [y, m, d] = fechaTransferencia.split('-').map(Number);
+  const tr = new Date(y, m - 1, d, 12, 0, 0);
+  const fpp = new Date(tr); fpp.setDate(fpp.getDate() + (266 - diaEmbrion));
+  const hoy = new Date(); hoy.setHours(12, 0, 0, 0);
+  const inicioGest = new Date(fpp); inicioGest.setDate(inicioGest.getDate() - 280);
+  const diasGest = Math.max(0, Math.round((hoy.getTime() - inicioGest.getTime()) / 86400000));
+  const sem = Math.floor(diasGest / 7), dias = diasGest % 7;
+  const meses = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  const mm = String(fpp.getMonth() + 1).padStart(2, '0');
+  const dd = String(fpp.getDate()).padStart(2, '0');
+  return {
+    fechaParto: `${fpp.getFullYear()}-${mm}-${dd}`,
+    fechaPartoLarga: `${fpp.getDate()} de ${meses[fpp.getMonth()]} de ${fpp.getFullYear()}`,
+    semanasActuales: `${sem} sem ${dias} d`,
+    diasRestantes: Math.round((fpp.getTime() - hoy.getTime()) / 86400000),
+  };
+}
+
+// ════════════════════════════════════════════════════════════════
+//  FECHAS & TIEMPO — nuevas calculadoras
+// ════════════════════════════════════════════════════════════════
+
+// ── Días laborables entre dos fechas ──
+export function calcularDiasLaborables(fechaInicio: string, fechaFin: string, incluirSabado: boolean): {
+  diasTotales: number; diasLaborables: number; finDeSemana: number; semanas: number;
+} {
+  const [y1, m1, d1] = fechaInicio.split('-').map(Number);
+  const [y2, m2, d2] = fechaFin.split('-').map(Number);
+  let ini = new Date(y1, m1 - 1, d1, 12, 0, 0);
+  let fin = new Date(y2, m2 - 1, d2, 12, 0, 0);
+  if (ini > fin) { const t = ini; ini = fin; fin = t; }
+  let diasTotales = 0, diasLaborables = 0, finDeSemana = 0;
+  const cur = new Date(ini);
+  while (cur <= fin) {
+    diasTotales++;
+    const dow = cur.getDay();
+    const esLaborable = incluirSabado ? dow !== 0 : (dow !== 0 && dow !== 6);
+    if (esLaborable) diasLaborables++; else finDeSemana++;
+    cur.setDate(cur.getDate() + 1);
+  }
+  return { diasTotales, diasLaborables, finDeSemana, semanas: Math.round((diasTotales / 7) * 10) / 10 };
+}
+
+// ── Horas trabajadas (entrada/salida + descanso) ──
+export function calcularHorasTrabajadas(entrada: string, salida: string, descansoMin: number): {
+  horasDecimales: number; texto: string; totalMin: number;
+} {
+  const [eh, em] = entrada.split(':').map(Number);
+  const [sh, sm] = salida.split(':').map(Number);
+  let min = (sh * 60 + sm) - (eh * 60 + em);
+  if (min < 0) min += 24 * 60; // turno nocturno
+  min -= Math.max(0, descansoMin);
+  if (min < 0) min = 0;
+  const h = Math.floor(min / 60), m = min % 60;
+  return { horasDecimales: Math.round((min / 60) * 100) / 100, texto: `${h}h ${m}min`, totalMin: min };
+}
+
+// ── Sumar o restar horas y minutos ──
+export function calcularSumaHoras(h1: number, m1: number, op: 'sumar' | 'restar', h2: number, m2: number): {
+  horas: number; minutos: number; totalMin: number; texto: string; negativo: boolean;
+} {
+  const signo = op === 'restar' ? -1 : 1;
+  let totalMin = (h1 * 60 + m1) + signo * (h2 * 60 + m2);
+  const negativo = totalMin < 0;
+  totalMin = Math.abs(totalMin);
+  const horas = Math.floor(totalMin / 60), minutos = totalMin % 60;
+  return { horas, minutos, totalMin, texto: `${negativo ? '−' : ''}${horas}h ${minutos}min`, negativo };
+}
+
+// ── Conversor de unidades de tiempo ──
+export function convertirTiempo(valor: number, unidad: 'segundos' | 'minutos' | 'horas' | 'dias' | 'semanas'): {
+  segundos: number; minutos: number; horas: number; dias: number; semanas: number;
+} {
+  const factor: Record<string, number> = { segundos: 1, minutos: 60, horas: 3600, dias: 86400, semanas: 604800 };
+  const seg = valor * factor[unidad];
+  const r = (n: number) => Math.round(n * 1000) / 1000;
+  return { segundos: r(seg), minutos: r(seg / 60), horas: r(seg / 3600), dias: r(seg / 86400), semanas: r(seg / 604800) };
+}
+
+// ── Número de semana del año (ISO 8601) ──
+export function calcularNumeroSemana(fecha: string): {
+  semana: number; anio: number; diaDelAnio: number; trimestre: number;
+} {
+  const [y, m, d] = fecha.split('-').map(Number);
+  const date = new Date(Date.UTC(y, m - 1, d));
+  const dayNum = (date.getUTCDay() + 6) % 7; // lunes = 0
+  date.setUTCDate(date.getUTCDate() - dayNum + 3); // jueves de esa semana
+  const firstThursday = new Date(Date.UTC(date.getUTCFullYear(), 0, 4));
+  const firstDayNum = (firstThursday.getUTCDay() + 6) % 7;
+  firstThursday.setUTCDate(firstThursday.getUTCDate() - firstDayNum + 3);
+  const semana = 1 + Math.round((date.getTime() - firstThursday.getTime()) / (7 * 86400000));
+  const inicioAnio = new Date(Date.UTC(y, 0, 1));
+  const diaDelAnio = Math.floor((Date.UTC(y, m - 1, d) - inicioAnio.getTime()) / 86400000) + 1;
+  return { semana, anio: date.getUTCFullYear(), diaDelAnio, trimestre: Math.floor((m - 1) / 3) + 1 };
+}
+
+// ── Qué día de la semana cae una fecha ──
+export function calcularDiaSemana(fecha: string): {
+  diaSemana: string; fechaLarga: string; esFinDeSemana: boolean; diaDelAnio: number;
+} {
+  const [y, m, d] = fecha.split('-').map(Number);
+  const date = new Date(y, m - 1, d, 12, 0, 0);
+  const dias = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+  const meses = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  const dow = date.getDay();
+  const inicioAnio = new Date(y, 0, 1, 12, 0, 0);
+  const diaDelAnio = Math.floor((date.getTime() - inicioAnio.getTime()) / 86400000) + 1;
+  return {
+    diaSemana: dias[dow],
+    fechaLarga: `${d} de ${meses[m - 1]} de ${y}`,
+    esFinDeSemana: dow === 0 || dow === 6,
+    diaDelAnio,
+  };
+}
+
+// ── Tiempo juntos / desde una fecha (aniversario) ──
+export function calcularTiempoJuntos(fechaInicio: string): {
+  anios: number; meses: number; dias: number; totalDias: number; totalHoras: number;
+  diasProximoAniversario: number; texto: string;
+} {
+  const [y, m, d] = fechaInicio.split('-').map(Number);
+  const ini = new Date(y, m - 1, d, 0, 0, 0);
+  const hoy = new Date(); hoy.setHours(0, 0, 0, 0);
+  let anios = hoy.getFullYear() - ini.getFullYear();
+  let meses = hoy.getMonth() - ini.getMonth();
+  let dias = hoy.getDate() - ini.getDate();
+  if (dias < 0) { meses--; dias += new Date(hoy.getFullYear(), hoy.getMonth(), 0).getDate(); }
+  if (meses < 0) { anios--; meses += 12; }
+  const totalDias = Math.floor((hoy.getTime() - ini.getTime()) / 86400000);
+  const prox = new Date(hoy.getFullYear(), ini.getMonth(), ini.getDate(), 0, 0, 0);
+  if (prox < hoy) prox.setFullYear(prox.getFullYear() + 1);
+  const diasProximoAniversario = Math.ceil((prox.getTime() - hoy.getTime()) / 86400000);
+  return {
+    anios, meses, dias, totalDias, totalHoras: totalDias * 24,
+    diasProximoAniversario,
+    texto: `${anios} años, ${meses} meses y ${dias} días`,
+  };
+}
+
+// ── Edad de tu mascota en años humanos ──
+export function calcularEdadMascota(edadAnios: number, especie: 'perro' | 'gato', tamano: 'pequeno' | 'mediano' | 'grande'): {
+  edadHumana: number; etapa: string; especie: 'perro' | 'gato';
+} {
+  let edadHumana: number;
+  if (especie === 'gato') {
+    if (edadAnios <= 1) edadHumana = Math.round(edadAnios * 15);
+    else if (edadAnios <= 2) edadHumana = 15 + Math.round((edadAnios - 1) * 9);
+    else edadHumana = 24 + Math.round((edadAnios - 2) * 4);
+  } else {
+    const porAnio = tamano === 'pequeno' ? 4 : tamano === 'grande' ? 6 : 5;
+    if (edadAnios <= 1) edadHumana = Math.round(edadAnios * 15);
+    else if (edadAnios <= 2) edadHumana = 15 + Math.round((edadAnios - 1) * 9);
+    else edadHumana = 24 + Math.round((edadAnios - 2) * porAnio);
+  }
+  let etapa: string;
+  if (edadHumana < 13) etapa = 'Cachorro';
+  else if (edadHumana < 25) etapa = 'Joven';
+  else if (edadHumana < 50) etapa = 'Adulto';
+  else if (edadHumana < 70) etapa = 'Maduro';
+  else etapa = 'Senior';
+  return { edadHumana, etapa, especie };
+}
+
+// ── Día del año y días restantes ──
+export function calcularDiaDelAnio(fecha: string): {
+  diaDelAnio: number; diasRestantes: number; porcentaje: number; esBisiesto: boolean; totalDias: number;
+} {
+  const [y, m, d] = fecha.split('-').map(Number);
+  const date = new Date(y, m - 1, d, 12, 0, 0);
+  const inicioAnio = new Date(y, 0, 1, 12, 0, 0);
+  const esBisiesto = (y % 4 === 0 && y % 100 !== 0) || y % 400 === 0;
+  const totalDias = esBisiesto ? 366 : 365;
+  const diaDelAnio = Math.floor((date.getTime() - inicioAnio.getTime()) / 86400000) + 1;
+  return {
+    diaDelAnio, diasRestantes: totalDias - diaDelAnio,
+    porcentaje: Math.round((diaDelAnio / totalDias) * 100), esBisiesto, totalDias,
+  };
+}
+
+// ── Año bisiesto ──
+export function calcularAnioBisiesto(anio: number): {
+  esBisiesto: boolean; proximoBisiesto: number; diasDelAnio: number; motivo: string;
+} {
+  const test = (a: number) => (a % 4 === 0 && a % 100 !== 0) || a % 400 === 0;
+  const esBisiesto = test(anio);
+  let proximoBisiesto = anio + 1;
+  while (!test(proximoBisiesto)) proximoBisiesto++;
+  let motivo: string;
+  if (anio % 400 === 0) motivo = `${anio} es divisible entre 400, por lo que sí es bisiesto.`;
+  else if (anio % 100 === 0) motivo = `${anio} es divisible entre 100 pero no entre 400, por lo que NO es bisiesto.`;
+  else if (anio % 4 === 0) motivo = `${anio} es divisible entre 4 (y no entre 100), por lo que es bisiesto.`;
+  else motivo = `${anio} no es divisible entre 4, por lo que no es bisiesto.`;
+  return { esBisiesto, proximoBisiesto, diasDelAnio: esBisiesto ? 366 : 365, motivo };
+}

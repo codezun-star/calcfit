@@ -63,7 +63,7 @@ calcfit-astro/
 │   │   │   ├── HistoryTable.tsx
 │   │   │   ├── ShareButtons.tsx
 │   │   │   └── Badge.tsx              ← popular | new | essential
-│   │   └── calculators/               ← 99 componentes React (ver CALCULADORAS.md)
+│   │   └── calculators/               ← 141 componentes React (ver CALCULADORAS.md)
 │   │       ├── [NombreCalculator].tsx ← un archivo por calculadora
 │   │       ├── GaugeIMC.tsx           ← gauge SVG semicircular animado
 │   │       ├── ZonasCardiaca.tsx      ← barras horizontales de zonas cardíacas
@@ -77,8 +77,8 @@ calcfit-astro/
 │   ├── content/
 │   │   └── blog/                      ← artículos .md (nombre del archivo = slug de URL)
 │   └── pages/
-│       ├── index.astro                ← homepage con las 99 calculadoras (importa de lib/calcData.ts)
-│       ├── [slug].astro               ← 99 páginas calculadora (ver CALCULADORAS.md)
+│       ├── index.astro                ← homepage con las 141 calculadoras (importa de lib/calcData.ts)
+│       ├── [slug].astro               ← 141 páginas calculadora (ver CALCULADORAS.md)
 │       ├── fitness|embarazo|fechas|nutricion/[...page].astro ← páginas de categoría paginadas
 │       ├── blog/
 │       │   ├── [...page].astro        ← lista paginada (20 art/pág) — /blog, /blog/2, /blog/3...
@@ -312,7 +312,7 @@ Tres visualizaciones específicas en `src/components/calculators/`:
 
 ## Homepage (src/pages/index.astro)
 
-La homepage muestra las **99 calculadoras** en 4 categorías mediante el componente `CalculatorBrowser`. Los datos (calculadoras, categorías e íconos SVG) viven en `src/lib/calcData.ts` como **fuente única**: `index.astro` y las páginas de categoría (`/fitness`, `/embarazo`, `/fechas`, `/nutricion`) importan de ahí. Al añadir una calculadora se edita SOLO `calcData.ts`. Los íconos se renderizan con `set:html` / `dangerouslySetInnerHTML`.
+La homepage muestra las **141 calculadoras** en 4 categorías mediante el componente `CalculatorBrowser`. Los datos (calculadoras, categorías e íconos SVG) viven en `src/lib/calcData.ts` como **fuente única**: `index.astro` y las páginas de categoría (`/fitness`, `/embarazo`, `/fechas`, `/nutricion`) importan de ahí. Al añadir una calculadora se edita SOLO `calcData.ts`. Los íconos se renderizan con `set:html` / `dangerouslySetInnerHTML`.
 
 ### Secciones de la homepage y dónde aparece el contador
 
@@ -359,8 +359,8 @@ La columna izquierda del hero (`.hero-left`) tiene una imagen de fondo de gimnas
 - La columna derecha (`.hero-nums`) mantiene fondo sólido `var(--ink-2)` sin imagen.
 - Si se cambia la imagen, verificar que el overlay siga siendo opaco suficiente (mínimo 0.65).
 
-Categorías y conteo actual (total: 99) — ver detalle en [CALCULADORAS.md](CALCULADORAS.md) y archivos por categoría:
-- Fitness & salud (51) · Embarazo & fertilidad (20) · Fechas & tiempo (8) · Nutrición & bienestar (20)
+Categorías y conteo actual (total: 141) — ver detalle en [CALCULADORAS.md](CALCULADORAS.md) y archivos por categoría:
+- Fitness & salud (62) · Embarazo & fertilidad (29) · Fechas & tiempo (19) · Nutrición & bienestar (31)
 
 Al agregar una calculadora nueva, seguir el checklist completo de la sección "Reglas para agregar una calculadora nueva".
 
@@ -605,7 +605,7 @@ npm run preview  # preview del build
 
 **7. Verificación final**
 - Ejecutar `npm run build` — debe completar sin errores
-- El número de páginas en el build debe coincidir (actualmente 95: 89 calculadoras + 1 homepage + 5 estáticas)
+- El número de páginas en el build debe coincidir (actualmente 228: 141 calculadoras + 1 homepage + 5 estáticas + blog paginado + páginas de categoría)
 
 ---
 
@@ -695,6 +695,7 @@ Siempre verificar `typeof window !== 'undefined'` antes de acceder a localStorag
 
 | Fecha | Acción |
 |---|---|
+| 2026-06-21 | Expansión masiva: +40 calculadoras (10 por categoría) + 10 artículos de blog, seleccionadas por demanda de búsqueda y sin duplicar. **Fitness** (+10): pasos-calorias, calorias-saltar-cuerda, calorias-bailando, calorias-eliptica, calorias-pesas, calorias-futbol, masa-magra, superficie-corporal, porcentaje-peso-perdido, frecuencia-respiratoria. **Nutrición** (+10): superavit-calorico, keto-macros, sal-diaria, calcio-diario, hierro-diario, magnesio-diario, zinc-diario, vitamina-c-diaria, grasa-diaria, potasio-diario. **Embarazo** (+10): calendario-chino-bebe, semanas-a-meses, cuenta-atras-parto, dpo, acido-folico, percentil-bebe, leche-bebe, edad-corregida, fertilidad-por-edad, fecha-parto-fiv. **Fechas** (+10): dias-laborables, horas-trabajadas, sumar-horas, conversor-tiempo, numero-semana, dia-semana, tiempo-juntos, edad-perro, dia-del-anio, anio-bisiesto. Cada una con función pura en `calculators.ts`, componente React, página SEO completa (title/description/keywords/FAQs/tabla) e imagen OG. Blog: +10 artículos interconectados (10000-pasos-al-dia, superavit-calorico-ganar-musculo, sal-y-sodio-cuanto-al-dia, calendario-chino-bebe-funciona, semanas-a-meses-embarazo, acido-folico-embarazo, percentiles-bebe-explicados, edad-perro-anos-humanos, minerales-calcio-hierro-magnesio, calcular-horas-trabajadas). Total: 101 + 40 = **141 calculadoras** (Fitness 62 · Embarazo 29 · Fechas 19 · Nutrición 31). Build: 228 páginas. |
 | 2026-06-16 | Validación de calculadoras (fuente: componentes) + limpieza de duplicados + 4 nuevas. Eliminados 2 duplicados reales: `ventana-fertil` (se conserva `ovulacion`) y `peso-embarazo` (se conserva `aumento-peso-embarazo`), con redirects 301 en `public/_redirects`. Añadidas 4 calculadoras de alta demanda (1 por categoría): `calorias-corriendo` (Fitness), `contador-contracciones` (Embarazo), `sumar-restar-dias` (Fechas), `azucar-diario` (Nutrición), cada una con función pura, componente, página SEO y OG. Total: 99 − 2 + 4 = **101 calculadoras** (Fitness 52 · Embarazo 19 · Fechas 9 · Nutrición 21). |
 | 2026-06-16 | Auditoría SEO + 7 tandas. (1) Eliminados TODOS los anuncios: Monetag (push/vignette/popunder) en Base.astro + componente AdSense `AdBanner.astro` y sus usos. (2) `calcData.ts` convertido en fuente única: integradas las 10 calculadoras del Batch 9 (Embarazo `/embarazo` pasa a 20) e `index.astro` ahora importa de calcData (fin de la duplicación). `og:type=article` en artículos del blog. (3) Corregidos 5 enlaces internos rotos del blog. (4) Generadas 99 imágenes OG de marca + `default.jpg` (`scripts/generate-og.mjs`); `ogImage` no estándar normalizados a `/og/[slug].jpg`. (5) 74 títulos acortados a ≤60 chars (keyword primero). (6) 45 meta descriptions acortadas a ≤155 chars. (7) Sitemap con prioridades por tipo (home 1.0, calc 0.8, blog 0.7, categoría 0.6, legal 0.3) y lastmod por build; breadcrumb de 3 niveles (Inicio→Categoría→Calculadora) en HTML y schema; `apple-touch-icon.png` 180×180; `og:image:alt`/`twitter:image:alt`; enlaces SSR a categorías en el footer. Total: 99 calculadoras. |
 | 2026-06-02 | Blog: +20 artículos SEO (grasa-abdominal, ganar-musculo-siendo-delgado, cuanto-tarda-verse-el-musculo, running-para-principiantes, entrenamiento-mayores-40, vo2-maximo-como-mejorar, calorias-alimentos-comunes, proteina-vegetal-vs-animal, alcohol-y-calorias, dieta-mediterranea, carga-glucemica-practica, omega-3-beneficios, colesterol-alto-que-comer, presion-arterial-normal, glucosa-en-sangre, frecuencia-cardiaca-reposo, magnesio-deficiencia, sarcopenia-perdida-muscular, perder-peso-sin-efecto-rebote, salud-hormonal-y-ejercicio). Total blog: 48 artículos. |

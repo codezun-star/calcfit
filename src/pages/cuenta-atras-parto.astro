@@ -1,0 +1,75 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import CuentaAtrasPartoCalculator from '../components/calculators/CuentaAtrasPartoCalculator';
+
+const faqs = [
+  { q: '¿Cuántos días faltan para mi parto?', a: 'Introduce tu fecha probable de parto (FPP) y la calculadora te dice los días y semanas que faltan, además del porcentaje de embarazo completado. La FPP es una estimación: solo el 5% de los bebés nace ese día exacto.' },
+  { q: '¿Es normal que el bebé no nazca en la fecha prevista?', a: 'Sí, es lo más habitual. La mayoría de los bebés nace entre la semana 37 y la 42. Un embarazo se considera a término desde la semana 37, así que nacer unos días antes o después de la FPP es completamente normal.' },
+  { q: '¿Cómo se calcula la fecha probable de parto?', a: 'Con la regla de Naegele: se suman 280 días (40 semanas) a la fecha de la última regla. Puedes obtenerla con nuestra calculadora de fecha de parto si aún no la conoces.' },
+  { q: '¿Qué pasa si supero la semana 40?', a: 'Es frecuente. A partir de la semana 41-42 el equipo médico vigila más de cerca el embarazo y puede valorar inducir el parto si es necesario para el bienestar del bebé.' },
+  { q: '¿Cuándo debo preparar la maleta del hospital?', a: 'Lo recomendable es tenerla lista alrededor de la semana 36, ya que el parto puede adelantarse. La cuenta atrás te ayuda a organizarte conforme se acerca la fecha.' },
+];
+---
+
+<CalculatorLayout
+  title="Cuenta Atrás para el Parto — Días que Faltan | CalcFit"
+  description="Calcula cuántos días y semanas faltan para tu parto a partir de tu fecha probable. Mira el porcentaje de embarazo completado. Gratis."
+  calculatorName="Cuenta Atrás para el Parto"
+  breadcrumbSlug="cuenta-atras-parto"
+  ogImage="/og/cuenta-atras-parto.jpg"
+  keywords="cuenta atrás parto, cuántos días faltan para el parto, días para dar a luz, cuenta regresiva embarazo, semanas que faltan parto"
+  faqs={faqs}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Cuenta Atrás<br><span style="color: var(--acid);">del Parto</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Descubre cuántos días y semanas faltan para conocer a tu bebé y cuánto llevas de embarazo.
+    </p>
+  </div>
+
+  <CuentaAtrasPartoCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cómo funciona la cuenta atrás?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      A partir de tu fecha probable de parto se calculan los días restantes hasta hoy y, en sentido inverso, cuántas semanas de embarazo llevas (sobre un total de 40). Recuerda que la FPP es orientativa: lo normal es dar a luz entre la semana 37 y la 42.
+    </p>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Hitos del final del embarazo</h2>
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 320px;">
+      <thead>
+        <tr style="border-bottom: 2px solid var(--border);">
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Semana</th>
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Hito</th>
+        </tr>
+      </thead>
+      <tbody>
+        {[
+          { s: '36', h: 'Preparar la maleta del hospital' },
+          { s: '37', h: 'Embarazo a término' },
+          { s: '40', h: 'Fecha probable de parto' },
+          { s: '41–42', h: 'Vigilancia y posible inducción' },
+        ].map((row) => (
+          <tr style="border-bottom: 1px solid var(--border);">
+            <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.s}</td>
+            <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.h}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    </div>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {faqs.map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

@@ -93,7 +93,7 @@ const main = async () => {
     count++;
   }
   // OG por defecto (homepage y fallback)
-  await render('default.jpg', 'Calculadoras de Salud', '99 calculadoras gratuitas, validadas cientificamente. Sin registro.');
+  await render('default.jpg', 'Calculadoras de Salud', '141 calculadoras gratuitas, validadas cientificamente. Sin registro.');
   console.log(`✓ Generadas ${count} imagenes OG de calculadora + default.jpg en public/og/`);
 };
 main().catch((e) => { console.error(e); process.exit(1); });

@@ -1,0 +1,75 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import SalDiariaCalculator from '../components/calculators/SalDiariaCalculator';
+
+const faqs = [
+  { q: '¿Cuánta sal se puede comer al día?', a: 'La OMS recomienda no superar los 5 gramos de sal al día (una cucharadita rasa), equivalentes a unos 2 gramos de sodio. La mayoría de la población consume el doble de esa cantidad.' },
+  { q: '¿Cuál es la diferencia entre sal y sodio?', a: 'La sal de mesa es cloruro de sodio. 1 gramo de sal contiene unos 400 mg de sodio. Por eso el límite de 5 g de sal equivale a unos 2.000 mg de sodio, que es como suele aparecer en las etiquetas.' },
+  { q: '¿Qué pasa si como demasiada sal?', a: 'El exceso de sodio eleva la presión arterial y aumenta el riesgo de enfermedad cardiovascular, ictus y daño renal. Reducir la sal es una de las medidas más coste-efectivas para mejorar la salud poblacional.' },
+  { q: '¿De dónde viene la mayor parte de la sal que como?', a: 'En torno al 70-75% del sodio procede de alimentos procesados y de comer fuera de casa: pan, embutidos, quesos, salsas, snacks y precocinados. Solo una parte pequeña viene del salero.' },
+  { q: '¿Cómo puedo reducir el consumo de sal?', a: 'Cocina con hierbas y especias, lee las etiquetas, limita los ultraprocesados y prueba la comida antes de salar. El paladar se adapta en pocas semanas a sabores menos salados.' },
+];
+---
+
+<CalculatorLayout
+  title="Sal Diaria — Cuántos Gramos al Día (OMS) | CalcFit"
+  description="Calcula cuánta sal y sodio consumes frente al límite de la OMS de 5 g/día. Compara tu ingesta y descubre cuánto te pasas. Gratis."
+  calculatorName="Sal y Sodio Diario"
+  breadcrumbSlug="sal-diaria"
+  ogImage="/og/sal-diaria.jpg"
+  keywords="sal diaria, cuánta sal al día, sodio recomendado OMS, límite de sal diario, gramos de sal al día, sal y presión arterial"
+  faqs={faqs}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Sal<br><span style="color: var(--acid);">Diaria</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Compara la sal que consumes con el límite de 5 g/día de la OMS y descubre tu equivalente en sodio.
+    </p>
+  </div>
+
+  <SalDiariaCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cuánta sal es saludable?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      La OMS fija el límite en <strong>menos de 5 g de sal al día</strong> (unos 2 g de sodio) para adultos. Reducir el sodio baja la presión arterial y disminuye el riesgo cardiovascular. Para convertir, recuerda que 1 g de sal = 400 mg de sodio, y que el sodio de las etiquetas se multiplica por 2,5 para obtener la sal.
+    </p>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Sal en alimentos comunes</h2>
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 320px;">
+      <thead>
+        <tr style="border-bottom: 2px solid var(--border);">
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Alimento</th>
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Sal aprox.</th>
+        </tr>
+      </thead>
+      <tbody>
+        {[
+          { a: '2 lonchas de jamón cocido', s: '~1,2 g' },
+          { a: '1 ración de pan (100 g)', s: '~1,3 g' },
+          { a: 'Bolsa de patatas fritas', s: '~1,0 g' },
+          { a: 'Pizza preparada (1/2)', s: '~3,0 g' },
+        ].map((row) => (
+          <tr style="border-bottom: 1px solid var(--border);">
+            <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.a}</td>
+            <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.s}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    </div>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {faqs.map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>
