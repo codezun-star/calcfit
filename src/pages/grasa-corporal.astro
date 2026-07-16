@@ -4,12 +4,13 @@ import GrasaCalculator from '../components/calculators/GrasaCalculator';
 ---
 
 <CalculatorLayout
-  title="Grasa Corporal — Método US Navy sin Báscula | CalcFit"
-  description="Calcula tu porcentaje de grasa corporal sin báscula con el método US Navy: solo cuello, cintura y cadera. Con categoría e interpretación. Gratis."
+  title="Calculadora de Grasa Corporal — Método US Navy | CalcFit"
+  description="Calculadora de grasa corporal fiable: calcula tu porcentaje con el método US Navy usando cuello, cintura y cadera. Sin báscula especial. Gratis."
   calculatorName="Grasa Corporal"
   breadcrumbSlug="grasa-corporal"
   ogImage="/og/grasa-corporal.jpg"
-  keywords="calculadora grasa corporal, porcentaje grasa corporal, método US Navy grasa, grasa corporal sin báscula, cómo medir grasa corporal en casa"
+  keywords="calculadora grasa corporal, calcular grasa corporal, cómo se calcula la grasa corporal, porcentaje de grasa corporal, método US Navy grasa, grasa corporal sin báscula"
+  related={['imc', 'grasa-visceral', 'indice-masa-grasa', 'masa-magra', 'deficit-calorico']}
   faqs={[
     { q: '¿Cuál es un porcentaje de grasa corporal saludable?', a: 'Para hombres, el rango fitness (saludable y visualmente definido) es 14–17%. Para mujeres, 21–24%. Los atletas pueden estar por debajo de estos valores. Por encima del 25% en hombres y 32% en mujeres se clasifica como obesidad, con mayor riesgo cardiovascular y metabólico.' },
     { q: '¿Qué tan preciso es el método US Navy?', a: 'El método US Navy tiene un margen de error de ±3–4% comparado con métodos de referencia como DEXA. Es menos preciso que la pesada hidrostática o DEXA, pero mucho más accesible. Su mayor limitación es que depende de la precisión de las mediciones: un error de 1 cm en la cintura puede alterar el resultado hasta en 1.5%.' },
@@ -30,9 +31,9 @@ import GrasaCalculator from '../components/calculators/GrasaCalculator';
   <GrasaCalculator client:load />
 
   <div slot="seo">
-    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cómo funciona el método US Navy?</h2>
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cómo se calcula la grasa corporal?</h2>
     <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
-      El método circunferencial de la Marina de los EE. UU. estima el porcentaje de grasa corporal usando solo una cinta métrica. Para hombres: <strong>% grasa = 86.010 × log10(cintura − cuello) − 70.041 × log10(altura) + 36.76</strong>. Para mujeres se añade la cadera: <strong>% grasa = 163.205 × log10(cintura + cadera − cuello) − 97.684 × log10(altura) − 78.387</strong>. El margen de error es de ±3–4% respecto a métodos de referencia como DEXA, pero no requiere equipo especializado.
+      La forma más fiable de calcular la grasa corporal en casa es el método circunferencial de la Marina de los EE. UU. (US Navy), que solo requiere una cinta métrica. Para hombres: <strong>% grasa = 86.010 × log10(cintura − cuello) − 70.041 × log10(altura) + 36.76</strong>. Para mujeres se añade la cadera: <strong>% grasa = 163.205 × log10(cintura + cadera − cuello) − 97.684 × log10(altura) − 78.387</strong>. Su margen de error es de ±3–4% respecto a métodos clínicos de referencia como la absorciometría DEXA o la pesada hidrostática — suficiente para seguir tu progreso mes a mes sin equipo especializado. A diferencia de las básculas de bioimpedancia, no le afectan la hidratación ni la hora del día, lo que lo hace más consistente entre mediciones.
     </p>
 
     <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Rangos de grasa corporal saludable</h2>

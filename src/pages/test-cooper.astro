@@ -4,12 +4,13 @@ import TestCooperCalculator from '../components/calculators/TestCooperCalculator
 ---
 
 <CalculatorLayout
-  title="Test de Cooper — VO₂ Máx en 12 Minutos | CalcFit"
-  description="Calcula tu VO₂ máximo con el Test de Cooper: corre 12 minutos e introduce la distancia recorrida. Evalúa tu capacidad aeróbica. Gratis."
+  title="Test de Cooper — Calculadora VO₂ Máx y Baremos | CalcFit"
+  description="Calcula tu VO₂ máximo con el Test de Cooper: corre 12 minutos e introduce la distancia. Incluye baremos por edad y sexo. Gratis."
   calculatorName="Test de Cooper"
   breadcrumbSlug="test-cooper"
   ogImage="/og/test-cooper.jpg"
-  keywords="test de Cooper, VO2 máx 12 minutos, test Cooper running, capacidad aeróbica, fórmula Cooper VO2"
+  keywords="test de Cooper, test de cooper baremos, VO2 máx 12 minutos, test Cooper distancia, capacidad aeróbica, fórmula Cooper VO2"
+  related={['test-rockport', 'vam', 'umbral-anaerobico', 'calorias-corriendo']}
   faqs={[
     { q: '¿En qué consiste el Test de Cooper?', a: 'El Test de Cooper consiste en correr la mayor distancia posible en exactamente 12 minutos en una pista plana. Fue desarrollado por el Dr. Kenneth Cooper en 1968 para evaluar la condición física de militares estadounidenses. La distancia recorrida se introduce en la fórmula para estimar el VO₂ máximo.' },
     { q: '¿Cómo se calcula el VO₂ máx con el Test de Cooper?', a: 'La fórmula de Cooper es: VO₂ máx (ml/kg/min) = (distancia en metros − 504.9) / 44.73. Por ejemplo, si recorres 2400 m en 12 minutos, tu VO₂ máx estimado es (2400 − 504.9) / 44.73 ≈ 42.4 ml/kg/min.' },
@@ -59,6 +60,41 @@ import TestCooperCalculator from '../components/calculators/TestCooperCalculator
               <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.c1}</td>
               <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.c2}</td>
               <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.c3}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Baremos del Test de Cooper — distancia en 12 minutos</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 16px;">
+      Estos son los baremos clásicos del Test de Cooper: la distancia (en metros) que deberías recorrer en 12 minutos según tu edad y sexo para cada nivel de condición física.
+    </p>
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 480px;">
+        <thead>
+          <tr style="border-bottom: 2px solid var(--border);">
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Nivel</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">H 20–29</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">H 30–39</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">M 20–29</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">M 30–39</th>
+          </tr>
+        </thead>
+        <tbody>
+          {[
+            { nivel: 'Excelente', h1: '> 2800 m',     h2: '> 2700 m',     m1: '> 2700 m',     m2: '> 2500 m' },
+            { nivel: 'Bueno',     h1: '2400–2800 m',  h2: '2300–2700 m',  m1: '2200–2700 m',  m2: '2000–2500 m' },
+            { nivel: 'Promedio',  h1: '2200–2399 m',  h2: '1900–2299 m',  m1: '1800–2199 m',  m2: '1700–1999 m' },
+            { nivel: 'Bajo',      h1: '1600–2199 m',  h2: '1500–1899 m',  m1: '1500–1799 m',  m2: '1400–1699 m' },
+            { nivel: 'Muy bajo',  h1: '< 1600 m',     h2: '< 1500 m',     m1: '< 1500 m',     m2: '< 1400 m' },
+          ].map((row) => (
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 10px 0; font-size: 13px; color: var(--ink); font-weight: 600;">{row.nivel}</td>
+              <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.h1}</td>
+              <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.h2}</td>
+              <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.m1}</td>
+              <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.m2}</td>
             </tr>
           ))}
         </tbody>

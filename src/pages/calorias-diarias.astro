@@ -4,12 +4,13 @@ import CaloriasCalculator from '../components/calculators/CaloriasCalculator';
 ---
 
 <CalculatorLayout
-  title="Calorías Diarias (TDEE) — Mifflin-St Jeor | CalcFit"
-  description="Calcula tus calorías diarias de mantenimiento, déficit y superávit con la fórmula Mifflin-St Jeor. Personalizado por peso, altura, edad y actividad."
+  title="Calculadora de Calorías Diarias — TDEE y TMB | CalcFit"
+  description="Calcula tus calorías diarias (TDEE): gasto energético de mantenimiento, déficit y superávit con Mifflin-St Jeor según tu actividad. Gratis."
   calculatorName="Calorías Diarias"
   breadcrumbSlug="calorias-diarias"
   ogImage="/og/calorias-diarias.jpg"
-  keywords="calculadora calorías diarias, TDEE, cuántas calorías necesito al día, gasto calórico diario, TMB metabolismo basal calorías"
+  keywords="calculadora calorías diarias, TDEE, cuántas calorías necesito al día, gasto energético diario, gasto calórico diario, TMB metabolismo basal calorías"
+  related={['metabolismo-basal', 'deficit-calorico', 'superavit-calorico', 'imc']}
   faqs={[
     { q: '¿Cuántas calorías debo comer para perder peso?', a: 'Para perder peso necesitas un déficit calórico: consumir menos calorías que tu TDEE. Un déficit de 500 kcal/día produce aproximadamente 0.5 kg de pérdida por semana, que es el ritmo más recomendado por los expertos en nutrición. Nunca comas menos de tu TMB durante períodos prolongados.' },
     { q: '¿Qué es el TDEE y cómo se diferencia de la TMB?', a: 'La TMB (Tasa Metabólica Basal) es la energía que tu cuerpo necesita en reposo absoluto. El TDEE (Total Daily Energy Expenditure) es tu gasto calórico real, que incluye la actividad física: TDEE = TMB × Factor de actividad. Para perder peso, consume por debajo de tu TDEE; para ganar masa muscular, por encima.' },

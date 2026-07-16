@@ -19,7 +19,9 @@ const {
   schema,
 } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+// Con build.format: 'file' el pathname en build lleva extensión (.html) — la URL pública no
+const cleanPathname = Astro.url.pathname.replace(/\/index\.html$/, '/').replace(/\.html$/, '');
+const canonicalURL = new URL(cleanPathname, Astro.site);
 const ogImageURL = new URL(ogImage, Astro.site);
 
 const websiteSchema = {
@@ -114,11 +116,5 @@ const websiteSchema = {
   </head>
   <body>
     <slot />
-    <!-- Monetag ads — DESACTIVADOS (sitio sin anuncios). Descomentar para reactivar.
-    <script is:inline>(function(s){s.dataset.zone='11097773',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-    <script is:inline>(function(s){s.dataset.zone='11097772',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-    <script is:inline>(function(s){s.dataset.zone='11095157',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-    -->
-
   </body>
 </html>

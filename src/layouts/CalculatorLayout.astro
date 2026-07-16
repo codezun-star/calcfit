@@ -2,7 +2,7 @@
 import Base from './Base.astro';
 import Navbar from '../components/layout/Navbar.astro';
 import Footer from '../components/layout/Footer.astro';
-import { categorias } from '../lib/calcData';
+import { calculadoras, categorias } from '../lib/calcData';
 
 interface Props {
   title: string;
@@ -14,6 +14,7 @@ interface Props {
   keywords?: string;
   faqs?: Array<{ q: string; a: string }>;
   dateModified?: string;
+  related?: string[];
 }
 
 const {
@@ -26,7 +27,13 @@ const {
   keywords,
   faqs,
   dateModified = '2026-05-16',
+  related = [],
 } = Astro.props;
+
+// Calculadoras relacionadas (enlazado interno) — datos desde calcData.ts
+const relatedCalcs = related
+  .map((slug) => calculadoras.find((c) => c.slug === `/${slug}`))
+  .filter((c): c is NonNullable<typeof c> => Boolean(c));
 
 const pageUrl = `https://www.calcfit.com/${breadcrumbSlug}`;
 
@@ -104,15 +111,33 @@ const combinedSchema = { '@context': 'https://schema.org', '@graph': graphItems 
     <slot name="seo" />
   </div>
 
+  <!-- Calculadoras relacionadas (server rendered) -->
+  {relatedCalcs.length > 0 && (
+    <section class="related-section" style="background: var(--ink);">
+      <p style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #888; margin-bottom: 20px;">Calculadoras relacionadas</p>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
+        {relatedCalcs.map((c) => (
+          <a href={c.slug} style="display: block; border: 1px solid var(--ink-3); border-radius: 2px; padding: 16px; text-decoration: none;">
+            <span style="display: inline-flex; color: var(--acid); margin-bottom: 10px;"><Fragment set:html={c.icon} /></span>
+            <span style="display: block; font-family: var(--font-display); font-size: 20px; color: white; line-height: 1;">{c.nombre}</span>
+            <span style="display: block; font-size: 12px; color: #999; margin-top: 6px; line-height: 1.5;">{c.desc}</span>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+
   <Footer />
 </Base>
 
 <style>
   .breadcrumb  { padding: 10px 32px; }
   .seo-section { padding: 48px 32px; }
+  .related-section { padding: 40px 32px; }
   @media (max-width: 640px) {
     .breadcrumb  { padding: 10px 16px; }
     .seo-section { padding: 32px 16px; }
+    .related-section { padding: 32px 16px; }
     :global(.calc-main > div:first-child) {
       padding-left: 16px !important;
       padding-right: 16px !important;
