@@ -543,6 +543,45 @@ Carpeta `public/og/` — pendiente generar las imágenes por calculadora. Format
 
 ---
 
+## AEO — optimización para motores de respuesta
+
+El sitio está preparado para ser citado por ChatGPT, Perplexity, Claude, Google AI Overviews y asistentes similares.
+
+| Pieza | Dónde vive | Notas |
+|---|---|---|
+| `llms.txt` | `src/pages/llms.txt.ts` | Endpoint estático. Se **genera en cada build** desde `calcData.ts` y la colección `blog`: nunca hay que mantenerlo a mano. URL: `https://www.calcfit.com/llms.txt` |
+| Reglas para bots de IA | `public/robots.txt` | `Allow: /` explícito para GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot, Google-Extended, Applebot-Extended, CCBot y otros |
+| Nodos JSON-LD compartidos | `src/lib/schema.ts` | `organizationSchema` y `websiteSchema` con `@id` estables. Los usan `Base.astro` **y** `CalculatorLayout.astro`, para que las referencias por `@id` nunca queden colgando |
+| Bloque "En resumen" | `CalculatorLayout.astro` | Primer elemento de la zona `seo-section`, con clase `aeo-answer`. Es el objetivo de `speakable` y el texto que un motor de respuesta cita literalmente |
+| Frescura | `SITE_DATE_MODIFIED` en `src/lib/schema.ts` | Default de `dateModified` en las 141 páginas + fecha visible "Revisado el…" |
+
+### Schemas por página (actualizado)
+
+| Página | Schemas en el `@graph` |
+|---|---|
+| Homepage y estáticas | `WebSite` + `Organization` |
+| Cada calculadora | `Organization` + `WebSite` + `MedicalWebContent` (con `speakable`, `isAccessibleForFree`) + `BreadcrumbList` + `HowTo` + `FAQPage` |
+
+### Props AEO de `CalculatorLayout`
+
+```astro
+<CalculatorLayout
+  answer="Respuesta directa de 1-2 frases."   <!-- opcional: por defecto usa `description` -->
+  howTo={['Paso 1…', 'Paso 2…', 'Paso 3…']}   <!-- opcional: por defecto, los pasos del patrón estándar -->
+  dateModified="2026-07-31"                    <!-- opcional: por defecto SITE_DATE_MODIFIED -->
+  …
+>
+```
+
+### Reglas al añadir contenido
+
+1. **No hace falta tocar `llms.txt`** — se regenera solo con cada `npm run build`.
+2. Al revisar el contenido del sitio, actualizar `SITE_DATE_MODIFIED` en `src/lib/schema.ts`.
+3. `answer` debe ser la respuesta corta y concreta a la pregunta que trae al usuario a la página; sin él se usa `description`, que es aceptable pero menos específico.
+4. Mantener el mínimo de 4-5 FAQs — sin ellas no hay `FAQPage` y se pierde la vía principal de citación.
+
+---
+
 ## Scripts disponibles
 
 ```bash
@@ -696,6 +735,7 @@ Siempre verificar `typeof window !== 'undefined'` antes de acceder a localStorag
 
 | Fecha | Acción |
 |---|---|
+| 2026-07-31 | AEO (optimización para motores de respuesta). (1) Nuevo `src/pages/llms.txt.ts` — genera `/llms.txt` en cada build desde `calcData.ts` + blog, agrupado por las 4 categorías. (2) `public/robots.txt` con `Allow` explícito para GPTBot, OAI-SearchBot, ChatGPT-User, ClaudeBot, Claude-SearchBot, PerplexityBot, Google-Extended, Applebot-Extended, CCBot, meta-externalagent y otros. (3) Nuevo `src/lib/schema.ts` con `organizationSchema` / `websiteSchema` de `@id` estable: las páginas de calculadora pasaban el prop `schema` a `Base.astro`, lo que **sustituía** el `@graph` global y dejaba las 141 calculadoras sin `Organization` ni `WebSite`; ahora ambos nodos van también en su `@graph`. (4) `CalculatorLayout.astro`: `MedicalWebContent` gana `speakable`, `isAccessibleForFree`, `isPartOf` y `@id`; nuevo schema `HowTo`; `FAQPage` y `BreadcrumbList` con `@id` propio. Nuevos props opcionales `answer` y `howTo`. (5) Nuevo bloque visible "En resumen" (clase `aeo-answer`) al inicio de la zona SEO de las 141 calculadoras, con la fecha de revisión. (6) `<link rel="alternate" type="text/plain" href="/llms.txt">` en todas las páginas. |
 | 2026-07-16 | Recuperación SEO tras caída de tráfico (GSC muestra colapso de impresiones el 3-4 jul, una semana después de activar Monetag el 26-jun). (1) **Monetag eliminado por completo** de `Base.astro` — los scripts comentados de n6wxm.com/nap5k.com/al5sm.com seguían publicándose como comentario HTML; dominios asociados a malvertising/Safe Browsing. NO reactivar Monetag. (2) **Canonical corregido en las 228 páginas**: con `build.format: 'file'`, `Astro.url.pathname` incluye `.html` en build, por lo que canonical y `og:url` apuntaban a `/pagina.html` (contradiciendo al sitemap y causando indexación de duplicados con/sin slash). `Base.astro` ahora normaliza el pathname. (3) Nuevo prop `related` en `CalculatorLayout` → sección "Calculadoras relacionadas" server-side (datos de calcData.ts), añadida a 14 páginas fuertes: imc, grasa-corporal, calorias-diarias, calorias-natacion, calorias-caminando, fuerza-relativa, 1rm, test-cooper, masa-muscular, deficit-calorico, volumen-entrenamiento, peso-ideal, colesterol, semana-embarazo. (4) Títulos/descriptions/keywords realineados con las consultas reales de GSC (p. ej. "Cuántas Calorías se Queman Nadando", "Calculadora de Fuerza", "Calculadora RM"). (5) Tabla de baremos por distancia (12 min, edad/sexo) añadida a test-cooper. (6) `favicon.ico` generado en `public/` (estaba referenciado pero no existía). |
 | 2026-07-10 | Anuncios desactivados: los 3 scripts de Monetag (zonas 11097773, 11097772, 11095157 — dominios n6wxm.com, nap5k.com, al5sm.com) quedan **comentados** en `Base.astro` (bloque `<!-- Monetag ads — DESACTIVADOS -->`, descomentar para reactivar). `politica-cookies` y `politica-privacidad` actualizadas: ya no mencionan Monetag y declaran que el sitio no muestra anuncios. Sin service worker ni otros restos publicitarios en `public/`. |
 | 2026-06-21 | Expansión masiva: +40 calculadoras (10 por categoría) + 10 artículos de blog, seleccionadas por demanda de búsqueda y sin duplicar. **Fitness** (+10): pasos-calorias, calorias-saltar-cuerda, calorias-bailando, calorias-eliptica, calorias-pesas, calorias-futbol, masa-magra, superficie-corporal, porcentaje-peso-perdido, frecuencia-respiratoria. **Nutrición** (+10): superavit-calorico, keto-macros, sal-diaria, calcio-diario, hierro-diario, magnesio-diario, zinc-diario, vitamina-c-diaria, grasa-diaria, potasio-diario. **Embarazo** (+10): calendario-chino-bebe, semanas-a-meses, cuenta-atras-parto, dpo, acido-folico, percentil-bebe, leche-bebe, edad-corregida, fertilidad-por-edad, fecha-parto-fiv. **Fechas** (+10): dias-laborables, horas-trabajadas, sumar-horas, conversor-tiempo, numero-semana, dia-semana, tiempo-juntos, edad-perro, dia-del-anio, anio-bisiesto. Cada una con función pura en `calculators.ts`, componente React, página SEO completa (title/description/keywords/FAQs/tabla) e imagen OG. Blog: +10 artículos interconectados (10000-pasos-al-dia, superavit-calorico-ganar-musculo, sal-y-sodio-cuanto-al-dia, calendario-chino-bebe-funciona, semanas-a-meses-embarazo, acido-folico-embarazo, percentiles-bebe-explicados, edad-perro-anos-humanos, minerales-calcio-hierro-magnesio, calcular-horas-trabajadas). Total: 101 + 40 = **141 calculadoras** (Fitness 62 · Embarazo 29 · Fechas 19 · Nutrición 31). Build: 228 páginas. |
