@@ -4616,3 +4616,147 @@ export function calcularAnioBisiesto(anio: number): {
   else motivo = `${anio} no es divisible entre 4, por lo que no es bisiesto.`;
   return { esBisiesto, proximoBisiesto, diasDelAnio: esBisiesto ? 366 : 365, motivo };
 }
+
+// ─── CALORÍAS DE UNA RECETA ────────────────────────────────────────────────
+export interface IngredienteReceta {
+  nombre:  string;
+  gramos:  number;
+  kcal100: number;   // kcal por 100 g del ingrediente
+}
+
+export interface CaloriasRecetaResult {
+  caloriasTotales:  number;
+  caloriasRacion:   number;
+  pesoTotalG:       number;
+  pesoRacionG:      number;
+  densidad:         number;   // kcal por 100 g de receta
+  nivelDensidad:    'baja' | 'media' | 'alta';
+  detalle:          Array<{ nombre: string; kcal: number; porcentaje: number }>;
+}
+
+/** Suma las calorías de los ingredientes y las reparte entre las raciones. */
+export function calcularCaloriasReceta(
+  ingredientes: IngredienteReceta[],
+  raciones:     number,
+): CaloriasRecetaResult {
+  const validos = ingredientes.filter(i => i.gramos > 0 && i.kcal100 >= 0);
+
+  const caloriasTotales = validos.reduce((t, i) => t + (i.gramos * i.kcal100) / 100, 0);
+  const pesoTotalG      = validos.reduce((t, i) => t + i.gramos, 0);
+  const densidad        = pesoTotalG > 0 ? (caloriasTotales / pesoTotalG) * 100 : 0;
+
+  const nivelDensidad: CaloriasRecetaResult['nivelDensidad'] =
+    densidad < 100 ? 'baja' : densidad <= 250 ? 'media' : 'alta';
+
+  const detalle = validos
+    .map(i => {
+      const kcal = (i.gramos * i.kcal100) / 100;
+      return {
+        nombre:     i.nombre.trim() || 'Ingrediente',
+        kcal:       Math.round(kcal),
+        porcentaje: caloriasTotales > 0 ? Math.round((kcal / caloriasTotales) * 100) : 0,
+      };
+    })
+    .sort((a, b) => b.kcal - a.kcal);
+
+  return {
+    caloriasTotales: Math.round(caloriasTotales),
+    caloriasRacion:  raciones > 0 ? Math.round(caloriasTotales / raciones) : 0,
+    pesoTotalG:      Math.round(pesoTotalG),
+    pesoRacionG:     raciones > 0 ? Math.round(pesoTotalG / raciones) : 0,
+    densidad:        Math.round(densidad),
+    nivelDensidad,
+    detalle,
+  };
+}
+
+// ─── TEST DE FLEXIONES (resistencia muscular) ──────────────────────────────
+export type NivelFlexiones = 'excelente' | 'bueno' | 'promedio' | 'regular' | 'bajo';
+
+export interface TestFlexionesResult {
+  nivel:          NivelFlexiones;
+  nivelNombre:    string;
+  franjaEdad:     string;
+  variante:       'estandar' | 'rodillas';
+  repeticiones:   number;
+  minimoSiguiente: number | null;  // repeticiones para subir de nivel (null si ya es excelente)
+  baremo:         Array<{ nivel: string; rango: string }>;
+  descripcion:    string;
+}
+
+/**
+ * Baremos de resistencia muscular del tren superior (ACSM / CSEP).
+ * Los valores publicados evalúan flexiones estándar en hombres y flexiones
+ * con rodillas apoyadas en mujeres. Cada franja guarda los mínimos de
+ * excelente, bueno, promedio y regular; por debajo del último, el nivel es bajo.
+ */
+const BAREMOS_FLEXIONES: Record<'estandar' | 'rodillas', Array<{
+  maxEdad: number; franja: string; excelente: number; bueno: number; promedio: number; regular: number;
+}>> = {
+  estandar: [
+    { maxEdad: 29, franja: '20-29 años', excelente: 36, bueno: 29, promedio: 22, regular: 17 },
+    { maxEdad: 39, franja: '30-39 años', excelente: 30, bueno: 22, promedio: 17, regular: 12 },
+    { maxEdad: 49, franja: '40-49 años', excelente: 25, bueno: 17, promedio: 13, regular: 10 },
+    { maxEdad: 59, franja: '50-59 años', excelente: 21, bueno: 13, promedio: 10, regular: 7 },
+    { maxEdad: 99, franja: '60 años o más', excelente: 18, bueno: 11, promedio: 8, regular: 5 },
+  ],
+  rodillas: [
+    { maxEdad: 29, franja: '20-29 años', excelente: 30, bueno: 21, promedio: 15, regular: 10 },
+    { maxEdad: 39, franja: '30-39 años', excelente: 27, bueno: 20, promedio: 13, regular: 8 },
+    { maxEdad: 49, franja: '40-49 años', excelente: 24, bueno: 15, promedio: 11, regular: 5 },
+    { maxEdad: 59, franja: '50-59 años', excelente: 21, bueno: 11, promedio: 7, regular: 2 },
+    { maxEdad: 99, franja: '60 años o más', excelente: 17, bueno: 12, promedio: 5, regular: 2 },
+  ],
+};
+
+export function calcularTestFlexiones(
+  repeticiones: number,
+  edadAnios:    number,
+  variante:     'estandar' | 'rodillas',
+): TestFlexionesResult {
+  const tabla = BAREMOS_FLEXIONES[variante];
+  const fila  = tabla.find(f => edadAnios <= f.maxEdad) ?? tabla[tabla.length - 1];
+
+  let nivel: NivelFlexiones;
+  let minimoSiguiente: number | null;
+  if (repeticiones >= fila.excelente)      { nivel = 'excelente'; minimoSiguiente = null; }
+  else if (repeticiones >= fila.bueno)     { nivel = 'bueno';     minimoSiguiente = fila.excelente; }
+  else if (repeticiones >= fila.promedio)  { nivel = 'promedio';  minimoSiguiente = fila.bueno; }
+  else if (repeticiones >= fila.regular)   { nivel = 'regular';   minimoSiguiente = fila.promedio; }
+  else                                     { nivel = 'bajo';      minimoSiguiente = fila.regular; }
+
+  const NOMBRES: Record<NivelFlexiones, string> = {
+    excelente: 'Excelente',
+    bueno:     'Bueno',
+    promedio:  'Promedio',
+    regular:   'Regular',
+    bajo:      'Bajo',
+  };
+
+  const DESCRIPCIONES: Record<NivelFlexiones, string> = {
+    excelente: 'Tu resistencia muscular del tren superior está por encima de la de la mayoría de personas de tu franja de edad.',
+    bueno:     'Estás por encima de la media de tu franja de edad. Con algo más de volumen de entrenamiento puedes alcanzar el nivel excelente.',
+    promedio:  'Tu resultado está en la media de tu franja de edad. Entrenar empuje dos veces por semana suele mejorarlo con rapidez.',
+    regular:   'Tu resultado está por debajo de la media. Empieza por progresiones más fáciles (flexiones inclinadas) y sube el volumen poco a poco.',
+    bajo:      'Tu resistencia del tren superior es baja para tu franja de edad. Las flexiones inclinadas contra una pared o un banco son el punto de partida más seguro.',
+  };
+
+  const baremo = [
+    { nivel: 'Excelente', rango: `${fila.excelente} o más` },
+    { nivel: 'Bueno',     rango: `${fila.bueno} – ${fila.excelente - 1}` },
+    { nivel: 'Promedio',  rango: `${fila.promedio} – ${fila.bueno - 1}` },
+    { nivel: 'Regular',   rango: `${fila.regular} – ${fila.promedio - 1}` },
+    { nivel: 'Bajo',      rango: `${fila.regular - 1} o menos` },
+  ];
+
+  return {
+    nivel,
+    nivelNombre: NOMBRES[nivel],
+    franjaEdad:  fila.franja,
+    variante,
+    repeticiones,
+    minimoSiguiente,
+    baremo,
+    descripcion: DESCRIPCIONES[nivel],
+  };
+}

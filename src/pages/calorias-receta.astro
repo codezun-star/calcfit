@@ -1,0 +1,98 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import CaloriasRecetaCalculator from '../components/calculators/CaloriasRecetaCalculator';
+
+const faqs = [
+  { q: '¿Cómo se calculan las calorías de una receta?', a: 'Se suman las calorías de cada ingrediente crudo y el total se divide entre las raciones que salen. Para cada ingrediente, la operación es: gramos × kcal por 100 g ÷ 100. No se suman las calorías del agua de cocción ni se restan las que se pierden al cocinar, porque la energía de los alimentos no desaparece con el calor.' },
+  { q: '¿Peso los ingredientes crudos o cocinados?', a: 'Lo correcto es pesarlos crudos, que es como vienen expresados los valores de las tablas nutricionales y las etiquetas. El arroz o la pasta absorben agua al cocerse y multiplican su peso por dos o tres sin ganar ni una caloría, así que usar el peso cocinado con las kcal del alimento crudo sobrestima muchísimo el resultado.' },
+  { q: '¿Cuántas calorías tiene una ración normal?', a: 'Depende del plato y de tus necesidades, pero como referencia un plato principal suele moverse entre 400 y 700 kcal en una dieta de 2.000 kcal diarias, y una guarnición o entrante entre 150 y 300 kcal. Divide tus calorías diarias entre las comidas del día para fijar tu propio objetivo por plato.' },
+  { q: '¿Qué es la densidad calórica y por qué importa?', a: 'Es la cantidad de calorías por cada 100 g de comida. Por debajo de 100 kcal/100 g la receta es ligera y saciante (verduras, legumbres, sopas); por encima de 250 kcal/100 g concentra muchas calorías en poco volumen (frituras, salsas, quesos). Con la misma cantidad de comida en el plato, una densidad más baja ayuda a saciarse con menos calorías.' },
+  { q: '¿Cuenta el aceite que se queda en la sartén?', a: 'Solo en parte. Si fríes y escurres bien, una porción del aceite se queda fuera del plato; si salteas o alíñas en crudo, prácticamente todo acaba en la receta. Como el aceite aporta 884 kcal por 100 g, es el ingrediente que más distorsiona el resultado: mídelo con cuchara en lugar de a ojo.' },
+  { q: '¿Dónde encuentro las kcal por 100 g de cada ingrediente?', a: 'En la etiqueta nutricional del producto, en la columna "por 100 g", que es obligatoria en la Unión Europea. Para alimentos frescos sin etiqueta puedes usar las bases de datos públicas como BEDCA en España o la de USDA. La calculadora incluye además una tabla con los ingredientes más habituales.' },
+];
+---
+
+<CalculatorLayout
+  title="Calcular Calorías de una Receta — Por Ración | CalcFit"
+  description="Calcula las calorías de cualquier receta sumando sus ingredientes y obtén las kcal por ración y la densidad calórica del plato. Gratis, sin registro."
+  calculatorName="Calorías de una Receta"
+  breadcrumbSlug="calorias-receta"
+  ogImage="/og/calorias-receta.jpg"
+  keywords="calorías de una receta, calcular calorías receta, kcal por ración, calorías caseras, densidad calórica"
+  answer="Para calcular las calorías de una receta se multiplica el peso en gramos de cada ingrediente por sus kcal por 100 g, se divide entre 100, se suman todos los ingredientes y el total se reparte entre las raciones que salen."
+  related={['calorias-diarias', 'macronutrientes', 'deficit-calorico', 'grasa-diaria']}
+  faqs={faqs}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Calorías<br><span style="color: var(--acid);">de una Receta</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Suma los ingredientes de tu plato y obtén las calorías totales, las kcal por ración y qué ingrediente aporta más.
+    </p>
+  </div>
+
+  <CaloriasRecetaCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cómo se calcula?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      Las calorías de un plato casero son la suma de las de sus ingredientes: no se crean ni se destruyen al cocinar. Para cada ingrediente se aplica una regla de tres sencilla y después se reparte el total entre las raciones:
+    </p>
+    <p style="font-family: var(--font-mono); font-size: 13px; color: var(--ink); background: var(--border); padding: 14px; margin-bottom: 24px;">
+      kcal ingrediente = gramos × kcal por 100 g ÷ 100<br />
+      kcal por ración = suma de ingredientes ÷ raciones
+    </p>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      Pesa siempre los ingredientes <strong>en crudo</strong>: es como figuran en las etiquetas y en las tablas de composición de alimentos. El agua de cocción no aporta calorías, pero sí cambia el peso final del plato, y por eso la densidad calórica de la receta cocinada resulta menor que la suma de los ingredientes secos.
+    </p>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Calorías por 100 g de ingredientes habituales</h2>
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 320px;">
+      <thead>
+        <tr style="border-bottom: 2px solid var(--border);">
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Ingrediente</th>
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">kcal/100 g</th>
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Nota</th>
+        </tr>
+      </thead>
+      <tbody>
+        {[
+          { i: 'Aceite de oliva', k: '884', n: 'Una cucharada son unos 10 g' },
+          { i: 'Queso curado', k: '390', n: 'Muy denso: pesa, no calcules a ojo' },
+          { i: 'Azúcar', k: '400', n: 'Cuenta también la del sofrito o la salsa' },
+          { i: 'Pasta cruda', k: '371', n: 'Cocida baja a unas 130 kcal/100 g' },
+          { i: 'Arroz crudo', k: '350', n: 'Cocido baja a unas 120 kcal/100 g' },
+          { i: 'Pechuga de pollo', k: '165', n: 'Sin piel, cruda' },
+          { i: 'Huevo', k: '143', n: 'Uno mediano pesa unos 55 g sin cáscara' },
+          { i: 'Patata', k: '77', n: 'Frita multiplica por tres o cuatro' },
+          { i: 'Cebolla', k: '40', n: 'Aporta poco salvo por el aceite del sofrito' },
+          { i: 'Tomate', k: '18', n: 'Base ideal para bajar la densidad del plato' },
+        ].map((row) => (
+          <tr style="border-bottom: 1px solid var(--border);">
+            <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.i}</td>
+            <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.k}</td>
+            <td style="padding: 10px 0; font-size: 12px; color: var(--muted);">{row.n}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    </div>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Densidad calórica del plato</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      Además del total, la calculadora muestra las kcal por cada 100 g de receta terminada. Por debajo de 100 kcal/100 g el plato es ligero y saciante; entre 100 y 250 está equilibrado; por encima de 250 concentra mucha energía en poco volumen. Bajar la densidad calórica —más verdura, menos aceite y salsas— permite comer la misma cantidad de comida con bastantes menos calorías, que es la estrategia más sostenible para mantener un déficit sin pasar hambre.
+    </p>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {faqs.map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

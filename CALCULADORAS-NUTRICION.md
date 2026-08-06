@@ -26,9 +26,10 @@
 | 76 | IG de Comida | `/ig-comida` | `IGComidaCalculator.tsx` | `calcularIGComida` | Nutrición | 7B |
 | 77 | Ratio Omega | `/omega-ratio` | `OmegaRatioCalculator.tsx` | `calcularOmegaRatio` | Nutrición | 7B |
 | 89 | Fibra Diaria | `/fibra-diaria` | `FibraDiariaCalculator.tsx` | `calcularFibraDiaria` | Nutrición | 8 |
+| 145 | Calorías de una Receta | `/calorias-receta` | `CaloriasRecetaCalculator.tsx` | `calcularCaloriasReceta` | Nutrición | 11 |
 
 ---
 
 ## Slugs
 
-`macronutrientes` · `proteinas` · `metabolismo-basal` · `deficit-calorico` · `resistencia-insulina` · `glucosa` · `colesterol` · `carga-glucemica` · `cafeina` · `sueno` · `ayuno-intermitente` · `alcoholemia` · `creatina` · `calorias-bebidas` · `riesgo-diabetes` · `vitamina-d` · `proteina-por-comida` · `ig-comida` · `omega-ratio` · `fibra-diaria`
+`macronutrientes` · `proteinas` · `metabolismo-basal` · `deficit-calorico` · `resistencia-insulina` · `glucosa` · `colesterol` · `carga-glucemica` · `cafeina` · `sueno` · `ayuno-intermitente` · `alcoholemia` · `creatina` · `calorias-bebidas` · `riesgo-diabetes` · `vitamina-d` · `proteina-por-comida` · `ig-comida` · `omega-ratio` · `fibra-diaria` · `calorias-receta`

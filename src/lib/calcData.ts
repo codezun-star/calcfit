@@ -158,6 +158,8 @@ const I: Record<string, string> = {
   perro:             `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l1-3 2.5 2h3L13 3l1 3v4c0 2.5-2 4.5-5 4.5S4 12.5 4 10V6z"/><circle cx="7" cy="8.5" r="0.6" fill="currentColor" stroke="none"/><circle cx="11" cy="8.5" r="0.6" fill="currentColor" stroke="none"/><path d="M8 11.5h2"/></svg>`,
   diaAnio:           `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="7"/><path d="M9 9V3.5"/><path d="M9 9l4.5 2.5"/><path d="M9 9L5 12"/></svg>`,
   bisiesto:          `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="14" height="13" rx="1"/><line x1="2" y1="7" x2="16" y2="7"/><text x="9" y="13.5" font-size="5" text-anchor="middle" fill="currentColor" stroke="none" font-family="monospace">29</text></svg>`,
+  flexiones:         `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="3.5" cy="6" r="1.5"/><path d="M5 7.5h6.5l3 3"/><path d="M5.5 7.5L4 12"/><path d="M9.5 7.5L8.5 12"/><line x1="1" y1="14" x2="17" y2="14"/></svg>`,
+  recetaKcal:        `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 8.5h13a6.5 6.5 0 01-6.5 6h0a6.5 6.5 0 01-6.5-6z"/><line x1="1.5" y1="16.5" x2="16.5" y2="16.5"/><path d="M7 5.5c0-1 1-1.5 1-2.5"/><path d="M10 5.5c0-1 1-1.5 1-2.5"/></svg>`,
 };
 
 export const calculadoras: Calc[] = [
@@ -302,6 +304,8 @@ export const calculadoras: Calc[] = [
   { slug: '/edad-perro',             nombre: 'Edad del Perro',               desc: 'Edad de perro o gato en años humanos',                   badge: null, destacada: false, num: '141', icon: I.perro },
   { slug: '/dia-del-anio',           nombre: 'Día del Año',                  desc: 'Qué día del año es una fecha (1-366)',                   badge: null, destacada: false, num: '142', icon: I.diaAnio },
   { slug: '/anio-bisiesto',          nombre: 'Año Bisiesto',                 desc: 'Comprueba si un año es bisiesto',                        badge: null, destacada: false, num: '143', icon: I.bisiesto },
+  { slug: '/test-flexiones',         nombre: 'Test de Flexiones',            desc: 'Cuántas flexiones deberías hacer según tu edad',         badge: null, destacada: false, num: '144', icon: I.flexiones },
+  { slug: '/calorias-receta',        nombre: 'Calorías de una Receta',       desc: 'Calorías totales y por ración de tus platos caseros',    badge: null, destacada: false, num: '145', icon: I.recetaKcal },
 ];
 
 export const categorias: Categoria[] = [
@@ -321,6 +325,7 @@ export const categorias: Categoria[] = [
       '/potencia-salto', '/grasa-visceral', '/oximetria', '/umbral-anaerobico', '/carga-entrenamiento', '/escala-borg', '/fc-reposo', '/actividad-fisica', '/hidratacion-deportiva', '/ritmo-natacion',
       '/ftp-ciclismo', '/cadencia-carrera', '/predictor-carrera', '/recuperacion-muscular', '/calorias-corriendo',
       '/pasos-calorias', '/calorias-saltar-cuerda', '/calorias-bailando', '/calorias-eliptica', '/calorias-pesas', '/calorias-futbol', '/masa-magra', '/superficie-corporal', '/porcentaje-peso-perdido', '/frecuencia-respiratoria',
+      '/test-flexiones',
     ],
   },
   {
@@ -336,7 +341,7 @@ export const categorias: Categoria[] = [
   {
     label: 'Nutrición & bienestar',
     slug: 'nutricion',
-    slugs: ['/macronutrientes', '/proteinas', '/metabolismo-basal', '/deficit-calorico', '/resistencia-insulina', '/glucosa', '/colesterol', '/carga-glucemica', '/cafeina', '/sueno', '/ayuno-intermitente', '/alcoholemia', '/creatina', '/calorias-bebidas', '/riesgo-diabetes', '/vitamina-d', '/proteina-por-comida', '/ig-comida', '/omega-ratio', '/fibra-diaria', '/azucar-diario', '/superavit-calorico', '/keto-macros', '/sal-diaria', '/calcio-diario', '/hierro-diario', '/magnesio-diario', '/zinc-diario', '/vitamina-c-diaria', '/grasa-diaria', '/potasio-diario'],
+    slugs: ['/macronutrientes', '/proteinas', '/metabolismo-basal', '/deficit-calorico', '/resistencia-insulina', '/glucosa', '/colesterol', '/carga-glucemica', '/cafeina', '/sueno', '/ayuno-intermitente', '/alcoholemia', '/creatina', '/calorias-bebidas', '/riesgo-diabetes', '/vitamina-d', '/proteina-por-comida', '/ig-comida', '/omega-ratio', '/fibra-diaria', '/azucar-diario', '/superavit-calorico', '/keto-macros', '/sal-diaria', '/calcio-diario', '/hierro-diario', '/magnesio-diario', '/zinc-diario', '/vitamina-c-diaria', '/grasa-diaria', '/potasio-diario', '/calorias-receta'],
   },
 ];
 

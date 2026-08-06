@@ -63,7 +63,7 @@ calcfit-astro/
 │   │   │   ├── HistoryTable.tsx
 │   │   │   ├── ShareButtons.tsx
 │   │   │   └── Badge.tsx              ← popular | new | essential
-│   │   └── calculators/               ← 141 componentes React (ver CALCULADORAS.md)
+│   │   └── calculators/               ← 143 componentes React (ver CALCULADORAS.md)
 │   │       ├── [NombreCalculator].tsx ← un archivo por calculadora
 │   │       ├── GaugeIMC.tsx           ← gauge SVG semicircular animado
 │   │       ├── ZonasCardiaca.tsx      ← barras horizontales de zonas cardíacas
@@ -77,8 +77,8 @@ calcfit-astro/
 │   ├── content/
 │   │   └── blog/                      ← artículos .md (nombre del archivo = slug de URL)
 │   └── pages/
-│       ├── index.astro                ← homepage con las 141 calculadoras (importa de lib/calcData.ts)
-│       ├── [slug].astro               ← 141 páginas calculadora (ver CALCULADORAS.md)
+│       ├── index.astro                ← homepage con las 143 calculadoras (importa de lib/calcData.ts)
+│       ├── [slug].astro               ← 143 páginas calculadora (ver CALCULADORAS.md)
 │       ├── fitness|embarazo|fechas|nutricion/[...page].astro ← páginas de categoría paginadas
 │       ├── blog/
 │       │   ├── [...page].astro        ← lista paginada (20 art/pág) — /blog, /blog/2, /blog/3...
@@ -246,7 +246,7 @@ Cada página de calculadora sigue este patrón exacto (incluye los props SEO obl
 
 ### Funciones disponibles
 
-Las 89 funciones están documentadas en [CALCULADORAS.md](CALCULADORAS.md) (índice) y en los archivos de detalle por categoría: [CALCULADORAS-FITNESS.md](CALCULADORAS-FITNESS.md), [CALCULADORAS-NUTRICION.md](CALCULADORAS-NUTRICION.md), [CALCULADORAS-EMBARAZO.md](CALCULADORAS-EMBARAZO.md), [CALCULADORAS-FECHAS.md](CALCULADORAS-FECHAS.md) — columna "Función en calculators.ts". La firma completa (parámetros y tipo de retorno) vive en el propio archivo `src/lib/calculators.ts` con TypeScript estricto.
+Las 91 funciones están documentadas en [CALCULADORAS.md](CALCULADORAS.md) (índice) y en los archivos de detalle por categoría: [CALCULADORAS-FITNESS.md](CALCULADORAS-FITNESS.md), [CALCULADORAS-NUTRICION.md](CALCULADORAS-NUTRICION.md), [CALCULADORAS-EMBARAZO.md](CALCULADORAS-EMBARAZO.md), [CALCULADORAS-FECHAS.md](CALCULADORAS-FECHAS.md) — columna "Función en calculators.ts". La firma completa (parámetros y tipo de retorno) vive en el propio archivo `src/lib/calculators.ts` con TypeScript estricto.
 
 Convención: todas las funciones son `export function calcularXxx(...)` sin efectos secundarios.
 
@@ -312,7 +312,7 @@ Tres visualizaciones específicas en `src/components/calculators/`:
 
 ## Homepage (src/pages/index.astro)
 
-La homepage muestra las **141 calculadoras** en 4 categorías mediante el componente `CalculatorBrowser`. Los datos (calculadoras, categorías e íconos SVG) viven en `src/lib/calcData.ts` como **fuente única**: `index.astro` y las páginas de categoría (`/fitness`, `/embarazo`, `/fechas`, `/nutricion`) importan de ahí. Al añadir una calculadora se edita SOLO `calcData.ts`. Los íconos se renderizan con `set:html` / `dangerouslySetInnerHTML`.
+La homepage muestra las **143 calculadoras** en 4 categorías mediante el componente `CalculatorBrowser`. Los datos (calculadoras, categorías e íconos SVG) viven en `src/lib/calcData.ts` como **fuente única**: `index.astro` y las páginas de categoría (`/fitness`, `/embarazo`, `/fechas`, `/nutricion`) importan de ahí. Al añadir una calculadora se edita SOLO `calcData.ts`. Los íconos se renderizan con `set:html` / `dangerouslySetInnerHTML`.
 
 ### Secciones de la homepage y dónde aparece el contador
 
@@ -359,8 +359,8 @@ La columna izquierda del hero (`.hero-left`) tiene una imagen de fondo de gimnas
 - La columna derecha (`.hero-nums`) mantiene fondo sólido `var(--ink-2)` sin imagen.
 - Si se cambia la imagen, verificar que el overlay siga siendo opaco suficiente (mínimo 0.65).
 
-Categorías y conteo actual (total: 141) — ver detalle en [CALCULADORAS.md](CALCULADORAS.md) y archivos por categoría:
-- Fitness & salud (62) · Embarazo & fertilidad (29) · Fechas & tiempo (19) · Nutrición & bienestar (31)
+Categorías y conteo actual (total: 143) — ver detalle en [CALCULADORAS.md](CALCULADORAS.md) y archivos por categoría:
+- Fitness & salud (63) · Embarazo & fertilidad (29) · Fechas & tiempo (19) · Nutrición & bienestar (32)
 
 Al agregar una calculadora nueva, seguir el checklist completo de la sección "Reglas para agregar una calculadora nueva".
 
@@ -553,7 +553,7 @@ El sitio está preparado para ser citado por ChatGPT, Perplexity, Claude, Google
 | Reglas para bots de IA | `public/robots.txt` | `Allow: /` explícito para GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot, Google-Extended, Applebot-Extended, CCBot y otros |
 | Nodos JSON-LD compartidos | `src/lib/schema.ts` | `organizationSchema` y `websiteSchema` con `@id` estables. Los usan `Base.astro` **y** `CalculatorLayout.astro`, para que las referencias por `@id` nunca queden colgando |
 | Bloque "En resumen" | `CalculatorLayout.astro` | Primer elemento de la zona `seo-section`, con clase `aeo-answer`. Es el objetivo de `speakable` y el texto que un motor de respuesta cita literalmente |
-| Frescura | `SITE_DATE_MODIFIED` en `src/lib/schema.ts` | Default de `dateModified` en las 141 páginas + fecha visible "Revisado el…" |
+| Frescura | `SITE_DATE_MODIFIED` en `src/lib/schema.ts` | Default de `dateModified` en las 143 páginas + fecha visible "Revisado el…" |
 | Serialización del JSON-LD | `src/lib/jsonld.ts` | **Usar `jsonLd()` siempre, nunca `JSON.stringify()`** para JSON-LD |
 
 ### `jsonLd()` — regla obligatoria
@@ -653,7 +653,7 @@ npm run preview  # preview del build
 
 **7. Verificación final**
 - Ejecutar `npm run build` — debe completar sin errores
-- El número de páginas en el build debe coincidir (actualmente 228: 141 calculadoras + 1 homepage + 5 estáticas + blog paginado + páginas de categoría)
+- El número de páginas en el build debe coincidir (actualmente 232: 143 calculadoras + 1 homepage + 5 estáticas + blog paginado + páginas de categoría)
 
 ---
 
@@ -743,6 +743,7 @@ Siempre verificar `typeof window !== 'undefined'` antes de acceder a localStorag
 
 | Fecha | Acción |
 |---|---|
+| 2026-08-06 | Ampliación: +2 calculadoras y +2 artículos. **Fitness & salud**: `test-flexiones` (`calcularTestFlexiones`, `TestFlexionesCalculator.tsx`) — nivel de resistencia muscular del tren superior con los baremos por edad del ACSM/CSEP (estándar y con rodillas apoyadas); no duplica `test-cooper` (aeróbico), `test-rockport` (marcha), `potencia-salto` ni `1rm`/`fuerza-relativa` (fuerza máxima). **Nutrición & bienestar**: `calorias-receta` (`calcularCaloriasReceta`, `CaloriasRecetaCalculator.tsx`) — suma ingredientes, reparte por raciones y calcula la densidad calórica. Ambas con página SEO completa (title/description/keywords/FAQs/tablas/`related`), imagen OG y entrada en `calcData.ts`. Blog: `cuantas-flexiones-por-edad` y `calcular-calorias-de-una-receta`. Contadores de la homepage 141 → 143. Build: 232 páginas. **Descartada** una calculadora de edad metabólica: toda fórmula predictiva de TMB escala con el peso total, así que devolvía "excelente" a perfiles con sobrepeso; sin masa magra medida el resultado es engañoso. |
 | 2026-07-31 | Serialización segura del JSON-LD: nuevo `src/lib/jsonld.ts` con `jsonLd()`, usado por `Base.astro`. Escapa `<`, `>` y `&` como unicode. Corrige los 15 errores `Cannot compress file` de astro-compress (oximetria, presion-pulso, cintura-cadera…), causados por comparadores sueltos como `<86%` o `< 25 mmHg` dentro de las respuestas de FAQ del JSON-LD: esas páginas se publicaban sin minificar. También cierra el vector de inyección por `</script>` en textos. Build: 0 errores de compresión (antes 15). |
 | 2026-07-31 | AEO (optimización para motores de respuesta). (1) Nuevo `src/pages/llms.txt.ts` — genera `/llms.txt` en cada build desde `calcData.ts` + blog, agrupado por las 4 categorías. (2) `public/robots.txt` con `Allow` explícito para GPTBot, OAI-SearchBot, ChatGPT-User, ClaudeBot, Claude-SearchBot, PerplexityBot, Google-Extended, Applebot-Extended, CCBot, meta-externalagent y otros. (3) Nuevo `src/lib/schema.ts` con `organizationSchema` / `websiteSchema` de `@id` estable: las páginas de calculadora pasaban el prop `schema` a `Base.astro`, lo que **sustituía** el `@graph` global y dejaba las 141 calculadoras sin `Organization` ni `WebSite`; ahora ambos nodos van también en su `@graph`. (4) `CalculatorLayout.astro`: `MedicalWebContent` gana `speakable`, `isAccessibleForFree`, `isPartOf` y `@id`; nuevo schema `HowTo`; `FAQPage` y `BreadcrumbList` con `@id` propio. Nuevos props opcionales `answer` y `howTo`. (5) Nuevo bloque visible "En resumen" (clase `aeo-answer`) al inicio de la zona SEO de las 141 calculadoras, con la fecha de revisión. (6) `<link rel="alternate" type="text/plain" href="/llms.txt">` en todas las páginas. |
 | 2026-07-16 | Recuperación SEO tras caída de tráfico (GSC muestra colapso de impresiones el 3-4 jul, una semana después de activar Monetag el 26-jun). (1) **Monetag eliminado por completo** de `Base.astro` — los scripts comentados de n6wxm.com/nap5k.com/al5sm.com seguían publicándose como comentario HTML; dominios asociados a malvertising/Safe Browsing. NO reactivar Monetag. (2) **Canonical corregido en las 228 páginas**: con `build.format: 'file'`, `Astro.url.pathname` incluye `.html` en build, por lo que canonical y `og:url` apuntaban a `/pagina.html` (contradiciendo al sitemap y causando indexación de duplicados con/sin slash). `Base.astro` ahora normaliza el pathname. (3) Nuevo prop `related` en `CalculatorLayout` → sección "Calculadoras relacionadas" server-side (datos de calcData.ts), añadida a 14 páginas fuertes: imc, grasa-corporal, calorias-diarias, calorias-natacion, calorias-caminando, fuerza-relativa, 1rm, test-cooper, masa-muscular, deficit-calorico, volumen-entrenamiento, peso-ideal, colesterol, semana-embarazo. (4) Títulos/descriptions/keywords realineados con las consultas reales de GSC (p. ej. "Cuántas Calorías se Queman Nadando", "Calculadora de Fuerza", "Calculadora RM"). (5) Tabla de baremos por distancia (12 min, edad/sexo) añadida a test-cooper. (6) `favicon.ico` generado en `public/` (estaba referenciado pero no existía). |

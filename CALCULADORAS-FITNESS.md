@@ -59,12 +59,13 @@
 | 71 | Cadencia de Carrera | `/cadencia-carrera` | `CadenciaCarreraCalculator.tsx` | `calcularCadenciaCarrera` | Fitness | 7B |
 | 72 | Predictor de Carrera | `/predictor-carrera` | `PredictorCarreraCalculator.tsx` | `calcularPredictorCarrera` | Fitness | 7B |
 | 73 | Recuperación Muscular | `/recuperacion-muscular` | `RecuperacionMuscularCalculator.tsx` | `calcularRecuperacionMuscular` | Fitness | 7B |
+| 144 | Test de Flexiones | `/test-flexiones` | `TestFlexionesCalculator.tsx` | `calcularTestFlexiones` | Fitness | 11 |
 
 ---
 
 ## Slugs
 
-`imc` · `calorias-diarias` · `peso-ideal` · `grasa-corporal` · `frecuencia-cardiaca` · `agua-diaria` · `ffmi` · `complexion-corporal` · `somatotipo` · `indice-adiposidad` · `vo2-maximo` · `presion-arterial` · `riesgo-cardiovascular` · `cintura-cadera` · `cintura-estatura` · `1rm` · `volumen-entrenamiento` · `fuerza-relativa` · `masa-muscular` · `calorias-ejercicio` · `calorias-caminando` · `calorias-ciclismo` · `calorias-natacion` · `ritmo-carrera` · `test-cooper` · `test-rockport` · `recuperacion-cardiaca` · `temperatura-corporal` · `presion-pulso` · `talla-predicha` · `vam` · `indice-masa-grasa` · `ritmo-maraton` · `indice-conicidad` · `tasa-sudoracion` · `masa-osea` · `sindrome-metabolico` · `potencia-salto` · `grasa-visceral` · `oximetria` · `umbral-anaerobico` · `carga-entrenamiento` · `escala-borg` · `fc-reposo` · `actividad-fisica` · `hidratacion-deportiva` · `ritmo-natacion` · `ftp-ciclismo` · `cadencia-carrera` · `predictor-carrera` · `recuperacion-muscular`
+`imc` · `calorias-diarias` · `peso-ideal` · `grasa-corporal` · `frecuencia-cardiaca` · `agua-diaria` · `ffmi` · `complexion-corporal` · `somatotipo` · `indice-adiposidad` · `vo2-maximo` · `presion-arterial` · `riesgo-cardiovascular` · `cintura-cadera` · `cintura-estatura` · `1rm` · `volumen-entrenamiento` · `fuerza-relativa` · `masa-muscular` · `calorias-ejercicio` · `calorias-caminando` · `calorias-ciclismo` · `calorias-natacion` · `ritmo-carrera` · `test-cooper` · `test-rockport` · `recuperacion-cardiaca` · `temperatura-corporal` · `presion-pulso` · `talla-predicha` · `vam` · `indice-masa-grasa` · `ritmo-maraton` · `indice-conicidad` · `tasa-sudoracion` · `masa-osea` · `sindrome-metabolico` · `potencia-salto` · `grasa-visceral` · `oximetria` · `umbral-anaerobico` · `carga-entrenamiento` · `escala-borg` · `fc-reposo` · `actividad-fisica` · `hidratacion-deportiva` · `ritmo-natacion` · `ftp-ciclismo` · `cadencia-carrera` · `predictor-carrera` · `recuperacion-muscular` · `test-flexiones`
 
 ---
 
