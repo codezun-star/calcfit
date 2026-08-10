@@ -63,7 +63,7 @@ Si vas a hacer cardio en ayunas y quieres proteger el músculo:
 - **Mantén la intensidad moderada**: zona 2 (65-70% FC máxima) maximiza la oxidación de grasa y minimiza el catabolismo
 - **Duración máxima 45-60 minutos**: más tiempo sin combustible aumenta el riesgo
 
-Consulta tus zonas cardíacas reales con nuestra [calculadora de frecuencia cardíaca](/frecuencia-cardiaca) para asegurarte de entrenar en la intensidad correcta.
+Consulta tus zonas cardíacas reales con nuestra calculadora de frecuencia cardíaca para asegurarte de entrenar en la intensidad correcta.
 
 ## La conclusión práctica
 

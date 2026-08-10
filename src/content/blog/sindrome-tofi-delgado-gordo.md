@@ -29,7 +29,7 @@ El IMC es el cociente peso / estatura². Es un cribado poblacional útil —corr
 
 Dos personas con IMC idéntico de 23 pueden tener perfiles completamente distintos: una con 15% de grasa corporal y función metabólica excelente; otra con 28% de grasa corporal, con la mayor parte acumulada en el abdomen alrededor de los órganos.
 
-La [calculadora de IMC](/imc) es un primer paso, pero complementarla con [porcentaje de grasa corporal](/grasa-corporal) y [grasa visceral](/grasa-visceral) da una imagen mucho más precisa de tu salud real.
+La [calculadora de IMC](/imc) es un primer paso, pero complementarla con [porcentaje de grasa corporal](/grasa-corporal) y [grasa visceral](/grasa-corporal) da una imagen mucho más precisa de tu salud real.
 
 ## Quiénes tienen mayor riesgo de TOFI
 
@@ -65,11 +65,11 @@ La resonancia magnética es el gold standard para medir grasa visceral, pero no 
 
 **1. Circunferencia de cintura elevada con peso normal**: en hombres, riesgo aumentado por encima de 94 cm; en mujeres, por encima de 80 cm. Muchos TOFI tienen "barriga funcional" visible sin sobrepeso aparente en el resto del cuerpo.
 
-**2. Relación cintura-cadera elevada**: la [calculadora de índice cintura-cadera](/indice-conicidad) puede orientar sobre el riesgo cardiovascular derivado de la distribución de grasa.
+**2. Relación cintura-cadera elevada**: la [calculadora de índice cintura-cadera](/grasa-corporal) puede orientar sobre el riesgo cardiovascular derivado de la distribución de grasa.
 
 **3. Analítica básica**: glucosa en ayunas, triglicéridos, HDL, ALT y presión arterial. Si dos o más están fuera de rango con IMC normal, el riesgo metabólico es real.
 
-**4. Índice de adiposidad visceral (IAV)**: se calcula con circunferencia de cintura, IMC, triglicéridos y HDL. La [calculadora de índice de adiposidad](/indice-adiposidad) lo estima sin necesidad de pruebas de imagen.
+**4. Índice de adiposidad visceral (IAV)**: se calcula con circunferencia de cintura, IMC, triglicéridos y HDL. La [calculadora de índice de adiposidad](/grasa-corporal) lo estima sin necesidad de pruebas de imagen.
 
 ## Qué hacer si eres TOFI
 

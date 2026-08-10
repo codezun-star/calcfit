@@ -63,7 +63,7 @@ Hay mucha confusión entre fuentes "completas" e "incompletas". Una proteína co
 | Lentejas cocidas | 1 taza (200 g) | 18 g |
 | Tofu firme | 100 g | 8 g |
 
-Para calcular exactamente cuánta proteína necesitas repartir por cada comida del día, usa nuestra [calculadora de proteína por comida](/proteina-por-comida). Te ayuda a distribuir los gramos de forma práctica en tu rutina de alimentación.
+Para calcular exactamente cuánta proteína necesitas repartir por cada comida del día, usa nuestra [calculadora de proteína por comida](/proteinas). Te ayuda a distribuir los gramos de forma práctica en tu rutina de alimentación.
 
 ## El mito del "anabolic window" y la distribución
 

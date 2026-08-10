@@ -13,10 +13,8 @@ for (const cat of categorias) {
 const calcWithCat = calculadoras.map(c => ({ ...c, categoria: catBySlug[c.slug] ?? '' }));
 const catLabels = categorias.map(c => c.label);
 const categoryPageUrls: Record<string, string> = {
-  'Fitness & salud':       '/fitness',
-  'Embarazo & fertilidad': '/embarazo',
-  'Fechas & tiempo':       '/fechas',
-  'Nutrición & bienestar': '/nutricion',
+  'Fitness & composición corporal': '/fitness',
+  'Calorías & nutrición':           '/nutricion',
 };
 
 const schema = {
@@ -50,12 +48,12 @@ const schema = {
         contactType: 'customer support',
         availableLanguage: 'Spanish',
       },
-      description: '143 calculadoras de salud gratuitas, validadas científicamente, sin registro.',
+      description: '18 calculadoras de fitness y composición corporal, validadas científicamente, sin registro.',
     },
     {
       '@type': 'ItemList',
       name: 'Calculadoras de salud CalcFit',
-      numberOfItems: 143,
+      numberOfItems: 18,
       itemListElement: calculadoras.map((c, i) => ({
         '@type': 'ListItem',
         position: i + 1,
@@ -77,8 +75,8 @@ function blogThumb(url: string): string {
 ---
 
 <Base
-  title="CalcFit — 143 Calculadoras de Salud Gratuitas y Validadas Científicamente"
-  description="143 calculadoras de salud gratuitas: IMC, calorías, embarazo, glucosa, colesterol, masa muscular, 1RM, riesgo cardiovascular y más. Sin registro. Validadas científicamente."
+  title="Calculadoras de Fitness y Composición Corporal | CalcFit"
+  description="Calcula tu IMC, grasa corporal, masa muscular, calorías diarias, déficit, 1RM y calorías quemadas al caminar, correr, nadar o pedalear. Gratis, sin registro."
   keywords="calculadoras de salud gratis, calculadora IMC, calculadora calorías, calculadora peso ideal, calcular grasa corporal, calculadoras fitness"
   schema={schema}
 >
@@ -90,9 +88,7 @@ function blogThumb(url: string): string {
   </a>
   <div style="display: flex; align-items: center; gap: 24px;">
     <a href="#fitness"   class="nav-text nav-cat" style="font-size: 12px; color: #888; letter-spacing: 0.5px; text-decoration: none;">Fitness</a>
-    <a href="#embarazo"  class="nav-text nav-cat" style="font-size: 12px; color: #888; letter-spacing: 0.5px; text-decoration: none;">Embarazo</a>
-    <a href="#fechas"    class="nav-text nav-cat" style="font-size: 12px; color: #888; letter-spacing: 0.5px; text-decoration: none;">Fechas</a>
-    <a href="#nutricion" class="nav-text nav-cat" style="font-size: 12px; color: #888; letter-spacing: 0.5px; text-decoration: none;">Nutrición</a>
+    <a href="#nutricion" class="nav-text nav-cat" style="font-size: 12px; color: #888; letter-spacing: 0.5px; text-decoration: none;">Calorías &amp; nutrición</a>
     <a href="/blog" class="nav-text nav-cat" style="font-size: 12px; color: #888; letter-spacing: 0.5px; text-decoration: none;">Blog</a>
     <a href="#calculadoras" style="font-size: 12px; font-weight: 600; background: var(--acid); color: var(--ink); padding: 7px 16px; text-decoration: none;">Empezar</a>
   </div>
@@ -156,8 +152,6 @@ function blogThumb(url: string): string {
 <!-- CALCULADORAS -->
 <section id="calculadoras" style="background: var(--cream); padding: 48px 32px;">
   <span id="fitness"   style="display: block; height: 0;"></span>
-  <span id="embarazo"  style="display: block; height: 0;"></span>
-  <span id="fechas"    style="display: block; height: 0;"></span>
   <span id="nutricion" style="display: block; height: 0;"></span>
   <div style="display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px; padding-bottom: 16px; border-bottom: 1px solid var(--border); margin-bottom: 24px;">
     <h2 style="font-family: var(--font-display); font-size: 48px; color: var(--ink);">Calculadoras</h2>
@@ -194,7 +188,7 @@ function blogThumb(url: string): string {
 <section class="cta-section" style="background: var(--acid); padding: 52px 32px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px;">
   <div>
     <h2 style="font-family: var(--font-display); font-size: 58px; color: var(--ink); line-height: 0.95;">Empieza /<br>ahora.</h2>
-    <p style="font-size: 13px; color: #3a3900; margin-top: 8px;">143 calculadoras gratuitas te esperan.</p>
+    <p style="font-size: 13px; color: #3a3900; margin-top: 8px;">18 calculadoras gratuitas te esperan.</p>
   </div>
   <div style="display: flex; gap: 12px; flex-wrap: wrap;">
     <a href="#calculadoras" style="background: var(--ink); color: var(--acid); padding: 14px 28px; font-weight: 600; font-size: 13px; text-decoration: none;">Ver calculadoras</a>

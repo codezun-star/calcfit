@@ -105,7 +105,7 @@ Con una dieta plant-based bien planificada, la proteína no suele ser el problem
 - **Omega-3 (EPA/DHA)**: las fuentes vegetales (linaza, chía) solo aportan ALA, que se convierte ineficientemente. Considera algas DHA/EPA.
 - **Hierro y zinc**: la biodisponibilidad es menor en fuentes vegetales. La vitamina C mejora la absorción del hierro no hemo.
 
-Para saber si estás alcanzando tus requerimientos proteicos diarios, usa la [calculadora de proteína diaria](/proteina-por-comida).
+Para saber si estás alcanzando tus requerimientos proteicos diarios, usa la [calculadora de proteína diaria](/proteinas).
 
 ---
 

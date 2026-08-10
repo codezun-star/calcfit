@@ -90,7 +90,7 @@ Si llevas más de 4 semanas sin perder peso comiendo lo que crees que es un déf
 
 Nuestra [calculadora de calorías diarias](/calorias-diarias) te ayuda a definir tu punto de partida real y entender si tu estimación actual de mantenimiento es correcta.
 
-Para ir más allá, nuestra [calculadora de edad biológica](/edad-biologica) incluye factores como composición corporal, actividad y hábitos para darte una perspectiva completa de tu salud metabólica.
+Para ir más allá, nuestra calculadora de edad biológica incluye factores como composición corporal, actividad y hábitos para darte una perspectiva completa de tu salud metabólica.
 
 ---
 

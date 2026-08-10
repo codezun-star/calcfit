@@ -73,13 +73,13 @@ Distingue entre masa grasa y masa libre de grasa. Es el indicador más útil par
 Simple y muy predictiva. Una cintura mayor a 88 cm en mujeres y 102 cm en hombres es marcador independiente de riesgo cardiovascular y metabólico, sin importar el IMC.
 
 ### Índice de adiposidad corporal (IAC)
-Usa la circunferencia de cadera y la altura para estimar grasa corporal sin necesidad de báscula. Nuestra [calculadora de índice de adiposidad](/indice-adiposidad) te lo calcula automáticamente.
+Usa la circunferencia de cadera y la altura para estimar grasa corporal sin necesidad de báscula. Nuestra [calculadora de índice de adiposidad](/grasa-corporal) te lo calcula automáticamente.
 
 ### Índice cintura-estatura
 Divide la circunferencia de cintura entre la altura. Un valor mayor a 0.5 es señal de alerta independientemente del IMC. Es uno de los predictores más sólidos de riesgo cardiometabólico.
 
 ### Grasa visceral
-La grasa que rodea los órganos es la que realmente importa desde el punto de vista metabólico. Nuestra [calculadora de grasa visceral](/grasa-visceral) da una estimación basada en tus medidas corporales.
+La grasa que rodea los órganos es la que realmente importa desde el punto de vista metabólico. Nuestra [calculadora de grasa visceral](/grasa-corporal) da una estimación basada en tus medidas corporales.
 
 ## Entonces, ¿el IMC sirve para algo?
 

@@ -1,3 +1,2 @@
-/ventana-fertil       /ovulacion               301
-/peso-embarazo        /aumento-peso-embarazo   301
+# Normaliza las URLs con barra final → sin barra (trailingSlash: 'never')
 /*/  /:splat  301

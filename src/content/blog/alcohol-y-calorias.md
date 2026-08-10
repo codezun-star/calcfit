@@ -82,12 +82,12 @@ La estrategia más efectiva para quien bebe socialmente: elegir destilados (vodk
 
 ## Usa la calculadora para ver el impacto exacto
 
-La [calculadora de calorías en bebidas alcohólicas](/calorias-bebidas) te permite ver cuántas calorías suman tus bebidas habituales y cómo encajan (o no) en tu objetivo calórico diario.
+La calculadora de calorías en bebidas alcohólicas te permite ver cuántas calorías suman tus bebidas habituales y cómo encajan (o no) en tu objetivo calórico diario.
 
 ---
 
 ## Artículos relacionados
 
 - [Déficit calórico sin pasar hambre: cómo calcularlo y aplicarlo de verdad](/blog/deficit-calorico-sin-pasar-hambre)
-- [Azúcar: cuánto es demasiado y cómo identificarla en los productos](/blog/azucar-cuanto-es-demasiado)
+- Azúcar: cuánto es demasiado y cómo identificarla en los productos
 - [Calorías de mantenimiento: qué son y cómo calcularlas con precisión](/blog/calorias-de-mantenimiento-guia)

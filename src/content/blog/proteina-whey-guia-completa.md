@@ -64,7 +64,7 @@ Dicho eso, si comes poco antes de entrenar o entrenas en ayunas, tomar proteína
 
 Lo que sí es claro: distribuir la proteína en 3-5 comidas a lo largo del día optimiza la síntesis proteica mejor que concentrarla en 1-2 comidas.
 
-Usa nuestra [calculadora de proteína por comida](/proteina-por-comida) para saber cuánta proteína necesitas en cada toma según tu peso y objetivo.
+Usa nuestra [calculadora de proteína por comida](/proteinas) para saber cuánta proteína necesitas en cada toma según tu peso y objetivo.
 
 ## Cuánta proteína whey necesitas (si es que la necesitas)
 

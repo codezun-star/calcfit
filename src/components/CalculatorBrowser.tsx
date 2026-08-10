@@ -1,10 +1,8 @@
 import { useState, useMemo, useEffect } from 'react';
 
 const HASH_MAP: Record<string, string> = {
-  'fitness':   'Fitness & salud',
-  'embarazo':  'Embarazo & fertilidad',
-  'fechas':    'Fechas & tiempo',
-  'nutricion': 'Nutrición & bienestar',
+  'fitness':   'Fitness & composición corporal',
+  'nutricion': 'Calorías & nutrición',
 };
 
 type Calc = {

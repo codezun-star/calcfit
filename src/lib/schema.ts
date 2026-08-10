@@ -12,7 +12,7 @@ export const ORGANIZATION_ID = `${SITE_URL}/#organization`;
 export const WEBSITE_ID = `${SITE_URL}/#website`;
 
 /** Fecha de última revisión global del sitio (ISO YYYY-MM-DD). */
-export const SITE_DATE_MODIFIED = '2026-08-06';
+export const SITE_DATE_MODIFIED = '2026-08-10';
 
 export const organizationSchema = {
   '@type': 'Organization',

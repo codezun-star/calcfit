@@ -79,7 +79,7 @@ El descanso no es opcional — es parte del programa. Señales de que necesitas 
 - Pérdida de motivación o irritabilidad
 - Dolor articular persistente (diferente al DOMS muscular)
 
-Monitoriza tu frecuencia cardíaca en reposo con nuestra [calculadora de FC en reposo](/fc-reposo) para detectar señales tempranas de sobreentrenamiento.
+Monitoriza tu frecuencia cardíaca en reposo con nuestra calculadora de FC en reposo para detectar señales tempranas de sobreentrenamiento.
 
 ## Cómo integrar cardio con el entrenamiento de fuerza
 
@@ -89,7 +89,7 @@ La combinación de fuerza + cardio en el mismo día puede ser subóptima si el c
 - **Cardio de baja intensidad (zona 2) en días separados** de las sesiones de fuerza — funciona como descanso activo
 - **HIIT máximo 2 veces por semana** para no sobrecargar el sistema nervioso central
 
-Revisa las zonas cardíacas correctas para tu cardio de baja intensidad con nuestra [calculadora de frecuencia cardíaca](/frecuencia-cardiaca).
+Revisa las zonas cardíacas correctas para tu cardio de baja intensidad con nuestra calculadora de frecuencia cardíaca.
 
 ## Muestra de semana para alguien con 4 días disponibles
 
@@ -103,7 +103,7 @@ Revisa las zonas cardíacas correctas para tu cardio de baja intensidad con nues
 | Sábado | HIIT o cardio zona 2 | 25-40 min |
 | Domingo | Descanso completo | — |
 
-Ajusta el volumen de entrenamiento con nuestra [calculadora de volumen de entrenamiento](/volumen-entrenamiento) para asegurarte de que las series semanales por grupo muscular están en el rango óptimo.
+Ajusta el volumen de entrenamiento con nuestra calculadora de volumen de entrenamiento para asegurarte de que las series semanales por grupo muscular están en el rango óptimo.
 
 ## La regla más importante de todas
 

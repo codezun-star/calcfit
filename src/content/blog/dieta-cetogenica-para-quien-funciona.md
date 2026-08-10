@@ -49,7 +49,7 @@ Sin embargo, los meta-análisis que comparan keto con otras dietas de igual cont
 
 **Ciertos cánceres**: área de investigación activa. Algunas líneas celulares cancerosas dependen casi exclusivamente de glucosa (efecto Warburg). La keto como adyuvante oncológico está en estudio pero no es estándar clínico.
 
-Evalúa tu riesgo metabólico actual con nuestra [calculadora de síndrome metabólico](/sindrome-metabolico) y la [calculadora de resistencia a la insulina](/resistencia-insulina).
+Evalúa tu riesgo metabólico actual con nuestra calculadora de síndrome metabólico y la calculadora de resistencia a la insulina.
 
 ## Contextos donde la keto tiene desventajas reales
 

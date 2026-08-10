@@ -19,7 +19,7 @@ export const GET: APIRoute = async () => {
 
   lines.push('# CalcFit');
   lines.push('');
-  lines.push(`> ${calculadoras.length} calculadoras de salud, fitness, nutrición, embarazo y fechas, con fórmulas validadas científicamente (OMS, Mifflin-St Jeor, US Navy, Cooper, AHA/ACC…). Todos los cálculos se ejecutan en el navegador del usuario: sin registro, sin backend y sin cookies de rastreo.`);
+  lines.push(`> ${calculadoras.length} calculadoras de fitness, composición corporal y gasto calórico, con fórmulas validadas científicamente (OMS, Mifflin-St Jeor, US Navy, Cooper, Epley). Todos los cálculos se ejecutan en el navegador del usuario: sin registro, sin backend y sin cookies de rastreo.`);
   lines.push('');
   lines.push('## Cómo usar este sitio');
   lines.push('');

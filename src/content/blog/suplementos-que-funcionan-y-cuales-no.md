@@ -33,7 +33,7 @@ Es el suplemento deportivo con más investigación publicada — más de 500 est
 
 Dosis: 3-5 g/día de creatina monohidrato. La "carga" inicial no es necesaria para la mayoría. El monohidrato es exactamente igual de eficaz que las formas "premium" (etil éster, HCl) y mucho más barato.
 
-Usa nuestra [calculadora de creatina](/creatina) para calcular la dosis personalizada según tu peso corporal.
+Usa nuestra calculadora de creatina para calcular la dosis personalizada según tu peso corporal.
 
 ### Proteína en polvo (whey, caseína, vegana)
 
@@ -104,4 +104,4 @@ Si no puedes responder sí a las tres, probablemente estás comprando una histor
 
 - [Creatina: guía completa sin mitos para principiantes y deportistas](/blog/creatina-guia-completa-sin-mitos)
 - [Proteína whey: guía completa para elegir la que te conviene](/blog/proteina-whey-guia-completa)
-- [Vitamina D: la deficiencia que el médico no siempre busca](/blog/vitamina-d-deficiencia-suplementacion)
+- Vitamina D: la deficiencia que el médico no siempre busca

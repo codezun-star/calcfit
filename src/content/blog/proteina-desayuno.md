@@ -62,7 +62,7 @@ Los desayunos ricos en carbohidratos refinados (cereales de caja, pan blanco, zu
 
 Un desayuno con 30g de proteína y grasas saludables mantiene la glucosa más estable durante 4-5 horas, reduciendo el hambre y mejorando el foco cognitivo durante la mañana.
 
-Monitoriza tus niveles de glucosa en ayunas con la [calculadora de glucosa en sangre](/glucosa) para entender tu punto de partida metabólico.
+Monitoriza tus niveles de glucosa en ayunas con la calculadora de glucosa en sangre para entender tu punto de partida metabólico.
 
 ## La distribución óptima de proteína a lo largo del día
 
@@ -76,7 +76,7 @@ Ejemplo de distribución óptima para 150g de proteína diaria:
 - Merienda/post-entrenamiento: 30g
 - Cena: 45g
 
-La [calculadora de proteína por comida](/proteina-por-comida) te ayuda a distribuir tus gramos diarios de forma práctica.
+La [calculadora de proteína por comida](/proteinas) te ayuda a distribuir tus gramos diarios de forma práctica.
 
 ## ¿Y si no tienes hambre por las mañanas?
 

@@ -86,7 +86,7 @@ Hay métricas más informativas que el número en la báscula:
 
 Hay dos tipos principales de grasa: subcutánea (la que puedes pellizcar) y visceral (la que rodea los órganos internos). La grasa visceral es la metabólicamente peligrosa: genera inflamación, altera la sensibilidad a la insulina y se asocia con mayor riesgo cardiovascular y diabetes.
 
-La grasa visceral no siempre es visible. Una persona con cintura aparentemente "normal" puede tener exceso de grasa visceral. Los indicadores más prácticos son la circunferencia de cintura y la relación cintura-cadera. Usa nuestra [calculadora de grasa visceral](/grasa-visceral) para obtener una estimación.
+La grasa visceral no siempre es visible. Una persona con cintura aparentemente "normal" puede tener exceso de grasa visceral. Los indicadores más prácticos son la circunferencia de cintura y la relación cintura-cadera. Usa nuestra [calculadora de grasa visceral](/grasa-corporal) para obtener una estimación.
 
 ## El mensaje final
 

@@ -43,7 +43,7 @@ Los estudios sobre ayuno intermitente muestran resultados similares a las dietas
 
 Lo que sí tiene:
 - Facilita la restricción calórica en personas que prefieren comer pocas comidas abundantes en lugar de muchas pequeñas
-- Puede mejorar la sensibilidad a la insulina, especialmente en personas con resistencia a la misma (puedes evaluarla con nuestra [calculadora de resistencia a la insulina](/resistencia-insulina))
+- Puede mejorar la sensibilidad a la insulina, especialmente en personas con resistencia a la misma (puedes evaluarla con nuestra calculadora de resistencia a la insulina)
 - Reduce los picos de insulina posprandiales por la menor frecuencia de comidas
 - Algunos estudios sugieren mejoras en marcadores inflamatorios, aunque los efectos a largo plazo siguen bajo investigación
 
@@ -62,7 +62,7 @@ Muchas personas reportan que el ayuno intermitente les resulta más fácil de ma
 
 **Simplifica la logística**: preparar 2-3 comidas en lugar de 5-6 al día requiere menos tiempo y planificación.
 
-Para calcular qué ventana de ayuno se adapta mejor a tu horario y objetivo, nuestra [calculadora de ayuno intermitente](/ayuno-intermitente) te ayuda a estructurar los tiempos de forma personalizada.
+Para calcular qué ventana de ayuno se adapta mejor a tu horario y objetivo, nuestra calculadora de ayuno intermitente te ayuda a estructurar los tiempos de forma personalizada.
 
 ## Para quién NO funciona el ayuno intermitente
 

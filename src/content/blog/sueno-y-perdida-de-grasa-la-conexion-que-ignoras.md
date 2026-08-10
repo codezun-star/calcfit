@@ -51,7 +51,7 @@ Mismo déficit. Misma pérdida de peso. Resultado completamente diferente en com
 
 ## Cuántas horas son suficientes
 
-La recomendación de la National Sleep Foundation para adultos (18-64 años) es **7-9 horas**. Nuestra [calculadora de sueño](/sueno) te ayuda a planificar tus horas según tu cronotipo, horario de despertador y necesidades de recuperación.
+La recomendación de la National Sleep Foundation para adultos (18-64 años) es **7-9 horas**. Nuestra calculadora de sueño te ayuda a planificar tus horas según tu cronotipo, horario de despertador y necesidades de recuperación.
 
 Pero no es solo cantidad, es calidad. 8 horas de sueño interrumpido o en un ambiente con luz o ruido no equivale a 7 horas de sueño profundo continuo.
 

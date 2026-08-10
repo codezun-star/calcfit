@@ -33,7 +33,7 @@ No toda la grasa es igual. La grasa abdominal tiene dos componentes completament
 
 Una persona con cintura aparentemente normal puede tener exceso de grasa visceral. Y al revés: alguien con barriga visible puede tener valores metabólicos perfectamente saludables. La circunferencia de cintura es el indicador más práctico sin equipos de imagen. Para hombres, riesgo aumentado por encima de 94 cm; para mujeres, por encima de 80 cm (criterios OMS).
 
-Usa la [calculadora de grasa visceral](/grasa-visceral) para estimar tu nivel con solo la circunferencia de cintura.
+Usa la [calculadora de grasa visceral](/grasa-corporal) para estimar tu nivel con solo la circunferencia de cintura.
 
 ## La reducción localizada no existe
 

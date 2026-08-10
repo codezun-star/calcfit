@@ -37,7 +37,7 @@ Esto tiene dos ventajas:
 1. Permite que el sistema cardiovascular se adapte sin sobrecargarlo
 2. Reduce el impacto acumulado sobre articulaciones antes de que estén adaptadas
 
-La frecuencia cardíaca es el mejor indicador de intensidad. Para principiantes, correr en una zona donde puedas mantener una conversación (zona 2, aproximadamente 60-70% de la frecuencia cardíaca máxima) es más efectivo que correr "a tope". Usa la [calculadora de zonas de frecuencia cardíaca](/frecuencia-cardiaca) para conocer tus rangos.
+La frecuencia cardíaca es el mejor indicador de intensidad. Para principiantes, correr en una zona donde puedas mantener una conversación (zona 2, aproximadamente 60-70% de la frecuencia cardíaca máxima) es más efectivo que correr "a tope". Usa la calculadora de zonas de frecuencia cardíaca para conocer tus rangos.
 
 ## Plan de 8 semanas del sofá al 5K
 
@@ -60,7 +60,7 @@ Cada sesión dura entre 30-40 minutos. Hacer 3 sesiones por semana con al menos 
 
 Para principiantes, un ritmo entre 6:30 y 8:00 min/km es lo más común. El objetivo no es velocidad, es completar el tiempo de carrera.
 
-Con la [calculadora de ritmo de carrera](/ritmo-carrera) puedes calcular tu tiempo estimado para diferentes distancias una vez conozcas tu ritmo.
+Con la calculadora de ritmo de carrera puedes calcular tu tiempo estimado para diferentes distancias una vez conozcas tu ritmo.
 
 ## El calzado: lo más importante del equipamiento
 
@@ -87,7 +87,7 @@ Precio no indica calidad necesariamente, pero menos de 60 USD suele implicar amo
 
 ## Qué esperar en términos de rendimiento aeróbico
 
-El VO₂ máximo —la capacidad aeróbica máxima— mejora notablemente en los primeros 6-12 meses de entrenamiento consistente. En principiantes, mejoras del 15-25% son comunes en el primer año. Mide tu progreso con la [calculadora de VO₂ máximo](/vo2-maximo).
+El VO₂ máximo —la capacidad aeróbica máxima— mejora notablemente en los primeros 6-12 meses de entrenamiento consistente. En principiantes, mejoras del 15-25% son comunes en el primer año. Mide tu progreso con la [calculadora de VO₂ máximo](/test-cooper).
 
 ## Nutrición para el running
 

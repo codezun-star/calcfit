@@ -51,7 +51,7 @@ Los estudios consistentemente muestran:
 
 Estos números son con entrenamiento. La creatina sin entrenamiento tiene efectos mínimos. No es una pastilla para ganar músculo sentado.
 
-Para saber cuál es la dosis específica para tu peso corporal y objetivo, usa nuestra [calculadora de creatina](/creatina), que calcula la carga inicial y la dosis de mantenimiento personalizada.
+Para saber cuál es la dosis específica para tu peso corporal y objetivo, usa nuestra calculadora de creatina, que calcula la carga inicial y la dosis de mantenimiento personalizada.
 
 ## Monohidrato vs "creatinas avanzadas"
 
@@ -108,7 +108,7 @@ La creatina no necesita "combinarse" con nada especial. Se absorbe perfectamente
 
 No necesitas zumo de uva, azúcar ni ningún otro "potenciador". Solo coherencia en la toma diaria.
 
-Si estás trabajando en ganar masa muscular, combina la creatina con un seguimiento adecuado de tu ingesta proteica. Consulta nuestra [calculadora de proteína por comida](/proteina-por-comida) para optimizar la distribución diaria, y la [calculadora de 1RM](/1rm) para seguir la progresión de tu fuerza a lo largo del tiempo.
+Si estás trabajando en ganar masa muscular, combina la creatina con un seguimiento adecuado de tu ingesta proteica. Consulta nuestra [calculadora de proteína por comida](/proteinas) para optimizar la distribución diaria, y la [calculadora de 1RM](/1rm) para seguir la progresión de tu fuerza a lo largo del tiempo.
 
 ---
 

@@ -89,7 +89,7 @@ Sí, en la mayoría de los casos. DOMS moderado no indica que el músculo no est
 
 Para un programa de hipertrofia con alta frecuencia (entrenar el mismo músculo 2-3 veces por semana), es normal y esperado entrenar con algo de DOMS residual. Con el tiempo, el DOMS disminuye y la frecuencia alta sigue siendo productiva.
 
-Monitoriza tu recuperación con la [calculadora de recuperación muscular](/recuperacion-muscular) y ajusta el volumen si el DOMS es severo o persistente entre sesiones.
+Monitoriza tu recuperación con la calculadora de recuperación muscular y ajusta el volumen si el DOMS es severo o persistente entre sesiones.
 
 ## DOMS y principiantes: lo que hay que saber
 

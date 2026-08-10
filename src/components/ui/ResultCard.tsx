@@ -3,9 +3,11 @@ interface ResultCardProps {
   value: string | number;
   unit: string;
   interpretation?: string;
+  /** Color del valor. Por defecto acid; se usa para señalar categorías de resultado. */
+  color?: string;
 }
 
-export default function ResultCard({ label, value, unit, interpretation }: ResultCardProps) {
+export default function ResultCard({ label, value, unit, interpretation, color }: ResultCardProps) {
   return (
     <div style={{
       background: 'var(--ink)',
@@ -27,12 +29,12 @@ export default function ResultCard({ label, value, unit, interpretation }: Resul
         <span style={{
           fontFamily: 'var(--font-display)',
           fontSize: '72px',
-          color: 'var(--acid)',
+          color: color ?? 'var(--acid)',
           lineHeight: '1',
         }}>
           {value}
         </span>
-        <span style={{ fontSize: '11px', color: '#666', fontFamily: 'var(--font-mono)' }}>
+        <span style={{ fontSize: '11px', color: '#aaa', fontFamily: 'var(--font-mono)' }}>
           {unit}
         </span>
       </div>

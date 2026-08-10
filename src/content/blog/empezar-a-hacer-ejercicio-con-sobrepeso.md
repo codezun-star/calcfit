@@ -28,7 +28,7 @@ Comenzar desde cero con exceso de peso requiere una estrategia diferente: progre
 
 **La termorregulación es menos eficiente**: el tejido adiposo actúa como aislante. Entrenar con calor puede ser especialmente demandante — hidratación y ambientes ventilados son prioritarios.
 
-Antes de empezar, calcula tu IMC con nuestra [calculadora de IMC](/imc) y tu frecuencia cardíaca de entrenamiento segura con la [calculadora de frecuencia cardíaca](/frecuencia-cardiaca) para tener referencias objetivas.
+Antes de empezar, calcula tu IMC con nuestra [calculadora de IMC](/imc) y tu frecuencia cardíaca de entrenamiento segura con la calculadora de frecuencia cardíaca para tener referencias objetivas.
 
 ## El error más común: empezar demasiado fuerte
 

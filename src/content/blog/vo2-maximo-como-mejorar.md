@@ -50,7 +50,7 @@ El **Test de Cooper** es el más usado: correr lo más lejos posible en 12 minut
 
 Si recorriste 2.400 m en 12 minutos: VO₂ máx ≈ (2400 − 504.9) / 44.73 ≈ **42.4 ml/kg/min**.
 
-Usa nuestra [calculadora de VO₂ máximo](/vo2-maximo) para obtener el resultado directo sin hacer la operación manualmente.
+Usa nuestra [calculadora de VO₂ máximo](/test-cooper) para obtener el resultado directo sin hacer la operación manualmente.
 
 ## Qué tipo de entrenamiento lo mejora más
 
@@ -71,7 +71,7 @@ El entrenamiento en zona 2 (60-70% FCmáx, donde puedes hablar pero con esfuerzo
 
 La combinación óptima: 80% del tiempo en zona 2 + 20% en alta intensidad.
 
-Calcula tus zonas de frecuencia cardíaca con la [calculadora de zonas cardíacas](/frecuencia-cardiaca).
+Calcula tus zonas de frecuencia cardíaca con la calculadora de zonas cardíacas.
 
 ## Cuánto puede mejorar y en cuánto tiempo
 

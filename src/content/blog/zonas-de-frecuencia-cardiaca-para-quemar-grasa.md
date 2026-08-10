@@ -33,7 +33,7 @@ La zona quema grasa es útil. Pero no es la única respuesta y no es siempre la 
 
 ## Las 5 zonas cardíacas y qué pasa en cada una
 
-Para calcular tus zonas personalizadas necesitas saber tu frecuencia cardíaca máxima. Usa nuestra [calculadora de frecuencia cardíaca](/frecuencia-cardiaca) que te da las zonas exactas según tu edad y frecuencia en reposo.
+Para calcular tus zonas personalizadas necesitas saber tu frecuencia cardíaca máxima. Usa nuestra calculadora de frecuencia cardíaca que te da las zonas exactas según tu edad y frecuencia en reposo.
 
 | Zona | % FC máxima | Intensidad percibida | Combustible principal | Para qué sirve |
 |---|---|---|---|---|
@@ -54,9 +54,9 @@ Fórmulas más precisas:
 - **Tanaka** (más precisa en adultos): FC máx = 208 − (0.7 × edad)
 - **Gelish**: FC máx = 207 − (0.7 × edad)
 
-Nuestra [calculadora de frecuencia cardíaca](/frecuencia-cardiaca) usa la fórmula de Tanaka y calcula automáticamente tus 5 zonas en ppm.
+Nuestra calculadora de frecuencia cardíaca usa la fórmula de Tanaka y calcula automáticamente tus 5 zonas en ppm.
 
-Para saber tu frecuencia cardíaca en reposo (que mejora la precisión de las zonas), úsala en combinación con nuestra [calculadora de FC en reposo](/fc-reposo).
+Para saber tu frecuencia cardíaca en reposo (que mejora la precisión de las zonas), úsala en combinación con nuestra calculadora de FC en reposo.
 
 ## Qué zona usar según tu objetivo
 
@@ -73,7 +73,7 @@ Evita pasar la mayoría del tiempo en zona 3: es lo suficientemente dura para ca
 ### Si tienes poco tiempo
 **HIIT en zona 4-5**: 2-3 sesiones semanales de 20-25 minutos con intervalos de alta intensidad producen mejoras significativas en VO2 máximo y composición corporal con menor inversión de tiempo. Combínalos con 1-2 sesiones de zona 2 más largas.
 
-Puedes evaluar tu capacidad cardiorrespiratoria con nuestra [calculadora de VO2 máximo](/vo2-maximo), que estima tu consumo máximo de oxígeno y te compara con referencias para tu edad y sexo.
+Puedes evaluar tu capacidad cardiorrespiratoria con nuestra [calculadora de VO2 máximo](/test-cooper), que estima tu consumo máximo de oxígeno y te compara con referencias para tu edad y sexo.
 
 ## La frecuencia cardíaca de recuperación: un indicador de condición física
 
@@ -83,7 +83,7 @@ Un dato que pocos miran y es muy informativo: cuánto baja tu frecuencia cardía
 - **Baja entre 12-20 ppm**: condición aceptable
 - **Baja menos de 12 ppm**: señal de alarma, puede indicar fatiga acumulada o mala condición
 
-Usa nuestra [calculadora de recuperación cardíaca](/recuperacion-cardiaca) para evaluar tu FCR y ver cómo va mejorando con el entrenamiento.
+Usa nuestra calculadora de recuperación cardíaca para evaluar tu FCR y ver cómo va mejorando con el entrenamiento.
 
 ## Errores frecuentes al entrenar por zonas
 
@@ -107,12 +107,12 @@ Esto varía mucho según el peso corporal. Como referencia para una persona de 7
 | Zona 4 (80-90%) | 540 – 650 kcal |
 | Zona 5 (90-100%) | 650 – 800+ kcal |
 
-Para calcular las calorías quemadas en tus actividades específicas, puedes usar nuestra [calculadora de calorías en ejercicio](/calorias-ejercicio).
+Para calcular las calorías quemadas en tus actividades específicas, puedes usar nuestra calculadora de calorías en ejercicio.
 
 ---
 
 ## Artículos relacionados
 
-- [Cuánta agua necesitas al día según tu peso y actividad](/blog/cuanta-agua-necesitas-al-dia-segun-tu-peso)
+- Cuánta agua necesitas al día según tu peso y actividad
 - [Grasa corporal vs peso en báscula: por qué el número no lo es todo](/blog/grasa-corporal-vs-peso-en-bascula)
 - [Creatina: guía completa sin mitos para principiantes y deportistas](/blog/creatina-guia-completa-sin-mitos)
