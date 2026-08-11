@@ -1,0 +1,76 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import CuandoTestEmbarazoCalculator from '../components/calculators/CuandoTestEmbarazoCalculator';
+
+const faqs = [
+  { q: '¿Cuándo es el mejor momento para hacerse el test de embarazo?', a: 'El día óptimo es el primer día de la falta de menstruación, o lo que es equivalente, 14 días después de la ovulación (14 DPO). En este momento la concentración de hCG en orina es suficiente para ser detectada por la mayoría de los tests de farmacia. Hacerlo antes puede resultar en un falso negativo, aunque con tests de alta sensibilidad (6 mUI/mL) algunos detectan el embarazo desde 10 DPO.' },
+  { q: '¿Qué es hCG y por qué importa para el test?', a: 'La gonadotropina coriónica humana (hCG) es la hormona producida por el embrión desde la implantación (6–10 días tras la fecundación). Sus niveles se duplican aproximadamente cada 48 horas en el primer trimestre. Los tests de embarazo detectan hCG en orina; los más sensibles del mercado detectan desde 10 mUI/mL, mientras los estándar requieren 20–25 mUI/mL.' },
+  { q: '¿Por qué el test debe hacerse con la primera orina de la mañana?', a: 'La primera orina del día es la más concentrada porque se ha acumulado durante toda la noche sin diluirse por ingesta de líquidos. Esto maximiza la concentración de hCG detectable. Si haces el test más tarde del día, beber mucha agua puede diluir la orina y reducir la sensibilidad del resultado.' },
+  { q: '¿Puede dar negativo si estoy embarazada?', a: 'Sí, si se hace muy pronto. Un "falso negativo" ocurre cuando la concentración de hCG es aún insuficiente para ser detectada. Si el test da negativo pero la menstruación no llega, repítelo 2–3 días después. También puede dar falso negativo en embarazos ectópicos, donde la producción de hCG es menor.' },
+  { q: '¿Qué significa DPO?', a: 'DPO son las siglas de "Días Post Ovulación". La ovulación ocurre aproximadamente en el día (duración del ciclo − 14) de tu ciclo. Un ciclo de 28 días tiene la ovulación en el día 14; uno de 32 días, en el día 18. El test mínimo se recomienda a partir de 10 DPO, y el óptimo es a los 14 DPO (cuando empieza la falta esperada).' },
+];
+---
+
+<CalculatorLayout
+  title="Cuándo Hacer el Test de Embarazo — Día Óptimo | CalcFit"
+  description="Calcula el día ideal para hacerte el test de embarazo según tu última regla y tu ciclo. Evita falsos negativos. Basado en días post-ovulación. Gratis."
+  calculatorName="Test de Embarazo"
+  breadcrumbSlug="cuando-test-embarazo"
+  ogImage="/og/cuando-test-embarazo.jpg"
+  keywords="cuándo hacer test embarazo, día para test embarazo, prueba embarazo días después ovulación, falso negativo test embarazo, DPO test embarazo"
+  faqs={faqs}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Test de<br><span style="color: var(--acid);">Embarazo</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Calcula cuándo hacerte el test para obtener un resultado fiable y evitar falsos negativos. Basado en tu ciclo y la ovulación estimada.
+    </p>
+  </div>
+
+  <CuandoTestEmbarazoCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cómo funciona el cálculo?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      La calculadora estima la fecha de ovulación sumando (duración del ciclo − 14) días a la fecha de la última menstruación. El test mínimo se establece a los 10 días post-ovulación (10 DPO), cuando el 75% de los embarazos ya producen niveles detectables de hCG. El test óptimo es a los 14 DPO, equivalente al primer día de falta esperada.
+    </p>
+
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 400px;">
+      <thead>
+        <tr style="background: var(--ink); color: var(--acid);">
+          <th style="padding: 10px 14px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Día post-ovulación</th>
+          <th style="padding: 10px 14px; text-align: left;">Probabilidad de detección</th>
+          <th style="padding: 10px 14px; text-align: left;">Recomendación</th>
+        </tr>
+      </thead>
+      <tbody>
+        {[
+          ['8–9 DPO',  '~20–30%', 'Muy pronto — probable falso negativo'],
+          ['10 DPO',   '~60–75%', 'Posible — usar test de alta sensibilidad'],
+          ['12 DPO',   '~90%',    'Buen momento con test estándar'],
+          ['14 DPO',   '~99%',    'Momento óptimo — falta esperada'],
+        ].map(([dpo, prob, rec], i) => (
+          <tr style={`background: ${i % 2 === 0 ? 'white' : '#f9f6f0'};`}>
+            <td style="padding: 10px 14px; font-weight: 600;">{dpo}</td>
+            <td style="padding: 10px 14px;">{prob}</td>
+            <td style="padding: 10px 14px; color: var(--muted);">{rec}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    </div>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {faqs.map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

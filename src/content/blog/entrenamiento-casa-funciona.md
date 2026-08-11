@@ -106,7 +106,7 @@ Día C (Full body + Core):
 - Plancha lateral: 2×30 segundos cada lado
 - Burpees: 3×10
 
-Calcula tus calorías con la [calculadora de calorías diarias](/calorias-diarias) —el entrenamiento en casa no cambia las necesidades nutricionales fundamentales. La calculadora de carga de entrenamiento puede ayudarte a monitorear el volumen semanal.
+Calcula tus calorías con la [calculadora de calorías diarias](/calorias-diarias) —el entrenamiento en casa no cambia las necesidades nutricionales fundamentales. La [calculadora de carga de entrenamiento](/carga-entrenamiento) puede ayudarte a monitorear el volumen semanal.
 
 ---
 

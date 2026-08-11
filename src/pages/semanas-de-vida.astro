@@ -1,0 +1,76 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import SemanasDeVidaCalculator from '../components/calculators/SemanasDeVidaCalculator';
+
+const faqs = [
+  { q: '¿Por qué medir la vida en semanas?', a: 'Oliver Burkeman popularizó esta perspectiva en su libro "Cuatro mil semanas": una vida humana promedio de 80 años equivale a unas 4.000 semanas. Ver la vida en semanas —en lugar de años— hace que el tiempo parezca más concreto y manejable, y ayuda a priorizar lo verdaderamente importante.' },
+  { q: '¿Cuántas semanas vive una persona de media?', a: 'Una esperanza de vida de 75 años equivale a 3.900 semanas; 80 años son 4.160 semanas; 85 años son 4.420 semanas. Según la OPS (2023), la esperanza de vida promedio en Latinoamérica es de 74,4 años para hombres y 80,4 para mujeres.' },
+  { q: '¿Qué son los hitos de semanas redondas?', a: 'La calculadora te muestra la próxima semana "redonda" (múltiplo de 500): semana 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000… Son fechas perfectas para reflexionar, celebrar o establecer nuevas metas personales.' },
+  { q: '¿Cómo se calculan exactamente las semanas vividas?', a: 'Se toma la diferencia en días entre la fecha de nacimiento y hoy, y se divide entre 7. Se usa la fecha exacta de nacimiento, por lo que la precisión es de ±1 semana según el día actual.' },
+  { q: '¿Cuándo es la semana 1000 de vida?', a: 'La semana 1.000 de vida se cumple aproximadamente a los 19 años y 2 meses (1000 × 7 = 7.000 días ÷ 365,25 ≈ 19,16 años). La semana 2.000 llega a los 38 años y 4 meses, y la semana 3.000 a los 57 años y 6 meses.' },
+];
+---
+
+<CalculatorLayout
+  title="Semanas de Vida — Cuántas Semanas Has Vivido | CalcFit"
+  description="Calcula exactamente cuántas semanas, meses y días llevas vividos desde tu nacimiento. Descubre tu próximo hito de semanas redondas. Gratis."
+  calculatorName="Semanas de Vida"
+  breadcrumbSlug="semanas-de-vida"
+  ogImage="/og/semanas-de-vida.jpg"
+  keywords="calculadora semanas de vida, cuántas semanas he vivido, semanas vividas desde nacimiento, 4000 semanas vida, hitos de vida semanas"
+  faqs={faqs}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Semanas<br><span style="color: var(--acid);">de Vida</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Descubre cuántas semanas llevas vividas desde tu nacimiento y cuándo llega tu próximo hito redondo.
+    </p>
+  </div>
+
+  <SemanasDeVidaCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Por qué contar en semanas?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      Una vida humana promedio de 80 años equivale a unas 4.160 semanas. Ver la vida en unidades semanales —más pequeñas que los años pero más manejables que los días— crea una perspectiva que ayuda a valorar el tiempo. Cada semana que pasa es una unidad de tiempo con entidad propia: trabajo, descanso, relaciones, crecimiento.
+    </p>
+
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 340px;">
+      <thead>
+        <tr style="background: var(--ink); color: var(--acid);">
+          <th style="padding: 10px 14px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Hito</th>
+          <th style="padding: 10px 14px; text-align: left;">Edad aprox.</th>
+          <th style="padding: 10px 14px; text-align: left;">Días totales</th>
+        </tr>
+      </thead>
+      <tbody>
+        {[
+          ['1.000 semanas', '~19 años',  '7.000 días'],
+          ['2.000 semanas', '~38 años', '14.000 días'],
+          ['3.000 semanas', '~57 años', '21.000 días'],
+          ['4.000 semanas', '~76 años', '28.000 días'],
+        ].map(([hito, edad, dias], i) => (
+          <tr style={`background: ${i % 2 === 0 ? 'white' : '#f9f6f0'};`}>
+            <td style="padding: 10px 14px; font-weight: 600; color: var(--ink);">{hito}</td>
+            <td style="padding: 10px 14px;">{edad}</td>
+            <td style="padding: 10px 14px; color: var(--muted);">{dias}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    </div>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {faqs.map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

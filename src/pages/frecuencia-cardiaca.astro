@@ -1,0 +1,75 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import FCMCalculator from '../components/calculators/FCMCalculator';
+---
+
+<CalculatorLayout
+  title="Frecuencia Cardíaca Máxima y Zonas FC | CalcFit"
+  description="Calcula tu frecuencia cardíaca máxima (ppm) y las 5 zonas de entrenamiento. Optimiza la quema de grasa, la resistencia y el rendimiento."
+  calculatorName="Frecuencia Cardíaca"
+  breadcrumbSlug="frecuencia-cardiaca"
+  ogImage="/og/frecuencia-cardiaca.jpg"
+  keywords="calculadora frecuencia cardíaca máxima, zonas entrenamiento cardíaco, FCM por edad, pulsaciones máximas, zona quema grasa cardíaca"
+  faqs={[
+    { q: '¿Cómo se calcula la frecuencia cardíaca máxima?', a: 'La fórmula más usada es FCM = 220 − Edad. Esta fórmula tiene una desviación estándar de ±10-12 ppm, lo que significa que para una persona de 40 años, la FCM real puede estar entre 158 y 182 ppm. La fórmula de Tanaka (208 − 0.7 × Edad) tiene menor error sistemático en adultos mayores.' },
+    { q: '¿Cuál es la zona cardíaca ideal para quemar grasa?', a: 'La zona 2 (60–70% de la FCM) se llama \'zona de quema de grasa\' porque en ella el cuerpo obtiene el mayor porcentaje de energía de las grasas. Sin embargo, en términos absolutos, las zonas más altas queman más calorías totales por minuto. Para perder grasa corporal, lo más importante es el déficit calórico total, no la zona cardíaca.' },
+    { q: '¿Es peligroso entrenar en zona 5 (frecuencia cardíaca máxima)?', a: 'Para personas sanas y entrenadas, el entrenamiento en zona 5 (HIIT, sprints) es seguro en intervalos cortos. Sin embargo, no se recomienda para principiantes ni personas con historial de problemas cardiovasculares. Siempre realiza un calentamiento adecuado y consulta a tu médico si tienes factores de riesgo cardiovascular.' },
+    { q: '¿Cómo mido mi frecuencia cardíaca sin pulsómetro?', a: 'Coloca dos dedos (índice y corazón) en la arteria carótida (cuello) o arteria radial (muñeca). Cuenta los latidos durante 15 segundos y multiplica por 4. Para la frecuencia en reposo, mídela al despertar antes de levantarte, durante 3 días consecutivos y calcula el promedio.' },
+  ]}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Frecuencia<br><span style="color: var(--acid);">Cardíaca</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Conoce tu frecuencia cardíaca máxima (FCM) y las 5 zonas de entrenamiento para optimizar cada sesión de ejercicio.
+    </p>
+  </div>
+
+  <FCMCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">Las 5 zonas de entrenamiento</h2>
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 420px;">
+      <thead>
+        <tr style="border-bottom: 2px solid var(--border);">
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase;">Zona</th>
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase;">% FCM</th>
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase;">Beneficio</th>
+        </tr>
+      </thead>
+      <tbody>
+        {[
+          { z: '1 — Recuperación',   p: '50–60%', b: 'Recuperación activa, calentamiento' },
+          { z: '2 — Quema de grasa', p: '60–70%', b: 'Máxima oxidación de grasas' },
+          { z: '3 — Aeróbica',       p: '70–80%', b: 'Mejora resistencia cardiovascular' },
+          { z: '4 — Anaeróbica',     p: '80–90%', b: 'Aumenta velocidad y potencia' },
+          { z: '5 — Máxima',         p: '90–100%', b: 'Intervalos de alta intensidad (HIIT)' },
+        ].map((row) => (
+          <tr style="border-bottom: 1px solid var(--border);">
+            <td style="padding: 10px 0; font-size: 13px; font-weight: 600; color: var(--ink);">{row.z}</td>
+            <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.p}</td>
+            <td style="padding: 10px 0; font-size: 13px; color: var(--muted);">{row.b}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    </div>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {[
+        { q: '¿Cómo se calcula la frecuencia cardíaca máxima?', a: 'La fórmula más usada es FCM = 220 − Edad. Esta fórmula tiene una desviación estándar de ±10-12 ppm, lo que significa que para una persona de 40 años, la FCM real puede estar entre 158 y 182 ppm. La fórmula de Tanaka (208 − 0.7 × Edad) tiene menor error sistemático en adultos mayores.' },
+        { q: '¿Cuál es la zona cardíaca ideal para quemar grasa?', a: 'La zona 2 (60–70% de la FCM) se llama \'zona de quema de grasa\' porque en ella el cuerpo obtiene el mayor porcentaje de energía de las grasas. Sin embargo, en términos absolutos, las zonas más altas queman más calorías totales por minuto. Para perder grasa corporal, lo más importante es el déficit calórico total, no la zona cardíaca.' },
+        { q: '¿Es peligroso entrenar en zona 5 (frecuencia cardíaca máxima)?', a: 'Para personas sanas y entrenadas, el entrenamiento en zona 5 (HIIT, sprints) es seguro en intervalos cortos. Sin embargo, no se recomienda para principiantes ni personas con historial de problemas cardiovasculares. Siempre realiza un calentamiento adecuado y consulta a tu médico si tienes factores de riesgo cardiovascular.' },
+        { q: '¿Cómo mido mi frecuencia cardíaca sin pulsómetro?', a: 'Coloca dos dedos (índice y corazón) en la arteria carótida (cuello) o arteria radial (muñeca). Cuenta los latidos durante 15 segundos y multiplica por 4. Para la frecuencia en reposo, mídela al despertar antes de levantarte, durante 3 días consecutivos y calcula el promedio.' },
+      ].map((faq) => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

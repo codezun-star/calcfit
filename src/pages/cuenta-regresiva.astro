@@ -1,0 +1,74 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import CuentaRegresivaCalculator from '../components/calculators/CuentaRegresivaCalculator';
+
+const faqs = [
+  { q: '¿Para qué sirve una cuenta regresiva?', a: 'Las cuentas regresivas ayudan a gestionar el tiempo y mantener la motivación hacia un objetivo. Estudios de psicología del tiempo muestran que visualizar el tiempo restante hasta un evento aumenta la anticipación positiva y mejora la planificación. Son útiles para bodas, vacaciones, fechas de entrega, eventos deportivos y metas personales.' },
+  { q: '¿Se actualiza en tiempo real?', a: 'Sí. La calculadora actualiza días, horas, minutos y segundos cada segundo mientras la tengas abierta en el navegador. El cálculo se realiza completamente en tu dispositivo, sin conexión a servidores externos.' },
+  { q: '¿Qué pasa si introduzco una fecha pasada?', a: 'Si la fecha ya ocurrió, la calculadora lo detecta automáticamente y muestra cuántos días han transcurrido desde ese evento, en lugar de la cuenta regresiva hacia adelante.' },
+  { q: '¿Puedo añadir un nombre al evento?', a: 'Sí. El campo de nombre del evento es opcional, pero si lo rellenas aparecerá en la visualización y en el mensaje al compartir. Puedes ponerle cualquier nombre: "Mi boda", "Vacaciones en Cancún", "Final del proyecto", etc.' },
+  { q: '¿Hasta qué fecha puedo calcular la cuenta regresiva?', a: 'Puedes introducir cualquier fecha futura, sin límite. La calculadora soporta desde mañana hasta décadas en el futuro, mostrando el desglose exacto en días, horas, minutos y segundos en cada momento.' },
+];
+---
+
+<CalculatorLayout
+  title="Cuenta Regresiva a Fecha — Tiempo Exacto en Días | CalcFit"
+  description="Calcula los días, horas, minutos y segundos exactos que faltan para cualquier fecha, en tiempo real. Ideal para bodas, eventos y metas."
+  calculatorName="Cuenta Regresiva"
+  breadcrumbSlug="cuenta-regresiva"
+  ogImage="/og/cuenta-regresiva.jpg"
+  keywords="cuenta regresiva fecha, calculadora cuenta regresiva, días que faltan para, tiempo restante fecha, cuenta atrás evento"
+  faqs={faqs}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Cuenta<br><span style="color: var(--acid);">Regresiva</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Introduce una fecha futura y obtén los días, horas, minutos y segundos exactos que quedan. Actualización en tiempo real.
+    </p>
+  </div>
+
+  <CuentaRegresivaCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cómo funciona la cuenta regresiva?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      La calculadora obtiene la fecha y hora actual de tu dispositivo y la resta a la fecha objetivo que introduces. El resultado se descompone en días completos, horas, minutos y segundos. Se actualiza cada segundo mientras la página está abierta, sin ninguna llamada a servidores externos: todo el procesamiento ocurre en tu navegador.
+    </p>
+
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 320px;">
+      <thead>
+        <tr style="background: var(--ink); color: var(--acid);">
+          <th style="padding: 10px 14px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Unidad</th>
+          <th style="padding: 10px 14px; text-align: left;">Equivalencia</th>
+        </tr>
+      </thead>
+      <tbody>
+        {[
+          ['1 día', '24 horas = 1.440 minutos = 86.400 segundos'],
+          ['1 semana', '7 días = 604.800 segundos'],
+          ['1 mes (aprox.)', '30,44 días = 43.830 minutos'],
+          ['1 año (aprox.)', '365,25 días = 8.766 horas'],
+        ].map(([u, eq], i) => (
+          <tr style={`background: ${i % 2 === 0 ? 'white' : '#f9f6f0'};`}>
+            <td style="padding: 10px 14px; font-weight: 600;">{u}</td>
+            <td style="padding: 10px 14px; color: var(--muted);">{eq}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    </div>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {faqs.map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

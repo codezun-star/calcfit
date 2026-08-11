@@ -1,0 +1,74 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import DiaDelAnioCalculator from '../components/calculators/DiaDelAnioCalculator';
+
+const faqs = [
+  { q: '¿Qué día del año es hoy?', a: 'Introduce la fecha y la calculadora te dice el número de día del año (del 1 al 365 o 366), cuántos días faltan para fin de año y el porcentaje del año transcurrido.' },
+  { q: '¿Cómo se calcula el día del año?', a: 'Se cuentan los días transcurridos desde el 1 de enero hasta la fecha indicada, incluyéndola. El 1 de enero es el día 1 y el 31 de diciembre es el 365 (o el 366 en años bisiestos).' },
+  { q: '¿Cuántos días tiene un año?', a: 'Un año normal tiene 365 días y un año bisiesto, 366. El día extra de los bisiestos es el 29 de febrero, que se añade cada cuatro años con algunas excepciones.' },
+  { q: '¿Para qué sirve saber el día del año?', a: 'El número de día del año (también llamado día juliano u ordinal) se usa en logística, agricultura, astronomía y sistemas informáticos para identificar una fecha con un solo número.' },
+  { q: '¿Qué día del año es el más buscado?', a: 'Fechas como el día 100, el día 200 o el ecuador del año (alrededor del 2 de julio) son curiosidades populares. La calculadora también te muestra el porcentaje del año completado.' },
+];
+---
+
+<CalculatorLayout
+  title="Qué Día del Año Es — Día Ordinal | CalcFit"
+  description="Calcula qué número de día del año es una fecha (1-366), cuántos días faltan para fin de año y el porcentaje transcurrido. Gratis."
+  calculatorName="Día del Año"
+  breadcrumbSlug="dia-del-anio"
+  ogImage="/og/dia-del-anio.jpg"
+  keywords="qué día del año es hoy, día del año, día ordinal, días que faltan para fin de año, número de día del año"
+  faqs={faqs}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Día del<br><span style="color: var(--acid);">Año</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Descubre qué número de día del año es una fecha y cuánto queda para que termine el año.
+    </p>
+  </div>
+
+  <DiaDelAnioCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cómo se calcula?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      Se cuentan los días transcurridos desde el 1 de enero hasta la fecha elegida, ambos incluidos. Este número, llamado <strong>día ordinal</strong> o día del año, va del 1 al 365 (o 366 en años bisiestos). La calculadora también indica los días que faltan y el porcentaje de año completado.
+    </p>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Días del año por mes</h2>
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 320px;">
+      <thead>
+        <tr style="border-bottom: 2px solid var(--border);">
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Fecha</th>
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Día del año</th>
+        </tr>
+      </thead>
+      <tbody>
+        {[
+          { f: '1 de enero', d: '1' },
+          { f: '1 de julio', d: '182' },
+          { f: '31 de diciembre', d: '365 / 366' },
+        ].map((row) => (
+          <tr style="border-bottom: 1px solid var(--border);">
+            <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.f}</td>
+            <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.d}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    </div>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {faqs.map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

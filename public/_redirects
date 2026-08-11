@@ -1,2 +1,3 @@
-# Normaliza las URLs con barra final → sin barra (trailingSlash: 'never')
+/ventana-fertil       /ovulacion               301
+/peso-embarazo        /aumento-peso-embarazo   301
 /*/  /:splat  301

@@ -42,7 +42,7 @@ Con menos de 7 horas de sueño:
 - El cortisol (hormona catabólica) aumenta
 - El tiempo percibido hasta el agotamiento disminuye un 10-30%
 
-No hay protocolo de recuperación que compense el déficit de sueño crónico. Consulta nuestra calculadora de sueño para planificar tus horas de descanso según tu horario y cronotipo.
+No hay protocolo de recuperación que compense el déficit de sueño crónico. Consulta nuestra [calculadora de sueño](/sueno) para planificar tus horas de descanso según tu horario y cronotipo.
 
 ### 2. Proteína post-entrenamiento
 
@@ -62,7 +62,7 @@ Esto importa especialmente si entrenas dos días seguidos o dos veces al día. P
 
 Incluso una deshidratación leve (1-2% del peso corporal) reduce el rendimiento y puede prolongar la recuperación. El músculo es aproximadamente 75% agua.
 
-Calcula tu necesidad diaria de hidratación con nuestra calculadora de agua diaria, y si entrenas con sudoración intensa, usa la calculadora de tasa de sudoración para estimar lo que pierdes en cada sesión.
+Calcula tu necesidad diaria de hidratación con nuestra [calculadora de agua diaria](/agua-diaria), y si entrenas con sudoración intensa, usa la [calculadora de tasa de sudoración](/tasa-sudoracion) para estimar lo que pierdes en cada sesión.
 
 ## Lo que tiene evidencia débil o mixta
 
@@ -78,7 +78,7 @@ La recuperación activa — actividad de muy baja intensidad el día después de
 
 Caminar 20-30 minutos, nadar suave o hacer movilidad ligera el día de "descanso" es mejor que no moverse.
 
-Nuestra calculadora de recuperación muscular te ayuda a estimar cuántas horas necesita cada grupo muscular antes de volver a entrenarlo con alta intensidad.
+Nuestra [calculadora de recuperación muscular](/recuperacion-muscular) te ayuda a estimar cuántas horas necesita cada grupo muscular antes de volver a entrenarlo con alta intensidad.
 
 ---
 

@@ -1,0 +1,84 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import ProbabilidadEmbarazoCalculator from '../components/calculators/ProbabilidadEmbarazoCalculator';
+---
+
+<CalculatorLayout
+  title="Probabilidad de Embarazo por Día del Ciclo | CalcFit"
+  description="Estima tu probabilidad de concepción según el día del ciclo y si hubo relaciones. Basado en la investigación de Wilcox (1995). Gratis."
+  calculatorName="Probabilidad de Embarazo"
+  breadcrumbSlug="probabilidad-embarazo"
+  ogImage="/og/probabilidad-embarazo.jpg"
+  keywords="probabilidad de embarazo por día del ciclo, qué probabilidad tengo de quedar embarazada, porcentaje de embarazo según ciclo, posibilidad de concepción cada día, fertilidad por día"
+  faqs={[
+    { q: '¿En qué día del ciclo hay mayor probabilidad de embarazo?', a: 'El día de mayor probabilidad de concepción es el inmediatamente anterior a la ovulación (día −1 respecto a la ovulación), con aproximadamente un 33% de probabilidad por ciclo. Le siguen los días −2 (27%) y −3 (22%). La ovulación en sí tiene un 15%, ya que el óvulo solo es viable 12–24 horas.' },
+    { q: '¿Cuál es la probabilidad de embarazo en general por ciclo?', a: 'Para una pareja joven y sana con relaciones frecuentes durante la ventana fértil, la probabilidad de embarazo por ciclo es del 20–30%. A lo largo de un año, el 85% de las parejas sin problemas de fertilidad logran el embarazo. Esta probabilidad disminuye con la edad: a los 35 años es de ~15–20% por ciclo; a los 40, de ~5%.' },
+    { q: '¿Puedo quedar embarazada el primer día del período?', a: 'La probabilidad es extremadamente baja. Durante la menstruación, el óvulo del ciclo anterior ya no es viable y el siguiente aún no ha madurado. Sin embargo, en ciclos muy cortos (21–24 días), la ovulación puede ocurrir poco después del período, y los espermatozoides depositados al final de la regla podrían sobrevivir hasta la ovulación.' },
+    { q: '¿Qué factores aumentan la probabilidad de concepción?', a: 'Factores que mejoran la probabilidad: relaciones sexuales en los 2–3 días previos a la ovulación, peso saludable (IMC 18.5–25), no fumar, edad entre 20 y 35 años, ciclos regulares, y niveles normales de AMH (reserva ovárica). El estrés crónico puede reducir la fertilidad al alterar el eje hormonal y retrasar la ovulación.' },
+    { q: '¿Cuánto tiempo se recomienda intentar el embarazo antes de consultar al médico?', a: 'Si tienes menos de 35 años, se recomienda consultar tras 12 meses de relaciones sin anticonceptivos y sin embarazo. Si tienes 35–39 años, consultar tras 6 meses. Si tienes 40 años o más, consultar de inmediato. También consultar antes si tienes ciclos irregulares, SOP, endometriosis, o historial de abortos.' },
+  ]}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Probabilidad<br><span style="color: var(--acid);">de Embarazo</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Estima la probabilidad de concepción según el día de tu ciclo y la frecuencia de relaciones, basado en investigación científica.
+    </p>
+  </div>
+
+  <ProbabilidadEmbarazoCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">Probabilidad de concepción por día del ciclo</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 16px;">
+      Los datos de probabilidad están basados en el estudio de Wilcox et al. (1995, NEJM) que monitorizó 625 ciclos menstruales midiendo los niveles urinarios de LH y hCG. Los días se expresan en relación al día de ovulación (día 0).
+    </p>
+
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 380px;">
+      <thead>
+        <tr style="background: var(--ink); color: var(--cream);">
+          <th style="padding: 10px 12px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Día relativo a ovulación</th>
+          <th style="padding: 10px 12px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Probabilidad (relación única)</th>
+          <th style="padding: 10px 12px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Etapa</th>
+        </tr>
+      </thead>
+      <tbody>
+        {[
+          { dia: '−5', prob: '10%', etapa: 'Fértil' },
+          { dia: '−4', prob: '14%', etapa: 'Fértil' },
+          { dia: '−3', prob: '22%', etapa: 'Muy fértil' },
+          { dia: '−2', prob: '27%', etapa: 'Muy fértil' },
+          { dia: '−1', prob: '33%', etapa: 'MÁXIMA fertilidad' },
+          { dia: '0 (ovulación)', prob: '15%', etapa: 'Alta fertilidad' },
+          { dia: '+1', prob: '5%', etapa: 'Baja' },
+          { dia: '+2 o más', prob: '< 2%', etapa: 'Muy baja' },
+        ].map((r, i) => (
+          <tr style={`background: ${i % 2 === 0 ? 'var(--cream)' : 'white'}`}>
+            <td style="padding: 9px 12px; color: var(--ink); font-weight: 600;">{r.dia}</td>
+            <td style="padding: 9px 12px; color: var(--acid); font-family: var(--font-display); font-size: 16px;">{r.prob}</td>
+            <td style="padding: 9px 12px; color: var(--muted);">{r.etapa}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    </div>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {[
+        { q: '¿En qué día del ciclo hay mayor probabilidad de embarazo?', a: 'El día de mayor probabilidad de concepción es el inmediatamente anterior a la ovulación (día −1 respecto a la ovulación), con aproximadamente un 33% de probabilidad por ciclo. Le siguen los días −2 (27%) y −3 (22%). La ovulación en sí tiene un 15%, ya que el óvulo solo es viable 12–24 horas.' },
+        { q: '¿Cuál es la probabilidad de embarazo en general por ciclo?', a: 'Para una pareja joven y sana con relaciones frecuentes durante la ventana fértil, la probabilidad de embarazo por ciclo es del 20–30%. A lo largo de un año, el 85% de las parejas sin problemas de fertilidad logran el embarazo. Esta probabilidad disminuye con la edad: a los 35 años es de ~15–20% por ciclo; a los 40, de ~5%.' },
+        { q: '¿Puedo quedar embarazada el primer día del período?', a: 'La probabilidad es extremadamente baja. Durante la menstruación, el óvulo del ciclo anterior ya no es viable y el siguiente aún no ha madurado. Sin embargo, en ciclos muy cortos (21–24 días), la ovulación puede ocurrir poco después del período, y los espermatozoides depositados al final de la regla podrían sobrevivir hasta la ovulación.' },
+        { q: '¿Qué factores aumentan la probabilidad de concepción?', a: 'Factores que mejoran la probabilidad: relaciones sexuales en los 2–3 días previos a la ovulación, peso saludable (IMC 18.5–25), no fumar, edad entre 20 y 35 años, ciclos regulares, y niveles normales de AMH (reserva ovárica). El estrés crónico puede reducir la fertilidad al alterar el eje hormonal y retrasar la ovulación.' },
+        { q: '¿Cuánto tiempo se recomienda intentar el embarazo antes de consultar al médico?', a: 'Si tienes menos de 35 años, se recomienda consultar tras 12 meses de relaciones sin anticonceptivos y sin embarazo. Si tienes 35–39 años, consultar tras 6 meses. Si tienes 40 años o más, consultar de inmediato. También consultar antes si tienes ciclos irregulares, SOP, endometriosis, o historial de abortos.' },
+      ].map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

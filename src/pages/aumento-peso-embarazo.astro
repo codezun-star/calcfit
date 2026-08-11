@@ -1,0 +1,82 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import AumentoPesoEmbarazoCalculator from '../components/calculators/AumentoPesoEmbarazoCalculator';
+---
+
+<CalculatorLayout
+  title="Ganancia de Peso en el Embarazo — Guía IOM | CalcFit"
+  description="Calcula cuánto peso ganar en el embarazo según tu IMC previo y la semana actual. Guías IOM 2009 y OMS, por trimestre y con alerta. Gratis."
+  calculatorName="Ganancia de Peso en el Embarazo"
+  breadcrumbSlug="aumento-peso-embarazo"
+  ogImage="/og/aumento-peso-embarazo.jpg"
+  keywords="cuánto peso ganar en el embarazo, ganancia de peso embarazo por IMC, peso recomendado embarazo OMS, aumento de peso embarazo normal, guías IOM 2009 embarazo"
+  faqs={[
+    { q: '¿Cuánto peso es normal ganar durante el embarazo?', a: 'Según las guías del Instituto de Medicina (IOM, 2009), la ganancia recomendada depende del IMC previo al embarazo: bajo peso (IMC <18.5) → 12.5–18 kg; peso normal (18.5–24.9) → 11.5–16 kg; sobrepeso (25–29.9) → 7–11.5 kg; obesidad (≥30) → 5–9 kg. En embarazos gemelares los rangos son mayores.' },
+    { q: '¿Cómo se distribuye el aumento de peso en el embarazo?', a: 'En el primer trimestre la ganancia es mínima (1–2 kg en total). A partir del segundo trimestre el ritmo se acelera a unos 0.3–0.5 kg por semana según el IMC previo. El mayor incremento ocurre en el tercer trimestre, cuando el bebé gana la mayor parte de su peso. Al final del embarazo, el bebé representa ~3–4 kg de la ganancia total.' },
+    { q: '¿Qué pasa si gano más peso del recomendado?', a: 'Una ganancia excesiva aumenta el riesgo de: diabetes gestacional, hipertensión, parto prematuro, macrosomía fetal (bebé grande) que complica el parto, y mayor dificultad para recuperar el peso previo tras el parto. Sin embargo, no se recomienda hacer dietas restrictivas durante el embarazo: consulta con tu obstetra o matrona para ajustar la alimentación.' },
+    { q: '¿Y si gano menos peso del recomendado?', a: 'Una ganancia insuficiente se asocia a mayor riesgo de bajo peso al nacer, parto prematuro y restricción del crecimiento intrauterino. No alcanzar el peso recomendado puede indicar náuseas graves, hiperémesis gravidaria u otros problemas. Si estás ganando poco peso, consulta con tu médico para descartar causas subyacentes.' },
+    { q: '¿Qué parte del peso ganado no es grasa materna?', a: 'De los 11.5–16 kg típicos de una mujer con peso normal, solo ~3–4 kg son reservas de grasa materna. El resto incluye: bebé (~3.5 kg), placenta (~0.6 kg), líquido amniótico (~0.8 kg), útero (~0.9 kg), aumento de volumen sanguíneo (~1.5 kg), líquido intersticial (~1.5 kg) y aumento del pecho (~0.5 kg).' },
+  ]}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Ganancia de Peso<br><span style="color: var(--acid);">Embarazo</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Calcula tu ganancia de peso ideal por trimestre según tu IMC previo. Basado en las guías IOM 2009 y OMS.
+    </p>
+  </div>
+
+  <AumentoPesoEmbarazoCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">Ganancia de peso recomendada por IMC (IOM 2009)</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      Las guías del Instituto de Medicina (IOM, 2009) son el estándar internacional para la ganancia de peso gestacional. Se basan en el IMC previo al embarazo y se expresan como un rango que minimiza los riesgos para la madre y el bebé.
+    </p>
+
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 460px;">
+      <thead>
+        <tr style="background: var(--ink); color: var(--cream);">
+          <th style="padding: 10px 12px; text-align: left; font-family: var(--font-mono); font-weight: 400;">IMC pre-embarazo</th>
+          <th style="padding: 10px 12px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Categoría</th>
+          <th style="padding: 10px 12px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Ganancia total</th>
+          <th style="padding: 10px 12px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Ritmo 2.º-3.er trim.</th>
+        </tr>
+      </thead>
+      <tbody>
+        {[
+          { imc: '< 18.5', cat: 'Bajo peso', ganancia: '12.5–18 kg', ritmo: '~0.5 kg/sem' },
+          { imc: '18.5–24.9', cat: 'Peso normal', ganancia: '11.5–16 kg', ritmo: '~0.45 kg/sem' },
+          { imc: '25–29.9', cat: 'Sobrepeso', ganancia: '7–11.5 kg', ritmo: '~0.3 kg/sem' },
+          { imc: '≥ 30', cat: 'Obesidad', ganancia: '5–9 kg', ritmo: '~0.25 kg/sem' },
+        ].map((r, i) => (
+          <tr style={`background: ${i % 2 === 0 ? 'var(--cream)' : 'white'}`}>
+            <td style="padding: 9px 12px; color: var(--ink); font-weight: 600;">{r.imc}</td>
+            <td style="padding: 9px 12px; color: var(--muted);">{r.cat}</td>
+            <td style="padding: 9px 12px; color: var(--acid); font-family: var(--font-display); font-size: 16px;">{r.ganancia}</td>
+            <td style="padding: 9px 12px; color: var(--muted);">{r.ritmo}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    </div>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {[
+        { q: '¿Cuánto peso es normal ganar durante el embarazo?', a: 'Según las guías del Instituto de Medicina (IOM, 2009), la ganancia recomendada depende del IMC previo al embarazo: bajo peso (IMC <18.5) → 12.5–18 kg; peso normal (18.5–24.9) → 11.5–16 kg; sobrepeso (25–29.9) → 7–11.5 kg; obesidad (≥30) → 5–9 kg. En embarazos gemelares los rangos son mayores.' },
+        { q: '¿Cómo se distribuye el aumento de peso en el embarazo?', a: 'En el primer trimestre la ganancia es mínima (1–2 kg en total). A partir del segundo trimestre el ritmo se acelera a unos 0.3–0.5 kg por semana según el IMC previo. El mayor incremento ocurre en el tercer trimestre, cuando el bebé gana la mayor parte de su peso. Al final del embarazo, el bebé representa ~3–4 kg de la ganancia total.' },
+        { q: '¿Qué pasa si gano más peso del recomendado?', a: 'Una ganancia excesiva aumenta el riesgo de: diabetes gestacional, hipertensión, parto prematuro, macrosomía fetal (bebé grande) que complica el parto, y mayor dificultad para recuperar el peso previo tras el parto. Sin embargo, no se recomienda hacer dietas restrictivas durante el embarazo: consulta con tu obstetra o matrona para ajustar la alimentación.' },
+        { q: '¿Y si gano menos peso del recomendado?', a: 'Una ganancia insuficiente se asocia a mayor riesgo de bajo peso al nacer, parto prematuro y restricción del crecimiento intrauterino. No alcanzar el peso recomendado puede indicar náuseas graves, hiperémesis gravidaria u otros problemas. Si estás ganando poco peso, consulta con tu médico para descartar causas subyacentes.' },
+        { q: '¿Qué parte del peso ganado no es grasa materna?', a: 'De los 11.5–16 kg típicos de una mujer con peso normal, solo ~3–4 kg son reservas de grasa materna. El resto incluye: bebé (~3.5 kg), placenta (~0.6 kg), líquido amniótico (~0.8 kg), útero (~0.9 kg), aumento de volumen sanguíneo (~1.5 kg), líquido intersticial (~1.5 kg) y aumento del pecho (~0.5 kg).' },
+      ].map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

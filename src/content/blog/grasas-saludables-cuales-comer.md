@@ -39,7 +39,7 @@ Las grasas cumplen funciones que ningún otro macronutriente puede reemplazar:
 
 **Poliinsaturadas omega-6**: aceites de girasol, maíz, soja. Son esenciales pero el problema es la proporción: la dieta occidental moderna tiene un ratio omega-6/omega-3 de 15:1 a 20:1 cuando el óptimo es 4:1. El exceso de omega-6 es proinflamatorio.
 
-Calcula tu ratio omega-6/omega-3 actual con nuestra calculadora de ratio omega para ver si necesitas ajustar.
+Calcula tu ratio omega-6/omega-3 actual con nuestra [calculadora de ratio omega](/omega-ratio) para ver si necesitas ajustar.
 
 ### Grasas saturadas: moderación, no eliminación
 

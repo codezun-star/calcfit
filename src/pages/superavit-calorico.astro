@@ -1,0 +1,76 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import SuperavitCaloricoCalculator from '../components/calculators/SuperavitCaloricoCalculator';
+
+const faqs = [
+  { q: '¿Qué es un superávit calórico?', a: 'Es comer más calorías de las que tu cuerpo gasta. Es la condición necesaria para ganar peso y, con entrenamiento de fuerza, masa muscular. Lo contrario es el déficit calórico, que se usa para perder grasa.' },
+  { q: '¿Cuántas calorías de superávit para ganar músculo?', a: 'Para un crecimiento muscular limpio (lean bulk), basta con un superávit de 200-350 kcal sobre tu gasto. Superávits mayores aceleran el aumento de peso pero también la acumulación de grasa.' },
+  { q: '¿Cuánto músculo se puede ganar al mes?', a: 'Un principiante puede ganar 0,5-1 kg de músculo al mes; un intermedio, bastante menos. Ganar peso más rápido que eso suele significar que estás acumulando grasa además de músculo.' },
+  { q: '¿Es mejor un superávit lento o agresivo?', a: 'Para la mayoría, un superávit lento (lean bulk) maximiza la ganancia de músculo minimizando la grasa. El superávit agresivo solo tiene sentido en personas muy delgadas que necesitan ganar peso rápido.' },
+  { q: '¿Necesito más proteína en superávit?', a: 'Sí. Para construir músculo conviene ingerir entre 1,6 y 2,2 g de proteína por kg de peso al día, repartida en varias comidas. El superávit aporta la energía; la proteína, el material de construcción.' },
+];
+---
+
+<CalculatorLayout
+  title="Superávit Calórico — Calorías para Ganar Músculo | CalcFit"
+  description="Calcula tu superávit calórico para ganar masa muscular según tu gasto diario. Ritmo lento, moderado o rápido con ganancia estimada. Gratis."
+  calculatorName="Superávit Calórico"
+  breadcrumbSlug="superavit-calorico"
+  ogImage="/og/superavit-calorico.jpg"
+  keywords="superávit calórico, calorías para ganar músculo, calcular superávit, volumen lean bulk, cuántas calorías para subir de peso"
+  faqs={faqs}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Superávit<br><span style="color: var(--acid);">Calórico</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Calcula cuántas calorías comer para ganar masa muscular, con tres ritmos y la ganancia de peso estimada.
+    </p>
+  </div>
+
+  <SuperavitCaloricoCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cómo se calcula?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      Se parte de tu gasto energético total (TDEE) y se le suma un superávit. Como 1 kg de tejido equivale a unas 7.700 kcal, un superávit de 350 kcal/día supone aproximadamente 0,3 kg de ganancia semanal. La calculadora muestra tres escenarios para que elijas el que mejor se adapte a tu objetivo.
+    </p>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Ritmos de superávit</h2>
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 320px;">
+      <thead>
+        <tr style="border-bottom: 2px solid var(--border);">
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Ritmo</th>
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Superávit</th>
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Ganancia/mes</th>
+        </tr>
+      </thead>
+      <tbody>
+        {[
+          { r: 'Lento (lean bulk)', s: '+200 kcal', g: '~0,8 kg' },
+          { r: 'Moderado', s: '+350 kcal', g: '~1,4 kg' },
+          { r: 'Rápido', s: '+500 kcal', g: '~2,0 kg' },
+        ].map((row) => (
+          <tr style="border-bottom: 1px solid var(--border);">
+            <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.r}</td>
+            <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.s}</td>
+            <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.g}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    </div>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {faqs.map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

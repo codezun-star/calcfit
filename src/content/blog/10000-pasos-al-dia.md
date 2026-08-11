@@ -26,7 +26,7 @@ Eso no significa que sea una mala meta. Estudios posteriores han confirmado que 
 
 El gasto depende sobre todo de tu **peso corporal** y, en menor medida, de tu altura (que determina la longitud de la zancada) y del ritmo. Como referencia, una persona de unos 70 kg quema alrededor de **400 kcal** al completar 10.000 pasos, recorriendo unos 7 km.
 
-Puedes calcular tu cifra exacta con nuestra [calculadora de pasos a calorías](/calorias-caminando), que ajusta el resultado a tu peso y altura.
+Puedes calcular tu cifra exacta con nuestra [calculadora de pasos a calorías](/pasos-calorias), que ajusta el resultado a tu peso y altura.
 
 | Pasos | Calorías (70 kg) | Distancia |
 |---|---|---|
@@ -56,7 +56,7 @@ Eso sí, la alimentación manda: es fácil compensar 400 kcal con un par de snac
 
 ## Conclusión
 
-Los 10.000 pasos son una buena meta, pero no son mágicos ni imprescindibles. Lo importante es la tendencia: cuanto más sedentario partes, más ganas con cada paso extra. Mide cuántas calorías quemas con tu actividad en la [calculadora de pasos a calorías](/calorias-caminando) y úsalo como motivación, no como obligación.
+Los 10.000 pasos son una buena meta, pero no son mágicos ni imprescindibles. Lo importante es la tendencia: cuanto más sedentario partes, más ganas con cada paso extra. Mide cuántas calorías quemas con tu actividad en la [calculadora de pasos a calorías](/pasos-calorias) y úsalo como motivación, no como obligación.
 
 ---
 

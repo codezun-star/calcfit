@@ -1,0 +1,75 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import IGComidaCalculator from '../components/calculators/IGComidaCalculator';
+
+const faqs = [
+  { q: '¿Qué es el índice glucémico (IG)?', a: 'El índice glucémico (IG) mide la velocidad a la que un alimento eleva la glucosa en sangre en comparación con la glucosa pura (IG 100). Fue desarrollado por Jenkins et al. en 1981. Un IG bajo (<55) indica elevación lenta y progresiva de la glucosa; un IG alto (≥70) indica una subida rápida.' },
+  { q: '¿Qué diferencia hay entre IG y carga glucémica?', a: 'El IG mide la calidad del carbohidrato, pero no la cantidad. La carga glucémica (CG = IG × gramos de carbs / 100) integra ambos factores. Una sandía tiene IG 72 (alto) pero CG baja (≈4 por porción) porque contiene poca cantidad de carbohidratos. La CG es más útil en la práctica clínica.' },
+  { q: '¿Cómo puedo bajar el IG de una comida?', a: 'Añadir proteína, grasa y fibra reduce el IG de una comida completa. Cocinar al dente reduce el IG de la pasta. Enfriar y recalentar el arroz aumenta el almidón resistente y baja su IG. Añadir vinagre o zumo de limón también reduce el IG de la comida.' },
+  { q: '¿Las personas con diabetes deben evitar los alimentos de IG alto?', a: 'No necesariamente evitarlos, sino controlar la carga glucémica total. Combinar un alimento de IG alto con proteína, grasa y fibra reduce el impacto glucémico real. La Asociación Americana de Diabetes (ADA) recomienda centrarse en la cantidad total de carbohidratos y su distribución a lo largo del día.' },
+  { q: '¿Qué carga glucémica es demasiado alta?', a: 'Una carga glucémica baja es <10, moderada 10–19 y alta ≥20. Mantener cada comida con CG <20 y el total diario <100 se asocia con mejor control glucémico y menor riesgo de diabetes tipo 2 según estudios longitudinales como el Nurses Health Study.' },
+];
+---
+
+<CalculatorLayout
+  title="IG de la Comida — Índice y Carga Glucémica | CalcFit"
+  description="Calcula el índice glucémico y la carga glucémica ponderada de tu comida combinando varios alimentos. Ideal para diabéticos y control de glucosa."
+  calculatorName="IG de la Comida"
+  breadcrumbSlug="ig-comida"
+  ogImage="/og/ig-comida.jpg"
+  keywords="calculadora índice glucémico, carga glucémica comida, IG alimentos, índice glucémico dieta diabetes, calcular IG comida"
+  faqs={faqs}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      IG de<br><span style="color: var(--acid);">la Comida</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Introduce los alimentos de tu comida para obtener el índice glucémico ponderado y la carga glucémica total de la toma.
+    </p>
+  </div>
+
+  <IGComidaCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cómo se calcula el IG ponderado de una comida?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      El IG de una comida mixta se calcula ponderando el IG de cada alimento por su proporción de carbohidratos en el total: IG_comida = Σ(IG_i × carbs_i) / Σ(carbs_i). La carga glucémica total es CG = (IG_ponderado × carbs_totales) / 100. Esta metodología, descrita por Brand-Miller et al., permite evaluar el impacto glucémico real de comidas completas, no solo de alimentos individuales.
+    </p>
+
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 300px;">
+      <thead>
+        <tr style="background: var(--ink); color: var(--acid);">
+          <th style="padding: 10px 14px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Clasificación</th>
+          <th style="padding: 10px 14px; text-align: left;">IG</th>
+          <th style="padding: 10px 14px; text-align: left;">Carga glucémica</th>
+        </tr>
+      </thead>
+      <tbody>
+        {[
+          ['Bajo', '< 55', '< 10'],
+          ['Medio', '55–69', '10–19'],
+          ['Alto', '≥ 70', '≥ 20'],
+        ].map(([cat, ig, cg], i) => (
+          <tr style={`background: ${i % 2 === 0 ? 'white' : '#f9f6f0'};`}>
+            <td style="padding: 10px 14px;">{cat}</td>
+            <td style="padding: 10px 14px; font-family: var(--font-mono); font-size: 12px;">{ig}</td>
+            <td style="padding: 10px 14px; color: var(--muted);">{cg}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    </div>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {faqs.map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

@@ -1,0 +1,79 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import SindromeMetabolicoCalculator from '../components/calculators/SindromeMetabolicoCalculator';
+---
+
+<CalculatorLayout
+  title="Síndrome Metabólico — Criterios IDF 2006 | CalcFit"
+  description="Evalúa si cumples los criterios de síndrome metabólico según la IDF 2006: cintura, triglicéridos, HDL, presión arterial y glucosa. Gratis."
+  calculatorName="Síndrome Metabólico"
+  breadcrumbSlug="sindrome-metabolico"
+  ogImage="/og/sindrome-metabolico.jpg"
+  keywords="síndrome metabólico, criterios IDF, diagnóstico síndrome metabólico, resistencia insulina, obesidad abdominal riesgo"
+  faqs={[
+    { q: '¿Qué es el síndrome metabólico?', a: 'El síndrome metabólico es una agrupación de factores de riesgo cardiometabólico que, cuando aparecen juntos, multiplican el riesgo de enfermedad cardiovascular y diabetes tipo 2. Según la IDF 2006, afecta al 20–30% de la población adulta mundial. Su presencia triplica el riesgo de infarto y quintuplica el de diabetes tipo 2 comparado con personas sin el síndrome.' },
+    { q: '¿Cuáles son los criterios IDF 2006 para diagnosticarlo?', a: 'Según la Federación Internacional de Diabetes (IDF 2006), el diagnóstico requiere: obesidad central obligatoria (cintura >90 cm en hombres latinoamericanos, >80 cm en mujeres) más al menos 2 de los 4 criterios adicionales: triglicéridos ≥150 mg/dL o tratamiento, HDL bajo (<40 hombres / <50 mujeres) o tratamiento, presión arterial ≥130/85 mmHg o tratamiento, glucosa en ayunas ≥100 mg/dL, tratamiento o diagnóstico previo.' },
+    { q: '¿Qué diferencia hay entre los criterios para latinoamericanos y europeos?', a: 'El umbral de cintura para obesidad central es diferente por etnia. Para latinoamericanos, la IDF establece >90 cm en hombres (en lugar de >94 cm de los europeos) y >80 cm en mujeres (igual que europeos). Esto se debe a que las poblaciones latinoamericanas tienen mayor riesgo metabólico a la misma circunferencia de cintura que los europeos de ascendencia.' },
+    { q: '¿El síndrome metabólico tiene tratamiento?', a: 'Sí. El tratamiento principal es el cambio de estilo de vida: perder el 7–10% del peso corporal, 150–300 min/semana de ejercicio aeróbico moderado, dieta mediterránea o baja en carbohidratos refinados, y reducción del consumo de alcohol. En muchos casos, estos cambios pueden revertir el síndrome metabólico en 6–12 meses. La medicación se reserva para criterios que no mejoran con los cambios de hábitos.' },
+    { q: '¿Puedo tener síndrome metabólico y peso normal?', a: 'Sí. La llamada "obesidad metabólica de peso normal" (MONW, por sus siglas en inglés) ocurre en personas con IMC normal pero con exceso de grasa visceral (abdominal), lo que genera los mismos criterios metabólicos alterados. Esto es más frecuente en personas de origen asiático o latinoamericano y en personas sedentarias con poca masa muscular.' },
+  ]}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Síndrome<br><span style="color: var(--acid);">Metabólico</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Evalúa si cumples los criterios de síndrome metabólico según la Federación Internacional de Diabetes (IDF 2006), adaptados para Latinoamérica. Necesitas los valores de tu última analítica.
+    </p>
+  </div>
+
+  <SindromeMetabolicoCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cómo se diagnostica el síndrome metabólico?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      Según los criterios <strong>IDF 2006</strong> para Latinoamérica, el síndrome metabólico requiere <strong>obesidad central obligatoria</strong> (cintura >90 cm hombres / >80 cm mujeres) más al menos <strong>2 de los 4 criterios adicionales</strong>. La obesidad central es el criterio de entrada porque la grasa visceral es el mecanismo fisiopatológico central del síndrome.
+    </p>
+
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 360px;">
+        <thead>
+          <tr style="border-bottom: 2px solid var(--border);">
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Criterio</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Umbral</th>
+          </tr>
+        </thead>
+        <tbody>
+          {[
+            { crit: 'Cintura (OBLIGATORIO)', umbral: '>90 cm hombres / >80 cm mujeres (LATAM)' },
+            { crit: 'Triglicéridos',        umbral: '≥ 150 mg/dL o en tratamiento' },
+            { crit: 'HDL colesterol',       umbral: '< 40 mg/dL hombres / < 50 mg/dL mujeres' },
+            { crit: 'Presión arterial',     umbral: '≥ 130/85 mmHg o en tratamiento' },
+            { crit: 'Glucosa en ayunas',    umbral: '≥ 100 mg/dL o en tratamiento/diagnóstico' },
+          ].map(row => (
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 10px 0; font-size: 13px; color: var(--ink); font-weight: 600;">{row.crit}</td>
+              <td style="padding: 10px 0; font-size: 12px; color: var(--muted);">{row.umbral}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {[
+        { q: '¿Qué es el síndrome metabólico?', a: 'El síndrome metabólico es una agrupación de factores de riesgo cardiometabólico que, cuando aparecen juntos, multiplican el riesgo de enfermedad cardiovascular y diabetes tipo 2. Según la IDF 2006, afecta al 20–30% de la población adulta mundial. Su presencia triplica el riesgo de infarto y quintuplica el de diabetes tipo 2 comparado con personas sin el síndrome.' },
+        { q: '¿Cuáles son los criterios IDF 2006 para diagnosticarlo?', a: 'Según la Federación Internacional de Diabetes (IDF 2006), el diagnóstico requiere: obesidad central obligatoria (cintura >90 cm en hombres latinoamericanos, >80 cm en mujeres) más al menos 2 de los 4 criterios adicionales: triglicéridos ≥150 mg/dL o tratamiento, HDL bajo (<40 hombres / <50 mujeres) o tratamiento, presión arterial ≥130/85 mmHg o tratamiento, glucosa en ayunas ≥100 mg/dL, tratamiento o diagnóstico previo.' },
+        { q: '¿Qué diferencia hay entre los criterios para latinoamericanos y europeos?', a: 'El umbral de cintura para obesidad central es diferente por etnia. Para latinoamericanos, la IDF establece >90 cm en hombres (en lugar de >94 cm de los europeos) y >80 cm en mujeres (igual que europeos). Esto se debe a que las poblaciones latinoamericanas tienen mayor riesgo metabólico a la misma circunferencia de cintura que los europeos de ascendencia.' },
+        { q: '¿El síndrome metabólico tiene tratamiento?', a: 'Sí. El tratamiento principal es el cambio de estilo de vida: perder el 7–10% del peso corporal, 150–300 min/semana de ejercicio aeróbico moderado, dieta mediterránea o baja en carbohidratos refinados, y reducción del consumo de alcohol. En muchos casos, estos cambios pueden revertir el síndrome metabólico en 6–12 meses. La medicación se reserva para criterios que no mejoran con los cambios de hábitos.' },
+        { q: '¿Puedo tener síndrome metabólico y peso normal?', a: 'Sí. La llamada "obesidad metabólica de peso normal" (MONW, por sus siglas en inglés) ocurre en personas con IMC normal pero con exceso de grasa visceral (abdominal), lo que genera los mismos criterios metabólicos alterados. Esto es más frecuente en personas de origen asiático o latinoamericano y en personas sedentarias con poca masa muscular.' },
+      ].map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

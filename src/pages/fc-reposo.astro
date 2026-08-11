@@ -1,0 +1,82 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import FCReposoCalculator from '../components/calculators/FCReposoCalculator';
+---
+
+<CalculatorLayout
+  title="Calculadora de FC en Reposo — Nivel Cardiovascular | CalcFit"
+  description="Evalúa tu frecuencia cardíaca en reposo y descubre tu nivel de fitness cardiovascular. Calcula reserva cardíaca y FC máxima estimada. Gratis."
+  calculatorName="FC en Reposo"
+  breadcrumbSlug="fc-reposo"
+  ogImage="/og/fc-reposo.jpg"
+  keywords="calculadora frecuencia cardíaca reposo, FC reposo normal, reserva cardíaca, nivel fitness cardiovascular, bradicardia atletas"
+  faqs={[
+    { q: '¿Cuál es la frecuencia cardíaca en reposo normal?', a: 'La FC en reposo normal para adultos es de 60–100 ppm según la American Heart Association. Sin embargo, deportistas bien entrenados pueden tener FC de 40–50 ppm (bradicardia fisiológica), lo que indica un corazón muy eficiente. FC por encima de 100 ppm en reposo (taquicardia sinusal) puede ser señal de estrés, anemia, hipertiroidismo u otras condiciones.' },
+    { q: '¿Cómo se mide correctamente la FC en reposo?', a: 'Mídela por la mañana al despertar, antes de levantarte. Coloca los dedos índice y medio en el cuello (arteria carótida) o en la muñeca (arteria radial) y cuenta los latidos durante 60 segundos. Repítelo 3 días consecutivos y promedia los valores para mayor fiabilidad. Evita café, estrés o actividad física antes de la medición.' },
+    { q: '¿Qué es la reserva cardíaca?', a: 'La reserva cardíaca (o HRR, Heart Rate Reserve) es la diferencia entre la FC máxima y la FC en reposo: FC máx − FC reposo. Una mayor reserva indica mayor capacidad del corazón para acelerar durante el ejercicio, lo que refleja mejor condición aeróbica. La fórmula de Karvonen usa la reserva cardíaca para calcular zonas de entrenamiento personalizadas.' },
+    { q: '¿La FC en reposo cambia con el entrenamiento?', a: 'Sí, y significativamente. El entrenamiento aeróbico regular (carrera, ciclismo, natación) puede reducir la FC en reposo entre 5 y 25 ppm en 8–16 semanas. Esta reducción refleja un aumento del volumen sistólico (la sangre que el corazón expulsa en cada latido), lo que permite mantener el mismo gasto cardíaco con menos latidos.' },
+    { q: '¿La FC en reposo puede predecir problemas de salud?', a: 'Estudios epidemiológicos han mostrado que una FC en reposo elevada es un factor de riesgo independiente de mortalidad cardiovascular. En el estudio HUNT (2013, n=28.000), cada 10 ppm adicionales de FC en reposo se asoció con un 16% mayor riesgo de mortalidad. Por el contrario, una FC baja en atletas (bradicardia sinusal) es benigna y protectora.' },
+  ]}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      FC en<br><span style="color: var(--acid);">Reposo</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Evalúa tu frecuencia cardíaca en reposo y descubre tu nivel de condición cardiovascular, reserva cardíaca y FC máxima estimada.
+    </p>
+  </div>
+
+  <FCReposoCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cómo se clasifica la FC en reposo?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      La clasificación se basa en tablas normativas por sexo y edad de la American College of Sports Medicine (ACSM). La <strong>reserva cardíaca = FC máx estimada − FC reposo</strong>; una mayor reserva indica mejor capacidad aeróbica. La <strong>FC máxima estimada = 220 − edad</strong> (fórmula Tanaka más precisa para >40 años: 208 − 0.7 × edad).
+    </p>
+
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 340px;">
+        <thead>
+          <tr style="border-bottom: 2px solid var(--border);">
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Nivel</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Hombres (ppm)</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Mujeres (ppm)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {[
+            { nivel: 'Atleta',    h: '< 50',   m: '< 54'   },
+            { nivel: 'Excelente', h: '50–58',  m: '54–60'  },
+            { nivel: 'Bueno',     h: '59–65',  m: '61–67'  },
+            { nivel: 'Normal',    h: '66–72',  m: '68–73'  },
+            { nivel: 'Bajo',      h: '73–81',  m: '74–82'  },
+            { nivel: 'Pobre',     h: '> 81',   m: '> 82'   },
+          ].map(row => (
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 10px 0; font-size: 13px; color: var(--ink); font-weight: 600;">{row.nivel}</td>
+              <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.h}</td>
+              <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.m}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {[
+        { q: '¿Cuál es la frecuencia cardíaca en reposo normal?', a: 'La FC en reposo normal para adultos es de 60–100 ppm según la American Heart Association. Sin embargo, deportistas bien entrenados pueden tener FC de 40–50 ppm (bradicardia fisiológica), lo que indica un corazón muy eficiente. FC por encima de 100 ppm en reposo (taquicardia sinusal) puede ser señal de estrés, anemia, hipertiroidismo u otras condiciones.' },
+        { q: '¿Cómo se mide correctamente la FC en reposo?', a: 'Mídela por la mañana al despertar, antes de levantarte. Coloca los dedos índice y medio en el cuello (arteria carótida) o en la muñeca (arteria radial) y cuenta los latidos durante 60 segundos. Repítelo 3 días consecutivos y promedia los valores para mayor fiabilidad. Evita café, estrés o actividad física antes de la medición.' },
+        { q: '¿Qué es la reserva cardíaca?', a: 'La reserva cardíaca (o HRR, Heart Rate Reserve) es la diferencia entre la FC máxima y la FC en reposo: FC máx − FC reposo. Una mayor reserva indica mayor capacidad del corazón para acelerar durante el ejercicio, lo que refleja mejor condición aeróbica. La fórmula de Karvonen usa la reserva cardíaca para calcular zonas de entrenamiento personalizadas.' },
+        { q: '¿La FC en reposo cambia con el entrenamiento?', a: 'Sí, y significativamente. El entrenamiento aeróbico regular (carrera, ciclismo, natación) puede reducir la FC en reposo entre 5 y 25 ppm en 8–16 semanas. Esta reducción refleja un aumento del volumen sistólico (la sangre que el corazón expulsa en cada latido), lo que permite mantener el mismo gasto cardíaco con menos latidos.' },
+        { q: '¿La FC en reposo puede predecir problemas de salud?', a: 'Estudios epidemiológicos han mostrado que una FC en reposo elevada es un factor de riesgo independiente de mortalidad cardiovascular. En el estudio HUNT (2013, n=28.000), cada 10 ppm adicionales de FC en reposo se asoció con un 16% mayor riesgo de mortalidad. Por el contrario, una FC baja en atletas (bradicardia sinusal) es benigna y protectora.' },
+      ].map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

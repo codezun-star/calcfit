@@ -85,7 +85,7 @@ La movilidad articular disminuye con la edad sin trabajo específico. Dedicar 10
 
 **Más proteína, no menos**: la "resistencia anabólica" que aparece con la edad significa que el músculo responde menos eficientemente a la proteína. La solución no es ignorarla sino consumir más: 2.0-2.4 g/kg/día en lugar de los 1.6 g/kg de personas jóvenes.
 
-**Vitamina D**: la deficiencia es muy común después de los 40 y afecta directamente la función muscular y ósea. Considera suplementar si vives en latitudes altas o trabajas en interiores. La guía de vitamina D explica cuándo y cómo suplementar.
+**Vitamina D**: la deficiencia es muy común después de los 40 y afecta directamente la función muscular y ósea. Considera suplementar si vives en latitudes altas o trabajas en interiores. La [guía de vitamina D](/blog/vitamina-d-deficiencia-suplementacion) explica cuándo y cómo suplementar.
 
 **Calcio**: la densidad ósea requiere calcio suficiente (1.000-1.200 mg/día). Fuentes: lácteos, sardinas con espinas, tofu firme, legumbres.
 

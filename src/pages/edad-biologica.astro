@@ -1,0 +1,78 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import EdadBiologicaCalculator from '../components/calculators/EdadBiologicaCalculator';
+
+const faqs = [
+  { q: '¿Qué es la edad biológica y cómo difiere de la cronológica?', a: 'La edad cronológica es los años transcurridos desde el nacimiento. La edad biológica refleja el estado real de los tejidos, células y funciones fisiológicas, que puede ser mayor o menor que la cronológica según el estilo de vida. Personas con hábitos saludables pueden tener una edad biológica 10–15 años menor que la cronológica.' },
+  { q: '¿Cuánto puede afectar el tabaco a la edad biológica?', a: 'El tabaquismo activo acorta la esperanza de vida en 10–12 años de media (OMS). A nivel celular, acelera el acortamiento de los telómeros (marcadores de envejecimiento celular) y aumenta el estrés oxidativo. Ex fumadores recuperan parcialmente este daño, especialmente si dejaron antes de los 40 años.' },
+  { q: '¿El ejercicio físico puede rejuvenecer biológicamente?', a: 'Sí. Estudios de Biernot et al. y del King\'s College de Londres muestran que los adultos que practican actividad física regular moderada-intensa tienen telómeros 9 años más largos que los sedentarios. El ejercicio mejora la sensibilidad a la insulina, reduce la inflamación crónica y optimiza la función mitocondrial.' },
+  { q: '¿Cómo afecta el sueño al envejecimiento biológico?', a: 'Dormir menos de 6 horas aumenta el cortisol, reduce la liberación de GH y limita la reparación del ADN que ocurre durante el sueño. Vgontzas et al. documentaron que la privación crónica de sueño se asocia con marcadores de envejecimiento acelerado y mayor riesgo de enfermedades crónicas.' },
+  { q: '¿Es posible reducir la edad biológica con cambios de hábitos?', a: 'Sí. Un estudio de Fitzgerald et al. (2021) demostró una reducción de 3.23 años en la edad biológica (medida por reloj epigenético DNAmAge) en 8 semanas con intervención de dieta, sueño, ejercicio y manejo del estrés. Los cambios más impactantes son: dejar de fumar, aumentar la actividad física y mejorar la dieta.' },
+];
+---
+
+<CalculatorLayout
+  title="Edad Biológica — Estimación por Estilo de Vida | CalcFit"
+  description="Estima tu edad biológica según actividad física, tabaco, dieta, sueño, estrés e IMC. Descubre si tu cuerpo envejece más rápido o más lento. Gratis."
+  calculatorName="Edad Biológica"
+  breadcrumbSlug="edad-biologica"
+  ogImage="/og/edad-biologica.jpg"
+  keywords="calculadora edad biológica, envejecimiento estilo de vida, edad biológica vs cronológica, cómo calcular edad biológica, rejuvenecer edad biológica"
+  faqs={faqs}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Edad<br><span style="color: var(--acid);">Biológica</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Estima tu edad biológica basándose en 8 factores clave del estilo de vida: actividad física, tabaco, alcohol, sueño, estrés, dieta, IMC y chequeos médicos.
+    </p>
+  </div>
+
+  <EdadBiologicaCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cómo se estima la edad biológica?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      Esta calculadora usa un modelo de ajuste por factores de riesgo validados en la literatura epidemiológica. Cada hábito se traduce en un ajuste (positivo o negativo) sobre la edad cronológica, inspirado en los estudios de Levine et al. (2018) sobre relojes epigenéticos y los datos del Framingham Heart Study. Los factores de mayor impacto son el tabaquismo (+7 años), el sedentarismo (+4 años), la obesidad (+5 años) y el estrés muy alto (+5 años).
+    </p>
+
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 400px;">
+        <thead>
+          <tr style="background: var(--ink); color: var(--acid);">
+            <th style="padding: 10px 14px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Factor</th>
+            <th style="padding: 10px 14px; text-align: left;">Mejor escenario</th>
+            <th style="padding: 10px 14px; text-align: left;">Peor escenario</th>
+          </tr>
+        </thead>
+        <tbody>
+          {[
+            ['Actividad física', '−5 años (muy activo)', '+4 años (sedentario)'],
+            ['Tabaco', '0 (nunca fumó)', '+7 años (fumador activo)'],
+            ['Sueño', '0 (6–8 h)', '+3 años (<6 h)'],
+            ['Estrés', '−1 año (bajo)', '+5 años (muy alto)'],
+            ['Dieta', '−3 años (excelente)', '+4 años (mala)'],
+            ['IMC', '0 (normal)', '+5 años (obesidad)'],
+          ].map(([f, mejor, peor], i) => (
+            <tr style={`background: ${i % 2 === 0 ? 'white' : '#f9f6f0'};`}>
+              <td style="padding: 10px 14px;">{f}</td>
+              <td style="padding: 10px 14px; color: #166534; font-size: 12px;">{mejor}</td>
+              <td style="padding: 10px 14px; color: #991b1b; font-size: 12px;">{peor}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {faqs.map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

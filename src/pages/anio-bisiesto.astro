@@ -1,0 +1,75 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import AnioBisiestoCalculator from '../components/calculators/AnioBisiestoCalculator';
+
+const faqs = [
+  { q: '¿Qué es un año bisiesto?', a: 'Es un año con 366 días en lugar de 365, porque añade el 29 de febrero. Sirve para ajustar el calendario al tiempo real que tarda la Tierra en dar una vuelta al Sol (unos 365,2422 días).' },
+  { q: '¿Cómo se sabe si un año es bisiesto?', a: 'Un año es bisiesto si es divisible entre 4, salvo los años divisibles entre 100, que solo lo son si además son divisibles entre 400. Por eso 2000 fue bisiesto pero 1900 no lo fue.' },
+  { q: '¿Cada cuántos años hay uno bisiesto?', a: 'Por regla general, cada 4 años. Sin embargo, la excepción de los años de fin de siglo (divisibles entre 100 pero no entre 400) hace que el patrón no sea perfectamente regular.' },
+  { q: '¿Por qué existen los años bisiestos?', a: 'Porque la Tierra tarda aproximadamente 365 días y 6 horas en orbitar el Sol. Esas 6 horas extra se acumulan y, cada 4 años, suman un día completo que se añade como 29 de febrero para no desfasar las estaciones.' },
+  { q: '¿2100 será bisiesto?', a: 'No. Aunque es divisible entre 4, también lo es entre 100 y no entre 400, por lo que no será bisiesto. El próximo año de fin de siglo bisiesto será el 2400.' },
+];
+---
+
+<CalculatorLayout
+  title="Año Bisiesto — Comprueba Cualquier Año | CalcFit"
+  description="Comprueba si un año es bisiesto y descubre el próximo. Explicación de la regla del 4, el 100 y el 400. Gratis y sin registro."
+  calculatorName="Año Bisiesto"
+  breadcrumbSlug="anio-bisiesto"
+  ogImage="/og/anio-bisiesto.jpg"
+  keywords="año bisiesto, es bisiesto, próximo año bisiesto, cómo saber si un año es bisiesto, años bisiestos"
+  faqs={faqs}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Año<br><span style="color: var(--acid);">Bisiesto</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Comprueba si cualquier año es bisiesto y descubre cuál será el próximo, con la explicación de por qué.
+    </p>
+  </div>
+
+  <AnioBisiestoCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cómo se determina?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      La regla del calendario gregoriano es clara: un año es bisiesto si es <strong>divisible entre 4</strong>, excepto los divisibles entre 100, que solo son bisiestos si también lo son entre 400. Este ajuste mantiene el calendario alineado con las estaciones a lo largo de los siglos.
+    </p>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Ejemplos de la regla</h2>
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 320px;">
+      <thead>
+        <tr style="border-bottom: 2px solid var(--border);">
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Año</th>
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">¿Bisiesto?</th>
+        </tr>
+      </thead>
+      <tbody>
+        {[
+          { a: '2024', b: 'Sí (divisible entre 4)' },
+          { a: '1900', b: 'No (entre 100, no entre 400)' },
+          { a: '2000', b: 'Sí (divisible entre 400)' },
+          { a: '2100', b: 'No (entre 100, no entre 400)' },
+        ].map((row) => (
+          <tr style="border-bottom: 1px solid var(--border);">
+            <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.a}</td>
+            <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.b}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    </div>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {faqs.map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

@@ -90,12 +90,12 @@ Si el primer ingrediente de un "pan integral" es "harina de trigo" (sin la palab
 
 Una heurística útil aunque no perfecta: si un producto tiene más de 5 ingredientes y varios de ellos son difíciles de pronunciar, probablemente sea ultraprocesado. Los alimentos mínimamente procesados tienen ingredientes simples y pocos.
 
-Nuestra calculadora de índice glucémico de comidas te ayuda a evaluar el impacto en glucosa de diferentes opciones y comparar alimentos con valores nutricionales similares.
+Nuestra [calculadora de índice glucémico de comidas](/ig-comida) te ayuda a evaluar el impacto en glucosa de diferentes opciones y comparar alimentos con valores nutricionales similares.
 
 ---
 
 ## Artículos relacionados
 
-- Azúcar: cuánto es demasiado y qué le hace realmente a tu cuerpo
-- Fibra dietética: para qué sirve realmente
+- [Azúcar: cuánto es demasiado y qué le hace realmente a tu cuerpo](/blog/azucar-cuanto-es-demasiado)
+- [Fibra dietética: para qué sirve realmente](/blog/fibra-dietetica-para-que-sirve-realmente)
 - [Grasas saludables: cuáles comer y cuáles evitar](/blog/grasas-saludables-cuales-comer)

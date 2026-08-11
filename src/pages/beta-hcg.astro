@@ -1,0 +1,80 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import BetaHCGCalculator from '../components/calculators/BetaHCGCalculator';
+---
+
+<CalculatorLayout
+  title="Beta-hCG — ¿Sube Correctamente tu hCG? | CalcFit"
+  description="Introduce dos valores de beta-hCG y los días entre ellos: interpreta si el ascenso es normal para un embarazo evolutivo. Gratis y sin registro."
+  calculatorName="Beta-hCG"
+  breadcrumbSlug="beta-hcg"
+  ogImage="/og/beta-hcg.jpg"
+  keywords="calculadora beta hCG, cuánto debe subir la beta hCG, tiempo de duplicación hCG, beta hCG embarazo ectópico, interpretación beta hCG primera semana embarazo"
+  faqs={[
+    { q: '¿Cuánto debe subir la beta-hCG en 48 horas?', a: 'En las primeras semanas de embarazo (hasta la semana 6), la beta-hCG debe aumentar al menos un 66% cada 48 horas. Entre las semanas 6 y 7, se acepta un ascenso del 53% en 48 horas. Un ascenso menor puede indicar embarazo ectópico o gestación no evolutiva, aunque también puede ser variación normal. Siempre requiere evaluación médica.' },
+    { q: '¿Qué es la beta-hCG y para qué sirve?', a: 'La gonadotropina coriónica humana (hCG) es la hormona producida por el trofoblasto (futuro placenta) desde la implantación. Su medición en sangre (beta-hCG cuantitativa) confirma el embarazo y su seguimiento en serie permite evaluar si el embarazo es evolutivo. Los tests de embarazo de orina detectan hCG, pero no pueden cuantificarla.' },
+    { q: '¿Qué valores de hCG son normales en las primeras semanas?', a: 'Los valores normales varían mucho entre individuos: semana 3–4: 5–1,200 mUI/ml; semana 4–5: 200–7,000; semana 5–6: 200–32,000; semana 6–7: 3,000–160,000; semana 7–12: pico de hasta 500,000 mUI/ml. Después del primer trimestre, la hCG cae y se estabiliza. Lo más importante no es el valor absoluto sino la curva de ascenso.' },
+    { q: '¿Un ascenso lento siempre significa embarazo ectópico?', a: 'No, un ascenso lento de hCG puede ocurrir en embarazos intrauterinos normales (especialmente con implantación tardía), en abortos en evolución y en embarazos ectópicos. La ecografía transvaginal es imprescindible para determinar la localización del embarazo cuando la hCG supera el umbral discriminatorio (1,500–2,000 mUI/ml) sin visualizarse saco intrauterino.' },
+    { q: '¿Cuándo aparece el saco gestacional en la ecografía?', a: 'El saco gestacional suele verse por ecografía transvaginal cuando la hCG supera los 1,500–2,000 mUI/ml (umbral discriminatorio), generalmente en la semana 5–5.5 de gestación. El embrión con latido cardíaco se ve a partir de la semana 6–6.5, cuando la hCG supera los 10,000–20,000 mUI/ml.' },
+  ]}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Calculadora<br><span style="color: var(--acid);">Beta-hCG</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Interpreta si el ascenso de tu beta-hCG entre dos analíticas es adecuado para un embarazo intrauterino evolutivo.
+    </p>
+  </div>
+
+  <BetaHCGCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cómo se interpreta la curva de beta-hCG?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 16px;">
+      En un embarazo intrauterino evolutivo, la beta-hCG se duplica aproximadamente <strong>cada 48–72 horas</strong> durante las primeras semanas. El criterio mínimo aceptado es un ascenso del 66% en 48 horas (hasta la semana 6) o del 53% (semanas 6–7). Un ascenso menor no siempre indica problema, pero requiere evaluación médica urgente.
+    </p>
+
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 400px;">
+      <thead>
+        <tr style="background: var(--ink); color: var(--cream);">
+          <th style="padding: 10px 12px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Ascenso en 48 h</th>
+          <th style="padding: 10px 12px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Interpretación</th>
+          <th style="padding: 10px 12px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        {[
+          { asc: '≥ 66%', interp: 'Normal (hasta semana 6)', accion: 'Seguimiento programado', color: '#34D399' },
+          { asc: '53–65%', interp: 'Límite bajo aceptable', accion: 'Repetir en 48 h + ecografía TV', color: '#CAFF00' },
+          { asc: '< 53%', interp: 'Insuficiente', accion: 'Consulta urgente obstétrica', color: '#FB923C' },
+          { asc: 'Descenso', interp: 'Caída de hCG', accion: 'Urgencias obstétricas inmediatas', color: '#F87171' },
+        ].map((r, i) => (
+          <tr style={`background: ${i % 2 === 0 ? 'var(--cream)' : 'white'}`}>
+            <td style={`padding: 9px 12px; color: ${r.color}; font-family: var(--font-display); font-size: 16px;`}>{r.asc}</td>
+            <td style="padding: 9px 12px; color: var(--ink); font-weight: 600;">{r.interp}</td>
+            <td style="padding: 9px 12px; color: var(--muted);">{r.accion}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    </div>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {[
+        { q: '¿Cuánto debe subir la beta-hCG en 48 horas?', a: 'En las primeras semanas de embarazo (hasta la semana 6), la beta-hCG debe aumentar al menos un 66% cada 48 horas. Entre las semanas 6 y 7, se acepta un ascenso del 53% en 48 horas. Un ascenso menor puede indicar embarazo ectópico o gestación no evolutiva, aunque también puede ser variación normal. Siempre requiere evaluación médica.' },
+        { q: '¿Qué es la beta-hCG y para qué sirve?', a: 'La gonadotropina coriónica humana (hCG) es la hormona producida por el trofoblasto (futuro placenta) desde la implantación. Su medición en sangre (beta-hCG cuantitativa) confirma el embarazo y su seguimiento en serie permite evaluar si el embarazo es evolutivo. Los tests de embarazo de orina detectan hCG, pero no pueden cuantificarla.' },
+        { q: '¿Qué valores de hCG son normales en las primeras semanas?', a: 'Los valores normales varían mucho entre individuos: semana 3–4: 5–1,200 mUI/ml; semana 4–5: 200–7,000; semana 5–6: 200–32,000; semana 6–7: 3,000–160,000; semana 7–12: pico de hasta 500,000 mUI/ml. Después del primer trimestre, la hCG cae y se estabiliza. Lo más importante no es el valor absoluto sino la curva de ascenso.' },
+        { q: '¿Un ascenso lento siempre significa embarazo ectópico?', a: 'No, un ascenso lento de hCG puede ocurrir en embarazos intrauterinos normales (especialmente con implantación tardía), en abortos en evolución y en embarazos ectópicos. La ecografía transvaginal es imprescindible para determinar la localización del embarazo cuando la hCG supera el umbral discriminatorio (1,500–2,000 mUI/ml) sin visualizarse saco intrauterino.' },
+        { q: '¿Cuándo aparece el saco gestacional en la ecografía?', a: 'El saco gestacional suele verse por ecografía transvaginal cuando la hCG supera los 1,500–2,000 mUI/ml (umbral discriminatorio), generalmente en la semana 5–5.5 de gestación. El embrión con latido cardíaco se ve a partir de la semana 6–6.5, cuando la hCG supera los 10,000–20,000 mUI/ml.' },
+      ].map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

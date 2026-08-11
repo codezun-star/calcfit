@@ -1,0 +1,82 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import GlucosaCalculator from '../components/calculators/GlucosaCalculator';
+---
+
+<CalculatorLayout
+  title="Glucosa en Sangre — Ayunas, Postprandial y HbA1c | CalcFit"
+  description="Interpreta tu glucosa en ayunas, postprandial o HbA1c según criterios ADA. Detecta prediabetes y diabetes al instante. Gratis, sin registro."
+  calculatorName="Glucosa en Sangre"
+  breadcrumbSlug="glucosa"
+  ogImage="/og/glucosa.jpg"
+  keywords="calculadora glucosa, glucosa en ayunas normal, interpretación HbA1c, prediabetes glucosa, niveles de glucosa ADA, glucosa postprandial"
+  faqs={[
+    { q: '¿Cuál es el nivel normal de glucosa en ayunas?', a: 'Según la Asociación Americana de Diabetes (ADA), la glucosa en ayunas normal es menor a 100 mg/dL. Entre 100 y 125 mg/dL se considera prediabetes, y 126 mg/dL o más en dos mediciones distintas indica diabetes.' },
+    { q: '¿Qué es la HbA1c y qué valor es normal?', a: 'La hemoglobina glucosilada (HbA1c) refleja el promedio de glucosa en sangre durante los últimos 2-3 meses. Un valor menor a 5.7% es normal, entre 5.7% y 6.4% indica prediabetes, y 6.5% o más es diagnóstico de diabetes.' },
+    { q: '¿Qué significa la glucosa postprandial?', a: 'La glucosa postprandial se mide 2 horas después de una comida. Un valor menor a 140 mg/dL es normal; entre 140 y 199 mg/dL indica intolerancia a la glucosa (prediabetes); 200 mg/dL o más puede indicar diabetes.' },
+    { q: '¿Cuántas horas de ayuno se necesitan para medir la glucosa en ayunas?', a: 'Se requieren al menos 8 horas sin ingerir alimentos ni bebidas calóricas. Solo se permite agua. El análisis se suele realizar por la mañana antes del desayuno para mayor comodidad.' },
+    { q: '¿La prediabetes siempre se convierte en diabetes?', a: 'No. Con cambios en el estilo de vida —dieta saludable, ejercicio regular y pérdida de peso si hay sobrepeso— entre el 40% y 70% de las personas con prediabetes pueden revertir su situación. El diagnóstico temprano es clave para actuar a tiempo.' },
+  ]}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Glucosa<br><span style="color: var(--acid);">en Sangre</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Interpreta tus valores de glucosa en ayunas, postprandial o HbA1c siguiendo los criterios diagnósticos de la Asociación Americana de Diabetes (ADA 2024).
+    </p>
+  </div>
+
+  <GlucosaCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cómo se interpretan los valores de glucosa?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      La glucosa en sangre se puede medir de tres formas principales: en ayunas (sin comer 8 horas), postprandial (2 horas después de comer) y mediante la HbA1c, que refleja el promedio de los últimos 2–3 meses. Cada tipo tiene sus propios rangos diagnósticos según la ADA y la OMS.
+    </p>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Tabla de clasificación ADA 2024</h2>
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 420px;">
+        <thead>
+          <tr style="border-bottom: 2px solid var(--border);">
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Tipo</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Normal</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Prediabetes</th>
+            <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Diabetes</th>
+          </tr>
+        </thead>
+        <tbody>
+          {[
+            { tipo: 'Ayunas (mg/dL)',      normal: '< 100',   pre: '100–125',  diab: '≥ 126' },
+            { tipo: 'Postprandial (mg/dL)', normal: '< 140',   pre: '140–199',  diab: '≥ 200' },
+            { tipo: 'HbA1c (%)',            normal: '< 5.7%',  pre: '5.7–6.4%', diab: '≥ 6.5%' },
+          ].map((row) => (
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 10px 0; font-size: 13px; color: var(--ink); font-weight: 600;">{row.tipo}</td>
+              <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: #34D399;">{row.normal}</td>
+              <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: #FB923C;">{row.pre}</td>
+              <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: #F87171;">{row.diab}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {[
+        { q: '¿Cuál es el nivel normal de glucosa en ayunas?', a: 'Según la Asociación Americana de Diabetes (ADA), la glucosa en ayunas normal es menor a 100 mg/dL. Entre 100 y 125 mg/dL se considera prediabetes, y 126 mg/dL o más en dos mediciones distintas indica diabetes.' },
+        { q: '¿Qué es la HbA1c y qué valor es normal?', a: 'La hemoglobina glucosilada (HbA1c) refleja el promedio de glucosa en sangre durante los últimos 2-3 meses. Un valor menor a 5.7% es normal, entre 5.7% y 6.4% indica prediabetes, y 6.5% o más es diagnóstico de diabetes.' },
+        { q: '¿Qué significa la glucosa postprandial?', a: 'La glucosa postprandial se mide 2 horas después de una comida. Un valor menor a 140 mg/dL es normal; entre 140 y 199 mg/dL indica intolerancia a la glucosa (prediabetes); 200 mg/dL o más puede indicar diabetes.' },
+        { q: '¿Cuántas horas de ayuno se necesitan para medir la glucosa en ayunas?', a: 'Se requieren al menos 8 horas sin ingerir alimentos ni bebidas calóricas. Solo se permite agua. El análisis se suele realizar por la mañana antes del desayuno para mayor comodidad.' },
+        { q: '¿La prediabetes siempre se convierte en diabetes?', a: 'No. Con cambios en el estilo de vida —dieta saludable, ejercicio regular y pérdida de peso si hay sobrepeso— entre el 40% y 70% de las personas con prediabetes pueden revertir su situación. El diagnóstico temprano es clave para actuar a tiempo.' },
+      ].map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

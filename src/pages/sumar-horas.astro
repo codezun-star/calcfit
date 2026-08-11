@@ -1,0 +1,74 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import SumarHorasCalculator from '../components/calculators/SumarHorasCalculator';
+
+const faqs = [
+  { q: '¿Cómo se suman horas y minutos?', a: 'Se suman por separado las horas y los minutos, y cada 60 minutos se convierten en 1 hora. La calculadora lo hace automáticamente y te da el resultado en horas y minutos y en minutos totales.' },
+  { q: '¿Cómo se restan horas?', a: 'Se convierten ambas cantidades a minutos, se restan y se vuelve a expresar en horas y minutos. Si el resultado es negativo, la calculadora lo indica con un signo menos.' },
+  { q: '¿Para qué sirve sumar horas?', a: 'Es útil para sumar la duración de varias tareas, calcular el total de horas de un proyecto, planificar viajes con escalas o controlar el tiempo dedicado a distintas actividades.' },
+  { q: '¿Puedo sumar más de 24 horas?', a: 'Sí. La calculadora no limita el resultado a un día, así que puedes obtener totales de 30, 50 o más horas, ideales para sumar jornadas o periodos largos.' },
+  { q: '¿Qué diferencia hay con la calculadora de horas trabajadas?', a: 'Esta suma o resta dos duraciones (cantidades de tiempo), mientras que la de horas trabajadas calcula el tiempo entre una hora de entrada y una de salida concretas, descontando descansos.' },
+];
+---
+
+<CalculatorLayout
+  title="Sumar y Restar Horas y Minutos | CalcFit"
+  description="Suma o resta horas y minutos de forma sencilla. Obtén el resultado en horas, minutos y minutos totales. Gratis y sin registro."
+  calculatorName="Sumar y Restar Horas"
+  breadcrumbSlug="sumar-horas"
+  ogImage="/og/sumar-horas.jpg"
+  keywords="sumar horas, restar horas, sumar horas y minutos, calculadora de horas, sumar tiempo"
+  faqs={faqs}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Sumar<br><span style="color: var(--acid);">Horas</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Suma o resta dos cantidades de horas y minutos y obtén el total exacto.
+    </p>
+  </div>
+
+  <SumarHorasCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cómo se calcula?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      La calculadora convierte cada cantidad a minutos, realiza la suma o la resta y vuelve a expresar el resultado en horas y minutos. Maneja resultados mayores de 24 horas y también valores negativos cuando restas una duración mayor a otra menor.
+    </p>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Equivalencias rápidas</h2>
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 320px;">
+      <thead>
+        <tr style="border-bottom: 2px solid var(--border);">
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Horas</th>
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Minutos</th>
+        </tr>
+      </thead>
+      <tbody>
+        {[
+          { h: '1 h', m: '60 min' },
+          { h: '2 h 30 min', m: '150 min' },
+          { h: '8 h', m: '480 min' },
+        ].map((row) => (
+          <tr style="border-bottom: 1px solid var(--border);">
+            <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.h}</td>
+            <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.m}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    </div>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {faqs.map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

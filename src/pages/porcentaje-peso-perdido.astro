@@ -1,0 +1,75 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import PorcentajePesoPerdidoCalculator from '../components/calculators/PorcentajePesoPerdidoCalculator';
+
+const faqs = [
+  { q: '¿Cómo se calcula el porcentaje de peso perdido?', a: 'Se divide el peso perdido entre el peso inicial y se multiplica por 100. Por ejemplo, perder 6 kg partiendo de 80 kg equivale a un 7,5% de pérdida de peso corporal.' },
+  { q: '¿Qué porcentaje de peso es saludable perder?', a: 'Se recomienda perder entre el 0,5% y el 1% del peso corporal por semana. Una pérdida del 5% al 10% del peso inicial ya aporta beneficios significativos para la salud metabólica.' },
+  { q: '¿Por qué se mide en porcentaje y no en kilos?', a: 'El porcentaje permite comparar de forma justa la pérdida entre personas de distinto peso. Perder 5 kg no es lo mismo para alguien de 60 kg que para alguien de 120 kg.' },
+  { q: '¿Qué es una pérdida de peso clínicamente significativa?', a: 'Perder un 5% o más del peso inicial se considera clínicamente significativo: mejora la presión arterial, la glucosa, los lípidos y reduce el riesgo de diabetes tipo 2.' },
+  { q: '¿Cada cuánto debo pesarme para seguir mi progreso?', a: 'Lo ideal es pesarse una vez por semana, el mismo día y a la misma hora, en ayunas. El peso fluctúa a diario por agua y comida, así que la tendencia semanal es más fiable que el dato puntual.' },
+];
+---
+
+<CalculatorLayout
+  title="Porcentaje de Peso Perdido — Calcula tu % | CalcFit"
+  description="Calcula qué porcentaje de tu peso corporal has perdido (o ganado) a partir de tu peso inicial y actual. Sigue tu progreso real. Gratis."
+  calculatorName="Porcentaje de Peso Perdido"
+  breadcrumbSlug="porcentaje-peso-perdido"
+  ogImage="/og/porcentaje-peso-perdido.jpg"
+  keywords="porcentaje de peso perdido, calcular peso perdido, porcentaje peso corporal perdido, cuánto peso he perdido, pérdida de peso porcentaje"
+  faqs={faqs}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Peso<br><span style="color: var(--acid);">Perdido %</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Calcula qué porcentaje de tu peso corporal has perdido o ganado entre dos pesadas.
+    </p>
+  </div>
+
+  <PorcentajePesoPerdidoCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cómo se calcula?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      La fórmula es: <strong>% perdido = (peso inicial − peso actual) ÷ peso inicial × 100</strong>. Expresar la pérdida en porcentaje es la forma estándar en medicina para valorar la magnitud de un cambio de peso, independientemente del punto de partida.
+    </p>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Qué significa cada nivel de pérdida</h2>
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 320px;">
+      <thead>
+        <tr style="border-bottom: 2px solid var(--border);">
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">% perdido</th>
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Significado</th>
+        </tr>
+      </thead>
+      <tbody>
+        {[
+          { p: '< 3%', s: 'Cambio leve, dentro de fluctuación' },
+          { p: '3–5%', s: 'Pérdida moderada inicial' },
+          { p: '5–10%', s: 'Clínicamente significativa' },
+          { p: '> 10%', s: 'Gran mejora metabólica' },
+        ].map((row) => (
+          <tr style="border-bottom: 1px solid var(--border);">
+            <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.p}</td>
+            <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.s}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    </div>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {faqs.map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

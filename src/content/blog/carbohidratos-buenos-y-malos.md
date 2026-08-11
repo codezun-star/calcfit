@@ -39,7 +39,7 @@ Ejemplos que rompen la intuición del IG:
 - **Puré de papas**: IG 80 — con mantequilla y proteína, el impacto glucémico real baja significativamente
 - **Zanahoria cocida**: IG 85 — pero una porción estándar tiene solo 5-6 g de carbohidratos
 
-Por eso es más útil la **carga glucémica** (CG), que considera tanto el IG como la cantidad de carbohidratos por porción. Nuestra calculadora de índice glucémico de comidas te permite calcular la carga glucémica de tus platos principales.
+Por eso es más útil la **carga glucémica** (CG), que considera tanto el IG como la cantidad de carbohidratos por porción. Nuestra [calculadora de índice glucémico de comidas](/ig-comida) te permite calcular la carga glucémica de tus platos principales.
 
 ## Los carbohidratos que sí conviene priorizar
 
@@ -57,7 +57,7 @@ Por eso es más útil la **carga glucémica** (CG), que considera tanto el IG co
 
 **Harinas refinadas**: pan blanco, pasta blanca, arroz blanco. No son veneno, pero han perdido la fibra y la mayoría de los micronutrientes. Impacto glucémico más rápido y menor saciedad por caloría.
 
-**Azúcar añadida**: ya desarrollado en detalle en nuestro artículo sobre el azúcar. El problema mayor no es la miel vs el azúcar blanco — es la cantidad total de azúcar libre en la dieta.
+**Azúcar añadida**: ya desarrollado en detalle en [nuestro artículo sobre el azúcar](/blog/azucar-cuanto-es-demasiado). El problema mayor no es la miel vs el azúcar blanco — es la cantidad total de azúcar libre en la dieta.
 
 **Bebidas azucaradas**: zumos, refrescos, bebidas energéticas. La glucosa líquida no genera el mismo señal de saciedad que la glucosa sólida y produce picos glucémicos más pronunciados.
 
@@ -95,4 +95,4 @@ El AR mejora la sensibilidad a la insulina, aumenta la saciedad y favorece la di
 
 - [Cómo leer etiquetas nutricionales: lo que importa y lo que es marketing](/blog/como-leer-etiquetas-nutricionales)
 - [Dieta cetogénica: para quién funciona y para quién no](/blog/dieta-cetogenica-para-quien-funciona)
-- Fibra dietética: para qué sirve realmente
+- [Fibra dietética: para qué sirve realmente](/blog/fibra-dietetica-para-que-sirve-realmente)

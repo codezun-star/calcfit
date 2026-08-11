@@ -1,0 +1,83 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import AlcoholemiaCalculator from '../components/calculators/AlcoholemiaCalculator';
+---
+
+<CalculatorLayout
+  title="Alcoholemia — Tasa de Alcohol en Sangre (Widmark) | CalcFit"
+  description="Estima tu alcohol en sangre con la fórmula de Widmark: efectos por nivel, tiempo hasta la sobriedad y límite legal. Herramienta de concienciación."
+  calculatorName="Calculadora de Alcoholemia"
+  breadcrumbSlug="alcoholemia"
+  ogImage="/og/alcoholemia.jpg"
+  keywords="calculadora alcoholemia, tasa alcohol en sangre, fórmula Widmark, cuándo puedo conducir, límite alcohol conducción, gramos litro alcohol sangre"
+  faqs={[
+    { q: '¿Por qué las mujeres tienen mayor alcoholemia que los hombres con la misma cantidad?', a: 'Las mujeres tienen menor proporción de agua corporal (constante r = 0.55 vs 0.68 en hombres), por lo que el alcohol se diluye menos. También tienen menor actividad de la enzima alcohol-deshidrogenasa en el estómago, absorbiendo más alcohol antes de que llegue al torrente sanguíneo.' },
+    { q: '¿Cuánto tiempo tarda el cuerpo en eliminar el alcohol?', a: 'El hígado elimina aproximadamente 0.10–0.15 g/L por hora. No hay forma de acelerar este proceso: el café, el ejercicio o el agua fría no reducen la alcoholemia. Solo el tiempo lo hace.' },
+    { q: '¿Es fiable esta calculadora para decidir si conducir?', a: 'No. Esta calculadora es orientativa y no debe usarse para decidir conducir. Hay gran variabilidad individual: factores como el estado de ánimo, el cansancio, la medicación, el nivel de tolerancia y si se ha comido afectan enormemente la respuesta al alcohol.' },
+    { q: '¿Cuál es el límite legal de alcoholemia en Latinoamérica?', a: 'Varía por país. En México el límite general es 0.8 g/L (0.4 g/L para conductores de transporte público). En Argentina: 0.5 g/L (tolerancia cero para conductores profesionales). En Colombia: 0.4 g/L. En Chile: 0.3 g/L (tolerancia cero para conductores profesionales y menores de 18). En España: 0.5 g/L (0.3 g/L para conductores noveles). Siempre verifica la legislación local vigente.' },
+    { q: '¿Hay forma de eliminar el alcohol del cuerpo más rápido?', a: 'No. El mito del café, la ducha fría o el ejercicio para \'bajar\' la alcoholemia es falso. El hígado elimina el alcohol a una tasa fija de aproximadamente 0.10–0.15 g/L por hora y ninguna sustancia acelera este proceso de forma significativa. El tiempo es la única forma de reducir la alcoholemia.' },
+  ]}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Calculadora de<br><span style="color: var(--acid);">Alcoholemia</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Herramienta orientativa basada en la fórmula de Widmark para estimar la tasa de alcohol en sangre. Diseñada para concienciación, no para tomar decisiones de conducción.
+    </p>
+  </div>
+
+  <AlcoholemiaCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cómo se calcula la alcoholemia?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      Usamos la <strong>fórmula de Widmark</strong>: <em>BAC = (gramos de alcohol) ÷ (peso × r)</em>, donde <em>r</em> es la constante de distribución corporal (0.68 para hombres, 0.55 para mujeres). El hígado elimina aproximadamente 0.15 g/L por hora.
+    </p>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Efectos según nivel de alcoholemia</h2>
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 360px;">
+      <thead>
+        <tr style="border-bottom: 2px solid var(--border);">
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Tasa (g/L)</th>
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Estado</th>
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Efectos</th>
+        </tr>
+      </thead>
+      <tbody>
+        {[
+          { tasa: '0.0 – 0.2',  estado: 'Sin efectos',          efectos: 'No hay alteraciones perceptibles' },
+          { tasa: '0.2 – 0.5',  estado: 'Euforia leve',         efectos: 'Ligera desinhibición, reflejos intactos' },
+          { tasa: '0.5 – 1.0',  estado: 'Alteración moderada',  efectos: 'Reducción de reflejos, visión alterada. LÍMITE LEGAL' },
+          { tasa: '1.0 – 1.5',  estado: 'Alteración severa',    efectos: 'Torpeza motriz, habla pastosa, juicio muy afectado' },
+          { tasa: '1.5 – 3.0',  estado: 'Intoxicación grave',   efectos: 'Confusión, posible inconsciencia' },
+          { tasa: '> 3.0',      estado: 'Peligro vital',        efectos: 'Riesgo de coma etílico. Emergencia médica' },
+        ].map(row => (
+          <tr style="border-bottom: 1px solid var(--border);">
+            <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.tasa}</td>
+            <td style="padding: 10px 0; font-size: 13px; color: var(--ink);">{row.estado}</td>
+            <td style="padding: 10px 0; font-size: 12px; color: var(--muted);">{row.efectos}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    </div>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {[
+        { q: '¿Por qué las mujeres tienen mayor alcoholemia que los hombres con la misma cantidad?', a: 'Las mujeres tienen menor proporción de agua corporal (constante r = 0.55 vs 0.68 en hombres), por lo que el alcohol se diluye menos. También tienen menor actividad de la enzima alcohol-deshidrogenasa en el estómago, absorbiendo más alcohol antes de que llegue al torrente sanguíneo.' },
+        { q: '¿Cuánto tiempo tarda el cuerpo en eliminar el alcohol?', a: 'El hígado elimina aproximadamente 0.10–0.15 g/L por hora. No hay forma de acelerar este proceso: el café, el ejercicio o el agua fría no reducen la alcoholemia. Solo el tiempo lo hace.' },
+        { q: '¿Es fiable esta calculadora para decidir si conducir?', a: 'No. Esta calculadora es orientativa y no debe usarse para decidir conducir. Hay gran variabilidad individual: factores como el estado de ánimo, el cansancio, la medicación, el nivel de tolerancia y si se ha comido afectan enormemente la respuesta al alcohol.' },
+        { q: '¿Cuál es el límite legal de alcoholemia en Latinoamérica?', a: 'Varía por país. En México el límite general es 0.8 g/L (0.4 g/L para conductores de transporte público). En Argentina: 0.5 g/L (tolerancia cero para conductores profesionales). En Colombia: 0.4 g/L. En Chile: 0.3 g/L (tolerancia cero para conductores profesionales y menores de 18). En España: 0.5 g/L (0.3 g/L para conductores noveles). Siempre verifica la legislación local vigente.' },
+        { q: '¿Hay forma de eliminar el alcohol del cuerpo más rápido?', a: 'No. El mito del café, la ducha fría o el ejercicio para \'bajar\' la alcoholemia es falso. El hígado elimina el alcohol a una tasa fija de aproximadamente 0.10–0.15 g/L por hora y ninguna sustancia acelera este proceso de forma significativa. El tiempo es la única forma de reducir la alcoholemia.' },
+      ].map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

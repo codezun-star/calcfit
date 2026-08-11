@@ -1,0 +1,77 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import LactanciaCalculator from '../components/calculators/LactanciaCalculator';
+
+const faqs = [
+  { q: '¿Cuánto tiempo recomienda la OMS dar el pecho?', a: 'La Organización Mundial de la Salud (OMS) recomienda lactancia materna exclusiva durante los primeros 6 meses de vida, sin introducir ningún otro alimento o líquido (ni agua). A partir de los 6 meses se introduce alimentación complementaria manteniendo la lactancia hasta los 2 años o más, según el deseo de la madre y el bebé.' },
+  { q: '¿Cuántas calorías extra necesita una madre lactante?', a: 'La lactancia materna requiere aproximadamente 500 kcal adicionales al día por encima de las necesidades habituales de la madre. Estas calorías se destinan a producir leche materna (600–900 ml diarios). La OMS y la Academia Americana de Pediatría aconsejan no hacer dietas restrictivas durante la lactancia, aunque el proceso naturalmente ayuda a perder el peso ganado en el embarazo.' },
+  { q: '¿Cuánta leche produce una madre en un día?', a: 'La producción media es de 600–900 ml diarios, aunque varía mucho según la frecuencia de las tomas, la succión del bebé y las características individuales. El principio de oferta y demanda regula la producción: cuanto más mama el bebé, más leche produce la madre. En los primeros días se produce calostro (50–100 ml/día), rico en anticuerpos.' },
+  { q: '¿Cuántas tomas al día son normales?', a: 'Un recién nacido mama entre 8 y 12 veces al día (cada 2–3 horas). A medida que el bebé crece, las tomas se espacian: a los 3 meses puede mamar 7–8 veces/día; a los 6 meses, 5–6 veces/día. La lactancia a demanda (sin horario fijo) se considera la práctica óptima para mantener la producción y satisfacer las necesidades del bebé.' },
+  { q: '¿La lactancia protege contra el cáncer de mama?', a: 'Sí. Estudios del Collaborative Group on Hormonal Factors in Breast Cancer (Lancet, 2002) demostraron que por cada 12 meses de lactancia el riesgo de cáncer de mama se reduce un 4,3%. El mecanismo incluye la diferenciación de las células mamarias y la reducción de los niveles de estrógenos durante la lactancia. El efecto protector persiste incluso si se amamantó en el pasado.' },
+];
+---
+
+<CalculatorLayout
+  title="Lactancia Materna — Calorías y Guía OMS | CalcFit"
+  description="Calcula las calorías extra necesarias durante la lactancia, la leche por toma y los beneficios según recomendaciones OMS. Para madres lactantes. Gratis."
+  calculatorName="Lactancia Materna"
+  breadcrumbSlug="lactancia"
+  ogImage="/og/lactancia.jpg"
+  keywords="calculadora lactancia, calorías lactancia materna, cuánta leche produce madre lactante, recomendaciones OMS lactancia, beneficios lactancia materna"
+  faqs={faqs}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Calculadora<br><span style="color: var(--acid);">Lactancia</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Estima la leche producida por toma, las calorías extra necesarias y los beneficios de la lactancia materna según las recomendaciones de la OMS.
+    </p>
+  </div>
+
+  <LactanciaCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">Recomendaciones OMS sobre lactancia</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      La OMS y UNICEF identifican la lactancia materna como una de las intervenciones de salud con mayor impacto a nivel mundial. Puede prevenir el 13% de las muertes infantiles menores de 5 años. En países de ingresos medios como los hispanohablantes, la tasa de lactancia exclusiva a los 6 meses varía entre el 30% (México) y el 55% (Bolivia), con grandes oportunidades de mejora.
+    </p>
+
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 360px;">
+      <thead>
+        <tr style="background: var(--ink); color: var(--acid);">
+          <th style="padding: 10px 14px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Etapa</th>
+          <th style="padding: 10px 14px; text-align: left;">Producción media</th>
+          <th style="padding: 10px 14px; text-align: left;">Tomas/día</th>
+        </tr>
+      </thead>
+      <tbody>
+        {[
+          ['Días 1–3 (calostro)',   '50–100 ml/día',  '8–12'],
+          ['Semana 1–2',            '300–500 ml/día', '8–10'],
+          ['1–3 meses',             '600–800 ml/día', '7–9'],
+          ['3–6 meses',             '750–900 ml/día', '6–8'],
+          ['6–12 meses (+ sólidos)', '400–600 ml/día', '4–6'],
+        ].map(([etapa, prod, tomas], i) => (
+          <tr style={`background: ${i % 2 === 0 ? 'white' : '#f9f6f0'};`}>
+            <td style="padding: 10px 14px; font-weight: 600;">{etapa}</td>
+            <td style="padding: 10px 14px;">{prod}</td>
+            <td style="padding: 10px 14px; color: var(--muted);">{tomas}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    </div>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {faqs.map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

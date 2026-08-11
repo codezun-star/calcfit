@@ -1,0 +1,76 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import GrasaDiariaCalculator from '../components/calculators/GrasaDiariaCalculator';
+
+const faqs = [
+  { q: '¿Cuántos gramos de grasa se deben comer al día?', a: 'La OMS recomienda que la grasa aporte entre el 20% y el 35% de las calorías diarias. En una dieta de 2000 kcal, eso equivale a entre 44 y 78 g de grasa al día, con unos 67 g como punto medio.' },
+  { q: '¿Cuánta grasa saturada es el límite?', a: 'Las grasas saturadas deben quedar por debajo del 10% de las calorías. En 2000 kcal son unos 22 g al día. Sustituirlas por grasas insaturadas mejora el perfil de colesterol.' },
+  { q: '¿La grasa engorda?', a: 'La grasa es el macronutriente más calórico (9 kcal/g), pero no engorda por sí sola: lo que engorda es el exceso total de calorías. Las grasas saludables son necesarias para hormonas, vitaminas y saciedad.' },
+  { q: '¿Qué grasas son saludables?', a: 'Las grasas insaturadas del aceite de oliva, el aguacate, los frutos secos, las semillas y el pescado azul. Conviene limitar las grasas saturadas de ultraprocesados y evitar las grasas trans.' },
+  { q: '¿Cuánta grasa en una dieta para adelgazar?', a: 'No se debe eliminar la grasa al adelgazar. Mantener al menos el 20-25% de las calorías en forma de grasa preserva la salud hormonal y la saciedad; lo importante es el déficit calórico total.' },
+];
+---
+
+<CalculatorLayout
+  title="Gramos de Grasa al Día — Cuánta Comer | CalcFit"
+  description="Calcula cuántos gramos de grasa debes comer al día según tus calorías. Rango saludable del 20-35% y límite de grasa saturada. Gratis."
+  calculatorName="Grasa Diaria"
+  breadcrumbSlug="grasa-diaria"
+  ogImage="/og/grasa-diaria.jpg"
+  keywords="gramos de grasa al día, cuánta grasa comer, grasa diaria recomendada, grasa saturada límite, grasa en la dieta"
+  faqs={faqs}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      Grasa<br><span style="color: var(--acid);">Diaria</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Calcula cuántos gramos de grasa debes comer al día según tus calorías, con el límite de grasa saturada.
+    </p>
+  </div>
+
+  <GrasaDiariaCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">¿Cómo se calcula?</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      Cada gramo de grasa aporta 9 kcal. El rango saludable es el <strong>20-35% de las calorías</strong>: grasa(g) = calorías × % ÷ 9. Las grasas saturadas deben quedar por debajo del 10% de la energía. Esta calculadora te da el rango y un valor recomendado del 30%.
+    </p>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Grasa diaria según tus calorías</h2>
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 320px;">
+      <thead>
+        <tr style="border-bottom: 2px solid var(--border);">
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Calorías</th>
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Rango grasa</th>
+          <th style="text-align: left; padding: 10px 0; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 1px;">Saturada máx.</th>
+        </tr>
+      </thead>
+      <tbody>
+        {[
+          { c: '1500 kcal', g: '33–58 g', s: '17 g' },
+          { c: '2000 kcal', g: '44–78 g', s: '22 g' },
+          { c: '2500 kcal', g: '56–97 g', s: '28 g' },
+        ].map((row) => (
+          <tr style="border-bottom: 1px solid var(--border);">
+            <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.c}</td>
+            <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.g}</td>
+            <td style="padding: 10px 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink);">{row.s}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    </div>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {faqs.map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

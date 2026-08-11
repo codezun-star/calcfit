@@ -1,0 +1,76 @@
+---
+import CalculatorLayout from '../layouts/CalculatorLayout.astro';
+import IMCInfantilCalculator from '../components/calculators/IMCInfantilCalculator';
+
+const faqs = [
+  { q: '¿Por qué el IMC infantil se mide diferente al de adultos?', a: 'En niños y adolescentes, el IMC cambia con la edad y el sexo porque la composición corporal varía durante el crecimiento. Un IMC de 20 puede ser normal para un adolescente de 16 años pero bajo peso para un adulto. Por eso se usan percentiles (p) referenciados a tablas de crecimiento de la OMS según edad y sexo.' },
+  { q: '¿Qué significa el percentil del IMC en un niño?', a: 'El percentil indica la posición del niño respecto a una población de referencia. Percentil 50 significa que el 50% de los niños de su edad y sexo tienen un IMC menor. La OMS clasifica: <p5 bajo peso, p5–p84 peso normal, p85–p94 sobrepeso, ≥p95 obesidad.' },
+  { q: '¿Con qué frecuencia debo calcular el IMC de mi hijo?', a: 'El seguimiento del IMC infantil se recomienda en cada revisión pediátrica: cada 6 meses en los primeros 3 años y anualmente en edad escolar. El pediatra evalúa la tendencia (si el percentil sube o baja con el tiempo), que es más informativa que un valor puntual.' },
+  { q: '¿Cuáles son las causas del sobrepeso infantil?', a: 'El sobrepeso infantil es multifactorial: alimentación con exceso calórico (bebidas azucaradas, ultraprocesados), sedentarismo, más de 2 horas diarias de pantallas, privación de sueño (que aumenta grelina y resistencia a insulina) y factores genéticos. La intervención temprana es clave para prevenir obesidad adulta.' },
+  { q: '¿El percentil 85 o 95 en niños es siempre problemático?', a: 'No necesariamente. Niños musculosos o con constitución grande pueden superar el p85 sin tener exceso de grasa. El IMC no diferencia músculo de grasa. El pediatra considera el historial de crecimiento, la constitución familiar y otras métricas (pliegues cutáneos, actividad física) para el diagnóstico definitivo.' },
+];
+---
+
+<CalculatorLayout
+  title="IMC Infantil — Percentil OMS para Niños | CalcFit"
+  description="Calcula el IMC, percentil y z-score de tu hijo según tablas OMS. Clasifica el peso infantil entre 2 y 19 años por edad y sexo. Gratis."
+  calculatorName="IMC Pediátrico"
+  breadcrumbSlug="imc-infantil"
+  ogImage="/og/imc-infantil.jpg"
+  keywords="calculadora IMC niños, IMC pediátrico percentil, IMC infantil OMS, sobrepeso infantil percentil, calcular IMC hijo"
+  faqs={faqs}
+>
+  <div style="background: var(--ink); padding: 40px 32px 32px;">
+    <h1 style="font-family: var(--font-display); font-size: clamp(40px, 8vw, 64px); color: white; line-height: 0.92; margin-bottom: 12px;">
+      IMC<br><span style="color: var(--acid);">Pediátrico</span>
+    </h1>
+    <p style="font-size: 13px; color: #999; max-width: 480px; line-height: 1.7;">
+      Calcula el IMC y percentil OMS de niños y adolescentes de 2 a 19 años. Clasifica el peso según edad y sexo con tablas de referencia de la OMS (2007).
+    </p>
+  </div>
+
+  <IMCInfantilCalculator client:load />
+
+  <div slot="seo">
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px;">IMC infantil: percentiles y clasificación OMS</h2>
+    <p style="font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 24px;">
+      La OMS publicó en 2007 las tablas de crecimiento para niños de 5 a 19 años (OMS Growth Reference) que permiten clasificar el IMC por edad y sexo en percentiles y z-scores. La fórmula es la misma que en adultos (peso / altura²), pero la interpretación cambia con la edad. El z-score indica cuántas desviaciones estándar se aleja el valor de la mediana de referencia.
+    </p>
+
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; min-width: 340px;">
+        <thead>
+          <tr style="background: var(--ink); color: var(--acid);">
+            <th style="padding: 10px 14px; text-align: left; font-family: var(--font-mono); font-weight: 400;">Clasificación</th>
+            <th style="padding: 10px 14px; text-align: left;">Percentil</th>
+            <th style="padding: 10px 14px; text-align: left;">Z-score</th>
+          </tr>
+        </thead>
+        <tbody>
+          {[
+            ['Bajo peso', '< p5', '< −1.65'],
+            ['Peso normal', 'p5 – p84', '−1.65 a +1.04'],
+            ['Sobrepeso', 'p85 – p94', '+1.04 a +1.65'],
+            ['Obesidad', '≥ p95', '≥ +1.65'],
+          ].map(([cat, per, z], i) => (
+            <tr style={`background: ${i % 2 === 0 ? 'white' : '#f9f6f0'};`}>
+              <td style="padding: 10px 14px;">{cat}</td>
+              <td style="padding: 10px 14px; font-family: var(--font-mono); font-size: 12px;">{per}</td>
+              <td style="padding: 10px 14px; color: var(--muted);">{z}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <h2 style="font-family: var(--font-display); font-size: 32px; color: var(--ink); margin-bottom: 16px; margin-top: 32px;">Preguntas frecuentes</h2>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {faqs.map(faq => (
+        <div style="border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <p style="font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">{faq.q}</p>
+          <p style="font-size: 13px; color: var(--muted); line-height: 1.7;">{faq.a}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</CalculatorLayout>

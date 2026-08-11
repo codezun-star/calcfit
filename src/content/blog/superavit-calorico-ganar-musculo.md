@@ -32,7 +32,7 @@ La clave está en un superávit **moderado**, lo que se conoce como *lean bulk* 
 | Moderado | +350 kcal | ~1,4 kg/mes |
 | Rápido | +500 kcal | ~2 kg/mes |
 
-Para la mayoría, un superávit de **200-350 kcal sobre el TDEE** es el punto óptimo: suficiente para crecer, poco como para engordar. Calcula tus cifras exactas en la [calculadora de superávit calórico](/calorias-diarias).
+Para la mayoría, un superávit de **200-350 kcal sobre el TDEE** es el punto óptimo: suficiente para crecer, poco como para engordar. Calcula tus cifras exactas en la [calculadora de superávit calórico](/superavit-calorico).
 
 ## Por qué no debes pasarte
 
@@ -40,7 +40,7 @@ El cuerpo solo puede construir músculo a un ritmo limitado. Un principiante qui
 
 ## La proteína sigue mandando
 
-El superávit aporta la energía, pero el material de construcción es la **proteína**. Apunta a entre 1,6 y 2,2 g por kilo de peso al día, repartida en varias comidas. Puedes ajustarla con la [calculadora de proteína por comida](/proteinas).
+El superávit aporta la energía, pero el material de construcción es la **proteína**. Apunta a entre 1,6 y 2,2 g por kilo de peso al día, repartida en varias comidas. Puedes ajustarla con la [calculadora de proteína por comida](/proteina-por-comida).
 
 ## Cómo montar el superávit
 
@@ -56,7 +56,7 @@ Pésate una vez por semana y mira la tendencia. Si ganas mucho más de ~1,5% de 
 
 ## Conclusión
 
-Ganar músculo no es comer "a saco", sino mantener un superávit calórico controlado, suficiente proteína y entrenamiento de fuerza. La paciencia gana: un volumen limpio te dejará más músculo y menos grasa que comer sin control. Empieza calculando tu objetivo en la [calculadora de superávit calórico](/calorias-diarias).
+Ganar músculo no es comer "a saco", sino mantener un superávit calórico controlado, suficiente proteína y entrenamiento de fuerza. La paciencia gana: un volumen limpio te dejará más músculo y menos grasa que comer sin control. Empieza calculando tu objetivo en la [calculadora de superávit calórico](/superavit-calorico).
 
 ---
 

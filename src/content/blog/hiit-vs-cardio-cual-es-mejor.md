@@ -54,7 +54,7 @@ Sin embargo, el mismo análisis encontró que el cardio moderado muestra ventaja
 - Ya tienes buena base aeróbica (el HIIT mal ejecutado sin base es lesión asegurada)
 - Buscas variar y no te aburre el esfuerzo intenso
 
-Evalúa tu capacidad aeróbica actual con nuestra [calculadora de VO2 máximo](/test-cooper) antes de plantear un programa de HIIT intenso.
+Evalúa tu capacidad aeróbica actual con nuestra [calculadora de VO2 máximo](/vo2-maximo) antes de plantear un programa de HIIT intenso.
 
 ## Cuándo elegir cardio moderado
 
@@ -69,7 +69,7 @@ Los fisiólogos del deporte usan el modelo de distribución polarizada: el 80% d
 
 La trampa más común: entrenar siempre en zona 3 (moderado-alto, donde no puedes conversar pero tampoco es máximo). Es la intensidad "gris" que cansa sin producir las adaptaciones de las zonas extremas.
 
-Revisa tus zonas de entrenamiento con nuestra calculadora de frecuencia cardíaca para asegurarte de que realmente estás donde crees.
+Revisa tus zonas de entrenamiento con nuestra [calculadora de frecuencia cardíaca](/frecuencia-cardiaca) para asegurarte de que realmente estás donde crees.
 
 ## Protocolo práctico combinado
 
