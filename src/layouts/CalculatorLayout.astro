@@ -4,6 +4,9 @@ import Navbar from '../components/layout/Navbar.astro';
 import Footer from '../components/layout/Footer.astro';
 import { calculadoras, categorias } from '../lib/calcData';
 import { organizationSchema, websiteSchema, ORGANIZATION_ID, WEBSITE_ID, SITE_DATE_MODIFIED } from '../lib/schema';
+import AdSlot from '../components/ads/AdSlot.astro';
+import AdRail from '../components/ads/AdRail.astro';
+import AdInContent from '../components/ads/AdInContent.astro';
 
 interface Props {
   title: string;
@@ -158,24 +161,44 @@ const combinedSchema = { '@context': 'https://schema.org', '@graph': graphItems 
     </span>
   </div>
 
+  <!-- Publicidad — cabecera -->
+  <div style="background: var(--cream); border-bottom: 1px solid var(--border);">
+    <AdSlot format="leaderboard" mobile="mobile" eager gap="14px" />
+  </div>
+
   <!-- Main calculator slot -->
   <main class="calc-main" style="min-height: calc(100vh - 200px);">
     <slot />
   </main>
 
-  <!-- SEO content slot (server rendered) -->
-  <div class="seo-section" style="background: var(--cream); border-top: 1px solid var(--border); max-width: 860px; margin: 0 auto;">
-    <!-- Respuesta directa — primer bloque que lee un motor de respuesta -->
-    <div style="border-left: 2px solid var(--acid); padding: 4px 0 4px 16px; margin-bottom: 32px;">
-      <p style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px;">En resumen</p>
-      <p class="aeo-answer" style="font-size: 15px; line-height: 1.7; color: var(--ink);">{directAnswer}</p>
-      <p style="font-size: 12px; color: var(--muted); margin-top: 10px;">
-        Cálculo gratuito, sin registro y realizado en tu navegador · Revisado el <time datetime={dateModified}>{fechaRevision}</time>
-      </p>
-    </div>
-
-    <slot name="seo" />
+  <!-- Publicidad — bajo el resultado, el punto de mayor atención de la página -->
+  <div style="background: var(--cream); max-width: 860px; margin: 0 auto; padding: 0 32px;">
+    <AdSlot format="native" gap="8px" />
   </div>
+
+  <!-- SEO content slot (server rendered) -->
+  <div class="seo-outer" style="background: var(--cream); border-top: 1px solid var(--border);">
+   <div class="seo-shell">
+    <div class="seo-section">
+      <!-- Respuesta directa — primer bloque que lee un motor de respuesta -->
+      <div style="border-left: 2px solid var(--acid); padding: 4px 0 4px 16px; margin-bottom: 32px;">
+        <p style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px;">En resumen</p>
+        <p class="aeo-answer" style="font-size: 15px; line-height: 1.7; color: var(--ink);">{directAnswer}</p>
+        <p style="font-size: 12px; color: var(--muted); margin-top: 10px;">
+          Cálculo gratuito, sin registro y realizado en tu navegador · Revisado el <time datetime={dateModified}>{fechaRevision}</time>
+        </p>
+      </div>
+
+      <div class="seo-body"><slot name="seo" /></div>
+
+      <AdSlot format="banner" mobile="mobile" gap="36px" />
+    </div>
+    <AdRail />
+   </div>
+  </div>
+
+  <!-- Anuncio dentro del texto: se inserta antes del 2.º H2 de la zona SEO -->
+  <AdInContent target=".seo-body" after={1} />
 
   <!-- Calculadoras relacionadas (server rendered) -->
   {relatedCalcs.length > 0 && (
@@ -198,7 +221,8 @@ const combinedSchema = { '@context': 'https://schema.org', '@graph': graphItems 
 
 <style>
   .breadcrumb  { padding: 10px 32px; }
-  .seo-section { padding: 48px 32px; }
+  .seo-shell   { display: flex; gap: 24px; align-items: flex-start; max-width: 1064px; margin: 0 auto; }
+  .seo-section { padding: 48px 32px; flex: 1 1 auto; min-width: 0; max-width: 860px; margin: 0 auto; }
   .related-section { padding: 40px 32px; }
   @media (max-width: 640px) {
     .breadcrumb  { padding: 10px 16px; }

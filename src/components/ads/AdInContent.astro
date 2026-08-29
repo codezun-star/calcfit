@@ -1,0 +1,29 @@
+---
+/**
+ * Marcador: pide al motor que inserte un anuncio dentro del texto, justo antes
+ * del enésimo `<h2>` del contenedor indicado. Así el anuncio cae entre dos
+ * secciones —nunca parte un párrafo— sin tener que tocar las 143 páginas.
+ * Si el contenedor no existe, el marcador desaparece sin dejar rastro.
+ */
+interface Props {
+  /** Selector CSS del contenedor de texto */
+  target: string;
+  /** Índice del `<h2>` (base 0) antes del cual se inserta. Por defecto el 2.º */
+  after?: number;
+  format?: string;
+  mobile?: string;
+  gap?: string;
+}
+
+const { target, after = 1, format = 'rectangle', mobile = 'rectangle', gap = '32px' } = Astro.props;
+---
+
+<div
+  data-ad-inject
+  data-ad-target={target}
+  data-ad-after={String(after)}
+  data-ad={format}
+  data-ad-mobile={mobile}
+  data-ad-gap={gap}
+  hidden
+></div>

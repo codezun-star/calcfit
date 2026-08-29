@@ -5,6 +5,7 @@ import Footer from '../../components/layout/Footer.astro';
 import { calculadoras, categorias } from '../../lib/calcData';
 import type { GetStaticPathsOptions, Page } from 'astro';
 import type { Calc } from '../../lib/calcData';
+import AdSlot from '../../components/ads/AdSlot.astro';
 
 const cat = categorias.find(c => c.slug === 'fechas')!;
 const slugSet = new Set(cat.slugs);
@@ -44,6 +45,11 @@ const titleSuffix = page.currentPage > 1 ? ` — Página ${page.currentPage}` : 
         {allCalcs.length} herramientas gratuitas · Sin registro
       </p>
     </div>
+  </div>
+
+  <!-- Publicidad — cabecera -->
+  <div style="background: var(--cream); border-bottom: 1px solid var(--border);">
+    <AdSlot format="leaderboard" mobile="mobile" eager gap="14px" />
   </div>
 
   <!-- Grid -->
@@ -86,6 +92,9 @@ const titleSuffix = page.currentPage > 1 ? ` — Página ${page.currentPage}` : 
         </nav>
       )}
 
+      <div style="max-width:860px; margin:0 auto;">
+        <AdSlot format="native" gap="40px" />
+      </div>
     </div>
   </main>
 

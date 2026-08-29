@@ -4,6 +4,7 @@ import Footer from '../components/layout/Footer.astro';
 import CalculatorBrowser from '../components/CalculatorBrowser';
 import { getCollection } from 'astro:content';
 import { calculadoras, categorias } from '../lib/calcData';
+import AdSlot from '../components/ads/AdSlot.astro';
 
 // Mapa slug → categoría para pasar al componente React
 const catBySlug: Record<string, string> = {};
@@ -153,6 +154,11 @@ function blogThumb(url: string): string {
   ))}
 </div>
 
+<!-- Publicidad — cabecera -->
+<div style="background: var(--cream); border-bottom: 1px solid var(--border);">
+  <AdSlot format="leaderboard" mobile="mobile" eager gap="14px" />
+</div>
+
 <!-- CALCULADORAS -->
 <section id="calculadoras" style="background: var(--cream); padding: 48px 32px;">
   <span id="fitness"   style="display: block; height: 0;"></span>
@@ -163,6 +169,10 @@ function blogThumb(url: string): string {
     <h2 style="font-family: var(--font-display); font-size: 48px; color: var(--ink);">Calculadoras</h2>
   </div>
   <CalculatorBrowser calculadoras={calcWithCat} categorias={catLabels} limit={15} categoryPageUrls={categoryPageUrls} client:load />
+
+  <div style="max-width: 860px; margin: 0 auto;">
+    <AdSlot format="native" gap="40px" />
+  </div>
 </section>
 
 <!-- MANIFESTO -->
@@ -176,7 +186,7 @@ function blogThumb(url: string): string {
   <div class="manifesto-right" style="display: flex; flex-direction: column; justify-content: center;">
     {[
       { n: '01', title: 'Validadas científicamente', desc: 'Fórmulas basadas en evidencia: OMS, ACSM y literatura médica peer-reviewed.' },
-      { n: '02', title: 'Privacidad total', desc: 'Todo el cálculo ocurre en tu navegador. Cero cookies de rastreo.' },
+      { n: '02', title: 'Tus datos no salen de aquí', desc: 'Todo el cálculo ocurre en tu navegador. No enviamos a ningún servidor lo que escribes.' },
       { n: '03', title: 'Siempre gratis', desc: 'Sin planes premium, sin registro obligatorio, sin letra pequeña.' },
     ].map((f, i) => (
       <div style={`padding: 20px 0; ${i < 2 ? 'border-bottom: 1px solid #1e1e1e;' : ''}`}>
@@ -201,6 +211,11 @@ function blogThumb(url: string): string {
     <a href="/imc" style="background: transparent; border: 1px solid var(--ink); color: var(--ink); padding: 14px 28px; font-size: 13px; text-decoration: none;">Calcular mi IMC</a>
   </div>
 </section>
+
+<!-- Publicidad — cierre de la home -->
+<div style="background: var(--cream);">
+  <AdSlot format="banner" mobile="mobile" gap="28px" />
+</div>
 
 <!-- BLOG -->
 {ultimosArticulos.length > 0 && (

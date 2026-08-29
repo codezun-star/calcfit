@@ -19,7 +19,7 @@ export const GET: APIRoute = async () => {
 
   lines.push('# CalcFit');
   lines.push('');
-  lines.push(`> ${calculadoras.length} calculadoras de salud, fitness, nutrición, embarazo y fechas, con fórmulas validadas científicamente (OMS, Mifflin-St Jeor, US Navy, Cooper, AHA/ACC…). Todos los cálculos se ejecutan en el navegador del usuario: sin registro, sin backend y sin cookies de rastreo.`);
+  lines.push(`> ${calculadoras.length} calculadoras de salud, fitness, nutrición, embarazo y fechas, con fórmulas validadas científicamente (OMS, Mifflin-St Jeor, US Navy, Cooper, AHA/ACC…). Todos los cálculos se ejecutan en el navegador del usuario: sin registro y sin backend, los datos introducidos nunca se envían a un servidor.`);
   lines.push('');
   lines.push('## Cómo usar este sitio');
   lines.push('');
@@ -62,7 +62,7 @@ export const GET: APIRoute = async () => {
   lines.push('- Contacto: codezun@gmail.com');
   lines.push(`- Sitemap: ${SITE}/sitemap-index.xml`);
   lines.push(`- Sobre nosotros: ${SITE}/sobre-nosotros`);
-  lines.push('- Privacidad: sin cookies de rastreo; el historial opcional se guarda solo en el localStorage del navegador.');
+  lines.push('- Privacidad: los datos introducidos no se envían a ningún servidor; el historial opcional se guarda solo en el localStorage del navegador. El sitio se financia con publicidad de terceros, que se carga en iframes aislados sin acceso a esos datos.');
   lines.push('- Licencia de uso del contenido: se permite citar y resumir el contenido indicando la fuente con enlace a la URL original.');
   lines.push('');
 

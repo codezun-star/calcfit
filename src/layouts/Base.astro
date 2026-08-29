@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import { organizationSchema, websiteSchema as siteNode } from '../lib/schema';
 import { jsonLd } from '../lib/jsonld';
+import AdEngine from '../components/ads/AdEngine.astro';
 
 interface Props {
   title: string;
@@ -10,6 +11,10 @@ interface Props {
   ogImage?: string;
   ogType?: string;
   schema?: object;
+  /** Monetización: `false` deja la página sin publicidad (páginas legales) */
+  ads?: boolean;
+  /** Barra publicitaria inferior fija */
+  anchorAd?: boolean;
 }
 
 const {
@@ -19,6 +24,8 @@ const {
   ogImage = '/og/default.jpg',
   ogType = 'website',
   schema,
+  ads = true,
+  anchorAd = true,
 } = Astro.props;
 
 // Con build.format: 'file' el pathname en build lleva extensión (.html) — la URL pública no
@@ -72,6 +79,15 @@ const websiteSchema = {
     <!-- JSON-LD -->
     <script is:inline type="application/ld+json" set:html={jsonLd(schema ?? websiteSchema)} />
 
+    {ads && (
+      <>
+        <link rel="preconnect" href="https://www.highrevenueformat.com" crossorigin />
+        <link rel="dns-prefetch" href="https://www.highrevenueformat.com" />
+        <link rel="dns-prefetch" href="https://pl31073381.profitableratecpmnetwork.com" />
+        <link rel="dns-prefetch" href="https://pl31073382.profitableratecpmnetwork.com" />
+      </>
+    )}
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="alternate icon" href="/favicon.ico" sizes="any" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -87,5 +103,6 @@ const websiteSchema = {
   </head>
   <body>
     <slot />
+    {ads && <AdEngine anchor={anchorAd} />}
   </body>
 </html>

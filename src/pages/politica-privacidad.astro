@@ -5,6 +5,7 @@ import Footer from '../components/layout/Footer.astro';
 ---
 
 <Base
+  ads={false}
   title="Política de Privacidad — CalcFit"
   description="Política de privacidad de CalcFit. Sin registro de usuarios. Los cálculos ocurren en tu navegador y no se envían datos personales al servidor."
 >
@@ -16,7 +17,7 @@ import Footer from '../components/layout/Footer.astro';
     <h1 style="font-family: var(--font-display); font-size: 88px; color: white; line-height: 0.92; margin-bottom: 20px;">
       Política de<br><span style="color: var(--acid);">Privacidad.</span>
     </h1>
-    <p style="font-family: var(--font-mono); font-size: 11px; color: #555;">Última actualización: julio de 2026</p>
+    <p style="font-family: var(--font-mono); font-size: 11px; color: #555;">Última actualización: agosto de 2026</p>
   </div>
 
 
@@ -70,7 +71,7 @@ import Footer from '../components/layout/Footer.astro';
         num: '04',
         titulo: 'Cookies',
         contenido: [
-          'CalcFit puede utilizar cookies técnicas y de analítica. Para más información, consulte nuestra <a href="/politica-cookies" style="color: var(--ink); text-decoration: underline;">Política de Cookies</a>.',
+          'CalcFit puede utilizar cookies técnicas, de analítica y de publicidad. Para más información, consulte nuestra <a href="/politica-cookies" style="color: var(--ink); text-decoration: underline;">Política de Cookies</a>.',
         ],
       },
       {
@@ -79,7 +80,9 @@ import Footer from '../components/layout/Footer.astro';
         contenido: [
           'El Sitio está alojado en infraestructura de terceros (Cloudflare Pages / Vercel). Dichos proveedores pueden registrar datos técnicos de acceso (dirección IP, navegador, sistema operativo) en los logs estándar del servidor con fines de seguridad y rendimiento, de acuerdo con sus propias políticas de privacidad. CalcFit no tiene acceso a estos logs ni los utiliza para fines de marketing.',
           'Las fuentes tipográficas se cargan desde Google Fonts. Si deseas evitar esta conexión, puedes autoalojar las fuentes desactivando JavaScript o usando una extensión de bloqueo de contenido.',
-          '<strong>Publicidad:</strong> CalcFit no muestra anuncios actualmente ni comparte datos con redes publicitarias. Si en el futuro se incorporara publicidad, esta política se actualizará para identificar al proveedor y los datos que pudiera tratar.',
+          '<strong>Publicidad:</strong> el Sitio se financia con publicidad servida por una red externa a través de los dominios <strong>profitableratecpmnetwork.com</strong> y <strong>highrevenueformat.com</strong> (Adsterra). Dicha red actúa como responsable independiente y puede tratar datos técnicos de navegación —dirección IP, navegador, dispositivo, idioma, página de origen e identificadores almacenados en tu navegador— para medir impresiones, limitar la frecuencia de los anuncios y prevenir el fraude.',
+          'CalcFit <strong>no envía a la red publicitaria ningún dato que introduzcas en las calculadoras</strong>. Los anuncios se cargan en marcos aislados (iframes) sin acceso al contenido de los formularios: tu peso, tu altura, tus fechas o cualquier otro valor siguen calculándose y quedándose en tu navegador.',
+          'Puedes bloquear estas conexiones con una extensión de bloqueo de contenido. El detalle de los identificadores usados está en la <a href="/politica-cookies" style="color: var(--ink); text-decoration: underline;">Política de Cookies</a>.',
         ],
       },
       {

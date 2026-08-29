@@ -1,0 +1,99 @@
+---
+/**
+ * Hueco publicitario. Sólo emite el marcador: el pintado lo hace `AdEngine`
+ * (incluido una vez desde `Base.astro`), que elige formato según el ancho de
+ * pantalla y carga el anuncio cuando entra en el viewport.
+ *
+ * El espacio se reserva por adelantado con `min-height` para no provocar CLS.
+ */
+import { AD_UNITS, AD_NATIVE_MIN_HEIGHT, type AdSlotName } from '../../lib/ads';
+
+interface Props {
+  /** Formato en escritorio. Ojo: no puede llamarse `slot`, es atributo reservado de Astro */
+  format: AdSlotName;
+  /** Formato en móvil (≤767px). Por defecto el mismo; `none` lo oculta */
+  mobile?: AdSlotName;
+  /** Carga inmediata, sin esperar al scroll. Úsalo sólo above the fold */
+  eager?: boolean;
+  /** Etiqueta "Publicidad" visible (obligatoria salvo en el ancla, que ya la lleva) */
+  label?: boolean;
+  /** Fondo oscuro: invierte los colores de la etiqueta */
+  dark?: boolean;
+  /** Márgenes verticales del bloque */
+  gap?: string;
+  class?: string;
+}
+
+const {
+  format,
+  mobile = format,
+  eager = false,
+  label = true,
+  dark = false,
+  gap = '24px',
+  class: className = '',
+} = Astro.props;
+
+const heightOf = (name: AdSlotName): number => {
+  if (name === 'none') return 0;
+  if (name === 'native') return AD_NATIVE_MIN_HEIGHT;
+  return AD_UNITS[name].height;
+};
+
+// Reserva de espacio: cada breakpoint reserva lo que realmente va a pintar
+const desktopH = heightOf(format);
+const mobileH = heightOf(mobile);
+const hidden = format === 'none' && mobile === 'none';
+---
+
+{!hidden && (
+  <div
+    class:list={['ad-unit', dark && 'ad-unit--dark', className]}
+    data-ad={format}
+    data-ad-mobile={mobile}
+    data-ad-eager={eager ? '' : undefined}
+    style={`--ad-h-d:${desktopH}px; --ad-h-m:${mobileH}px; margin:${gap} auto;`}
+  >
+    {label && <span class="ad-unit__label">Publicidad</span>}
+    <div class="ad-unit__box"></div>
+  </div>
+)}
+
+<style is:global>
+  /* Cuadrado, sin sombras ni gradientes — coherente con el sistema de diseño */
+  .ad-unit {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
+    overflow: hidden;
+  }
+  .ad-unit__label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+    line-height: 1;
+  }
+  .ad-unit--dark .ad-unit__label { color: #888; }
+  .ad-unit__box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--ad-h-d);
+    overflow: hidden;
+  }
+  .ad-unit__box > iframe { border: 0; display: block; max-width: 100%; }
+  /* El native se estira al ancho disponible */
+  .ad-unit[data-ad='native'] .ad-unit__box { display: block; }
+  @media (max-width: 767px) {
+    .ad-unit__box { min-height: var(--ad-h-m); }
+    .ad-unit[data-ad-mobile='none'] { display: none; }
+  }
+  @media (min-width: 768px) {
+    .ad-unit[data-ad='none'] { display: none; }
+  }
+</style>

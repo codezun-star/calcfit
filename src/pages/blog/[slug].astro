@@ -4,6 +4,9 @@ import Navbar from '../../components/layout/Navbar.astro';
 import Footer from '../../components/layout/Footer.astro';
 import ShareButtons from '../../components/ui/ShareButtons';
 import { getCollection, getEntry, render } from 'astro:content';
+import AdSlot from '../../components/ads/AdSlot.astro';
+import AdRail from '../../components/ads/AdRail.astro';
+import AdInContent from '../../components/ads/AdInContent.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog', (e) => e.data.publicado !== false);
@@ -111,6 +114,11 @@ const articleSchema = {
     </div>
   </div>
 
+  <!-- Publicidad — cabecera -->
+  <div style="background: var(--cream); border-bottom: 1px solid var(--border);">
+    <AdSlot format="leaderboard" mobile="mobile" eager gap="14px" />
+  </div>
+
   <!-- Imagen hero -->
   {heroImagen && (
     <div style="max-width:720px; margin:0 auto; padding:0 20px;">
@@ -138,10 +146,14 @@ const articleSchema = {
   )}
 
   <!-- Contenido -->
-  <main style="max-width:720px; margin:0 auto; padding:32px 20px 60px; min-height:50vh;">
+  <div class="blog-shell">
+  <main style="max-width:720px; margin:0 auto; padding:32px 20px 60px; min-height:50vh; flex:1 1 auto; min-width:0;">
     <div class="prose">
       <Content />
     </div>
+
+    <!-- Publicidad — final del artículo -->
+    <AdSlot format="native" gap="36px" />
 
     <!-- Compartir -->
     <div style="margin-top:40px; padding-top:32px; border-top:1px solid var(--border);">
@@ -177,6 +189,8 @@ const articleSchema = {
       </a>
     </div>
 
+    <AdSlot format="banner" mobile="mobile" gap="32px" />
+
     <!-- Volver -->
     <div style="margin-top:20px;">
       <a
@@ -191,11 +205,17 @@ const articleSchema = {
       </a>
     </div>
   </main>
+  <AdRail />
+  </div>
+
+  <!-- Anuncio dentro del texto: antes del 3.er H2 del artículo -->
+  <AdInContent target=".prose" after={2} />
 
   <Footer />
 </Base>
 
 <style is:global>
+  .blog-shell { display: flex; gap: 24px; align-items: flex-start; max-width: 904px; margin: 0 auto; }
   .prose h2 {
     font-family: var(--font-display);
     font-size: 1.6rem;

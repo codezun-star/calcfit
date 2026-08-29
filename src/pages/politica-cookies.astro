@@ -5,6 +5,7 @@ import Footer from '../components/layout/Footer.astro';
 ---
 
 <Base
+  ads={false}
   title="Política de Cookies — CalcFit"
   description="Política de cookies de CalcFit. Conoce qué cookies utiliza el sitio, para qué sirven y cómo controlarlas desde tu navegador."
 >
@@ -16,7 +17,7 @@ import Footer from '../components/layout/Footer.astro';
     <h1 style="font-family: var(--font-display); font-size: 88px; color: white; line-height: 0.92; margin-bottom: 20px;">
       Política de<br><span style="color: var(--acid);">Cookies.</span>
     </h1>
-    <p style="font-family: var(--font-mono); font-size: 11px; color: #555;">Última actualización: julio de 2026</p>
+    <p style="font-family: var(--font-mono); font-size: 11px; color: #555;">Última actualización: agosto de 2026</p>
   </div>
 
 
@@ -28,7 +29,7 @@ import Footer from '../components/layout/Footer.astro';
       <line x1="12" y1="16" x2="12.01" y2="16"/>
     </svg>
     <p style="font-size: 14px; font-weight: 600; color: var(--ink);">
-      CalcFit utiliza cookies y tecnologías similares para el funcionamiento del sitio y la analítica. Esta política explica qué se usa y cómo controlarlo.
+      CalcFit utiliza cookies y tecnologías similares para el funcionamiento del sitio, la analítica y la publicidad que lo mantiene gratuito. Esta política explica qué se usa y cómo controlarlo.
     </p>
   </div>
 
@@ -53,7 +54,7 @@ import Footer from '../components/layout/Footer.astro';
         lista: [
           'Cookies técnicas esenciales: necesarias para el funcionamiento básico del sitio.',
           'Cookies de analítica (Google Analytics): permiten medir el tráfico y mejorar el contenido. Google tiene su propia política de privacidad en policies.google.com.',
-          'Cookies de publicidad: CalcFit no muestra anuncios actualmente, por lo que no se instalan cookies publicitarias. Si en el futuro se incorporara publicidad, esta política se actualizará para detallar la red utilizada y sus cookies.',
+          'Cookies de publicidad: el sitio muestra anuncios servidos por una red publicitaria externa (Adsterra / profitableratecpmnetwork.com y highrevenueformat.com). Estas redes pueden instalar cookies o identificadores propios en tu navegador para limitar la frecuencia con la que ves un mismo anuncio, medir clics y detectar fraude. CalcFit no controla ni tiene acceso a esos identificadores.',
           'Cookies de terceros: proveedores de servicios integrados en el sitio pueden establecer sus propias cookies.',
         ],
       },
@@ -77,14 +78,24 @@ import Footer from '../components/layout/Footer.astro';
       },
       {
         num: '04',
-        titulo: 'Fuentes y servicios de terceros',
+        titulo: 'Publicidad',
         contenido: [
-          'Las fuentes tipográficas del sitio (Bebas Neue, DM Mono, Plus Jakarta Sans) se cargan desde Google Fonts. Esta petición puede incluir tu dirección IP, el navegador y el sistema operativo en los logs de Google. Google tiene su propia política de privacidad disponible en policies.google.com.',
-          'Si deseas evitar cualquier conexión con servicios de terceros, puedes bloquearla con una extensión de tipo uBlock Origin o equivalente.',
+          'CalcFit es un sitio gratuito y se financia con publicidad. Los espacios publicitarios los sirve una red externa a través de los dominios <strong>profitableratecpmnetwork.com</strong> y <strong>highrevenueformat.com</strong>, que actúan como responsables independientes del tratamiento de los datos que recojan.',
+          'Los anuncios se cargan dentro de marcos aislados (iframes) y CalcFit no les transmite ningún dato introducido en las calculadoras: tu peso, tu altura, tus fechas o cualquier otro valor que escribas permanecen en tu navegador y nunca salen de él.',
+          'La red publicitaria sí puede tratar, por su cuenta, datos técnicos habituales de la navegación: dirección IP, tipo de navegador y dispositivo, idioma, página desde la que se carga el anuncio e identificadores propios almacenados en tu navegador, con fines de medición, limitación de frecuencia y prevención del fraude.',
+          'Todos los bloques publicitarios del sitio aparecen etiquetados como «Publicidad». El sitio también puede mostrar formatos de la red que se abren en una pestaña nueva. Las páginas legales (aviso legal, privacidad y cookies) no contienen publicidad.',
         ],
       },
       {
         num: '05',
+        titulo: 'Fuentes y servicios de terceros',
+        contenido: [
+          'Las fuentes tipográficas del sitio (Bebas Neue, DM Mono, Plus Jakarta Sans) se cargan desde Google Fonts. Esta petición puede incluir tu dirección IP, el navegador y el sistema operativo en los logs de Google. Google tiene su propia política de privacidad disponible en policies.google.com.',
+          'Si deseas evitar cualquier conexión con servicios de terceros —analítica o publicidad incluidas—, puedes bloquearla con una extensión de tipo uBlock Origin o equivalente.',
+        ],
+      },
+      {
+        num: '06',
         titulo: 'Cómo gestionar o rechazar las cookies',
         contenido: [
           'Puedes configurar tu navegador para bloquear o eliminar cookies en cualquier momento. La mayoría de navegadores permiten hacerlo desde Configuración → Privacidad y seguridad → Cookies.',
@@ -92,7 +103,7 @@ import Footer from '../components/layout/Footer.astro';
         ],
       },
       {
-        num: '06',
+        num: '07',
         titulo: 'Contacto',
         contenido: [
           'Para cualquier duda sobre esta política, escríbenos a: <a href="mailto:codezun@gmail.com" style="color: var(--ink); text-decoration: underline;">codezun@gmail.com</a>',

@@ -1,0 +1,68 @@
+---
+/**
+ * Se incluye una sola vez por página desde `Base.astro`.
+ * Carga el script global de la red, el motor de anuncios y —si procede— la
+ * barra inferior fija.
+ */
+import { AD_GLOBAL_SRC } from '../../lib/ads';
+import AdSlot from './AdSlot.astro';
+
+interface Props {
+  /** Barra inferior fija (formato ancla) */
+  anchor?: boolean;
+}
+
+const { anchor = true } = Astro.props;
+---
+
+<!-- Red publicitaria — script global -->
+<script is:inline async data-cfasync="false" src={AD_GLOBAL_SRC}></script>
+
+{anchor && (
+  <div class="ad-anchor" id="cf-ad-anchor">
+    <button class="ad-anchor__close" type="button" aria-label="Cerrar anuncio">&times;</button>
+    <AdSlot format="leaderboard" mobile="mobile" eager dark gap="0" />
+  </div>
+)}
+
+<script>
+  import '../../lib/adEngine';
+</script>
+
+<style is:global>
+  .ad-anchor {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9990;
+    background: var(--ink);
+    border-top: 1px solid var(--ink-3);
+    padding: 5px 0 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .ad-anchor .ad-unit { margin: 0 auto !important; }
+  .ad-anchor__close {
+    position: absolute;
+    top: -22px;
+    right: 8px;
+    width: 22px;
+    height: 22px;
+    padding: 0;
+    line-height: 1;
+    font-size: 15px;
+    font-family: var(--font-mono);
+    color: var(--ink);
+    background: var(--acid);
+    border: 0;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+  /* El ancla flota sobre el contenido: dejamos hueco al final de la página */
+  body.has-ad-anchor { padding-bottom: 78px; }
+  @media (min-width: 768px) {
+    body.has-ad-anchor { padding-bottom: 118px; }
+  }
+</style>

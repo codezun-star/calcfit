@@ -4,6 +4,7 @@ import Navbar from '../../components/layout/Navbar.astro';
 import Footer from '../../components/layout/Footer.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
 import type { GetStaticPathsOptions, Page } from 'astro';
+import AdSlot from '../../components/ads/AdSlot.astro';
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
   const todos = await getCollection('blog', (e) => e.data.publicado !== false);
@@ -49,6 +50,11 @@ const titleSuffix = page.currentPage > 1 ? ` — Página ${page.currentPage}` : 
         Artículos sobre fitness, nutrición y salud respaldados por evidencia científica.
       </p>
     </div>
+  </div>
+
+  <!-- Publicidad — cabecera -->
+  <div style="background: var(--cream); border-bottom: 1px solid var(--border);">
+    <AdSlot format="leaderboard" mobile="mobile" eager gap="14px" />
   </div>
 
   <!-- Lista -->
@@ -180,6 +186,7 @@ const titleSuffix = page.currentPage > 1 ? ` — Página ${page.currentPage}` : 
         )}
       </>
     )}
+    <AdSlot format="native" gap="40px" />
   </main>
 
   <Footer />

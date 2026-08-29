@@ -63,6 +63,11 @@ calcfit-astro/
 │   │   │   ├── HistoryTable.tsx
 │   │   │   ├── ShareButtons.tsx
 │   │   │   └── Badge.tsx              ← popular | new | essential
+│   │   ├── ads/                       ← publicidad (ver sección "Publicidad")
+│   │   │   ├── AdSlot.astro           ← hueco publicitario (reserva espacio, elige formato)
+│   │   │   ├── AdEngine.astro         ← script global + motor + ancla inferior (una vez por página)
+│   │   │   ├── AdRail.astro           ← columna lateral pegajosa 160×600 + 160×300 (≥1200px)
+│   │   │   └── AdInContent.astro      ← inserta un anuncio antes del enésimo H2 del texto
 │   │   └── calculators/               ← 143 componentes React (ver CALCULADORAS.md)
 │   │       ├── [NombreCalculator].tsx ← un archivo por calculadora
 │   │       ├── GaugeIMC.tsx           ← gauge SVG semicircular animado
@@ -71,6 +76,8 @@ calcfit-astro/
 │   ├── lib/
 │   │   ├── calculators.ts             ← TODA la lógica de cálculo (funciones puras)
 │   │   ├── units.ts                   ← conversiones métrico ↔ imperial
+│   │   ├── ads.ts                     ← unidades publicitarias (fuente única de claves y tamaños)
+│   │   ├── adEngine.ts                ← motor de anuncios en cliente (iframe aislado + lazy)
 │   │   ├── useValidation.ts           ← hook de validación de campos
 │   │   └── useHistory.ts              ← hook de historial en localStorage
 │   ├── content.config.ts              ← schema Zod del blog (Content Layer API, Astro 6)
@@ -464,6 +471,68 @@ Google Analytics está activo en todas las páginas (ID: `G-NRM0FZ5W8S`). Se iny
 
 ---
 
+## Publicidad
+
+El sitio se monetiza con una red externa (Adsterra: `profitableratecpmnetwork.com` y `highrevenueformat.com`). **No se pegan los snippets del proveedor directamente en las páginas** — todo pasa por el sistema de `src/components/ads/`.
+
+### Por qué existe el sistema (y no se pegan los snippets a mano)
+
+| Problema del snippet original | Cómo lo resuelve el sistema |
+|---|---|
+| `atOptions` es una **variable global**: dos banners en la misma página se pisan y sólo se pinta el último | Cada banner se pinta en su propio iframe `srcdoc`, con un `window` aislado |
+| El `document.write` del proveedor **borraría el documento** si corre tras el load (React ya hidratado) | Dentro del iframe escribe en su propio documento, durante el parseo |
+| Cargar todos los formatos en todas las pantallas malgasta impresiones | El motor elige escritorio **o** móvil según el viewport: nunca los dos |
+| Anuncios abajo que nadie ve cuentan como impresión no vista | `IntersectionObserver` con 600px de margen: se piden al acercarse a pantalla |
+| Los anuncios entrando en caliente desplazan el contenido (CLS) | Cada hueco reserva su altura exacta por adelantado |
+
+### Unidades disponibles (`src/lib/ads.ts` — fuente única)
+
+| Nombre | Tamaño | Uso |
+|---|---|---|
+| `leaderboard` | 728×90 | Cabecera de escritorio y ancla inferior |
+| `mobile` | 320×50 | El equivalente en móvil de los dos anteriores |
+| `banner` | 468×60 | Cierre de página |
+| `rectangle` | 300×250 | Dentro del texto (vale también en móvil) |
+| `skyscraper` | 160×600 | Columna lateral, sólo ≥1200px |
+| `halfsky` | 160×300 | Debajo del anterior |
+| `native` | contenedor propio | Native Banner asíncrono — **uno solo por página** (su id es fijo) |
+
+El script global de la red y el ancla se inyectan desde `Base.astro`.
+
+### Cómo se añade un anuncio
+
+```astro
+---
+import AdSlot from '../components/ads/AdSlot.astro';
+---
+<AdSlot format="leaderboard" mobile="mobile" eager gap="14px" />
+```
+
+- `format` — formato en escritorio. **Nunca llamar a este prop `slot`**: es atributo reservado de Astro y el componente acabaría dentro de un slot con nombre del padre.
+- `mobile` — formato bajo 767px; `"none"` lo oculta (así el rail lateral no gasta impresiones en móvil).
+- `eager` — carga inmediata, sólo above the fold.
+
+### Colocación actual
+
+| Página | Anuncios |
+|---|---|
+| Calculadoras (143) | leaderboard cabecera · native bajo el resultado · rectangle dentro del texto (antes del 2.º H2) · banner al cierre · rail 160×600 + 160×300 · ancla |
+| Homepage | leaderboard cabecera · native tras el grid · banner antes del blog · ancla |
+| Artículo de blog | leaderboard cabecera · rectangle antes del 3.er H2 · native al final · banner · rail · ancla |
+| Blog (listado) y categorías | leaderboard cabecera · native al cierre · ancla |
+| `sobre-nosotros`, `contacto` | banner al cierre · ancla |
+| `aviso-legal`, `politica-privacidad`, `politica-cookies` | **ninguno** — se pasa `ads={false}` a `Base` |
+
+### Reglas
+
+- Todo bloque lleva la etiqueta visible **"Publicidad"** (`.ad-unit__label`).
+- Las páginas legales van sin publicidad: `<Base ads={false} …>`.
+- Al tocar la publicidad hay que revisar `politica-cookies.astro` y `politica-privacidad.astro` — ambas declaran hoy la red y los datos que trata.
+- El ancla inferior se puede cerrar y el cierre se recuerda en `sessionStorage` (`cf-ad-anchor`).
+- No afirmar "cero cookies de rastreo" en ningún texto del sitio mientras haya red publicitaria. Lo que sí sigue siendo cierto —y es lo que se dice— es que **los datos introducidos en las calculadoras no salen del navegador**.
+
+---
+
 ## SEO — Sistema completo (implementado 2026-05-16)
 
 Este proyecto usa **SEO agresivo** en todas las calculadoras. Cada nueva calculadora DEBE seguir exactamente el mismo estándar.
@@ -737,12 +806,15 @@ Siempre verificar `typeof window !== 'undefined'` antes de acceder a localStorag
 - Deploy en producción (Vercel / Netlify / Cloudflare Pages) — configurar redirect 301 de non-www a www
 - Verificar propiedad en Google Search Console y enviar sitemap con URL www
 
-> Resueltos (2026-06-16): imágenes OG generadas para las 99 calculadoras + `default.jpg` con `scripts/generate-og.mjs` (regenerar tras añadir calculadoras); `apple-touch-icon.png` 180×180 añadido. El sitio **no usa anuncios** actualmente (Monetag y AdSense fueron eliminados); si se reactivan, revisar la coherencia de `politica-cookies`.
+> Resueltos (2026-06-16): imágenes OG generadas para las 99 calculadoras + `default.jpg` con `scripts/generate-og.mjs` (regenerar tras añadir calculadoras); `apple-touch-icon.png` 180×180 añadido.
+>
+> Publicidad (2026-08-29): el sitio **sí muestra anuncios** — ver la sección «Publicidad». Monetag sigue eliminado y **no debe reactivarse** (dominios asociados a malvertising). La red actual es Adsterra.
 
 ## Registro de cambios
 
 | Fecha | Acción |
 |---|---|
+| 2026-08-29 | **Publicidad en todo el sitio** (red Adsterra). Nuevo sistema en `src/components/ads/` + `src/lib/ads.ts` (unidades) y `src/lib/adEngine.ts` (motor). Los snippets del proveedor **no** se pegan en las páginas: cada banner se pinta en un iframe `srcdoc` propio porque `atOptions` es global y dos banners en la misma página se pisarían; además así el `document.write` del proveedor no puede borrar el documento ya hidratado por React. El motor elige formato de escritorio **o** de móvil según el viewport (nunca los dos), difiere la carga con `IntersectionObserver` (600px de margen) salvo en los huecos `eager`, y reserva la altura exacta de cada hueco para no provocar CLS. Formatos: 728×90, 468×60, 300×250, 160×600, 160×300, 320×50 y el Native Banner (uno por página, id fijo). Colocación: cabecera + native bajo el resultado + rectangle dentro del texto + banner de cierre + rail lateral (≥1200px) + ancla inferior descartable en las 143 calculadoras; equivalentes en home, blog, artículos y categorías. Las **páginas legales quedan sin publicidad** (`ads={false}`). `politica-cookies` y `politica-privacidad` reescritas: declaran la red, los dominios y los datos técnicos que trata, y precisan que los valores introducidos en las calculadoras no se le envían. Retirada la afirmación «cero cookies de rastreo» de la home y de `llms.txt` por ser incompatible con una red publicitaria. Build: 232 páginas, 0 errores de compresión. |
 | 2026-08-11 | **Revertida la poda del 10-ago** (commit `aeca7d4`, «de 143 a 18 calculadoras»). Se restauran las 143 calculadoras, sus 146 componentes, las 144 imágenes OG, los 70 artículos del blog, las 4 categorías (`/fitness`, `/nutricion`, `/embarazo`, `/fechas`) y `calculators.ts` completo (146 funciones, 4.762 líneas). Build de vuelta en 232 páginas, sin errores de compresión. Se hizo con `git revert` y no con reset, porque el commit ya estaba publicado en `main`. **Se conservan** los dos arreglos legítimos que la poda traía mezclados: el prop `color` de `ResultCard` (sin él fallan los tipos de `cafeina`, `carga-glucemica`, `presion-pulso`, `recuperacion-cardiaca`, `test-cooper` y `test-rockport`) y las unidades en `#aaa` en lugar de `#666`, por la escala de contraste. **Nota para futuras sesiones:** el diagnóstico SEO que motivó la poda sigue sin resolverse (caída del 95,7 % de impresiones el 3-4 jul, 47 clics en tres meses, 52 calculadoras sin una sola impresión). Revertir restaura el inventario, no el tráfico; si se vuelve a atacar el problema, hacerlo de forma incremental y medible, no con un borrado masivo de una sola vez. |
 | 2026-08-06 | Ampliación: +2 calculadoras y +2 artículos. **Fitness & salud**: `test-flexiones` (`calcularTestFlexiones`, `TestFlexionesCalculator.tsx`) — nivel de resistencia muscular del tren superior con los baremos por edad del ACSM/CSEP (estándar y con rodillas apoyadas); no duplica `test-cooper` (aeróbico), `test-rockport` (marcha), `potencia-salto` ni `1rm`/`fuerza-relativa` (fuerza máxima). **Nutrición & bienestar**: `calorias-receta` (`calcularCaloriasReceta`, `CaloriasRecetaCalculator.tsx`) — suma ingredientes, reparte por raciones y calcula la densidad calórica. Ambas con página SEO completa (title/description/keywords/FAQs/tablas/`related`), imagen OG y entrada en `calcData.ts`. Blog: `cuantas-flexiones-por-edad` y `calcular-calorias-de-una-receta`. Contadores de la homepage 141 → 143. Build: 232 páginas. **Descartada** una calculadora de edad metabólica: toda fórmula predictiva de TMB escala con el peso total, así que devolvía "excelente" a perfiles con sobrepeso; sin masa magra medida el resultado es engañoso. |
 | 2026-07-31 | Serialización segura del JSON-LD: nuevo `src/lib/jsonld.ts` con `jsonLd()`, usado por `Base.astro`. Escapa `<`, `>` y `&` como unicode. Corrige los 15 errores `Cannot compress file` de astro-compress (oximetria, presion-pulso, cintura-cadera…), causados por comparadores sueltos como `<86%` o `< 25 mmHg` dentro de las respuestas de FAQ del JSON-LD: esas páginas se publicaban sin minificar. También cierra el vector de inyección por `</script>` en textos. Build: 0 errores de compresión (antes 15). |
