@@ -12,7 +12,6 @@ keywords:
   - "rutina de fuerza para personas delgadas"
   - "suplementos para subir de peso ectomorfo"
 autor: "Equipo CalcFit"
-imagen: "https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 unsplashQuery: "gym weight training muscle building man"
 ---

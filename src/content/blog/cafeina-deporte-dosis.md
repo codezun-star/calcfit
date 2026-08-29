@@ -12,7 +12,6 @@ keywords:
   - "tolerancia a la cafeína cómo evitarla"
   - "cafeína vs pre-workout diferencia"
 autor: "Equipo CalcFit"
-imagen: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 unsplashQuery: "coffee caffeine pre workout sports performance energy drink"
 ---

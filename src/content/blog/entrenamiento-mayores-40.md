@@ -12,7 +12,6 @@ keywords:
   - "rutina de ejercicio para mujeres de 40 años"
   - "metabolismo más lento después de 40 qué hacer"
 autor: "Equipo CalcFit"
-imagen: "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 unsplashQuery: "mature adult fitness training gym 40s"
 ---

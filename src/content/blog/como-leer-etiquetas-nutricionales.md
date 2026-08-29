@@ -12,7 +12,6 @@ keywords:
   - "azucar oculta en alimentos"
 autor: "Equipo CalcFit"
 unsplashQuery: "food label nutrition facts healthy eating grocery shopping"
-imagen: "https://images.unsplash.com/photo-1542838132-92c53300491e?ixid=M3w5NjI4Mjh8MHwxfHNlYXJjaHwxfHxmb29kJTIwbGFiZWwlMjBudXRyaXRpb24lMjBmYWN0cyUyMGhlYWx0aHklMjBlYXRpbmclMjBncm9jZXJ5JTIwc2hvcHBpbmd8ZW58MHwwfHx8MTc3OTkzMzk5N3ww&ixlib=rb-4.1.0&w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 ---
 

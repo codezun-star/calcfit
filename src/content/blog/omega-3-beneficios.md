@@ -12,7 +12,6 @@ keywords:
   - "suplemento omega 3 cuándo tomarlo"
   - "omega 3 ratio omega 6 salud inflamación"
 autor: "Equipo CalcFit"
-imagen: "https://images.unsplash.com/photo-1490474504059-bf2db5ab2348?w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 unsplashQuery: "salmon fish omega 3 healthy food"
 ---

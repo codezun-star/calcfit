@@ -12,7 +12,6 @@ keywords:
   - "ayuno intermitente efectos secundarios"
   - "ventana de alimentacion ayuno"
 autor: "Equipo CalcFit"
-imagen: "https://images.unsplash.com/photo-1631709497515-8c71f07630e9?ixid=M3w5NjI4Mjh8MHwxfHNlYXJjaHwxfHxpbnRlcm1pdHRlbnQlMjBmYXN0aW5nJTIwY2xvY2slMjBmb29kJTIwaGVhbHRoeSUyMGVhdGluZyUyMHRpbWVyfGVufDB8MHx8fDE3Nzk5MzA5NDh8MA&ixlib=rb-4.1.0&w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 unsplashQuery: "intermittent fasting clock food healthy eating timer"
 ---

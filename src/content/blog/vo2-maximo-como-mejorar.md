@@ -12,7 +12,6 @@ keywords:
   - "ejercicios para aumentar capacidad aeróbica"
   - "VO2 max hombre mujer edad"
 autor: "Equipo CalcFit"
-imagen: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 unsplashQuery: "cycling cardio VO2 aerobic fitness endurance"
 ---

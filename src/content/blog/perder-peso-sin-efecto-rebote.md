@@ -12,7 +12,6 @@ keywords:
   - "perder peso de forma sostenible"
   - "qué hacer para no recuperar el peso que perdí"
 autor: "Equipo CalcFit"
-imagen: "https://images.unsplash.com/photo-1607962837359-5e7e89f86776?w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 unsplashQuery: "weight scale healthy lifestyle sustainable"
 ---

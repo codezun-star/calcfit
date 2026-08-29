@@ -12,7 +12,6 @@ keywords:
   - "tabla nutricional alimentos básicos"
   - "calorías frutas verduras cereales legumbres"
 autor: "Equipo CalcFit"
-imagen: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 unsplashQuery: "food nutrition healthy meal variety"
 ---

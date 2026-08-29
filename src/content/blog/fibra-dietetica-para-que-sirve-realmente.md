@@ -12,7 +12,6 @@ keywords:
   - "fibra y perdida de peso"
   - "fibra prebiotica microbiota"
 autor: "Equipo CalcFit"
-imagen: "https://images.unsplash.com/photo-1610348725531-843dff563e2c?ixid=M3w5NjI4Mjh8MHwxfHNlYXJjaHwxfHxmaWJlciUyMHZlZ2V0YWJsZXMlMjBmcnVpdHMlMjBsZWd1bWVzJTIwaGVhbHRoeSUyMGZvb2QlMjBwbGFudCUyMGJhc2VkfGVufDB8MHx8fDE3Nzk5MzA5NTF8MA&ixlib=rb-4.1.0&w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 unsplashQuery: "fiber vegetables fruits legumes healthy food plant based"
 ---

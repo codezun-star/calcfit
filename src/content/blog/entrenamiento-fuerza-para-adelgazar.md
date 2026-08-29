@@ -12,7 +12,6 @@ keywords:
   - "beneficios del entrenamiento de fuerza"
 autor: "Equipo CalcFit"
 unsplashQuery: "strength training weightlifting gym barbell workout fitness"
-imagen: "https://images.unsplash.com/photo-1604233098531-90b71b1b17a6?ixid=M3w5NjI4Mjh8MHwxfHNlYXJjaHwxfHxzdHJlbmd0aCUyMHRyYWluaW5nJTIwd2VpZ2h0bGlmdGluZyUyMGd5bSUyMGJhcmJlbGwlMjB3b3Jrb3V0JTIwZml0bmVzc3xlbnwwfDB8fHwxNzc5OTM0MDAxfDA&ixlib=rb-4.1.0&w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 ---
 

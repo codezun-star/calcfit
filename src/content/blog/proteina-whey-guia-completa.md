@@ -12,7 +12,6 @@ keywords:
   - "whey hidrolizado vale la pena"
 autor: "Equipo CalcFit"
 unsplashQuery: "whey protein fitness supplement sport healthy body"
-imagen: "https://images.unsplash.com/photo-1693996045300-521e9d08cabc?ixid=M3w5NjI4Mjh8MHwxfHNlYXJjaHwxfHx3aGV5JTIwcHJvdGVpbiUyMGZpdG5lc3MlMjBzdXBwbGVtZW50JTIwc3BvcnQlMjBoZWFsdGh5JTIwYm9keXxlbnwwfDB8fHwxNzc5OTM0MDg2fDA&ixlib=rb-4.1.0&w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 ---
 

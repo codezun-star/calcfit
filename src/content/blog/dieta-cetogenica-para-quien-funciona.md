@@ -12,7 +12,6 @@ keywords:
   - "dieta baja en carbohidratos evidencia"
 autor: "Equipo CalcFit"
 unsplashQuery: "ketogenic diet low carb healthy fat avocado eggs meat nutrition"
-imagen: "https://images.unsplash.com/photo-1642689690565-bf0afb7eb41e?ixid=M3w5NjI4Mjh8MHwxfHNlYXJjaHwxfHxrZXRvZ2VuaWMlMjBkaWV0JTIwbG93JTIwY2FyYiUyMGhlYWx0aHklMjBmYXQlMjBhdm9jYWRvJTIwZWdncyUyMG1lYXQlMjBudXRyaXRpb258ZW58MHwwfHx8MTc3OTkzNDAwMHww&ixlib=rb-4.1.0&w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 ---
 

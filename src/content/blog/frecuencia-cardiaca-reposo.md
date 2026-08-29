@@ -12,7 +12,6 @@ keywords:
   - "frecuencia cardíaca 50 60 70 80 qué significa"
   - "bradicardia taquicardia valores normales"
 autor: "Equipo CalcFit"
-imagen: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 unsplashQuery: "heart rate pulse fitness health wearable"
 ---

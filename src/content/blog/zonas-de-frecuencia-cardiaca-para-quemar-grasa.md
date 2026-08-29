@@ -12,7 +12,6 @@ keywords:
   - "entrenamiento por zonas cardiaca"
   - "como calcular mis zonas de entrenamiento"
 autor: "Equipo CalcFit"
-imagen: "https://images.unsplash.com/photo-1483721310020-03333e577078?ixid=M3w5NjI4Mjh8MHwxfHNlYXJjaHwxfHxoZWFydCUyMHJhdGUlMjBtb25pdG9yJTIwcnVubmluZyUyMGNhcmRpbyUyMGV4ZXJjaXNlJTIwZml0bmVzcyUyMGF0aGxldGV8ZW58MHwwfHx8MTc3OTkzMDk1M3ww&ixlib=rb-4.1.0&w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 unsplashQuery: "heart rate monitor running cardio exercise fitness athlete"
 ---

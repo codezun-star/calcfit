@@ -54,7 +54,43 @@ export default defineConfig({
         return { ...item, lastmod: BUILD_DATE, changefreq: 'monthly', priority: 0.8 };
       },
     }),
-    compress(),
+    compress({
+      HTML: {
+        'html-minifier-terser': {
+          // Los tres ajustes siguientes existen porque el minificador reescribía
+          // el HTML *dentro* de las islas de React y rompía la hidratación
+          // (error #418 en la home: la isla entera se descartaba y se volvía a
+          // pintar en cliente). No tocar sin comprobar la hidratación después.
+          //
+          // 1. minifyCSS pasaba cada atributo `style` por clean-css y lo
+          //    devolvía normalizado, distinto del que React esperaba.
+          minifyCSS: false,
+          // 2. sortAttributes/sortClassName reordenaban los atributos de los SVG
+          //    que los iconos inyectan con dangerouslySetInnerHTML.
+          sortAttributes: false,
+          sortClassName: false,
+          // 3. collapseWhitespace se comía el espacio final de los nodos de texto
+          //    ("Mostrando " + 15 + " de " + 63). Conservador: colapsa varios
+          //    espacios en uno, pero nunca los elimina.
+          conservativeCollapse: true,
+          // React separa dos nodos de texto contiguos con un comentario vacío.
+          // Se conservan sólo esos; los comentarios redactados a mano se siguen
+          // eliminando. El resto de la lista son los valores por defecto de
+          // astro-compress, que hay que repetir porque el array se sustituye.
+          ignoreCustomComments: [
+            /^\s*$/,
+            /^\s*#/,
+            /.*\$.*/,
+            /^\s*\[/,
+            /^\s*\]/,
+            /^\s*!/,
+            /^\s*\//,
+            /^\s*astro:.*/,
+            /^\s*astro:end/,
+          ],
+        },
+      },
+    }),
   ],
   output: 'static',
   trailingSlash: 'never',

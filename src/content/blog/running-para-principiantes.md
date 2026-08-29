@@ -12,7 +12,6 @@ keywords:
   - "ritmo de carrera para principiantes"
   - "cuánto correr al principio sin cansarse"
 autor: "Equipo CalcFit"
-imagen: "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 unsplashQuery: "running jogging outdoors beginner fitness"
 ---

@@ -12,7 +12,6 @@ keywords:
   - "cómo controlar la glucosa en sangre con la dieta"
   - "glucosa 100 110 120 qué significa"
 autor: "Equipo CalcFit"
-imagen: "https://images.unsplash.com/photo-1576086213369-97a306d36557?w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 unsplashQuery: "blood glucose test health diabetes"
 ---

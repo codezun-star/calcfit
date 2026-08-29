@@ -14,10 +14,6 @@ export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
 
 const { page } = Astro.props as { page: Page<CollectionEntry<'blog'>> };
 
-function thumbUrl(url: string): string {
-  return url.replace(/&w=\d+/, '&w=400').replace(/&h=\d+/, '&h=267');
-}
-
 const categorias: Record<string, string> = {
   fitness:  'Fitness',
   nutricion: 'Nutrición',
@@ -69,24 +65,11 @@ const titleSuffix = page.currentPage > 1 ? ` — Página ${page.currentPage}` : 
           {page.data.map((art: any) => (
             <a
               href={`/blog/${art.id}`}
-              style="display:flex; align-items:flex-start; gap:0; background:var(--cream); text-decoration:none; border-left:3px solid transparent; transition:background 0.15s, border-color 0.15s; overflow:hidden;"
+              style="display:flex; align-items:center; gap:0; background:var(--cream); text-decoration:none; border-left:3px solid transparent; transition:background 0.15s, border-color 0.15s; overflow:hidden;"
               onmouseover="this.style.background='#EDE9DF'; this.style.borderLeftColor='var(--acid)'"
               onmouseout="this.style.background='var(--cream)'; this.style.borderLeftColor='transparent'"
             >
-              {art.data.imagen && (
-                <div class="blog-thumb" style="flex-shrink:0; width:160px; min-height:107px; overflow:hidden;">
-                  <img
-                    src={thumbUrl(art.data.imagen)}
-                    alt={art.data.titulo}
-                    width="160"
-                    height="107"
-                    loading="lazy"
-                    style="width:160px; height:107px; object-fit:cover; display:block;"
-                    onerror="this.closest('.blog-thumb').style.display='none'"
-                  />
-                </div>
-              )}
-              <div style="flex:1; min-width:0; padding:18px 16px 18px 20px;">
+              <div style="flex:1; min-width:0; padding:18px 20px;">
                 <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px; flex-wrap:wrap;">
                   {art.data.categoria && (
                     <span style="font-size:10px; font-weight:500; text-transform:uppercase; letter-spacing:0.08em; background:var(--ink); color:var(--acid); padding:2px 8px; font-family:var(--font-mono);">
@@ -103,7 +86,7 @@ const titleSuffix = page.currentPage > 1 ? ` — Página ${page.currentPage}` : 
                   </p>
                 )}
               </div>
-              <div style="padding:18px 16px 0 0; flex-shrink:0;">
+              <div style="padding:0 20px 0 0; flex-shrink:0; display:flex; align-items:center;">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <line x1="5" y1="12" x2="19" y2="12"></line>
                   <polyline points="12 5 19 12 12 19"></polyline>
@@ -191,9 +174,3 @@ const titleSuffix = page.currentPage > 1 ? ` — Página ${page.currentPage}` : 
 
   <Footer />
 </Base>
-
-<style>
-  @media (max-width: 480px) {
-    .blog-thumb { display: none !important; }
-  }
-</style>

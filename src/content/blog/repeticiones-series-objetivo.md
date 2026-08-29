@@ -12,7 +12,6 @@ keywords:
   - "volumen de entrenamiento óptimo semanal"
   - "cuántas veces entrenar por semana músculo"
 autor: "Equipo CalcFit"
-imagen: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 unsplashQuery: "weightlifting gym barbell strength training sets reps"
 ---

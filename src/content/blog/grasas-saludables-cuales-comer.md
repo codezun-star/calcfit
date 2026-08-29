@@ -12,7 +12,6 @@ keywords:
   - "aceite de oliva beneficios salud"
 autor: "Equipo CalcFit"
 unsplashQuery: "healthy fats avocado olive oil nuts salmon omega 3 nutrition"
-imagen: "https://images.unsplash.com/photo-1583354594681-b417ffe21302?ixid=M3w5NjI4Mjh8MHwxfHNlYXJjaHwxfHxoZWFsdGh5JTIwZmF0cyUyMGF2b2NhZG8lMjBvbGl2ZSUyMG9pbCUyMG51dHMlMjBzYWxtb24lMjBvbWVnYSUyMDMlMjBudXRyaXRpb258ZW58MHwwfHx8MTc3OTkzNDAwMnww&ixlib=rb-4.1.0&w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 ---
 

@@ -12,7 +12,6 @@ keywords:
   - "perder grasa sin perder peso"
   - "composicion corporal hombre mujer"
 autor: "Equipo CalcFit"
-imagen: "https://images.unsplash.com/photo-1523901839036-a3030662f220?ixid=M3w5NjI4Mjh8MHwxfHNlYXJjaHwxfHxib2R5JTIwY29tcG9zaXRpb24lMjBmaXRuZXNzJTIwdGFwZSUyMG1lYXN1cmUlMjBtdXNjbGUlMjB3b21hbiUyMG1hbnxlbnwwfDB8fHwxNzc5OTMwOTUyfDA&ixlib=rb-4.1.0&w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 unsplashQuery: "body composition fitness tape measure muscle woman man"
 ---

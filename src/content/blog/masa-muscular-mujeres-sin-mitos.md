@@ -12,7 +12,6 @@ keywords:
   - "tonificar mujeres que significa"
 autor: "Equipo CalcFit"
 unsplashQuery: "woman strength training weightlifting gym fitness female athlete"
-imagen: "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?ixid=M3w5NjI4Mjh8MHwxfHNlYXJjaHwxfHx3b21hbiUyMHN0cmVuZ3RoJTIwdHJhaW5pbmclMjB3ZWlnaHRsaWZ0aW5nJTIwZ3ltJTIwZml0bmVzcyUyMGZlbWFsZSUyMGF0aGxldGV8ZW58MHwwfHx8MTc3OTkzNDAwNHww&ixlib=rb-4.1.0&w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 ---
 

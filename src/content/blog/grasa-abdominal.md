@@ -12,7 +12,6 @@ keywords:
   - "por qué no me baja la barriga"
   - "grasa abdominal hombres después de 30"
 autor: "Equipo CalcFit"
-imagen: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 unsplashQuery: "abs workout core fitness training"
 ---

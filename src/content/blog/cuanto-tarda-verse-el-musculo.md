@@ -12,7 +12,6 @@ keywords:
   - "cuánto tiempo para notar cambios físicos entrenamiento"
   - "tiempo real para ganar músculo por semana"
 autor: "Equipo CalcFit"
-imagen: "https://images.unsplash.com/photo-1581009137042-c552e485697a?w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 unsplashQuery: "gym mirror progress fitness transformation"
 ---

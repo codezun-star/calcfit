@@ -12,7 +12,6 @@ keywords:
   - "cómo aplicar dieta mediterránea en latinoamérica"
   - "alimentos dieta mediterránea lista completa"
 autor: "Equipo CalcFit"
-imagen: "https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 unsplashQuery: "mediterranean food healthy olive oil vegetables fish"
 ---

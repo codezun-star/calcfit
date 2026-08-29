@@ -400,6 +400,11 @@ El blog usa el **Content Layer API de Astro 6** con archivos `.md` en `src/conte
 }
 ```
 
+**Los artículos no llevan imágenes.** No hay campo `imagen` en el schema ni `<img>` en las plantillas del blog (artículo, listado ni sección de la home). Para compartir en redes se usa la imagen OG de marca (`/og/default.jpg`), que es metadato, no una imagen visible en la página.
+
+```
+```
+
 ### Cómo crear un artículo nuevo
 
 1. Crear `src/content/blog/[slug].md` — el nombre del archivo es la URL final (`/blog/slug`).
@@ -659,6 +664,33 @@ Todo bloque `<script type="application/ld+json">` debe serializarse con `jsonLd(
 
 ---
 
+## Compresión del HTML — cuidado con las islas de React
+
+`astro-compress` se configura en `astro.config.mjs` con cuatro ajustes que **no
+son opcionales**: sin ellos el minificador reescribe el HTML que hay dentro de
+las islas de React y la hidratación falla (error #418 — React descarta la isla y
+la vuelve a pintar entera en cliente, perdiendo el HTML del servidor).
+
+| Ajuste | Qué rompía |
+|---|---|
+| `minifyCSS: false` | Pasaba cada atributo `style` por clean-css y lo devolvía normalizado, distinto del que React esperaba |
+| `sortAttributes: false` | Reordenaba alfabéticamente los atributos de los SVG que los iconos inyectan con `dangerouslySetInnerHTML` |
+| `sortClassName: false` | Mismo problema con el orden de las clases |
+| `conservativeCollapse: true` | `collapseWhitespace` se comía el espacio final de los nodos de texto (`"Mostrando " + 15 + " de " + 63`) |
+
+Además se conservan los comentarios vacíos (`ignoreCustomComments: [/^\s*$/, …]`),
+que son los separadores que React coloca entre dos nodos de texto contiguos.
+
+**Coste:** el HTML sin comprimir crece un 2,5 % (≈1 KB por página). A cambio las
+islas hidratan de verdad en lugar de repintarse.
+
+**Cómo comprobarlo tras tocar la compresión:** servir `dist/` y cargar la home
+en un navegador; la consola no debe mostrar ningún error de React. En producción
+el error sale minificado (`Minified React error #418`); para verlo legible, hacer
+un build con `vite: { define: { 'process.env.NODE_ENV': '"development"' } }`.
+
+---
+
 ## Scripts disponibles
 
 ```bash
@@ -814,6 +846,9 @@ Siempre verificar `typeof window !== 'undefined'` antes de acceder a localStorag
 
 | Fecha | Acción |
 |---|---|
+| 2026-08-29 | **Blog sin imágenes.** Eliminado el campo `imagen` del schema (`content.config.ts`), el frontmatter `imagen:` de los 58 artículos que lo llevaban, la imagen hero del artículo (con su crédito de Unsplash), la miniatura del listado y la de las tarjetas de la home, más los dos helpers de recorte (`blogThumb`, `thumbUrl`) y el CSS huérfano `.blog-thumb`. Las filas del listado se reajustaron (siguen siendo flex: texto + flecha). El `og:image` de los artículos pasa a la imagen de marca `/og/default.jpg` — es metadato para compartir, no una imagen de la página. El JSON-LD `Article` ya no emite `image`. |
+| 2026-08-29 | **Corregido el error de hidratación de React en la home** (#418), que existía desde antes de la publicidad. La causa era `astro-compress`: reescribía el HTML *dentro* de la isla `CalculatorBrowser` de tres formas —`minifyCSS` normalizaba los atributos `style`, `sortAttributes`/`sortClassName` reordenaban los atributos de los SVG inyectados con `dangerouslySetInnerHTML`, y `collapseWhitespace` se comía el espacio final de los nodos de texto—, así que React descartaba la isla entera y la repintaba en cliente. Ver la sección «Compresión del HTML». Coste: +2,5 % de HTML sin comprimir. |
+| 2026-08-29 | Rail publicitario lateral reposicionado: en vez de robar espacio a la columna de contenido (una rejilla que desplazaba el texto 60px a la izquierda en pantallas anchas), ahora se ancla *fuera* de ella con `position: absolute; left: 100%` sobre un contenedor `relative`. La columna conserva su ancho y su centrado de siempre; el rail sólo aparece cuando de verdad sobra sitio al lado (1240px en calculadoras, 1100px en artículos). |
 | 2026-08-29 | **Publicidad en todo el sitio** (red Adsterra). Nuevo sistema en `src/components/ads/` + `src/lib/ads.ts` (unidades) y `src/lib/adEngine.ts` (motor). Los snippets del proveedor **no** se pegan en las páginas: cada banner se pinta en un iframe `srcdoc` propio porque `atOptions` es global y dos banners en la misma página se pisarían; además así el `document.write` del proveedor no puede borrar el documento ya hidratado por React. El motor elige formato de escritorio **o** de móvil según el viewport (nunca los dos), difiere la carga con `IntersectionObserver` (600px de margen) salvo en los huecos `eager`, y reserva la altura exacta de cada hueco para no provocar CLS. Formatos: 728×90, 468×60, 300×250, 160×600, 160×300, 320×50 y el Native Banner (uno por página, id fijo). Colocación: cabecera + native bajo el resultado + rectangle dentro del texto + banner de cierre + rail lateral (≥1200px) + ancla inferior descartable en las 143 calculadoras; equivalentes en home, blog, artículos y categorías. Las **páginas legales quedan sin publicidad** (`ads={false}`). `politica-cookies` y `politica-privacidad` reescritas: declaran la red, los dominios y los datos técnicos que trata, y precisan que los valores introducidos en las calculadoras no se le envían. Retirada la afirmación «cero cookies de rastreo» de la home y de `llms.txt` por ser incompatible con una red publicitaria. Build: 232 páginas, 0 errores de compresión. |
 | 2026-08-11 | **Revertida la poda del 10-ago** (commit `aeca7d4`, «de 143 a 18 calculadoras»). Se restauran las 143 calculadoras, sus 146 componentes, las 144 imágenes OG, los 70 artículos del blog, las 4 categorías (`/fitness`, `/nutricion`, `/embarazo`, `/fechas`) y `calculators.ts` completo (146 funciones, 4.762 líneas). Build de vuelta en 232 páginas, sin errores de compresión. Se hizo con `git revert` y no con reset, porque el commit ya estaba publicado en `main`. **Se conservan** los dos arreglos legítimos que la poda traía mezclados: el prop `color` de `ResultCard` (sin él fallan los tipos de `cafeina`, `carga-glucemica`, `presion-pulso`, `recuperacion-cardiaca`, `test-cooper` y `test-rockport`) y las unidades en `#aaa` en lugar de `#666`, por la escala de contraste. **Nota para futuras sesiones:** el diagnóstico SEO que motivó la poda sigue sin resolverse (caída del 95,7 % de impresiones el 3-4 jul, 47 clics en tres meses, 52 calculadoras sin una sola impresión). Revertir restaura el inventario, no el tráfico; si se vuelve a atacar el problema, hacerlo de forma incremental y medible, no con un borrado masivo de una sola vez. |
 | 2026-08-06 | Ampliación: +2 calculadoras y +2 artículos. **Fitness & salud**: `test-flexiones` (`calcularTestFlexiones`, `TestFlexionesCalculator.tsx`) — nivel de resistencia muscular del tren superior con los baremos por edad del ACSM/CSEP (estándar y con rodillas apoyadas); no duplica `test-cooper` (aeróbico), `test-rockport` (marcha), `potencia-salto` ni `1rm`/`fuerza-relativa` (fuerza máxima). **Nutrición & bienestar**: `calorias-receta` (`calcularCaloriasReceta`, `CaloriasRecetaCalculator.tsx`) — suma ingredientes, reparte por raciones y calcula la densidad calórica. Ambas con página SEO completa (title/description/keywords/FAQs/tablas/`related`), imagen OG y entrada en `calcData.ts`. Blog: `cuantas-flexiones-por-edad` y `calcular-calorias-de-una-receta`. Contadores de la homepage 141 → 143. Build: 232 páginas. **Descartada** una calculadora de edad metabólica: toda fórmula predictiva de TMB escala con el peso total, así que devolvía "excelente" a perfiles con sobrepeso; sin masa magra medida el resultado es engañoso. |

@@ -12,7 +12,6 @@ keywords:
   - "cuántas calorías tiene una copa de vino"
   - "beber alcohol y adelgazar es posible"
 autor: "Equipo CalcFit"
-imagen: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 unsplashQuery: "alcohol drinks wine beer cocktail"
 ---

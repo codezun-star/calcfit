@@ -12,7 +12,6 @@ keywords:
   - "cómo absorber mejor el hierro dieta"
   - "hierro para deportistas mujeres"
 autor: "Equipo CalcFit"
-imagen: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 unsplashQuery: "healthy food iron rich spinach legumes meat nutrition iron"
 ---

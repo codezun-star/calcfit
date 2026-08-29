@@ -12,7 +12,6 @@ keywords:
   - "recomposición corporal principiantes"
   - "déficit calórico y ganar músculo es posible"
 autor: "Equipo CalcFit"
-imagen: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 unsplashQuery: "fitness body transformation gym muscle fat loss recomposition"
 ---

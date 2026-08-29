@@ -10,7 +10,6 @@ const blog = defineCollection({
     fecha: z.string(),
     keywords: z.array(z.string()),
     autor: z.string().default('Equipo CalcFit'),
-    imagen: z.string().optional(),
     publicado: z.boolean().default(true),
     tituloSeo: z.string().optional(),
     fechaModificada: z.string().optional(),

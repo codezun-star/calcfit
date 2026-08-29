@@ -12,7 +12,6 @@ keywords:
   - "cardio ayunas vs desayunado"
 autor: "Equipo CalcFit"
 unsplashQuery: "morning run sunrise jogging fasted workout empty stomach"
-imagen: "https://images.unsplash.com/photo-1477332552946-cfb384aeaf1c?ixid=M3w5NjI4Mjh8MHwxfHNlYXJjaHwxfHxtb3JuaW5nJTIwcnVuJTIwc3VucmlzZSUyMGpvZ2dpbmclMjBmYXN0ZWQlMjB3b3Jrb3V0JTIwZW1wdHklMjBzdG9tYWNofGVufDB8MHx8fDE3Nzk5MzM5OTZ8MA&ixlib=rb-4.1.0&w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 ---
 

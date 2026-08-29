@@ -12,7 +12,6 @@ keywords:
   - "perder peso ejercicio sin lesiones"
 autor: "Equipo CalcFit"
 unsplashQuery: "overweight fitness beginner walking exercise health motivation"
-imagen: "https://images.unsplash.com/photo-1487956382158-bb926046304a?ixid=M3w5NjI4Mjh8MHwxfHNlYXJjaHwxfHxvdmVyd2VpZ2h0JTIwZml0bmVzcyUyMGJlZ2lubmVyJTIwd2Fsa2luZyUyMGV4ZXJjaXNlJTIwaGVhbHRoJTIwbW90aXZhdGlvbnxlbnwwfDB8fHwxNzc5OTM0MDAwfDA&ixlib=rb-4.1.0&w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 ---
 

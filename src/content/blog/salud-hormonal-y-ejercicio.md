@@ -12,7 +12,6 @@ keywords:
   - "entrenamiento y menstruación"
   - "adaptar dieta y ejercicio al ciclo hormonal"
 autor: "Equipo CalcFit"
-imagen: "https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 unsplashQuery: "woman fitness yoga training healthy lifestyle"
 ---

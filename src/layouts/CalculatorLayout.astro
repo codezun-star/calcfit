@@ -221,8 +221,10 @@ const combinedSchema = { '@context': 'https://schema.org', '@graph': graphItems 
 
 <style>
   .breadcrumb  { padding: 10px 32px; }
-  .seo-shell   { display: flex; gap: 24px; align-items: flex-start; max-width: 1064px; margin: 0 auto; }
-  .seo-section { padding: 48px 32px; flex: 1 1 auto; min-width: 0; max-width: 860px; margin: 0 auto; }
+  /* `relative` es lo que ancla el rail lateral; sin él se posicionaría
+     respecto al viewport. La columna conserva su ancho y su centrado. */
+  .seo-shell   { position: relative; max-width: 860px; margin: 0 auto; }
+  .seo-section { padding: 48px 32px; }
   .related-section { padding: 40px 32px; }
   @media (max-width: 640px) {
     .breadcrumb  { padding: 10px 16px; }

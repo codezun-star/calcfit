@@ -12,7 +12,6 @@ keywords:
   - "vitamina d sol o suplemento"
 autor: "Equipo CalcFit"
 unsplashQuery: "vitamin D sunlight health supplement nutrition wellness"
-imagen: "https://images.unsplash.com/photo-1624362772755-4d5843e67047?ixid=M3w5NjI4Mjh8MHwxfHNlYXJjaHwxfHx2aXRhbWluJTIwRCUyMHN1bmxpZ2h0JTIwaGVhbHRoJTIwc3VwcGxlbWVudCUyMG51dHJpdGlvbiUyMHdlbGxuZXNzfGVufDB8MHx8fDE3Nzk5MzQwMDh8MA&ixlib=rb-4.1.0&w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 ---
 

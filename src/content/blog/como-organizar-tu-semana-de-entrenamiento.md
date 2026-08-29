@@ -12,7 +12,6 @@ keywords:
   - "descanso entre sesiones gym"
 autor: "Equipo CalcFit"
 unsplashQuery: "workout schedule training plan weekly fitness calendar gym"
-imagen: "https://images.unsplash.com/photo-1641337221253-fdc7237f6b61?ixid=M3w5NjI4Mjh8MHwxfHNlYXJjaHwxfHx3b3Jrb3V0JTIwc2NoZWR1bGUlMjB0cmFpbmluZyUyMHBsYW4lMjB3ZWVrbHklMjBmaXRuZXNzJTIwY2FsZW5kYXIlMjBneW18ZW58MHwwfHx8MTc3OTkzMzk5OHww&ixlib=rb-4.1.0&w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 ---
 

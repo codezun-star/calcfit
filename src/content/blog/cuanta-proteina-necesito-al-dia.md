@@ -12,7 +12,6 @@ keywords:
   - "proteina para adelgazar"
   - "fuentes de proteina completa"
 autor: "Equipo CalcFit"
-imagen: "https://images.unsplash.com/photo-1670398564097-0762e1b30b3a?ixid=M3w5NjI4Mjh8MHwxfHNlYXJjaHwxfHxwcm90ZWluJTIwZm9vZCUyMGNoaWNrZW4lMjBlZ2dzJTIwbWVhdCUyMG51dHJpdGlvbiUyMGd5bSUyMG11c2NsZXxlbnwwfDB8fHwxNzc5OTMwOTUwfDA&ixlib=rb-4.1.0&w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 unsplashQuery: "protein food chicken eggs meat nutrition gym muscle"
 ---

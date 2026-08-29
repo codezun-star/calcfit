@@ -12,7 +12,6 @@ keywords:
   - "sarcopenia síntomas diagnóstico"
   - "ejercicio para prevenir sarcopenia mayores"
 autor: "Equipo CalcFit"
-imagen: "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 unsplashQuery: "elderly fitness strength training muscle health"
 ---

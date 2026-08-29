@@ -72,9 +72,6 @@ const ultimosArticulos = (await getCollection('blog', e => e.data.publicado !== 
   .sort((a, b) => b.data.fecha.localeCompare(a.data.fecha))
   .slice(0, 3);
 const catNombre: Record<string, string> = { fitness: 'Fitness', nutricion: 'Nutrición', salud: 'Salud', guias: 'Guías', general: 'General' };
-function blogThumb(url: string): string {
-  return url.replace(/&w=\d+/, '&w=640').replace(/&h=\d+/, '&h=360');
-}
 ---
 
 <Base
@@ -233,20 +230,6 @@ function blogThumb(url: string): string {
           onmouseover="this.style.background='#EDE9DF'"
           onmouseout="this.style.background='var(--cream)'"
         >
-          {art.data.imagen && (
-            <div style="overflow:hidden; height:180px;">
-              <img
-                src={blogThumb(art.data.imagen)}
-                alt={art.data.titulo}
-                width="640"
-                height="360"
-                loading="lazy"
-                style="width:100%; height:180px; object-fit:cover; display:block; transition:transform 0.3s;"
-                onmouseover="this.style.transform='scale(1.03)'"
-                onmouseout="this.style.transform='scale(1)'"
-              />
-            </div>
-          )}
           <div style="padding:20px 24px 24px;">
             <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px; flex-wrap:wrap;">
               {art.data.categoria && (

@@ -12,7 +12,6 @@ keywords:
   - "dieta para colesterol alto menú semanal"
   - "colesterol bueno y malo diferencia cómo subir HDL"
 autor: "Equipo CalcFit"
-imagen: "https://images.unsplash.com/photo-1505576399279-565b52d4ac71?w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 unsplashQuery: "heart health food cholesterol healthy diet"
 ---

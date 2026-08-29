@@ -12,7 +12,6 @@ keywords:
   - "cuanto cardio hacer a la semana"
 autor: "Equipo CalcFit"
 unsplashQuery: "HIIT cardio running interval training high intensity workout"
-imagen: "https://images.unsplash.com/photo-1571008887538-b36bb32f4571?ixid=M3w5NjI4Mjh8MHwxfHNlYXJjaHwxfHxISUlUJTIwY2FyZGlvJTIwcnVubmluZyUyMGludGVydmFsJTIwdHJhaW5pbmclMjBoaWdoJTIwaW50ZW5zaXR5JTIwd29ya291dHxlbnwwfDB8fHwxNzc5OTM0MDAzfDA&ixlib=rb-4.1.0&w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 ---
 

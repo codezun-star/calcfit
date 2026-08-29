@@ -12,7 +12,6 @@ keywords:
   - "tabla carga glucémica alimentos"
   - "cómo controlar picos de glucosa con la dieta"
 autor: "Equipo CalcFit"
-imagen: "https://images.unsplash.com/photo-1518843875459-f738682238a6?w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 unsplashQuery: "blood sugar glucose healthy food carbs vegetables"
 ---

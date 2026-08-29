@@ -12,7 +12,6 @@ keywords:
   - "zinc sistema inmune beneficios"
   - "zinc para qué sirve"
 autor: "Equipo CalcFit"
-imagen: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 unsplashQuery: "healthy food nutrition minerals vitamins supplements"
 ---

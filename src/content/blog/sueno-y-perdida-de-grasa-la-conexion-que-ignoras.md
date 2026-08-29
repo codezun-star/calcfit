@@ -12,7 +12,6 @@ keywords:
   - "grelina leptina y sueño"
   - "cuantas horas dormir para perder grasa"
 autor: "Equipo CalcFit"
-imagen: "https://images.unsplash.com/photo-1658928785463-990d81c7d4f3?ixid=M3w5NjI4Mjh8MHwxfHNlYXJjaHwxfHxzbGVlcCUyMHJlc3QlMjBuaWdodCUyMGhlYWx0aHklMjBiZWRyb29tJTIwcmVjb3ZlcnklMjB3b21hbnxlbnwwfDB8fHwxNzc5OTMwOTUzfDA&ixlib=rb-4.1.0&w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 unsplashQuery: "sleep rest night healthy bedroom recovery woman"
 ---

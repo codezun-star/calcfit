@@ -12,7 +12,6 @@ keywords:
   - "proteína lentejas garbanzos comparada con carne"
   - "dieta vegetariana y músculo proteína suficiente"
 autor: "Equipo CalcFit"
-imagen: "https://images.unsplash.com/photo-1532550907401-a500c9a57435?w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 unsplashQuery: "protein food plant animal legumes meat eggs"
 ---

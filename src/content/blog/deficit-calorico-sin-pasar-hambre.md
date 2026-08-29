@@ -12,7 +12,6 @@ keywords:
   - "deficit calorico sin rebote"
   - "bajar de peso sin dieta estricta"
 autor: "Equipo CalcFit"
-imagen: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixid=M3w5NjI4Mjh8MHwxfHNlYXJjaHwxfHxoZWFsdGh5JTIwbWVhbCUyMHByZXAlMjB3ZWlnaHQlMjBsb3NzJTIwc2FsYWQlMjB2ZWdldGFibGVzJTIwZm9vZHxlbnwwfDB8fHwxNzc5OTMwOTUxfDA&ixlib=rb-4.1.0&w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 unsplashQuery: "healthy meal prep weight loss salad vegetables food"
 ---

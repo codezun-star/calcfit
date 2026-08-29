@@ -1,13 +1,22 @@
 ---
 /**
  * Columna lateral pegajosa con los formatos verticales (160×600 + 160×300).
- * Sólo aparece a partir de 1200px, donde sobra espacio junto a la columna de
- * contenido: nunca se superpone al texto ni existe en móvil.
+ *
+ * Se posiciona *fuera* de la columna de contenido (`left: 100%` respecto al
+ * contenedor, que debe llevar `position: relative`), no dentro de una rejilla:
+ * así el texto se queda exactamente donde estaba y el rail sólo aparece cuando
+ * de verdad sobra sitio al lado. En móvil no existe, ni siquiera oculto, para
+ * no gastar impresiones que nadie vería.
  */
+interface Props {
+  /** Ancho de pantalla a partir del cual hay hueco al lado de la columna */
+  from?: 1100 | 1240;
+}
+const { from = 1240 } = Astro.props;
 import AdSlot from './AdSlot.astro';
 ---
 
-<aside class="ad-rail" aria-label="Publicidad">
+<aside class:list={['ad-rail', `ad-rail--${from}`]} aria-label="Publicidad">
   <div class="ad-rail__inner">
     <AdSlot format="skyscraper" mobile="none" gap="0" />
     <AdSlot format="halfsky" mobile="none" gap="0" />
@@ -16,19 +25,27 @@ import AdSlot from './AdSlot.astro';
 
 <style is:global>
   .ad-rail { display: none; }
-  @media (min-width: 1200px) {
-    .ad-rail {
-      display: block;
-      flex: 0 0 160px;
-      width: 160px;
-    }
-    .ad-rail__inner {
-      position: sticky;
-      top: 76px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-    .ad-rail .ad-unit { margin: 0 !important; }
+
+  /* `top/bottom: 0` da al rail la altura completa del bloque de contenido,
+     que es lo que permite que el interior siga pegado durante todo el scroll. */
+  .ad-rail--1100,
+  .ad-rail--1240 {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 100%;
+    margin-left: 24px;
+    width: 160px;
   }
+  .ad-rail__inner {
+    position: sticky;
+    top: 76px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .ad-rail .ad-unit { margin: 0 !important; }
+
+  @media (min-width: 1100px) { .ad-rail--1100 { display: block; } }
+  @media (min-width: 1240px) { .ad-rail--1240 { display: block; } }
 </style>

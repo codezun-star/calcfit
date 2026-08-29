@@ -12,7 +12,6 @@ keywords:
   - "que suplementos tomar para el gym"
 autor: "Equipo CalcFit"
 unsplashQuery: "supplements vitamins protein powder sport nutrition capsules"
-imagen: "https://images.unsplash.com/photo-1775200279682-cf9af4cb2e4e?ixid=M3w5NjI4Mjh8MHwxfHNlYXJjaHwxfHxzdXBwbGVtZW50cyUyMHZpdGFtaW5zJTIwcHJvdGVpbiUyMHBvd2RlciUyMHNwb3J0JTIwbnV0cml0aW9uJTIwY2Fwc3VsZXN8ZW58MHwwfHx8MTc3OTkzNDAwN3ww&ixlib=rb-4.1.0&w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 ---
 

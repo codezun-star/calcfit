@@ -12,7 +12,6 @@ keywords:
   - "descanso activo muscular"
 autor: "Equipo CalcFit"
 unsplashQuery: "muscle recovery rest sleep athlete stretching foam roller"
-imagen: "https://images.unsplash.com/photo-1653617748437-895c016e88b1?ixid=M3w5NjI4Mjh8MHwxfHNlYXJjaHwxfHxtdXNjbGUlMjByZWNvdmVyeSUyMHJlc3QlMjBzbGVlcCUyMGF0aGxldGUlMjBzdHJldGNoaW5nJTIwZm9hbSUyMHJvbGxlcnxlbnwwfDB8fHwxNzc5OTM0MDA2fDA&ixlib=rb-4.1.0&w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 ---
 

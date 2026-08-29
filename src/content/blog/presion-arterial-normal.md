@@ -12,7 +12,6 @@ keywords:
   - "cómo bajar la presión arterial naturalmente"
   - "hipertensión arterial sin medicación qué hacer"
 autor: "Equipo CalcFit"
-imagen: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 unsplashQuery: "blood pressure monitor health measurement"
 ---

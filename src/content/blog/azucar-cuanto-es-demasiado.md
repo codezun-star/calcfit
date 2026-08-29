@@ -12,7 +12,6 @@ keywords:
   - "reducir consumo de azucar"
 autor: "Equipo CalcFit"
 unsplashQuery: "sugar cubes sweet food unhealthy diet glucose blood"
-imagen: "https://images.unsplash.com/photo-1709651808265-977ed7ef78c6?ixid=M3w5NjI4Mjh8MHwxfHNlYXJjaHwxfHxzdWdhciUyMGN1YmVzJTIwc3dlZXQlMjBmb29kJTIwdW5oZWFsdGh5JTIwZGlldCUyMGdsdWNvc2UlMjBibG9vZHxlbnwwfDB8fHwxNzc5OTMzOTk0fDA&ixlib=rb-4.1.0&w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 ---
 

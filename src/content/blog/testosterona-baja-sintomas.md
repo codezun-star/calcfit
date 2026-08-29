@@ -12,7 +12,6 @@ keywords:
   - "hipogonadismo síntomas hombres"
   - "testosterona baja qué hacer"
 autor: "Equipo CalcFit"
-imagen: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 unsplashQuery: "men fitness health strength training hormones"
 ---

@@ -12,7 +12,6 @@ keywords:
   - "carbohidratos para deportistas"
 autor: "Equipo CalcFit"
 unsplashQuery: "carbohydrates whole grains rice bread pasta oats healthy food"
-imagen: "https://images.unsplash.com/photo-1509440159596-0249088772ff?ixid=M3w5NjI4Mjh8MHwxfHNlYXJjaHwxfHxjYXJib2h5ZHJhdGVzJTIwd2hvbGUlMjBncmFpbnMlMjByaWNlJTIwYnJlYWQlMjBwYXN0YSUyMG9hdHMlMjBoZWFsdGh5JTIwZm9vZHxlbnwwfDB8fHwxNzc5OTMzOTk1fDA&ixlib=rb-4.1.0&w=1200&h=630&fit=crop&q=80&auto=format"
 publicado: true
 ---
 
