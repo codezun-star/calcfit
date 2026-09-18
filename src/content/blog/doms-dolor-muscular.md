@@ -13,7 +13,6 @@ keywords:
   - "DOMS cuánto duran agujetas"
 autor: "Equipo CalcFit"
 publicado: true
-unsplashQuery: "muscle pain recovery exercise sore fitness training"
 ---
 
 Las agujetas no son ácido láctico. Esa idea fue refutada hace décadas. El ácido láctico se elimina del músculo entre 30 y 60 minutos después de hacer ejercicio y tiene una vida media de aproximadamente 1 hora. El DOMS aparece 24-48 horas después. Los tiempos no cuadran.

@@ -11,7 +11,6 @@ keywords:
   - "niveles optimos vitamina d"
   - "vitamina d sol o suplemento"
 autor: "Equipo CalcFit"
-unsplashQuery: "vitamin D sunlight health supplement nutrition wellness"
 publicado: true
 ---
 

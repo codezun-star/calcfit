@@ -11,7 +11,6 @@ keywords:
   - "proteina en polvo recomendacion"
   - "whey hidrolizado vale la pena"
 autor: "Equipo CalcFit"
-unsplashQuery: "whey protein fitness supplement sport healthy body"
 publicado: true
 ---
 

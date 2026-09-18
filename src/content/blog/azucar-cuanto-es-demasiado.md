@@ -11,7 +11,6 @@ keywords:
   - "azucar libre OMS recomendacion"
   - "reducir consumo de azucar"
 autor: "Equipo CalcFit"
-unsplashQuery: "sugar cubes sweet food unhealthy diet glucose blood"
 publicado: true
 ---
 

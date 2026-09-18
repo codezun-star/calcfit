@@ -13,7 +13,6 @@ keywords:
   - "ejercicio para prevenir sarcopenia mayores"
 autor: "Equipo CalcFit"
 publicado: true
-unsplashQuery: "elderly fitness strength training muscle health"
 ---
 
 La sarcopenia es la pérdida progresiva de masa muscular, fuerza y función asociada al envejecimiento. No es solo una cuestión estética. Es uno de los principales factores de riesgo de caídas, discapacidad, hospitalización y mortalidad en adultos mayores.

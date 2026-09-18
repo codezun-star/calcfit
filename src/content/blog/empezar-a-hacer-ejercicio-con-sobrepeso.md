@@ -11,7 +11,6 @@ keywords:
   - "rutina principiantes sobrepeso"
   - "perder peso ejercicio sin lesiones"
 autor: "Equipo CalcFit"
-unsplashQuery: "overweight fitness beginner walking exercise health motivation"
 publicado: true
 ---
 

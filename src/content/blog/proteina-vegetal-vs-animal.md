@@ -13,7 +13,6 @@ keywords:
   - "dieta vegetariana y músculo proteína suficiente"
 autor: "Equipo CalcFit"
 publicado: true
-unsplashQuery: "protein food plant animal legumes meat eggs"
 ---
 
 La pregunta "¿puede un vegetariano ganar músculo igual que alguien que come carne?" tiene una respuesta basada en evidencia: sí, pero con más atención a la estrategia nutricional. No por limitación fisiológica, sino por diferencias en la calidad y biodisponibilidad de la proteína.

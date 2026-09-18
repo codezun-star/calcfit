@@ -11,7 +11,6 @@ keywords:
   - "cuantos carbohidratos comer al dia"
   - "carbohidratos para deportistas"
 autor: "Equipo CalcFit"
-unsplashQuery: "carbohydrates whole grains rice bread pasta oats healthy food"
 publicado: true
 ---
 

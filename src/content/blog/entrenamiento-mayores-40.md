@@ -13,7 +13,6 @@ keywords:
   - "metabolismo más lento después de 40 qué hacer"
 autor: "Equipo CalcFit"
 publicado: true
-unsplashQuery: "mature adult fitness training gym 40s"
 ---
 
 A los 40 el cuerpo no se rompe. Pero sí cambia las reglas. Y quien no actualiza el plan de entrenamiento acaba lesionado, frustrado o simplemente sin progreso.

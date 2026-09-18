@@ -11,7 +11,6 @@ keywords:
   - "ganar musculo mujer como"
   - "tonificar mujeres que significa"
 autor: "Equipo CalcFit"
-unsplashQuery: "woman strength training weightlifting gym fitness female athlete"
 publicado: true
 ---
 

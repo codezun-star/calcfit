@@ -13,7 +13,6 @@ keywords:
   - "cuántas veces entrenar por semana músculo"
 autor: "Equipo CalcFit"
 publicado: true
-unsplashQuery: "weightlifting gym barbell strength training sets reps"
 ---
 
 "4 series de 12 repeticiones para ganar músculo." Esta fórmula ha circulado en los gimnasios durante décadas. Y aunque no está del todo mal, tampoco es toda la historia.

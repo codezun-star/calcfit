@@ -13,7 +13,6 @@ keywords:
   - "calorías frutas verduras cereales legumbres"
 autor: "Equipo CalcFit"
 publicado: true
-unsplashQuery: "food nutrition healthy meal variety"
 ---
 
 Saber cuántas calorías tiene lo que comes no requiere una app ni un nutricionista. Requiere tener algunos números de referencia internalizados. Una vez los tienes, empiezas a tomar decisiones diferentes sin esfuerzo consciente.

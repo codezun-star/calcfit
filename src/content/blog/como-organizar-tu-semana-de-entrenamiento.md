@@ -11,7 +11,6 @@ keywords:
   - "distribucion entrenamiento semanal"
   - "descanso entre sesiones gym"
 autor: "Equipo CalcFit"
-unsplashQuery: "workout schedule training plan weekly fitness calendar gym"
 publicado: true
 ---
 

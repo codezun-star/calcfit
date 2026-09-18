@@ -13,7 +13,6 @@ keywords:
   - "cafeína vs pre-workout diferencia"
 autor: "Equipo CalcFit"
 publicado: true
-unsplashQuery: "coffee caffeine pre workout sports performance energy drink"
 ---
 
 La cafeína es el suplemento ergogénico más estudiado en la historia del deporte. Con más de 600 ensayos controlados aleatorizados, es también el más respaldado por la evidencia.

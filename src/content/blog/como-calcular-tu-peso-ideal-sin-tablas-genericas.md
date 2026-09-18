@@ -13,7 +13,6 @@ keywords:
   - "peso ideal no es el mismo para todos"
 autor: "Equipo CalcFit"
 publicado: true
-unsplashQuery: "healthy weight body scale fitness woman man measurement"
 ---
 
 ¿Cuánto debería pesar? Es una de las preguntas más frecuentes en consulta de nutrición y también una de las que más frustración generan. La razón: la mayoría de tablas de "peso ideal" son promedios estadísticos de poblaciones que no tienen nada que ver contigo.

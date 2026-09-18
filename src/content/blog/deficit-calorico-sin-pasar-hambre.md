@@ -13,7 +13,6 @@ keywords:
   - "bajar de peso sin dieta estricta"
 autor: "Equipo CalcFit"
 publicado: true
-unsplashQuery: "healthy meal prep weight loss salad vegetables food"
 ---
 
 El déficit calórico no es una dieta. Es un principio físico. Y como todo principio físico, tiene reglas que no se pueden ignorar sin consecuencias.

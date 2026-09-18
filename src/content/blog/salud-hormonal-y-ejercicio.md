@@ -13,7 +13,6 @@ keywords:
   - "adaptar dieta y ejercicio al ciclo hormonal"
 autor: "Equipo CalcFit"
 publicado: true
-unsplashQuery: "woman fitness yoga training healthy lifestyle"
 ---
 
 Si eres mujer y has notado que algunos días tienes energía para mover el mundo en el gimnasio y otros te cuesta completar una sesión normal, no es falta de constancia. Es química.

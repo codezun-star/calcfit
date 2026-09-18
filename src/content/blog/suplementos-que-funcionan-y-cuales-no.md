@@ -11,7 +11,6 @@ keywords:
   - "suplementos que no sirven marketing"
   - "que suplementos tomar para el gym"
 autor: "Equipo CalcFit"
-unsplashQuery: "supplements vitamins protein powder sport nutrition capsules"
 publicado: true
 ---
 

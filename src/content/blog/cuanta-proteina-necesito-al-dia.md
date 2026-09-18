@@ -13,7 +13,6 @@ keywords:
   - "fuentes de proteina completa"
 autor: "Equipo CalcFit"
 publicado: true
-unsplashQuery: "protein food chicken eggs meat nutrition gym muscle"
 ---
 
 Hay dos tipos de personas en el gimnasio: las que no comen suficiente proteína y las que se obsesionan con los batidos hasta el punto de ignorar todo lo demás. Ninguno de los dos extremos funciona.

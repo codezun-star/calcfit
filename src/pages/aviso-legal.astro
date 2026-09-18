@@ -12,17 +12,17 @@ import Footer from '../components/layout/Footer.astro';
   <Navbar />
 
   <!-- HERO -->
-  <div style="background: var(--ink); padding: 64px 32px 48px;">
-    <p style="font-family: var(--font-mono); font-size: 10px; color: #555; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 16px;">Información legal</p>
-    <h1 style="font-family: var(--font-display); font-size: 88px; color: white; line-height: 0.92; margin-bottom: 20px;">
+  <div style="background: var(--ink); padding: clamp(40px, 9vw, 64px) clamp(16px, 5vw, 32px) clamp(32px, 7vw, 48px);">
+    <p style="font-family: var(--font-mono); font-size: 10px; color: #999; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 16px;">Información legal</p>
+    <h1 style="font-family: var(--font-display); font-size: clamp(44px, 11vw, 88px); color: white; line-height: 0.92; margin-bottom: 20px;">
       Aviso<br><span style="color: var(--acid);">Legal.</span>
     </h1>
-    <p style="font-family: var(--font-mono); font-size: 11px; color: #555;">Última actualización: enero de 2026</p>
+    <p style="font-family: var(--font-mono); font-size: 11px; color: #999;">Última actualización: enero de 2026</p>
   </div>
 
 
   <!-- CONTENIDO -->
-  <div style="background: var(--cream); padding: 56px 32px; max-width: 860px;">
+  <div style="background: var(--cream); padding: clamp(32px, 7vw, 56px) clamp(16px, 5vw, 32px); max-width: 860px; margin: 0 auto;">
 
     {[
       {

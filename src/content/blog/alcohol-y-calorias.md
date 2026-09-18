@@ -13,7 +13,6 @@ keywords:
   - "beber alcohol y adelgazar es posible"
 autor: "Equipo CalcFit"
 publicado: true
-unsplashQuery: "alcohol drinks wine beer cocktail"
 ---
 
 El alcohol es el macronutriente olvidado. La mayoría de personas que "hacen todo bien" con la dieta pero no ven resultados tienen un punto ciego: las calorías que beben los fines de semana.

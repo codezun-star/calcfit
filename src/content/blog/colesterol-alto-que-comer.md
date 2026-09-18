@@ -13,7 +13,6 @@ keywords:
   - "colesterol bueno y malo diferencia cómo subir HDL"
 autor: "Equipo CalcFit"
 publicado: true
-unsplashQuery: "heart health food cholesterol healthy diet"
 ---
 
 El colesterol total no es el número que importa. El ratio entre LDL y HDL, y especialmente las partículas de LDL pequeñas y densas, son los marcadores que mejor predicen el riesgo cardiovascular.

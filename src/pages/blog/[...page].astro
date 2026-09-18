@@ -23,11 +23,13 @@ const categorias: Record<string, string> = {
 };
 
 const titleSuffix = page.currentPage > 1 ? ` — Página ${page.currentPage}` : '';
+// Las páginas 2, 3… del listado repetían la misma meta description que /blog.
+const descSuffix = page.currentPage > 1 ? ` Página ${page.currentPage} de ${page.lastPage}.` : '';
 ---
 
 <Base
   title={`Blog de Fitness y Nutrición — Artículos con Evidencia Científica${titleSuffix} | CalcFit`}
-  description="Artículos sobre fitness, nutrición y salud respaldados por evidencia científica. Aprende a calcular calorías, perder grasa, mejorar tu rendimiento y más."
+  description={`Artículos sobre fitness, nutrición y salud respaldados por evidencia científica. Aprende a calcular calorías, perder grasa, mejorar tu rendimiento y más.${descSuffix}`}
 >
   <Navbar />
 

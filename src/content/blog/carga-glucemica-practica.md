@@ -13,7 +13,6 @@ keywords:
   - "cómo controlar picos de glucosa con la dieta"
 autor: "Equipo CalcFit"
 publicado: true
-unsplashQuery: "blood sugar glucose healthy food carbs vegetables"
 ---
 
 La sandía tiene un índice glucémico de 72. Eso la pone en la categoría "alto", junto al pan blanco y las papas fritas. Pero nadie ha engordado comiendo sandía, y es un absurdo nutricional decirle a alguien que no coma sandía por su "alto IG".

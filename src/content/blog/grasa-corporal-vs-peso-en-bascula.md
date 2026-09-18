@@ -13,7 +13,6 @@ keywords:
   - "composicion corporal hombre mujer"
 autor: "Equipo CalcFit"
 publicado: true
-unsplashQuery: "body composition fitness tape measure muscle woman man"
 ---
 
 Llevas tres semanas entrenando, comiendo bien, sintiendo que la ropa te queda diferente... y la báscula no se mueve. Incluso subió un kilo.

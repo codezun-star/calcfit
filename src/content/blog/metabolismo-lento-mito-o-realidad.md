@@ -13,7 +13,6 @@ keywords:
   - "que afecta el metabolismo"
 autor: "Equipo CalcFit"
 publicado: true
-unsplashQuery: "metabolism energy healthy food active lifestyle fitness woman"
 ---
 
 "Mi metabolismo es lento, por eso no bajo de peso." Es la frase que más escucho. Y es cierta... en el 5% de los casos. En el 95% restante, el problema es otro.

@@ -13,7 +13,6 @@ keywords:
   - "zinc para qué sirve"
 autor: "Equipo CalcFit"
 publicado: true
-unsplashQuery: "healthy food nutrition minerals vitamins supplements"
 ---
 
 El zinc es el segundo mineral traza más abundante en el cuerpo humano, presente en más de 300 enzimas y fundamental para más de 1.000 proteínas. Y sin embargo, la Organización Mundial de la Salud estima que el 31% de la población mundial tiene ingesta insuficiente de zinc.

@@ -12,22 +12,22 @@ import AdSlot from '../components/ads/AdSlot.astro';
   <Navbar />
 
   <!-- HERO -->
-  <div style="background: var(--ink); padding: 64px 32px 48px;">
-    <p style="font-family: var(--font-mono); font-size: 10px; color: #555; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 16px;">Sobre nosotros</p>
-    <h1 style="font-family: var(--font-display); font-size: 88px; color: white; line-height: 0.92; margin-bottom: 20px;">
+  <div style="background: var(--ink); padding: clamp(40px, 9vw, 64px) clamp(16px, 5vw, 32px) clamp(32px, 7vw, 48px);">
+    <p style="font-family: var(--font-mono); font-size: 10px; color: #999; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 16px;">Sobre nosotros</p>
+    <h1 style="font-family: var(--font-display); font-size: clamp(44px, 11vw, 88px); color: white; line-height: 0.92; margin-bottom: 20px;">
       Ciencia /<br><span style="color: var(--acid);">accesible.</span>
     </h1>
-    <p style="font-size: 14px; color: #666; max-width: 520px; line-height: 1.8;">
+    <p style="font-size: 14px; color: #999; max-width: 520px; line-height: 1.8;">
       CalcFit nació de una pregunta simple: ¿por qué las mejores herramientas de salud están detrás de muros de registro o de pago? La respuesta fue construirlas de otro modo.
     </p>
   </div>
 
 
   <!-- CONTENIDO -->
-  <div style="background: var(--cream); padding: 56px 32px; max-width: 860px;">
+  <div style="background: var(--cream); padding: clamp(32px, 7vw, 56px) clamp(16px, 5vw, 32px); max-width: 860px; margin: 0 auto;">
 
     <!-- Manifiesto -->
-    <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid var(--border); margin-bottom: 48px;">
+    <div class="about-row" style="padding-bottom: 48px; border-bottom: 1px solid var(--border); margin-bottom: 48px;">
       <div>
         <p style="font-family: var(--font-mono); font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 2px;">01 — Misión</p>
       </div>
@@ -43,7 +43,7 @@ import AdSlot from '../components/ads/AdSlot.astro';
     </div>
 
     <!-- Cómo funciona -->
-    <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid var(--border); margin-bottom: 48px;">
+    <div class="about-row" style="padding-bottom: 48px; border-bottom: 1px solid var(--border); margin-bottom: 48px;">
       <div>
         <p style="font-family: var(--font-mono); font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 2px;">02 — Tecnología</p>
       </div>
@@ -59,7 +59,7 @@ import AdSlot from '../components/ads/AdSlot.astro';
     </div>
 
     <!-- Rigor científico -->
-    <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid var(--border); margin-bottom: 48px;">
+    <div class="about-row" style="padding-bottom: 48px; border-bottom: 1px solid var(--border); margin-bottom: 48px;">
       <div>
         <p style="font-family: var(--font-mono); font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 2px;">03 — Rigor</p>
       </div>
@@ -86,7 +86,7 @@ import AdSlot from '../components/ads/AdSlot.astro';
     </div>
 
     <!-- Contacto -->
-    <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 48px;">
+    <div class="about-row">
       <div>
         <p style="font-family: var(--font-mono); font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 2px;">04 — Contacto</p>
       </div>
@@ -113,3 +113,14 @@ import AdSlot from '../components/ads/AdSlot.astro';
 
   <Footer />
 </Base>
+
+<style>
+  .about-row {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: clamp(20px, 4vw, 48px);
+  }
+  @media (max-width: 640px) {
+    .about-row { grid-template-columns: 1fr; gap: 10px; }
+  }
+</style>

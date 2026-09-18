@@ -11,7 +11,6 @@ keywords:
   - "ingredientes etiqueta alimentos"
   - "azucar oculta en alimentos"
 autor: "Equipo CalcFit"
-unsplashQuery: "food label nutrition facts healthy eating grocery shopping"
 publicado: true
 ---
 

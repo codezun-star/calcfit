@@ -13,7 +13,6 @@ keywords:
   - "imc y grasa corporal diferencia"
 autor: "Equipo CalcFit"
 publicado: true
-unsplashQuery: "doctor scale weight body measurement health check"
 ---
 
 Cada vez que vas al médico, la enfermera te pesa, te mide y antes de que el doctor entre a la sala ya tienes un número: tu IMC. Si está entre 18.5 y 24.9, todo bien. Si está por encima de 25, sobrepeso. Por encima de 30, obesidad.

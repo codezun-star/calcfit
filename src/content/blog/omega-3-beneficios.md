@@ -13,7 +13,6 @@ keywords:
   - "omega 3 ratio omega 6 salud inflamación"
 autor: "Equipo CalcFit"
 publicado: true
-unsplashQuery: "salmon fish omega 3 healthy food"
 ---
 
 Hay pocas intervenciones nutricionales con el volumen de evidencia que tiene el omega-3. Miles de estudios en décadas, con resultados consistentes en reducción de triglicéridos, inflamación y mortalidad cardiovascular.

@@ -13,7 +13,6 @@ keywords:
   - "testosterona baja qué hacer"
 autor: "Equipo CalcFit"
 publicado: true
-unsplashQuery: "men fitness health strength training hormones"
 ---
 
 La testosterona en hombres ha caído un 20% en los últimos 30 años. Eso no es opinión: es el resultado de estudios longitudinales como el de Travison et al., publicado en el *Journal of Clinical Endocrinology & Metabolism* en 2007, que comparó niveles de testosterona en hombres de la misma edad en 1987, 1995 y 2002.

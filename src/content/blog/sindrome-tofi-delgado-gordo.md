@@ -13,7 +13,6 @@ keywords:
   - "peso normal pero con barriga"
 autor: "Equipo CalcFit"
 publicado: true
-unsplashQuery: "health checkup body composition medical normal weight"
 ---
 
 Puedes tener un IMC de 22, entrar en la misma ropa desde hace años, y tener el perfil metabólico de alguien con obesidad severa.

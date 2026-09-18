@@ -6,6 +6,7 @@ import { calculadoras, categorias } from '../../lib/calcData';
 import type { GetStaticPathsOptions, Page } from 'astro';
 import type { Calc } from '../../lib/calcData';
 import AdSlot from '../../components/ads/AdSlot.astro';
+import { organizationSchema, websiteSchema, ORGANIZATION_ID, SITE_URL } from '../../lib/schema';
 
 const cat = categorias.find(c => c.slug === 'nutricion')!;
 const slugSet = new Set(cat.slugs);
@@ -21,12 +22,59 @@ export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
 
 const { page } = Astro.props as { page: Page<Calc> };
 const titleSuffix = page.currentPage > 1 ? ` — Página ${page.currentPage}` : '';
+// Sin esto las páginas 2, 3 y 4 de la categoría repetían palabra por palabra la
+// meta description de la página 1 (descripciones duplicadas en Search Console).
+const descSuffix = page.currentPage > 1 ? ` Página ${page.currentPage} de ${page.lastPage}.` : '';
+
+const categoryUrl = `${SITE_URL}/nutricion`;
+const pageUrl = page.currentPage > 1 ? `${categoryUrl}/${page.currentPage}` : categoryUrl;
+
+// CollectionPage + ItemList: describe la categoría como listado y enumera las
+// calculadoras de ESTA página, con su posición real dentro de la categoría.
+const collectionSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    organizationSchema,
+    websiteSchema,
+    {
+      '@type': 'CollectionPage',
+      '@id': `${pageUrl}#collection`,
+      url: pageUrl,
+      name: cat.label,
+      description: `${allCalcs.length} calculadoras de ${cat.label.toLowerCase()} gratuitas, validadas científicamente y sin registro.`,
+      inLanguage: 'es',
+      isPartOf: { '@id': `${SITE_URL}/#website` },
+      publisher: { '@id': ORGANIZATION_ID },
+      breadcrumb: { '@id': `${pageUrl}#breadcrumb` },
+      mainEntity: {
+        '@type': 'ItemList',
+        name: cat.label,
+        numberOfItems: allCalcs.length,
+        itemListElement: page.data.map((calc, i) => ({
+          '@type': 'ListItem',
+          position: (page.currentPage - 1) * page.size + i + 1,
+          name: calc.nombre,
+          url: `${SITE_URL}${calc.slug}`,
+        })),
+      },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${pageUrl}#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Inicio', item: SITE_URL },
+        { '@type': 'ListItem', position: 2, name: cat.label, item: categoryUrl },
+      ],
+    },
+  ],
+};
 ---
 
 <Base
   title={`Calculadoras de Nutrición y Bienestar${titleSuffix} — ${allCalcs.length} Herramientas Gratis | CalcFit`}
-  description={`${allCalcs.length} calculadoras de nutrición y bienestar gratuitas: macronutrientes, proteínas, déficit calórico, glucosa, colesterol y más. Validadas científicamente.`}
+  description={`${allCalcs.length} calculadoras de nutrición y bienestar gratuitas: macronutrientes, proteínas, déficit calórico, glucosa, colesterol y más. Validadas científicamente.${descSuffix}`}
   keywords="calculadoras nutrición, calculadora macronutrientes, proteínas diarias, déficit calórico, glucosa en sangre, calculadoras bienestar gratis"
+  schema={collectionSchema}
 >
   <Navbar />
 
@@ -93,6 +141,24 @@ const titleSuffix = page.currentPage > 1 ? ` — Página ${page.currentPage}` : 
         </nav>
       )}
 
+      <!-- Índice completo de la categoría.
+           La rejilla de arriba está paginada de 20 en 20, así que sin esta
+           lista una calculadora de la página 4 sólo recibía enlaces desde esa
+           página. Con ella todas quedan a un clic desde cualquier página
+           de la categoría. -->
+      {page.lastPage > 1 && (
+        <nav class="cat-index" aria-label={`Todas las calculadoras de ${cat.label}`}>
+          <p class="cat-index__title">Todas las calculadoras de {cat.label} ({allCalcs.length})</p>
+          <ul class="cat-index__list">
+            {allCalcs.map(calc => (
+              <li>
+                <a href={calc.slug} class="cat-index__link">{calc.nombre}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )}
+
       <div style="max-width:860px; margin:0 auto;">
         <AdSlot format="native" gap="40px" />
       </div>
@@ -155,7 +221,37 @@ const titleSuffix = page.currentPage > 1 ? ` — Página ${page.currentPage}` : 
   }
   .page-link:hover { border-color: var(--ink); }
   .page-link--active { background: var(--ink); color: var(--acid); border-color: var(--ink); }
+  .cat-index {
+    margin-top: 40px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+  }
+  .cat-index__title {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+  .cat-index__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    columns: 4;
+    column-gap: 24px;
+  }
+  .cat-index__list li { break-inside: avoid; margin-bottom: 7px; }
+  .cat-index__link {
+    font-size: 12.5px;
+    color: var(--ink);
+    text-decoration: none;
+    line-height: 1.5;
+  }
+  .cat-index__link:hover { text-decoration: underline; text-decoration-color: var(--acid); text-decoration-thickness: 2px; }
+  @media (max-width: 900px) { .cat-index__list { columns: 2; } }
   @media (max-width: 600px) {
     .calc-grid { grid-template-columns: repeat(2, 1fr); }
+    .cat-index__list { columns: 1; }
   }
 </style>

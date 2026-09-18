@@ -13,7 +13,6 @@ keywords:
   - "cuánto correr al principio sin cansarse"
 autor: "Equipo CalcFit"
 publicado: true
-unsplashQuery: "running jogging outdoors beginner fitness"
 ---
 
 La mayoría de personas que empiezan a correr lo dejan antes de la tercera semana. No porque el running sea duro —lo es—, sino porque cometen el error más predecible: salen el primer día a correr 30 minutos seguidos, se lesionan o se agotan completamente, y deciden que "el running no es para ellas".

@@ -13,7 +13,6 @@ keywords:
   - "deshidratacion sintomas"
 autor: "Equipo CalcFit"
 publicado: true
-unsplashQuery: "water bottle hydration sports drink athlete gym workout"
 ---
 
 "Toma 8 vasos de agua al día." Lo escuchaste del médico, de tu mamá, en alguna revista de salud. El problema es que ese número no tiene base científica sólida y probablemente no aplica a tu caso.

@@ -13,7 +13,6 @@ keywords:
   - "qué hacer para no recuperar el peso que perdí"
 autor: "Equipo CalcFit"
 publicado: true
-unsplashQuery: "weight scale healthy lifestyle sustainable"
 ---
 
 El fenómeno del efecto rebote no es debilidad mental. Es biología.

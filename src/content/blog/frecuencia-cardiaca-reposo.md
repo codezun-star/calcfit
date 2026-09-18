@@ -13,7 +13,6 @@ keywords:
   - "bradicardia taquicardia valores normales"
 autor: "Equipo CalcFit"
 publicado: true
-unsplashQuery: "heart rate pulse fitness health wearable"
 ---
 
 La frecuencia cardíaca en reposo (FCR) es el número de veces que late el corazón por minuto cuando estás completamente en reposo. Es un número sencillo de medir y uno de los indicadores más informativos sobre la salud del sistema cardiovascular.

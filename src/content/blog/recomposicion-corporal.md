@@ -13,7 +13,6 @@ keywords:
   - "déficit calórico y ganar músculo es posible"
 autor: "Equipo CalcFit"
 publicado: true
-unsplashQuery: "fitness body transformation gym muscle fat loss recomposition"
 ---
 
 El debate clásico del fitness es: primero pierde grasa (cutting), luego gana músculo (bulking). O al revés. O ciclos alternados de 3-4 meses cada uno.

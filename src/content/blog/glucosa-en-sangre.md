@@ -13,7 +13,6 @@ keywords:
   - "glucosa 100 110 120 qué significa"
 autor: "Equipo CalcFit"
 publicado: true
-unsplashQuery: "blood glucose test health diabetes"
 ---
 
 Una glucosa en ayunas de 99 mg/dL es "normal" según la mayoría de laboratorios. Una de 101 mg/dL ya está en "glucosa alterada en ayunas". La diferencia de 2 mg/dL no tiene ningún significado clínico real, pero el etiquetado cambia.

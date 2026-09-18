@@ -13,7 +13,6 @@ keywords:
   - "cuantas horas dormir para perder grasa"
 autor: "Equipo CalcFit"
 publicado: true
-unsplashQuery: "sleep rest night healthy bedroom recovery woman"
 ---
 
 Haces todo bien. Comes en déficit, entrenas 4 días a la semana, llevas el registro de calorías. Y aun así los resultados no llegan al ritmo esperado. Si estás durmiendo 5-6 horas por noche, encontraste el problema.

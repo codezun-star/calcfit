@@ -13,7 +13,6 @@ keywords:
   - "ventana de alimentacion ayuno"
 autor: "Equipo CalcFit"
 publicado: true
-unsplashQuery: "intermittent fasting clock food healthy eating timer"
 ---
 
 El ayuno intermitente se convirtió en los últimos años en una de esas cosas que o la gente jura que cambió su vida o dice que es una completa pérdida de tiempo. Ambos grupos tienen parte de razón.

@@ -13,7 +13,6 @@ keywords:
   - "VO2 max hombre mujer edad"
 autor: "Equipo CalcFit"
 publicado: true
-unsplashQuery: "cycling cardio VO2 aerobic fitness endurance"
 ---
 
 El VO₂ máximo no es solo un número para atletas de élite. Es el indicador más robusto de salud cardiovascular y uno de los predictores más fuertes de mortalidad por todas las causas que existe en la literatura médica.

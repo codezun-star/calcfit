@@ -13,7 +13,6 @@ keywords:
   - "grasa abdominal hombres después de 30"
 autor: "Equipo CalcFit"
 publicado: true
-unsplashQuery: "abs workout core fitness training"
 ---
 
 La barriga es la zona más buscada y la más malentendida del cuerpo humano. Miles de millones de abdominales se hacen cada día en todo el mundo. La grasa abdominal no desaparece.

@@ -11,7 +11,6 @@ keywords:
   - "dieta baja en grasas mito"
   - "aceite de oliva beneficios salud"
 autor: "Equipo CalcFit"
-unsplashQuery: "healthy fats avocado olive oil nuts salmon omega 3 nutrition"
 publicado: true
 ---
 

@@ -13,7 +13,6 @@ keywords:
   - "alimentos dieta mediterránea lista completa"
 autor: "Equipo CalcFit"
 publicado: true
-unsplashQuery: "mediterranean food healthy olive oil vegetables fish"
 ---
 
 El estudio PREDIMED, publicado en el *New England Journal of Medicine* en 2013 con más de 7.000 participantes, mostró que la dieta mediterránea reduce el riesgo de eventos cardiovasculares mayores en un 30% comparado con una dieta baja en grasa. Es uno de los estudios nutricionales más sólidos que existen.

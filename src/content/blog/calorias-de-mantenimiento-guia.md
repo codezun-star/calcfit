@@ -13,7 +13,6 @@ keywords:
   - "cuantas calorias necesito al dia"
 autor: "Equipo CalcFit"
 publicado: true
-unsplashQuery: "nutrition balanced diet food calories healthy lifestyle"
 ---
 
 Si nunca has calculado tus calorías de mantenimiento, estás navegando a ciegas. Puede que funcione durante un tiempo —el cuerpo tiene sus propios mecanismos de regulación— pero cuando los resultados se estancan, no sabrás por qué ni qué ajustar.

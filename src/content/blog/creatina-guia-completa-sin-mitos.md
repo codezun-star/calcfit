@@ -13,7 +13,6 @@ keywords:
   - "cuándo tomar creatina"
 autor: "Equipo CalcFit"
 publicado: true
-unsplashQuery: "creatine supplement gym workout powder sports nutrition"
 ---
 
 Si hay un suplemento que merece ser tomado en serio, es la creatina. No porque sea mágica, sino porque es el suplemento deportivo más investigado de la historia y tiene décadas de evidencia sólida respaldando su eficacia y seguridad.

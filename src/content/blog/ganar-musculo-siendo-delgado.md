@@ -13,7 +13,6 @@ keywords:
   - "suplementos para subir de peso ectomorfo"
 autor: "Equipo CalcFit"
 publicado: true
-unsplashQuery: "gym weight training muscle building man"
 ---
 
 "Como muchísimo y no subo ni un kilo." Es la frase más repetida por las personas con morfología ectomorfa. Y en la mayoría de los casos, cuando se lleva un registro real de calorías durante una semana, resulta que comen bastante menos de lo que creen.

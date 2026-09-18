@@ -13,7 +13,6 @@ keywords:
   - "deficiencia de magnesio cómo saber si me falta"
 autor: "Equipo CalcFit"
 publicado: true
-unsplashQuery: "nuts seeds magnesium healthy food minerals"
 ---
 
 El magnesio participa en más de 300 reacciones enzimáticas en el cuerpo humano. Síntesis de proteínas, producción de energía, función muscular y nerviosa, regulación de la glucosa, síntesis de ADN. Es un cofactor esencial para casi todo lo que hace el metabolismo.

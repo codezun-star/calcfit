@@ -11,7 +11,6 @@ keywords:
   - "cetosis que es y como funciona"
   - "dieta baja en carbohidratos evidencia"
 autor: "Equipo CalcFit"
-unsplashQuery: "ketogenic diet low carb healthy fat avocado eggs meat nutrition"
 publicado: true
 ---
 

@@ -13,7 +13,6 @@ keywords:
   - "hipertensión arterial sin medicación qué hacer"
 autor: "Equipo CalcFit"
 publicado: true
-unsplashQuery: "blood pressure monitor health measurement"
 ---
 
 La hipertensión arterial afecta a más del 30% de la población adulta en Latinoamérica y es responsable del 45% de las muertes por enfermedades cardíacas. Lo más preocupante: la mitad de las personas que la tienen no lo saben, porque no produce síntomas en las etapas iniciales.

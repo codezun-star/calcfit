@@ -11,7 +11,6 @@ keywords:
   - "entrenamiento intervalos alta intensidad"
   - "cuanto cardio hacer a la semana"
 autor: "Equipo CalcFit"
-unsplashQuery: "HIIT cardio running interval training high intensity workout"
 publicado: true
 ---
 

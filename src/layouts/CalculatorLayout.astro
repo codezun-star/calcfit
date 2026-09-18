@@ -3,6 +3,7 @@ import Base from './Base.astro';
 import Navbar from '../components/layout/Navbar.astro';
 import Footer from '../components/layout/Footer.astro';
 import { calculadoras, categorias } from '../lib/calcData';
+import { getRelatedCalcs } from '../lib/related';
 import { organizationSchema, websiteSchema, ORGANIZATION_ID, WEBSITE_ID, SITE_DATE_MODIFIED } from '../lib/schema';
 import AdSlot from '../components/ads/AdSlot.astro';
 import AdRail from '../components/ads/AdRail.astro';
@@ -50,10 +51,14 @@ const fechaRevision = new Date(`${dateModified}T00:00:00Z`).toLocaleDateString('
   timeZone: 'UTC',
 });
 
-// Calculadoras relacionadas (enlazado interno) — datos desde calcData.ts
-const relatedCalcs = related
+// Calculadoras relacionadas (enlazado interno) — datos desde calcData.ts.
+// Si la página no pasa `related`, se calculan por afinidad temática: así las
+// 143 calculadoras enlazan a otras cuatro en lugar de ser callejones sin
+// salida (ver src/lib/related.ts).
+const explicitRelated = related
   .map((slug) => calculadoras.find((c) => c.slug === `/${slug}`))
   .filter((c): c is NonNullable<typeof c> => Boolean(c));
+const relatedCalcs = explicitRelated.length > 0 ? explicitRelated : getRelatedCalcs(breadcrumbSlug);
 
 const pageUrl = `https://www.calcfit.com/${breadcrumbSlug}`;
 

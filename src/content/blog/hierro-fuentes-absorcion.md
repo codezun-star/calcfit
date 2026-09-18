@@ -13,7 +13,6 @@ keywords:
   - "hierro para deportistas mujeres"
 autor: "Equipo CalcFit"
 publicado: true
-unsplashQuery: "healthy food iron rich spinach legumes meat nutrition iron"
 ---
 
 El déficit de hierro es la carencia nutricional más extendida en el mundo. La Organización Mundial de la Salud estima que afecta a más de 2.000 millones de personas —aproximadamente el 25% de la población global. Y muchos de ellos no lo saben.

@@ -13,7 +13,6 @@ keywords:
   - "home workout que sí funciona"
 autor: "Equipo CalcFit"
 publicado: true
-unsplashQuery: "home workout training exercise living room fitness bodyweight"
 ---
 
 Durante el confinamiento de 2020, millones de personas entrenaron en casa durante meses. Los estudios que siguieron esa cohorte dieron resultados interesantes: la pérdida de masa muscular fue menor de lo esperado, especialmente en personas previamente activas.

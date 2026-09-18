@@ -13,7 +13,6 @@ keywords:
   - "qué desayunar para no tener hambre"
 autor: "Equipo CalcFit"
 publicado: true
-unsplashQuery: "healthy breakfast eggs protein morning meal nutrition"
 ---
 
 El desayuno más popular del mundo —zumo de naranja, tostada con mermelada y café— tiene aproximadamente 5-8 gramos de proteína. Es también el desayuno que más hambre produce a las 11 de la mañana.

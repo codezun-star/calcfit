@@ -13,7 +13,6 @@ keywords:
   - "tiempo real para ganar músculo por semana"
 autor: "Equipo CalcFit"
 publicado: true
-unsplashQuery: "gym mirror progress fitness transformation"
 ---
 
 La pregunta más honesta que se puede hacer al empezar a entrenar es: ¿cuándo voy a ver algo? No "¿cuándo seré atleta?" ni "¿cuándo tendré el cuerpo que quiero?". Solo: ¿cuándo noto algo diferente?

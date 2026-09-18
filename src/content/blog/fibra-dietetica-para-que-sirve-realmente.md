@@ -13,7 +13,6 @@ keywords:
   - "fibra prebiotica microbiota"
 autor: "Equipo CalcFit"
 publicado: true
-unsplashQuery: "fiber vegetables fruits legumes healthy food plant based"
 ---
 
 Cuando alguien habla de fibra, la imagen que viene a la mente es el laxante de tu abuela o el cereal de salvado con aspecto de cartón. La fibra tiene una reputación aburrida que no se merece, porque sus efectos van mucho más allá del tránsito intestinal.

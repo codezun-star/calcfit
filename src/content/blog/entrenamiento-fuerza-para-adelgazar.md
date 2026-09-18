@@ -11,7 +11,6 @@ keywords:
   - "cardio o pesas para bajar de peso"
   - "beneficios del entrenamiento de fuerza"
 autor: "Equipo CalcFit"
-unsplashQuery: "strength training weightlifting gym barbell workout fitness"
 publicado: true
 ---
 

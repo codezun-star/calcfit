@@ -11,7 +11,6 @@ keywords:
   - "como recuperarse mejor del ejercicio"
   - "descanso activo muscular"
 autor: "Equipo CalcFit"
-unsplashQuery: "muscle recovery rest sleep athlete stretching foam roller"
 publicado: true
 ---
 

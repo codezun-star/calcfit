@@ -13,7 +13,6 @@ keywords:
   - "como calcular mis zonas de entrenamiento"
 autor: "Equipo CalcFit"
 publicado: true
-unsplashQuery: "heart rate monitor running cardio exercise fitness athlete"
 ---
 
 En casi cualquier cinta de correr o bicicleta estática verás una etiqueta: "Zona de quema de grasa: 60-70% FC máxima". La idea de fondo es correcta. La aplicación que hace la mayoría es incorrecta.

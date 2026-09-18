@@ -11,7 +11,6 @@ keywords:
   - "correr en ayunas pierde musculo"
   - "cardio ayunas vs desayunado"
 autor: "Equipo CalcFit"
-unsplashQuery: "morning run sunrise jogging fasted workout empty stomach"
 publicado: true
 ---
 

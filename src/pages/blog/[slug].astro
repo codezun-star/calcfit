@@ -7,6 +7,9 @@ import { getCollection, getEntry, render } from 'astro:content';
 import AdSlot from '../../components/ads/AdSlot.astro';
 import AdRail from '../../components/ads/AdRail.astro';
 import AdInContent from '../../components/ads/AdInContent.astro';
+import { calculadoras } from '../../lib/calcData';
+import { getCalcsForText } from '../../lib/related';
+import { organizationSchema, websiteSchema, ORGANIZATION_ID, WEBSITE_ID, SITE_URL } from '../../lib/schema';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog', (e) => e.data.publicado !== false);
@@ -28,36 +31,68 @@ const categorias: Record<string, string> = {
   general:   'General',
 };
 
+const postUrl = `${SITE_URL}/blog/${post.id}`;
+
+// Artículos relacionados: misma categoría primero, después el resto, y dentro
+// de cada grupo los más recientes. Sin esto cada artículo era un callejón sin
+// salida —sólo enlazaba a la home y al índice del blog— y los 70 artículos no
+// se pasaban autoridad entre sí.
+const allPosts = (await getCollection('blog', (e) => e.data.publicado !== false))
+  .filter((p) => p.id !== post.id);
+const relatedPosts = allPosts
+  .map((p) => {
+    const sharedKeywords = p.data.keywords.filter((k) =>
+      post.data.keywords.some((own) => own.toLowerCase() === k.toLowerCase()),
+    ).length;
+    return {
+      post: p,
+      score: (p.data.categoria === post.data.categoria ? 10 : 0) + sharedKeywords * 3,
+    };
+  })
+  .sort((a, b) => b.score - a.score || b.post.data.fecha.localeCompare(a.post.data.fecha))
+  .slice(0, 3)
+  .map((r) => r.post);
+
+// Calculadoras de las que habla el artículo (enlazado blog → calculadora).
+const relatedCalcs = getCalcsForText(
+  `${post.data.titulo} ${post.data.descripcion ?? ''} ${post.data.keywords.join(' ')}`,
+  3,
+);
+
 const articleSchema = {
   '@context': 'https://schema.org',
   '@graph': [
+    // Organization y WebSite se repiten aquí porque el prop `schema`
+    // SUSTITUYE al @graph por defecto de Base.astro: sin ellos los 70
+    // artículos quedaban sin esos nodos y con un publisher duplicado y sin
+    // `@id`, que es el mismo fallo que ya se corrigió en las calculadoras.
+    organizationSchema,
+    websiteSchema,
     {
       '@type': 'Article',
+      '@id': `${postUrl}#article`,
       headline: post.data.titulo,
       description: post.data.descripcion ?? '',
-      author: {
-        '@type': 'Organization',
-        name: post.data.autor,
-        url: 'https://www.calcfit.com',
-      },
-      publisher: {
-        '@type': 'Organization',
-        name: 'CalcFit',
-        url: 'https://www.calcfit.com',
-        logo: { '@type': 'ImageObject', url: 'https://www.calcfit.com/favicon.svg' },
-      },
+      inLanguage: 'es',
+      isAccessibleForFree: true,
+      articleSection: categorias[post.data.categoria] ?? post.data.categoria,
+      author: { '@id': ORGANIZATION_ID },
+      publisher: { '@id': ORGANIZATION_ID },
+      isPartOf: { '@id': WEBSITE_ID },
       datePublished: post.data.fecha + 'T00:00:00Z',
       dateModified: (post.data.fechaModificada ?? post.data.fecha) + 'T00:00:00Z',
-      url: 'https://www.calcfit.com/blog/' + post.id,
-      mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://www.calcfit.com/blog/' + post.id },
+      url: postUrl,
+      mainEntityOfPage: { '@type': 'WebPage', '@id': postUrl },
+      breadcrumb: { '@id': `${postUrl}#breadcrumb` },
       keywords: post.data.keywords.join(', '),
     },
     {
       '@type': 'BreadcrumbList',
+      '@id': `${postUrl}#breadcrumb`,
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://www.calcfit.com' },
-        { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://www.calcfit.com/blog' },
-        { '@type': 'ListItem', position: 3, name: post.data.titulo, item: 'https://www.calcfit.com/blog/' + post.id },
+        { '@type': 'ListItem', position: 1, name: 'Inicio', item: SITE_URL },
+        { '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE_URL}/blog` },
+        { '@type': 'ListItem', position: 3, name: post.data.titulo, item: postUrl },
       ],
     },
   ],
@@ -137,13 +172,35 @@ const articleSchema = {
       />
     </div>
 
+    <!-- Calculadoras que trata el artículo -->
+    {relatedCalcs.length > 0 && (
+      <section style="margin-top:32px; border-top:1px solid var(--border); padding-top:28px;">
+        <p style="font-family:var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:0.08em; color:var(--muted); margin:0 0 14px;">
+          Calcúlalo tú
+        </p>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:10px;">
+          {relatedCalcs.map(calc => (
+            <a href={calc.slug} style="display:flex; align-items:flex-start; gap:10px; border:1px solid var(--border); padding:14px; text-decoration:none;">
+              <span style="display:inline-flex; flex-shrink:0; width:28px; height:28px; align-items:center; justify-content:center; background:var(--ink); color:var(--acid);">
+                <Fragment set:html={calc.icon} />
+              </span>
+              <span>
+                <span style="display:block; font-size:13px; font-weight:600; color:var(--ink); line-height:1.3;">{calc.nombre}</span>
+                <span style="display:block; font-size:11px; color:var(--muted); margin-top:3px; line-height:1.45;">{calc.desc}</span>
+              </span>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
     <!-- CTA calculadoras -->
     <div style="margin-top:32px; border:1px solid var(--ink); padding:24px;">
       <p style="font-family:var(--font-display); font-size:20px; color:var(--ink); margin:0 0 6px; letter-spacing:0.3px;">
         PRUEBA NUESTRAS CALCULADORAS
       </p>
       <p style="font-size:13px; color:var(--muted); line-height:1.55; margin:0 0 16px; font-family:var(--font-body);">
-        101 calculadoras de salud gratuitas, sin registro, validadas científicamente.
+        {calculadoras.length} calculadoras de salud gratuitas, sin registro, validadas científicamente.
       </p>
       <a
         href="/"
@@ -158,6 +215,25 @@ const articleSchema = {
         </svg>
       </a>
     </div>
+
+    <!-- Seguir leyendo -->
+    {relatedPosts.length > 0 && (
+      <section style="margin-top:32px; border-top:1px solid var(--border); padding-top:28px;">
+        <p style="font-family:var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:0.08em; color:var(--muted); margin:0 0 14px;">
+          Seguir leyendo
+        </p>
+        <div style="display:flex; flex-direction:column;">
+          {relatedPosts.map(p => (
+            <a href={`/blog/${p.id}`} style="display:block; padding:14px 0; border-bottom:1px solid var(--border); text-decoration:none;">
+              <span style="display:block; font-size:14px; font-weight:600; color:var(--ink); line-height:1.4;">{p.data.titulo}</span>
+              {p.data.descripcion && (
+                <span style="display:block; font-size:12px; color:var(--muted); margin-top:4px; line-height:1.55;">{p.data.descripcion}</span>
+              )}
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
 
     <AdSlot format="banner" mobile="mobile" gap="32px" />
 

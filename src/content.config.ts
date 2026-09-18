@@ -13,7 +13,6 @@ const blog = defineCollection({
     publicado: z.boolean().default(true),
     tituloSeo: z.string().optional(),
     fechaModificada: z.string().optional(),
-    unsplashQuery: z.string().optional(),
   }),
 });
 
