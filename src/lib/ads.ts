@@ -48,6 +48,20 @@ export const AD_NATIVE_MIN_HEIGHT = 250;
 export const AD_GLOBAL_SRC =
   'https://pl31073381.profitableratecpmnetwork.com/51/81/48/51814890af0502b1e60a87df7a9b6cd4.js';
 
+/**
+ * Segunda unidad global de la red. No ocupa hueco en la página: la pinta el
+ * proveedor con su propio formato, así que se pide en diferido y con tope
+ * (ver `loadDeferredUnit` en `adEngine.ts`) para que no moleste al visitante.
+ */
+export const AD_DEFERRED_SRC =
+  'https://pl29628768.profitableratecpmnetwork.com/94/e3/ce/94e3ced2e7d7c440f8015d5159fc226a.js';
+
+/** Espera tras el `load` antes de pedir la unidad diferida (ms) */
+export const AD_DEFERRED_DELAY = 3000;
+
+/** Clave de sessionStorage: una sola carga de la unidad diferida por sesión */
+export const AD_DEFERRED_KEY = 'cf-ad-deferred';
+
 /** Punto de corte móvil/escritorio para elegir formato */
 export const AD_MOBILE_QUERY = '(max-width: 767px)';
 
