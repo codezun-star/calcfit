@@ -3,6 +3,8 @@ import '../styles/global.css';
 import { organizationSchema, websiteSchema as siteNode } from '../lib/schema';
 import { jsonLd } from '../lib/jsonld';
 import AdEngine from '../components/ads/AdEngine.astro';
+import AppShell, { type AppSection } from '../components/layout/AppShell.astro';
+import { calculadoras } from '../lib/calcData';
 
 interface Props {
   title: string;
@@ -33,6 +35,15 @@ const cleanPathname = Astro.url.pathname.replace(/\/index\.html$/, '/').replace(
 const canonicalURL = new URL(cleanPathname, Astro.site);
 const ogImageURL = new URL(ogImage, Astro.site);
 
+// Pestaña activa de la barra inferior en móvil (AppShell.astro)
+const CATEGORY_PATH = /^\/(fitness|embarazo|fechas|nutricion)(\/\d+)?$/;
+const calcPaths = new Set(calculadoras.map((c) => c.slug));
+const section: AppSection =
+  cleanPathname === '/' ? 'inicio'
+  : cleanPathname === '/blog' || cleanPathname.startsWith('/blog/') ? 'blog'
+  : CATEGORY_PATH.test(cleanPathname) || calcPaths.has(cleanPathname) ? 'categorias'
+  : 'menu';
+
 const websiteSchema = {
   '@context': 'https://schema.org',
   '@graph': [siteNode, organizationSchema],
@@ -43,8 +54,18 @@ const websiteSchema = {
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#0F0E0D" />
+
+    <!-- App instalable (PWA): pantalla completa al abrirla desde el icono -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="application-name" content="CalcFit" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="CalcFit" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <!-- iOS no convierte los resultados numéricos en enlaces de teléfono -->
+    <meta name="format-detection" content="telephone=no" />
 
     <title>{title}</title>
     <meta name="description" content={description} />
@@ -103,6 +124,7 @@ const websiteSchema = {
   </head>
   <body>
     <slot />
+    <AppShell active={section} />
     {ads && <AdEngine anchor={anchorAd} />}
   </body>
 </html>

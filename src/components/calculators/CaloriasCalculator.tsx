@@ -96,7 +96,7 @@ export default function CaloriasCalculator() {
         <select
           value={actividad}
           onChange={(e) => setActividad(e.target.value as Actividad)}
-          style={{ width: '100%', padding: '10px 0', border: 'none', borderBottom: '1px solid var(--border)', background: 'transparent', fontSize: '14px', fontFamily: 'var(--font-body)', color: 'var(--ink)', outline: 'none', cursor: 'pointer' }}
+          style={{ width: '100%', padding: '10px 0', border: 'none', borderBottom: '1px solid var(--border)', background: 'transparent', fontSize: '16px', fontFamily: 'var(--font-body)', color: 'var(--ink)', outline: 'none', cursor: 'pointer' }}
         >
           {(Object.keys(actividadLabels) as Actividad[]).map((a) => (
             <option key={a} value={a}>{actividadLabels[a]}</option>

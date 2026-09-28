@@ -1,0 +1,1046 @@
+---
+/**
+ * Capa de "app nativa" para móvil (≤767px). Se incluye una vez por página
+ * desde `Base.astro`:
+ *
+ * - Barra de pestañas inferior fija: Inicio · Categorías · Buscar · Blog · Menú.
+ * - Tres hojas (`<dialog>` modal, capa superior del navegador): categorías,
+ *   menú y buscador a pantalla completa. Se cierran con el botón, tocando el
+ *   fondo, deslizando hacia abajo, con Escape o con el gesto «atrás» de Android.
+ *
+ * El buscador también funciona en escritorio (lo abre la lupa de la Navbar)
+ * y atiende `?q=` para el SearchAction del schema de la home. Su índice
+ * (`/search.json`) se pide la primera vez que se abre: no pesa en la página.
+ *
+ * Todo el contenido de las hojas se renderiza en el servidor: son enlaces
+ * rastreables y funcionan aunque el JavaScript tarde en llegar.
+ */
+import { calculadoras, categorias } from '../../lib/calcData';
+
+export type AppSection = 'inicio' | 'categorias' | 'blog' | 'menu' | null;
+
+interface Props {
+  /** Pestaña resaltada */
+  active?: AppSection;
+}
+
+const { active = null } = Astro.props;
+
+const bySlug = new Map(calculadoras.map((c) => [c.slug, c]));
+
+// Icono de cada categoría: el de su calculadora más representativa
+const CAT_ICON: Record<string, string> = {
+  fitness: '/frecuencia-cardiaca',
+  embarazo: '/semana-embarazo',
+  fechas: '/edad',
+  nutricion: '/macronutrientes',
+};
+const cats = categorias.map((c) => ({
+  label: c.label,
+  href: `/${c.slug}`,
+  count: c.slugs.length,
+  icon: bySlug.get(CAT_ICON[c.slug] ?? '')?.icon ?? '',
+}));
+
+// Accesos rápidos: las calculadoras con más demanda del sitio
+const POPULARES = [
+  '/imc',
+  '/calorias-diarias',
+  '/grasa-corporal',
+  '/peso-ideal',
+  '/deficit-calorico',
+  '/frecuencia-cardiaca',
+  '/fecha-parto',
+  '/ovulacion',
+];
+const populares = POPULARES.map((s) => bySlug.get(s)).filter((c): c is NonNullable<typeof c> => Boolean(c));
+
+const total = calculadoras.length;
+
+const chevron = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" aria-hidden="true"><polyline points="6,3 11,8 6,13"/></svg>';
+const closeIcon = '<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" aria-hidden="true"><line x1="4" y1="4" x2="14" y2="14"/><line x1="14" y1="4" x2="4" y2="14"/></svg>';
+---
+
+<!-- Barra de pestañas (sólo móvil) -->
+<nav class="tabbar" aria-label="Navegación de la app">
+  <a href="/" class:list={['tab', active === 'inicio' && 'is-active']} aria-current={active === 'inicio' ? 'page' : undefined}>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linejoin="miter" aria-hidden="true"><path d="M3.5 10.5 12 3.5l8.5 7v10h-6v-6h-5v6h-6z" /></svg>
+    <span>Inicio</span>
+  </a>
+  <button type="button" class:list={['tab', active === 'categorias' && 'is-active']} data-sheet-open="calcs" aria-haspopup="dialog" aria-expanded="false">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" /><rect x="13.5" y="3.5" width="7" height="7" /><rect x="3.5" y="13.5" width="7" height="7" /><rect x="13.5" y="13.5" width="7" height="7" /></svg>
+    <span>Categorías</span>
+  </button>
+  <button type="button" class="tab" data-sheet-open="search" aria-haspopup="dialog" aria-expanded="false">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" /><line x1="15.5" y1="15.5" x2="20.5" y2="20.5" /></svg>
+    <span>Buscar</span>
+  </button>
+  <a href="/blog" class:list={['tab', active === 'blog' && 'is-active']} aria-current={active === 'blog' ? 'page' : undefined}>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" aria-hidden="true"><path d="M5.5 3.5h9l4 4v13h-13z" /><line x1="9" y1="11.5" x2="15" y2="11.5" /><line x1="9" y1="15.5" x2="15" y2="15.5" /></svg>
+    <span>Blog</span>
+  </a>
+  <button type="button" class:list={['tab', active === 'menu' && 'is-active']} data-sheet-open="menu" aria-haspopup="dialog" aria-expanded="false">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7" /><line x1="4" y1="12" x2="20" y2="12" /><line x1="4" y1="17" x2="20" y2="17" /></svg>
+    <span>Menú</span>
+  </button>
+</nav>
+
+<!-- Hoja: categorías -->
+<dialog class="sheet" id="sheet-calcs" aria-labelledby="sheet-calcs-title">
+  <div class="sheet__head" data-sheet-drag>
+    <span class="sheet__grip" aria-hidden="true"></span>
+    <p class="sheet__title" id="sheet-calcs-title">Categorías</p>
+    <button type="button" class="sheet__close" data-sheet-close aria-label="Cerrar"><Fragment set:html={closeIcon} /></button>
+  </div>
+  <div class="sheet__body">
+    <ul class="sheet-list">
+      {cats.map((c) => (
+        <li>
+          <a href={c.href} class="sheet-row">
+            <span class="sheet-row__icon"><Fragment set:html={c.icon} /></span>
+            <span class="sheet-row__text">
+              <span class="sheet-row__label">{c.label}</span>
+              <span class="sheet-row__sub">{c.count} calculadoras</span>
+            </span>
+            <span class="sheet-row__chev"><Fragment set:html={chevron} /></span>
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <p class="sheet__section">Más usadas</p>
+    <div class="sheet-chips">
+      {populares.map((c) => (
+        <a href={c.slug} class="sheet-chip">
+          <Fragment set:html={c.icon} />
+          <span>{c.nombre}</span>
+        </a>
+      ))}
+    </div>
+
+    <a href="/#calculadoras" class="sheet__all">Ver las {total} calculadoras</a>
+  </div>
+</dialog>
+
+<!-- Hoja: menú -->
+<dialog class="sheet" id="sheet-menu" aria-labelledby="sheet-menu-title">
+  <div class="sheet__head" data-sheet-drag>
+    <span class="sheet__grip" aria-hidden="true"></span>
+    <p class="sheet__title" id="sheet-menu-title">Menú</p>
+    <button type="button" class="sheet__close" data-sheet-close aria-label="Cerrar"><Fragment set:html={closeIcon} /></button>
+  </div>
+  <div class="sheet__body">
+    <ul class="sheet-list">
+      <li data-install hidden>
+        <button type="button" class="sheet-row sheet-row--accent" data-install-btn>
+          <span class="sheet-row__icon">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><line x1="9" y1="2" x2="9" y2="11" /><polyline points="5,7.5 9,11.5 13,7.5" /><polyline points="2.5,12 2.5,15.5 15.5,15.5 15.5,12" /></svg>
+          </span>
+          <span class="sheet-row__text">
+            <span class="sheet-row__label">Instalar CalcFit</span>
+            <span class="sheet-row__sub">Ábrela como una app, sin tienda ni registro</span>
+          </span>
+        </button>
+        <p class="sheet-hint" data-install-hint hidden>
+          Pulsa el botón <strong>Compartir</strong> del navegador y elige <strong>«Añadir a pantalla de inicio»</strong>.
+        </p>
+      </li>
+      <li data-share hidden>
+        <button type="button" class="sheet-row" data-share-btn>
+          <span class="sheet-row__icon">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><line x1="9" y1="11" x2="9" y2="2" /><polyline points="5.5,5 9,1.5 12.5,5" /><polyline points="6,8 3,8 3,16 15,16 15,8 12,8" /></svg>
+          </span>
+          <span class="sheet-row__text">
+            <span class="sheet-row__label">Compartir esta página</span>
+          </span>
+        </button>
+      </li>
+      <li>
+        <a href="/blog" class="sheet-row">
+          <span class="sheet-row__icon">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><path d="M3.5 1.5h7l4 4v11h-11z" /><line x1="6.5" y1="9" x2="11.5" y2="9" /><line x1="6.5" y1="12" x2="11.5" y2="12" /></svg>
+          </span>
+          <span class="sheet-row__text"><span class="sheet-row__label">Blog</span><span class="sheet-row__sub">Guías con evidencia científica</span></span>
+          <span class="sheet-row__chev"><Fragment set:html={chevron} /></span>
+        </a>
+      </li>
+      <li>
+        <a href="/sobre-nosotros" class="sheet-row">
+          <span class="sheet-row__icon">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="#CAFF00" aria-hidden="true"><rect x="7.5" y="1" width="3" height="16" /><rect x="1" y="7.5" width="16" height="3" /></svg>
+          </span>
+          <span class="sheet-row__text"><span class="sheet-row__label">Sobre nosotros</span><span class="sheet-row__sub">Misión y rigor científico</span></span>
+          <span class="sheet-row__chev"><Fragment set:html={chevron} /></span>
+        </a>
+      </li>
+      <li>
+        <a href="/contacto" class="sheet-row">
+          <span class="sheet-row__icon">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" aria-hidden="true"><rect x="1.5" y="3.5" width="15" height="11" /><polyline points="1.5,4 9,10 16.5,4" /></svg>
+          </span>
+          <span class="sheet-row__text"><span class="sheet-row__label">Contacto</span><span class="sheet-row__sub">codezun@gmail.com</span></span>
+          <span class="sheet-row__chev"><Fragment set:html={chevron} /></span>
+        </a>
+      </li>
+    </ul>
+
+    <p class="sheet__section">Legal</p>
+    <ul class="sheet-list sheet-list--compact">
+      <li><a href="/aviso-legal" class="sheet-row"><span class="sheet-row__text"><span class="sheet-row__label">Aviso legal</span></span><span class="sheet-row__chev"><Fragment set:html={chevron} /></span></a></li>
+      <li><a href="/politica-privacidad" class="sheet-row"><span class="sheet-row__text"><span class="sheet-row__label">Política de privacidad</span></span><span class="sheet-row__chev"><Fragment set:html={chevron} /></span></a></li>
+      <li><a href="/politica-cookies" class="sheet-row"><span class="sheet-row__text"><span class="sheet-row__label">Política de cookies</span></span><span class="sheet-row__chev"><Fragment set:html={chevron} /></span></a></li>
+    </ul>
+
+    <p class="sheet__foot">Los datos que introduces en las calculadoras no salen de tu navegador.</p>
+  </div>
+</dialog>
+
+<!-- Buscador: pantalla completa en móvil, panel centrado en escritorio -->
+<dialog class="search" id="sheet-search" aria-label="Buscar calculadora">
+  <form class="search__bar" role="search" data-search-form>
+    <label class="search__field">
+      <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.75" /><line x1="12.8" y1="12.8" x2="17.5" y2="17.5" /></svg>
+      <input
+        type="search"
+        name="q"
+        class="search__input"
+        placeholder={`Buscar entre ${total} calculadoras`}
+        aria-label="Buscar calculadora o artículo"
+        autocomplete="off"
+        autocorrect="off"
+        autocapitalize="off"
+        spellcheck="false"
+        enterkeyhint="search"
+        data-search-input
+      />
+      <button type="button" class="search__clear" data-search-clear aria-label="Borrar búsqueda" hidden><Fragment set:html={closeIcon} /></button>
+    </label>
+    <button type="button" class="search__cancel" data-sheet-close>Cancelar</button>
+  </form>
+
+  <div class="search__body" data-search-body>
+    <div data-search-empty>
+      <p class="search__section">Más usadas</p>
+      <ul class="search-list">
+        {populares.map((c) => (
+          <li>
+            <a href={c.slug} class="search-row">
+              <span class="search-row__icon"><Fragment set:html={c.icon} /></span>
+              <span class="search-row__text">
+                <span class="search-row__name">{c.nombre}</span>
+                <span class="search-row__meta">{c.desc}</span>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <p class="search__section">Categorías</p>
+      <div class="search-cats">
+        {cats.map((c) => <a href={c.href} class="search-cat">{c.label}</a>)}
+      </div>
+    </div>
+    <ul class="search-list" data-search-results hidden></ul>
+    <p class="search__none" data-search-none hidden></p>
+    <p class="cf-sr-only" aria-live="polite" data-search-status></p>
+  </div>
+</dialog>
+
+<script>
+  type SheetName = 'calcs' | 'menu' | 'search';
+
+  interface SearchData {
+    i: string[];
+    c: [string, string, string, string, number][];
+    b: [string, string, string][];
+  }
+
+  interface Entry {
+    url: string;
+    name: string;
+    meta: string;
+    icon: string;
+    /** Nombre normalizado (sin tildes, minúsculas) */
+    nn: string;
+    /** Todo el texto buscable, normalizado */
+    hay: string;
+    blog: boolean;
+  }
+
+  interface BeforeInstallPromptEvent extends Event {
+    prompt(): Promise<void>;
+    userChoice: Promise<{ outcome: 'accepted' | 'dismissed' }>;
+  }
+
+  const html = document.documentElement;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const CLOSE_MS = 240;
+
+  const dialogOf = (name: string) => document.getElementById(`sheet-${name}`) as HTMLDialogElement | null;
+  const allDialogs = () => document.querySelectorAll<HTMLDialogElement>('dialog.sheet, dialog.search');
+
+  function setExpanded(name: string, value: boolean): void {
+    document
+      .querySelectorAll(`[data-sheet-open="${name}"]`)
+      .forEach((el) => el.setAttribute('aria-expanded', String(value)));
+  }
+
+  /* ── Abrir y cerrar ─────────────────────────────────────────────── */
+
+  /** Cierres animados pendientes: si la hoja se reabre, se cancelan */
+  const pendingClose = new WeakMap<HTMLDialogElement, () => void>();
+
+  function finishClose(dlg: HTMLDialogElement): void {
+    pendingClose.get(dlg)?.();
+    dlg.classList.remove('is-closing');
+    dlg.style.transform = '';
+    if (dlg.open) dlg.close();
+  }
+
+  function closeSheet(dlg: HTMLDialogElement): void {
+    if (!dlg.open || dlg.classList.contains('is-closing')) return;
+    if (reducedMotion.matches) {
+      finishClose(dlg);
+      return;
+    }
+    dlg.classList.add('is-closing');
+    const onEnd = (e: AnimationEvent) => {
+      if (e.target === dlg) finishClose(dlg);
+    };
+    const timer = window.setTimeout(() => finishClose(dlg), CLOSE_MS + 80);
+    dlg.addEventListener('animationend', onEnd);
+    pendingClose.set(dlg, () => {
+      window.clearTimeout(timer);
+      dlg.removeEventListener('animationend', onEnd);
+      pendingClose.delete(dlg);
+    });
+  }
+
+  function openSheet(name: SheetName): void {
+    const dlg = dialogOf(name);
+    if (!dlg || typeof dlg.showModal !== 'function') {
+      // Navegador sin <dialog>: la home tiene el listado completo
+      if (name !== 'menu') location.href = '/#calculadoras';
+      return;
+    }
+    allDialogs().forEach((d) => {
+      if (d !== dlg && d.open) finishClose(d);
+    });
+    pendingClose.get(dlg)?.();
+    dlg.classList.remove('is-closing');
+    dlg.style.transform = '';
+    if (!dlg.open) dlg.showModal();
+    html.classList.add('sheet-lock');
+    setExpanded(name, true);
+    if (name === 'search') {
+      // En el mismo gesto del usuario: así iOS sí despliega el teclado
+      searchInput?.focus();
+      loadIndex().catch(() => undefined);
+    }
+  }
+
+  allDialogs().forEach((dlg) => {
+    const name = dlg.id.replace('sheet-', '');
+    dlg.addEventListener('close', () => {
+      setExpanded(name, false);
+      if (!document.querySelector('dialog.sheet[open], dialog.search[open]')) html.classList.remove('sheet-lock');
+    });
+    // Escape y el gesto «atrás» de Android: cierre animado si se puede
+    dlg.addEventListener('cancel', (e) => {
+      if (!e.cancelable) return;
+      e.preventDefault();
+      closeSheet(dlg);
+    });
+    // Toque en el fondo oscuro
+    dlg.addEventListener('click', (e) => {
+      if (e.target === dlg) closeSheet(dlg);
+    });
+    // Enlace a la misma página (p. ej. /#calculadoras desde la home): cerrar ya
+    dlg.addEventListener('click', (e) => {
+      const link = (e.target as Element).closest('a');
+      if (link && link.pathname === location.pathname && link.origin === location.origin) finishClose(dlg);
+    });
+  });
+
+  document.addEventListener('click', (e) => {
+    const target = e.target as Element;
+    const opener = target.closest<HTMLElement>('[data-sheet-open]');
+    if (opener) {
+      e.preventDefault();
+      openSheet(opener.dataset.sheetOpen as SheetName);
+      return;
+    }
+    const closer = target.closest<HTMLElement>('[data-sheet-close]');
+    const dlg = closer?.closest('dialog');
+    if (dlg) closeSheet(dlg);
+  });
+
+  // Volver con el botón atrás a una página guardada en caché: sin hojas abiertas
+  window.addEventListener('pageshow', (e) => {
+    if (e.persisted) allDialogs().forEach(finishClose);
+  });
+
+  /* ── Deslizar hacia abajo para cerrar ───────────────────────────── */
+
+  document.querySelectorAll<HTMLElement>('[data-sheet-drag]').forEach((handle) => {
+    const dlg = handle.closest('dialog');
+    if (!dlg) return;
+    let startY = 0;
+    let dy = 0;
+    let dragging = false;
+
+    handle.addEventListener('pointerdown', (e) => {
+      if (e.pointerType === 'mouse' || (e.target as Element).closest('button')) return;
+      dragging = true;
+      startY = e.clientY;
+      dy = 0;
+      try {
+        handle.setPointerCapture(e.pointerId);
+      } catch {
+        /* puntero ya liberado: el arrastre sigue sin captura */
+      }
+      dlg.style.transition = 'none';
+    });
+    handle.addEventListener('pointermove', (e) => {
+      if (!dragging) return;
+      dy = Math.max(0, e.clientY - startY);
+      dlg.style.transform = `translateY(${dy}px)`;
+    });
+    const end = () => {
+      if (!dragging) return;
+      dragging = false;
+      dlg.style.transition = '';
+      if (dy > Math.min(120, dlg.offsetHeight * 0.25)) {
+        closeSheet(dlg);
+      } else {
+        dlg.style.transform = '';
+      }
+    };
+    handle.addEventListener('pointerup', end);
+    handle.addEventListener('pointercancel', end);
+  });
+
+  /* ── Pestañas: tocar la activa sube al principio, como en una app ── */
+
+  document.querySelectorAll<HTMLAnchorElement>('.tabbar a.tab').forEach((tab) => {
+    tab.addEventListener('click', (e) => {
+      if (tab.pathname !== location.pathname) return;
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: reducedMotion.matches ? 'auto' : 'smooth' });
+    });
+  });
+
+  /* ── Buscador ───────────────────────────────────────────────────── */
+
+  const searchForm = document.querySelector<HTMLFormElement>('[data-search-form]');
+  const searchInput = document.querySelector<HTMLInputElement>('[data-search-input]');
+  const searchClear = document.querySelector<HTMLButtonElement>('[data-search-clear]');
+  const searchBody = document.querySelector<HTMLElement>('[data-search-body]');
+  const emptyState = document.querySelector<HTMLElement>('[data-search-empty]');
+  const resultsList = document.querySelector<HTMLUListElement>('[data-search-results]');
+  const noResults = document.querySelector<HTMLElement>('[data-search-none]');
+  const status = document.querySelector<HTMLElement>('[data-search-status]');
+
+  const BLOG_ICON =
+    '<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="M3.5 1.5h7l4 4v11h-11z"/><line x1="6.5" y1="9" x2="11.5" y2="9"/><line x1="6.5" y1="12" x2="11.5" y2="12"/></svg>';
+  const MAX_RESULTS = 40;
+
+  const norm = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+
+  let index: Entry[] | null = null;
+  let indexPromise: Promise<Entry[]> | null = null;
+
+  function loadIndex(): Promise<Entry[]> {
+    if (!indexPromise) {
+      indexPromise = fetch('/search.json')
+        .then((r) => {
+          if (!r.ok) throw new Error(`search.json ${r.status}`);
+          return r.json() as Promise<SearchData>;
+        })
+        .then((data) => {
+          const calcs: Entry[] = data.c.map(([url, name, desc, cat, icon]) => ({
+            url,
+            name,
+            meta: cat ? `${cat} · ${desc}` : desc,
+            icon: data.i[icon] ?? '',
+            nn: norm(name),
+            hay: norm(`${name} ${desc} ${cat} ${url.replace(/[/-]/g, ' ')}`),
+            blog: false,
+          }));
+          const posts: Entry[] = data.b.map(([url, name, desc]) => ({
+            url,
+            name,
+            meta: `Blog · ${desc}`,
+            icon: BLOG_ICON,
+            nn: norm(name),
+            hay: norm(`${name} ${desc}`),
+            blog: true,
+          }));
+          index = [...calcs, ...posts];
+          return index;
+        })
+        .catch((err: unknown) => {
+          indexPromise = null;
+          throw err;
+        });
+    }
+    return indexPromise;
+  }
+
+  /** Raíz de una palabra: "embarazada" → "embaraz", "corriendo" → "corrie" */
+  const stem = (t: string) => (t.length >= 5 ? t.slice(0, Math.max(4, t.length - 3)) : t);
+
+  function rank(terms: string[], entries: Entry[], loose: boolean): Entry[] {
+    const scored: { s: number; e: Entry }[] = [];
+    for (const e of entries) {
+      const keys = loose ? terms.map(stem) : terms;
+      if (!keys.every((t) => e.hay.includes(t))) continue;
+      let s = e.blog ? 0 : 40;
+      // "imc" → /imc antes que /imc-infantil
+      if (e.url === `/${keys.join('-')}`) s += 200;
+      if (e.nn.startsWith(keys[0])) s += 100;
+      for (const t of keys) {
+        if (e.nn.includes(t)) s += 30;
+        if (` ${e.nn}`.includes(` ${t}`)) s += 15;
+      }
+      scored.push({ s, e });
+    }
+    scored.sort((a, b) => b.s - a.s || a.e.name.length - b.e.name.length || a.e.name.localeCompare(b.e.name, 'es'));
+    return scored.slice(0, MAX_RESULTS).map((x) => x.e);
+  }
+
+  function row(e: Entry): HTMLLIElement {
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.href = e.url;
+    a.className = 'search-row';
+    const icon = document.createElement('span');
+    icon.className = 'search-row__icon';
+    icon.innerHTML = e.icon; // SVG propio, generado en build desde calcData.ts
+    const text = document.createElement('span');
+    text.className = 'search-row__text';
+    const name = document.createElement('span');
+    name.className = 'search-row__name';
+    name.textContent = e.name;
+    const meta = document.createElement('span');
+    meta.className = 'search-row__meta';
+    meta.textContent = e.meta;
+    text.append(name, meta);
+    a.append(icon, text);
+    li.append(a);
+    return li;
+  }
+
+  function runSearch(): void {
+    if (!searchInput || !emptyState || !resultsList || !noResults || !status) return;
+    const q = searchInput.value;
+    if (searchClear) searchClear.hidden = q.length === 0;
+    const terms = norm(q).trim().split(/\s+/).filter(Boolean);
+
+    if (terms.length === 0) {
+      emptyState.hidden = false;
+      resultsList.hidden = true;
+      noResults.hidden = true;
+      status.textContent = '';
+      return;
+    }
+    if (!index) {
+      loadIndex()
+        .then(() => runSearch())
+        .catch(() => {
+          emptyState.hidden = true;
+          resultsList.hidden = true;
+          noResults.hidden = false;
+          noResults.textContent = 'No se pudo cargar el buscador. Revisa tu conexión.';
+        });
+      return;
+    }
+
+    let found = rank(terms, index, false);
+    if (found.length === 0) found = rank(terms, index, true);
+
+    emptyState.hidden = true;
+    resultsList.replaceChildren(...found.map(row));
+    resultsList.hidden = found.length === 0;
+    noResults.hidden = found.length > 0;
+    noResults.textContent = found.length ? '' : `Sin resultados para «${q.trim()}»`;
+    status.textContent = found.length ? `${found.length} resultados` : 'Sin resultados';
+  }
+
+  searchInput?.addEventListener('input', runSearch);
+  searchClear?.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (!searchInput) return;
+    searchInput.value = '';
+    runSearch();
+    searchInput.focus();
+  });
+  // Intro abre el primer resultado
+  searchForm?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const first = resultsList && !resultsList.hidden ? resultsList.querySelector('a') : null;
+    if (first) location.href = first.href;
+  });
+  // Deslizar la lista esconde el teclado, como en las apps
+  searchBody?.addEventListener('touchmove', () => searchInput?.blur(), { passive: true });
+  // El índice se pide en cuanto el dedo toca la lupa, antes del click
+  document.addEventListener('pointerdown', (e) => {
+    if ((e.target as Element).closest('[data-sheet-open="search"]')) loadIndex().catch(() => undefined);
+  });
+
+  // SearchAction del schema (https://www.calcfit.com/?q=imc) y acceso directo
+  // «Buscar» del icono de la app instalada (/?q=)
+  const params = new URLSearchParams(location.search);
+  if (params.has('q') && searchInput) {
+    searchInput.value = params.get('q') ?? '';
+    history.replaceState(history.state, '', location.pathname + location.hash);
+    openSheet('search');
+    runSearch();
+  }
+
+  /* ── Instalar como app y compartir ──────────────────────────────── */
+
+  const nav = navigator as Navigator & { standalone?: boolean };
+  const standalone = window.matchMedia('(display-mode: standalone)').matches || nav.standalone === true;
+  if (standalone) html.classList.add('is-standalone');
+
+  const installItem = document.querySelector<HTMLElement>('[data-install]');
+  const installBtn = document.querySelector<HTMLButtonElement>('[data-install-btn]');
+  const installHint = document.querySelector<HTMLElement>('[data-install-hint]');
+  let installEvent: BeforeInstallPromptEvent | null = null;
+
+  const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent) || (/macintosh/i.test(navigator.userAgent) && navigator.maxTouchPoints > 1);
+  if (installItem && !standalone && isIOS) installItem.hidden = false;
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    installEvent = e as BeforeInstallPromptEvent;
+    if (installItem) installItem.hidden = false;
+  });
+  window.addEventListener('appinstalled', () => {
+    installEvent = null;
+    if (installItem) installItem.hidden = true;
+  });
+  installBtn?.addEventListener('click', () => {
+    if (installEvent) {
+      const evt = installEvent;
+      installEvent = null;
+      evt
+        .prompt()
+        .then(() => evt.userChoice)
+        .then((choice) => {
+          if (choice.outcome === 'accepted' && installItem) installItem.hidden = true;
+        })
+        .catch(() => undefined);
+    } else if (installHint) {
+      installHint.hidden = !installHint.hidden;
+    }
+  });
+
+  const shareItem = document.querySelector<HTMLElement>('[data-share]');
+  if (shareItem && typeof navigator.share === 'function') {
+    shareItem.hidden = false;
+    document.querySelector('[data-share-btn]')?.addEventListener('click', () => {
+      const canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.href;
+      navigator.share({ title: document.title, url: canonical || location.href }).catch(() => undefined);
+    });
+  }
+</script>
+
+<style is:global>
+  /* ── Barra de pestañas ─────────────────────────────────────────── */
+  .tabbar { display: none; }
+  @media (max-width: 767px) {
+    .tabbar {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 9991;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      height: calc(var(--tabbar-h) + var(--safe-b));
+      padding: 0 env(safe-area-inset-right, 0px) var(--safe-b) env(safe-area-inset-left, 0px);
+      background: var(--ink);
+      border-top: 1px solid var(--ink-3);
+      view-transition-name: tabbar;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+  }
+  .tab {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    min-width: 0;
+    height: var(--tabbar-h);
+    padding: 0 2px;
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 1;
+    color: #999;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    text-decoration: none;
+    -webkit-touch-callout: none;
+  }
+  .tab svg { flex: none; transition: transform 0.15s ease; }
+  .tab:active svg { transform: scale(0.86); }
+  .tab span { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .tab.is-active { color: var(--acid); }
+  .tab.is-active::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 50%;
+    width: 24px;
+    height: 2px;
+    margin-left: -12px;
+    background: var(--acid);
+  }
+
+  /* ── Hojas inferiores ──────────────────────────────────────────── */
+  html.sheet-lock,
+  html.sheet-lock body { overflow: hidden; }
+
+  dialog.sheet {
+    position: fixed;
+    inset: auto 0 0 0;
+    width: 100%;
+    max-width: 560px;
+    max-height: calc(100% - 40px);
+    margin: 0 auto;
+    padding: 0;
+    color: #fff;
+    background: var(--ink);
+    border: 0;
+    border-top: 1px solid var(--ink-3);
+    overflow: hidden;
+    overscroll-behavior: contain;
+  }
+  dialog.sheet[open] {
+    display: flex;
+    flex-direction: column;
+    animation: cf-sheet-in 0.34s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transition: transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  dialog.sheet::backdrop { background: rgba(0, 0, 0, 0.6); }
+  dialog.sheet[open]::backdrop { animation: cf-fade-in 0.3s ease; }
+  dialog.sheet[open].is-closing { animation: cf-sheet-out 0.24s cubic-bezier(0.4, 0, 1, 1) forwards; }
+  dialog.sheet[open].is-closing::backdrop { animation: cf-fade-out 0.24s ease forwards; }
+
+  @keyframes cf-sheet-in  { from { transform: translateY(100%); } }
+  @keyframes cf-sheet-out { to { transform: translateY(100%); } }
+  @keyframes cf-fade-in   { from { opacity: 0; } }
+  @keyframes cf-fade-out  { to { opacity: 0; } }
+
+  .sheet__head {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: none;
+    padding: 20px 6px 8px 20px;
+    touch-action: none;
+    cursor: grab;
+  }
+  .sheet__grip {
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    width: 36px;
+    height: 4px;
+    margin-left: -18px;
+    background: #666;
+  }
+  .sheet__title {
+    font-family: var(--font-display);
+    font-size: 30px;
+    line-height: 1;
+    letter-spacing: 0.3px;
+    color: #fff;
+  }
+  .sheet__close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    color: #999;
+    background: none;
+    border: 0;
+    cursor: pointer;
+  }
+  .sheet__body {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    padding: 4px 20px calc(24px + var(--safe-b));
+  }
+  .sheet__section {
+    margin: 26px 0 12px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #888;
+  }
+
+  .sheet-list { list-style: none; border-top: 1px solid var(--ink-3); }
+  .sheet-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+    min-height: 62px;
+    padding: 10px 0;
+    font: inherit;
+    text-align: left;
+    color: #fff;
+    text-decoration: none;
+    background: none;
+    border: 0;
+    border-bottom: 1px solid var(--ink-3);
+    cursor: pointer;
+  }
+  .sheet-row__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    width: 36px;
+    height: 36px;
+    color: var(--acid);
+    background: var(--ink-3);
+  }
+  .sheet-row--accent .sheet-row__icon { color: var(--ink); background: var(--acid); }
+  .sheet-row__text { display: flex; flex-direction: column; gap: 4px; flex: 1 1 auto; min-width: 0; }
+  .sheet-row__label { font-size: 15px; font-weight: 600; line-height: 1.25; }
+  .sheet-row__sub { font-size: 12px; color: #999; line-height: 1.35; }
+  .sheet-row__chev { flex: none; display: flex; color: #666; }
+  .sheet-list--compact .sheet-row { min-height: 50px; }
+  .sheet-list--compact .sheet-row__label { font-size: 14px; font-weight: 500; color: #ccc; }
+  .sheet-hint {
+    padding: 4px 0 14px 50px;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #aaa;
+    border-bottom: 1px solid var(--ink-3);
+  }
+  .sheet-hint strong { color: #fff; font-weight: 600; }
+
+  .sheet-chips { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .sheet-chip {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 50px;
+    padding: 10px 12px;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.25;
+    color: #fff;
+    text-decoration: none;
+    border: 1px solid var(--ink-3);
+  }
+  .sheet-chip svg { flex: none; color: var(--acid); }
+  .sheet__all {
+    display: block;
+    margin-top: 20px;
+    padding: 15px;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    color: var(--ink);
+    background: var(--acid);
+    text-decoration: none;
+  }
+  .sheet__foot { margin-top: 24px; font-size: 11px; line-height: 1.6; color: #888; }
+
+  /* ── Buscador ──────────────────────────────────────────────────── */
+  dialog.search {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    margin: 0;
+    padding: 0;
+    color: var(--ink);
+    background: var(--cream);
+    border: 0;
+    overflow: hidden;
+  }
+  dialog.search[open] {
+    display: flex;
+    flex-direction: column;
+    animation: cf-search-in 0.26s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  dialog.search::backdrop { background: rgba(0, 0, 0, 0.6); }
+  dialog.search[open]::backdrop { animation: cf-fade-in 0.26s ease; }
+  dialog.search[open].is-closing { animation: cf-search-out 0.2s ease-in forwards; }
+  dialog.search[open].is-closing::backdrop { animation: cf-fade-out 0.2s ease forwards; }
+  @keyframes cf-search-in  { from { opacity: 0; transform: translateY(18px); } }
+  @keyframes cf-search-out { to { opacity: 0; transform: translateY(18px); } }
+
+  @media (min-width: 768px) {
+    dialog.search {
+      inset: 10vh 0 auto 0;
+      width: calc(100% - 48px);
+      max-width: 640px;
+      height: auto;
+      max-height: 76vh;
+      margin: 0 auto;
+      border: 1px solid var(--ink);
+    }
+  }
+
+  .search__bar {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex: none;
+    height: var(--appbar-h);
+    padding: 0 max(4px, env(safe-area-inset-right, 0px)) 0 max(12px, env(safe-area-inset-left, 0px));
+    background: var(--ink);
+  }
+  .search__field {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1 1 auto;
+    min-width: 0;
+    height: 38px;
+    padding: 0 4px 0 12px;
+    color: #999;
+    background: var(--ink-3);
+    cursor: text;
+  }
+  .search__field svg { flex: none; }
+  .search__input {
+    flex: 1 1 auto;
+    min-width: 0;
+    height: 100%;
+    font-family: var(--font-body);
+    font-size: 16px; /* 16px: iOS no hace zoom al enfocar */
+    color: #fff;
+    background: transparent;
+    border: 0;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .search__input::placeholder { color: #999; opacity: 1; }
+  .search__input::-webkit-search-cancel-button,
+  .search__input::-webkit-search-decoration { -webkit-appearance: none; appearance: none; }
+  .search__clear {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    color: #999;
+    background: none;
+    border: 0;
+    cursor: pointer;
+  }
+  .search__clear[hidden] { display: none; }
+  .search__cancel {
+    flex: none;
+    height: 44px;
+    padding: 0 12px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--acid);
+    background: none;
+    border: 0;
+    cursor: pointer;
+  }
+  .search__body {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    padding: 4px max(16px, env(safe-area-inset-right, 0px)) calc(24px + var(--safe-b)) max(16px, env(safe-area-inset-left, 0px));
+  }
+  .search__section {
+    margin: 20px 0 4px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .search-list { list-style: none; }
+  .search-list[hidden] { display: none; }
+  .search-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 0;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+  }
+  .search-row:hover,
+  .search-row:focus-visible { background: #EDE9E0; outline: none; }
+  .search-row__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    width: 36px;
+    height: 36px;
+    color: var(--acid);
+    background: var(--ink);
+  }
+  .search-row__text { display: flex; flex-direction: column; gap: 3px; flex: 1 1 auto; min-width: 0; }
+  .search-row__name { font-size: 14px; font-weight: 600; line-height: 1.3; }
+  .search-row__meta {
+    font-size: 12px;
+    color: var(--muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .search-cats { display: flex; flex-wrap: wrap; gap: 8px; padding-top: 8px; }
+  .search-cat {
+    padding: 10px 14px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    border: 1px solid var(--ink);
+  }
+  .search-cat:hover { color: var(--acid); background: var(--ink); }
+  .search__none { padding: 48px 0; font-size: 13px; text-align: center; color: var(--muted); }
+
+  .cf-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    dialog.sheet[open],
+    dialog.search[open],
+    dialog.sheet[open]::backdrop,
+    dialog.search[open]::backdrop { animation: none; }
+  }
+</style>

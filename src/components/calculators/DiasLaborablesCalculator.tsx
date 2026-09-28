@@ -17,7 +17,7 @@ export default function DiasLaborablesCalculator() {
     setRes(calcularDiasLaborables(inicio, fin, sabado));
   }
 
-  const dateStyle: React.CSSProperties = { width: '100%', maxWidth: '220px', padding: '8px 0', border: 'none', borderBottom: '1px solid var(--border)', background: 'transparent', fontSize: '15px', color: 'var(--ink)', fontFamily: 'var(--font-body)', outline: 'none' };
+  const dateStyle: React.CSSProperties = { width: '100%', maxWidth: '220px', padding: '8px 0', border: 'none', borderBottom: '1px solid var(--border)', background: 'transparent', fontSize: '16px', color: 'var(--ink)', fontFamily: 'var(--font-body)', outline: 'none' };
   const seg = (active: boolean): React.CSSProperties => ({
     flex: 1, padding: '9px', border: '1px solid', borderColor: active ? 'var(--ink)' : 'var(--border)',
     background: active ? 'var(--ink)' : 'transparent', color: active ? 'var(--acid)' : 'var(--muted)',

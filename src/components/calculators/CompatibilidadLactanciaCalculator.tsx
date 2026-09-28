@@ -40,7 +40,7 @@ export default function CompatibilidadLactanciaCalculator() {
             placeholder="ej. ibuprofeno, amoxicilina..."
             style={{
               flex: 1, padding: '10px 12px', border: 'none', borderBottom: '2px solid var(--border)',
-              background: 'transparent', fontFamily: 'var(--font-body)', fontSize: '14px', color: 'var(--ink)',
+              background: 'transparent', fontFamily: 'var(--font-body)', fontSize: '16px', color: 'var(--ink)',
               outline: 'none',
             }}
           />

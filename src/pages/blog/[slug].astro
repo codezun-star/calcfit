@@ -106,10 +106,10 @@ const articleSchema = {
   schema={articleSchema}
   ogType="article"
 >
-  <Navbar />
+  <Navbar back="/blog" backLabel="Blog" title={post.data.titulo} />
 
   <!-- Header del artículo -->
-  <div style="background:var(--ink); padding:40px 20px 32px; margin-top:56px;">
+  <div style="background:var(--ink); padding:40px 20px 32px;">
     <div style="max-width:720px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-size:12px; color:#888; margin-bottom:20px; font-family:var(--font-mono); flex-wrap:wrap;">
         <a href="/" style="text-decoration:none; color:#888;">INICIO</a>

@@ -33,7 +33,7 @@ export default function CicloMenstrualCalculator() {
           type="date"
           value={ultimaMens}
           onChange={e => setUltimaMens(e.target.value)}
-          style={{ width: '100%', padding: '10px 0', border: 'none', borderBottom: errors.ultimaMens ? '1px solid #F87171' : '1px solid var(--border)', background: 'transparent', fontSize: '14px', fontFamily: 'var(--font-body)', color: 'var(--ink)', outline: 'none' }}
+          style={{ width: '100%', padding: '10px 0', border: 'none', borderBottom: errors.ultimaMens ? '1px solid #F87171' : '1px solid var(--border)', background: 'transparent', fontSize: '16px', fontFamily: 'var(--font-body)', color: 'var(--ink)', outline: 'none' }}
         />
         {errors.ultimaMens && <p style={{ fontSize: '11px', color: '#F87171', marginTop: '4px' }}>{errors.ultimaMens}</p>}
       </div>

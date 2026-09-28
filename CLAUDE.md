@@ -43,6 +43,8 @@ calcfit-astro/
 │   ├── favicon.ico
 │   ├── robots.txt
 │   ├── og/                            ← imágenes OG estáticas (generadas, scripts/generate-og.mjs)
+│   ├── icons/                         ← iconos de la app instalable 192/512/maskable (scripts/generate-icons.mjs)
+│   ├── manifest.webmanifest           ← PWA: nombre, colores, iconos y accesos directos
 │   └── apple-touch-icon.png           ← icono iOS 180×180
 ├── src/
 │   ├── styles/
@@ -53,7 +55,8 @@ calcfit-astro/
 │   │   └── CalculatorLayout.astro     ← layout de cada calculadora (navbar + breadcrumb + slots)
 │   ├── components/
 │   │   ├── layout/
-│   │   │   ├── Navbar.astro
+│   │   │   ├── Navbar.astro           ← barra superior (en móvil: atrás + título + búsqueda); incluye su espaciador
+│   │   │   ├── AppShell.astro         ← móvil: barra de pestañas + hojas (categorías, menú) + buscador
 │   │   │   └── Footer.astro           ← 3 columnas: Herramientas, CalcFit, Legal
 │   │   ├── ui/                        ← componentes React reutilizables
 │   │   │   ├── Toggle.tsx             ← "kg · cm" / "lb · pies"
@@ -86,6 +89,7 @@ calcfit-astro/
 │   │   └── blog/                      ← artículos .md (nombre del archivo = slug de URL)
 │   └── pages/
 │       ├── index.astro                ← homepage con las 143 calculadoras (importa de lib/calcData.ts)
+│       ├── search.json.ts             ← índice del buscador de la app (generado en build)
 │       ├── [slug].astro               ← 143 páginas calculadora (ver CALCULADORAS.md)
 │       ├── fitness|embarazo|fechas|nutricion/[...page].astro ← páginas de categoría paginadas
 │       ├── blog/
@@ -336,7 +340,7 @@ La homepage muestra las **143 calculadoras** en 4 categorías mediante el compon
 
 ### Navbar de la homepage — categorías
 
-El nav de la homepage (index.astro) tiene 4 links de categoría con scroll suave:
+La homepage usa el mismo componente que el resto: `<Navbar home />`. En escritorio muestra 4 links de categoría con scroll suave:
 - `#fitness` → Fitness & salud
 - `#embarazo` → Embarazo & fertilidad
 - `#fechas` → Fechas & tiempo
@@ -346,7 +350,7 @@ Estos links cambian el hash de la URL → `CalculatorBrowser` escucha `hashchang
 
 ### Navbar — position: fixed
 
-Tanto `Navbar.astro` (páginas calculadoras) como el nav inline de `index.astro` usan `position: fixed; top: 0; left: 0; right: 0`. El espaciado lo compensa un `<div style="height: 56px">` inmediatamente después del nav.
+`Navbar.astro` (usado en **todas** las páginas, home incluida) es `position: fixed; top: 0; left: 0; right: 0` y **lleva su propio espaciador** (`.app-bar-spacer`, altura `--appbar-h`). Las páginas no deben añadir otro `<div style="height: 56px">` ni `margin-top: 56px`.
 
 ### Hero — imagen de fondo (actualizado 2026-05-16)
 
@@ -371,6 +375,30 @@ Categorías y conteo actual (total: 143) — ver detalle en [CALCULADORAS.md](CA
 - Fitness & salud (63) · Embarazo & fertilidad (29) · Fechas & tiempo (19) · Nutrición & bienestar (32)
 
 Al agregar una calculadora nueva, seguir el checklist completo de la sección "Reglas para agregar una calculadora nueva".
+
+---
+
+## Experiencia de app nativa en móvil (≤767px)
+
+En móvil el sitio se comporta como una app: barra superior con «atrás», barra de pestañas inferior, hojas deslizables y buscador a pantalla completa. En escritorio no cambia nada salvo la lupa de búsqueda en la navbar.
+
+| Pieza | Dónde vive | Qué hace |
+|---|---|---|
+| Barra superior | `Navbar.astro` | Props `back` (destino del botón atrás), `backLabel`, `title` y `home`. En móvil: chevron «atrás» + logo que se convierte en `title` cuando el H1 sale de pantalla (IntersectionObserver) + lupa. El botón atrás hace `history.back()` si se llegó desde otra página del sitio y, si no (entrada directa), lleva a `back` |
+| Barra de pestañas | `AppShell.astro` (incluido en `Base.astro`) | Inicio · Categorías · Buscar · Blog · Menú. La pestaña activa la calcula `Base.astro` desde la URL (calculadoras y categorías → «Categorías»; páginas estáticas → «Menú»). Tocar la pestaña activa sube al principio |
+| Hojas | `AppShell.astro` | `<dialog>` modal: categorías (con «Más usadas») y menú (blog, nosotros, contacto, legal, instalar, compartir). Se cierran con ×, tocando el fondo, deslizando hacia abajo, Escape o el gesto «atrás» de Android |
+| Buscador | `AppShell.astro` + `src/pages/search.json.ts` | Calculadoras y artículos, sin tildes y con raíz de palabra («embarazada» → embarazo). El índice (~17 KB gzip) se pide al abrirlo, no va en la página. Atiende `?q=` (SearchAction del schema y acceso directo de la app) |
+| App instalable | `public/manifest.webmanifest`, `public/icons/`, metas en `Base.astro` | `display: standalone`, accesos directos (IMC, Calorías, Embarazo, Buscar). «Instalar CalcFit» aparece en el Menú cuando el navegador lo permite (Android) o con instrucciones (iOS). **Sin service worker** |
+| Transición entre páginas | `global.css` (`@view-transition`) | Fundido CSS entre documentos; las barras fijas no se mueven. Sin soporte, se navega igual que antes |
+| Detalles táctiles | `global.css` | Sin retraso de doble toque, respuesta `:active`, sin zoom de iOS al enfocar campos |
+
+### Reglas
+
+- **Campos de formulario a 16px como mínimo** (`input`, `select`, `textarea`): por debajo iOS hace zoom al tocarlos. Al crear una calculadora con campos propios, usar `fontSize: '16px'` o el componente `Input`.
+- Tokens de medida en `tokens.css`: `--appbar-h` (56px), `--tabbar-h` (58px) y `--safe-b` (zona segura inferior del iPhone). El viewport usa `viewport-fit=cover`; cualquier elemento fijo abajo debe sumar `var(--safe-b)`.
+- El ancla publicitaria se apoya **encima** de la barra de pestañas en móvil (`AdEngine.astro`); si cambia la altura de una de las dos, revisar la otra.
+- Las listas de la home (`CalculatorBrowser`, con clases `cb-*`) y de las categorías pasan a formato lista nativa en móvil sólo con CSS: la isla de React no cambia su HTML.
+- Si cambia el favicon, regenerar los iconos con `node scripts/generate-icons.mjs`.
 
 ---
 
@@ -850,6 +878,7 @@ Siempre verificar `typeof window !== 'undefined'` antes de acceder a localStorag
 
 | Fecha | Acción |
 |---|---|
+| 2026-09-28 | **Experiencia de app nativa en móvil.** Nuevo `AppShell.astro` (incluido en `Base.astro`): barra de pestañas inferior (Inicio · Categorías · Buscar · Blog · Menú) y hojas `<dialog>` deslizables para categorías y menú, que se cierran con ×, tocando el fondo, deslizando hacia abajo, Escape o el «atrás» de Android. Buscador a pantalla completa (panel centrado en escritorio, abierto desde la nueva lupa de la navbar) sobre calculadoras y artículos, con índice `/search.json` generado en build y pedido sólo al abrirlo; atiende `?q=`. `Navbar.astro` pasa a ser la barra de todas las páginas (la home deja su nav inline: `<Navbar home />`), con botón «atrás» y título compacto que aparece al desplazar el H1, y lleva su propio espaciador — corrige de paso las 5 páginas estáticas, cuya cabecera quedaba tapada por la navbar fija. PWA instalable (`manifest.webmanifest`, iconos 192/512/maskable con `scripts/generate-icons.mjs`, metas de Apple, sin service worker). Transición CSS entre páginas (`@view-transition`), respuesta táctil `:active`, sin retraso de doble toque, `format-detection` para que iOS no enlace números como teléfonos. Home móvil: hero compacto con buscador, cifras deslizables, pestañas de categoría deslizables y calculadoras en lista nativa (también en las páginas de categoría); oculta la columna «Resultados en tiempo real», que se veía en móvil porque su `display: flex` en línea anulaba el `display: none`. En calculadoras, la miga de pan se oculta en móvil (la sustituye el «atrás»). 21 calculadoras con campos a 14-15px suben a 16px para evitar el zoom de iOS al enfocarlos. `ShareButtons` añade «Compartir» con la hoja nativa del sistema cuando existe. El ancla publicitaria se apoya sobre la barra de pestañas. Build: 232 páginas, 0 errores. |
 | 2026-09-23 | **Segunda unidad global de Adsterra, en diferido.** Nueva constante `AD_DEFERRED_SRC` en `src/lib/ads.ts` y `loadDeferredUnit()` en `src/lib/adEngine.ts`. El script no se pega en `Base.astro` como etiqueta suelta: se inyecta desde el motor tras el `load`, en el primer hueco libre del hilo principal (3 s) y **una sola vez por sesión** (`sessionStorage: cf-ad-deferred`), de modo que no compite con el render ni se repite al recorrer varias calculadoras. Las páginas legales siguen sin publicidad (van sin `AdEngine`). Sin cambios en las páginas legales: `politica-cookies` y `politica-privacidad` ya declaran el dominio `profitableratecpmnetwork.com`, que es el que sirve esta unidad. Build: 232 páginas, 0 errores. |
 | 2026-09-18 | **Revisión general del sitio: enlazado interno, schema del blog y accesibilidad.** El hueco real no estaban en los títulos ni en las meta descriptions (auditadas: 143/143 correctas, sin duplicados, con FAQs, OG y canonical) sino en el **grafo de enlaces internos**: sólo 16 de las 143 calculadoras pasaban el prop `related`, la home sólo enlaza 15 (la isla `CalculatorBrowser` renderiza en servidor una categoría con `limit={15}`) y las categorías pagínan de 20 en 20, así que **55 calculadoras recibían enlaces desde una sola página del sitio y 41 desde dos**. (1) Nuevo `src/lib/related.ts`: afinidad por TF-IDF sobre nombre + descripción + slug, con bono por categoría y una segunda pasada que coloca a las huérfanas en la página con la que más se parecen, de modo que **ninguna calculadora se queda sin enlaces entrantes**; determinista (desempate alfabético) para que el HTML no cambie al reordenar `calcData.ts`. `CalculatorLayout` lo usa como respaldo cuando la página no pasa `related`, que sigue teniendo prioridad. (2) Las páginas de categoría ganan un índice completo server-side cuando hay paginación, así que las 63 de Fitness quedan a un clic desde cualquiera de sus 4 páginas, más schema `CollectionPage` + `ItemList` + `BreadcrumbList` y meta description propia por página (antes las páginas 2-4 repetían la de la 1). (3) **Los 70 artículos del blog no tenían `Organization` ni `WebSite` en su `@graph`** —el prop `schema` sustituye al de `Base.astro`, el mismo fallo que se corrigió en las calculadoras el 31-jul— y su `publisher`/`author` eran objetos sueltos sin `@id`; ahora usan los nodos compartidos y el `Article` gana `@id`, `inLanguage`, `articleSection`, `isPartOf` y `breadcrumb`. (4) Los artículos dejan de ser callejones sin salida: bloque "Calcúlalo tú" con las calculadoras que trata el texto (`getCalcsForText`, con umbral relativo para no rellenar con coincidencias flojas) y "Seguir leyendo" con 3 artículos afines. Corregido el CTA que decía **"101 calculadoras"** desde la expansión a 143. (5) Accesibilidad y responsive: `#555` sobre fondo oscuro (2,66:1) y `#666` en encabezados de columna (3,45:1) incumplían la propia escala de contraste de este archivo — corregidos en el pie y en las 5 páginas estáticas; el H1 de 88px fijo de esas páginas desbordaba en móvil (ahora `clamp`), su bloque de contenido tenía `max-width` sin `margin: 0 auto` (se pegaba a la izquierda en pantallas anchas) y sus rejillas `1fr 2fr` no se apilaban. (6) Retirado el campo muerto `unsplashQuery` del schema y de los 58 artículos que aún lo llevaban (resto de las imágenes del blog, eliminadas el 29-ago). Resultado medido sobre `dist/`: la mediana de páginas que enlazan a cada calculadora pasa de **3 a 8** y la media de 8,8 a 14,7; desaparece el grupo de 55 con un solo enlace entrante; 537 enlaces nuevos de blog a calculadora. Build: 232 páginas, 0 errores, JSON-LD válido y con `Organization` + `WebSite` en las 232. |
 | 2026-08-29 | **Blog sin imágenes.** Eliminado el campo `imagen` del schema (`content.config.ts`), el frontmatter `imagen:` de los 58 artículos que lo llevaban, la imagen hero del artículo (con su crédito de Unsplash), la miniatura del listado y la de las tarjetas de la home, más los dos helpers de recorte (`blogThumb`, `thumbUrl`) y el CSS huérfano `.blog-thumb`. Las filas del listado se reajustaron (siguen siendo flex: texto + flecha). El `og:image` de los artículos pasa a la imagen de marca `/og/default.jpg` — es metadato para compartir, no una imagen de la página. El JSON-LD `Article` ya no emite `image`. |

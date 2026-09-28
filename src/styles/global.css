@@ -10,17 +10,65 @@ html, body {
   overflow-x: hidden;
 }
 
+html {
+  /* Sin inflado de texto al girar el móvil ni destello gris al tocar:
+     la respuesta táctil la dan los estados :active de más abajo */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  scroll-padding-top: calc(var(--appbar-h) + 8px);
+}
+
 body {
   font-family: var(--font-body);
   background: var(--cream);
   color: var(--ink);
   -webkit-font-smoothing: antialiased;
+  /* viewport-fit=cover: en horizontal el contenido no se mete bajo el notch */
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
 }
 
 * {
   border-radius: var(--radius) !important;
   box-shadow: none !important;
 }
+
+/* Sin el retraso de doble toque en los controles */
+a, button, input, select, textarea, label, summary {
+  touch-action: manipulation;
+}
+
+/* ── Móvil: comportamiento de app nativa ───────────────────────────── */
+@media (max-width: 767px) {
+  /* Hueco para la barra de pestañas inferior (AppShell.astro) */
+  body { padding-bottom: calc(var(--tabbar-h) + var(--safe-b)); }
+}
+
+/* Respuesta al toque, como en iOS/Android: el control se atenúa al pulsarlo */
+@media (hover: none) and (pointer: coarse) {
+  a:active,
+  button:not(:disabled):active,
+  summary:active,
+  [role='button']:active {
+    opacity: 0.66;
+  }
+  button, [role='button'] {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+}
+
+/* Transición entre páginas (navegación entre documentos, sólo CSS):
+   el contenido entra con un fundido y las barras fijas no se mueven.
+   Navegadores sin soporte navegan exactamente igual que antes. */
+@media (max-width: 767px) and (prefers-reduced-motion: no-preference) {
+  @view-transition { navigation: auto; }
+}
+::view-transition-old(root) { animation: 140ms ease-in both cf-vt-out; }
+::view-transition-new(root) { animation: 260ms cubic-bezier(0.2, 0.8, 0.2, 1) both cf-vt-in; }
+@keyframes cf-vt-out { to { opacity: 0; } }
+@keyframes cf-vt-in  { from { opacity: 0; transform: translateY(12px); } }
 
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(14px); }
@@ -34,3 +82,7 @@ body {
 .anim-4 { animation-delay: 0.20s; }
 .anim-5 { animation-delay: 0.25s; }
 .anim-6 { animation-delay: 0.30s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .anim { opacity: 1; animation: none; }
+}

@@ -69,8 +69,8 @@ export default function CalculatorBrowser({
 
   return (
     <div>
-      {/* Barra de búsqueda */}
-      <div style={{ position: 'relative', marginBottom: 20 }}>
+      {/* Barra de búsqueda (en móvil la sustituye el buscador de la app) */}
+      <div className="cb-search" style={{ position: 'relative', marginBottom: 20 }}>
         <div style={{
           position: 'absolute',
           left: 0,
@@ -97,7 +97,7 @@ export default function CalculatorBrowser({
             border: 'none',
             borderBottom: `1px solid ${focusedSearch ? 'var(--acid)' : 'var(--border)'}`,
             background: 'transparent',
-            fontSize: 14,
+            fontSize: 16,
             color: 'var(--ink)',
             fontFamily: 'var(--font-body)',
             outline: 'none',
@@ -131,12 +131,14 @@ export default function CalculatorBrowser({
       </div>
 
       {/* Pills de categoría */}
-      <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 20 }}>
+      <div className="cb-pills" style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 20 }}>
         {pills.map(pill => {
           const isActive = activeCategory === pill;
           return (
             <button
               key={pill}
+              className="cb-pill"
+              aria-pressed={isActive}
               onClick={() => setActiveCategory(pill)}
               style={{
                 padding: '5px 14px',
@@ -156,7 +158,7 @@ export default function CalculatorBrowser({
             </button>
           );
         })}
-        <span style={{
+        <span className="cb-count" style={{
           marginLeft: 'auto',
           fontFamily: 'var(--font-mono)',
           fontSize: 10,
@@ -195,7 +197,7 @@ export default function CalculatorBrowser({
           </button>
         </div>
       ) : (
-        <div style={{
+        <div className="cb-grid" style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
           gap: 1,
@@ -205,6 +207,7 @@ export default function CalculatorBrowser({
             <a
               key={calc.slug}
               href={calc.slug}
+              className="cb-card"
               style={{
                 background: 'var(--cream)',
                 padding: 20,

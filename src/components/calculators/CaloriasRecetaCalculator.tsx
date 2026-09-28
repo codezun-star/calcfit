@@ -71,7 +71,7 @@ export default function CaloriasRecetaCalculator() {
 
   const inputCell: React.CSSProperties = {
     width: '100%', background: 'transparent', border: 'none', borderBottom: '1px solid var(--border)',
-    padding: '8px 0', fontSize: '14px', fontFamily: 'var(--font-body)', color: 'var(--ink)', outline: 'none',
+    padding: '8px 0', fontSize: '16px', fontFamily: 'var(--font-body)', color: 'var(--ink)', outline: 'none',
   };
 
   return (

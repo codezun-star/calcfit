@@ -148,8 +148,7 @@ const combinedSchema = { '@context': 'https://schema.org', '@graph': graphItems 
 ---
 
 <Base title={title} description={description} keywords={keywords} ogImage={ogImage} schema={combinedSchema}>
-  <Navbar />
-  <div style="height: 56px;"></div>
+  <Navbar back={cat ? `/${cat.slug}` : '/'} backLabel={categoryName ?? 'Inicio'} title={calculatorName} />
 
   <!-- Breadcrumb -->
   <div class="breadcrumb" style="background: var(--cream); border-bottom: 1px solid var(--border);">
@@ -231,6 +230,10 @@ const combinedSchema = { '@context': 'https://schema.org', '@graph': graphItems 
   .seo-shell   { position: relative; max-width: 860px; margin: 0 auto; }
   .seo-section { padding: 48px 32px; }
   .related-section { padding: 40px 32px; }
+  /* En móvil el botón «atrás» de la barra superior sustituye a la miga de pan */
+  @media (max-width: 767px) {
+    .breadcrumb { display: none; }
+  }
   @media (max-width: 640px) {
     .breadcrumb  { padding: 10px 16px; }
     .seo-section { padding: 32px 16px; }

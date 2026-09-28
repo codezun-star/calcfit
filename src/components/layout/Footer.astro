@@ -7,6 +7,11 @@
   @media (max-width: 640px) {
     .site-footer { padding: 24px 20px 20px; }
   }
+  /* Móvil: columnas en rejilla 2×2 y enlaces con área táctil cómoda */
+  @media (max-width: 767px) {
+    .footer-cols { display: grid !important; grid-template-columns: 1fr 1fr; gap: 28px 16px !important; width: 100%; }
+    .footer-cols a { padding: 4px 0; font-size: 13px !important; }
+  }
 </style>
 
   <!-- Top row -->
@@ -25,7 +30,7 @@
     </div>
 
     <!-- Links en columnas -->
-    <div style="display: flex; gap: 48px; flex-wrap: wrap;">
+    <div class="footer-cols" style="display: flex; gap: 48px; flex-wrap: wrap;">
       <div>
         <p style="font-family: var(--font-mono); font-size: 9px; color: #999; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;">Categorías</p>
         <div style="display: flex; flex-direction: column; gap: 6px;">

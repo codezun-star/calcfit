@@ -1,0 +1,45 @@
+{
+  "id": "/",
+  "name": "CalcFit — Calculadoras de salud",
+  "short_name": "CalcFit",
+  "description": "Calculadoras de salud gratuitas y validadas científicamente: IMC, calorías, embarazo, nutrición y más. Sin registro.",
+  "lang": "es",
+  "dir": "ltr",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0F0E0D",
+  "theme_color": "#0F0E0D",
+  "categories": ["health", "fitness", "medical", "lifestyle"],
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    {
+      "name": "Calculadora IMC",
+      "short_name": "IMC",
+      "url": "/imc",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "Calorías diarias",
+      "short_name": "Calorías",
+      "url": "/calorias-diarias",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "Semana de embarazo",
+      "short_name": "Embarazo",
+      "url": "/semana-embarazo",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    },
+    {
+      "name": "Buscar calculadora",
+      "short_name": "Buscar",
+      "url": "/?q=",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    }
+  ]
+}

@@ -52,7 +52,7 @@ export default function AyunoCalculator() {
           type="time"
           value={horaInicio}
           onChange={e => setHoraInicio(e.target.value)}
-          style={{ width: '100%', padding: '10px 0', border: 'none', borderBottom: '1px solid var(--border)', background: 'transparent', fontSize: '14px', fontFamily: 'var(--font-body)', color: 'var(--ink)', outline: 'none' }}
+          style={{ width: '100%', padding: '10px 0', border: 'none', borderBottom: '1px solid var(--border)', background: 'transparent', fontSize: '16px', fontFamily: 'var(--font-body)', color: 'var(--ink)', outline: 'none' }}
         />
       </div>
 

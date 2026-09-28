@@ -76,10 +76,10 @@ const collectionSchema = {
   keywords="calculadoras embarazo, calculadora ovulación, ciclo menstrual, fecha de parto, semana embarazo, calculadoras fertilidad gratis"
   schema={collectionSchema}
 >
-  <Navbar />
+  <Navbar back="/" title={cat.label} />
 
   <!-- Header -->
-  <div style="background:var(--ink); padding:40px 20px 32px; margin-top:56px;">
+  <div style="background:var(--ink); padding:40px 20px 32px;">
     <div style="max-width:1200px; margin:0 auto;">
       <div style="display:flex; align-items:center; gap:6px; font-family:var(--font-mono); font-size:11px; color:#888; margin-bottom:16px; text-transform:uppercase; letter-spacing:0.08em;">
         <a href="/" style="color:#888; text-decoration:none;">Inicio</a>
@@ -251,7 +251,35 @@ const collectionSchema = {
   .cat-index__link:hover { text-decoration: underline; text-decoration-color: var(--acid); text-decoration-thickness: 2px; }
   @media (max-width: 900px) { .cat-index__list { columns: 2; } }
   @media (max-width: 600px) {
-    .calc-grid { grid-template-columns: repeat(2, 1fr); }
     .cat-index__list { columns: 1; }
+  }
+  /* Móvil: lista nativa (icono · nombre y descripción · chevron) */
+  @media (max-width: 767px) {
+    .calc-grid { grid-template-columns: 1fr; background: transparent; border-top: 1px solid var(--border); }
+    .calc-card {
+      display: grid;
+      grid-template-columns: 40px minmax(0, 1fr) 16px;
+      column-gap: 14px;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .calc-card::after {
+      content: '';
+      grid-column: 3;
+      grid-row: 1 / span 3;
+      width: 8px;
+      height: 8px;
+      border-top: 1.75px solid var(--muted);
+      border-right: 1.75px solid var(--muted);
+      transform: rotate(45deg);
+    }
+    .calc-icon { grid-row: 1 / span 3; width: 40px; height: 40px; margin: 0; }
+    .calc-nombre, .calc-desc, .calc-badge { grid-column: 2; }
+    .calc-nombre { font-size: 15px; margin-bottom: 2px; }
+    .calc-desc { font-size: 12px; margin-bottom: 0; }
+    .calc-badge { justify-self: start; margin-top: 6px; }
+    .page-link { min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
+    .cat-index__link { display: inline-block; padding: 6px 0; font-size: 14px; }
   }
 </style>

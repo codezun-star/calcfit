@@ -14,4 +14,9 @@
   --font-body:    'Plus Jakarta Sans', sans-serif;
 
   --radius: 2px;
+
+  /* Experiencia de app en móvil (ver Navbar.astro y AppShell.astro) */
+  --appbar-h: 56px;
+  --tabbar-h: 58px;
+  --safe-b:   env(safe-area-inset-bottom, 0px);
 }
