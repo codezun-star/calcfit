@@ -10,14 +10,9 @@
  *  3. Carga diferida: sólo se pide el anuncio cuando está a punto de entrar en
  *     pantalla, salvo los marcados como `eager` (above the fold).
  *  4. Formato según viewport: se elige uno u otro, nunca se cargan los dos.
- *  5. La unidad global diferida se pide después del load, en el primer hueco
- *     libre del hilo principal y una sola vez por sesión.
  */
 import {
   AD_BANNER_HOST,
-  AD_DEFERRED_DELAY,
-  AD_DEFERRED_KEY,
-  AD_DEFERRED_SRC,
   AD_LAZY_MARGIN,
   AD_MOBILE_QUERY,
   AD_NATIVE_KEY,
@@ -212,51 +207,8 @@ function setupAnchor(): void {
   });
 }
 
-/** Ejecuta `fn` cuando el hilo principal esté libre (o ya, si no hay API) */
-function whenIdle(fn: () => void): void {
-  if (typeof window.requestIdleCallback === 'function') {
-    window.requestIdleCallback(fn, { timeout: 2000 });
-  } else {
-    fn();
-  }
-}
-
-/**
- * Unidad global diferida (`AD_DEFERRED_SRC`): la pinta el proveedor con su
- * propio formato, sin hueco reservado en la página. Para que no resulte
- * intrusiva se pide con tres frenos:
- *  - después del `load`, nunca durante el render del contenido;
- *  - en el primer hueco libre del hilo principal, tras `AD_DEFERRED_DELAY`;
- *  - una sola vez por sesión de navegación, aunque se visiten varias páginas.
- * En las páginas legales no llega a ejecutarse: van sin `AdEngine`.
- */
-function loadDeferredUnit(): void {
-  try {
-    if (sessionStorage.getItem(AD_DEFERRED_KEY)) return;
-    sessionStorage.setItem(AD_DEFERRED_KEY, '1');
-  } catch {
-    /* modo privado: sin tope entre páginas, pero igual de diferida */
-  }
-
-  const request = (): void => {
-    const script = document.createElement('script');
-    script.async = true;
-    script.setAttribute('data-cfasync', 'false');
-    script.src = AD_DEFERRED_SRC;
-    document.body.appendChild(script);
-  };
-
-  const schedule = (): void => {
-    window.setTimeout(() => whenIdle(request), AD_DEFERRED_DELAY);
-  };
-
-  if (document.readyState === 'complete') schedule();
-  else window.addEventListener('load', schedule, { once: true });
-}
-
 function start(): void {
   setupAnchor();
-  loadDeferredUnit();
   document.querySelectorAll<HTMLElement>('[data-ad-inject]').forEach(injectInContent);
   document.querySelectorAll<HTMLElement>('.ad-unit').forEach(activate);
 }
